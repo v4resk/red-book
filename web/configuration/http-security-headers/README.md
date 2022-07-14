@@ -1,0 +1,2 @@
+# HTTP security headers
+
