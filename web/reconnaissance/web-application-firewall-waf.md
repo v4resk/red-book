@@ -1,2 +1,0 @@
-# Web Application Firewall (WAF)
-

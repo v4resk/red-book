@@ -1,2 +1,0 @@
-# 🛠️ CSP (Content Security Policy)
-

@@ -1,2 +1,0 @@
-# Wireless keyboard/mouse
-

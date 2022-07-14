@@ -1,2 +1,0 @@
-# HTTP response splitting
-

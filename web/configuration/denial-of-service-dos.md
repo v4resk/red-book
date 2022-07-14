@@ -1,2 +1,0 @@
-# Denial of Service (DoS)
-

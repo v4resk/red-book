@@ -1,2 +1,0 @@
-# 🛠️ Living off the land
-

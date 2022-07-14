@@ -1,2 +1,0 @@
-# Subdomains enumeration
-

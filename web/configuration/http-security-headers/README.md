@@ -1,2 +1,0 @@
-# HTTP security headers
-

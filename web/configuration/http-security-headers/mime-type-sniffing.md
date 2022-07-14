@@ -1,2 +1,0 @@
-# MIME type sniffing
-
