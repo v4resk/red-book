@@ -119,3 +119,8 @@
   * [🛠️ DC Shadow](ad/persistence/dcshadow.md)
   * [🛠️ CA Shadow](ad/persistence/ca-shadow.md)
   * [🛠️ Access controls](ad/persistence/access-controls.md)
+
+## Windows Pentesting <a href="#windows" id="windows"></a>
+* [Reconnaissance](ad/recon/README.md)
+* [Movement](ad/movement/README.md)
+* [Persistence](ad/persistence/README.md)
