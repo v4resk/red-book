@@ -5,6 +5,7 @@
 ## Active Directory <a href="#ad" id="ad"></a>
 
 * [Reconnaissance](ad/recon/README.md)
+  * [PowerView](ad/recon/powerview.md)
   * [DHCP](ad/recon/dhcp.md)
   * [DNS](ad/recon/dns.md)
   * [NBT-NS](ad/recon/nbt-ns.md)
@@ -110,6 +111,7 @@
     * [Capture](ad/movement/ntlm/capture.md)
     * [Relay](ad/movement/ntlm/relay.md)
     * [Pass the hash](ad/movement/ntlm/pth.md)
+  * [Pivoting](ad/movement/pivoting.md)
 * [Persistence](ad/persistence/README.md)
   * [Silver & Golden tickets](ad/persistence/silver-and-golden-tickets.md)
   * [🛠️ RBCD to KRBTGT](ad/persistence/rbcd-to-krbtgt.md)
@@ -122,6 +124,5 @@
 
 ## Windows Pentesting <a href="#windows" id="windows"></a>
 * [Reconnaissance](windows/recon/README.md)
-  * [PowerView](windows/recon/powerview.md)
 * [Movement](awindowsd/movement/README.md)
 * [Persistence](windows/persistence/README.md)
