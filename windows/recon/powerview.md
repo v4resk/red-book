@@ -62,7 +62,182 @@ Get-DomainGroup -AdminCount | Get-DomainGroupMember -Recurse | ?{$_.MemberName -
 {% endtab %}
 {% endtabs %}
 
+### Domain Enumeration
 
+{% tabs %}
+{% tab title="Windows" %}
+PowerView ([sources](https://github.com/PowerShellMafia/PowerSploit), can be imported as a powershell module in order to perform enumeration on the box.
+
+
+```bash
+# Domain Info
+Get-NetDomain #Get info about the current domain
+Get-NetDomain -Domain mydomain.local
+Get-DomainSID #Get domain SID
+
+# Policy
+Get-DomainPolicy #Get info about the policy
+(Get-DomainPolicy)."KerberosPolicy" #Kerberos tickets info(MaxServiceAge)
+(Get-DomainPolicy)."SystemAccess" #Password policy
+(Get-DomainPolicy).PrivilegeRights #Check your privileges
+
+# Domain Controller
+Get-NetDomainController -Domain mydomain.local #Get Domain Controller
+```
+
+{% endtab %}
+{% endtabs %}
+
+### Misc Enumeration
+
+{% tabs %}
+{% tab title="Windows" %}
+PowerView ([sources](https://github.com/PowerShellMafia/PowerSploit), can be imported as a powershell module in order to perform enumeration on the box.
+
+
+```bash
+Get-NetDomain #Basic domain info
+#User info
+Get-NetUser -UACFilter NOT_ACCOUNTDISABLE | select samaccountname, description, pwdlastset, logoncount, badpwdcount #Basic user enabled info
+Get-NetUser -LDAPFilter '(sidHistory=*)' #Find users with sidHistory set
+Get-NetUser -PreauthNotRequired #ASREPRoastable users
+Get-NetUser -SPN #Kerberoastable users
+#Groups info
+Get-NetGroup | select samaccountname, admincount, description
+Get-DomainObjectAcl -SearchBase 'CN=AdminSDHolder,CN=System,DC=EGOTISTICAL-BANK,DC=local' | %{ $_.SecurityIdentifier } | Convert-SidToName #Get AdminSDHolders
+#Computers
+Get-NetComputer | select samaccountname, operatingsystem
+Get-NetComputer -Unconstrained | select samaccountname #DCs always appear but aren't useful for privesc
+Get-NetComputer -TrustedToAuth | select samaccountname #Find computers with Constrained Delegation
+Get-DomainGroup -AdminCount | Get-DomainGroupMember -Recurse | ?{$_.MemberName -like '*$'} #Find any machine accounts in privileged groups
+#Shares
+Find-DomainShare -CheckShareAccess #Search readable shares
+#Domain trusts
+Get-NetDomainTrust #Get all domain trusts (parent, children and external)
+Get-NetForestDomain | Get-NetDomainTrust #Enumerate all the trusts of all the domains found
+#LHF
+#Check if any user passwords are set
+$FormatEnumerationLimit=-1;Get-DomainUser -LDAPFilter '(userPassword=*)' -Properties samaccountname,memberof,userPassword | % {Add-Member -InputObject $_ NoteProperty 'Password' "$([System.Text.Encoding]::ASCII.GetString($_.userPassword))" -PassThru} | fl
+#Asks DC for all computers, and asks every compute if it has admin access (very noisy). You need RCP and SMB ports opened.
+Find-LocalAdminAccess
+#Get members from Domain Admins (default) and a list of computers and check if any of the users is logged in any machine running Get-NetSession/Get-NetLoggedon on each host. If -Checkaccess, then it also check for LocalAdmin access in the hosts.
+Invoke-UserHunter -CheckAccess
+#Find interesting ACLs
+Invoke-ACLScanner -ResolveGUIDs | select IdentityReferenceName, ObjectDN, ActiveDirectoryRights | fl
+```
+
+{% endtab %}
+{% endtabs %}
+
+### Logon Users/ Session Enumeration
+
+{% tabs %}
+{% tab title="Windows" %}
+PowerView ([sources](https://github.com/PowerShellMafia/PowerSploit), can be imported as a powershell module in order to perform enumeration on the box.
+
+
+```bash
+Get-NetLoggedon -ComputerName <servername> #Get net logon users at the moment in a computer (need admins rights on target)
+Get-NetSession -ComputerName <servername> #Get active sessions on the host
+Get-LoggedOnLocal -ComputerName <servername> #Get locally logon users at the moment (need remote registry (default in server OS))
+Get-LastLoggedon -ComputerName <servername> #Get last user logged on (needs admin rigths in host)
+Get-NetRDPSession -ComputerName <servername> #List RDP sessions inside a host (needs admin rights in host)
+```
+
+{% endtab %}
+{% endtabs %}
+
+### Shares Enumeration
+
+{% tabs %}
+{% tab title="Windows" %}
+PowerView ([sources](https://github.com/PowerShellMafia/PowerSploit), can be imported as a powershell module in order to perform enumeration on the box.
+
+
+```bash
+Get-NetFileServer #Search file servers. Lot of users use to be logged in this kind of servers
+Find-DomainShare -CheckShareAccess #Search readable shares
+Find-InterestingDomainShareFile #Find interesting files, can use filters
+```
+
+{% endtab %}
+{% endtabs %}
+
+### GPO & OU Enumeration
+
+{% tabs %}
+{% tab title="Windows" %}
+PowerView ([sources](https://github.com/PowerShellMafia/PowerSploit), can be imported as a powershell module in order to perform enumeration on the box.
+
+
+```bash
+#GPO
+Get-NetGPO #Get all policies with details
+Get-NetGPO | select displayname #Get the names of the policies
+Get-NetGPO -ComputerName <servername> #Get the policy applied in a computer
+gpresult /V #Get current policy
+# Enumerate permissions for GPOs where users with RIDs of > -1000 have some kind of modification/control rights
+Get-DomainObjectAcl -LDAPFilter '(objectCategory=groupPolicyContainer)' | ? { ($_.SecurityIdentifier -match '^S-1-5-.*-[1-9]\d{3,}$') -and ($_.ActiveDirectoryRights -match 'WriteProperty|GenericAll|GenericWrite|WriteDacl|WriteOwner')}
+Get-NetGPO -GPOName '{3E04167E-C2B6-4A9A-8FB7-C811158DC97C}' #Get GPO of an OU
+
+#OU
+Get-NetOU #Get Organization Units
+Get-NetOU StudentMachines | %{Get-NetComputer -ADSPath $_} #Get all computers inside an OU (StudentMachines in this case)
+```
+
+{% endtab %}
+{% endtabs %}
+
+### ACL Enumeration
+
+{% tabs %}
+{% tab title="Windows" %}
+PowerView ([sources](https://github.com/PowerShellMafia/PowerSploit), can be imported as a powershell module in order to perform enumeration on the box.
+
+
+```bash
+Get-ObjectAcl -SamAccountName <username> -ResolveGUIDs #Get ACLs of an object (permissions of other objects over the indicated one)
+Get-PathAcl -Path "\\dc.mydomain.local\sysvol" #Get permissions of a file
+Find-InterestingDomainAcl -ResolveGUIDs #Find intresting ACEs (Interesting permisions of "unexpected objects" (RID>1000 and modify permissions) over other objects
+Find-InterestingDomainAcl -ResolveGUIDs | ?{$_.IdentityReference -match "RDPUsers"} #Check if any of the interesting permissions founds is realated to a username/group
+Get-NetGroupMember -GroupName "Administrators" -Recurse | ?{$_.IsGroup -match "false"} | %{Get-ObjectACL -SamAccountName $_.MemberName -ResolveGUIDs} | select ObjectDN, IdentityReference, ActiveDirectoryRights #Get special rights over All administrators in domain
+```
+
+{% endtab %}
+{% endtabs %}
+
+
+### Others & Tricks
+
+{% tabs %}
+{% tab title="Windows" %}
+PowerView ([sources](https://github.com/PowerShellMafia/PowerSploit), can be imported as a powershell module in order to perform enumeration on the box.
+
+We can convert a SID to a Name
+```bash
+"S-1-5-21-1874506631-3219952063-538504511-2136" | Convert-SidToName
+```
+
+RunAs users
+```bash
+# use an alterate creadential for any function
+$SecPassword = ConvertTo-SecureString 'BurgerBurgerBurger!' -AsPlainText -Force
+$Cred = New-Object System.Management.Automation.PSCredential('TESTLAB\dfm.a', $SecPassword)
+Get-DomainUser -Credential $Cred
+```
+
+Impersonate an user
+```bash
+# if running in -sta mode, impersonate another credential a la "runas /netonly"
+$SecPassword = ConvertTo-SecureString 'Password123!' -AsPlainText -Force
+$Cred = New-Object System.Management.Automation.PSCredential('TESTLAB\dfm.a', $SecPassword)
+Invoke-UserImpersonation -Credential $Cred
+# ... action
+Invoke-RevertToSelf
+```
+
+{% endtab %}
+{% endtabs %}
 
 ## Resources
 
