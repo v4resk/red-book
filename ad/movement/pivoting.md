@@ -291,7 +291,7 @@ You can check for more details on theses techniques on their dedicated Hack-Army
 {% endcontent-ref %}
 
 {% content-ref url="ntlm/pth.md %}
-[ptk.md](ntlm/pth.md)
+[pth.md](ntlm/pth.md)
 {% endcontent-ref %}
 
 {% content-ref url="kerberos/ptk.md" %}
