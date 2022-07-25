@@ -39,7 +39,7 @@ The following table should help  for better understanding of the ACE types and w
 
 In order to navigate the notes, testers can use the mindmap below.
 
-![](<../../../.gitbook/assets/DACL abuse.png>)
+![](<../../../.gitbook/assets/DACL_abuse.png>)
 
 All of the aforementioned attacks (red blocks) are detailed in the child notes, except:
 
