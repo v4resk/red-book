@@ -124,5 +124,12 @@
 
 ## Windows Pentesting <a href="#windows" id="windows"></a>
 * [Reconnaissance](windows/recon/README.md)
-* [Movement](awindowsd/movement/README.md)
+* [Movement](windows/movement/README.md)
 * [Persistence](windows/persistence/README.md)
+
+## Linux Pentesting <a href="#linux" id="linux"></a>
+* [Reconnaissance](linux/recon/README.md)
+* [Movement](linux/movement/README.md)
+* [Persistence](linux/persistence/README.md)
+
+## Docker Pentesting <a href="#linux" id="linux"></a>
