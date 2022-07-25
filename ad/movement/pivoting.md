@@ -290,7 +290,7 @@ You can check for more details on theses techniques on their dedicated Hack-Army
 [pass-the-certificate.md](kerberos/pass-the-certificate.md)
 {% endcontent-ref %}
 
-{% content-ref url="ntlm/pth.md %}
+{% content-ref url="ntlm/pth.md" %}
 [pth.md](ntlm/pth.md)
 {% endcontent-ref %}
 
