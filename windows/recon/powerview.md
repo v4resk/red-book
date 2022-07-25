@@ -10,7 +10,7 @@
 
 {% tabs %}
 {% tab title="Windows" %}
-PowerView ([sources](https://github.com/PowerShellMafia/PowerSploit), can be imported as a powershell module in order to perform enumeration on the box.
+[PowerView](https://github.com/PowerShellMafia/PowerSploit), can be imported as a powershell module in order to perform enumeration on the box.
 
 
 ```bash
@@ -66,7 +66,7 @@ Get-DomainGroup -AdminCount | Get-DomainGroupMember -Recurse | ?{$_.MemberName -
 
 {% tabs %}
 {% tab title="Windows" %}
-PowerView ([sources](https://github.com/PowerShellMafia/PowerSploit), can be imported as a powershell module in order to perform enumeration on the box.
+[PowerView](https://github.com/PowerShellMafia/PowerSploit), can be imported as a powershell module in order to perform enumeration on the box.
 
 
 ```bash
@@ -92,7 +92,7 @@ Get-NetDomainController -Domain mydomain.local #Get Domain Controller
 
 {% tabs %}
 {% tab title="Windows" %}
-PowerView ([sources](https://github.com/PowerShellMafia/PowerSploit), can be imported as a powershell module in order to perform enumeration on the box.
+[PowerView](https://github.com/PowerShellMafia/PowerSploit), can be imported as a powershell module in order to perform enumeration on the box.
 
 
 ```bash
@@ -133,7 +133,7 @@ Invoke-ACLScanner -ResolveGUIDs | select IdentityReferenceName, ObjectDN, Active
 
 {% tabs %}
 {% tab title="Windows" %}
-PowerView ([sources](https://github.com/PowerShellMafia/PowerSploit), can be imported as a powershell module in order to perform enumeration on the box.
+[PowerView](https://github.com/PowerShellMafia/PowerSploit), can be imported as a powershell module in order to perform enumeration on the box.
 
 
 ```bash
@@ -151,7 +151,7 @@ Get-NetRDPSession -ComputerName <servername> #List RDP sessions inside a host (n
 
 {% tabs %}
 {% tab title="Windows" %}
-PowerView ([sources](https://github.com/PowerShellMafia/PowerSploit), can be imported as a powershell module in order to perform enumeration on the box.
+[PowerView](https://github.com/PowerShellMafia/PowerSploit), can be imported as a powershell module in order to perform enumeration on the box.
 
 
 ```bash
@@ -167,7 +167,7 @@ Find-InterestingDomainShareFile #Find interesting files, can use filters
 
 {% tabs %}
 {% tab title="Windows" %}
-PowerView ([sources](https://github.com/PowerShellMafia/PowerSploit), can be imported as a powershell module in order to perform enumeration on the box.
+[PowerView](https://github.com/PowerShellMafia/PowerSploit), can be imported as a powershell module in order to perform enumeration on the box.
 
 
 ```bash
@@ -192,8 +192,7 @@ Get-NetOU StudentMachines | %{Get-NetComputer -ADSPath $_} #Get all computers in
 
 {% tabs %}
 {% tab title="Windows" %}
-PowerView ([sources](https://github.com/PowerShellMafia/PowerSploit), can be imported as a powershell module in order to perform enumeration on the box.
-
+[PowerView](https://github.com/PowerShellMafia/PowerSploit), can be imported as a powershell module in order to perform enumeration on the box.
 
 ```bash
 Get-ObjectAcl -SamAccountName <username> -ResolveGUIDs #Get ACLs of an object (permissions of other objects over the indicated one)
@@ -211,7 +210,7 @@ Get-NetGroupMember -GroupName "Administrators" -Recurse | ?{$_.IsGroup -match "f
 
 {% tabs %}
 {% tab title="Windows" %}
-PowerView [sources](https://github.com/PowerShellMafia/PowerSploit), can be imported as a powershell module in order to perform enumeration on the box.
+[PowerView](https://github.com/PowerShellMafia/PowerSploit), can be imported as a powershell module in order to perform enumeration on the box.
 
 We can convert a SID to a Name
 ```bash
