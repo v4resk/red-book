@@ -39,7 +39,8 @@ The following table should help  for better understanding of the ACE types and w
 
 In order to navigate the notes, testers can use the mindmap below.
 
-<img src="../../../.gitbook/assets/DACL_abuse.png">
+![](<../../../.gitbook/assets/DACL_abuse.png>)
+
 All of the aforementioned attacks (red blocks) are detailed in the child notes, except:
 
 * **SPN-jacking:** very specific scenario, requires lots of access: see [ADDS > Movement > Kerberos > SPN-jacking](../kerberos/spn-jacking.md)
