@@ -121,6 +121,7 @@
   * [🛠️ Access controls](ad/persistence/access-controls.md)
 
 ## Windows Pentesting <a href="#windows" id="windows"></a>
-* [Reconnaissance](ad/recon/README.md)
-* [Movement](ad/movement/README.md)
-* [Persistence](ad/persistence/README.md)
+* [Reconnaissance](windows/recon/README.md)
+  * [PowerView](windows/recon/powerview.md)
+* [Movement](awindowsd/movement/README.md)
+* [Persistence](windows/persistence/README.md)
