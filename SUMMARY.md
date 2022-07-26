@@ -133,3 +133,7 @@
 * [Persistence](linux/persistence/README.md)
 
 ## Docker Pentesting <a href="#linux" id="linux"></a>
+* [Reconnaissance](docker/recon/README.md)
+  * [Docker Registry](docker/recon/registry/README.md)
+    * [🛠️ HTTP API V2](docker/recon/registry/apiv2.md)
+* [Movement](docker/movement/README.md)
