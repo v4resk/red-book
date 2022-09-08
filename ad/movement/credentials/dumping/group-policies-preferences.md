@@ -12,6 +12,10 @@ Windows systems come with a built-in Administrator (with an RID of 500) that mos
 * **Issue 2**: by default, knowing the built-in Administrator's hash (RID 500) allows for powerful [Pass-the-Hash](../../ntlm/pth.md) attacks ([read more](../../ntlm/pth.md#limitations-tips-and-tricks)).
 * **Issue 3**: all Group Policies are stored in the Domain Controllers' `SYSVOL` share. All domain users have read access to it. This means all domain users can read the encrypted password set in Group Policy Preferences, and since Microsoft published the encryption key around 2012, the password can be decrypted:man_shrugging:.
 
+{% hint style="error" %}
+In 2015, Microsoft removed storing the encrypted password in the SYSVOL folder. It introduced the [[Local Administrator Password Solution (LAPS)](./laps-secrets.md), which offers a much more secure approach to remotely managing the local administrator password.
+{% endhint %}
+
 ## Practice
 
 {% tabs %}

