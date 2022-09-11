@@ -140,3 +140,10 @@
 
 ## Defense Evasion <a href="#evasion" id="evasion"></a>
 * [Obfuscation](evasion/obf/README.md)
+* [Code & Process Injection](evasion/code/README.md)
+
+## OSINT <a href="#osint" id="osint"></a>
+* [🛠️ Recon-ng](OSINT/recon-ng/README.md)
+* [🛠️ Maltego](OSINT/maltego/README.md)
+* [🛠️ Specialized Search Engines](OSINT/searchEngines/README.md)
+* [🛠️ Google Dorks](OSINT/searchEngines/README.md)
