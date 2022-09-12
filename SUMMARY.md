@@ -123,14 +123,14 @@
   * [🛠️ Access controls](ad/persistence/access-controls.md)
 
 ## Windows Pentesting <a href="#windows" id="windows"></a>
-* [Reconnaissance](windows/recon/README.md)
-* [Movement](windows/movement/README.md)
-* [Persistence](windows/persistence/README.md)
+* [🛠️Reconnaissance](windows/recon/README.md)
+* [🛠️Movement](windows/movement/README.md)
+* [🛠️Persistence](windows/persistence/README.md)
 
 ## Linux Pentesting <a href="#linux" id="linux"></a>
-* [Reconnaissance](linux/recon/README.md)
-* [Movement](linux/movement/README.md)
-* [Persistence](linux/persistence/README.md)
+* [🛠️Reconnaissance](linux/recon/README.md)
+* [🛠️Movement](linux/movement/README.md)
+* [🛠️Persistence](linux/persistence/README.md)
 
 ## Docker Pentesting <a href="#docker" id="docker"></a>
 * [Reconnaissance](docker/recon/README.md)
@@ -148,7 +148,7 @@
   * [MSHTA](redteam/weapon/mshta.md)
   * [WSH](redteam/weapon/wsh.md)
   * [VBA](redteam/weapon/vba.md)
-* [Delivery](redteam/delivery/README.md)
+* [🛠️Delivery](redteam/delivery/README.md)
 * [Defense Evasion](redteam/evasion/README.md)
-  * [Obfuscation](redteam/evasion/obf/README.md)
-  * [Code & Process Injection](redteam/evasion/code/README.md)
+  * [🛠️Obfuscation](redteam/evasion/obf/README.md)
+  * [🛠️Code & Process Injection](redteam/evasion/code/README.md)
