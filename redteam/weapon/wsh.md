@@ -28,9 +28,9 @@ wscript.exe c:\Users\Veresk\Desktop\openCalc.vbs
 ```
 
 {% hint style="success" %}
-A trick is to change the .vbs extension by a randomly choosen one.
+A nice trick !
 {% endhint %}
-
+A trick is to change the .vbs extension by a randomly choosen one.
 ```bash
 wscript.exe /e:VBScript c:\Users\Veresk\Desktop\openCalc.odt
 ```
