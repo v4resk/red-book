@@ -37,9 +37,7 @@ wscript.exe /e:VBScript c:\Users\Veresk\Desktop\openCalc.odt
 {% endtab %}
 
 {% tab title="pubprn.vbs" %}
-{% hint style="info" %}
-Signed Script Proxy Execution - bypass application whitelisting using pubprn.vbs
-{% endhint %}
+
 Using [pubprn.vbs](https://docs.microsoft.com/en-us/previous-versions/windows/it-pro/windows-server-2012-r2-and-2012/cc753116(v=ws.11)), we will execute code to launch calc.exe. First of, the xml that will be executed by the script:
 
 ```bash
