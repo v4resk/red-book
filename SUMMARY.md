@@ -140,12 +140,12 @@
 
 ## Red-Teaming <a href="#evasion" id="evasion"></a>
 * [Reconnaissance](redteam/recon/README.md)
-  * [🛠️ Recon-ng](redteam/recon/recon-ng/README.md)
-  * [🛠️ Maltego](redteam/recon/maltego/README.md)
-  * [🛠️ Specialized Search Engines](redteam/recon/README.md)
-  * [🛠️ Google Dorks](redteam/recon/README.md)
+  * [🛠️ Recon-ng](redteam/recon/recon-ng.md)
+  * [🛠️ Maltego](redteam/recon/maltego.md)
+  * [🛠️ Specialized Search Engines](redteam/recon/engine.md)
+  * [🛠️ Google Dorks](redteam/recon/dorks.md)
 * [Weaponization](redteam/weapon/README.md)
-* [Delivery](redteam/weapon/README.md)
+* [Delivery](redteam/delivery/README.md)
 * [Defense Evasion](redteam/evasion/README.md)
   * [Obfuscation](redteam/evasion/obf/README.md)
   * [Code & Process Injection](redteam/evasion/code/README.md)
