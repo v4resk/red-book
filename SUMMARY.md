@@ -138,12 +138,14 @@
     * [🛠️ HTTP API V2](docker/recon/registry/apiv2.md)
 * [Movement](docker/movement/README.md)
 
-## Defense Evasion <a href="#evasion" id="evasion"></a>
-* [Obfuscation](evasion/obf/README.md)
-* [Code & Process Injection](evasion/code/README.md)
-
-## OSINT <a href="#osint" id="osint"></a>
-* [🛠️ Recon-ng](OSINT/recon-ng/README.md)
-* [🛠️ Maltego](OSINT/maltego/README.md)
-* [🛠️ Specialized Search Engines](OSINT/searchEngines/README.md)
-* [🛠️ Google Dorks](OSINT/searchEngines/README.md)
+## Red-Teaming <a href="#evasion" id="evasion"></a>
+* [Reconnaissance](redteam/recon/README.md)
+  * [🛠️ Recon-ng](redteam/recon/recon-ng/README.md)
+  * [🛠️ Maltego](redteam/recon/maltego/README.md)
+  * [🛠️ Specialized Search Engines](redteam/recon/README.md)
+  * [🛠️ Google Dorks](redteam/recon/README.md)
+* [Weaponization](redteam/weapon/README.md)
+* [Delivery](redteam/weapon/README.md)
+* [Defense Evasion](redteam/evasion/README.md)
+  * [Obfuscation](redteam/evasion/obf/README.md)
+  * [Code & Process Injection](redteam/evasion/code/README.md)
