@@ -147,6 +147,7 @@
 * [Weaponization](redteam/weapon/README.md)
   * [MSHTA](redteam/weapon/mshta.md)
   * [WSH](redteam/weapon/wsh.md)
+  * [VBA](redteam/weapon/vba.md)
 * [Delivery](redteam/delivery/README.md)
 * [Defense Evasion](redteam/evasion/README.md)
   * [Obfuscation](redteam/evasion/obf/README.md)
