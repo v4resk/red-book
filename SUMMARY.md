@@ -150,7 +150,7 @@
   * [VBA](redteam/weapon/vba.md)
 * [Delivery](redteam/delivery/README.md)
   * [🛠️Password Attacks](redteam/delivery/passwd.md)
-  * [🛠️Phishing] (redteam/delivery/phishing/README.md)  
+  * [🛠️Phishing](redteam/delivery/phishing/README.md)  
 * [Defense Evasion](redteam/evasion/README.md)
   * [🛠️Obfuscation](redteam/evasion/obf/README.md)
   * [🛠️Code & Process Injection](redteam/evasion/code/README.md)
