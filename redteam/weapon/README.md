@@ -1,5 +1,5 @@
 ---
-description: MITRE ATT&CK™ Technique TA0002
+description: MITRE ATT&CK™ Execution -Technique TA0002
 ---
 # Weaponization
 
