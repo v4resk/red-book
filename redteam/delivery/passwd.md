@@ -22,9 +22,9 @@ Here are some website and tools that provide ressources about leaked passwords.
 
 {% tab title="CeWL" %}
 
-Tools such as Cewl can be used to effectively crawl a website and extract strings or keywords. Cewl is a powerful tool to generate a wordlist specific to a given company or target.  
+Tools such as [Cewl - Custom Word List generator](https://github.com/digininja/CeWL) can be used to effectively crawl a website and extract strings or keywords. Cewl is a powerful tool to **generate a wordlist specific to a given company or target**.  
 
-CeWL (Custom Word List generator) is a ruby app which spiders a given URL, up to a specified depth, and returns a list of words which can then be used for password crackers such as John the Ripper. Optionally, CeWL can follow external links.  
+CeWL is a ruby app which spiders a given URL, up to a specified depth, and returns a list of words which can then be used for password crackers such as John the Ripper. Optionally, CeWL can follow external links.  
 
 ```bash
 cewl -w list.txt -d 5 -m 5 http://target.net
@@ -41,7 +41,7 @@ python3 username_generator.py -w users.lst
 ```
 {% endtab %}
 {% tab title="Crunch" %}
-crunch is one of many powerful tools for creating an offline wordlist. With crunch, we can specify numerous options, including min, max, and options
+[Crunch](https://github.com/jim3ma/crunch) is one of many powerful tools for creating an offline wordlist. With crunch, we can specify numerous options, including min, max, and options
 
 ```bash
 #min=2 max=2 charset=01234abcd outfile=crunch.txt
@@ -50,13 +50,13 @@ crunch 2 2 01234abcd -o crunch.txt
 
 Crunch also lets us specify a character set using the -t option to combine words of our choice. Here are some of the other options that could be used to help create different combinations of your choice:
 
-@ - lower case alpha characters
+**@** - lower case alpha characters
 
-, - upper case alpha characters
+**,** - upper case alpha characters
 
-% - numeric characters
+**%** - numeric characters
 
-^ - special characters including space
+**^** - special characters including space
 
 ```bash
 #min=6 max=6 option=pass[0-9][0-9] outfile=stdin
@@ -81,7 +81,7 @@ python3 cupp.py -a
 
 {% tab title="Ruled-Based" %}
 
-Rule-Based attacks assume the attacker knows something about the password policy. Rules are applied to create passwords within the guidelines of the given password policy and should, in theory, only generate valid passwords. Using pre-existing wordlists may be useful when generating passwords that fit a policy — for example, manipulating or 'mangling' a password such as 'password': p@ssword, Pa$$word, Passw0rd, and so on.
+**Rule-Based attacks** assume the attacker knows something about the password policy. Rules are applied to create passwords within the guidelines of the given password policy and should, in theory, only generate valid passwords. Using pre-existing wordlists may be useful when generating passwords that fit a policy — for example, manipulating or 'mangling' a password such as 'password': p@ssword, Pa$$word, Passw0rd, and so on.
 
 [John the ripper](https://github.com/openwall/john) has a config file that contains rule sets, which is located at /etc/john/john.conf or /opt/john/john.conf depending on your distro or how john was installed. You can read /etc/john/john.conf and look for List.Rules to see all the available rules:
 
