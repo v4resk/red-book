@@ -50,13 +50,13 @@ crunch 2 2 01234abcd -o crunch.txt
 
 Crunch also lets us specify a character set using the -t option to combine words of our choice. Here are some of the other options that could be used to help create different combinations of your choice:
 
-**@** - lower case alpha characters
+`@` - lower case alpha characters
 
-**,** - upper case alpha characters
+`,` - upper case alpha characters
 
-**%** - numeric characters
+`%` - numeric characters
 
-**^** - special characters including space
+`^` - special characters including space
 
 ```bash
 #min=6 max=6 option=pass[0-9][0-9] outfile=stdin
@@ -81,7 +81,7 @@ python3 cupp.py -a
 
 {% tab title="Ruled-Based" %}
 
-**Rule-Based attacks** assume the attacker knows something about the password policy. Rules are applied to create passwords within the guidelines of the given password policy and should, in theory, only generate valid passwords. Using pre-existing wordlists may be useful when generating passwords that fit a policy — for example, manipulating or 'mangling' a password such as 'password': p@ssword, Pa$$word, Passw0rd, and so on.
+**Rule-Based attacks** assume the attacker knows something about the password policy. Rules are applied to create passwords within the guidelines of the given password policy and should, in theory, only generate valid passwords. Using pre-existing wordlists may be useful when generating passwords that fit a policy — for example, manipulating or 'mangling' a password such as `password`: `p@ssword`, `Pa$$word`, `Passw0rd`, and so on.
 
 [John the ripper](https://github.com/openwall/john) has a config file that contains rule sets, which is located at /etc/john/john.conf or /opt/john/john.conf depending on your distro or how john was installed. You can read /etc/john/john.conf and look for List.Rules to see all the available rules:
 
