@@ -7,21 +7,24 @@ We will also speak about tools used to perform online and offline password attac
 
 ## Practice
 ### Default Passwords
-Here are some website lists that provide default passwords for various products.
-1 - [Cirt.net](https://cirt.net/passwords)
+Here are some website lists that provide default passwords for various products.  
+1 - [Cirt.net](https://cirt.net/passwords)  
 2 - [Default-password](https://default-password.info/)  
-3 - [Datarecovery](https://datarecovery.com/rd/default-passwords/)
+3 - [Datarecovery](https://datarecovery.com/rd/default-passwords/)  
 
 ### Leaked Passwords
-Here are some website and tools that provide ressources about leaked passwords.
+Here are some website and tools that provide ressources about leaked passwords.  
 1 - [PwnedOrNot](https://github.com/thewhiteh4t/pwnedOrNot)  
 2 - [SecLists/Passwords/Leaked-Databases](https://github.com/danielmiessler/SecLists/tree/master/Passwords/Leaked-Databases)  
 
 ### Generate a Wordlist
 {% tabs %}
 
-{% tab title="CeWL - From a Website" %}
-CeWL (Custom Word List generator) is a ruby app which spiders a given URL, up to a specified depth, and returns a list of words which can then be used for password crackers such as John the Ripper. Optionally, CeWL can follow external links.
+{% tab title="CeWL" %}
+
+Tools such as Cewl can be used to effectively crawl a website and extract strings or keywords. Cewl is a powerful tool to generate a wordlist specific to a given company or target.  
+
+CeWL (Custom Word List generator) is a ruby app which spiders a given URL, up to a specified depth, and returns a list of words which can then be used for password crackers such as John the Ripper. Optionally, CeWL can follow external links.  
 
 ```bash
 cewl -w list.txt -d 5 -m 5 http://target.net
