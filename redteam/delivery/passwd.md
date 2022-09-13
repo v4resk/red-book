@@ -36,8 +36,8 @@ python3 username_generator.py -w users.lst
 ### Crunch - Generate Password list
 crunch is one of many powerful tools for creating an offline wordlist. With crunch, we can specify numerous options, including min, max, and options
 
-```
-# min=2 max=2 charset=01234abcd outfile=crunch.txt
+```bash
+#min=2 max=2 charset=01234abcd outfile=crunch.txt
 crunch 2 2 01234abcd -o crunch.txt
 ```
 
@@ -51,13 +51,25 @@ Crunch also lets us specify a character set using the -t option to combine words
 
 [^] - special characters including space
 
-```
-# min=6 max=6 option=pass[0-9][0-9] outfile=stdin
+```bash
+#min=6 max=6 option=pass[0-9][0-9] outfile=stdin
 crunch 6 6 -t pass%%
 ```
 
 ### CUPP - Common User Passwords Profiler (OSINT)
 
+[CUPP](https://github.com/Mebus/cupp) is an automatic and interactive tool written in Python for creating custom wordlists. For instance, if you know some details about a specific target, such as their birthdate, pet name, company name, etc., this could be a helpful tool to generate passwords based on this known information.
+
+```bash
+#Interactive mod
+python3 cupp.py -i
+
+#Pre-created wordlists
+python3 cupp.py -l
+
+# Alecto database default logins
+python3 cupp.py -a
+```
 
 {% tabs %}
 
