@@ -12,5 +12,6 @@ Reconnaissance consists of techniques that involve adversaries actively or passi
 ## Resources
 
 {% embed url="https://attack.mitre.org/tactics/TA0043/" %}
+{% embed url="https://www.lockheedmartin.com/en-us/capabilities/cyber/cyber-kill-chain.html" %}
 {% embed url="https://tryhackme.com/room/recon" %}
 

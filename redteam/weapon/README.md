@@ -14,6 +14,7 @@ This is the way that adversary will execute code on a target computer.
 
 ## Resources
 
+{% embed url="https://www.lockheedmartin.com/en-us/capabilities/cyber/cyber-kill-chain.html" %}
 {% embed url="https://www.ired.team/" %}
 {% embed url="https://tryhackme.com/room/weaponization" %}
 {% embed url="https://github.com/infosecn1nja/Red-Teaming-Toolkit#Initial-Access" %}
