@@ -149,7 +149,7 @@
   * [WSH](redteam/weapon/wsh.md)
   * [VBA](redteam/weapon/vba.md)
 * [Delivery](redteam/delivery/README.md)
-  * [🛠️Password Attacks](redteam/delivery/passwd.md)
+  * [Password Attacks](redteam/delivery/passwd.md)
   * [🛠️Phishing](redteam/delivery/phishing/README.md)  
 * [Defense Evasion](redteam/evasion/README.md)
   * [🛠️Obfuscation](redteam/evasion/obf/README.md)

