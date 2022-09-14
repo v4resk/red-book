@@ -124,6 +124,7 @@
 
 ## 🛠️Windows Pentesting <a href="#windows" id="windows"></a>
 * [Reconnaissance](windows/recon/README.md)
+  * [Enum Security Solutions](windows/recon/av.md)
 * [Movement](windows/movement/README.md)
 * [Persistence](windows/persistence/README.md)
 
