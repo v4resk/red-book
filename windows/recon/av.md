@@ -48,11 +48,7 @@ PS C:\Users\v4resk> Get-NetFirewallRule | findstr "Rule-Name"
 ```
 
 We can try to disable it using the Set-NetFirewallProfile cmdlet.
-
-{% hint style="info" %}
-We need Admin privileges in order to modify NetFirewall properties
-{% endhint %}  
-
+ 
 ``` bash
 PS C:\Users\v4resk> Set-NetFirewallProfile -Profile Domain, Public, Private -Enabled False
 ```
@@ -62,6 +58,9 @@ We can now use built-in windows tools to test connections:
 PS C:\Users\v4resk> Test-NetConnection -ComputerName 127.0.0.1 -Port 80
 PS C:\Users\v4resk> (New-Object System.Net.Sockets.TcpClient("127.0.0.1", "80")).Connected
 ```
+{% hint style="info" %}
+We need Admin privileges in order to modify NetFirewall properties
+{% endhint %} 
 
 {% endtab %}
 
