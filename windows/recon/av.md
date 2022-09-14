@@ -61,8 +61,30 @@ PS C:\Users\v4resk> (New-Object System.Net.Sockets.TcpClient("127.0.0.1", "80"))
 {% hint style="info" %}
 We need Admin privileges in order to modify NetFirewall properties
 {% endhint %} 
-
 {% endtab %}
+
+{% tab title="Sysmon" %}
+[Sysmon (System Monitor)](https://docs.microsoft.com/en-us/sysinternals/downloads/sysmon) is a Windows system service and device driver that, once installed on a system, remains resident across system reboots to monitor and log system activity to the Windows event log.  
+To detect sysmon on a target we can do:
+```bash
+# With process list
+PS C:\Users\v4resk> Get-Process | Where-Object { $_.ProcessName -eq "Sysmon" }
+
+# With services list
+PS C:\Users\v4resk> Get-CimInstance win32_service -Filter "Description = 'System Monitor service'"
+PS C:\Users\v4resk> Get-Service | where-object {$_.DisplayName -like "*sysm*"}
+
+#Windows Registry
+
+PS C:\Users\v4resk> reg query HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\WINEVT\Channels\Microsoft-Windows-Sysmon/Operational
+```
+
+If the target system is running Sysmon, we must try to locate its configuration file
+```bash
+findstr /si '<ProcessCreate onmatch="exclude">' C:\*
+```
+{% endtab %}
+
 
 {% endtabs %}
 
