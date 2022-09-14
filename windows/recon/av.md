@@ -7,16 +7,16 @@ It is important to enumerate antivirus and security detection methods on an endp
 ## Practice
 
 {% tabs %}
-{% tab title="wmic" %}
+{% tab title="AntiVirus" %}
 
 We can enumerate AV software using Windows built-in tools, such as `wmic`
 
 ```bash
 #CMD
-PS C:\Users\veresk> wmic /namespace:\\root\securitycenter2 path antivirusproduct
+PS C:\Users\v4resk> wmic /namespace:\\root\securitycenter2 path antivirusproduct
 
 #PowerShell cmdlet
-PS C:\Users\veresk> Get-CimInstance -Namespace root/SecurityCenter2 -ClassName AntivirusProduct
+PS C:\Users\v4resk> Get-CimInstance -Namespace root/SecurityCenter2 -ClassName AntivirusProduct
 ```
 {% endtab %}
 
@@ -25,14 +25,41 @@ PS C:\Users\veresk> Get-CimInstance -Namespace root/SecurityCenter2 -ClassName A
 We can enumerate if Windows Defender is running: 
 ```bash
 #Check if running
-PS C:\Users\veresk>  Get-Service WinDefend
+PS C:\Users\v4resk>  Get-Service WinDefend
 ```
 Next, we can start using the Get-MpComputerStatus cmdlet to get the current Windows Defender status. 
 ```bash
 #PowerShell cmdlet
-PS C:\Users\veresk> Get-MpComputerStatus
-PS C:\Users\veresk> Get-MpComputerStatus | select RealTimeProtectionEnabled
+PS C:\Users\v4resk> Get-MpComputerStatus
+PS C:\Users\v4resk> Get-MpComputerStatus | select RealTimeProtectionEnabled
 ```
+{% tab title="FireWalls" %}
+
+We can enumerate the `Windows Firewall` software with powershell.
+
+```bash
+PS C:\Users\v4resk> Get-NetFirewallProfile
+PS C:\Users\v4resk> Get-NetFirewallProfile | Format-Table Name, Enabled
+```
+{% endtab %}
+
+We can try to disable it using the Set-NetFirewallProfile cmdlet.
+
+{% hint style="error" %}
+We need Admin privileges in order to modify NetFirewall properties
+{% endhint %}  
+
+``` bash
+PS C:\Users\v4resk> Set-NetFirewallProfile -Profile Domain, Public, Private -Enabled False
+```
+
+We can use built-in windows tools to test connections:
+```bash
+PS C:\Users\v4resk> Test-NetConnection -ComputerName 127.0.0.1 -Port 80
+PS C:\Users\v4resk> (New-Object System.Net.Sockets.TcpClient("127.0.0.1", "80")).Connected
+```
+
+
 
 {% endtab %}
 
