@@ -39,13 +39,17 @@ PS C:\Users\v4resk> Get-MpComputerStatus | select RealTimeProtectionEnabled
 We can enumerate the `Windows Firewall` software with powershell.
 
 ```bash
+#Enum if its enabled
 PS C:\Users\v4resk> Get-NetFirewallProfile
 PS C:\Users\v4resk> Get-NetFirewallProfile | Format-Table Name, Enabled
+
+#Enum rules
+PS C:\Users\v4resk> Get-NetFirewallRule | findstr "Rule-Name"
 ```
 
 We can try to disable it using the Set-NetFirewallProfile cmdlet.
 
-{% hint style="error" %}
+{% hint style="info" %}
 We need Admin privileges in order to modify NetFirewall properties
 {% endhint %}  
 
@@ -53,7 +57,7 @@ We need Admin privileges in order to modify NetFirewall properties
 PS C:\Users\v4resk> Set-NetFirewallProfile -Profile Domain, Public, Private -Enabled False
 ```
 
-We can use built-in windows tools to test connections:
+We can now use built-in windows tools to test connections:
 ```bash
 PS C:\Users\v4resk> Test-NetConnection -ComputerName 127.0.0.1 -Port 80
 PS C:\Users\v4resk> (New-Object System.Net.Sockets.TcpClient("127.0.0.1", "80")).Connected
