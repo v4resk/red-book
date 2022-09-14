@@ -33,6 +33,7 @@ Next, we can start using the Get-MpComputerStatus cmdlet to get the current Wind
 PS C:\Users\v4resk> Get-MpComputerStatus
 PS C:\Users\v4resk> Get-MpComputerStatus | select RealTimeProtectionEnabled
 ```
+{% endtab %}
 {% tab title="FireWalls" %}
 
 We can enumerate the `Windows Firewall` software with powershell.
@@ -41,7 +42,6 @@ We can enumerate the `Windows Firewall` software with powershell.
 PS C:\Users\v4resk> Get-NetFirewallProfile
 PS C:\Users\v4resk> Get-NetFirewallProfile | Format-Table Name, Enabled
 ```
-{% endtab %}
 
 We can try to disable it using the Set-NetFirewallProfile cmdlet.
 
@@ -58,8 +58,6 @@ We can use built-in windows tools to test connections:
 PS C:\Users\v4resk> Test-NetConnection -ComputerName 127.0.0.1 -Port 80
 PS C:\Users\v4resk> (New-Object System.Net.Sockets.TcpClient("127.0.0.1", "80")).Connected
 ```
-
-
 
 {% endtab %}
 
