@@ -85,7 +85,13 @@ findstr /si '<ProcessCreate onmatch="exclude">' C:\*
 ```
 {% endtab %}
 
+{% tab title="EDRs" %}
+We can use scripts for enumerating security products within the machine, such as [SharpEDRChecker](https://github.com/PwnDexter/SharpEDRChecker).
 
+```bash
+PS C:\Users\v4resk> Invoke-EDRChecker
+```
+{% endtab %}
 {% endtabs %}
 
 
