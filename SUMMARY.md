@@ -123,35 +123,39 @@
   * [🛠️ Access controls](ad/persistence/access-controls.md)
 
 ## 🛠️Windows Pentesting <a href="#windows" id="windows"></a>
-* [Reconnaissance](windows/recon/README.md)
+
+* [Reconnaissance](windows/reconnaissance/README.md)
   * [Enum Security Solutions](windows/recon/av.md)
-* [Movement](windows/movement/README.md)
-* [Persistence](windows/persistence/README.md)
+* [Movement](windows/movement.md)
+* [Persistence](windows/persistence.md)
 
 ## 🛠️Linux Pentesting <a href="#linux" id="linux"></a>
-* [Reconnaissance](linux/recon/README.md)
-* [Movement](linux/movement/README.md)
-* [Persistence](linux/persistence/README.md)
+
+* [Reconnaissance](linux/reconnaissance.md)
+* [Movement](linux/movement.md)
+* [Persistence](linux/persistence.md)
 
 ## 🛠️Docker Pentesting <a href="#docker" id="docker"></a>
-* [Reconnaissance](docker/recon/README.md)
+
+* [Reconnaissance](docker/reconnaissance/README.md)
   * [Docker Registry](docker/recon/registry/README.md)
     * [🛠️ HTTP API V2](docker/recon/registry/apiv2.md)
-* [Movement](docker/movement/README.md)
+* [Movement](docker/movement.md)
 
 ## Red-Teaming <a href="#evasion" id="evasion"></a>
+
 * [Reconnaissance](redteam/recon/README.md)
-  * [🛠️ Recon-ng](redteam/recon/recon-ng.md)
-  * [🛠️ Maltego](redteam/recon/maltego.md)
-  * [🛠️ Specialized Search Engines](redteam/recon/engine.md)
-  * [🛠️ Google Dorks](redteam/recon/dorks.md)
+  * [🛠️ Recon-ng](evasion/recon/recon-ng.md)
+  * [🛠️ Maltego](evasion/recon/maltego.md)
+  * [🛠️ Specialized Search Engines](evasion/recon/specialized-search-engines.md)
+  * [🛠️ Google Dorks](evasion/recon/google-dorks.md)
 * [Weaponization](redteam/weapon/README.md)
   * [MSHTA](redteam/weapon/mshta.md)
   * [WSH](redteam/weapon/wsh.md)
   * [VBA](redteam/weapon/vba.md)
 * [Delivery](redteam/delivery/README.md)
   * [Password Attacks](redteam/delivery/passwd.md)
-  * [🛠️Phishing](redteam/delivery/phishing/README.md)  
-* [Defense Evasion](redteam/evasion/README.md)
+  * [🛠️Phishing](evasion/delivery/phishing.md)
+* [Defense Evasion](evasion/defense-evasion/README.md)
   * [🛠️Obfuscation](redteam/evasion/obf/README.md)
-  * [🛠️Code & Process Injection](redteam/evasion/code/README.md)
+  * [🛠️Code & Process Injection](evasion/defense-evasion/code-and-process-injection.md)
