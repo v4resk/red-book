@@ -126,6 +126,7 @@
 * [Reconnaissance](windows/recon/README.md)
   * [Enum Security Solutions](windows/recon/av.md)
 * [Movement](windows/movement/README.md)
+  * [Privilege Escalation](windows/movement/privEsc/README.md)
 * [Persistence](windows/persistence/README.md)
 
 ## 🛠️Linux Pentesting <a href="#linux" id="linux"></a>
