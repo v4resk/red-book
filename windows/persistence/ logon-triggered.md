@@ -13,13 +13,19 @@ If we want to force all users to run a payload while logging in, we can use the 
 {% tab title="Registry" %}
 You can also force a user to execute a program on logon via the registry. You can use the following registry entries to specify applications to run at logon:
 - `HKCU\Software\Microsoft\Windows\CurrentVersion\Run`  
-- `HKCU\Software\Microsoft\Windows\CurrentVersion\RunOnce`
-- `HKLM\Software\Microsoft\Windows\CurrentVersion\Run`
-- `HKLM\Software\Microsoft\Windows\CurrentVersion\RunOnce`
+- `HKCU\Software\Microsoft\Windows\CurrentVersion\RunOnce`  
+- `HKLM\Software\Microsoft\Windows\CurrentVersion\Run`  
+- `HKLM\Software\Microsoft\Windows\CurrentVersion\RunOnce`  
+  
+For example:
+```bash
+reg add "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Run" /v PeMalware /t REG_SZ /d "C:\Users\user1\shell.exe"
+```
+
 
 {% hint style="success" %}
 Registry entries under `HKCU` will only apply to the current user.  
-Registry entries under `HKLM` will apply to everyone.  
+Registry entries under `HKLM` will apply to everyone.
 {% endhint %}
 
 {% endtab %}
