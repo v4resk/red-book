@@ -30,7 +30,7 @@
       * [Web browsers](ad/movement/credentials/dumping/web-browsers.md)
       * [In-memory secrets](ad/movement/credentials/dumping/passwords-in-memory.md)
       * [🛠️ Cached Kerberos tickets](ad/movement/credentials/dumping/cached-kerberos-tickets.md)
-      * [🛠️ Windows Credential Manager](ad/movement/credentials/dumping/windows-credential-manager.md)
+      * [Windows Credential Manager](ad/movement/credentials/dumping/windows-credential-manager.md)
       * [🛠️ Local files](ad/movement/credentials/dumping/local-files.md)
       * [🛠️ Password managers](ad/movement/credentials/dumping/password-managers.md)
     * [Cracking](ad/movement/credentials/cracking.md)
@@ -129,6 +129,8 @@
 * [Movement](windows/movement/README.md)
   * [Privilege Escalation](windows/movement/privEsc/README.md)
 * [Persistence](windows/persistence/README.md)
+  * [Logon Triggered](windows/persistence/logon-triggered.md)
+
 
 ## 🛠️Linux Pentesting <a href="#linux" id="linux"></a>
 
