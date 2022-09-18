@@ -6,8 +6,11 @@ It's sometime usefull to know how to plant payloads that will get executed when 
 {% tabs %}
 
 {% tab title="Startup Folders" %}
-We can put executable in each user's folder: `C:\Users\<your_username>\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup`  
-If we want to force all users to run a payload while logging in, we can use the folder under: `C:\ProgramData\Microsoft\Windows\Start Menu\Programs\StartUp`  
+We can put executable in each user's folder:  
+- `C:\Users\<your_username>\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup`  
+  
+If we want to force all users to run a payload while logging in, we can use the folder under:  
+- `C:\ProgramData\Microsoft\Windows\Start Menu\Programs\StartUp`  
 {% endtab %}
 
 {% tab title="Registry" %}
@@ -27,7 +30,21 @@ reg add "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Run" /v PeM
 Registry entries under `HKCU` will only apply to the current user.  
 Registry entries under `HKLM` will apply to everyone.
 {% endhint %}
-
 {% endtab %}
 
+{% tab title="WinLogon" %}
+Winlogon, the Windows component that loads your user profile right after authentication can be abuse for persistence  
+We can edit the `Shell` & `Userinit` keys:  
+
+{% hint style="danger" %}
+If we'd replace any of the executables with some reverse shell, we would break the logon sequence, which isn't desired. Interestingly, you can append commands separated by a comma, and Winlogon will process them all.
+{% endhint %}
+  
+```bash
+reg add "HKLM\Software\Microsoft\Windows NT\CurrentVersion\Winlogon" /v Userinit /d "C:\Windows\System32\Userinit.exe, C:\Windows\shell.exe" /f
+```
+
+
+
+{% endtab %}
 {% endtabs %}
