@@ -1,7 +1,9 @@
 # Logon Triggered Persistence 
 
 ## Theory
-It's sometime usefull to know how to plant payloads that will get executed when a user logs into the system.
+It's sometime usefull to know how to plant payloads that will get executed when a user logs into the system ! 
+
+## Practice
 
 {% tabs %}
 
