@@ -162,4 +162,5 @@
 * [Defense Evasion](redteam/evasion/README.md)
   * [🛠️Obfuscation](redteam/evasion/obf/README.md)
   * [🛠️Code & Process Injection](redteam/evasion/evasion/code-and-process-injection.md)
+* [lateral movement](redteam/pivoting/README.md)
 * [Exfiltration](redteam/exfiltration/README.md)
