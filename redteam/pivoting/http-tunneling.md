@@ -1,8 +1,10 @@
 # HTTP(S) Tunneling
 
 ## Theory
-Tunneling over the HTTP protocol technique encapsulates other protocols and sends them back and forth via the HTTP protocol. HTTP tunneling sends and receives many HTTP requests depending on the communication channel!  
-
+Tunneling over the HTTP protocol technique encapsulates other protocols and sends them back and forth via the HTTP protocol. HTTP tunneling sends and receives many HTTP requests depending on the communication channel. We can pivoting throught this.
+{% hint style="danger" %}
+We can also use HTTP(S) Tunneling as a good [exfiltration](../exfiltration/README.md) channel.
+{% endhint %} 
 ## Practice
 
 {% tabs %}
