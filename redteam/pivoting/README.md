@@ -11,4 +11,4 @@ Lateral Movement consists of techniques that we use to enter and control remote 
 
 ## Resources
 
-{% embed url="https://attack.mitre.org/tactics/TA0008//" %}
+{% embed url="https://attack.mitre.org/tactics/TA0008/" %}
