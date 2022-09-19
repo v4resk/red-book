@@ -167,3 +167,5 @@
   * [Port Forwarding](redteam/pivoting/portfwd.md)
   * [HTTP(s) Tunneling](redteam/pivoting/http-tunneling.md)
 * [Exfiltration](redteam/exfiltration/README.md)
+  * [over ICMP](redteam/exfiltration/icmp.md)
+  * [over DNS](redteam/exfiltration/dns.md)
