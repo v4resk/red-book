@@ -97,6 +97,13 @@ On the compromised host, we would use the following command:
 www-data@pwned.lab$ ./chisel server -p LISTEN_PORT --socks5
 ```
 {% endtab %}
+{% tab title="ProxyChain" %}
+A little reminder on how to use the proxy with ProxyChain. To use it you just have to add the following line to `/etc/proxychains.conf`:
+```bash
+socks5 127.0.0.1 1080
+```
+
+{% endtab %}
 {% endtabs %}
 
 ## Resources
