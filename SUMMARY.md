@@ -122,29 +122,6 @@
   * [🛠️ CA Shadow](ad/persistence/ca-shadow.md)
   * [🛠️ Access controls](ad/persistence/access-controls.md)
 
-## 🛠️Windows Pentesting <a href="#windows" id="windows"></a>
-
-* [Reconnaissance](windows/reconnaissance/README.md)
-  * [Enum Security Solutions](windows/recon/av.md)
-* [Movement](windows/movement/README.md)
-  * [Privilege Escalation](windows/movement/privEsc/README.md)
-* [Persistence](windows/persistence/README.md)
-  * [Logon Triggered](windows/persistence/logon-triggered.md)
-
-
-## 🛠️Linux Pentesting <a href="#linux" id="linux"></a>
-
-* [Reconnaissance](linux/reconnaissance.md)
-* [Movement](linux/movement.md)
-* [Persistence](linux/persistence.md)
-
-## 🛠️Docker Pentesting <a href="#docker" id="docker"></a>
-
-* [Reconnaissance](docker/reconnaissance/README.md)
-  * [Docker Registry](docker/recon/registry/README.md)
-    * [🛠️ HTTP API V2](docker/recon/registry/apiv2.md)
-* [Movement](docker/movement.md)
-
 ## Red-Teaming <a href="#evasion" id="evasion"></a>
 
 * [Reconnaissance](redteam/recon/README.md)
@@ -169,3 +146,26 @@
 * [Exfiltration](redteam/exfiltration/README.md)
   * [Over ICMP](redteam/exfiltration/icmp.md)
   * [Over DNS](redteam/exfiltration/dns.md)
+
+## Windows Pentesting <a href="#windows" id="windows"></a>
+
+* [Reconnaissance](windows/reconnaissance/README.md)
+  * [Enum Security Solutions](windows/recon/av.md)
+* [Movement](windows/movement/README.md)
+  * [Privilege Escalation](windows/movement/privEsc/README.md)
+* [Persistence](windows/persistence/README.md)
+  * [Logon Triggered](windows/persistence/logon-triggered.md)
+
+
+## 🛠️Linux Pentesting <a href="#linux" id="linux"></a>
+
+* [Reconnaissance](linux/reconnaissance.md)
+* [Movement](linux/movement.md)
+* [Persistence](linux/persistence.md)
+
+## 🛠️Docker Pentesting <a href="#docker" id="docker"></a>
+
+* [Reconnaissance](docker/reconnaissance/README.md)
+  * [Docker Registry](docker/recon/registry/README.md)
+    * [🛠️ HTTP API V2](docker/recon/registry/apiv2.md)
+* [Movement](docker/movement.md)
