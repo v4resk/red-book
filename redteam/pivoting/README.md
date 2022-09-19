@@ -1,5 +1,5 @@
 ---
-description: MITRE ATT&CK™ Exfiltration -Technique TA0008
+description: MITRE ATT&CK™ Lateral Movement - Technique TA0008
 ---
 # Lateral Movement 
 
