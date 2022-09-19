@@ -141,7 +141,7 @@
   * [🛠️Code & Process Injection](redteam/evasion/evasion/code-and-process-injection.md)
 * [lateral movement](redteam/pivoting/README.md)
   * [Active Directory](redteam/pivoting/ad.md)
-  * [🛠️Port Forwarding](redteam/pivoting/portfwd.md)
+  * [Port Forwarding](redteam/pivoting/portfwd.md)
   * [🛠️HTTP(s) Tunneling](redteam/pivoting/http-tunneling.md)
 * [Exfiltration](redteam/exfiltration/README.md)
   * [Over ICMP](redteam/exfiltration/icmp.md)
