@@ -2,7 +2,7 @@
 
 ## Theory
 
-This technique is also known as TCP over DNS, where an attacker encapsulates other protocols, such as HTTP requests, over the DNS protocol using the [DNS Data Exfiltration technique](../exfiltration/dns.md). DNS Tunneling establishes a communication channel where data is sent and received continuously.
+DNS Tunneling also known as **TCP over DNS**, where an attacker encapsulates other protocols, such as HTTP requests, over the DNS protocol using the [DNS Data Exfiltration technique](../exfiltration/dns.md). DNS Tunneling establishes a communication channel where data is sent and received continuously.
 
 ## Practice
 

