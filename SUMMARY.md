@@ -1,6 +1,6 @@
 # Table of contents
 
-* [Academy](README.md)
+* [Red-Book](README.md)
 
 ## Active Directory <a href="#ad" id="ad"></a>
 
@@ -135,10 +135,10 @@
   * [VBA](redteam/weapon/vba.md)
 * [Delivery](redteam/delivery/README.md)
   * [Password Attacks](redteam/delivery/passwd.md)
-  * [🛠️Phishing](redteam/delivery/phishing.md)
-* [Defense Evasion](redteam/evasion/README.md)
+  * [🛠️Phishing](evasion/delivery/phishing.md)
+* [Defense Evasion](evasion/defense-evasion/README.md)
   * [🛠️Obfuscation](redteam/evasion/obf/README.md)
-  * [🛠️Code & Process Injection](redteam/evasion/evasion/code-and-process-injection.md)
+  * [🛠️Code & Process Injection](evasion/defense-evasion/code-and-process-injection.md)
 * [Lateral Movement](redteam/pivoting/README.md)
   * [Active Directory](redteam/pivoting/ad.md)
   * [Port Forwarding](redteam/pivoting/portfwd.md)
@@ -153,10 +153,9 @@
 * [Reconnaissance](windows/reconnaissance/README.md)
   * [Enum Security Solutions](windows/recon/av.md)
 * [Movement](windows/movement/README.md)
-  * [Privilege Escalation](windows/movement/privEsc/README.md)
+  * [Privilege Escalation](windows/movement/privilege-escalation.md)
 * [Persistence](windows/persistence/README.md)
   * [Logon Triggered](windows/persistence/logon-triggered.md)
-
 
 ## 🛠️Linux Pentesting <a href="#linux" id="linux"></a>
 
