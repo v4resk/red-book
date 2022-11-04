@@ -8,7 +8,7 @@
 The 🛠️ emoji is used where work has to be done.
 {% endhint %}
 
-This project is aimed at providing technical guides on various hacking topics:
+The **Red-Book of Hack-Army** aimed to provide a technical guides on various hacking topics:
 
 * Active Directory&#x20;
 * Web Pentest
@@ -19,7 +19,7 @@ This project is aimed at providing technical guides on various hacking topics:
 * Phishing&#x20;
 * ...
 
-The objective of this website is to provide a large wiki/knowledge base on offensive cybersecurity technics/tricks. Most of the content that you will find here are just **copy/past** from other valuable resources on internet.&#x20;
+The objective of this website is to provide a large wiki/knowledge base on offensive cybersecurity techniques/tricks. Most of the content that you will find here are just **copy/past** from other valuable resources on internet.&#x20;
 
 Keep in mind that these guides was created to centralize red teaming information that i found all over the web or during CTF and real word pentesting.
 

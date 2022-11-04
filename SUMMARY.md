@@ -1,6 +1,6 @@
 # Table of contents
 
-* [Introduction](README.md)
+* [Academy](README.md)
 
 ## Active Directory <a href="#ad" id="ad"></a>
 
