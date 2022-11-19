@@ -71,3 +71,5 @@ C:\> fodhelper.exe
 ## References
 
 {% embed url="https://tryhackme.com/room/bypassinguac" %}
+{% embed url="https://github.com/hfiref0x/UACME" %}
+{% embed url="https://v3ded.github.io/redteam/utilizing-programmatic-identifiers-progids-for-uac-bypasses" %}
