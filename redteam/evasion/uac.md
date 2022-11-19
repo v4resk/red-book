@@ -31,7 +31,7 @@ if UAC is configured on the "Always Notify" level, fodhelper and similar apps wo
 
  Microsoft doesn't consider UAC a security boundary but rather a simple convenience to the administrator to avoid unnecessarily running processes with administrative privileges. In that sense any bypass technique is not considered a vulnerability to Microsoft, and therefore some of them remain unpatched to this day.
 
-### Using ProgID to bypass UAC
+### Using ProgID and AutoElevate binary to bypass UAC
 we will create an entry on the registry for a new progID of our choice (any name will do) and then point the CurVer entry in the ms-settings progID to our newly created progID. This way, when fodhelper tries opening a file using the ms-settings progID, it will notice the CurVer entry pointing to our new progID and check it to see what command to use.  
 {% tabs %}
 {% tab title="Powershell" %}
@@ -66,7 +66,19 @@ The operation completed successfully.
 C:\> fodhelper.exe
 ```  
 {% endtab %}
-{% endtabs %}
+{% endtabs %}  
+
+### Automated Exploitation
+{% tabs %}
+{% tab title="UACME" %}
+While [UACME](https://github.com/hfiref0x/UACME) provides several tools, we will focus mainly on the one called **Akagi**, which runs the actual UAC bypasses  
+If you want to test for method 33, you can do the following from a command prompt, and a high integrity cmd.exe will pop up:
+
+```bash
+C:\tools>UACME-Akagi64.exe 33
+```  
+{% endtab %}
+{% endtabs %}  
 
 ## References
 
