@@ -1,6 +1,6 @@
 # Table of contents
 
-* [Red-Book](README.md)
+* [Introduction](README.md)
 
 ## Active Directory <a href="#ad" id="ad"></a>
 
