@@ -93,6 +93,7 @@
   * [Built-ins & settings](ad/movement/domain-settings/README.md)
     * [Security groups](ad/movement/domain-settings/builtin-groups.md)
     * [MachineAccountQuota](ad/movement/domain-settings/machineaccountquota.md)
+    * [Pre-Windows 2000 computers](ad/movement/domain-settings/pre-windows-2000-computers.md)
   * [Netlogon](ad/movement/netlogon/README.md)
     * [ZeroLogon](ad/movement/netlogon/zerologon.md)
   * [Certificate Services (AD-CS)](ad/movement/ad-cs/README.md)
