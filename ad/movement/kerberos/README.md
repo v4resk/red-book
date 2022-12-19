@@ -1,6 +1,6 @@
 # Kerberos
 
-![](../../../.gitbook/assets/Kerberos\_delegations-rbcd.png)
+![](../../../.gitbook/assets/pass-the-things.png)
 
 ## Tickets
 
