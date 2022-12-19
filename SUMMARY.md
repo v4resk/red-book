@@ -143,6 +143,7 @@
   * [🛠️Code & Process Injection](redteam/evasion/code-and-process-injection.md)
   * [UAC bypass](redteam/evasion/uac/README.md)
   * [AMSI bypass](redteam/evasion/amsi/README.md)
+  * [EWT evasion](redteam/evasion/ewt-evasion.md)
 * [Lateral Movement](redteam/pivoting/README.md)
   * [Active Directory](redteam/pivoting/ad.md)
   * [Port Forwarding](redteam/pivoting/portfwd.md)
