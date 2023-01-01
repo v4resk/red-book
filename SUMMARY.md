@@ -142,7 +142,7 @@
   * [🛠️Obfuscation](redteam/evasion/obf/README.md)
   * [🛠️Code & Process Injection](redteam/evasion/code-process-injection/README.md)
   * [Living Off The Land](redteam/evasion/living-off-the-land/README.md)
-    * [Sysinternals](redteam/evasion/living-off-the-land/sysinternals.md)
+    * [Windows Sysinternals](redteam/evasion/living-off-the-land/sysinternals.md)
   * [UAC bypass](redteam/evasion/uac/README.md)
   * [AMSI bypass](redteam/evasion/amsi/README.md)
   * [ETW evasion](redteam/evasion/etw-evasion.md)
