@@ -8,6 +8,6 @@ The LOLBAS project is a community-driven repository gathering a collection of bi
 
 <figure><img src="../../../.gitbook/assets/c98596d3c51c192ae9fd415ff06fc6b9.png" alt=""><figcaption></figcaption></figure>
 
-### References
+## References
 
 {% embed url="https://tryhackme.com/room/livingofftheland" %}
