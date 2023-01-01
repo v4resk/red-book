@@ -135,6 +135,7 @@
   * [MSHTA](redteam/weapon/mshta.md)
   * [WSH](redteam/weapon/wsh.md)
   * [VBA](redteam/weapon/vba.md)
+  * [RegSrv32](redteam/weapon/regsrv32.md)
 * [Delivery](redteam/delivery/README.md)
   * [Password Attacks](redteam/delivery/passwd.md)
   * [🛠️Phishing](evasion/delivery/phishing.md)
@@ -146,7 +147,7 @@
     * [LOLBAS Project](redteam/evasion/living-off-the-land/lolbas.md)
     * [File Operations](redteam/evasion/living-off-the-land/file-operations.md)
     * [File Executions](redteam/evasion/living-off-the-land/file-executions.md)
-  * [UAC bypass](redteam/evasion/uac/README.md)
+  * [UAC bypass](redteam/evasion/uac/README.md).
   * [AMSI bypass](redteam/evasion/amsi/README.md)
   * [ETW evasion](redteam/evasion/etw-evasion.md)
 * [Lateral Movement](redteam/pivoting/README.md)
