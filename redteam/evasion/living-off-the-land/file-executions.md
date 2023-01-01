@@ -56,6 +56,8 @@ The MITRE ATT&CK framework refers to this technique as [Signed Binary Proxy Exec
 Note that other tools can be used for file executions. We suggest visiting the [LOLBAS](https://lolbas-project.github.io/)[ ](https://lolbas-project.github.io/)project to check them out.
 {% endhint %}
 
+
+
 ## References
 
 {% embed url="https://tryhackme.com/room/livingofftheland" %}
