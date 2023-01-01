@@ -7,8 +7,6 @@ Based on the MITRE ATT&CK framework, this technique is called **Signed Binary Pr
 
 ## Practice
 
-## Practice
-
 {% tabs %}
 {% tab title="BITSAdmin.exe" %}
 The bitsadmin tool is a system administrator utility that can be used to create, download or upload Background Intelligent Transfer Service (BITS) jobs and check their progress. [BITS](https://learn.microsoft.com/en-us/windows/win32/bits/background-intelligent-transfer-service-portal) is a low-bandwidth and asynchronous method to download and upload files from HTTP webservers and SMB servers. Additional information about the bitsadmin tool can be found at [Microsoft Docs](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/bitsadmin).
