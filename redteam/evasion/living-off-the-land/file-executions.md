@@ -36,7 +36,7 @@ wmic.exe process call create calc
 ```
 The MITRE ATT&CK framework refers to this technique as [Signed Binary Proxy Execution (T1218)](https://attack.mitre.org/techniques/T1218/)
 {% endtab %}
-{% endtabs %}
+
 
 {% tab title="rundll32.exe" %}
 Rundll32 is a Microsoft built-in tool that loads and runs Dynamic Link Library DLL files within the operating system. A red team can abuse and leverage rundll32.exe to run arbitrary payloads and execute JavaScript and PowerShell scripts. 
