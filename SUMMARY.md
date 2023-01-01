@@ -138,6 +138,8 @@
   * [RegSrv32](redteam/weapon/regsrv32.md)
   * [Powershell Without Powershell.exe](redteam/weapon/whithout-powershell.md)
   * [MSBuild](redteam/weapon/msbuild.md)
+  * [WMIC](redteam/weapon/wmic.md)
+  * [CMSTP](redteam/weapon/cmstp.md)
 * [Delivery](redteam/delivery/README.md)
   * [Password Attacks](redteam/delivery/passwd.md)
   * [🛠️Phishing](evasion/delivery/phishing.md)
