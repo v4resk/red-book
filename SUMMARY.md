@@ -137,6 +137,7 @@
   * [VBA](redteam/weapon/vba.md)
   * [RegSrv32](redteam/weapon/regsrv32.md)
   * [Powershell Without Powershell.exe](redteam/weapon/whithout-powershell.md)
+  * [MSBuild](redteam/weapon/msbuild.md)
 * [Delivery](redteam/delivery/README.md)
   * [Password Attacks](redteam/delivery/passwd.md)
   * [🛠️Phishing](evasion/delivery/phishing.md)
