@@ -145,6 +145,7 @@
     * [Windows Sysinternals](redteam/evasion/living-off-the-land/sysinternals.md)
     * [LOLBAS Project](redteam/evasion/living-off-the-land/lolbas.md)
     * [File Operations](redteam/evasion/living-off-the-land/file-operations.md)
+    * [File Executions](redteam/evasion/living-off-the-land/file-executions.md)
   * [UAC bypass](redteam/evasion/uac/README.md)
   * [AMSI bypass](redteam/evasion/amsi/README.md)
   * [ETW evasion](redteam/evasion/etw-evasion.md)

