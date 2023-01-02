@@ -179,9 +179,8 @@
 
 ## 🛠️Webapp Pentesting <a href="#docker" id="docker"></a>
 
-* [Reconnaissance](web/reconnaissance/README.md)
-* [Movement](web/movement.md)
-
+* [Reconnaissance](docker/reconnaissance.md)
+* [Movement](<docker/movement (1).md>)
 
 ## 🛠️Docker Pentesting <a href="#docker" id="docker"></a>
 
