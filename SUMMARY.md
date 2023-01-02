@@ -163,7 +163,7 @@
   * [Over ICMP](redteam/exfiltration/icmp.md)
   * [Over DNS](redteam/exfiltration/dns.md)
 
-## 🛠️Windows Pentesting <a href="#windows" id="windows"></a>
+## 🛠️Windows Pentest <a href="#windows" id="windows"></a>
 
 * [Reconnaissance](windows/recon/README.md)
   * [Enum Security Solutions](windows/recon/av.md)
@@ -171,19 +171,20 @@
 * [Persistence](windows/persistence/README.md)
   * [Logon Triggered](windows/persistence/logon-triggered.md)
 
-## 🛠️Linux Pentesting <a href="#linux" id="linux"></a>
+## 🛠️Linux Pentest <a href="#linux" id="linux"></a>
 
 * [Reconnaissance](linux/recon/README.md)
 * [Privilege Escalation](linux/privesc/README.md)
 * [Persistence](linux/persistence/README.md)
 
-## 🛠️Webapp Pentesting <a href="#docker" id="docker"></a>
+## 🛠️Webapp Pentest <a href="#docker" id="docker"></a>
 
 * [Reconnaissance](web/reconnaissance/README.md)
-* [Movement](web/movement.md)
+* [Server-side](web/movement.md)
+* [Client-side](web/movement.md)
 
 
-## 🛠️Docker Pentesting <a href="#docker" id="docker"></a>
+## 🛠️Docker Pentest <a href="#docker" id="docker"></a>
 
 * [Reconnaissance](docker/reconnaissance/README.md)
   * [Docker Registry](docker/recon/registry/README.md)
