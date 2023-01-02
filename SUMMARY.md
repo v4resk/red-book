@@ -132,6 +132,7 @@
   * [🛠️ Specialized Search Engines](redteam/recon/specialized-search-engines.md)
   * [🛠️ Google Dorks](redteam/recon/google-dorks.md)
 * [Weaponization](redteam/weapon/README.md)
+  * [🛠️Code & Process Injection](redteam/weapon/code-process-injection/README.md)
   * [MSHTA](redteam/weapon/mshta.md)
   * [WSH](redteam/weapon/wsh.md)
   * [VBA](redteam/weapon/vba.md)
@@ -145,7 +146,6 @@
   * [🛠️Phishing](evasion/delivery/phishing.md)
 * [Defense Evasion](redteam/evasion/README.md)
   * [🛠️Obfuscation](redteam/evasion/obf/README.md)
-  * [🛠️Code & Process Injection](redteam/evasion/code-process-injection/README.md)
   * [Living Off The Land](redteam/evasion/living-off-the-land/README.md)
     * [Windows Sysinternals](redteam/evasion/living-off-the-land/sysinternals.md)
     * [LOLBAS Project](redteam/evasion/living-off-the-land/lolbas.md)
@@ -163,20 +163,25 @@
   * [Over ICMP](redteam/exfiltration/icmp.md)
   * [Over DNS](redteam/exfiltration/dns.md)
 
-## Windows Pentesting <a href="#windows" id="windows"></a>
+## 🛠️Windows Pentesting <a href="#windows" id="windows"></a>
 
-* [Reconnaissance](windows/reconnaissance/README.md)
+* [Reconnaissance](windows/recon/README.md)
   * [Enum Security Solutions](windows/recon/av.md)
-* [Movement](windows/movement/README.md)
-  * [Privilege Escalation](windows/movement/privilege-escalation.md)
+* [Privilege Escalation](windows/privesc/README.md)
 * [Persistence](windows/persistence/README.md)
   * [Logon Triggered](windows/persistence/logon-triggered.md)
 
 ## 🛠️Linux Pentesting <a href="#linux" id="linux"></a>
 
-* [Reconnaissance](linux/reconnaissance.md)
-* [Movement](linux/movement.md)
-* [Persistence](linux/persistence.md)
+* [Reconnaissance](linux/recon/README.md)
+* [Privilege Escalation](linux/privesc/README.md)
+* [Persistence](linux/persistence/README.md)
+
+## 🛠️Webapp Pentesting <a href="#docker" id="docker"></a>
+
+* [Reconnaissance](web/reconnaissance/README.md)
+* [Movement](web/movement.md)
+
 
 ## 🛠️Docker Pentesting <a href="#docker" id="docker"></a>
 
