@@ -179,10 +179,15 @@
 
 ## 🛠️Webapp Pentest <a href="#docker" id="docker"></a>
 
+<<<<<<< HEAD
 * [Reconnaissance](web/reconnaissance/README.md)
 * [Server-side](web/movement.md)
 * [Client-side](web/movement.md)
 
+=======
+* [Reconnaissance](docker/reconnaissance.md)
+* [Movement](<docker/movement (1).md>)
+>>>>>>> 3ad72c9230f6145d63dd4e6456b08d8497f535e0
 
 ## 🛠️Docker Pentest <a href="#docker" id="docker"></a>
 
