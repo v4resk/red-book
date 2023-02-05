@@ -168,6 +168,7 @@
 * [Reconnaissance](windows/recon/README.md)
   * [Enum Security Solutions](windows/recon/av.md)
 * [Privilege Escalation](windows/privesc/README.md)
+  * [Abusing Tokens](windows/privesc/abusing-tokens.md)
 * [Persistence](windows/persistence/README.md)
   * [Logon Triggered](windows/persistence/logon-triggered.md)
 
