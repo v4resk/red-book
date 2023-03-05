@@ -3,6 +3,37 @@
 A lot of information on an AD domain can be obtained through LDAP. Most of the information can only be obtained with an authenticated bind but metadata (naming contexts, DNS server name, Domain Functional Level (DFL)) can be obtainable anonymously, even with anonymous binding disabled.
 
 {% tabs %}
+{% tab title="ldapsearch" %}
+The [ldapsearch](https://linux.die.net/man/1/ldapsearch) command is a shell-accessible interface to the [ldap_search_ext(3)](https://linux.die.net/man/3/ldap_search_ext) library call. It can be used to enumerate essential informations. 
+
+Enumerate the base domain
+```bash
+#Simple bind authentification (-x) as anonymous.
+ldapsearch -H ldap://$IP -x -s base namingcontexts
+```
+
+Dump all readable ldap informations as anonymous
+```bash
+ldapsearch -H ldap://$IP -x -b "DC=contoso,DC=local"
+```
+
+Dump all readable ldap informations as anonymous and filter
+```bash
+#With (objectClass=User) as the query and sAMAccountName the filter.
+ldapsearch -H ldap://$IP -x -b "DC=contoso,DC=local" '(objectClass=User)' sAMAccountName
+```
+
+Dump all readable ldap informations as a user and filter
+```bash
+#With (objectClass=User) as the query and sAMAccountName the filter.
+ldapsearch -H ldap://$IP -x -D "CN=MyUser,CN=Users,DC=contoso,DC=local" -w Password! -b "DC=contoso,DC=local" '(objectClass=User)' sAMAccountName
+
+#Or
+ldapsearch -H ldap://$IP -x -U "MyUser@contoso.local" -w Password! -b "DC=contoso,DC=local" '(objectClass=User)' sAMAccountName
+```
+
+{% endtab %}
+
 {% tab title="ldapsearch-ad" %}
 The [ldapsearch-ad](https://github.com/yaap7/ldapsearch-ad) Python script can also be used to enumerate essential information like domain admins that have their password set to never expire, default password policies and the ones found in GPOs, trusts, kerberoastable accounts, and so on.
 
