@@ -27,9 +27,6 @@ Dump all readable ldap informations as a user and filter
 ```bash
 #With (objectClass=User) as the query and sAMAccountName the filter.
 ldapsearch -H ldap://$IP -x -D "CN=MyUser,CN=Users,DC=contoso,DC=local" -w Password! -b "DC=contoso,DC=local" '(objectClass=User)' sAMAccountName
-
-#Or
-ldapsearch -H ldap://$IP -x -U "MyUser@contoso.local" -w Password! -b "DC=contoso,DC=local" '(objectClass=User)' sAMAccountName
 ```
 
 {% endtab %}
