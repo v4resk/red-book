@@ -174,19 +174,21 @@
 * [Persistence](windows/persistence/README.md)
   * [Logon Triggered](windows/persistence/logon-triggered.md)
 
-## 🛠️Linux Pentest <a href="#linux" id="linux"></a>
+## Linux Pentest <a href="#linux" id="linux"></a>
 
 * [Reconnaissance](linux/recon/README.md)
 * [Local Privilege Escalation](linux/privesc/README.md)
 * [Persistence](linux/persistence/README.md)
 
-## 🛠️Webapp Pentest <a href="#docker" id="docker"></a>
+## Webapp Pentest <a href="#docker" id="docker"></a>
 
 * [Reconnaissance](web/reconnaissance/README.md)
-* [Server Side](web/server-side/README.md)
+* [Server-Side](web/server-side/README.md)
   * [SQL Injection](web/server-side/sql-injection/README.md)
     * [Enum Database](web/server-side/sql-injection/enum-database.md)
-* [Client Side](web/client-side/README.md)
+    * [UNION Attacks](web/server-side/sql-injection/union-attacks.md)
+    * [Blind Attacks](web/server-side/sql-injection/blind-sqli/README.md)
+* [Client-Side](web/client-side/README.md)
 
 
 ## 🛠️Docker Pentest <a href="#docker" id="docker"></a>

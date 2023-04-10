@@ -113,14 +113,14 @@ The next step in performing SQL injections is to enumerate the tables that are p
 {% tabs %}
 {% tab title="MySQL" %}
 ```sql
-SELECT table_name FROM information_schema.tables
+SELECT table_name FROM information_schema.tables;
 SELECT table_name FROM information_schema.tables WHERE table_schema = DATABASE();
 ```
 {% endtab %}
 
 {% tab title="MSSQL" %}
 ```sql
-SELECT table_name FROM information_schema.tables
+SELECT table_name FROM information_schema.tables;
 SELECT table_name FROM information_schema.tables WHERE table_catalog = DB_NAME();
 ```
 {% endtab %}
@@ -150,35 +150,36 @@ SELECT tbl_name FROM sqlite_master WHERE type='table' and tbl_name NOT like 'sql
 {% endtabs %}
 
 ### Columns Names 
-Next step is to enumerate columns within tables.
+Next step is to enumerate columns within tables.It's a crucial step in the process of exploiting a SQL injection vulnerability.
+
 {% tabs %}
 {% tab title="MySQL" %}
 ```sql
-SELECT @@version 
+SELECT column_name FROM information_schema.columns WHERE table_name = 'TABLE-NAME-HERE';
 ```
 {% endtab %}
 
 {% tab title="MSSQL" %}
 ```sql
-SELECT @@version 
+SELECT column_name FROM information_schema.columns WHERE table_name = 'TABLE-NAME-HERE';
 ```
 {% endtab %}
 
 {% tab title="OracleSQL" %}
 ```sql
-SELECT banner FROM v$version
+SELECT column_name FROM all_tab_columns WHERE table_name = 'TABLE-NAME-HERE';
 ```
 {% endtab %}
 
 {% tab title="PostgreSQL" %}
 ```sql
-SELECT version() 
+SELECT column_name FROM information_schema.columns WHERE table_name='TABLE-NAME-HERE';
 ```
 {% endtab %}
 
 {% tab title="SQLite" %}
 ```sql
-SELECT sqlite_version();
+SELECT sql FROM sqlite_master WHERE type!='meta' AND sql NOT NULL AND name ='table_name';
 ```
 {% endtab %}
 {% endtabs %}
