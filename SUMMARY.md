@@ -183,8 +183,10 @@
 ## 🛠️Webapp Pentest <a href="#docker" id="docker"></a>
 
 * [Reconnaissance](web/reconnaissance/README.md)
-* [Server-side](web/movement.md)
-* [Client-side](web/movement.md)
+* [Server Side](web/server-side/README.md)
+  * [SQL Injection](web/server-side/sql-injection/README.md)
+    * [Enum Database](web/server-side/sql-injection/enum-database.md)
+* [Client Side](web/client-side/README.md)
 
 
 ## 🛠️Docker Pentest <a href="#docker" id="docker"></a>
