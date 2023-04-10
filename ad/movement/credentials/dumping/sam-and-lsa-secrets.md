@@ -8,11 +8,11 @@ description: MITRE ATT&CK™ Sub-techniques T1003.002, T1003.004 and T1003.005
 
 In Windows environments, passwords are stored in a hashed format in registry hives like SAM (Security Account Manager) and SECURITY.
 
-| Hive     | Details                                                        | Format or credential material                                                                                                                                                              |
-| -------- | -------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| SAM      | stores locally cached credentials (referred to as SAM secrets) | LM or NT hashes                                                                                                                                                                            |
-| SECURITY | stores domain cached credentials (referred to as LSA secrets)  | <p>Plaintext passwords</p><p>LM or NT hashes</p><p>Kerberos keys (DES, AES)</p><p>Domain Cached Credentials (DCC1 and DCC2)</p><p>Security Questions (<code>L$_SQSA_&#x3C;SID></code>)</p> |
-| SYSTEM   | contains enough info to decrypt SAM secrets and LSA secrets    | N/A                                                                                                                                                                                        |
+| Hive     | Details                                                        | Format or credential material                                                                                                                                                                                               |
+| -------- | -------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| SAM      | stores locally cached credentials (referred to as SAM secrets) | LM or NT hashes                                                                                                                                                                                                             |
+| SECURITY | stores domain cached credentials (referred to as LSA secrets)  | <p>Plaintext passwords</p><p>LM or NT hashes</p><p>Kerberos keys (DES, AES)</p><p>Domain Cached Credentials (DCC1 and DCC2)</p><p>Security Questions (<code>L$</code><em><code>SQSA</code></em><code>&#x3C;SID></code>)</p> |
+| SYSTEM   | contains enough info to decrypt SAM secrets and LSA secrets    | N/A                                                                                                                                                                                                                         |
 
 SAM and LSA secrets can be dumped either locally or remotely from the mounted registry hives. These secrets can also be extracted offline from the exported hives. Once the secrets are extracted, they can be used for various attacks, depending on the credential format.
 
@@ -79,7 +79,7 @@ BackupOperatorToDA.exe -d "domain" -u "user" -p "password" -t "target" -o "\\ATT
 ```
 
 {% hint style="info" %}
-Alternatively, from a live Windows machine, the hive files can also be exfiltrated using [Volume Shadow Copy](ntds.md#volume-shadow-copy-vssadmin) like demonstrated for an NTDS export.
+Alternatively, from a live Windows machine, the hive files can also be exfiltrated using [Volume Shadow Copy](broken-reference) like demonstrated for an NTDS export.
 {% endhint %}
 {% endtab %}
 

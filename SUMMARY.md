@@ -2,7 +2,7 @@
 
 * [The Red-Book](README.md)
 
-## Active Directory <a href="#ad" id="ad"></a>
+## Active Directory <a href="#a-d" id="a-d"></a>
 
 * [Reconnaissance](ad/recon/README.md)
   * [PowerView](ad/recon/powerview.md)
@@ -134,7 +134,7 @@
   * [🛠️ Specialized Search Engines](redteam/recon/specialized-search-engines.md)
   * [🛠️ Google Dorks](redteam/recon/google-dorks.md)
 * [Weaponization](redteam/weapon/README.md)
-  * [🛠️Code & Process Injection](redteam/weapon/code-process-injection/README.md)
+  * [🛠️Code & Process Injection](evasion/weapon/code-and-process-injection.md)
   * [MSHTA](redteam/weapon/mshta.md)
   * [WSH](redteam/weapon/wsh.md)
   * [VBA](redteam/weapon/vba.md)
@@ -182,7 +182,7 @@
 
 ## Webapp Pentest <a href="#docker" id="docker"></a>
 
-* [Reconnaissance](web/reconnaissance/README.md)
+* [Reconnaissance](docker/reconnaissance.md)
 * [Server-Side](web/server-side/README.md)
   * [SQL Injection](web/server-side/sql-injection/README.md)
     * [Enum Database](web/server-side/sql-injection/enum-database.md)
@@ -192,7 +192,6 @@
       * [Error Based](web/server-side/sql-injection/blind-sqli/error-based.md)
       * [Time Based](web/server-side/sql-injection/blind-sqli/time-based.md)
 * [Client-Side](web/client-side/README.md)
-
 
 ## 🛠️Docker Pentest <a href="#docker" id="docker"></a>
 
