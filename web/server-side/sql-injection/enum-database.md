@@ -107,6 +107,83 @@ SELECT sql FROM sqlite_schema;
 {% endtab %}
 {% endtabs %}
 
+### Tables Names 
+The next step in performing SQL injections is to enumerate the tables that are present within each database. Enumerating the table names can provide valuable information about the structure and content of the databases.  
+
+{% tabs %}
+{% tab title="MySQL" %}
+```sql
+SELECT table_name FROM information_schema.tables
+SELECT table_name FROM information_schema.tables WHERE table_schema = DATABASE();
+```
+{% endtab %}
+
+{% tab title="MSSQL" %}
+```sql
+SELECT table_name FROM information_schema.tables
+SELECT table_name FROM information_schema.tables WHERE table_catalog = DB_NAME();
+```
+{% endtab %}
+
+{% tab title="OracleSQL" %}
+```sql
+SELECT table_name FROM all_tables;
+SELECT table_name FROM all_tables WHERE owner = USER;
+
+SELECT owner, table_name FROM all_tables;
+SELECT owner, table_name FROM all_tab_columns WHERE column_name LIKE '%PASS%';
+```
+{% endtab %}
+
+{% tab title="PostgreSQL" %}
+```sql
+SELECT table_name FROM information_schema.tables;
+SELECT table_name FROM information_schema.tables WHERE table_schema = current_schema();
+```
+{% endtab %}
+
+{% tab title="SQLite" %}
+```sql
+SELECT tbl_name FROM sqlite_master WHERE type='table' and tbl_name NOT like 'sqlite_%';
+```
+{% endtab %}
+{% endtabs %}
+
+### Columns Names 
+Next step is to enumerate columns within tables.
+{% tabs %}
+{% tab title="MySQL" %}
+```sql
+SELECT @@version 
+```
+{% endtab %}
+
+{% tab title="MSSQL" %}
+```sql
+SELECT @@version 
+```
+{% endtab %}
+
+{% tab title="OracleSQL" %}
+```sql
+SELECT banner FROM v$version
+```
+{% endtab %}
+
+{% tab title="PostgreSQL" %}
+```sql
+SELECT version() 
+```
+{% endtab %}
+
+{% tab title="SQLite" %}
+```sql
+SELECT sqlite_version();
+```
+{% endtab %}
+{% endtabs %}
+
+
 ## Resources
 
 {% embed url="https://portswigger.net/web-security/sql-injection" %}
