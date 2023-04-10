@@ -7,8 +7,7 @@ Depending on the boolean result (TRUE or FALSE), the content within the response
 
 ## Practice
 
-### Getting database name
-
+### Getting database
 {% tabs %}
 {% tab title="MySQL" %}
 First, retrieve the database length:
@@ -53,8 +52,7 @@ Second, retrieve the database name:
 {% endtab %}
 {% endtabs %}
 
-### Getting tables names
-
+### Getting Tables
 {% tabs %}
 {% tab title="MySQL" %}
 First, retrieve the number of tables:
@@ -106,7 +104,7 @@ Third, retrieve name of each table
 {% endtab %}
 {% endtabs %}
 
-### Getting column names
+### Getting Columns
 {% tabs %}
 {% tab title="MySQL" %}
 First, retrieve the number of columns:
