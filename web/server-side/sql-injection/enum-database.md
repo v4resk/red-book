@@ -188,3 +188,4 @@ SELECT sql FROM sqlite_master WHERE type!='meta' AND sql NOT NULL AND name ='tab
 ## Resources
 
 {% embed url="https://portswigger.net/web-security/sql-injection" %}
+{% embed url="https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/SQL%20Injection" %}

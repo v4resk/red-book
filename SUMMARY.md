@@ -188,6 +188,9 @@
     * [Enum Database](web/server-side/sql-injection/enum-database.md)
     * [UNION Attacks](web/server-side/sql-injection/union-attacks.md)
     * [Blind Attacks](web/server-side/sql-injection/blind-sqli/README.md)
+      * [Boolean Based](web/server-side/sql-injection/blind-sqli/boolean-based.md)
+      * [Error Based](web/server-side/sql-injection/blind-sqli/error-based.md)
+      * [Time Based](web/server-side/sql-injection/blind-sqli/time-based.md)
 * [Client-Side](web/client-side/README.md)
 
 
