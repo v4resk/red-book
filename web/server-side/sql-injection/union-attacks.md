@@ -106,7 +106,7 @@ For example we can retrieve the database version on MySQL:
 ```
 
 You can now use queries on this page, in combinaison with UNION injection to dump the database. 
-{% page-ref page="enum-databases.md" %}
+{% page-ref page="../sql-injection/enum-databases.md" %}
 
 
 ## Resources
