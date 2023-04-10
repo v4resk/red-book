@@ -101,7 +101,7 @@ CONCAT('foo','~','bar')
 When you have determined the number of columns returned by the original query and found which columns can hold string data, you are in a position to retrieve interesting data.
 
 For example we can retrieve the database version on MySQL:
-```
+```sql
 ' UNION SELECT @@version, NULL--
 ```
 

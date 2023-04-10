@@ -120,6 +120,10 @@ SELECT table_name FROM information_schema.tables WHERE table_schema = DATABASE()
 
 {% tab title="MSSQL" %}
 ```sql
+SELECT name FROM master..sysobjects WHERE xtype = ‘U’; — use xtype = ‘V’ for views
+SELECT name FROM someotherdb..sysobjects WHERE xtype = ‘U’;
+SELECT master..syscolumns.name, TYPE_NAME(master..syscolumns.xtype) FROM master..syscolumns, master..sysobjects WHERE master..syscolumns.id=master..sysobjects.id AND master..sysobjects.name=’sometable’; — list colum names and types for master..sometable
+
 SELECT table_name FROM information_schema.tables;
 SELECT table_name FROM information_schema.tables WHERE table_catalog = DB_NAME();
 ```
