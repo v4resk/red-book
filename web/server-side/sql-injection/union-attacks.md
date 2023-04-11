@@ -50,8 +50,6 @@ Using `UNION SELECT` This only works if error showing is enabled
 {% endtab %}
 {% endtabs %}
 
-###
-
 ### Finding the good column's data type
 
 The reason for performing a SQL injection UNION attack is to be able to retrieve the results from an injected query. Generally, the interesting data that you want to retrieve will be in string form, so you need to find one or more columns in the original query results whose data type is, or is compatible with, string data.
@@ -68,8 +66,6 @@ After already determined number of columns, you can probe each column to test wh
 ```
 {% endtab %}
 {% endtabs %}
-
-###
 
 ### String concatenation
 
@@ -108,8 +104,6 @@ CONCAT('foo','~','bar')
 ```
 {% endtab %}
 {% endtabs %}
-
-###
 
 ### Using UNION attack
 

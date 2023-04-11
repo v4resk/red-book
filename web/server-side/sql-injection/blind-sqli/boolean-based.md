@@ -55,8 +55,6 @@ Second, retrieve the database name:
 {% endtab %}
 {% endtabs %}
 
-####
-
 #### Getting Tables
 
 {% tabs %}
@@ -112,8 +110,6 @@ Third, retrieve name of each table
 {% endtab %}
 {% endtabs %}
 
-####
-
 #### Getting Columns
 
 {% tabs %}
@@ -168,8 +164,6 @@ Third, retrieve name of each column
 ```
 {% endtab %}
 {% endtabs %}
-
-
 
 #### Dump values
 
