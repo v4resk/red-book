@@ -366,6 +366,11 @@ Second, retrieve values
 ```
 {% endtab %}
 
+{% tab title="OracleSQL" %}
+```
+```
+{% endtab %}
+
 {% tab title="PostgreSQL" %}
 First, retrieve the length of the value (we take password column as example):
 
