@@ -180,7 +180,7 @@
 * [Local Privilege Escalation](linux/privesc/README.md)
 * [Persistence](linux/persistence/README.md)
 
-## Webapp Pentest <a href="#docker" id="docker"></a>
+## Webapp Pentest <a href="#web" id="web"></a>
 
 * [Reconnaissance](web/reconnaissance/README.md)
 * [Server-Side](web/server-side/README.md)

