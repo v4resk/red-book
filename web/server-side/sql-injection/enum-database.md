@@ -114,10 +114,17 @@ SELECT datname FROM pg_database;
 {% endtab %}
 
 {% tab title="SQLite" %}
-We can extract database structure with the following query
+We can extract current database structure with the following query:
 
 ```sql
 SELECT sql FROM sqlite_schema;
+```
+
+We can list all databases with the following query:
+
+```sql
+PRAGMA database_list;
+SELECT name FROM pragma_database_list;
 ```
 {% endtab %}
 {% endtabs %}
