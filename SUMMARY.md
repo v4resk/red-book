@@ -164,6 +164,7 @@
 * [Exfiltration](redteam/exfiltration/README.md)
   * [Over ICMP](redteam/exfiltration/icmp.md)
   * [Over DNS](redteam/exfiltration/dns.md)
+  * [Over HTTP(s)](redteam/exfiltration/http.md)
 
 ## Windows Pentest <a href="#windows" id="windows"></a>
 
