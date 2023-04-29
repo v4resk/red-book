@@ -164,7 +164,7 @@
 * [Exfiltration](redteam/exfiltration/README.md)
   * [Over ICMP](redteam/exfiltration/icmp.md)
   * [Over DNS](redteam/exfiltration/dns.md)
-  * [Over HTTP(s)](redteam/exfiltration/http.md)
+  * [Over HTTP(s)](evasion/exfiltration/http.md)
 
 ## Windows Pentest <a href="#windows" id="windows"></a>
 
@@ -177,13 +177,13 @@
 
 ## Linux Pentest <a href="#linux" id="linux"></a>
 
-* [Reconnaissance](linux/recon/README.md)
-* [Local Privilege Escalation](linux/privesc/README.md)
+* [Reconnaissance](linux/recon.md)
+* [Local Privilege Escalation](linux/privesc.md)
 * [Persistence](linux/persistence/README.md)
 
 ## Webapp Pentest <a href="#web" id="web"></a>
 
-* [Reconnaissance](docker/reconnaissance.md)
+* [Reconnaissance](web/reconnaissance.md)
 * [Server-Side](web/server-side/README.md)
   * [SQL Injection](web/server-side/sql-injection/README.md)
     * [Enum Database](web/server-side/sql-injection/enum-database.md)
@@ -192,7 +192,7 @@
       * [Boolean Based](web/server-side/sql-injection/blind-sqli/boolean-based.md)
       * [Error Based](web/server-side/sql-injection/blind-sqli/error-based.md)
       * [Time Based](web/server-side/sql-injection/blind-sqli/time-based.md)
-* [Client-Side](web/client-side/README.md)
+* [Client-Side](web/client-side.md)
 
 ## 🛠️Docker Pentest <a href="#docker" id="docker"></a>
 
