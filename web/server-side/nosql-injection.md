@@ -4,9 +4,10 @@
 
 NoSQL databases provide looser consistency restrictions than traditional SQL databases. By requiring fewer relational constraints and consistency checks, NoSQL databases often offer performance and scaling benefits. Yet these databases are still potentially vulnerable to injection attacks, even if they aren't using the traditional SQL syntax.
 
-## Practice
+## Practice 
 
-### Authentication Bypass
+### Authentication Bypass 
+
 Using not equal ($ne) or greater ($gt) we can try to bypass authentication
 {% tabs %}
 
@@ -78,8 +79,8 @@ We can use `$nin` (not in) if you don't want to match with some values.
 
 ### MangoDB Injection
 {% tabs %}
-You may try to make boolean based injection on MongoDB with following payloads
 {% tab title="Payloads" %}
+You may try to make boolean based injection on MongoDB with following payloads
 ```
 , $where: '1 == 1'
 $where: '1 == 1'
