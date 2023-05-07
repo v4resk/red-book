@@ -172,6 +172,8 @@
   * [Enum Security Solutions](windows/recon/av.md)
 * [Local Privilege Escalation](windows/privesc/README.md)
   * [Abusing Tokens](windows/privesc/abusing-tokens.md)
+  * [Insecure Services](windows/privesc/services/README.md)
+    * [Weak Service Permissions](windows/privesc/services/weak-service-permissions.md)
 * [Persistence](windows/persistence/README.md)
   * [Logon Triggered](windows/persistence/logon-triggered.md)
 
@@ -185,6 +187,7 @@
 
 * [Reconnaissance](web/reconnaissance.md)
 * [Server-Side](web/server-side/README.md)
+  * [NoSQL Injection](web/server-side/nosql-injection.md)
   * [SQL Injection](web/server-side/sql-injection/README.md)
     * [Enum Database](web/server-side/sql-injection/enum-database.md)
     * [UNION Attacks](web/server-side/sql-injection/union-attacks.md)

