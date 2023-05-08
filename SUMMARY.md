@@ -176,6 +176,7 @@
     * [Weak Service Permissions](windows/privesc/services/weak-service-permissions.md)
     * [Weak File Permissions](windows/privesc/services/weak-files-permissions.md)
     * [Weak Registry Permissions](windows/privesc/services/weak-registry-permissions.md)
+    * [Unquoted Service Path](windows/privesc/services/unquoted-service-path.md)
 * [Persistence](windows/persistence/README.md)
   * [Logon Triggered](windows/persistence/logon-triggered.md)
 

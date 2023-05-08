@@ -1,11 +1,17 @@
+---
+description: MITRE ATT&CK™  Hijack Execution Flow - Technique T1574
+---
+
 # Weak Service Permissions
 
 ## Theory
+
 It is very often in Windows environments to discover services that run with SYSTEM privileges. If you have permissions over the service you can use it to escalate you privileges.
 
-## Practice
+## Practice
 
-If we have enought permissions over a service, we can edit the `binPath` parameters and replace it with our own binary or command. 
+If we have enough permissions over a service, we can edit the `binPath` parameters and replace it with our own binary or command.
+
 {% tabs %}
 {% tab title="Enum" %}
 If you have `SERVICE_CHANGE_CONFIG` or `SERVICE_ALL_ACCESS` permissions, you can replace the binary.
