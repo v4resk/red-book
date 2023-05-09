@@ -58,8 +58,8 @@ wmic service <Service_Name> call startservice
 net stop <Service_Name> && net start <Service_Name>
 
 #Using sc.exe
-sc.exe stop <Service_Name>
-sc.exe start <Service_Name>
+sc stop <Service_Name>
+sc start <Service_Name>
 ```
 {% endtab %}
 {% endtabs %}

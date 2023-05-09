@@ -41,12 +41,6 @@ accesschk64.exe /accepteula -kvuqsw hklm\System\CurrentControlSet\services
 accesschk64.exe /accepteula -kvuqsw hklm\System\CurrentControlSet\services\<Name>
 ```
 
-Or,if you want to look about a specific service:
-```powershell
-
-Get-Acl -Path hklm:\System\CurrentControlSet\services\<ServiceName> | fl
-```
-
 Or we can use the `servicesinfo` module of [WinPeas](https://github.com/carlospolop/PEASS-ng/tree/master/winPEAS)
 
 ```powershell
@@ -70,8 +64,8 @@ wmic service <Service_Name> call startservice
 net stop <Service_Name> && net start <Service_Name>
 
 #Using sc.exe
-sc.exe stop <Service_Name>
-sc.exe start <Service_Name>
+sc stop <Service_Name>
+sc start <Service_Name>
 ```
 {% endtab %}
 {% endtabs %}
