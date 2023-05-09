@@ -32,7 +32,7 @@ accesschk64.exe -uwcqv * -accepteula
 accesschk64.exe -uwcqv VulnSvc -accepteula
 ```
 
-We also can use the `servicesinfo` module of winpeas
+We also can use the `servicesinfo` module of [WinPeas](https://github.com/carlospolop/PEASS-ng/tree/master/winPEAS)
 
 ```powershell
 winPEASx64.exe servicesinfo

