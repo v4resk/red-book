@@ -1,6 +1,5 @@
 ---
-description: >-
-  CVE-2021–3156
+description: CVE-2021–3156
 ---
 
 # Sudo Baron Samedit

