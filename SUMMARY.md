@@ -186,6 +186,7 @@
 * [Local Privilege Escalation](linux/privesc/README.md)
   * [Sudo Exploits](linux/privesc/sudo/README.md)
     * [Baron Samedit](linux/privesc/sudo/sudo-baron-samedit.md)
+    * [Sudoedit Bypass](linux/privesc/sudo/sudoedit-bypass.md)
 * [Persistence](linux/persistence/README.md)
 
 ## Webapp Pentest <a href="#web" id="web"></a>
