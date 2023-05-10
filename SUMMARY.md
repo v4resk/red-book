@@ -184,7 +184,7 @@
 
 * [Reconnaissance](linux/recon/README.md)
 * [Local Privilege Escalation](linux/privesc/README.md)
-  * [Sudo Exploits](linux/privesc/README.md)
+  * [Sudo Exploits](linux/privesc/sudo/README.md)
     * [Baron Samedit](linux/privesc/sudo/sudo-baron-samedit.md)
 * [Persistence](linux/persistence/README.md)
 
