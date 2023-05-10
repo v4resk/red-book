@@ -185,7 +185,7 @@
 * [Reconnaissance](linux/recon/README.md)
 * [Local Privilege Escalation](linux/privesc/README.md)
   * [Sudo Exploits](linux/privesc/README.md)
-    * [Sudo Exploits](linux/privesc/sudo/sudo-baron-samedit.md)
+    * [Baron Samedit](linux/privesc/sudo/sudo-baron-samedit.md)
 * [Persistence](linux/persistence/README.md)
 
 ## Webapp Pentest <a href="#web" id="web"></a>
