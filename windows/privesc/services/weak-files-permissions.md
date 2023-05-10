@@ -1,6 +1,5 @@
 ---
-description: MITRE ATT&CK™ - Hijack Execution Flow: Services File Permissions Weakness  -
-  Technique T1574.010
+description: MITRE ATT&CK™ Hijack Execution Flow - Services File Permissions Weakness - Technique T1574.010
 ---
 
 # Weak File Permissions

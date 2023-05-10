@@ -1,5 +1,5 @@
 ---
-description: MITRE ATT&CK™ Exfiltration -Technique TA0005
+description: MITRE ATT&CK™ Exfiltration - Technique TA0005
 ---
 
 # Defense Evasion 

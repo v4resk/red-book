@@ -1,5 +1,5 @@
 ---
-description: MITRE ATT&CK™  Hijack Execution Flow - Technique T1574
+description: MITRE ATT&CK™ Hijack Execution Flow - Technique T1574
 ---
 
 # Weak Service Permissions
