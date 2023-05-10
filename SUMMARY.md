@@ -182,8 +182,10 @@
 
 ## Linux Pentest <a href="#linux" id="linux"></a>
 
-* [Reconnaissance](linux/recon.md)
-* [Local Privilege Escalation](linux/privesc.md)
+* [Reconnaissance](linux/recon/README.md)
+* [Local Privilege Escalation](linux/privesc/README.md)
+  * [Sudo Exploits](linux/privesc/README.md)
+    * [Sudo Exploits](linux/privesc/sudo/sudo-baron-samedit.md)
 * [Persistence](linux/persistence/README.md)
 
 ## Webapp Pentest <a href="#web" id="web"></a>
