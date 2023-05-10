@@ -58,5 +58,3 @@ make
 ### References
 
 {% embed url="https://datafarm-cybersecurity.medium.com/exploit-writeup-for-cve-2021-3156-sudo-baron-samedit-7a9a4282cb31" %}
-
-{% embed url="https://book.hacktricks.xyz/windows-hardening/windows-local-privilege-escalation#services-registry-modify-permissions" %}
