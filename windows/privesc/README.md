@@ -1,2 +1,2 @@
-# Privilege Escalation
+# Windows Privilege Escalation
 
