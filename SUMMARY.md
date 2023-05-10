@@ -185,6 +185,7 @@
 * [Reconnaissance](linux/reconnaissance.md)
 * [Local Privilege Escalation](linux/privesc/README.md)
   * [Sudo Exploits](linux/privesc/sudo/README.md)
+    * [Pwfeedback BOF](linux/privesc/sudo/pwfeedback-bof.md)
     * [Baron Samedit](linux/privesc/sudo/sudo-baron-samedit.md)
     * [Sudoedit Bypass](linux/privesc/sudo/sudoedit-bypass.md)
 * [Persistence](linux/persistence/README.md)
