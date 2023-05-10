@@ -2,7 +2,7 @@
 description: CVE-2021–3156
 ---
 
-# Sudo Baron Samedit
+# Baron Samedit
 
 
 # Theory
