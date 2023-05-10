@@ -182,7 +182,7 @@
 
 ## Linux Pentest <a href="#linux" id="linux"></a>
 
-* [Reconnaissance](linux/recon/README.md)
+* [Reconnaissance](linux/reconnaissance.md)
 * [Local Privilege Escalation](linux/privesc/README.md)
   * [Sudo Exploits](linux/privesc/sudo/README.md)
     * [Baron Samedit](linux/privesc/sudo/sudo-baron-samedit.md)
