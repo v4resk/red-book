@@ -13,13 +13,15 @@ The vulnerability was patched, but it didn’t update the version number for sud
 ## Practice
 
 {% tabs %}
-{% tab title="Enum" %}
+{% tab title="Enumeration" %}
 To check the exploitability of sudo, you may run the following commands. If it's returns the `sudoedit: /: not a regular file` error message, then it’s vulnerable. If it returns the sudoedit usage, it’s not.
+
 ```bash
 sudoedit -s /
 ```
 
 Or with the following command, if the system is vulnerable it will overwrite the heap buffer and crash the process:
+
 ```bash
 sudoedit -s '\' $(python3 -c 'print("A"*1000)')
 ```

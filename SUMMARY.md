@@ -184,6 +184,9 @@
 
 * [Reconnaissance](linux/reconnaissance.md)
 * [Local Privilege Escalation](linux/privesc/README.md)
+  * [Polkit Exploits](linux/privesc/polkit-exploits/README.md)
+    * [D-Bus Authentication Bypass](linux/privesc/polkit-exploits/d-bus-authentication-bypass.md)
+    * [PwnKit](linux/privesc/polkit-exploits/pwnkit.md)
   * [Sudo Exploits](linux/privesc/sudo/README.md)
     * [Pwfeedback BOF](linux/privesc/sudo/pwfeedback-bof.md)
     * [Baron Samedit](linux/privesc/sudo/sudo-baron-samedit.md)

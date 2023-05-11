@@ -1,6 +1,10 @@
 # The Red-Book
 
-![](.gitbook/assets/logo.png)
+<div align="left">
+
+<img src=".gitbook/assets/logo.png" alt="">
+
+</div>
 
 {% hint style="danger" %}
 **This project is a work in progress**.
