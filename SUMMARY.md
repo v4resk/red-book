@@ -129,7 +129,9 @@
 ## Red-Teaming <a href="#evasion" id="evasion"></a>
 
 * [Reconnaissance](redteam/recon/README.md)
-  * [🛠️ Recon-ng](redteam/recon/recon-ng.md)
+  * [DNS Enumeration](redteam/recon/dns-enum.md)
+  * [WAF Enumeration](redteam/recon/waf-enum.md)
+  * [Email Harvesting](redteam/recon/email-harvesting.md)
   * [🛠️ Maltego](redteam/recon/maltego.md)
   * [🛠️ Specialized Search Engines](redteam/recon/specialized-search-engines.md)
   * [🛠️ Google Dorks](redteam/recon/google-dorks.md)
