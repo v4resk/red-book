@@ -1,5 +1,5 @@
 ---
-description: MITRE ATT&CK™ Exfiltration -Technique TA0036
+description: MITRE ATT&CK™ Exfiltration - Tactic TA0036
 ---
 
 # Exfiltration

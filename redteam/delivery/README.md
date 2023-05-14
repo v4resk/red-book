@@ -1,5 +1,5 @@
 ---
-description: MITRE ATT&CK™ Initial Access -Technique TA0001
+description: MITRE ATT&CK™ Initial Access - Tactic TA0001
 ---
 
 # Delivery

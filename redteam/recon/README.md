@@ -1,5 +1,5 @@
 ---
-description: MITRE ATT&CK™ Reconnaissance -Technique TA0043
+description: MITRE ATT&CK™ Reconnaissance - Tactic TA0043
 ---
 
 # Reconnaissance
