@@ -21,8 +21,8 @@ curl -Rkfs https://target.url | grep -hio "\b[a-z0-9.-]\+@[a-z0-9.-]\+\.[a-z]\{2
 {% tab title="theHarvester" %}
 [theHarvester](https://github.com/laramies/theHarvester) is used to gather open source intelligence (OSINT) on a company or domain. The tool gathers names, emails, IPs, subdomains, and URLs by using multiple public resources.
 ```bash
-#Search using google
-theHarvester -d target.url -b google
+#Search using bing
+theHarvester -d target.url -b bing
 ```
 {% endtab %}
 
