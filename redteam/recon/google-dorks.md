@@ -7,13 +7,8 @@ We can perform advanced search queries using various operators that allow us to 
 
 ## Practice
 
-### Operators
-
 Here are some operators that might be useful
 ```bash
-# Search the latest cached results.
-cache:examle.com
-
 # Specify the filetype "pdf" and search the term "email address".
 filetype:pdf "email address"
 
@@ -36,12 +31,12 @@ cache:example.com
 [The Google Hacking Database(GHDB)](https://www.exploit-db.com/google-hacking-database) is a database of search queries (dorks) used to find sensitive publicly available information or vulnerabilities. 
 This is hosted by [exploit-db](https://www.exploit-db.com/)
 
-### Usefull dorks
+### Useful dorks
 
 {% tabs %}
 {% tab title="Subdomains"%}
 You can use this google dorks to enum subdomains of a website
-```
+```bash
 #Search for subdomains 
 site:*.domain.com
 
@@ -52,11 +47,12 @@ site:*.domain.com intitle:admin
 
 {% tab title="Directory Listing"%}
 You can use this google dorks to enum websites with directory listing enabled
-```
+```bash
 intitle:"Directory Listing For"
 intitle:"index of"
 ```
 {% endtab %}
+
 
 {% endtabs %}
 
