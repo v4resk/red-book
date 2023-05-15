@@ -52,13 +52,9 @@ intitle:"Directory Listing For"
 intitle:"index of"
 ```
 {% endtab %}
-
-
 {% endtabs %}
 
 ## Ressource
 
 {% embed url="https://www.exploit-db.com/google-hacking-database" %}
 {% embed url="https://exploit-notes.hdks.org/exploit/reconnaissance/google-dorks/" %}
-
-

@@ -51,10 +51,17 @@ dig axfr domain.com @ns.domain.com
 {% endtab %}
 
 {% tab title="DNSMap" %}
-[dnsmap](https://www.kali.org/tools/dnsmap/) scans a domain for common subdomains using a built-in or an external wordlist (if specified using -w option). The internal wordlist has around 1000 words
+[DNSMap](https://github.com/makefu/dnsmap) scans a domain for common subdomains using a built-in or an external wordlist (if specified using -w option). The internal wordlist has around 1000 words
 ```bash
 #Brute force domains and hosts
 dnsmap domain.com -w /usr/share/seclists/Discovery/DNS/dns-Jhaddix.txt
+```
+{% endtab %}
+
+{% tab title="DNSEnum" %}
+[DNSEnum](https://github.com/fwaeytens/dnsenum) Dnsenum is a multithreaded perl script to enumerate DNS information of a domain and to discover non-contiguous ip blocks. The main purpose of Dnsenum is to gather as much information as possible about a domain.
+```bash
+dnsenum domain.com
 ```
 {% endtab %}
 

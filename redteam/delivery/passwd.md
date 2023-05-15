@@ -16,6 +16,7 @@ Here are some website lists that provide default passwords for various products.
 Here are some website and tools that provide ressources about leaked passwords.  
 1 - [PwnedOrNot](https://github.com/thewhiteh4t/pwnedOrNot)  
 2 - [SecLists/Passwords/Leaked-Databases](https://github.com/danielmiessler/SecLists/tree/master/Passwords/Leaked-Databases)  
+3 - [HaveIBeenPwned](https://haveibeenpwned.com/)  
 
 ### Generate a Wordlist
 {% tabs %}
