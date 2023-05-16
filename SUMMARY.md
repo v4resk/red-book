@@ -122,7 +122,7 @@
   * [Skeleton key](ad/persistence/skeleton-key.md)
   * [SID History](ad/persistence/sid-history.md)
   * [AdminSDHolder](ad/persistence/adminsdholder.md)
-  * [GoldenGMSA](a-d/persistence/goldengmsa.md)
+  * [GoldenGMSA](ad/persistence/goldengmsa.md)
   * [🛠️ DC Shadow](ad/persistence/dcshadow.md)
   * [🛠️ CA Shadow](ad/persistence/ca-shadow.md)
   * [🛠️ Access controls](ad/persistence/access-controls.md)
