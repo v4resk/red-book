@@ -2,7 +2,7 @@
 
 * [The Red-Book](README.md)
 
-## Active Directory <a href="#a-d" id="a-d"></a>
+## Active Directory <a href="#ad" id="ad"></a>
 
 * [Reconnaissance](ad/recon/README.md)
   * [PowerView](ad/recon/powerview.md)
@@ -127,7 +127,7 @@
   * [🛠️ CA Shadow](ad/persistence/ca-shadow.md)
   * [🛠️ Access controls](ad/persistence/access-controls.md)
 
-## Red-Teaming <a href="#evasion" id="evasion"></a>
+## Red-Teaming <a href="#redteam" id="redteam"></a>
 
 * [Reconnaissance](redteam/recon/README.md)
   * [DNS Enumeration](redteam/recon/dns-enum.md)
@@ -147,7 +147,7 @@
   * [CMSTP](redteam/weapon/cmstp.md)
 * [Delivery](redteam/delivery/README.md)
   * [Password Attacks](redteam/delivery/passwd.md)
-  * [🛠️Phishing](evasion/delivery/phishing.md)
+  * [🛠️Phishing](redteam/delivery/phishing.md)
 * [Defense Evasion](redteam/evasion/README.md)
   * [🛠️Obfuscation](redteam/evasion/obf/README.md)
   * [Living Off The Land](redteam/evasion/living-off-the-land/README.md)
@@ -166,7 +166,7 @@
 * [Exfiltration](redteam/exfiltration/README.md)
   * [Over ICMP](redteam/exfiltration/icmp.md)
   * [Over DNS](redteam/exfiltration/dns.md)
-  * [Over HTTP(s)](evasion/exfiltration/http.md)
+  * [Over HTTP(s)](redteam/exfiltration/http.md)
 
 ## Windows Pentest <a href="#windows" id="windows"></a>
 
