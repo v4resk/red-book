@@ -136,7 +136,7 @@
   * [🛠️ Maltego](redteam/recon/maltego.md)
   * [🛠️ Specialized Search Engines](redteam/recon/specialized-search-engines.md)
 * [Weaponization](redteam/weapon/README.md)
-  * [🛠️Code & Process Injection](evasion/weapon/code-and-process-injection.md)
+  * [🛠️Code & Process Injection](redteam/weapon/code-and-process-injection.md)
   * [MSHTA](redteam/weapon/mshta.md)
   * [WSH](redteam/weapon/wsh.md)
   * [VBA](redteam/weapon/vba.md)
