@@ -131,7 +131,6 @@
 
 * [Reconnaissance](redteam/recon/README.md)
   * [DNS Enumeration](redteam/recon/dns-enum.md)
-  * [WAF Enumeration](redteam/recon/waf-enum.md)
   * [Email Harvesting](redteam/recon/email-harvesting.md)
   * [Google Dorks](redteam/recon/google-dorks.md)
   * [🛠️ Maltego](redteam/recon/maltego.md)
@@ -196,9 +195,11 @@
     * [Sudoedit Bypass](linux/privesc/sudo/sudoedit-bypass.md)
 * [Persistence](linux/persistence/README.md)
 
-## Webapp Pentest <a href="#web" id="web"></a>
+## Web Pentest <a href="#web" id="web"></a>
 
-* [Reconnaissance](web/reconnaissance.md)
+* [Reconnaissance](web/recon/README.md)
+  * [Subdomains enumeration](web/recon/subdomain-enum.md)
+  * [WAF Enumeration](web/recon/waf-enum.md)
 * [Server-Side](web/server-side/README.md)
   * [NoSQL Injection](web/server-side/nosql-injection.md)
   * [SQL Injection](web/server-side/sql-injection/README.md)
