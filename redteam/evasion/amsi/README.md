@@ -17,7 +17,7 @@ AMSI is fully integrated into the following Windows components:
 * Office VBA macros
 
 The below diagram depicts how data is dissected as it flows through the layers and what DLLs/API calls are being instrumented.\
-![](<../../../.gitbook/assets/35e16d45ce27145fcdf231fdb8dcb35e (1).png>)
+![](../../../.gitbook/assets/35e16d45ce27145fcdf231fdb8dcb35e.png)
 
 This is important to understand the complete model of AMSI, but we can break it down into core components, shown in the diagram below.\
 ![](../../../.gitbook/assets/efca9438e858f0476a4ffd777c36501a.png)
