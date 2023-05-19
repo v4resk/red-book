@@ -173,6 +173,7 @@
 * [Reconnaissance](windows/recon/README.md)
   * [Enum Security Solutions](windows/recon/av.md)
 * [Local Privilege Escalation](windows/privesc/README.md)
+  * [AlwaysInstallElevated](windows/privesc/alwaysinstallelevated.md)
   * [Abusing Tokens](windows/privesc/abusing-tokens.md)
   * [Insecure Services](windows/privesc/services/README.md)
     * [Weak Service Permissions](windows/privesc/services/weak-service-permissions.md)

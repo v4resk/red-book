@@ -13,7 +13,7 @@ By hijacking the Registry entries utilized by services, attackers can run their 
 An attacker can leverage this misconfiguration to modify the ImagePath of service with the path of the custom malicious executable that will give an escalation to the account context the service is set to execute under (local/domain account, SYSTEM, LocalService, or NetworkService).
 
 {% tabs %}
-{% tab title="Enum" %}
+{% tab title="Enumeration" %}
 We can check our permissions over services registry doing:
 ```powershell
 #Get the binary paths of the services
