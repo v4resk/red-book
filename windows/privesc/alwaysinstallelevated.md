@@ -14,13 +14,18 @@ The **AlwaysInstallElevated** policy feature offers ALL users on a Windows opera
 {% tabs %}
 {% tab title="Enumerate" %}
 Manual verification of the activation of this parameter is very simple and can be done with two commands. If it is enabled, it will create the value `AlwaysIntstallElevated` and set it to `0x1` (enabled) on the following two registry keys.
-```
+```bash
+#Windows   
 reg query HKCU\SOFTWARE\Policies\Microsoft\Windows\Installer /v AlwaysInstallElevated
 reg query HKLM\SOFTWARE\Policies\Microsoft\Windows\Installer /v AlwaysInstallElevated
+
+#Unix-like
+reg.py domain.local/username:password123@IP query -keyName "HKLM\SOFTWARE\Policies\Microsoft\Windows\Installer" -v AlwaysInstallElevated
+reg.py domain.local/username:password123@IP query -keyName "HKCU\SOFTWARE\Policies\Microsoft\Windows\Installer" -v AlwaysInstallElevated
 ```
 
 Alternatively, using [PowerUp](https://github.com/PowerShellMafia/PowerSploit) from Powersploit we can enumerate the AlwaysInstallElevated policy.
-```
+```powershell
 . .\PowerUp.ps1
 Invoke-AllChecks
 ```
