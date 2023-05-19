@@ -25,7 +25,7 @@
       * [LSASS secrets](ad/movement/credentials/dumping/lsass.md)
       * [DCSync](ad/movement/credentials/dumping/dcsync.md)
       * [Group Policy Preferences](ad/movement/credentials/dumping/group-policies-preferences.md)
-      * [Auto Logon Registry](ad/movement/credentials/dumping/autologon-registry.md)
+      * [AutoLogon Registry](ad/movement/credentials/dumping/autologon-registry.md)
       * [Network shares](ad/movement/credentials/dumping/network-shares.md)
       * [Network protocols](ad/movement/credentials/dumping/network-protocols.md)
       * [Web browsers](ad/movement/credentials/dumping/web-browsers.md)
