@@ -13,7 +13,7 @@ It is very often in Windows environments to discover services that run with SYST
 If we have enough permissions over a service, we can edit the `binPath` parameters and replace it with our own binary or command.
 
 {% tabs %}
-{% tab title="Enumeration" %}
+{% tab title="Enumerate" %}
 If you have `SERVICE_CHANGE_CONFIG` or `SERVICE_ALL_ACCESS` permissions, you can replace the binary.
 
 We can use [AccessChk](https://learn.microsoft.com/fr-fr/sysinternals/downloads/accesschk) from sysinternals tools to enum permissions over services.

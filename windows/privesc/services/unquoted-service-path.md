@@ -27,7 +27,7 @@ In order to run SomeExecutable.exe, the system will interpret this path in the f
 ## Practice
 
 {% tabs %}
-{% tab title="Enumeration" %}
+{% tab title="Enumerate" %}
 We can use wmic to enumerate it:
 
 ```powershell

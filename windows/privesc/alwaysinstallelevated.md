@@ -12,7 +12,7 @@ The **AlwaysInstallElevated** policy feature offers ALL users on a Windows opera
 ## Practice
 
 {% tabs %}
-{% tab title="Enumeration" %}
+{% tab title="Enumerate" %}
 Manual verification of the activation of this parameter is very simple and can be done with two commands. If it is enabled, it will create the value `AlwaysIntstallElevated` and set it to `0x1` (enabled) on the following two registry keys.
 ```
 reg query HKCU\SOFTWARE\Policies\Microsoft\Windows\Installer /v AlwaysInstallElevated

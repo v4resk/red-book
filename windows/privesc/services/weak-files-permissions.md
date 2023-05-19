@@ -13,7 +13,7 @@ It is very often in Windows environments to discover services that run with SYST
 If we have enough permissions over the binary of a service, we can replace it to our own binary. If you have write permissions over the folder you can do [DLL Hijacking](weak-files-permissions.md)
 
 {% tabs %}
-{% tab title="Enumeration" %}
+{% tab title="Enumerate" %}
 We can get every binary that is executed by a service using wmic and check your permissions using icacls
 
 ```powershell
