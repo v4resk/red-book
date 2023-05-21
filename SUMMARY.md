@@ -147,6 +147,15 @@
   * [CMSTP](redteam/weapon/cmstp.md)
 * [Delivery](redteam/delivery/README.md)
   * [Network Protocols](redteam/delivery/protocols/README.md)
+    * [🛠️ FTP](redteam/delivery/protocols/ftp.md)
+    * [🛠️ SSH](redteam/delivery/protocols/ssh.md)
+    * [🛠️ Telnet](redteam/delivery/protocols/telnet.md)
+    * [🛠️ DNS](redteam/delivery/protocols/dns.md)
+    * [🛠️ LDAP](redteam/delivery/protocols/ldap.md)
+    * [🛠️ SMB](redteam/delivery/protocols/smb.md)
+    * [🛠️ WinRM](redteam/delivery/protocols/winrm.md)
+    * [🛠️ NFS](redteam/delivery/protocols/nfs.md)
+    * [🛠️ MySQL](redteam/delivery/protocols/mysql.md)
   * [Password Attacks](redteam/delivery/passwd.md)
   * [🛠️Phishing](redteam/delivery/phishing.md)
 * [Defense Evasion](redteam/evasion/README.md)
@@ -168,6 +177,7 @@
   * [Over ICMP](redteam/exfiltration/icmp.md)
   * [Over DNS](redteam/exfiltration/dns.md)
   * [Over HTTP(s)](redteam/exfiltration/http.md)
+  * [Over SMB](redteam/exfiltration/smb.md)
 
 ## Windows Pentest <a href="#windows" id="windows"></a>
 
