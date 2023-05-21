@@ -152,7 +152,7 @@
     * [🛠️ Telnet](redteam/delivery/protocols/telnet.md)
     * [🛠️ DNS](redteam/delivery/protocols/dns.md)
     * [🛠️ LDAP](redteam/delivery/protocols/ldap.md)
-    * [🛠️ SMB](redteam/delivery/protocols/smb.md)
+    * [SMB](redteam/delivery/protocols/smb.md)
     * [🛠️ WinRM](redteam/delivery/protocols/winrm.md)
     * [🛠️ NFS](redteam/delivery/protocols/nfs.md)
     * [🛠️ MySQL](redteam/delivery/protocols/mysql.md)

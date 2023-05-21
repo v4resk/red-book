@@ -12,27 +12,6 @@ SMB protocols operate on different ports depending on the type of communication:
 
 ## Practice  
 
-### Enumerate  
-
-{% tabs %}
-{% tab title="nmap" %}
-Tools like [nmap](https://github.com/nmap/nmap) can be used to enumerate SMB.
-```bash
-#list the supported protocols and dialects of a SMB server. 
-nmap --script="smb-protocols" -p 445 <IP>
-
-#Determines the message signing configuration
-nmap --script="smb-security-mode" -p 445 <IP>
-
-#Try to enum SMB sessions/shares/users/domains/groups... with null/anonymous session
-nmap --script="smb-enum*" -p 445 <IP>
-
-#Or enum with a valide session
-nmap --script="smb-enum-shares" --script-args smbusername=administrator,smbpassword=mypassword_1 -p 445 <IP>
-```
-{% endtab %}
-{% endtabs %}
-
 ### Authentication 
 
 {% tabs %}
@@ -72,7 +51,54 @@ nmap --script smb-brute -p 445 <IP>
 {% endtab %}
 {% endtabs %}
 
-### Vulnerabilities
+### Enumerate  
+
+{% tabs %}
+{% tab title="nmap" %}
+Tools like [nmap](https://github.com/nmap/nmap) can be used to enumerate SMB.
+```bash
+#list the supported protocols and dialects of a SMB server. 
+nmap --script="smb-protocols" -p 445 <IP>
+
+#Determines the message signing configuration
+nmap --script="smb-security-mode" -p 445 <IP>
+
+#Try to enum SMB sessions/shares/users/domains/groups... with null/anonymous session
+nmap --script="smb-enum*" -p 445 <IP>
+
+#Or enum with a valide session
+nmap --script="smb-enum-shares" --script-args smbusername=administrator,smbpassword=mypassword_1 -p 445 <IP>
+```
+{% endtab %}
+
+{% tab title="CrackMapExec" %}
+Tools like [CrackMapExec](https://github.com/Porchetta-Industries/CrackMapExec) can be used to enumerate SMB.
+```bash
+#Enum host with SMB signing not required
+crackmapexec 192.168.1.0/24 --gen-relay-list relaylistOutputFilename.txt
+
+#Enum password policy
+crackmapexec $IP -u $USER -p $PASS --pass-pol
+
+#Enum domain users
+crackmapexec $IP -u $USER -p $PASS --users
+
+#Enum domain groups
+crackmapexec $IP -u $USER -p $PASS --groups
+
+#Enum local groups
+crackmapexec $IP -u $USER -p $PASS --local-group
+
+#Enum active sessions
+crackmapexec $IP -u $USER -p $PASS --sessions
+
+#Enum shares & access
+crackmapexec $IP -u $USER -p $PASS --shares
+```
+{% endtab %}
+{% endtabs %}
+
+### Vulnerabilities  
 
 You may use nmap to scan target for SMB vulnerabilities
 ```bash
