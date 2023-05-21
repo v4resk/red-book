@@ -12,6 +12,27 @@ SMB protocols operate on different ports depending on the type of communication:
 
 ## Practice  
 
+### Enumerate  
+
+{% tabs %}
+{% tab title="nmap" %}
+Tools like [nmap](https://github.com/nmap/nmap) can be used to enumerate SMB.
+```bash
+#list the supported protocols and dialects of a SMB server. 
+nmap --script="smb-protocols" -p 445 <IP>
+
+#Determines the message signing configuration
+nmap --script="smb-security-mode" -p 445 <IP>
+
+#Try to enum SMB sessions/shares/users/domains/groups... with null/anonymous session
+nmap --script="smb-enum*" -p 445 <IP>
+
+#Or enum with a valide session
+nmap --script="smb-enum-shares" --script-args smbusername=administrator,smbpassword=mypassword_1 -p 445 <IP>
+```
+{% endtab %}
+{% endtabs %}
+
 ### Authentication 
 
 {% tabs %}
