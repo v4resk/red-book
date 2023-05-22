@@ -199,7 +199,7 @@
 
 * [Reconnaissance](linux/reconnaissance.md)
 * [Local Privilege Escalation](linux/privesc/README.md)
-  * [🛠️ Kernel Exploits](linux/privesc/kernel-exploits/README.md)
+  * [🛠️ Kernel Exploits](linux/privesc/kernel-exploits.md)
   * [Polkit Exploits](linux/privesc/polkit-exploits/README.md)
     * [D-Bus Authentication Bypass](linux/privesc/polkit-exploits/d-bus-authentication-bypass.md)
     * [PwnKit](linux/privesc/polkit-exploits/pwnkit.md)
@@ -213,7 +213,7 @@
   * [🛠️ Scheduled tasks](linux/privesc/scheduled-tasks/README.md)
     * [Cron Jobs](linux/privesc/scheduled-tasks/cron-jobs.md)
     * [Systemd timers](linux/privesc/scheduled-tasks/systemd-timers.md)
-  * [🛠️ Interesting Groups](linux/privesc/groups/README.md)
+  * [🛠️ Interesting Groups](linux/privesc/interesting-groups.md)
   * [🛠️ Capabilities](linux/privesc/capabilities.md)
 * [Persistence](linux/persistence/README.md)
 
