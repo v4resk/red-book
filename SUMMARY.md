@@ -210,7 +210,7 @@
     * [PwnKit](linux/privesc/polkit-exploits/pwnkit.md)
   * [Sudo Exploits](linux/privesc/sudo-exploits/README.md)
     * [Sudo Misconfigurations](linux/privesc/sudo-exploits/sudo-misconfigurations.md)
-    * [Shared Library Hijacking](linux/privesc/sudo-exploits/shared-library-hijack.md)
+    * [Sudo Binaries](linux/privesc/sudo-exploits/sudo-binaries.md)
     * [Bypass of User Restrictions](linux/privesc/sudo-exploits/bypass-of-user-restrictions.md)
     * [Pwfeedback BOF](linux/privesc/sudo-exploits/pwfeedback-bof.md)
     * [Baron Samedit](linux/privesc/sudo-exploits/sudo-baron-samedit.md)

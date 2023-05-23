@@ -44,7 +44,7 @@ If you find that a binary have the SUID bits, you can check on [GTFOBins](https:
 {% tab title="Enumerate" %}
 If a **suid** binary executes another command **without specifying the full path.** We can abuse it and get a privilege escalation.
 
-You may use `strings` to spot other binaries calls, or reverse the **suid** binary.
+You may use `strings` to spot other binaries calls, or do some reverse engineering on the **suid** binary.
 
 ```bash
 strings ./the-suid-bin
