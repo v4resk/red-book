@@ -1,22 +1,20 @@
-# 🛠️ SUID Binaries
+# SUID Binaries
 
 ## Theory
 
 SUID/Setuid stands for "set user ID upon execution", it is enabled by default in every Linux distributions. If a file with this bit is run, the uid will be changed by the owner one. If the file owner is `root`, the uid will be changed to `root` even if it was executed from user `bob`. SUID bit is represented by an `s`.
 
-
-
 {% hint style="info" %}
 Some of these techniques also may be used with SUDO scripts and binary
 {% endhint %}
 
-## Practice&#x20;
+## Practice
 
 ### Misc SUID Binaries
 
 {% tabs %}
 {% tab title="Find" %}
-We can use this command to find all SUID binaries&#x20;
+We can use this command to find all SUID binaries
 
 ```bash
 find / -perm -4000 -type f -exec ls -la {} 2>/dev/null \;
@@ -98,7 +96,8 @@ readelf -d the-suid-bin | grep PATH
 0x000000000000001d (RUNPATH)            Library runpath: [/development]
 ```
 
-Alternatilvly, you could use the `strings` command to find used shared library
+Alternatively, you could use the `strings` command to find used shared library
+
 ```bash
 strings ./the-sudo-bin | grep -i '*.so*'
 ```
@@ -145,4 +144,3 @@ that means that the library you have generated need to have a function called `a
 {% endhint %}
 {% endtab %}
 {% endtabs %}
-
