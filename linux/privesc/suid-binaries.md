@@ -181,7 +181,7 @@ that means that the library you have generated need to have a function called `a
 {% endtabs %}
 
 
-### References
+## References
 
 {% embed url="https://book.hacktricks.xyz/linux-hardening/privilege-escalation" %}
 
