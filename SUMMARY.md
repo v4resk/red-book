@@ -209,7 +209,7 @@
     * [Pwfeedback BOF](linux/privesc/sudo-exploits/pwfeedback-bof.md)
     * [Baron Samedit](linux/privesc/sudo-exploits/sudo-baron-samedit.md)
     * [Sudoedit Bypass](linux/privesc/sudo-exploits/sudoedit-bypass.md)
-  * [🛠️ SUID](linux/privesc/suid.md)
+  * [🛠️ SUID Binaries](linux/privesc/suid-binaries.md)
   * [🛠️ Scheduled tasks](linux/privesc/scheduled-tasks/README.md)
     * [Cron Jobs](linux/privesc/scheduled-tasks/cron-jobs.md)
     * [Systemd timers](linux/privesc/scheduled-tasks/systemd-timers.md)
