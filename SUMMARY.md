@@ -211,6 +211,7 @@
   * [Sudo Exploits](linux/privesc/sudo-exploits/README.md)
     * [Sudo Misconfigurations](linux/privesc/sudo-exploits/sudo-misconfigurations.md)
     * [Sudo Binaries](linux/privesc/sudo-exploits/sudo-binaries.md)
+    * [Reuse Sudo Tokens](linux/privesc/sudo-exploits/reuse-sudo-tokens.md)
     * [Bypass of User Restrictions](linux/privesc/sudo-exploits/bypass-of-user-restrictions.md)
     * [Pwfeedback BOF](linux/privesc/sudo-exploits/pwfeedback-bof.md)
     * [Baron Samedit](linux/privesc/sudo-exploits/sudo-baron-samedit.md)

@@ -34,11 +34,11 @@ If you find that a binary have the SUID bits, you can check on [GTFOBins](https:
 {% endtab %}
 {% endtabs %}
 
-### Relative Path Exploit
+### No Command Path Exploit
 
 {% tabs %}
 {% tab title="Enumerate" %}
-If a **suid** binary executes another command **without specifying the full path.** We can abuse it and get a privilege escalation.
+If a **suid** binary executes another command **without specifying the path.** We can abuse it and get a privilege escalation.
 
 You may use `strings` to spot other binaries calls, or do some reverse engineering on the **suid** binary.
 
