@@ -199,7 +199,12 @@
 
 * [Reconnaissance](linux/reconnaissance.md)
 * [Local Privilege Escalation](linux/privesc/README.md)
-  * [🛠️ Kernel Exploits](linux/privesc/kernel-exploits/README.md)
+  * [Kernel Exploits](linux/privesc/kernel-exploits/README.md)
+    * [🛠️ DirtyPipe](linux/privesc/kernel-exploits/dirtycow.md)
+    * [🛠️ DirtyCow](linux/privesc/kernel-exploits/dirtypipe.md)
+    * [🛠️ RDS](linux/privesc/kernel-exploits/rds.md)
+    * [🛠️ Full Nelson](linux/privesc/kernel-exploits/full-nelson.md)
+    * [🛠️ Mempodipper](linux/privesc/kernel-exploits/mempodipper.md)
   * [Polkit Exploits](linux/privesc/polkit-exploits/README.md)
     * [D-Bus Authentication Bypass](linux/privesc/polkit-exploits/d-bus-authentication-bypass.md)
     * [PwnKit](linux/privesc/polkit-exploits/pwnkit.md)
