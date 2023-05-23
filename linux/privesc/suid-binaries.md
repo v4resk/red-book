@@ -4,10 +4,6 @@
 
 SUID/Setuid stands for "set user ID upon execution", it is enabled by default in every Linux distributions. If a file with this bit is run, the uid will be changed by the owner one. If the file owner is `root`, the uid will be changed to `root` even if it was executed from user `bob`. SUID bit is represented by an `s`.
 
-{% hint style="info" %}
-Some of these techniques also may be used with SUDO scripts and binary
-{% endhint %}
-
 ## Practice
 
 ### Misc SUID Binaries
