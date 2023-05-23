@@ -1,4 +1,4 @@
-# 🛠️ SUID Binaries
+# SUID Binaries
 
 ## Theory
 
