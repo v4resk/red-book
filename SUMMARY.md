@@ -220,6 +220,7 @@
   * [SUID Binaries](linux/privesc/suid-binaries.md)
   * [Script Exploits](linux/privesc/script-exploits/README.md)
     * [Python](linux/privesc/script-exploits/python/README.md)
+      * [Pip Download Code Execution](linux/privesc/script-exploits/python/pypi-package.md)
     * [Ruby](linux/privesc/script-exploits/ruby/README.md)
     * [Bash](linux/privesc/script-exploits/bash/README.md)
     * [Perl](linux/privesc/script-exploits/perl/README.md)
