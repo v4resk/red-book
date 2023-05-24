@@ -12,11 +12,7 @@ Directly deleting ETW logs can be an OPSEC (Operational Security) risk.
 
 Assuming an attacker did destroy all of the logs before they were forwarded to a SIEM by the SOC, or if they were not forwarded, how would this raise an alert? An attacker must first consider environment integrity; if no logs originate from a device, that can present serious suspicion and lead to an investigation. Even if an attacker did control what logs were removed and forwarded, defenders could still track the tampering.
 
-| EventID  | Description                                           |
-| -------- | ----------------------------------------------------- |
-| **1102** | Logs when the Windows Security audit log was cleared  |
-| **104**  | Logs when the log file was cleared                    |
-| **1100** | Logs when the Windows Event Log service was shut down |
+<table><thead><tr><th width="131.5">EventID</th><th>Description</th></tr></thead><tbody><tr><td><strong>1102</strong></td><td>Logs when the Windows Security audit log was cleared</td></tr><tr><td><strong>104</strong></td><td>Logs when the log file was cleared</td></tr><tr><td><strong>1100</strong></td><td>Logs when the Windows Event Log service was shut down</td></tr></tbody></table>
 
 ## ETW Components
 
@@ -32,11 +28,7 @@ ETW is broken up into three separate components, working together to manage and 
 
 Now that we understand how ETW is instrumented, how does this apply to attackers? We previously mentioned the goal of limiting visibility while maintaining integrity. We can limit a specific aspect of insight by targeting components while maintaining most of the data flow. Below is a brief list of specific techniques that target each ETW component.
 
-| Component  | Techniques                                                                              |
-| ---------- | --------------------------------------------------------------------------------------- |
-| Provider   | PSEtwLogProvider Modification, Group Policy Takeover, Log Pipeline Abuse, Type Creation |
-| Controller | Patching EtwEventWrite, Runtime Tracing Tampering,                                      |
-| Consumers  | Log Smashing, Log Tampering                                                             |
+<table><thead><tr><th width="164.5">Component</th><th>Techniques</th></tr></thead><tbody><tr><td>Provider</td><td>PSEtwLogProvider Modification, Group Policy Takeover, Log Pipeline Abuse, Type Creation</td></tr><tr><td>Controller</td><td>Patching EtwEventWrite, Runtime Tracing Tampering,</td></tr><tr><td>Consumers</td><td>Log Smashing, Log Tampering</td></tr></tbody></table>
 
 ## Practice
 
