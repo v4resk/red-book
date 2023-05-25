@@ -200,7 +200,7 @@
 * [Reconnaissance](linux/reconnaissance.md)
 * [Local Privilege Escalation](linux/privesc/README.md)
   * [Kernel Exploits](linux/privesc/kernel-exploits.md)
-    * [🛠️ CVE-2023-32233](linux/privesc/kernel-exploits/nf_tables.md)
+    * [🛠️ CVE-2023-32233](linux/privesc/kernel-exploits/nf\_tables.md)
     * [🛠️ DirtyPipe](linux/privesc/kernel-exploits/dirtypipe.md)
     * [🛠️ DirtyCow](linux/privesc/kernel-exploits/dirtycow.md)
     * [🛠️ RDS](linux/privesc/kernel-exploits/rds.md)
@@ -225,12 +225,12 @@
     * [Ruby](linux/privesc/script-exploits/ruby/README.md)
     * [Bash](linux/privesc/script-exploits/bash/README.md)
     * [Perl](linux/privesc/script-exploits/perl/README.md)
-  * [🛠️ Scheduled tasks](linux/privesc/scheduled-tasks/README.md)
+  * [Scheduled tasks](linux/privesc/scheduled-tasks/README.md)
     * [Cron Jobs](linux/privesc/scheduled-tasks/cron-jobs.md)
-    * [Systemd timers](linux/privesc/scheduled-tasks/systemd-timers.md)
+    * [🛠️ Systemd timers](linux/privesc/scheduled-tasks/systemd-timers.md)
   * [🛠️ Interesting Groups](linux/privesc/interesting-groups.md)
   * [🛠️ Capabilities](linux/privesc/capabilities.md)
-* [Persistence](linux/persistence/README.md)
+* [Persistence](linux/persistence.md)
 
 ## Web Pentest <a href="#web" id="web"></a>
 
@@ -261,9 +261,9 @@
       * [UNION Attacks](web/vulns/server-side/sql-injection/union-attacks.md)
       * [Blind Attacks](web/vulns/server-side/sql-injection/blind-sqli/README.md)
         * [Boolean Based](web/vulns/server-side/sql-injection/blind-sqli/boolean-based.md)
-        * [Error Based](web/vulns/server-side/sql-injection/blind-sqli/error-based.md)
-        * [Time Based](web/vulns/server-side/sql-injection/blind-sqli/time-based.md)
-  * [Client-Side](web/vulns/client-side/README.md)
+        * [Error Based](web/web-vulnerabilities/server-side/sql-injection/blind-sqli/error-based.md)
+        * [Time Based](web/web-vulnerabilities/server-side/sql-injection/blind-sqli/time-based.md)
+  * [Client-Side](web/web-vulnerabilities/client-side.md)
 
 ## 🛠️Docker Pentest <a href="#docker" id="docker"></a>
 
