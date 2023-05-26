@@ -227,7 +227,7 @@
     * [Perl](linux/privesc/script-exploits/perl/README.md)
   * [Scheduled tasks](linux/privesc/scheduled-tasks/README.md)
     * [Cron Jobs](linux/privesc/scheduled-tasks/cron-jobs.md)
-    * [🛠️ Systemd timers](linux/privesc/scheduled-tasks/systemd-timers.md)
+    * [Systemd timers](linux/privesc/scheduled-tasks/systemd-timers.md)
   * [🛠️ Interesting Groups](linux/privesc/interesting-groups.md)
   * [🛠️ Capabilities](linux/privesc/capabilities.md)
 * [Persistence](linux/persistence/README.md)
