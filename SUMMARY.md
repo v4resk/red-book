@@ -230,7 +230,7 @@
     * [🛠️ Systemd timers](linux/privesc/scheduled-tasks/systemd-timers.md)
   * [🛠️ Interesting Groups](linux/privesc/interesting-groups.md)
   * [🛠️ Capabilities](linux/privesc/capabilities.md)
-* [Persistence](linux/persistence.md)
+* [Persistence](linux/persistence/README.md)
 
 ## Web Pentest <a href="#web" id="web"></a>
 
@@ -261,9 +261,9 @@
       * [UNION Attacks](web/vulns/server-side/sql-injection/union-attacks.md)
       * [Blind Attacks](web/vulns/server-side/sql-injection/blind-sqli/README.md)
         * [Boolean Based](web/vulns/server-side/sql-injection/blind-sqli/boolean-based.md)
-        * [Error Based](web/web-vulnerabilities/server-side/sql-injection/blind-sqli/error-based.md)
-        * [Time Based](web/web-vulnerabilities/server-side/sql-injection/blind-sqli/time-based.md)
-  * [Client-Side](web/web-vulnerabilities/client-side.md)
+        * [Error Based](web/vulns/server-side/sql-injection/blind-sqli/error-based.md)
+        * [Time Based](web/vulns/server-side/sql-injection/blind-sqli/time-based.md)
+  * [Client-Side](web/vulns/client-side/README.md)
 
 ## 🛠️Docker Pentest <a href="#docker" id="docker"></a>
 
