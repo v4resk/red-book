@@ -32,15 +32,41 @@ Conceptually capabilities are maintained in sets, which are represented as bit m
 
 ## Practice 
 
+### Processes Capabilities 
+
 {% tabs %}
 {% tab title="Enumerate" %}
-BLANK
-{% endtab %}
+We can can find the capabilities of a process as follow
+```bash
+#List current process capabilities
+cat /proc/self/status | grep Cap
+cat /proc/$$/status | grep Cap
+capsh --print
 
-{% tab title="Exploit" %}
-BLANK
+#List capabilities of <PID> process
+cat /proc/<PID>/status | grep Cap
+```
+
+Using the capsh utility we can decode them into the capabilities name.
+```bash
+capsh --decode=0000003fffffffff
+0x0000003fffffffff=cap_chown,cap_dac_override,cap_dac_read_search,cap_fowner,cap_fsetid,cap_kill,cap_setgid,cap_setuid,cap_setpcap,cap_linux_immutable,cap_net_bind_service,cap_net_broadcast,cap_net_admin,cap_net_raw,cap_ipc_lock,cap_ipc_owner,cap_sys_module,cap_sys_rawio,cap_sys_chroot,cap_sys_ptrace,cap_sys_pacct,cap_sys_admin,cap_sys_boot,cap_sys_nice,cap_sys_resource,cap_sys_time,cap_sys_tty_config,cap_mknod,cap_lease,cap_audit_write,cap_audit_control,cap_setfcap,cap_mac_override,cap_mac_admin,cap_syslog,cap_wake_alarm,cap_block_suspend,37
+```
 {% endtab %}
 {% endtabs %}
+
+### Binaries Capabilities 
+
+{% tabs %}
+{% tab title="Enumerate" %}
+Binaries can have capabilities that can be used while executing. We can search binaries with capabilities as follow
+```bash
+getcap -r / 2>/dev/null
+```
+{% endtab %}
+{% endtabs %}
+
+
 
 ## References
 
