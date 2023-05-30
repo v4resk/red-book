@@ -4,13 +4,7 @@ description: A Pentesting / RedTeaming cheatsheet
 
 # The Red-Book
 
-
-
-<div align="center">
-
-<figure><img src=".gitbook/assets/v4resk_a_design_logo_in_dark_and_red_with_a_bushido_a509518b-b4fe-4d65-9c54-06ec53c9dbcd(1).png" alt="" width="563"><figcaption></figcaption></figure>
-
-</div>
+<figure><img src=".gitbook/assets/v4resk_a_design_logo_in_dark_and_red_with_a_bushido_a509518b-b4fe-4d65-9c54-06ec53c9dbcd(1).png" alt=""><figcaption></figcaption></figure>
 
 The **Red-Book of Hack-Army** aimed to provide a technical guides on various hacking topics.
 
