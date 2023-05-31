@@ -1,18 +1,20 @@
 ---
-description: A Pentesting / RedTeaming cheatsheet
+description: A Pentesting / RedTeaming book
 ---
 
 # The Red-Book
 
 <figure><img src=".gitbook/assets/v4resk_a_design_logo_in_dark_and_red_with_a_bushido_a509518b-b4fe-4d65-9c54-06ec53c9dbcd(1).png" alt=""><figcaption></figcaption></figure>
 
-The **Red-Book of Hack-Army** aimed to provide a technical guides on various hacking topics.
+**The Red-Book** is offering a curated collection of **technical notes** and **cheat sheets**. Our goal is to provide you with practical knowledge rooted in real-world experience. All the information you find within these pages has been meticulously sourced from a diverse range of valuable resources on the internet.
 
-The objective of this website is to provide a large wiki/knowledge base on offensive cybersecurity techniques/tricks. Most of the content that you will find here are just **copy/past** from other valuable resources on internet.
+We have scoured numerous reputable sources, including research papers, industry blogs, documentation, and expert opinions, to bring you the most relevant and up-to-date content. The techniques, methodologies, and concepts presented in **The Red-Book** have been carefully vetted and tested.
 
-Keep in mind that these guides was created to centralize Pentesting / RedTeaming information that i found all over the web or during CTF and real word engagement.
+Whether you are a cybersecurity enthusiast, an aspiring ethical hacker, or a concerned individual seeking to fortify your digital defenses, **The Red-Book** will serve as your indispensable resource. We cover a wide range of topics, including penetration testing, vulnerability assessments, social engineering, red teaming, network security, web application security, and much more.
 
-:tada:Please feel free to contribute, give feedback/suggestions or reach out to me on Discord (v4resk#0430).
+As you embark on this journey with us, keep in mind that offensive cybersecurity **is not about malicious intent**. It is about understanding the tactics employed by potential adversaries and using that knowledge to protect yourself and others. Together, let's take a proactive stance and defend against the ever-evolving digital threats that surround us. Remember, **knowledge is power, and with power comes responsibility**.
+
+:tada:Please feel free to contribute, give feedback/suggestions or reach out to me on Discord (**v4resk#0430**).
 
 {% hint style="danger" %}
 **This project is a work in progress**.
