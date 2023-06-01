@@ -691,7 +691,9 @@ su - root
 
 {% tabs %}
 {% tab title="Desc" %}
+[**CAP\_CHOWN**](https://man7.org/linux/man-pages/man7/capabilities.7.html)  allow us make arbitrary changes to file UIDs and GIDs.
 
+**This means that it's possible to change the ownership of any file.**
 {% endtab %}
 
 {% tab title="Exploit" %}
