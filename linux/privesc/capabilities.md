@@ -161,7 +161,7 @@ If you are in a docker container and `CAP_SYS_ADMIN` is enabled, then you can es
 [**CAP\_SYS\_PTRACE**](https://man7.org/linux/man-pages/man7/capabilities.7.html) allows to use `ptrace(2)` and recently introduced cross memory attach system calls such as `process_vm_readv(2)` and `process_vm_writev(2)`. If this capability is granted and the `ptrace(2)` system call itself is not blocked by a seccomp filter, this will allow an attacker to bypass other seccomp restrictions, see [PoC for bypassing seccomp if ptrace is allowed](https://gist.github.com/thejh/8346f47e359adecd1d53).
 {% endtab %}
 
-{% tab title="Exploit" %}
+{% tab title="Exploit - Python" %}
 For example, if **python** have the `CAP_SYS_PTRACE` capabilities,  we can inject a shellcode in a root process memory.
 
 ```bash
@@ -269,8 +269,13 @@ $ python2.7 ptrace.py <ROOT_PROCESS_PID>
 $ nc TARGET_IP 5600
 ```
 
+{% hint style="info" %}
+If you are in a docker container and`CAP_SYS_PTRACE` is enabled, then it means that you can **escape** the container **by injecting a shellcode** inside some process running inside the **host.** To access processes running inside the host the container needs to be run at least with **`--pid=host`**.\
+See[ this page](https://book.hacktricks.xyz/linux-hardening/privilege-escalation/linux-capabilities#cap\_sys\_ptrace) for more informations.
+{% endhint %}
+{% endtab %}
 
-
+{% tab title="Exploit - Gdb" %}
 Here is **an other PrivEsc example with `gdb`** if it have the `CAP_SYS_PTRACE` enabled
 
 ```bash
@@ -326,11 +331,6 @@ Continuing.
 process 207009 is executing new program: /usr/bin/dash
 [...]
 ```
-
-{% hint style="info" %}
-If you are in a docker container and`CAP_SYS_PTRACE` is enabled, then it means that you can **escape** the container **by injecting a shellcode** inside some process running inside the **host.** To access processes running inside the host the container needs to be run at least with **`--pid=host`**.\
-See[ this page](https://book.hacktricks.xyz/linux-hardening/privilege-escalation/linux-capabilities#cap\_sys\_ptrace) for more informations.
-{% endhint %}
 {% endtab %}
 {% endtabs %}
 
