@@ -1,12 +1,12 @@
-# Python - Yaml Deserialization
+# Python Deserialization
 
 ## Theory 
 
-Yaml python libraries is also capable to serialize python objects and not just raw data:
+Python's built-in serialization modules, such as pickle and cPickle, PyYaml, are commonly used for serializing and deserializing data. However, if the deserialization process is not properly secured, it can be exploited by attackers to execute arbitrary code or perform other malicious activities.
 
 ## Practice
 
-### PyYaml Code Execution
+### PyYaml Deserialization
 
 {% tabs %}
 {% tab title="Enumerate" %}
