@@ -1430,15 +1430,28 @@ sudo chattr -i file.txt
 
 #### CAP\_SYS\_CHROOT
 
+{% tabs %}
+{% tab title="Desc" %}
+[**CAP\_SYS\_CHROOT** ](https://man7.org/linux/man-pages/man7/capabilities.7.html) permits the use of the `chroot(2)` system call. This may allow escaping of any `chroot(2)` environment, using known weaknesses and escapes.
+{% endtab %}
 
-
-#### CAP\_SYS\_BOOT
-
-#### CAP\_SYSLOG
-
-#### CAP\_MKNOD
+{% tab title="Exploit - Python" %}
+You may want to have a look on [chw00t](https://github.com/earthquake/chw00t/), a chroot breaking tool.
+{% endtab %}
+{% endtabs %}
 
 #### CAP\_SETPCAP
+
+{% tabs %}
+{% tab title="Desc" %}
+[**CAP\_SETCAP** ](https://man7.org/linux/man-pages/man7/capabilities.7.html) is a Linux capability that allows a process to modify the capability sets of another process. It grants the ability to add or remove capabilities from the effective, inheritable, and permitted capability sets of other processes. However, there are certain restrictions on how this capability can be used.
+
+A process with `CAP_SETPCAP` **can only grant or remove capabilities that are in its own permitted capability set**. In other words, a process cannot grant a capability to another process if it does not have that capability itself. This restriction prevents a process from elevating the privileges of another process beyond its own level of privilege.
+
+Moreover, in recent kernel versions, the `CAP_SETPCAP` capability has been further restricted. It no longer allows a process to arbitrarily modify the capability sets of other processes. Instead, it **only allows a process to lower the capabilities in its own permitted capability set or the permitted capability set of its descendants**. This change was introduced to reduce potential security risks associated with the capability.
+
+{% endtab %}
+{% endtabs %}
 
 ## References
 
