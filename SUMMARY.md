@@ -228,7 +228,8 @@
   * [Scheduled tasks](linux/privesc/scheduled-tasks/README.md)
     * [Cron Jobs](linux/privesc/scheduled-tasks/cron-jobs.md)
     * [Systemd timers](linux/privesc/scheduled-tasks/systemd-timers.md)
-  * [🛠️ Interesting Groups](linux/privesc/interesting-groups.md)
+  * [Interesting Groups](linux/privesc/groups/README.md)
+    * [Lxd](linux/privesc/groups/README.md)
   * [Capabilities](linux/privesc/capabilities.md)
 * [Persistence](linux/persistence/README.md)
 
