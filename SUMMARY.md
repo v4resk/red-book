@@ -269,7 +269,7 @@
       * [Python Deserialization](web/vulns/server-side/deserialization/python.md)
       * [🛠️ Java Deserialization](web/vulns/server-side/deserialization/java.md)
       * [🛠️ Ruby Deserialization](web/vulns/server-side/deserialization/ruby.md)
-      * [🛠️ PHP Deserialization](web/vulns/server-side/deserialization/php.md)
+      * [🛠️ PHP Deserialization](web/web-vulnerabilities/server-side/deserialization/php.md)
   * [Client-Side](web/vulns/client-side/README.md)
 
 ## 🛠️Docker Pentest <a href="#docker" id="docker"></a>
