@@ -264,6 +264,11 @@
         * [Boolean Based](web/vulns/server-side/sql-injection/blind-sqli/boolean-based.md)
         * [Error Based](web/vulns/server-side/sql-injection/blind-sqli/error-based.md)
         * [Time Based](web/vulns/server-side/sql-injection/blind-sqli/time-based.md)
+    * [Insecure Deserialization](web/vulns/server-side/deserialization/README.md)
+      * [.NET Deserialization](web/vulns/server-side/deserialization/dotnet.md)
+      * [Python Deserialization](web/vulns/server-side/deserialization/python.md)
+      * [Java Deserialization](web/vulns/server-side/deserialization/java.md)
+      * [Ruby Deserialization](web/vulns/server-side/deserialization/ruby.md)
   * [Client-Side](web/vulns/client-side/README.md)
 
 ## 🛠️Docker Pentest <a href="#docker" id="docker"></a>
