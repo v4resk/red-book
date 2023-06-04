@@ -1420,10 +1420,10 @@ f.write('New content for the file\n')
 
 {% hint style="info" %}
 Note that usually this immutable attribute is set and remove using:
-
-sudo chattr +i file.txt&#x20;
-
+```bash
+sudo chattr +i file.txt
 sudo chattr -i file.txt
+```
 {% endhint %}
 {% endtab %}
 {% endtabs %}
