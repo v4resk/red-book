@@ -4,31 +4,52 @@ A lot of information on an AD domain can be obtained through LDAP. Most of the i
 
 {% tabs %}
 {% tab title="ldapsearch" %}
-The [ldapsearch](https://linux.die.net/man/1/ldapsearch) command is a shell-accessible interface to the [ldap_search_ext(3)](https://linux.die.net/man/3/ldap_search_ext) library call. It can be used to enumerate essential informations. 
+The [ldapsearch](https://linux.die.net/man/1/ldapsearch) command is a shell-accessible interface to the [ldap\_search\_ext(3)](https://linux.die.net/man/3/ldap\_search\_ext) library call. It can be used to enumerate essential informations.
+
+#### Anonymous Enumeration:
 
 Enumerate the base domain
+
 ```bash
 #Simple bind authentification (-x) as anonymous.
 ldapsearch -H ldap://$IP -x -s base namingcontexts
 ```
 
 Dump all readable ldap informations as anonymous
+
 ```bash
 ldapsearch -H ldap://$IP -x -b "DC=contoso,DC=local"
 ```
 
-Dump all readable ldap informations as anonymous and filter
+Dump ldap informations as anonymous and filter
+
 ```bash
 #With (objectClass=User) as the query and sAMAccountName the filter.
 ldapsearch -H ldap://$IP -x -b "DC=contoso,DC=local" '(objectClass=User)' sAMAccountName
 ```
 
-Dump all readable ldap informations as a user and filter
+#### Authenticated Enumeration:
+
+Dump readable ldap informations with **NTLM** based authentication&#x20;
+
 ```bash
 #With (objectClass=User) as the query and sAMAccountName the filter.
-ldapsearch -H ldap://$IP -x -D "CN=MyUser,CN=Users,DC=contoso,DC=local" -w Password! -b "DC=contoso,DC=local" '(objectClass=User)' sAMAccountName
+ldapsearch -H ldap://$IP -x -D "CN=MyUser,CN=Users,DC=contoso,DC=local" -w Password1 -b "DC=contoso,DC=local" '(objectClass=User)' sAMAccountName
+ldapsearch -H ldap://$IP -x -D "MyUser@contoso.local" -w Password1 -b "DC=contoso,DC=local" '(objectClass=User)' sAMAccountName
 ```
 
+Dump all readable ldap informations with **Kerberos** based authentication
+
+```bash
+#Get TGT
+kinit MyUser@contoso.local
+
+#List tickets
+klist
+
+#LdapSearch
+ldapsearch -H ldap://$IP -Y GSSAPI -b "DC=contoso,DC=local" '(objectClass=User)' sAMAccountName
+```
 {% endtab %}
 
 {% tab title="ldapsearch-ad" %}
@@ -114,4 +135,3 @@ LDAP anonymous binding is usually disabled but it's worth checking. It could be 
 * A more advanced LDAP enumeration can be carried out with BloodHound (see [this](bloodhound.md)).
 * The enum4linux tool can also be used, among other things, for LDAP recon (see [this](enum4linux.md)).
 {% endhint %}
-
