@@ -54,3 +54,5 @@ phpggc -l
 {% embed url="https://github.com/swisskyrepo/PayloadsAllTheThings/blob/master/Insecure%20Deserialization/PHP.md" %}
 
 {% embed url="https://portswigger.net/web-security/deserialization/exploiting" %}
+
+{% embed url="https://www.phpinternalsbook.com/php5/classes_objects/serialization.html" %}
