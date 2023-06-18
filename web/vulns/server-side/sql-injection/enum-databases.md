@@ -1,4 +1,4 @@
-# Enum Database
+# Enum Databases
 
 ## Theory
 
