@@ -75,7 +75,7 @@ sc start <Service_Name>
 {% endtab %}
 {% endtabs %}
 
-### References
+## References
 
 {% embed url="https://medium.com/@SumitVerma101/windows-privilege-escalation-part-1-unquoted-service-path-c7a011a8d8ae" %}
 
