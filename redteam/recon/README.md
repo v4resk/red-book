@@ -8,7 +8,7 @@ description: MITRE ATT&CK™ Reconnaissance - Tactic TA0043
 
 Reconnaissance consists of techniques that involve adversaries actively or passively gathering information that can be used to support targeting. Such information may include details of the victim organization, infrastructure, or staff/personnel. This information can be leveraged by the adversary to aid in other phases of the adversary lifecycle, such as using gathered information to plan and execute Initial Access, to scope and prioritize post-compromise objectives, or to drive and lead further Reconnaissance efforts.
 
-![](../../.gitbook/assets/weaponization.png)
+![](../../.gitbook/assets/spaces2Fuploads2Fweaponization.png)
 
 ## Resources
 
