@@ -117,8 +117,8 @@ For example we can retrieve the database version on MySQL:
 
 You can now use queries on this page, in combinaison with UNION injection to dump the database.
 
-{% content-ref url="broken-reference" %}
-[Broken link](broken-reference)
+{% content-ref url="enum-database.md" %}
+[enum-database.md](enum-database.md)
 {% endcontent-ref %}
 
 ## Resources

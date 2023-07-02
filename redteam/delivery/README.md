@@ -10,7 +10,7 @@ Delivery consists of techniques that use various entry vectors to gain their ini
 
 ![](../../.gitbook/assets/spaces2Fuploads2Fweaponization.png)
 
-On this website "Delmivery" will refere to the "Initial Access" Technique of MITRE ATT\&CK Framework.
+On this website "Delivery" will refere to the "Initial Access" Technique of MITRE ATT\&CK Framework.
 
 ## Resources
 
