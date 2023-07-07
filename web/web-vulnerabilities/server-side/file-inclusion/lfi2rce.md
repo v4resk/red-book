@@ -10,7 +10,7 @@ In PHP, vulnerable functions are: `require`, `require_once`, `include`, `include
 
 ### PHP filter chain
 {% tabs %}
-{% tab title="Enumerate" %}
+{% tab title="Exploit" %}
 PHP filters chain can be used to get a RCE without uploading a file if we control entirely the parameter passed to a `require` or an `include` in PHP!
 
 To generate one, we can use this [SynAcktiv tool](https://github.com/synacktiv/php_filter_chain_generator):
