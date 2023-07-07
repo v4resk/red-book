@@ -10,7 +10,7 @@ Exfiltration refers to techniques and attributes that result or aid in removing 
 
 Alternate protocols include FTP, SMTP, HTTP/S, DNS, SMB, or any other network protocol not being used as the main command and control channel.
 
-![](../../.gitbook/assets/weaponization.png)
+![](../../.gitbook/assets/spaces2Fuploads2Fweaponization.png)
 
 Data Exfiltration often happens at the last stage of the Cyber Kill Chain model, Actions on Objectives.
 

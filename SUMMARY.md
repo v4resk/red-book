@@ -193,6 +193,7 @@
     * [Weak Registry Permissions](windows/privesc/services/weak-registry-permissions.md)
     * [Unquoted Service Path](windows/privesc/services/unquoted-service-path.md)
 * [Persistence](windows/persistence/README.md)
+  * [Image File Execution Options](windows/persistence/image-file-execution-options.md)
   * [Logon Triggered](windows/persistence/logon-triggered.md)
 
 ## Linux Pentest <a href="#linux" id="linux"></a>
