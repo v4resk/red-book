@@ -103,7 +103,7 @@ python3 peas.py
 {% endtab %}
 {% endtabs %}
 
-## **Ruamel.yaml** Deserialization
+### **Ruamel.yaml** Deserialization
 
 {% tabs %}
 {% tab title="Enumerate" %}
@@ -164,7 +164,7 @@ python3 peas.py
 {% endtab %}
 {% endtabs %}
 
-## Pickle/cPickle Deserialization
+### Pickle/cPickle Deserialization
 
 The python `pickle` and `cPickle` (implementation of Pickle in C) modules, that serializes and deserializes a Python object, are vulnerables to remote code execution. If the website uses this modules, we may be able to execute arbitrary code.
 
@@ -227,7 +227,7 @@ python3 peas.py
 {% endtab %}
 {% endtabs %}
 
-## Jsonpickle Deserialization
+### Jsonpickle Deserialization
 
 [Jsonpickle](https://jsonpickle.github.io/) is a python library for serializing any arbitrary object graph into JSON.
 
