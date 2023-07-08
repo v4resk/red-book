@@ -273,8 +273,9 @@
       * [🛠️ Java Deserialization](web/web-vulnerabilities/server-side/deserialization/java.md)
       * [🛠️ Ruby Deserialization](web/web-vulnerabilities/server-side/deserialization/ruby.md)
     * [File Inclusion](web/web-vulnerabilities/server-side/file-inclusion/README.md)
-      * [LFI/RFI Basics](web/web-vulnerabilities/server-side/file-inclusion/lfi-rfi-basics.md)
-      * [LFI to RCE](web/web-vulnerabilities/server-side/file-inclusion/lfi2rce.md)
+      * [LFI to RCE](web/web-vulnerabilities/server-side/file-inclusion/lfi2rce/README.md)
+        * [PHP Wrappers](web/web-vulnerabilities/server-side/file-inclusion/lfi2rce/php-wrappers.md)
+      * [RFI to RCE](web/web-vulnerabilities/server-side/file-inclusion/rfi-to-rce.md)
   * [Client-Side](web/web-vulnerabilities/client-side/README.md)
 
 ## 🛠️Docker Pentest <a href="#docker" id="docker"></a>

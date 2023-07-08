@@ -10,6 +10,8 @@ Local File Inclusion (LFI) refers to a vulnerability in web applications where a
 In PHP, vulnerable functions are: `require`, `require_once`, `include`, `include_once`
 {% endhint %}
 
+
+
 #### PHP filter chain
 
 {% tabs %}
@@ -37,12 +39,6 @@ Accept: application/json, text/plain, */*
 ```
 {% endtab %}
 {% endtabs %}
-
-#### PHP Wrappers
-
-You may use some PHP wrappers like `data://`, `expect://`, `zip:// & rar://`, `input://` to execute arbitrary command through PHP.
-
-{% embed url="https://red.hack-army.net/web/web-vulnerabilities/server-side/file-inclusion/lfi-rfi-basics#lfi-rfi-using-php-protocols-and-wrappers" %}
 
 ## References
 
