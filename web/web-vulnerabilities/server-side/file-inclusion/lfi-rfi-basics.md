@@ -255,6 +255,15 @@ POST DATA: <?php system('id'); ?>
 
 {% tab title="Others" %}
 Check more possible supported protocols [here](https://www.php.net/manual/en/wrappers.php)
+
+* [php://memory and php://temp](https://www.php.net/manual/en/wrappers.php.php#wrappers.php.memory) — Write in memory or in a temporary file (not sure how this can be useful in a file inclusion attack)
+* [file://](https://www.php.net/manual/en/wrappers.file.php) — Accessing local filesystem
+* [http://](https://www.php.net/manual/en/wrappers.http.php) — Accessing HTTP(s) URLs
+* [ftp://](https://www.php.net/manual/en/wrappers.ftp.php) — Accessing FTP(s) URLs
+* [zlib://](https://www.php.net/manual/en/wrappers.compression.php) — Compression Streams
+* [glob://](https://www.php.net/manual/en/wrappers.glob.php) — Find pathnames matching pattern (It doesn't return nothing printable, so not really useful here)
+* [ssh2://](https://www.php.net/manual/en/wrappers.ssh2.php) — Secure Shell 2
+* [ogg://](https://www.php.net/manual/en/wrappers.audio.php) — Audio streams (Not useful to read arbitrary files)
 {% endtab %}
 {% endtabs %}
 
