@@ -38,6 +38,12 @@ Accept: application/json, text/plain, */*
 {% endtab %}
 {% endtabs %}
 
+#### PHP Wrappers
+
+You may use some PHP wrappers like `data://`, `expect://`, `zip:// & rar://`, `input://` to execute arbitrary command through PHP.
+
+{% embed url="https://red.hack-army.net/web/web-vulnerabilities/server-side/file-inclusion/lfi-rfi-basics#lfi-rfi-using-php-protocols-and-wrappers" %}
+
 ## References
 
 {% embed url="https://book.hacktricks.xyz/pentesting-web/file-inclusion" %}

