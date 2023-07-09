@@ -277,6 +277,7 @@
         * [PHP Wrappers](web/web-vulnerabilities/server-side/file-inclusion/lfi2rce/php-wrappers.md)
         * [Logs Poisoning](web/web-vulnerabilities/server-side/file-inclusion/lfi2rce/logs-poisoning.md)
         * [/proc](web/web-vulnerabilities/server-side/file-inclusion/lfi2rce/proc.md)
+        * [PHPInfo](web/web-vulnerabilities/server-side/file-inclusion/lfi2rce/phpinfo.md)
         * [PHP Sessions](web/web-vulnerabilities/server-side/file-inclusion/lfi2rce/php-sessions.md)
       * [RFI to RCE](web/web-vulnerabilities/server-side/file-inclusion/rfi-to-rce.md)
   * [Client-Side](web/web-vulnerabilities/client-side/README.md)
