@@ -1,5 +1,11 @@
 # RFI to RCE
 
+## Theory
+
+Remote file inclusion (RFI) is an attack targeting vulnerabilities in web applications that dynamically reference external ressources. The goal is to exploit the referencing function in an application to upload malware (e.g., backdoor shells) from a remote URL located within a different domain.
+
+## Practice
+
 {% tabs %}
 {% tab title="HTTP" %}
 We can host an arbitrary PHP code and access it through the **HTTP** protocol
