@@ -148,3 +148,7 @@ http://example.com/index.php?page=phar://./shell.jpg%2Fshell.txt&cmd=id"
 ```
 
 </details>
+
+## References
+
+{% embed url="https://book.hacktricks.xyz/pentesting-web/file-inclusion" %}
