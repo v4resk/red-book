@@ -86,13 +86,7 @@ We can now search for the exact Microsoft Exchange product version using [this m
 \
 Following versions are vulnerable :&#x20;
 
-| Version            | Vulnerable ProductVersion |
-| ------------------ | ------------------------- |
-| Exchange 2013 CU23 | < 15.0.1497.15            |
-| Exchange 2016 CU19 | < 15.1.2176.12            |
-| Exchange 2016 CU20 | < 15.1.2242.5             |
-| Exchange 2019 CU8  | < 15.2.792.13             |
-| Exchange 2019 CU9  | < 15.2.858.9              |
+<table><thead><tr><th width="370">Version</th><th>Vulnerable ProductVersion</th></tr></thead><tbody><tr><td>Exchange 2013 CU23</td><td>&#x3C; 15.0.1497.15</td></tr><tr><td>Exchange 2016 CU19</td><td>&#x3C; 15.1.2176.12</td></tr><tr><td>Exchange 2016 CU20</td><td>&#x3C; 15.1.2242.5</td></tr><tr><td>Exchange 2019 CU8 </td><td>&#x3C; 15.2.792.13</td></tr><tr><td>Exchange 2019 CU9</td><td>&#x3C; 15.2.858.9</td></tr></tbody></table>
 {% endtab %}
 
 {% tab title="Exploit" %}
@@ -108,7 +102,7 @@ python3 exchange_proxyshell.py -u https://<EXCHANGE-IP> -u user@domain.local
 {% endtab %}
 
 {% tab title="Exploit - Metasploit" %}
-There is a Metasploit module to exploit the ProxyShell vulnerability:
+A Metasploit module is available to exploit ProxyShell
 
 ```bash
 msf > use exploit/windows/http/exchange_proxyshell_rce

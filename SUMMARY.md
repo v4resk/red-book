@@ -107,7 +107,7 @@
   * [SCCM / MECM](ad/movement/sccm-mecm.md)
   * [Exchange services](ad/movement/exchange-services/README.md)
     * [PrivExchange](ad/movement/exchange-services/privexchange.md)
-    * [🛠️ ProxyLogon](ad/movement/exchange-services/proxylogon.md)
+    * [ProxyLogon](ad/movement/exchange-services/proxylogon.md)
     * [ProxyShell](ad/movement/exchange-services/proxyshell.md)
     * [🛠️ ProxyNotShell](a-d/movement/exchange-services/proxynotshell.md)
   * [Print Spooler Service](ad/movement/print-spooler-service/README.md)
