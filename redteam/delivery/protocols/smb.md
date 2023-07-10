@@ -1,3 +1,7 @@
+---
+description: Port 445,139
+---
+
 # SMB
 
 ## Theory
