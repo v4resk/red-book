@@ -110,7 +110,7 @@
     * [🛠️ ProxyShell](ad/movement/exchange-services/proxyshell.md)
   * [Print Spooler Service](ad/movement/print-spooler-service/README.md)
     * [PrinterBug](ad/movement/print-spooler-service/printerbug.md)
-    * [🛠️ PrintNightmare](ad/movement/print-spooler-service/printnightmare.md)
+    * [PrintNightmare](ad/movement/print-spooler-service/printnightmare.md)
   * [NTLM](ad/movement/ntlm/README.md)
     * [Capture](ad/movement/ntlm/capture.md)
     * [Relay](ad/movement/ntlm/relay.md)
