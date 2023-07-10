@@ -1,0 +1,2 @@
+# Rights on RODC object
+

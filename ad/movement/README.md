@@ -45,7 +45,7 @@ Below is a checklist to go through when conducting a pentest. Order is irrelevan
 ### Domain-level configuration and best-practices
 
 * [ ] The [Machine Account Quota](domain-settings/machineaccountquota.md) domain-level attribute is set to 0, preventing domain users from creating domain-joined computer accounts.
-* [ ] Default [special groups](../../a-d/movement/domain-settings/builtin-groups/) are empty, limiting, among other things, out-of-box ACE abuses.
+* [ ] Default [special groups](broken-reference) are empty, limiting, among other things, out-of-box ACE abuses.
 
 ### Networking, protocols and services
 
