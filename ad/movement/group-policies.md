@@ -70,6 +70,14 @@ Domain members refresh group policy settings every 90 minutes by default but it 
 
 In addition to the aforementioned exploitation paths, GPOs can be abused in other ways: leveraging logon/logoff scripts, using registry for autoruns, installing .msi, edit services and similar code execution avenues.
 
+### Group Policy Preferences Password
+
+Sometimes, you will find the built-in Administrator's password in a Group Policies.
+
+{% content-ref url="credentials/dumping/group-policies-preferences.md" %}
+[group-policies-preferences.md](credentials/dumping/group-policies-preferences.md)
+{% endcontent-ref %}
+
 ## References
 
 {% embed url="https://www.harmj0y.net/blog/redteaming/abusing-gpo-permissions/" %}

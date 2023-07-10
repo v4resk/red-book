@@ -24,7 +24,7 @@ All of this can be done from UNIX-like systems with [addspn](https://github.com/
 When attacking accounts able to delegate without constraints, there are two major scenarios
 
 * **the account is a computer**: computers can edit their own SPNs via the `msDS-AdditionalDnsHostName` attribute. Since ticket received by krbrelayx will be encrypted with AES256 (by default), attackers will need to either supply the right AES256 key for the unconstrained delegations account (`--aesKey` argument) or the salt and password (`--krbsalt` and `--krbpass` arguments).
-* **the account is a user**: users can't edit their own SPNs like computers do. Attackers need to control an [account operator](../../domain-settings/builtin-groups.md) (or any other user that has the needed privileges) to edit the user's SPNs. Moreover, since tickets received by krbrelayx will be encrypted with RC4, attackers will need to either supply the NT hash (`-hashes` argument) or the salt and password (`--krbsalt` and `--krbpass` arguments)
+* **the account is a user**: users can't edit their own SPNs like computers do. Attackers need to control an [account operator](../../../../a-d/movement/domain-settings/builtin-groups/) (or any other user that has the needed privileges) to edit the user's SPNs. Moreover, since tickets received by krbrelayx will be encrypted with RC4, attackers will need to either supply the NT hash (`-hashes` argument) or the salt and password (`--krbsalt` and `--krbpass` arguments)
 {% endhint %}
 
 {% hint style="success" %}
@@ -74,11 +74,7 @@ Alternatively, the TGT can be used with [S4U2self abuse](s4u2self-abuse.md) in o
 
 Once the TGT is injected, it can natively be
 
-
-
-
-
-&#x20;used when accessing a service, for example with [Mimikatz](https://github.com/gentilkiwi/mimikatz) to extract the `krbtgt` hash.
+used when accessing a service, for example with [Mimikatz](https://github.com/gentilkiwi/mimikatz) to extract the `krbtgt` hash.
 
 ```bash
 lsadump::dcsync /dc:$DomainController /domain:$DOMAIN /user:krbtgt
@@ -93,4 +89,3 @@ lsadump::dcsync /dc:$DomainController /domain:$DOMAIN /user:krbtgt
 {% embed url="https://exploit.ph/user-constrained-delegation.html" %}
 
 {% embed url="https://dirkjanm.io/krbrelayx-unconstrained-delegation-abuse-toolkit/" %}
-
