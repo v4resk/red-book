@@ -238,6 +238,7 @@
     * [Lxd](linux/privesc/groups/lxd.md)
   * [Capabilities](linux/privesc/capabilities.md)
 * [Persistence](linux/persistence/README.md)
+  * [SSH](linux/persistence/ssh.md)
 
 ## Web Pentest <a href="#web" id="web"></a>
 
