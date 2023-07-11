@@ -109,7 +109,7 @@
     * [PrivExchange](ad/movement/exchange-services/privexchange.md)
     * [ProxyLogon](ad/movement/exchange-services/proxylogon.md)
     * [ProxyShell](ad/movement/exchange-services/proxyshell.md)
-    * [🛠️ ProxyNotShell](a-d/movement/exchange-services/proxynotshell.md)
+    * [ProxyNotShell](a-d/movement/exchange-services/proxynotshell.md)
   * [Print Spooler Service](ad/movement/print-spooler-service/README.md)
     * [PrinterBug](ad/movement/print-spooler-service/printerbug.md)
     * [PrintNightmare](ad/movement/print-spooler-service/printnightmare.md)

@@ -54,6 +54,10 @@ Following versions are vulnerable:
 | Exchange 2016 CU19 | < 15.01.2176.009          |
 | Exchange 2019 CU7  | < 15.02.0721.013          |
 | Exchange 2019 CU8  | < 15.02.0792.010          |
+
+{% hint style="info" %}
+All versions before March 2, 2021 are vulnerable
+{% endhint %}
 {% endtab %}
 
 {% tab title="Exploit" %}

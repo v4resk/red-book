@@ -6,7 +6,7 @@ description: Chained CVE-2021-34473, CVE-2021-34523, CVE-2021-31207
 
 ## Theory
 
-On BlackHat USA 2021, Orange Tsai (a 0-day researcher focusing on web/application security) revealed the three CVEs affecting Microsoft Exchange that chained together can result in arbitrary code execution on the server. They dubbed these vulnerabilities ProxyShell.
+On BlackHat USA 2021, Orange Tsai (a 0-day researcher focusing on web/application security) revealed the three CVEs affecting Microsoft Exchange that chained together can result in arbitrary code execution on the server. They dubbed these vulnerabilities ProxyShell.&#x20;
 
 **CVE-2021-34473**: Path confusion bug on the Microsoft Exchange Explicit Logon feature.\
 Explicit Logon feature is a legitimate feature that enables users to open a new browser window of mailbox/calendar only under these conditions:
@@ -16,11 +16,11 @@ Explicit Logon feature is a legitimate feature that enables users to open a new 
 
 When opening the new window, the Exchange Backend server reads the URI and parses it for receiving the mailbox address. It looks like:
 
-<figure><img src="../../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 In order to exploit this vulnerability, the attacker just needs to replace the mailbox address with the following string: /autodiscover/autodiscover.json:
 
-<figure><img src="../../../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (2) (1).png" alt=""><figcaption></figcaption></figure>
 
 When the Exchange Backend server reads this string, it does not perform the checks on the address like usual, the string leads the server to access all backend URLs with the NT AUTHORITY/SYSTEM permissions.
 
@@ -86,7 +86,11 @@ We can now search for the exact Microsoft Exchange product version using [this m
 \
 Following versions are vulnerable :&#x20;
 
-<table><thead><tr><th width="370">Version</th><th>Vulnerable ProductVersion</th></tr></thead><tbody><tr><td>Exchange 2013 CU23</td><td>&#x3C; 15.0.1497.15</td></tr><tr><td>Exchange 2016 CU19</td><td>&#x3C; 15.1.2176.12</td></tr><tr><td>Exchange 2016 CU20</td><td>&#x3C; 15.1.2242.5</td></tr><tr><td>Exchange 2019 CU8 </td><td>&#x3C; 15.2.792.13</td></tr><tr><td>Exchange 2019 CU9</td><td>&#x3C; 15.2.858.9</td></tr></tbody></table>
+<table><thead><tr><th width="359">Version</th><th>Vulnerable ProductVersion</th></tr></thead><tbody><tr><td>Exchange 2013 CU23</td><td>&#x3C; 15.0.1497.15</td></tr><tr><td>Exchange 2016 CU19</td><td>&#x3C; 15.1.2176.12</td></tr><tr><td>Exchange 2016 CU20</td><td>&#x3C; 15.1.2242.5</td></tr><tr><td>Exchange 2019 CU8 </td><td>&#x3C; 15.2.792.13</td></tr><tr><td>Exchange 2019 CU9</td><td>&#x3C; 15.2.858.9</td></tr></tbody></table>
+
+{% hint style="info" %}
+All versions before May 11, 2021 are vulnerable
+{% endhint %}
 {% endtab %}
 
 {% tab title="Exploit" %}
