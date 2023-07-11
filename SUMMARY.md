@@ -2,7 +2,7 @@
 
 * [The Red-Book](README.md)
 
-## Active Directory <a href="#a-d" id="a-d"></a>
+## Active Directory <a href="#ad" id="ad"></a>
 
 * [Reconnaissance](ad/recon/README.md)
   * [PowerView](ad/recon/powerview.md)
@@ -95,7 +95,7 @@
     * [Grant rights](ad/movement/dacl/grant-rights.md)
     * [ReadGMSAPassword](ad/movement/dacl/readgmsapassword.md)
     * [Logon script](ad/movement/dacl/logon-script.md)
-    * [Rights on RODC object](a-d/movement/dacl/rights-on-rodc-object.md)
+    * [Rights on RODC object](ad/movement/dacl/rights-on-rodc-object.md)
   * [Group policies](ad/movement/group-policies.md)
   * [🛠️ Trusts](ad/movement/domain-trusts.md)
   * [Certificate Services (AD-CS)](ad/movement/ad-cs/README.md)
@@ -109,12 +109,12 @@
     * [PrivExchange](ad/movement/exchange-services/privexchange.md)
     * [ProxyLogon](ad/movement/exchange-services/proxylogon.md)
     * [ProxyShell](ad/movement/exchange-services/proxyshell.md)
-    * [ProxyNotShell](a-d/movement/exchange-services/proxynotshell.md)
+    * [ProxyNotShell](ad/movement/exchange-services/proxynotshell.md)
   * [Print Spooler Service](ad/movement/print-spooler-service/README.md)
     * [PrinterBug](ad/movement/print-spooler-service/printerbug.md)
     * [PrintNightmare](ad/movement/print-spooler-service/printnightmare.md)
   * [Built-ins & settings](ad/movement/domain-settings/README.md)
-    * [Security groups](a-d/movement/domain-settings/security-groups.md)
+    * [Security groups](ad/movement/domain-settings/security-groups.md)
     * [MachineAccountQuota](ad/movement/domain-settings/machineaccountquota.md)
     * [Pre-Windows 2000 computers](ad/movement/domain-settings/pre-windows-2000-computers.md)
     * [RODC](ad/movement/domain-settings/rodc.md)

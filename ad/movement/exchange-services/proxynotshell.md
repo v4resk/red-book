@@ -63,7 +63,7 @@ All versions before November 8, 2022 are vulnerable
 {% endtab %}
 
 {% tab title="Exploit" %}
-We can use testanull's python script to exploit this vulnerability
+We can use [testanull's python script](https://github.com/testanull/ProxyNotShell-PoC) to exploit this vulnerability
 
 ```bash
 # Install dependecies
