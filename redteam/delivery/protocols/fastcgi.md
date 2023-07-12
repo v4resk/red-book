@@ -61,7 +61,7 @@ Execute it:
 
 ```bash
 chmod +x exploit.sh
-./exploit.sh
+./exploit.sh localhost
 ```
 {% endtab %}
 {% endtabs %}
