@@ -2,7 +2,7 @@
 
 * [The Red-Book](README.md)
 
-## Active Directory <a href="#ad" id="ad"></a>
+## Active Directory <a href="#a-d" id="a-d"></a>
 
 * [Reconnaissance](ad/recon/README.md)
   * [PowerView](ad/recon/powerview.md)
@@ -134,6 +134,7 @@
 ## Red-Teaming <a href="#redteam" id="redteam"></a>
 
 * [Reconnaissance](redteam/recon/README.md)
+  * [OSINT](redteam/recon/osint.md)
   * [DNS Enumeration](redteam/recon/dns-enum.md)
   * [Email Harvesting](redteam/recon/email-harvesting.md)
   * [Google Dorks](redteam/recon/google-dorks.md)
@@ -141,14 +142,15 @@
   * [🛠️ Specialized Search Engines](redteam/recon/specialized-search-engines.md)
 * [Weaponization](redteam/weapon/README.md)
   * [🛠️Code & Process Injection](redteam/weapon/code-and-process-injection.md)
-  * [MSHTA](redteam/weapon/mshta.md)
-  * [WSH](redteam/weapon/wsh.md)
-  * [VBA](redteam/weapon/vba.md)
-  * [RegSrv32](redteam/weapon/regsrv32.md)
-  * [Powershell Without Powershell.exe](redteam/weapon/whithout-powershell.md)
-  * [MSBuild](redteam/weapon/msbuild.md)
-  * [WMIC](redteam/weapon/wmic.md)
-  * [CMSTP](redteam/weapon/cmstp.md)
+  * [Code Execution](redteam/weapon/code-execution/README.md)
+    * [MSHTA](redteam/weapon/code-execution/mshta.md)
+    * [WSH](redteam/weapon/code-execution/wsh.md)
+    * [VBA](redteam/weapon/code-execution/vba.md)
+    * [RegSrv32](redteam/weapon/code-execution/regsrv32.md)
+    * [Powershell Without Powershell.exe](redteam/weapon/code-execution/whithout-powershell.md)
+    * [MSBuild](redteam/weapon/code-execution/msbuild.md)
+    * [WMIC](redteam/weapon/code-execution/wmic.md)
+    * [CMSTP](redteam/weapon/code-execution/cmstp.md)
 * [Delivery](redteam/delivery/README.md)
   * [Network Protocols](redteam/delivery/protocols/README.md)
     * [🛠️ SSH](redteam/delivery/protocols/ssh.md)
