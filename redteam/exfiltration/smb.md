@@ -32,7 +32,7 @@ crackmapexec smb $IP -u $USERNAME -p $PASSWORD -M spider_plus -o READ_ONLY=False
 The previous command generates a json file with the list of accessible files in shares. We may use jq to parse this json output.
 
 ```bash
-cat 10.10.10.111.json | jq '. | map_values(key)'
+cat 10.10.10.111.json | jq '. | map_values(keys)'
 ```
 {% endtab %}
 {% endtabs %}
