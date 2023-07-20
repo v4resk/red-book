@@ -35,7 +35,7 @@ The NT hash can be used for [pass-the-hash](../ntlm/pth.md), [silver ticket](for
 If you have this error:**`KDC_ERR_PADATA_TYPE_NOSUPP`**when requesting PKINIT, it may be an indication that your targeted KDCs do not have certificates with the necessary EKU (Extended Key Usages). \
 More specificly, If a KDC must support smart card logon, its certificate must have the `Smart Card Logon` EKU\
 \
-You can use your certificate to logon on **LDAPS** via **Schannel**
+**You can use your certificate to logon on LDAPS via Schannel**
 {% endhint %}
 
 Authentication via Schannel is supported by [certipy-ad](https://github.com/ly4k/Certipy):
@@ -47,7 +47,6 @@ certipy auth -pfx administrator.pfx -username 'administrator' -domain 'contoso.l
 Type help for list of commands
 
 # help
-
 ```
 {% endtab %}
 
