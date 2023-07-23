@@ -2,7 +2,7 @@
 
 ## Theory
 
-When exploiting SQL injection vulnerabilities, it is often necessary to gather some information about the database itself. This includes the type and version of the database software, and the contents of the database in terms of which tables and columns it contains.
+When exploiting SQL injection vulnerabilities, or when you gain access to the database itself, it is often necessary to gather some information about the database itself. This includes the type and version of the database software, and the contents of the database in terms of which tables and columns it contains.
 
 ## Practice
 
