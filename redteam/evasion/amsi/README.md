@@ -17,10 +17,14 @@ AMSI is fully integrated into the following Windows components:
 * Office VBA macros
 
 The below diagram depicts how data is dissected as it flows through the layers and what DLLs/API calls are being instrumented.\
-![](../../../.gitbook/assets/35e16d45ce27145fcdf231fdb8dcb35e.png)
+
+
+<figure><img src="../../../.gitbook/assets/35e16d45ce27145fcdf231fdb8dcb35e.png" alt="" width="563"><figcaption></figcaption></figure>
 
 This is important to understand the complete model of AMSI, but we can break it down into core components, shown in the diagram below.\
-![](../../../.gitbook/assets/efca9438e858f0476a4ffd777c36501a.png)
+
+
+<figure><img src="../../../.gitbook/assets/efca9438e858f0476a4ffd777c36501a.png" alt=""><figcaption></figcaption></figure>
 
 {% hint style="danger" %}
 Note: AMSI is only instrumented when loaded from memory when executed from the CLR. It is assumed that if on disk MsMpEng.exe (Windows Defender) is already being instrumented.
