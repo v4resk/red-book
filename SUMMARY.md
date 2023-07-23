@@ -157,6 +157,7 @@
     * [FastCGI](redteam/delivery/protocols/fastcgi.md)
     * [LDAP](redteam/delivery/protocols/ldap.md)
     * [SMB](redteam/delivery/protocols/smb.md)
+    * [🛠️ Oracle TNS](redteam/delivery/protocols/oracle-tns.md)
     * [🛠️ FTP](redteam/delivery/protocols/ftp.md)
     * [🛠️ Telnet](redteam/delivery/protocols/telnet.md)
     * [🛠️ SSH](redteam/delivery/protocols/ssh.md)
