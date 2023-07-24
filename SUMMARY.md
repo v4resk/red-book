@@ -267,6 +267,7 @@
     * [🛠️ Flask](web/infrastructures/frameworks/flask.md)
     * [🛠️ Laravel](web/infrastructures/frameworks/laravel.md)
     * [🛠️ Spring](web/infrastructures/frameworks/spring.md)
+  * [WebDAV](web/infrastructures/webdav.md)
 * [Web Vulnerabilities](web/web-vulnerabilities/README.md)
   * [Server-Side](web/web-vulnerabilities/server-side/README.md)
     * [NoSQL Injection](web/web-vulnerabilities/server-side/nosql-injection.md)
