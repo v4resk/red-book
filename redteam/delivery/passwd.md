@@ -82,14 +82,37 @@ python3 cupp.py -l
 python3 cupp.py -a
 ```
 {% endtab %}
+{% endtabs %}
 
-{% tab title="Ruled-Based" %}
+### Rules-Based Wordlists
+
 **Rule-Based attacks** assume the attacker knows something about the password policy. Rules are applied to create passwords within the guidelines of the given password policy and should, in theory, only generate valid passwords. Using pre-existing wordlists may be useful when generating passwords that fit a policy — for example, manipulating or 'mangling' a password such as `password`: `p@ssword`, `Pa$$word`, `Passw0rd`, and so on.
 
-[John the ripper](https://github.com/openwall/john) has a config file that contains rule sets, which is located at /etc/john/john.conf or /opt/john/john.conf depending on your distro or how john was installed. You can read /etc/john/john.conf and look for List.Rules to see all the available rules:
+{% tabs %}
+{% tab title="John" %}
+[John the ripper](https://github.com/openwall/john) has a config file that contains rule sets, which is located at `/etc/john/john.conf` or `/opt/john/john.conf` depending on your distro or how john was installed. You can read /etc/john/john.conf and look for List.Rules to see all the available rules:
 
 ```bash
+# Create wordlist from a rule
 john --wordlist=/tmp/single-password-list.txt --rules=best64 --stdout | wc -l
+```
+{% endtab %}
+
+{% tab title="Hashcat" %}
+[Hashcat](https://github.com/hashcat/hashcat) has rule sets located at `/usr/share/hashcat/rules/`. To create your own rules, you may check this [hashcat documentation](https://hashcat.net/wiki/doku.php?id=rule\_based\_attack)
+
+```bash
+# Create wordlist from a rule
+hashcat -r /usr/share/rules/best64.rule wordlist.txt --stdout > new_wordlist.txt
+
+# Crack hash with combinor
+# each word of a dictionary is appended to each word in another dictionary. (left and right)
+hashcat -m 0 -a 1 hash.txt dict1.txt dict2.txt
+
+# Crack hash with combinor and rule
+# -j Single rule applied to each word on the left dictionary
+# -k Single rule applied to each word on the right dictionary
+hashcat -m 0 -a 1 hash.txt dict1.txt dict1.txt -j '$-' -k '$!'
 ```
 {% endtab %}
 {% endtabs %}
