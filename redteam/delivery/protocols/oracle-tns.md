@@ -185,6 +185,10 @@ odat stealremotepwds -s <IP> -U <username> -P <password> -d <SID> --get-all-pass
 
 Password hashes in Oracle are stored in the **sys.users$** or **dba\_users** tables. With permissions, we can extract them using odat
 
+{% hint style="info" %}
+You may want to add the `--sysdba` to make it works
+{% endhint %}
+
 ```bash
 # Test the module before use it
 odat passwordstealer -s <IP> -U <username> -P <password> -d <SID> --test-module
