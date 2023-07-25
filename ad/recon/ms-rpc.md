@@ -1,6 +1,6 @@
 # MS-RPC
 
-## Theory
+## RDPRDPTheory
 
 MS-RPC (Microsoft Remote Procedure Call) is a protocol that allows requesting service from a program on another computer without having to understand the details of that computer's network. An MS-RPC service can be accessed through different transport protocols, among which:
 
@@ -68,4 +68,3 @@ The enum4linux tool can be used to easily operate fast recon through MS-RPC, wit
 {% embed url="https://mucomplex.medium.com/remote-procedure-call-and-active-directory-enumeration-616b234468e5" %}
 
 {% embed url="https://actes.sstic.org/SSTIC06/Dissection_RPC_Windows/SSTIC06-article-Pouvesle-Dissection_RPC_Windows.pdf" %}
-

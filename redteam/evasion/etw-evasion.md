@@ -172,6 +172,6 @@ $snap.LogPipelineExecutionDetails = $false # Set ps-snapin execution details to 
 
 
 
-## References
+## Resources
 
 {% embed url="https://tryhackme.com/room/monitoringevasion" %}

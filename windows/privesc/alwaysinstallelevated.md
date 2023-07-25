@@ -63,6 +63,6 @@ msiexec.exe /quiet /qn /i package.msi
 {% endtab %}
 {% endtabs %}
 
-## References
+## Resources
 
 {% embed url="https://juggernaut-sec.com/alwaysinstallelevated/" %}

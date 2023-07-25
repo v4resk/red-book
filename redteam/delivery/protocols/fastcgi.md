@@ -66,7 +66,7 @@ chmod +x exploit.sh
 {% endtab %}
 {% endtabs %}
 
-## References
+## Resources
 
 {% embed url="https://exploit-notes.hdks.org/exploit/network/fastcgi-pentesting/" %}
 

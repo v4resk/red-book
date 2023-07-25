@@ -32,6 +32,6 @@ REG ADD "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution 
 {% endtab %}
 {% endtabs %}
 
-## References
+## Resources
 
 {% embed url="https://pentestlab.blog/2020/01/13/persistence-image-file-execution-options-injection/" %}

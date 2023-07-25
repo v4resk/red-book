@@ -158,6 +158,6 @@ C:\Users\v4resk\Tools>AmsiTrigger_x64.exe -i "bypass.ps1" -f 3
 {% endtab %}
 {% endtabs %}
 
-## References
+## Resources
 
 {% embed url="https://tryhackme.com/room/runtimedetectionevasion" %}
