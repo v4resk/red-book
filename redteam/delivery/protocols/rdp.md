@@ -42,7 +42,7 @@ crackmapexec rdp <IP> -u <userlist> -p <passwlist>
 {% endtab %}
 
 {% tab title="Password Spray" %}
-We can use following commands to do password spray
+We can use following commands to password spray
 
 ```bash
 #Hydra

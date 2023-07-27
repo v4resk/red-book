@@ -159,7 +159,7 @@
     * [SMB](redteam/delivery/protocols/smb.md)
     * [Oracle TNS](redteam/delivery/protocols/oracle-tns.md)
     * [RDP](redteam/delivery/protocols/rdp.md)
-    * [🛠️ WinRM](redteam/delivery/protocols/winrm.md)
+    * [WinRM](redteam/delivery/protocols/winrm.md)
     * [🛠️ FTP](redteam/delivery/protocols/ftp.md)
     * [🛠️ Telnet](redteam/delivery/protocols/telnet.md)
     * [🛠️ SSH](redteam/delivery/protocols/ssh.md)
