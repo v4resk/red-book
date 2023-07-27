@@ -1,5 +1,5 @@
 ---
-description: MITRE ATT&CK™ Protocol Tunneling  - ID T1572
+description: MITRE ATT&CK™ Protocol Tunneling  - Technique T1572
 ---
 
 # Port Forwarding

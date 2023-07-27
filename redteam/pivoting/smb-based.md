@@ -1,3 +1,7 @@
+---
+description: 'MITRE ATT&CK™ Remote Services: SMB/Windows Admin Shares - Technique T1021.002'
+---
+
 # SMB-based
 
 ## Theory
