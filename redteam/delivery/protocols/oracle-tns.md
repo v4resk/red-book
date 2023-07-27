@@ -1,5 +1,5 @@
 ---
-description: Port 1521,1522-1529
+description: Ports 1521,1522-1529
 ---
 
 # Oracle TNS

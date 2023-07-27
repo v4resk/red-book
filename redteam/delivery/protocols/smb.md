@@ -1,5 +1,5 @@
 ---
-description: Port 445,139
+description: Ports 445,139
 ---
 
 # SMB

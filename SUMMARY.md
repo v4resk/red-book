@@ -159,10 +159,10 @@
     * [SMB](redteam/delivery/protocols/smb.md)
     * [Oracle TNS](redteam/delivery/protocols/oracle-tns.md)
     * [RDP](redteam/delivery/protocols/rdp.md)
+    * [🛠️ WinRM](redteam/delivery/protocols/winrm.md)
     * [🛠️ FTP](redteam/delivery/protocols/ftp.md)
     * [🛠️ Telnet](redteam/delivery/protocols/telnet.md)
     * [🛠️ SSH](redteam/delivery/protocols/ssh.md)
-    * [🛠️ WinRM](redteam/delivery/protocols/winrm.md)
     * [🛠️ NFS](redteam/delivery/protocols/nfs.md)
     * [🛠️ MySQL](redteam/delivery/protocols/mysql.md)
   * [Password Attacks](redteam/delivery/passwd.md)
@@ -204,6 +204,7 @@
 * [Persistence](windows/persistence/README.md)
   * [Image File Execution Options](windows/persistence/image-file-execution-options.md)
   * [Logon Triggered](windows/persistence/logon-triggered.md)
+  * [Accessibility features Backdoor](windows/persistence/accessibility-features-backdoor.md)
 
 ## Linux Pentest <a href="#linux" id="linux"></a>
 
