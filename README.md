@@ -6,9 +6,9 @@ description: A Pentesting / RedTeaming book
 
 <figure><img src=".gitbook/assets/v4resk_a_design_logo_in_dark_and_red_with_a_bushido_a509518b-b4fe-4d65-9c54-06ec53c9dbcd(1).png" alt=""><figcaption></figcaption></figure>
 
-**The Red-Book** is offering a curated collection of **technical notes** and **cheat sheets**. Our goal is to provide you with practical knowledge rooted in real-world experience. All the information you find within these pages has been meticulously sourced from a diverse range of valuable resources on the internet.
+**The Red-Book** is offering a collection of **technical notes** and **cheat sheets**. Our goal is to provide you with practical knowledge rooted in real-world experience. All the information you find within these pages has been meticulously sourced from a diverse range of valuable resources on the internet.
 
-We have scoured numerous reputable sources, including research papers, industry blogs, documentation, and expert opinions, to bring you the most relevant and up-to-date content. The techniques, methodologies, and concepts presented in **The Red-Book** have been carefully vetted and tested.
+We have scoured numerous reputable sources, including research papers, industry blogs, documentation, and expert opinions, to bring you the most relevant and up-to-date content. The techniques, methodologies, and concepts presented in **The Red-Book** have been carefully vetted and tested (we still human, it's possible there's some mistakes).
 
 Whether you are a cybersecurity enthusiast, an aspiring ethical hacker, or a concerned individual seeking to fortify your digital defenses, **The Red-Book** will serve as your indispensable resource. We cover a wide range of topics, including penetration testing, vulnerability assessments, social engineering, red teaming, network security, web application security, and much more.
 
