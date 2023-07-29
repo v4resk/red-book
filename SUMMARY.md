@@ -119,7 +119,6 @@
     * [MachineAccountQuota](ad/movement/domain-settings/machineaccountquota.md)
     * [Pre-Windows 2000 computers](ad/movement/domain-settings/pre-windows-2000-computers.md)
     * [RODC](ad/movement/domain-settings/rodc.md)
-  * [Pivoting](ad/movement/pivoting.md)
 * [Persistence](ad/persistence/README.md)
   * [Silver & Golden tickets](ad/persistence/silver-and-golden-tickets.md)
   * [RBCD to KRBTGT](ad/persistence/rbcd-to-krbtgt.md)
