@@ -217,7 +217,7 @@ Implementation of this technique doesn’t require any toolkit since Windows has
 
 {% tabs %}
 {% tab title="Windows - Powershell" %}
-Execution of the following commands using wmic.exe will create in the name space of _“**root\subscription**“_ three events. You can set the arbitrary payload to execute within 5 seconds on **every new logon session creation** or within 60 seconds **every time Windows starts.**
+Execution of the following commands using powershell will create in the name space of _“**root\subscription**“_ three events on the target hosts. You can set the arbitrary payload to execute within 5 seconds on **every new logon session creation** or within 60 seconds **every time Windows starts.**
 
 ```powershell
 #Create CimSession
@@ -261,7 +261,7 @@ $EventFilterToCleanup | Remove-WmiObject
 {% endtab %}
 
 {% tab title="Windows - wmic.exe" %}
-Execution of the following commands using wmic.exe will create in the name space of _“**root\subscription**“_ three events. You can set the arbitrary payload to execute within 5 seconds on **every new logon session creation** or within 60 seconds **every time Windows starts.**
+Execution of the following commands using wmic.exe will create in the name space of _“**root\subscription**“_ three events on the target hosts. You can set the arbitrary payload to execute within 5 seconds on **every new logon session creation** or within 60 seconds **every time Windows starts.**
 
 ```powershell
 #Create filter to execute payload within 5 seconds on every new logon session creation:
