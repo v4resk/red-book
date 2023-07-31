@@ -185,6 +185,7 @@
   * [SMB-based](redteam/pivoting/smb-based.md)
   * [WinRM](redteam/pivoting/winrm.md)
   * [Remote WMI](redteam/pivoting/remote-wmi.md)
+  * [DCOM](redteam/pivoting/dcom.md)
   * [Scheduled Tasks (ATSVC)](redteam/pivoting/scheduled-tasks-atsvc.md)
   * [Services (SVCCTL)](redteam/pivoting/services-svcctl.md)
 * [Exfiltration](redteam/exfiltration/README.md)
