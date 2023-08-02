@@ -1,6 +1,7 @@
 ---
-description: MITRE ATT&CK™  - Exfiltration Over Alternative Protocol - ID T1048
+description: MITRE ATT&CK™  - Exfiltration Over Alternative Protocol - Technique T1048
 ---
+
 # Over HTTP(s)
 
 ## Theory
@@ -8,7 +9,7 @@ description: MITRE ATT&CK™  - Exfiltration Over Alternative Protocol - ID T104
 Exfiltration Over Alternative Protocol can be done using various common operating system utilities such as Net/SMB or FTP. On macOS and Linux curl may be used to invoke protocols such as HTTP/S
 
 {% hint style="danger" %}
-We can also use [HTTP(S) Tunneling](../pivoting/http-tunneling.md) as a good [exfiltration](../exfiltration/) channel.
+We can also use [HTTP(S) Tunneling](../pivoting/http-tunneling.md) as a good [exfiltration](./) channel.
 {% endhint %}
 
 ## Practice

@@ -1,5 +1,5 @@
 ---
-description: MITRE ATT&CK™  - Exfiltration Over Alternative Protocol - ID T1048
+description: MITRE ATT&CK™  - Exfiltration Over Alternative Protocol - Technique T1048
 ---
 
 # Over ICMP

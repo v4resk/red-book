@@ -1,3 +1,7 @@
+---
+description: 'MITRE ATT&CK™ Impair Defenses: Disable or Modify Tools - Technique T1562.001'
+---
+
 # UAC bypass
 
 ## Theory

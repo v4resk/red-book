@@ -1,5 +1,5 @@
 ---
-description: MITRE ATT&CK™  System Binary Proxy Execution - Msiexec - Technique T1218.007
+description: 'MITRE ATT&CK™  System Binary Proxy Execution: Msiexec - Technique T1218.007'
 ---
 
 # AlwaysInstallElevated
