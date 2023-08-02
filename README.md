@@ -17,6 +17,12 @@ As you embark on this journey with us, keep in mind that offensive cybersecurity
 :tada:Please feel free to contribute, give feedback/suggestions or reach out to me on Discord (**v4resk#0430**).
 
 {% hint style="danger" %}
+Around 95%, of the content relating to "Active Directory" comes from [The Hacker Recipes](https://www.thehacker.recipes/) website.
+
+Many thanks to [Charlie Bromberg](https://twitter.com/\_nwodtuhs) for his valuable work.
+{% endhint %}
+
+{% hint style="danger" %}
 **This project is a work in progress**.
 
 The 🛠️ emoji is used where work has to be done.
