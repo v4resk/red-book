@@ -26,7 +26,7 @@ This allows for lateral movement, account persistence, and in some cases privile
 
 {% tabs %}
 {% tab title="UNIX-like" %}
-**1 - Setting up the relay servers** :tools:****
+**1 - Setting up the relay servers** :tools:
 
 From UNIX-like systems, [Impacket](https://github.com/SecureAuthCorp/impacket)'s [ntlmrelayx](https://github.com/SecureAuthCorp/impacket/blob/master/examples/ntlmrelayx.py) (Python) can be used to conduct the ESC8 escalation scenario.
 
@@ -38,7 +38,7 @@ ntlmrelayx -t "http://CA/certsrv/certfnsh.asp" --adcs --template "Template name"
 The certificate template flag (i.e. `--template`) can either be left blank (default to **Machine** at the time of writing, October 20th 2012) or chosen among the certificate templates that fill the requirements.&#x20;
 {% endhint %}
 
-[Certipy](https://github.com/ly4k/Certipy) (Python) can be used to enumerate information regarding the certificate templates (EKUs allowing for authentication, allowing low-priv users to enroll, etc.) ([how to enumerate](./#attack-paths)).
+[Certipy](https://github.com/ly4k/Certipy) (Python) can be used to enumerate information regarding the certificate templates (EKUs allowing for authentication, allowing low-priv users to enroll, etc.).
 
 <pre class="language-python"><code class="lang-python"><strong># find ESC8-vulnerable CAs
 </strong><strong>certipy find -u "$USER@$DOMAIN" -p "$PASSWORD" -dc-ip "$DC_IP" -stdout | grep -B20 ESC8
@@ -51,7 +51,7 @@ The certificate template flag (i.e. `--template`) can either be left blank (defa
 By default, Certipy uses LDAPS, which is not always supported by the domain controllers. The `-scheme` flag can be used to set whether to use LDAP or LDAPS.
 {% endhint %}
 
-**2 - Authentication coercion** :chains:****
+**2 - Authentication coercion** :chains:
 
 Just like any other NTLM relay attack, once the relay servers are running and waiting for incoming NTLM authentications, authentication coercion techniques can be used (e.g. [PrinterBug](../mitm-and-coerced-authentications/ms-rprn.md), [PetitPotam](../mitm-and-coerced-authentications/ms-efsr.md), [PrivExchange](../mitm-and-coerced-authentications/pushsubscription-abuse.md)) to force accounts/machines to authenticate to the relay servers.
 

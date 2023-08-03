@@ -27,6 +27,10 @@ The following files can then be exported
 * `C:\Windows\Temp\NTDS\Active Directory\ntds.dit`
 * `C:\Windows\Temp\NTDS\registry\SYSTEM`
 
+{% hint style="warning" %}
+If the NTDS database is very large (several gigabytes), the generation of a defragmented backup with ntdsutil consumes a lot of CPU and disk resources on the server, which can cause slowdowns and other undesirable effects on the domain controller.
+{% endhint %}
+
 ### Volume Shadow Copy (VSSAdmin)
 
 VSS (Volume Shadow Copy) is a Microsoft Windows technology, implemented as a service, that allows the creation of backup copies of files or volumes, even when they are in use. The following command will create the shadow copy and will print two values that will be used later: the ID and the Name of the shadow copy.
@@ -68,3 +72,13 @@ Once the required files are exfiltrated, they can be parsed by tools like [secre
 secretsdump -ntds ntds.dit.save -system system.save LOCAL
 gosecretsdump -ntds ntds.dit.save -system system.save
 ```
+
+## NTDS Directory parsing and extraction
+
+With the required files, it is possible to extract more information than just secrets. The NTDS file is responsible for storing the entire directory, with users, groups, OUs, trusted domains etc... This data can be retrieved by parsing the NTDS with tools like [ntdsdotsqlite](https://github.com/almandin/ntdsdotsqlite). With the NTDS alone, objects can be extracted from the NTDS such as user and machine accounts, with a lot of information about them: descriptions, user account control flags, last logon and password change timestamps etc. This information is stored as an SQLite database which is easier to browse and query.
+
+With the `SYSTEM` hive available it is able to extract credentials as well: NT and LM hashes, supplemental credentials such as kerberos keys, cleartext passwords and password hash history.
+
+```bash
+ntdsdotsqlite ntds.dit -o ntds.sqlite
+ntdsdotsqlite ntds.dit -o ntds.sqlite --system SYSTEM.hive

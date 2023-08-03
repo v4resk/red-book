@@ -4,6 +4,12 @@
 
 If a service account, configured with constrained delegation to another service, is compromised, an attacker can impersonate any user (e.g. domain admin, except users protected against delegation) in the environment to access another service the initial one can delegate to.
 
+{% hint style="warning" %}
+If the "impersonated" account is "[is sensitive and cannot be delegated](https://learn.microsoft.com/en-us/windows-server/identity/ad-ds/manage/how-to-configure-protected-accounts)" or a member of the "[Protected Users](https://learn.microsoft.com/en-us/windows-server/security/credentials-protection-and-management/protected-users-security-group)" group, the delegation will fail.
+
+**Nota bene**: the native, RID 500, "Administrator" account doesn't benefit from that restriction, even if it's added to the Protected Users group (source: [sensepost.com](https://sensepost.com/blog/2023/protected-users-you-thought-you-were-safe-uh/)).
+{% endhint %}
+
 Constrained delegation can be configured with or without protocol transition. Abuse methodology differs for each scenario. The paths differ but the result is the same: a Service Ticket to authenticate on a target service on behalf of a user.
 
 Once the final Service Ticket is obtained, it can be used with [Pass-the-Ticket](../ptt.md) to access the target service.&#x20;
@@ -121,6 +127,8 @@ Rubeus.exe s4u /nowrap /msdsspn:"cifs/target" /impersonateuser:"administrator" /
 
 {% hint style="info" %}
 Computer accounts have SPNs set at their creation and can edit their own "rbcd attribute" (i.e. `msDS-AllowedToActOnBehalfOfOtherIdentity`). If the account configured with KCD without protocol transition is a computer, controlling another account to operate the RBCD approach is not needed. In this case, **serviceB** = **serviceA**, the computer account can be configured for a "self-rbcd".
+
+Around Aug./Sept. 2022, Microsoft seems to have patched the "self-rbcd" approach, but relying on another account for the RBCD will still work.
 {% endhint %}
 
 ## Resources

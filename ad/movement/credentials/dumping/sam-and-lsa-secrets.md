@@ -30,7 +30,7 @@ SAM and LSA secrets can be dumped either locally or remotely from the mounted re
 
 {% tabs %}
 {% tab title="UNIX-like" %}
-[Impacket](https://github.com/SecureAuthCorp/impacket)'s reg.py (Python) script can also be used to do the same operation remotely for a UNIX-like machine. For instance, this can be used to easily escalate from a [Backup Operator](broken-reference) member to a Domain Admin by dumping a Domain Controller's secrets and use them for a [DCSync](dcsync.md). _(At the time of writing, 17th Feb. 2022,_ [_the pull request_](https://github.com/SecureAuthCorp/impacket/pull/1257) _is pending)._
+[Impacket](https://github.com/SecureAuthCorp/impacket)'s reg.py (Python) script can also be used to do the same operation remotely for a UNIX-like machine. For instance, this can be used to easily escalate from a [Backup Operator](broken-reference) member to a Domain Admin by dumping a Domain Controller's secrets and use them for a [DCSync](dcsync.md).
 
 {% hint style="success" %}
 The attacker can start an SMB server, and indicate an UNC path including his IP address so that the hives get exported directly to his server.
@@ -124,7 +124,7 @@ secretsdump.py -sam '/path/to/sam.save' -security '/path/to/security.save' -syst
 {% endtab %}
 
 {% tab title="CrackMapExec" %}
-[CrackMapExec](https://github.com/byt3bl33d3r/CrackMapExec) (Python) can be used to remotely dump SAM and LSA secrets, on multiple hosts. It offers several authentication methods like [pass-the-hash](../../ntlm/pth.md) (NTLM), or [pass-the-ticket](../../kerberos/ptt.md) (Kerberos)
+[CrackMapExec](https://github.com/mpgn/CrackMapExec) (Python) can be used to remotely dump SAM and LSA secrets, on multiple hosts. It offers several authentication methods like [pass-the-hash](../../ntlm/pth.md) (NTLM), or [pass-the-ticket](../../kerberos/ptt.md) (Kerberos)
 
 ```bash
 # Remote dumping of SAM/LSA secrets
