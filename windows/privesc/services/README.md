@@ -15,6 +15,7 @@ To get a list of all services, we can use following commands:
 ```
 net start
 wmic service list brief
+wmic service get name,displayname,pathname,startmode
 sc query
 Get-Service
 ```

@@ -25,9 +25,6 @@ accesschk64.exe -uwcqv "Authenticated Users" * -accepteula
 accesschk64.exe -uwcqv "BUILTIN\Users" * -accepteula
 accesschk.exe -uwcqv %USERNAME% * -accepteula
 
-#list permissions of evryone.
-accesschk64.exe -uwcqv * -accepteula
-
 #list permissions for "VulnSvc" service.
 accesschk64.exe -uwcqv VulnSvc -accepteula
 ```

@@ -130,7 +130,7 @@
   * [SID History](ad/persistence/sid-history.md)
   * [AdminSDHolder](ad/persistence/adminsdholder.md)
   * [GoldenGMSA](ad/persistence/goldengmsa.md)
-  * [Kerberos](ad/persistence/kerberos/README.md)
+  * [Kerberos](a-d/persistence/kerberos/README.md)
     * [Forged tickets](ad/persistence/kerberos/forged-tickets.md)
     * [Delegation to KRBTGT](ad/persistence/kerberos/delegation-to-krbtgt.md)
   * [Certificate Services (AD-CS)](ad/persistence/ad-cs/README.md)
