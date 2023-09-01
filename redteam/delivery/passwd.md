@@ -115,6 +115,22 @@ hashcat -m 0 -a 1 hash.txt dict1.txt dict2.txt
 hashcat -m 0 -a 1 hash.txt dict1.txt dict1.txt -j '$-' -k '$!'
 ```
 {% endtab %}
+
+{% tab title="Psudohash" %}
+[Pseudohash](https://github.com/t3l3machus/psudohash) is a Python password list generator tool that can generates millions of keyword-based password mutations in seconds.
+
+```bash
+# --common-paddings-after  Append common paddings after each mutated word
+# --common-paddings-before Append common paddings before each mutated word
+# --custom-paddings-only Use only user provided paddings for word mutations (must be used with -ap AND (-cpb OR -cpa))
+# --append-padding VALUES Add comma seperated values to common paddings
+# --append-numbering LEVEL Append numbering range at the end of each word mutation (before appending year or common paddings).
+
+#Examples
+python3 psudohash.py -w password --common-paddings-after -y 2020-2023
+python3 psudohash.py -w password --common-paddings-before -an 3 -y 1990-2022
+```
+{% endtab %}
 {% endtabs %}
 
 ## Resources
