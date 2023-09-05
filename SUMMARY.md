@@ -286,7 +286,7 @@
       * [Spring Routing Abuse](web/infrastructures/frameworks/spring/spring-routing-abuse.md)
       * [Spring Boot Actuators](web/infrastructures/frameworks/spring/spring-boot-actuators.md)
       * [Spring View Manipulation](web/infrastructures/frameworks/spring/spring-view-manipulation.md)
-    * [🛠️ Werkzeug](web/infrastructures/frameworks/werkzeug.md)
+    * [Werkzeug](web/infrastructures/frameworks/werkzeug.md)
     * [🛠️ Django](web/infrastructures/frameworks/django.md)
     * [🛠️ Flask](web/infrastructures/frameworks/flask.md)
     * [🛠️ Laravel](web/infrastructures/frameworks/laravel.md)
