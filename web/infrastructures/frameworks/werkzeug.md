@@ -191,6 +191,8 @@ if rv is None:
 print(rv)
 ```
 
+If you are on a new version of Werkzeug, try changing the hashing algorithm to **sha1** instead of **md5**.
+
 </details>
 
 ## Resources
