@@ -201,7 +201,7 @@ hydra -L lists/usrname.txt -P lists/pass.txt localhost -V http-form-post '/wp-lo
 
 ### Reverse Shell
 
-If we have access to a privileged Wordpress account. We can try to execute PHP code from the admin dashboard to get a reverse shell.
+If we have **access to a privileged Wordpress account**. We can try to execute PHP code from the admin dashboard to get a reverse shell.
 
 {% tabs %}
 {% tab title="Themes Injection" %}
@@ -229,7 +229,7 @@ It may be possible to upload .php files as a plugin. For this:
 
 ### Vulnerabilities
 
-#### Unauthenticated View Private/Draft Posts: CVE-2019-17671
+#### Unauthenticated View Private/Draft Posts - CVE-2019-17671
 
 {% tabs %}
 {% tab title="Exploit" %}

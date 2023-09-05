@@ -12,8 +12,8 @@ Below is a checklist to go through when conducting a pentest. Order is irrelevan
 
 ### Kerberos configuration
 
-* [ ] `krbtgt`'s password has been changed in the last 6 months to prevent [Golden Ticket](../persistence/silver-and-golden-tickets.md) persistence attacks. From UNIX-like systems, this can be checked with [Impacket](https://github.com/SecureAuthCorp/impacket/)'s [Get-ADUsers.py](https://github.com/SecureAuthCorp/impacket/blob/master/examples/GetADUsers.py) script.
-* [ ] The RC4 `etype` is disabled for Kerberos to prevent [overpass-the-hash](kerberos/opth.md) and [NTLMv1 capture](ntlm/capture.md) and [cracking](credentials/cracking.md#tips-and-tricks) to [Silver Ticket](../persistence/silver-and-golden-tickets.md) attacks. This can be checked by attempting to obtain a TGT with an NT hash.
+* [ ] `krbtgt`'s password has been changed in the last 6 months to prevent [Golden Ticket](../persistence/kerberos/forged-tickets.md) persistence attacks. From UNIX-like systems, this can be checked with [Impacket](https://github.com/SecureAuthCorp/impacket/)'s [Get-ADUsers.py](https://github.com/SecureAuthCorp/impacket/blob/master/examples/GetADUsers.py) script.
+* [ ] The RC4 `etype` is disabled for Kerberos to prevent [overpass-the-hash](kerberos/opth.md) and [NTLMv1 capture](ntlm/capture.md) and [cracking](credentials/cracking.md#tips-and-tricks) to [Silver Ticket](../persistence/kerberos/forged-tickets.md) attacks. This can be checked by attempting to obtain a TGT with an NT hash.
 * [ ] No account is configured with `Do not require Kerberos Pre-Authentication` allowing for [ASREProast](kerberos/asreproast.md) attacks, or make sure those account have strong password resistant to [cracking](credentials/cracking.md).
 * [ ] User accounts that have at least one `ServicePrincipalName`, hence vulnerable to [Kerberoast](kerberos/kerberoast.md), have a strong password, resistant to [cracking.](credentials/cracking.md)
 
@@ -21,7 +21,7 @@ Below is a checklist to go through when conducting a pentest. Order is irrelevan
 
 * [ ] Domain Controllers are patched against [ZeroLogon](netlogon/zerologon.md).
 * [ ] Domain Controllers are patched against [Kerberos sAMAccountName spoofing](kerberos/samaccountname-spoofing.md).
-* [ ] [MS14-068](kerberos/forged-tickets.md#ms-14-068-cve-2014-6324) is patched, preventing forging of powerful Kerberos tickets.
+* [ ] [MS14-068](kerberos/forged-tickets/#ms-14-068-cve-2014-6324) is patched, preventing forging of powerful Kerberos tickets.
 * [ ] [PrivExchange](exchange-services/privexchange.md) patches are applied, protecting Exchange servers from [authentication coercion attacks relying on the PushSubscription API](mitm-and-coerced-authentications/pushsubscription-abuse.md), and [ACE abuse](dacl/) attacks relying on the `EXCHANGE WINDOWS PERMISSION` group having `WriteDacl` permissions against the domain object allowing for [DCSync](credentials/dumping/dcsync.md).
 * [ ] Patches for NTLM tampering vulnerabilities (e.g. CVE-2019-1040, CVE-2019-1019, CVE-2019-1166) are applied to limit [NTLM relay](ntlm/relay.md) attacks.
 * [ ] Latest security patched are applied (e.g. for ProxyLogon, ProxyShell, PrintNightmare, ...).
@@ -64,6 +64,6 @@ Below is a checklist to go through when conducting a pentest. Order is irrelevan
 
 ### Active Directory Certificate Services
 
-* [ ] The CA is configured correctly (the `EDITF_ATTRIBUTESUBJECTALTNAME2` flag is not set). This prevents [the corresponding domain escalation attack](ad-cs/ca-configuration.md).
+* [ ] The CA is configured correctly (the `EDITF_ATTRIBUTESUBJECTALTNAME2` flag is not set). This prevents [the corresponding domain escalation attack](broken-reference).
 * [ ] There are no certificate templates that are badly configured. This prevents [the corresponding domain escalation attack](ad-cs/certificate-templates.md).
 * [ ] AD-CS web endpoints are secured against [AD-CS NTLM relay attacks](ad-cs/web-endpoints.md) (HTTPS and EPA (Extended Protection for Authentication) enforced).

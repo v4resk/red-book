@@ -6,7 +6,7 @@ description: MITRE ATT&CK™ Sub-technique T1550.003
 
 ## Theory
 
-There are ways to come across ([cached Kerberos tickets](../credentials/dumping/cached-kerberos-tickets.md)) or forge ([overpass the hash](ptk.md), [silver ticket](forged-tickets.md#silver-ticket) and [golden ticket](forged-tickets.md#golden-ticket) attacks) Kerberos tickets. A ticket can then be used to authenticate to a system using Kerberos without knowing any password. This is called [Pass the ticket](ptt.md). Another name for this is Pass the Cache (when using tickets from, or found on, UNIX-like systems).&#x20;
+There are ways to come across ([cached Kerberos tickets](../credentials/dumping/cached-kerberos-tickets.md)) or forge ([overpass the hash](ptk.md), [silver ticket](forged-tickets/#silver-ticket) and [golden ticket](forged-tickets/#golden-ticket) attacks) Kerberos tickets. A ticket can then be used to authenticate to a system using Kerberos without knowing any password. This is called [Pass the ticket](ptt.md). Another name for this is Pass the Cache (when using tickets from, or found on, UNIX-like systems).
 
 ## Practice
 
@@ -131,7 +131,7 @@ Their are multiple service classes for multiple service types (LDAP, CIFS, HTTP 
 
 {% tabs %}
 {% tab title="UNIX-like" %}
-This technique is implemented and attempted by default in all [Impacket](https://github.com/SecureAuthCorp/impacket) scripts when doing pass-the-ticket (Impacket tries to change the service class to something else, and calls this "AnySPN").&#x20;
+This technique is implemented and attempted by default in all [Impacket](https://github.com/SecureAuthCorp/impacket) scripts when doing pass-the-ticket (Impacket tries to change the service class to something else, and calls this "AnySPN").
 
 Impacket's tgssub.py script can also be used for manual manipulation of the service name value. _At the time of writing, 12th Feb. 2022,_ [_the pull request_](https://github.com/SecureAuthCorp/impacket/pull/1256) _adding this script is pending._
 
