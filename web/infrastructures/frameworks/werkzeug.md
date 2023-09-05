@@ -95,7 +95,7 @@ Convert **from hex address to decimal** representation by running in python e.g.
 
 concatenate the values in `/etc/machine-id` or `/proc/sys/kernel/random/boot_id` with the first line of `/proc/self/cgroup` after the last slash (/).
 
-Use the following python script to get this value
+To clarify, here is the code used by Werkzeug to generate the machine\_id
 
 ```python
 def get_machine_id() -> t.Optional[t.Union[str, bytes]]:                                                                                                  
