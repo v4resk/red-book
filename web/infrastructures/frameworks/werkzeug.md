@@ -64,7 +64,9 @@ It's flask.app
 
 #### getattr(app, '**name**', getattr (app .\_\_ class\_\_, '**name**'))
 
-is Flask
+It's generally `Flask` but it may change depending of how the server has been started. Check [this video](https://www.youtube.com/watch?v=MVItEDBBcgg) for details.
+
+You may want to download application files, edit `python3.5/site-packages/werkzeug/debug/__init__.py` to make it print `probably_public_bits` and run it locally to get the right variable.
 
 #### getattr(mod, '\_\_file\_\_', None)
 
@@ -90,6 +92,8 @@ Convert **from hex address to decimal** representation by running in python e.g.
 >>> print(0x5600027a23ac)
 94558041547692
 ```
+
+Side note: It looks like Ubuntu Desktop doesn’t return “correct” values for getnode
 
 #### get\_machine\_id()
 
