@@ -8,19 +8,19 @@ The following recipe shows how to abuse S4U2self for Local Privilege Escalation,
 
 Kerberos delegations allow services to access other services on behalf of domain users.
 
-The "Kerberos" authentication protocol features delegation capabilities explained [here](./). Kerberos delegations can be abused by attackers to obtain access to valuable assets and sometimes even escalate to domain admin privileges. Regarding [constrained delegations](constrained.md) and [rbcd](rbcd.md), those types of delegation rely on **Kerberos extensions called S4U2Self and S4U2Proxy**.
+The "Kerberos" authentication protocol features delegation capabilities explained [here](./). Kerberos delegations can be abused by attackers to obtain access to valuable assets and sometimes even escalate to domain admin privileges. Regarding [constrained delegations](constrained.md) and [rbcd](rbcd.md), those types of delegation rely on **Kerberos extensions called** [**S4U2Self and S4U2Proxy**](../#service-for-user-extensions).
 
-**Service for User to Self (S4U2self)** allows a service to obtain a Service Ticket, on behalf of a user (called "principal"), to itself. This extension can be used by any account that has at least one SPN. Depending on the service and principal configurations, the resulting Service Ticket may or may not be forwardable but either way, the ticket can be used for authentication.
+Simply put, **Service for User to Self (S4U2self)** allows a service to obtain a Service Ticket, on behalf of a user (called "principal"), to itself.
 
 Last but not least, S4U2self can be used to produce a Service Ticket to oneself on behalf of another domain user, **even if that user is "sensitive for delegation" or member of the Protected Users group**. Consequently, this allows attackers, in very specific scenarios, to escalate their privileges or perform lateral movements.
 
 ### Microsoft Virtual Accounts
 
-Since machine accounts have their own set of SPNs by default at their creation, S4U2self can be used by any machine account, without any supplementary configuration. If an attacker manages to execute code as `NT AUTHORITY\NETWORK SERVICE` __ or as any other "Microsoft Virtual Account" (e.g. `defaultapppool` __ or `mssqlservice`) he will be able to escalate his privileges by abusing S4U2self. This happens because this kind of accounts all act on the network as the machine itself.
+Since machine accounts have their own set of SPNs by default at their creation, S4U2self can be used by any machine account, without any supplementary configuration. If an attacker manages to execute code as `NT AUTHORITY\NETWORK SERVICE` or as any other "Microsoft Virtual Account" (e.g. `defaultapppool` or `mssqlservice`) he will be able to escalate his privileges by abusing S4U2self. This happens because this kind of accounts all act on the network as the machine itself.
 
 ### OPSEC considerations
 
-The S4U2self abuse is not only a great way to perform Local Privilege Escalation or a lateral move, it's also an way more stealthier alternative to [Silver Tickets](../forged-tickets.md#silver-ticket) when an attacker has knowledge of a machine account's Kerberos keys. While a Silver Ticket is a Service Ticket featuring a forged PAC, the Service Ticket issued after an S4U2self request will be legitimate and will feature a valid PAC.
+The S4U2self abuse is not only a great way to perform Local Privilege Escalation or a lateral move, it's also an way more stealthier alternative to [Silver Tickets](../forged-tickets/silver.md) when an attacker has knowledge of a machine account's Kerberos keys. While a Silver Ticket is a Service Ticket featuring a forged PAC, the Service Ticket issued after an S4U2self request will be legitimate and will feature a valid PAC.
 
 ## Practice
 
@@ -70,7 +70,7 @@ From UNIX-like systems, [Impacket](https://github.com/SecureAuthCorp/impacket)'s
 
 ```bash
 export KRB5CCNAME="/path/to/ticket.ccache"
-getST.py -self -impersonate "DomainAdmin" -altservice "cifs/machine.domain.local" -k -no -pass -dc-ip "DomainController" "domain.local"/'machine$' 
+getST.py -self -impersonate "DomainAdmin" -altservice "cifs/machine.domain.local" -k -no-pass -dc-ip "DomainController" "domain.local"/'machine$' 
 ```
 {% endtab %}
 

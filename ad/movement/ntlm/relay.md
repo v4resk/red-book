@@ -10,11 +10,11 @@ After successfully [forcing a victim to authenticate](../mitm-and-coerced-authen
 
 The NTLM authentication messages are embedded in the packets of application protocols such as SMB, HTTP, MSSQL, SMTP, IMAP. The LM and NTLM authentication protocols are "application protocol-independent". It means one can relay LM or NTLM authentication messages over a certain protocol, say HTTP, over another, say SMB. That is called **cross-protocols LM/NTLM relay**. It also means the relays and attacks possible depend on the application protocol the authentication messages are embedded in.
 
-The chart below sums up the expected behavior of cross-protocols relay attacks depending on the mitigations in place ([original here](https://beta.hackndo.com/ntlm-relay/)). All the tests and results listed in the chart were made using [Impacket](https://github.com/SecureAuthCorp/impacket/)'s [ntlmrelayx](https://github.com/SecureAuthCorp/impacket/blob/master/examples/ntlmrelayx.py) (Python). :warning: _As of 25th Feb. 2022, this chart is a work in progress._
+The chart below sums up the expected behavior of cross-protocols relay attacks depending on the mitigations in place ([original here](https://beta.hackndo.com/ntlm-relay/)). All the tests and results listed in the chart were made using [Impacket](https://github.com/SecureAuthCorp/impacket/)'s [ntlmrelayx](https://github.com/SecureAuthCorp/impacket/blob/master/examples/ntlmrelayx.py) (Python).
 
-![](../../../.gitbook/assets/ntlm\_relau\_mitigation\_chart.png)
+![](../../../.gitbook/assets/ntlm\_relay\_mitigation\_chart.png)
 
-The following mindmap sums up the overall attack paths of NTLM relay.
+The following mindmap sums up the overall attack paths of NTLM relay. [Gabriel Prudhomme](https://twitter.com/vendetce) explains how to read it here: [BHIS | Coercions and Relays – The First Cred is the Deepest](https://youtu.be/b0lLxLJKaRs?t=480) (at 08:00).
 
 ![](<../../../.gitbook/assets/NTLM relay.png>)
 
@@ -45,7 +45,7 @@ On a side note, NTLMv2 responses are computed against multiples values including
 * the server Challenge
 * the `AvPairs`, a byte array containing the `msAvFlags` flag, which is used to enable the MIC
 
-On the other hand, NTLMv1 responses do not include the `AvPairs` in their calculation, leaving the MIC unprotected.
+On the other hand, NTLMv1 responses do not include the `AvPairs` in their calculation, leaving the MIC unsupported for this version of NTLM.
 
 In conclusion, session signing is protected by the MIC, which is enabled with the `msAvFlags`, which is protected by the NTLMv2 response, which can not be modified when not knowing the user's NT hash.
 
@@ -56,11 +56,15 @@ In conclusion, session signing is protected by the MIC, which is enabled with th
 * Stealing the session key (CVE-2019-1019)
 
 {% hint style="warning" %}
-As of november 2020, MIC was optional, but unofficial channels suggest it might've become mandatory ([source](https://twitter.com/decoder\_it/status/1347976999567032321)).
+As of november 2020, MIC was optional, but [unofficial channels](https://twitter.com/decoder\_it/status/1347976999567032321) suggest it might've become mandatory.
 {% endhint %}
 
 {% hint style="info" %}
 Windows Server 2019 ISOs seem to be patched against (at least) CVE-2019-1040.
+{% endhint %}
+
+{% hint style="danger" %}
+Reminder: if NTLMv1 is accepted, NTLM could be relayed and modified and the MIC dropped :microphone:
 {% endhint %}
 
 ### EPA (Extended Protection for Auth.) <a href="#epa-extended-protection-for-authentication" id="epa-extended-protection-for-authentication"></a>
@@ -71,14 +75,14 @@ In short, EPA (Extended Protection for Authentication) can use one or both of th
 * A Service Binding information in the form of a Service Principal Name (SPN), usually when there is no TLS channel to bind to (HTTP)
 
 {% hint style="info" %}
-For more details on how NTLM works, testers can read [the MS-NLMP doc](https://winprotocoldoc.blob.core.windows.net/productionwindowsarchives/MS-NLMP/\[MS-NLMP].pdf).&#x20;
+For more details on how NTLM works, testers can read [the MS-NLMP doc](https://winprotocoldoc.blob.core.windows.net/productionwindowsarchives/MS-NLMP/\[MS-NLMP].pdf).
 {% endhint %}
 
 ## Practice
 
 ### Detection
 
-From UNIX-like systems, [CrackMapExec](https://github.com/byt3bl33d3r/CrackMapExec) (Python) and [LdapRelayScan](https://github.com/zyn3rgy/LdapRelayScan) (Python) can be used to identify [signing](relay.md#session-signing) and [channel binding](relay.md#epa-extended-protection-for-authentication) requirements for SMB, LDAP and LDAPS.
+From UNIX-like systems, [CrackMapExec](https://github.com/mpgn/CrackMapExec) (Python) and [LdapRelayScan](https://github.com/zyn3rgy/LdapRelayScan) (Python) can be used to identify [signing](relay.md#session-signing) and [channel binding](relay.md#epa-extended-protection-for-authentication) requirements for SMB, LDAP and LDAPS.
 
 ```bash
 crackmapexec smb $target
@@ -98,7 +102,7 @@ sed -i 's/HTTP = On/HTTP = Off/g' /PATH/TO/Responder/Responder.conf
 ```
 {% endhint %}
 
-Below are different use-cases of ntlmrelayx. The last "**+**" tab lists other interesting features that make this tool a must-have when attacking AD domains. It's important to know that many of the use-cases below can be combined.
+Below are different use-cases of ntlmrelayx.
 
 {% tabs %}
 {% tab title="Cred dump" %}
@@ -151,7 +155,7 @@ In most cases, the `--remove-mic` option will be needed when relaying to LDAP(S)
 {% endhint %}
 
 {% hint style="info" %}
-Using LDAPS for that operation is not mandatory since Active Directory LDAP implements StartTLS. This is implemented in Impacket since April 30th 2022.
+Using LDAPS for that operation is not mandatory since Active Directory LDAP implements StartTLS. This is implemented in Impacket since April 30th 2022 ([PR #1305](https://github.com/SecureAuthCorp/impacket/pull/1305)).
 
 ```bash
 ntlmrelayx.py -t ldap://$DC_TARGET --add-computer SHUTDOWN
@@ -206,7 +210,7 @@ The ntlmrelayx tool offers features making it a very valuable asset when pentest
 
 * It can work with mitm6 (for [DHCPv6 + DNS poisoning](../mitm-and-coerced-authentications/#ipv6-dns-poisoning)) by enabling IPv6 support with the `-6` option (IPv6 support is not required since most hosts will send IPv4 but using this option is recommended since it will allow relay servers to work with IPv4 and IPv6)
 * It supports SMB2. It can be enabled with the `-smb2support` option
-* It implements **CVE-2019-1040** with the `--remove-mic` option, usually needed when attempting "cross-protocols unsigning relays" (e.g. **SMB to SMB-with-required-signing, or SMB to LDAP/S)**
+* It implements **CVE-2019-1040** with the `--remove-mic` option, usually needed when attempting "cross-protocols unsigning relays" (e.g. **SMB to SMB-with-required-signing, or SMB to LDAP/S).** This option can also be used when NTLMv1 is allowed (NTLMv1 doesn't support MIC).
 * it implements **CVE-2019-1019** with the `-remove-target` and `-machine-account` arguments
 * It has the ability to attack multiple targets with the `-tf` option instead of `-t`, and the `-w` option can be set to watch the target file for changes and update target list automatically
 * the target can be specified with a target protocol like `ldap://target` but the "all" keyword can be used (`all://target`). If the protocol isn't specified, it defaults to smb.
@@ -219,6 +223,7 @@ Thanks to [the "multi-relay" feature](https://github.com/SecureAuthCorp/impacket
 
 ![](../../../.gitbook/assets/capture\_and\_relay.png)
 
+{% hint style="info" %}
 The targets file used with the `-tf` option can contain the following
 
 ```bash
@@ -234,14 +239,17 @@ http://target:port/somepath
 ldaps://someserver.domain.lan
 someserver.domain.lan
 ```
+{% endhint %}
 
-[CrackMapExec](https://github.com/byt3bl33d3r/CrackMapExec) (Python) has the ability to generate the list of possible targets for relay to SMB (hosts with SMB signing not required).
+{% hint style="info" %}
+[CrackMapExec](https://github.com/mpgn/CrackMapExec) (Python) has the ability to generate the list of possible targets for relay to SMB (hosts with SMB signing not required).
 
 ```bash
 crackmapexec smb --gen-relay-list targets.txt $SUBNET
 ```
+{% endhint %}
 
-## References
+## Resources
 
 {% embed url="https://docs.microsoft.com/en-us/archive/blogs/josebda/the-basics-of-smb-signing-covering-both-smb1-and-smb2" %}
 

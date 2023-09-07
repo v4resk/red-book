@@ -2,7 +2,7 @@
 
 * [The Red-Book](README.md)
 
-## Active Directory <a href="#a-d" id="a-d"></a>
+## Active Directory <a href="#ad" id="ad"></a>
 
 * [Reconnaissance](ad/recon/README.md)
   * [PowerView](ad/recon/powerview.md)
@@ -130,7 +130,7 @@
   * [SID History](ad/persistence/sid-history.md)
   * [AdminSDHolder](ad/persistence/adminsdholder.md)
   * [GoldenGMSA](ad/persistence/goldengmsa.md)
-  * [Kerberos](a-d/persistence/kerberos/README.md)
+  * [Kerberos](ad/persistence/kerberos/README.md)
     * [Forged tickets](ad/persistence/kerberos/forged-tickets.md)
     * [Delegation to KRBTGT](ad/persistence/kerberos/delegation-to-krbtgt.md)
   * [Certificate Services (AD-CS)](ad/persistence/ad-cs/README.md)
