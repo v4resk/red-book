@@ -2,7 +2,7 @@
 
 * [The Red-Book](README.md)
 
-## Active Directory <a href="#ad" id="ad"></a>
+## Active Directory <a href="#a-d" id="a-d"></a>
 
 * [Reconnaissance](ad/recon/README.md)
   * [PowerView](ad/recon/powerview.md)
@@ -291,6 +291,7 @@
     * [🛠️ Flask](web/infrastructures/frameworks/flask.md)
     * [🛠️ Laravel](web/infrastructures/frameworks/laravel.md)
   * [WebDAV](web/infrastructures/webdav.md)
+  * [CGI](web/infrastructures/cgi.md)
 * [Web Vulnerabilities](web/web-vulnerabilities/README.md)
   * [Server-Side](web/web-vulnerabilities/server-side/README.md)
     * [NoSQL Injection](web/web-vulnerabilities/server-side/nosql-injection.md)
