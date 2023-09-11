@@ -263,6 +263,7 @@
   * [Interesting Groups](linux/privesc/groups/README.md)
     * [Lxd](linux/privesc/groups/lxd.md)
   * [Capabilities](linux/privesc/capabilities.md)
+  * [Linux Active Directory](linux/privesc/linux-active-directory.md)
 * [Persistence](linux/persistence/README.md)
   * [SSH](linux/persistence/ssh.md)
 
