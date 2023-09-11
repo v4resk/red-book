@@ -22,6 +22,18 @@ ticketConverter.py $ticket.ccache $ticket.kirbi
 ```
 {% endhint %}
 
+### Tools
+
+{% tabs %}
+{% tab title="Linkatz" %}
+[linikatz](https://github.com/CiscoCXSecurity/linikatz) is a tool to attack AD on UNIX. It allow you to dump credentials and kerberos cached tickets.
+
+```bash
+linikatz.sh
+```
+{% endtab %}
+{% endtabs %}
+
 ### CCACHE ticket reuse from /tmp
 
 {% tabs %}
