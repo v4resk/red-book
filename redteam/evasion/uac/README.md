@@ -79,6 +79,23 @@ C:\> fodhelper.exe
 {% endtab %}
 {% endtabs %}
 
+### IFileOperation DLL Hijack
+
+
+
+{% tabs %}
+{% tab title="First Tab" %}
+
+{% endtab %}
+
+{% tab title="Second Tab" %}
+
+{% endtab %}
+{% endtabs %}
+
+\
+
+
 ### Automated Exploitation
 
 {% tabs %}

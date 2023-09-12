@@ -1,25 +1,10 @@
-# Password Attacks
+# Generate Wordlists
 
 ## Theory
 
-Having a good wordlist is critical to carrying out a successful password attack. It is important to know how you can generate username lists and password lists. In this section, we will discuss creating targeted username and password lists. We will also cover various topics, including default, weak, leaked passwords, and creating targeted wordlists. We will also speak about tools used to perform online and offline password attacks.
+Having a good wordlist is critical to carrying out a successful password attack. It is important to know how you can generate username lists and password lists. In this section, we will discuss creating targeted username and password lists.
 
 ## Practice
-
-### Default Passwords
-
-Here are some website lists that provide default passwords for various products.\
-1 - [Cirt.net](https://cirt.net/passwords)\
-2 - [Default-password](https://default-password.info/)\
-3 - [Datarecovery](https://datarecovery.com/rd/default-passwords/)
-
-### Leaked Passwords
-
-Here are some website and tools that provide ressources about leaked passwords.\
-1 - [PwnedOrNot](https://github.com/thewhiteh4t/pwnedOrNot)\
-2 - [BreachCheck](https://github.com/v4resk/BreachCheck)\
-3 - [SecLists/Passwords/Leaked-Databases](https://github.com/danielmiessler/SecLists/tree/master/Passwords/Leaked-Databases)\
-4 - [HaveIBeenPwned](https://haveibeenpwned.com/)
 
 ### Generate a Wordlist
 
@@ -133,6 +118,6 @@ python3 psudohash.py -w password --common-paddings-before -an 3 -y 1990-2022
 {% endtab %}
 {% endtabs %}
 
-## Resources
+## References
 
 {% embed url="https://tryhackme.com/room/passwordattacks" %}
