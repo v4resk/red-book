@@ -186,7 +186,7 @@
   * [🛠️ Phishing](redteam/delivery/phishing.md)
 * [Credential Access](redteam/credential-access/README.md)
   * [Windows & Active Directory](redteam/credential-access/windows-and-active-directory.md)
-  * [🛠️ Veeam Backup](redteam/credential-access/veeam-backup.md)
+  * [Veeam Backup](redteam/credential-access/veeam-backup.md)
 * [Defense Evasion](redteam/evasion/README.md)
   * [Living Off The Land](redteam/evasion/living-off-the-land/README.md)
     * [Windows Sysinternals](redteam/evasion/living-off-the-land/sysinternals.md)
