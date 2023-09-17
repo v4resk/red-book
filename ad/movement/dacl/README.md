@@ -32,7 +32,7 @@ Then, on your attacking machine, we can use the following command to format resu
 #From UTF-16LE to UTF-8
 dos2unix acls.json
 
-#Parsing results from json results
+#Parsing json results
 cat acls.json|jq '.[]| "\(.SecurityIdentifierName):\(.SecurityIdentifierSID) | Have: \(.ActiveDirectoryRights) | On: \(.ObjectName):\(.ObjectSID)"'
 ```
 

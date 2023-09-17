@@ -221,6 +221,7 @@
 
 * [Reconnaissance](windows/recon/README.md)
   * [Enum Security Solutions](windows/recon/av.md)
+  * [Enum FIle/Folder ACLs](windows/recon/acls.md)
 * [Local Privilege Escalation](windows/privesc/README.md)
   * [AlwaysInstallElevated](windows/privesc/alwaysinstallelevated.md)
   * [AutoLogon Registry](windows/privesc/autologon-registry.md)
