@@ -50,6 +50,9 @@ Get-NetGPO | %{Get-ObjectAcl -ResolveGUIDs -Name $_.Name} | ? {$_.IdentityRefere
 #Policies Applied to a Given Computer
 Get-DomainGPO -ComputerIdentity COMPUTER01 -Properties Name, DisplayName
 
+#Enumerate a given GPO
+"{7EA15487-7F5B-4CE3-C029-CEBE6FFE6D47}" | Get-DomainGPO
+
 #OUs with a Given Policy Applied
 Get-DomainOU -GPLink "{DDC640FF-634A-4442-BC2E-C05EED132F0C}" -Properties DistinguishedName
 ```
