@@ -20,8 +20,8 @@ Other tools like, `Get-DomainObjectAcl` and `Add-DomainObjectAcl` from [Powerspl
 
 See this page for more details
 
-{% content-ref url="../../../a-d/recon/built-ins-objects-and-settings/dacls.md" %}
-[dacls.md](../../../a-d/recon/built-ins-objects-and-settings/dacls.md)
+{% content-ref url="../../../a-d/recon/objects-and-settings/dacls.md" %}
+[dacls.md](../../../a-d/recon/objects-and-settings/dacls.md)
 {% endcontent-ref %}
 
 ### Abuse
