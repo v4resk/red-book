@@ -19,6 +19,7 @@
     * [MS-RPC](a-d/recon/network/ms-rpc.md)
   * [Objects & Settings](a-d/recon/objects-and-settings/README.md)
     * [DACLs](a-d/recon/objects-and-settings/dacls.md)
+    * [Group policies](a-d/recon/objects-and-settings/group-policies.md)
     * [Password policy](a-d/recon/objects-and-settings/password-policy.md)
 * [Movement](ad/movement/README.md)
   * [Credentials](ad/movement/credentials/README.md)

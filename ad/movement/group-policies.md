@@ -14,6 +14,12 @@ In certain scenarios, an attacker can gain control over GPOs. Some ACEs can give
 * `GenericAll`, `GenericWrite`, `WriteProperty` to any property (no GUID specified)
 * `WriteDacl`, `WriteOwner`
 
+To enumerate GPO's delegation & permissions, please refer to following page
+
+{% content-ref url="../../a-d/recon/objects-and-settings/group-policies.md" %}
+[group-policies.md](../../a-d/recon/objects-and-settings/group-policies.md)
+{% endcontent-ref %}
+
 ## Practice
 
 GPO-based attacks can be conducted with [New-GPOImmediateTask](https://github.com/PowerShellMafia/PowerSploit/blob/26a0757612e5654b4f792b012ab8f10f95d391c9/Recon/PowerView.ps1#L5907-L6122) ([PowerView](https://github.com/PowerShellMafia/PowerSploit/blob/dev/Recon/PowerView.ps1) module), [SharpGPOAbuse](https://github.com/FSecureLABS/SharpGPOAbuse) (C#), or [pyGPOabuse](https://github.com/Hackndo/pyGPOAbuse) (python) and [GPOwned](https://github.com/X-C3LL/GPOwned) (Python) for UNIX-like systems.
