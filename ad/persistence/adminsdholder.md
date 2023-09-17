@@ -2,11 +2,11 @@
 
 ## Theory
 
-AdminSdHolder protects domain objects against permission changes. "AdminSdHolder" either refers to a domain object, a "worker code" or an operation depending on the context.&#x20;
+AdminSdHolder protects domain objects against permission changes. "AdminSdHolder" either refers to a domain object, a "worker code" or an operation depending on the context.
 
-The operation consists in the PDC (Principal Domain Controller) Emulator restoring pre-set permissions for high-privilege users every 60 minutes. Understanding what DACLs/ACEs are and how to abuse them is a requirement to the understanding of this persistence technique (see [Access Controls abuse](../movement/dacl/)).
+The operation consists in the PDC (Principal Domain Controller) Emulator restoring pre-set permissions for high-privilege users every 60 minutes. Understanding what DACLs/ACEs are and how to abuse them is a requirement to the understanding of this persistence technique (see [Access Controls abuse](broken-reference)).
 
-The operation is conducted by a "worker code" called **SDProp** (Security Descriptor propagator).&#x20;
+The operation is conducted by a "worker code" called **SDProp** (Security Descriptor propagator).
 
 SDProp propagates AdminSdHolder's DACL to every protected object every 60 minutes if their DACL is different.
 
@@ -29,7 +29,7 @@ When talking about AdminSdHolder, the **AdminCount** attribute is usually mentio
 
 ## Practice
 
-Once sufficient privileges are obtained, attackers can abuse AdminSdHolder to get persistence on the domain by modifying the AdminSdHolder object's DACL.&#x20;
+Once sufficient privileges are obtained, attackers can abuse AdminSdHolder to get persistence on the domain by modifying the AdminSdHolder object's DACL.
 
 Let's say an attacker adds the following ACE to AdminSdHolder's DACL: `attackercontrolleduser: Full Control`.
 

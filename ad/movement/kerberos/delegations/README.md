@@ -53,7 +53,7 @@ findDelegation.py -user "account" "DOMAIN"/"USER":"PASSWORD"
 {% endtab %}
 
 {% tab title="Windows" %}
-From Windows systems, [BloodHound](../../../recon/bloodhound.md) can be used to identify unconstrained and constrained delegation.
+From Windows systems, [BloodHound](../../../../a-d/recon/tools/bloodhound.md) can be used to identify unconstrained and constrained delegation.
 
 The following queries can be used to audit delegations.
 
@@ -110,8 +110,6 @@ Get-ADComputer "Account" -Properties TrustedForDelegation, TrustedToAuthForDeleg
 {% embed url="https://youtu.be/byykEId3FUs" %}
 
 {% embed url="https://docs.google.com/presentation/d/1rAl-XKrkuFjCpExHBGrp5L8ZwtuFFrOygZMapxMp28I/edit?usp=sharing" %}
-
-{% file src="../../../../.gitbook/assets/Insomnihack 2022 - Delegating Kerberos To Bypass Kerberos Delegation Limitations.pdf" %}
 
 ## Resources
 

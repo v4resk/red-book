@@ -8,7 +8,7 @@ description: CVE-2018-8581
 
 PrivExchange relay on the [PushSubscription coerced authentication](../mitm-and-coerced-authentications/pushsubscription-abuse.md), PushSubscription is an API on Exchange Web Services that allows to subscribe to push notifications. Attackers abuse it to make Exchange servers authenticate to a target of their choosing. **The coerced authentication is made over HTTP**, which is particularly powerful when doing [NTLM relay](../ntlm/relay.md) ([because of the Session Signing and MIC mitigations](../ntlm/relay.md#mic-message-integrity-code)).&#x20;
 
-As Exchange servers usually have high privileges in a domain (i.e. `WriteDacl`, see [Abusing ACLs](../dacl/)), the forced authentication can then be relayed and abused to obtain domain admin privileges (see [NTLM Relay](../ntlm/relay.md) and [Kerberos Unconstrained Delegations](../kerberos/delegations/#unconstrained-delegations-kud)).
+As Exchange servers usually have high privileges in a domain (i.e. `WriteDacl`, see [Abusing ACLs](broken-reference)), the forced authentication can then be relayed and abused to obtain domain admin privileges (see [NTLM Relay](../ntlm/relay.md) and [Kerberos Unconstrained Delegations](../kerberos/delegations/#unconstrained-delegations-kud)).
 
 <figure><img src="../../../.gitbook/assets/image (4).png" alt=""><figcaption></figcaption></figure>
 

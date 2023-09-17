@@ -2,7 +2,7 @@
 
 ## Theory
 
-This attack combines [Kerberos Constrained delegation abuse](delegations/constrained.md) and [DACL abuse](../dacl/). A service configured for Kerberos Constrained Delegation (KCD) can impersonate users on a set of services. The "set of services" is specified in the constrained delegation configuration. It is a list of SPNs (Service Principal Names) written in the `msDS-AllowedToDelegateTo` attribute of the KCD service's object.
+This attack combines [Kerberos Constrained delegation abuse](delegations/constrained.md) and [DACL abuse](broken-reference). A service configured for Kerberos Constrained Delegation (KCD) can impersonate users on a set of services. The "set of services" is specified in the constrained delegation configuration. It is a list of SPNs (Service Principal Names) written in the `msDS-AllowedToDelegateTo` attribute of the KCD service's object.
 
 In standard KCD abuse scenarios, an attacker that gains control over a "KCD service" can operate lateral movement and obtain access to the other services/SPNs. Since KCD allows for impersonation, the attacker can also impersonate users (e.g. domain admins) on the target services. Depending on the SPNs, or if it's possible to [modify it](ptt.md#modifying-the-spn), the attacker could also gain admin access to the server the "listed SPN" belongs to.
 
@@ -30,7 +30,7 @@ From UNIX-like machines, [krbrelayx](https://github.com/dirkjanm/krbrelayx)'s [a
 
 _At the time of writing, 12th Feb. 2022,_ [_the pull request_](https://github.com/SecureAuthCorp/impacket/pull/1256) _adding the `tgssub.py` is pending._ [_The pull request_](https://github.com/SecureAuthCorp/impacket/pull/1184) _modifying the `findDelegation.py` is pending._
 
-__:warning: _At the time of writing, 12th Feb. 2022, this technique has not been fully fool-proofed from UNIX systems. In case something errors, switch to the Windows technique._
+\_\_:warning: _At the time of writing, 12th Feb. 2022, this technique has not been fully fool-proofed from UNIX systems. In case something errors, switch to the Windows technique._
 
 ```python
 # 1. show SPNs listed in the KCD configuration
@@ -53,9 +53,7 @@ Once the final service ticket is obtained, it can be used with [Pass the Cache](
 {% endtab %}
 
 {% tab title="Windows" %}
-From Windows machines, [PowerView](https://github.com/PowerShellMafia/PowerSploit/blob/dev/Recon/PowerView.ps1) (PowerShell) and  [Rubeus](https://github.com/GhostPack/Rubeus) (C#) can be used to conduct the different steps (manipulate SPNs, obtain and manipulate tickets).
-
-
+From Windows machines, [PowerView](https://github.com/PowerShellMafia/PowerSploit/blob/dev/Recon/PowerView.ps1) (PowerShell) and [Rubeus](https://github.com/GhostPack/Rubeus) (C#) can be used to conduct the different steps (manipulate SPNs, obtain and manipulate tickets).
 
 ```powershell
 # 1. show SPNs listed in the KCD configuration

@@ -90,7 +90,7 @@ ldapdomaindump --user 'DOMAIN\USER' --password $PASSWORD --outdir ldapdomaindump
 {% endtab %}
 
 {% tab title="ntlmrelayx" %}
-With [Impacket](https://github.com/SecureAuthCorp/impacket)'s [ntlmrelayx](https://github.com/SecureAuthCorp/impacket/blob/master/examples/ntlmrelayx.py) (Python), it is possible to gather lots of information regarding the domain users and groups, the computers, [ADCS](../movement/ad-cs/), etc. through a [NTLM authentication relayed](../movement/ntlm/relay.md) within an LDAP session.
+With [Impacket](https://github.com/SecureAuthCorp/impacket)'s [ntlmrelayx](https://github.com/SecureAuthCorp/impacket/blob/master/examples/ntlmrelayx.py) (Python), it is possible to gather lots of information regarding the domain users and groups, the computers, [ADCS](../../../ad/movement/ad-cs/), etc. through a [NTLM authentication relayed](../../../ad/movement/ntlm/relay.md) within an LDAP session.
 
 ```bash
 ntlmrelayx -t "ldap://domaincontroller" --dump-adcs --dump-laps --dump-gmsa
@@ -100,10 +100,10 @@ ntlmrelayx -t "ldap://domaincontroller" --dump-adcs --dump-laps --dump-gmsa
 
 [CrackMapExec](https://github.com/byt3bl33d3r/CrackMapExec) (Python) also has useful modules that can be used to
 
-* map information regarding [AD-CS (Active Directory Certificate Services)](../movement/ad-cs/)
+* map information regarding [AD-CS (Active Directory Certificate Services)](../../../ad/movement/ad-cs/)
 * show subnets listed in AD-SS (Active Directory Sites and Services)
 * list the users description
-* print the [Machine Account Quota](../movement/domain-settings/machineaccountquota.md) domain-level attribute's value
+* print the [Machine Account Quota](../../../ad/movement/domain-settings/machineaccountquota.md) domain-level attribute's value
 
 ```bash
 # list PKIs/CAs
@@ -126,12 +126,12 @@ The PowerShell equivalent to CrackMapExec's `subnets` modules is the following
 ```
 
 {% hint style="info" %}
-LDAP anonymous binding is usually disabled but it's worth checking. It could be handy to list the users and test for [ASREProasting](../movement/kerberos/asreproast.md) (since this attack needs no authentication).
+LDAP anonymous binding is usually disabled but it's worth checking. It could be handy to list the users and test for [ASREProasting](../../../ad/movement/kerberos/asreproast.md) (since this attack needs no authentication).
 {% endhint %}
 
 {% hint style="success" %}
 **Automation and scripting**
 
-* A more advanced LDAP enumeration can be carried out with BloodHound (see [this](bloodhound.md)).
-* The enum4linux tool can also be used, among other things, for LDAP recon (see [this](enum4linux.md)).
+* A more advanced LDAP enumeration can be carried out with BloodHound (see [this](../tools/bloodhound.md)).
+* The enum4linux tool can also be used, among other things, for LDAP recon (see [this](../tools/enum4linux.md)).
 {% endhint %}

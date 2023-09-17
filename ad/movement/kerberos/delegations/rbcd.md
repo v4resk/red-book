@@ -2,7 +2,7 @@
 
 ## Theory
 
-If an account, having the capability to edit the `msDS-AllowedToActOnBehalfOfOtherIdentity` attribute of another object (e.g. the `GenericWrite` ACE, see [Abusing ACLs](../../dacl/)), is compromised, an attacker can use it populate that attribute, hence configuring that object for RBCD.
+If an account, having the capability to edit the `msDS-AllowedToActOnBehalfOfOtherIdentity` attribute of another object (e.g. the `GenericWrite` ACE, see [Abusing ACLs](broken-reference)), is compromised, an attacker can use it populate that attribute, hence configuring that object for RBCD.
 
 {% hint style="success" %}
 Machine accounts can edit their own `msDS-AllowedToActOnBehalfOfOtherIdentity` attribute, hence allowing RBCD attacks on relayed machine accounts authentications.
@@ -22,7 +22,7 @@ In 2022, [Jame Forshaw](https://twitter.com/tiraniddo) demonstrated that the SPN
 
 Then, in order to abuse this, the attacker has to control the account (A) the target object's (B) attribute has been populated with. Using that account's (A) credentials, the attacker can obtain a ticket through `S4U2Self` and `S4U2Proxy` requests, just like constrained delegation with protocol transition.
 
-In the end, an RBCD abuse results in a Service Ticket to authenticate on the target service (B) on behalf of a user. Once the final Service Ticket is obtained, it can be used with [Pass-the-Ticket](../ptt.md) to access the target service (B).&#x20;
+In the end, an RBCD abuse results in a Service Ticket to authenticate on the target service (B) on behalf of a user. Once the final Service Ticket is obtained, it can be used with [Pass-the-Ticket](../ptt.md) to access the target service (B).
 
 {% hint style="warning" %}
 If the "impersonated" account is "[is sensitive and cannot be delegated](https://learn.microsoft.com/en-us/windows-server/identity/ad-ds/manage/how-to-configure-protected-accounts)" or a member of the "[Protected Users](https://learn.microsoft.com/en-us/windows-server/security/credentials-protection-and-management/protected-users-security-group)" group, the delegation will (probably) fail.
@@ -37,6 +37,7 @@ There are a few additional details to keep in mind, valid as of the time of writ
 * Before this patch, some testing indicates that accounts set as "sensitive and cannot be delegated" wouldn't be delegated (intended behavior), but members of the Protected Users group (and without the "sensitive" setting) would be (unintended !).
 * As it turns out, even after the patch, as of Jan. 24th 2023, members of the Protected Users group are now in fact protected against delegation, **except** for the native administrator account (RID 500), even if it's a member of the group. No idea if this is intended or not but it seems it's not the only security behavior of that group that doesn't apply for this account (e.g. RC4 pre-authentication still works for the RID-500 admin, even if member of the Protected Users group, source: [Twitter](https://twitter.com/Defte\_/status/1597699988368556032)).
 {% endhint %}
+
 {% hint style="success" %}
 A technique called [AnySPN or "service class modification"](../ptt.md#modifying-the-spn) can be used concurrently with pass-the-ticket to change the service class the Service Ticket was destined to (e.g. for the `cifs/target.domain.local` SPN, the service class is `cifs`).
 {% endhint %}
@@ -51,9 +52,9 @@ The `msDS-AllowedToActOnBehalfOfOtherIdentity` was introduced with Windows Serve
 
 {% tabs %}
 {% tab title="UNIX-like" %}
-**1 - Edit the target's "rbcd" attribute (ACE abuse)** :pencil2: ****&#x20;
+**1 - Edit the target's "rbcd" attribute (ACE abuse)** :pencil2: \*\*\*\*
 
-[Impacket](https://github.com/SecureAuthCorp/impacket/)'s [rbcd.py](https://github.com/SecureAuthCorp/impacket/blob/master/examples/rbcd.py) script (Python) _c_an be used to read, write or clear the delegation rights, using the credentials of a domain user that has the needed permissions.
+[Impacket](https://github.com/SecureAuthCorp/impacket/)'s [rbcd.py](https://github.com/SecureAuthCorp/impacket/blob/master/examples/rbcd.py) script (Python) \_c\_an be used to read, write or clear the delegation rights, using the credentials of a domain user that has the needed permissions.
 
 ```bash
 # Read the attribute
@@ -71,7 +72,7 @@ Testers can also use [ntlmrelayx](https://github.com/SecureAuthCorp/impacket/blo
 In this example, `controlledaccount` can be [a computer account created for the attack](../../domain-settings/machineaccountquota.md#create-a-computer-account), or any other account -with at least one Service Principal Name set for the usual technique, or without for [SPN-less RBCD](rbcd.md#rbcd-on-spn-less-users)- which credentials are known to the attacker.
 {% endhint %}
 
-**2 - Obtain a ticket (delegation operation)** :ticket: ****&#x20;
+**2 - Obtain a ticket (delegation operation)** :ticket: \*\*\*\*
 
 Once the attribute has been modified, the [Impacket](https://github.com/SecureAuthCorp/impacket) script [getST](https://github.com/SecureAuthCorp/impacket/blob/master/examples/getST.py) (Python) can then perform all the necessary steps to obtain the final "impersonating" ST (in this case, "Administrator" is impersonated but it can be any user in the environment).
 
@@ -87,7 +88,7 @@ In [some cases](./#theory), the delegation will not work. Depending on the conte
 The SPN (Service Principal Name) set can have an impact on what services will be reachable. For instance, `cifs/target.domain` or `host/target.domain` will allow most remote dumping operations (more info on [adsecurity.org](https://adsecurity.org/?page\_id=183)). There however scenarios where the SPN can be changed ([AnySPN](../ptt.md#modifying-the-spn)) to access more service. This technique is automatically tried by Impacket scripts when doing pass-the-ticket.
 {% endhint %}
 
-**3 - Pass-the-ticket** :passport\_control: ****&#x20;
+**3 - Pass-the-ticket** :passport\_control: \*\*\*\*
 
 Once the ticket is obtained, it can be used with [pass-the-ticket](../ptt.md).
 {% endtab %}
@@ -95,7 +96,7 @@ Once the ticket is obtained, it can be used with [pass-the-ticket](../ptt.md).
 {% tab title="Windows" %}
 In order to run the following commands and tools as other users, testers can check the [user impersonation](../../credentials/impersonation.md) part.
 
-**1 - Edit the target's security descriptor (ACE abuse)**:pencil2: ****&#x20;
+**1 - Edit the target's security descriptor (ACE abuse)**:pencil2: \*\*\*\*
 
 The [PowerShell ActiveDirectory module](https://docs.microsoft.com/en-us/powershell/module/addsadministration/?view=win10-ps)'s cmdlets Set-ADComputer and Get-ADComputer can be used to write and read the attributed of an object (in this case, to modify the delegation rights).
 
@@ -132,7 +133,7 @@ StandIn.exe --object samaccountname=controlledaccountwithSPNName
 StandIn.exe --computer "target" --sid "controlledaccountwithSPN's SID"
 ```
 
-**2 - Obtain a ticket (delegation operation)** :ticket: ****&#x20;
+**2 - Obtain a ticket (delegation operation)** :ticket: \*\*\*\*
 
 [Rubeus](https://github.com/GhostPack/Rubeus) can then be used to request the TGT and "impersonation ST" and inject it for later use.
 
@@ -158,7 +159,7 @@ In [some cases](./#theory), the delegation will not work. Depending on the conte
 The SPN (Service Principal Name) set can have an impact on what services will be reachable. For instance, `cifs/target.domain` or `host/target.domain` will allow most remote dumping operations (more info on [adsecurity.org](https://adsecurity.org/?page\_id=183)). There however scenarios where the SPN can be changed ([AnySPN](../ptt.md#modifying-the-spn)) to access more service**s**. This technique can be exploited with the `/altservice` flag with Rubeus.
 {% endhint %}
 
-**3 - Pass-the-ticket** :passport\_control: ****&#x20;
+**3 - Pass-the-ticket** :passport\_control: \*\*\*\*
 
 Once the ticket is injected, it can natively be used when accessing the service (see [pass-the-ticket](../ptt.md)).
 {% endtab %}

@@ -71,7 +71,7 @@ john --format=krb5tgs --wordlist=$wordlist kerberoastables.txt
 
 ### Targeted Kerberoasting
 
-If an attacker controls an account with the rights to add an SPN to another ([`GenericAll`](../dacl/#genericall), [`GenericWrite`](../dacl/#genericwrite)), it can be abused to make that other account vulnerable to Kerberoast (see [exploitation](../dacl/targeted-kerberoasting.md)).
+If an attacker controls an account with the rights to add an SPN to another ([`GenericAll`](broken-reference), [`GenericWrite`](broken-reference)), it can be abused to make that other account vulnerable to Kerberoast (see [exploitation](../dacl/targeted-kerberoasting.md)).
 
 {% hint style="info" %}
 Controlling a member of the [Account Operators](broken-reference) group, targeted Kerberoasting can be conducted for the whole domain (see [exploitation](../dacl/targeted-kerberoasting.md)).

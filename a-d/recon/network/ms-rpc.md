@@ -60,7 +60,7 @@ RID Cycling is a method that allows attackers to enumerate domain objects by bru
 The Python script [ridenum](https://github.com/trustedsec/ridenum) can be used to operate that recon technique, with a Null session or with an authenticated one.
 
 {% hint style="success" %}
-The enum4linux tool can be used to easily operate fast recon through MS-RPC, with Null session or not (see [this page](enum4linux.md)).
+The enum4linux tool can be used to easily operate fast recon through MS-RPC, with Null session or not (see [this page](../tools/enum4linux.md)).
 {% endhint %}
 
 ## Resources

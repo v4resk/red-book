@@ -14,78 +14,15 @@ If an object's (called **objectA**) DACL features an ACE stating that another ob
 
 ### Recon
 
-DACL abuse potential paths can be identified by [BloodHound](../../recon/bloodhound.md) from UNIX-like (using the Python ingestor [bloodhound.py](https://github.com/fox-it/BloodHound.py)) and Windows (using the [SharpHound](https://github.com/BloodHoundAD/SharpHound3) ingestor) systems.
+DACL abuse potential paths can be identified by [BloodHound](../../../a-d/recon/tools/bloodhound.md) from UNIX-like (using the Python ingestor [bloodhound.py](https://github.com/fox-it/BloodHound.py)) and Windows (using the [SharpHound](https://github.com/BloodHoundAD/SharpHound3) ingestor) systems.
 
 Other tools like, `Get-DomainObjectAcl` and `Add-DomainObjectAcl` from [Powersploit](https://github.com/PowerShellMafia/PowerSploit/)'s [Powerview](https://github.com/PowerShellMafia/PowerSploit/blob/dev/Recon/PowerView.ps1), `Get-Acl` and `Set-Acl` official Powershell cmdlets, or [Impacket](https://github.com/SecureAuthCorp/impacket)'s dacledit.py script (Python) can be used in order to manually inspect an object's DACL. :warning: _At the time of writing, the Pull Request (_[_#1291_](https://github.com/SecureAuthCorp/impacket/pull/1291)_) offering that dacledit is still being reviewed and in active development. It has the following command-line arguments._
 
-{% tabs %}
-{% tab title="PowerView - Dump All ACLs" %}
-We can dump all Domain Object's ACL and convert it to a json file using `Get-DomainObjectAcl` from [Powersploit](https://github.com/PowerShellMafia/PowerSploit/)'s [Powerview](https://github.com/PowerShellMafia/PowerSploit/blob/dev/Recon/PowerView.ps1).&#x20;
+See this page for more details
 
-```powershell
-Get-DomainObjectAcl -ResolveGUIDs|select-object @{Name='SecurityIdentifierName';Expression={"$($_.SecurityIdentifier.Value|Convert-SidToName)"}},@{Name='SecurityIdentifierSID';Expression={"$($_.SecurityIdentifier.Value)"}},@{Name='ActiveDirectoryRights';Expression={"$($_.ActiveDirectoryRights)"}},ObjectDN,@{Name='ObjectName';Expression={"$($_.ObjectSID|Convert-SidToName)"}},ObjectSID|ConvertTo-Json -Compress|Out-File acls.json
-```
-
-Then, on your attacking machine, we can use the following command to format results
-
-```bash
-#From UTF-16LE to UTF-8
-dos2unix acls.json
-
-#Parsing json results
-cat acls.json|jq '.[]| "\(.SecurityIdentifierName):\(.SecurityIdentifierSID) | Have: \(.ActiveDirectoryRights) | On: \(.ObjectName):\(.ObjectSID)"'
-```
-
-{% hint style="info" %}
-You may convert SIDs with the following WMIC command
-
-```
-wmic useraccount where sid='<SID>' get name, caption,FullName
-```
-{% endhint %}
-{% endtab %}
-
-{% tab title="PowerView - Others" %}
-We can enumerate interesting Domain Object's ACL using `Get-DomainObjectAcl` from [Powersploit](https://github.com/PowerShellMafia/PowerSploit/)'s [Powerview](https://github.com/PowerShellMafia/PowerSploit/blob/dev/Recon/PowerView.ps1).&#x20;
-
-```powershell
-# Get current domain SID and find interesting properties
-$SID = Get-DomainSid ; Get-DomainComputer | Get-DomainObjectAcl -ResolveGUIDs | ? { $_.ActiveDirectoryRights -match "WriteProperty|GenericWrite|GenericAll|WriteDacl" -and $_.SecurityIdentifier -match "$SID-[\d]{4,10}" }
-
-# Find interesting ACL's for current user or user
-Find-InterestingDomainAcl -ResolveGUIDs  | Where-Object {$_.IdentityReference –eq [System.Security.Principal.WindowsIdentity]::GetCurrent().Name}
-
-# Get ACLs for User
-Get-DomainObjectAcl -Identity it_admin -ResolveGUIDs ? { $_.SecurityIdentifier -Match $(ConvertTo-SID yourUserName) }
-
-
-# Get ACLs for specific AD Object
-Get-DomainObjectAcl -SamAccountName <SAM> -ResolveGUIDs
-Get-DomainObjectAcl -Identity <Identity> -ResolveGUIDs
-
-
-# Get ACLs for specified prefix
-Get-DomainObjectAcl -ADSprefix 'CN=Administrators,CN=Users' -Verbose
-
-# Search for interesting ACEs
-Find-InterestingDomainAcl -ResolveGUIDs
-Find-InterestingDomainAcl -ResolveGUIDs | ?{$_.IdentityReference -match "Domain Users"} 
-Find-InterestingDomainAcl -ResolveGUIDs | ?{ $_.ActiveDirectoryRights -match "WriteProperty|GenericWrite|GenericAll|WriteDacl"
-
-# Get ACLs for select groups
-Get-DomainObjectACL -identity "Domain Admins" -ResolveGUIDs | ?{ $_.ActiveDirectoryRights -match "WriteProperty|GenericWrite|GenericAll|WriteDacl"
-
-# Find Interesting ACLs from groups we are a member of
-Find-InterestingDomainAcl -ResolveGUIDs | ?{$_.IdentityReferenceName -match "Standard-Users"}
-
-# Find Interesting ACLs for groups a user is a member of (Recursive)
-Get-DomainGroup -MemberIdentity "[User]" | Select-Object -ExpandProperty "SamAccountName" | ForEach-Object { Write-Host "Searching for interesting ACLs for $_" -ForegroundColor "Yellow"; Find-InterestingDomainAcl -ResolveGUIDs | Where-Object { $_.IdentityReferenceName -match $_ } }
-
-# Get the ACLs associated with the specified LDAP path to be used for search
-Get-DomainObjectAcl -ADSpath "LDAP://CN=DomainAdmins,CN=Users,DC=Security,DC=local" -ResolveGUIDs -Verbose
-```
-{% endtab %}
-{% endtabs %}
+{% content-ref url="../../../a-d/recon/built-ins-objects-and-settings/dacls.md" %}
+[dacls.md](../../../a-d/recon/built-ins-objects-and-settings/dacls.md)
+{% endcontent-ref %}
 
 ### Abuse
 
@@ -120,7 +57,7 @@ With enough permissions (`GenericAll`, `GenericWrite`) over a disabled object, i
 
 ### BloodHound edges
 
-[BloodHound](../../recon/bloodhound.md) has the ability to map abuse paths, with some that rely on DACL abuse. The following edges are not includes in the mindmap above:
+[BloodHound](../../../a-d/recon/tools/bloodhound.md) has the ability to map abuse paths, with some that rely on DACL abuse. The following edges are not includes in the mindmap above:
 
 * `AddKeyCredentialLink`, a write permission on an object's `Key-Credential-Link` attribute, for [Shadow Credentials](../kerberos/shadow-credentials.md) attacks
 * `WriteSPN`, a write permission on an object's `Service-Principal-Name` attribute, for [targeted Kerberoasting](targeted-kerberoasting.md) and [SPN jacking](../kerberos/spn-jacking.md) attacks
