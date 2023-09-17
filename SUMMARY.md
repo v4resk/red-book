@@ -21,6 +21,7 @@
     * [DACLs](a-d/recon/objects-and-settings/dacls.md)
     * [Group policies](a-d/recon/objects-and-settings/group-policies.md)
     * [Password policy](a-d/recon/objects-and-settings/password-policy.md)
+    * [LAPS](a-d/recon/objects-and-settings/laps.md)
 * [Movement](ad/movement/README.md)
   * [Credentials](ad/movement/credentials/README.md)
     * [Dumping](ad/movement/credentials/dumping/README.md)
