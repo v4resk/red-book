@@ -52,12 +52,17 @@ We can enumerate interesting Domain Object's ACL using `Get-DomainObjectAcl` fro
 # Get current domain SID and find interesting properties
 $SID = Get-DomainSid ; Get-DomainComputer | Get-DomainObjectAcl -ResolveGUIDs | ? { $_.ActiveDirectoryRights -match "WriteProperty|GenericWrite|GenericAll|WriteDacl" -and $_.SecurityIdentifier -match "$SID-[\d]{4,10}" }
 
-# Find interesting ACL's for current user
+# Find interesting ACL's for current user or user
 Find-InterestingDomainAcl -ResolveGUIDs  | Where-Object {$_.IdentityReference –eq [System.Security.Principal.WindowsIdentity]::GetCurrent().Name}
+
+# Get ACLs for User
+Get-DomainObjectAcl -Identity it_admin -ResolveGUIDs ? { $_.SecurityIdentifier -Match $(ConvertTo-SID yourUserName) }
+
 
 # Get ACLs for specific AD Object
 Get-DomainObjectAcl -SamAccountName <SAM> -ResolveGUIDs
 Get-DomainObjectAcl -Identity <Identity> -ResolveGUIDs
+
 
 # Get ACLs for specified prefix
 Get-DomainObjectAcl -ADSprefix 'CN=Administrators,CN=Users' -Verbose
