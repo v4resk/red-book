@@ -8,6 +8,8 @@ In certain scenarios, an attacker can gain control over GPOs. Some ACEs can give
 * `GenericAll`, `GenericWrite`, `WriteProperty` to any property (no GUID specified)
 * `WriteDacl`, `WriteOwner`
 
+This page is about enumeration, for GPO-based attacks, please refer to [this page](../../../ad/movement/group-policies.md).
+
 ## Practice
 
 ### PowerView

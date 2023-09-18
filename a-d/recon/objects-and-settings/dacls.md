@@ -6,6 +6,8 @@ DACL abuse potential paths can be identified by [BloodHound](../tools/bloodhound
 
 Other tools like, `Get-DomainObjectAcl` and `Add-DomainObjectAcl` from [Powersploit](https://github.com/PowerShellMafia/PowerSploit/)'s [Powerview](https://github.com/PowerShellMafia/PowerSploit/blob/dev/Recon/PowerView.ps1), `Get-Acl` and `Set-Acl` official Powershell cmdlets, or [Impacket](https://github.com/SecureAuthCorp/impacket)'s dacledit.py script (Python) can be used in order to manually inspect an object's DACL. :warning: _At the time of writing, the Pull Request (_[_#1291_](https://github.com/SecureAuthCorp/impacket/pull/1291)_) offering that dacledit is still being reviewed and in active development. It has the following command-line arguments._
 
+This page is about enumeration, for DACL-based attacks, please refer to [this page](../../../ad/movement/dacl/).
+
 ## Practice
 
 ### PowerView
