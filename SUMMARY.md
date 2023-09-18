@@ -143,6 +143,7 @@
     * [Certificate authority](ad/persistence/ad-cs/certificate-authority.md)
     * [Access controls](ad/persistence/ad-cs/access-controls.md)
     * [Golden certificate](ad/persistence/ad-cs/golden-certificate.md)
+  * [LAPS](a-d/persistence/laps.md)
   * [🛠️ DC Shadow](ad/persistence/dcshadow.md)
   * [🛠️ Access controls](ad/persistence/access-controls.md)
 
