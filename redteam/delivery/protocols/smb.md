@@ -82,25 +82,27 @@ Tools like [CrackMapExec](https://github.com/Porchetta-Industries/CrackMapExec) 
 
 ```bash
 #Enum host with SMB signing not required
-crackmapexec 192.168.1.0/24 --gen-relay-list relaylistOutputFilename.txt
+crackmapexec smb 192.168.1.0/24 --gen-relay-list relaylistOutputFilename.txt
 
 #Enum password policy
-crackmapexec $IP -u $USER -p $PASS --pass-pol
+crackmapexec smb $IP -u $USER -p $PASS --pass-pol
 
 #Enum domain users
-crackmapexec $IP -u $USER -p $PASS --users
+crackmapexec smb $IP -u $USER -p $PASS --users
+crackmapexec smb $IP -u $USER -p $PASS --rid-brute 5000
+
 
 #Enum domain groups
-crackmapexec $IP -u $USER -p $PASS --groups
+crackmapexec smb $IP -u $USER -p $PASS --groups
 
 #Enum local groups
-crackmapexec $IP -u $USER -p $PASS --local-group
+crackmapexec smb $IP -u $USER -p $PASS --local-group
 
 #Enum active sessions
-crackmapexec $IP -u $USER -p $PASS --sessions
+crackmapexec smb $IP -u $USER -p $PASS --sessions
 
 #Enum shares & access
-crackmapexec $IP -u $USER -p $PASS --shares
+crackmapexec smb $IP -u $USER -p $PASS --shares
 ```
 {% endtab %}
 {% endtabs %}
