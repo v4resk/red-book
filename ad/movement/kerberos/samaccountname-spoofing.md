@@ -42,6 +42,20 @@ Some of the tools and features that allow exploitation of these vulnerabilities 
 * Impacket's renameMachine: [https://github.com/SecureAuthCorp/impacket/pull/1224](https://github.com/SecureAuthCorp/impacket/pull/1224)
 {% endhint %}
 
+### Enumerate
+
+{% tabs %}
+{% tab title="UNIX-like" %}
+[CrackMapExec](https://github.com/byt3bl33d3r/CrackMapExec) (Python) can be used to check if the target is vulnerable to NoPac.
+
+```bash
+crackmapexec smb $IP -u $USER -p $PASSWORD -M nopac
+```
+{% endtab %}
+{% endtabs %}
+
+### Abuse
+
 {% tabs %}
 {% tab title="UNIX-like" %}
 On UNIX-like systems, the steps mentioned above can be conducted with
@@ -122,7 +136,7 @@ noPac.exe -domain mcafeelab.local -user "lowpriv" -pass "lowpriv" /dc dc.domain.
 In the screenshot below, the `-spn` argument is used in the `getST.py` command. The option is to be replaced with `-altservice`.
 {% endhint %}
 
-![](../../../.gitbook/assets/samaccountname%20spoofing.png)
+<figure><img src="../../../.gitbook/assets/spaces_-MHRw3PMJtbDDjbxm5ub_uploads_JCIbFHflwCsQx8sO9d2J_Screenshot from 2021-12-10 22-21-10.webp" alt=""><figcaption></figcaption></figure>
 
 ### User account
 

