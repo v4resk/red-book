@@ -250,7 +250,7 @@
 * [Local Privilege Escalation](linux/privesc/README.md)
   * [Kernel Exploits](linux/privesc/kernel-exploits.md)
     * [CVE-2023-0386 (OverlayFS)](linux/privesc/kernel-exploits/cve-2023-0386-overlayfs.md)
-    * [🛠️ CVE-2023-32233 (CAP\_NET\_ADMIN)](linux/privesc/kernel-exploits/nf\_tables.md)
+    * [CVE-2023-32233 (CAP\_NET\_ADMIN)](linux/privesc/kernel-exploits/nf\_tables.md)
     * [🛠️ DirtyPipe](linux/privesc/kernel-exploits/dirtypipe.md)
     * [🛠️ DirtyCow](linux/privesc/kernel-exploits/dirtycow.md)
     * [🛠️ RDS](linux/privesc/kernel-exploits/rds.md)
