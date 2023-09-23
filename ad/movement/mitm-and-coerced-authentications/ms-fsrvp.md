@@ -25,7 +25,7 @@ In June 2022, Microsoft patched [CVE-2022-30154](https://msrc.microsoft.com/upda
 [CrackMapExec](https://github.com/byt3bl33d3r/CrackMapExec) (Python) can be used to check if the target is vulnerable to ShadowCoerce.
 
 ```bash
-crackmapexec smb $IP -u $USER -p $PASSWORD -M shadowcoerce
+crackmapexec smb <TARGET> -u <USER> -p <PASSWORD> -M shadowcoerce
 ```
 {% endtab %}
 

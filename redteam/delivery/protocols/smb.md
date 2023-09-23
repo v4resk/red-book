@@ -1,5 +1,5 @@
 ---
-description: Ports 445,139
+description: Ports TCP 445,139
 ---
 
 # SMB
@@ -58,9 +58,29 @@ nmap --script smb-brute -p 445 <IP>
 
 ### Enumerate
 
+{% hint style="info" %}
+Using [nmap](https://github.com/nmap/nmap), we can enumerate sessions/shares/users/domains/groups at one time using the following command :
+
+&#x20;`nmap --script="smb-enum*" -p 445 <IP>`
+{% endhint %}
+
+#### Version & Configuration
+
 {% tabs %}
-{% tab title="nmap" %}
-Tools like [nmap](https://github.com/nmap/nmap) can be used to enumerate SMB.
+{% tab title="CrackMapExec" %}
+Tools like [CrackMapExec](https://github.com/Porchetta-Industries/CrackMapExec) can be used to enumerate supported protocols, dialects and signing configuration of SMB.
+
+```bash
+#Enum host with SMB signing not required
+crackmapexec smb 192.168.1.0/24 --gen-relay-list relaylistOutputFilename.txt
+
+#Simply fingerprint SMB versipn
+crackmapexec smb <TARGET>
+```
+{% endtab %}
+
+{% tab title="Nmap" %}
+Tools like [nmap](https://github.com/nmap/nmap) can be used to enumerate supported protocols, dialects and signing configuration of SMB.
 
 ```bash
 #list the supported protocols and dialects of a SMB server. 
@@ -69,51 +89,154 @@ nmap --script="smb-protocols" -p 445 <IP>
 #Determines the message signing configuration
 nmap --script="smb-security-mode" -p 445 <IP>
 
-#Try to enum SMB sessions/shares/users/domains/groups... with null/anonymous session
-nmap --script="smb-enum*" -p 445 <IP>
-
-#Or enum with a valide session
-nmap --script="smb-enum-shares" --script-args smbusername=administrator,smbpassword=mypassword_1 -p 445 <IP>
-```
-{% endtab %}
-
-{% tab title="CrackMapExec" %}
-Tools like [CrackMapExec](https://github.com/Porchetta-Industries/CrackMapExec) can be used to enumerate SMB.
-
-```bash
 #Enum host with SMB signing not required
-crackmapexec smb 192.168.1.0/24 --gen-relay-list relaylistOutputFilename.txt
-
-#Enum password policy
-crackmapexec smb $IP -u $USER -p $PASS --pass-pol
-
-#Enum domain users
-crackmapexec smb $IP -u $USER -p $PASS --users
-crackmapexec smb $IP -u $USER -p $PASS --rid-brute 5000
-
-
-#Enum domain groups
-crackmapexec smb $IP -u $USER -p $PASS --groups
-
-#Enum local groups
-crackmapexec smb $IP -u $USER -p $PASS --local-group
-
-#Enum active sessions
-crackmapexec smb $IP -u $USER -p $PASS --sessions
-
-#Enum shares & access
-crackmapexec smb $IP -u $USER -p $PASS --shares
+nmap --script smb-security-mode.nse,smb2-security-mode.nse -p445 192.168.1.0/24
 ```
 {% endtab %}
 {% endtabs %}
 
-### Vulnerabilities
+#### Users
 
-You may use nmap to scan target for SMB vulnerabilities
+{% tabs %}
+{% tab title="CrackMapExec" %}
+[CrackMapExec](https://github.com/Porchetta-Industries/CrackMapExec) can be used to enumerate users over SMB.
 
 ```bash
+# Enumerate domain users over \pipe\samr 
+crackmapexec smb <TARGET> -u <USER> -p <PASSWORD> --users
+
+# Enumerate local users over \pipe\samr 
+crackmapexec smb <TARGET> -u <USER> -p <PASSWORD> --local-users
+
+#Brute force RID using querydispinfo over \pipe\samr 
+crackmapexec smb <TARGET> -u <USER> -p <PASSWORD> --rid-brute 5000
+```
+{% endtab %}
+
+{% tab title="Nmap" %}
+[nmap](https://github.com/nmap/nmap)'s [smb-enum-users ](https://nmap.org/nsedoc/scripts/smb-enum-users.html)can be used to enumerate users over SMB.
+
+```bash
+#Try to enumerate users over SMB with null/anonymous session
+nmap --script="smb-enum-users" -p 445 <IP>
+
+#Or enumerate with a valide session
+nmap --script="smb-enum-users" --script-args smbusername=administrator,smbpassword=mypassword_1 -p 445 <IP>
+```
+{% endtab %}
+{% endtabs %}
+
+#### Groups
+
+{% tabs %}
+{% tab title="CrackMapExec" %}
+[CrackMapExec](https://github.com/Porchetta-Industries/CrackMapExec) can be used to enumerate groups over SMB.
+
+```bash
+# Enumerate domain groups over \pipe\samr 
+crackmapexec smb <TARGET> -u <USER> -p <PASSWORD> --groups
+
+#Enum local groups over \pipe\samr
+crackmapexec smb $IP -u $USER -p $PASS --local-group
+
+#Brute force RID using querydispinfo over \pipe\samr 
+crackmapexec smb <TARGET> -u <USER> -p <PASSWORD> --rid-brute 5000
+```
+{% endtab %}
+
+{% tab title="Nmap" %}
+[nmap](https://github.com/nmap/nmap)'s [smb-enum-groups](https://nmap.org/nsedoc/scripts/smb-enum-groups.html) can be used to enumerate groups over SMB.
+
+```bash
+#Try to enumerate groups over SMB with null/anonymous session
+nmap --script="smb-enum-groups" -p 445 <IP>
+
+#Or enumerate with a valide session
+nmap --script="smb-enum-groups" --script-args smbusername=administrator,smbpassword=mypassword_1 -p 445 <IP>
+```
+{% endtab %}
+{% endtabs %}
+
+#### Shares
+
+{% tabs %}
+{% tab title="CrackMapExec" %}
+[CrackMapExec](https://github.com/Porchetta-Industries/CrackMapExec) can be used to enumerate SMB shares.
+
+```bash
+crackmapexec smb <TARGET> -u <USER> -p <PASSWORD> --shares
+```
+{% endtab %}
+
+{% tab title="Nmap" %}
+[nmap](https://github.com/nmap/nmap)'s [smb-enum-shares](https://nmap.org/nsedoc/scripts/smb-enum-shares.html) can be used to enumerate groups over SMB.
+
+```bash
+#Try to enumerate SMB shares with null/anonymous session
+nmap --script="smb-enum-shares" -p 445 <IP>
+
+#Or enumerate with a valide session
+nmap --script="smb-enum-shares" --script-args smbusername=administrator,smbpassword=mypassword_1 -p 445 <IP>
+```
+{% endtab %}
+{% endtabs %}
+
+#### Sessions
+
+{% tabs %}
+{% tab title="CrackMapExec" %}
+[CrackMapExec](https://github.com/Porchetta-Industries/CrackMapExec) can be used to enumerate active sessions and logged in users over SMB.
+
+```bash
+#Enumerate active sessions
+crackmapexec smb <TARGET> -u <USER> -p <PASSWORD> --sessions
+
+#Enumerate logged-on in users
+crackmapexec smb <TARGET> -u <USER> -p <PASSWORD> --loggedon-users
+```
+{% endtab %}
+
+{% tab title="Nmap" %}
+[nmap](https://github.com/nmap/nmap)'s [smb-enum-sessions](https://nmap.org/nsedoc/scripts/smb-enum-sessions.html) can be used to enumerate active sessions over SMB.
+
+```bash
+#Try to enumerate groups over SMB with null/anonymous session
+nmap --script="smb-enum-sessions" -p 445 <IP>
+
+#Or enumerate with a valide session
+nmap --script="smb-enum-sessions" --script-args smbusername=administrator,smbpassword=mypassword_1 -p 445 <IP>
+```
+{% endtab %}
+{% endtabs %}
+
+#### Others
+
+{% tabs %}
+{% tab title="CrackMapExec" %}
+[CrackMapExec](https://github.com/Porchetta-Industries/CrackMapExec) can be used to enumerate various objects over SMB.
+
+```bash
+#Enumerate the password policy
+crackmapexec smb <TARGET> -u <USER> -p <PASSWORD> --pass-pol
+```
+{% endtab %}
+{% endtabs %}
+
+### Execute Remote Commands
+
+{% content-ref url="../../pivoting/smb-based.md" %}
+[smb-based.md](../../pivoting/smb-based.md)
+{% endcontent-ref %}
+
+### Vulnerabilities
+
+{% hint style="info" %}
+You may use nmap to scan target for SMB vulnerabilities
+
+```
 sudo nmap -p 445 --script="smb-vuln-*" <IP>
 ```
+{% endhint %}
 
 #### EternalBlue - MS17-010
 
@@ -125,6 +248,12 @@ Tools like [nmap](https://github.com/nmap/nmap) can be used to detect the presen
 
 ```bash
 sudo nmap -p 445 --script="smb-vuln-ms17-010" <IP>
+```
+
+[CrackMapExec](https://github.com/byt3bl33d3r/CrackMapExec) (Python) can be used to check if the target is vulnerable to MS17-010.
+
+```bash
+crackmapexec smb <IP> -u <USER> -p <PASSWORD> -M ms17-010
 ```
 {% endtab %}
 
@@ -212,6 +341,12 @@ python ms08-067.py 10.10.10.4 4 445
 ```
 {% endtab %}
 {% endtabs %}
+
+## Exfiltration
+
+{% content-ref url="../../exfiltration/smb.md" %}
+[smb.md](../../exfiltration/smb.md)
+{% endcontent-ref %}
 
 ## Resources
 

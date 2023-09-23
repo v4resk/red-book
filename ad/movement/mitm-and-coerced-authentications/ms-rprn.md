@@ -39,7 +39,7 @@ rpcdump.py $TARGET | grep -A 6 "spoolsv"
 [CrackMapExec](https://github.com/byt3bl33d3r/CrackMapExec) (Python) can be used to check if the spooler service is running.
 
 ```bash
-crackmapexec smb $IP -u $USER -p $PASSWORD -M spooler
+crackmapexec smb <TARGET> -u <USER> -p <PASSWORD> -M spooler
 ```
 {% endtab %}
 

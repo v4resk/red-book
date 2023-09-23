@@ -1,5 +1,5 @@
 ---
-description: Port 3389
+description: Port TCP 3389
 ---
 
 # RDP

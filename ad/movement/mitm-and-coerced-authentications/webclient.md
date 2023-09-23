@@ -18,7 +18,7 @@ From UNIX-like systems, this can be achieved with [webclientservicescanner](http
 
 ```bash
 webclientservicescanner 'domain.local'/'user':'password'@'machine'
-crackmapexec smb 'TARGETS' -d 'domain' -u 'user' -p 'password' -M webdav
+crackmapexec smb <IP> -d <DOMAIN> -u <USERT> -p <PASSWORD> -M webdav
 ```
 {% endtab %}
 
@@ -99,8 +99,6 @@ With a [searchConnector-ms](https://docs.microsoft.com/en-us/windows/win32/searc
 By opening an interactive session with the target (e.g. RDP), opening the Explorer, and type something in the address bar.
 {% endtab %}
 {% endtabs %}
-
-
 
 ## Resources
 

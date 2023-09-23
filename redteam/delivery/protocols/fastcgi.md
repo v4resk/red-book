@@ -1,5 +1,5 @@
 ---
-description: Port 9000
+description: Port TCP 9000
 ---
 
 # FastCGI

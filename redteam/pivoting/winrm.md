@@ -14,9 +14,57 @@ WinRM is the name of both a Windows service and a protocol that allows a user to
 
 ## Practice
 
-{% content-ref url="../delivery/protocols/winrm.md" %}
-[winrm.md](../delivery/protocols/winrm.md)
-{% endcontent-ref %}
+### Execute Remote Commands
+
+{% tabs %}
+{% tab title="UNIX-like" %}
+We can use [crackmapexec](https://github.com/mpgn/CrackMapExec) to remotely execute a command on the target over WinRM.
+
+```bash
+#Execute command
+crackmapexec winrm <IP> -u <user> -p <password> -x "whoami"
+
+#Execute PowerShell command
+crackmapexec winrm <IP> -u <user> -p <password> -x "$(Get-WMIObject -class Win32_ComputerSystem | select username).username"
+```
+{% endtab %}
+
+{% tab title="Windows" %}
+We can use PowerShell's `Invoke-Command` to remotely execute a command on the target over WinRM.
+
+```powershell
+#Create Powershell PSCredential object
+$username = 'Administrator';
+$password = 'Mypass123';
+$securePassword = ConvertTo-SecureString $password -AsPlainText -Force; 
+$credential = New-Object System.Management.Automation.PSCredential $username, $securePassword;
+
+#Invoke command remotly
+Invoke-Command -Computername <TARGET> -Credential $credential -ScriptBlock {whoami}
+
+#Invoke command remotly from functions of your current PS console (like imported modules)
+Invoke-Command -ComputerName <TARGET> -Credential $credential -ScriptBLock ${function:enumeration} [-ArgumentList "arguments"]
+```
+
+You may also run scripts using WInRM
+
+```powershell
+Invoke-Command -ComputerName <TARGET> -FilePath C:\path\to\script\file -credential $credential
+```
+{% endtab %}
+{% endtabs %}
+
+### Remote shell
+
+{% tabs %}
+{% tab title="UNIX-like" %}
+[Evil-winrm](https://github.com/Hackplayers/evil-winrm) can be use to obtain a winrm powershell session
+
+```bash
+evil-winrm -u <user> -p <password> -i <IP>
+```
+{% endtab %}
+{% endtabs %}
 
 ## Resources
 

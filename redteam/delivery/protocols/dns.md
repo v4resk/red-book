@@ -1,13 +1,13 @@
 ---
-description: Port 53
+description: Port TCP/UDP 53
 ---
 
 # DNS
 
 See the following pages for informations about the LDAP protocol.&#x20;
 
-{% content-ref url="../../../a-d/recon/network/dns.md" %}
-[dns.md](../../../a-d/recon/network/dns.md)
+{% content-ref url="../../../ad/recon/network/dns.md" %}
+[dns.md](../../../ad/recon/network/dns.md)
 {% endcontent-ref %}
 
 {% content-ref url="../../recon/dns-enum.md" %}

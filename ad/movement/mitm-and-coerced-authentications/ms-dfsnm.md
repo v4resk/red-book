@@ -13,7 +13,7 @@ In mid-2022, [Filip Dragovic](https://twitter.com/filip\_dragovic) demonstrated 
 [CrackMapExec](https://github.com/byt3bl33d3r/CrackMapExec) (Python) can be used to check if the target is vulnerable to DFSCoerce.
 
 ```bash
-crackmapexec smb $IP -u $USER -p $PASSWORD -M dfscoerce
+crackmapexec smb <TARGET> -u <USER> -p <PASSWORD> -M dfscoerce
 ```
 {% endtab %}
 
