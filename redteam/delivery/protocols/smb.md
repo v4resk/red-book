@@ -160,6 +160,14 @@ nmap --script="smb-enum-groups" --script-args smbusername=administrator,smbpassw
 #### Shares
 
 {% tabs %}
+{% tab title="SMBClient" %}
+SMBClient is a native tool that allow us to interact with SMB shares. We can use it to list shares as follow
+
+```bash
+smbclient -U <USER> -L '\\<IP>\'
+```
+{% endtab %}
+
 {% tab title="CrackMapExec" %}
 [CrackMapExec](https://github.com/Porchetta-Industries/CrackMapExec) can be used to enumerate SMB shares.
 
@@ -178,6 +186,36 @@ nmap --script="smb-enum-shares" -p 445 <IP>
 #Or enumerate with a valide session
 nmap --script="smb-enum-shares" --script-args smbusername=administrator,smbpassword=mypassword_1 -p 445 <IP>
 ```
+{% endtab %}
+{% endtabs %}
+
+#### ACLs of Share's File/Folder
+
+{% tabs %}
+{% tab title="Smbcacls" %}
+The smbcacls program allow us to get ACLs on an NT file or directory on a SMB file shares.
+
+```bash
+#File/Folder permission with anonymous/guest login (remove -N for password prompt)
+smbcacls -U <USER> -N '\\<IP>\<SHARE>' <FILE/FOLDER Name>
+```
+
+If you see a lot off files and folders, the following commands will make a recursive permissions check on each item
+
+```bash
+#Mount the Share locally
+sudo mount -t cifs -o username='USER',password='PASSWORD' '\\<IP>\<SHARE>' /mnt/Share
+
+#Get all items
+find /mnt/Share|sed 's|/mnt/Share/||g' > smb_items.txt
+
+#Get all ACLs
+for i in $(cat smb_items.txt); do echo $i; smbcacls -N '\\10.10.10.103\Department Shares' $i; echo ; done > smb_acls.txt
+```
+{% endtab %}
+
+{% tab title="Second Tab" %}
+
 {% endtab %}
 {% endtabs %}
 
@@ -209,11 +247,11 @@ nmap --script="smb-enum-sessions" --script-args smbusername=administrator,smbpas
 {% endtab %}
 {% endtabs %}
 
-#### Others
+#### Password Policy
 
 {% tabs %}
 {% tab title="CrackMapExec" %}
-[CrackMapExec](https://github.com/Porchetta-Industries/CrackMapExec) can be used to enumerate various objects over SMB.
+[CrackMapExec](https://github.com/Porchetta-Industries/CrackMapExec) can be used to enumerate various objects over SMB like the domain password policy.
 
 ```bash
 #Enumerate the password policy
