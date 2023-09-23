@@ -70,6 +70,16 @@ klist
 #LdapSearch
 ldapsearch -H ldap://$IP -Y GSSAPI -b "DC=contoso,DC=local" '(objectClass=User)' sAMAccountName
 ```
+
+{% hint style="info" %}
+If you have the following error using ldaps: **ldap\_sasl\_bind(SIMPLE): Can't contact LDAP server (-1),** it's probably because of an invalide certificate.&#x20;
+
+You can run following command to ignore the certificate:
+
+```bash
+LDAPTLS_REQCERT=never ldapsearch -x -H ldaps://<IP> [....] 
+```
+{% endhint %}
 {% endtab %}
 
 {% tab title="ldapsearch-ad" %}
