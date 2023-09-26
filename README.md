@@ -1,5 +1,5 @@
 ---
-description: A Pentesting / RedTeaming book
+description: The Art of Offensive CyberSecurity
 ---
 
 # The Red-Book
@@ -17,6 +17,10 @@ As you embark on this journey with us, keep in mind that offensive cybersecurity
 :tada:Please feel free to contribute, give feedback/suggestions or reach out to me on Discord (**v4resk#0430**).
 
 {% hint style="danger" %}
+A big thanks to [David Gee](https://twitter.com/davedotdev) for his support and generosity in providing this domain name. If you haven't already, be sure to check out his website: [https://dave.dev/](https://dave.dev/).
+{% endhint %}
+
+{% hint style="danger" %}
 Around 99%, of the content relating to "Active Directory" comes from [The Hacker Recipes](https://www.thehacker.recipes/) website.
 
 Many thanks to [Charlie Bromberg](https://twitter.com/\_nwodtuhs) for his valuable work.
@@ -28,8 +32,7 @@ Many thanks to [Charlie Bromberg](https://twitter.com/\_nwodtuhs) for his valuab
 The 🛠️ emoji is used where work has to be done.
 {% endhint %}
 
-{% hint style="danger" %}
+{% hint style="info" %}
 Fell free to contribute with donation in cryptocurency\
-ETH: 0x6F8274f1BEF5ca774769A73AB520C5461fB22219\
-BSC: 0x6F8274f1BEF5ca774769A73AB520C5461fB22219
+ETH: 0x6F8274f1BEF5ca774769A73AB520C5461fB22219
 {% endhint %}
