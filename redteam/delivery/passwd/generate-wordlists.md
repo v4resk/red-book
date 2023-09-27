@@ -67,6 +67,14 @@ python3 cupp.py -l
 python3 cupp.py -a
 ```
 {% endtab %}
+
+{% tab title="LDAPWordlistHarvester" %}
+[LDAPWordlistHarvester](https://github.com/p0dalirius/LDAPWordlistHarvester) is an other greate tool from [p0dalirius](https://github.com/p0dalirius). It generates a wordlist from the information present in [LDAP](../protocols/ldap.md), in order to crack passwords of domain accounts.
+
+```bash
+./LDAPWordlistHarvester.py -d 'domain.local' -u 'Administrator' -p 'P@ssw0rd123!' --dc-ip 192.168.1.101
+```
+{% endtab %}
 {% endtabs %}
 
 ### Rules-Based Wordlists
