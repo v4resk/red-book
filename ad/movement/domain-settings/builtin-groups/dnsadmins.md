@@ -1,8 +1,10 @@
-# DNSadmins
+# DNSAdmins
 
 ## Theory
 
-The attack relies on a DLL injection into the **dns service** running as SYSTEM on the DNS server which most of the time is on a Domain Contoller.
+Members of the built-in DNSAdmin group can read, write, create, delete DNS records (e.g. edit the [wildcard record](../../mitm-and-coerced-authentications/adidns-spoofing.md#manual-record-manipulation) if it already exists). Its members can also [run code via DLL on a Domain Controller operating as a DNS server](https://medium.com/@esnesenon/feature-not-bug-dnsadmin-to-dc-compromise-in-one-line-a0f779b8dc83) ([CVE-2021-40469](https://msrc.microsoft.com/update-guide/vulnerability/CVE-2021-40469)).
+
+The attack relies on a DLL injection into the **dns service** running as SYSTEM on the DNS server which most of the time is on a Domain Contoller which in this case implicate a domain compromise.
 
 {% hint style="info" %}
 You must be member of the DnsAdmins group to perform this attack.
