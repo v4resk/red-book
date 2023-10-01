@@ -21,7 +21,7 @@ A big thanks to [David Gee](https://twitter.com/davedotdev) for his support and 
 {% endhint %}
 
 {% hint style="danger" %}
-Around 99%, of the content relating to "Active Directory" comes from [The Hacker Recipes](https://www.thehacker.recipes/) website.
+Around 90%, of the content relating to "Active Directory" comes from [The Hacker Recipes](https://www.thehacker.recipes/) website.
 
 Many thanks to [Charlie Bromberg](https://twitter.com/\_nwodtuhs) for his valuable work.
 {% endhint %}
