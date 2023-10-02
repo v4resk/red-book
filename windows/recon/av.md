@@ -1,4 +1,4 @@
-# Enum Security Solutions
+# Security Solutions
 
 ## Theory
 
@@ -34,6 +34,16 @@ Next, we can start using the Get-MpComputerStatus cmdlet to get the current Wind
 PS C:\Users\v4resk> Get-MpComputerStatus
 PS C:\Users\v4resk> Get-MpComputerStatus | select RealTimeProtectionEnabled
 ```
+
+We can try to disable it using the Set-MpPreference cmdlet.
+
+```powershell
+Set-MpPreference -DisableRealtimeMonitoring $true
+```
+
+{% hint style="info" %}
+We need Admin privileges in order to modify Defender properties
+{% endhint %}
 {% endtab %}
 
 {% tab title="FireWalls" %}
