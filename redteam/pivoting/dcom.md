@@ -42,6 +42,9 @@ Impacket's [**dcomexec.py**](https://github.com/fortra/impacket/blob/master/exam
 #semi-interactive shell
 dcomexec.py domain/user:password@IP <command>
 
+#SilentCommand, mor likely to bypass security solutions
+dcomexec.py -silentcommand domain/user:password@IP <command>
+
 #semi-interactive shell using ShellWindows object
 # -object [{ShellWindows,ShellBrowserWindow,MMC20}]
 dcomexec.py domain/user:password@IP -object ShellWindows <command>

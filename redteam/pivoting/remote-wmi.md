@@ -27,6 +27,9 @@ The [Impacket](https://github.com/fortra/impacket)'s [wmiexec](https://github.co
 ```bash
 #Execute commands over MS-WMI
 wmiexec.py <domain>/<username>:<password>@<target>
+
+#SilentCommand, mor likely to bypass security solutions
+wmiexec.py -silentcommand <domain>/<username>:<password>@<target> <COMMAND>
 ```
 {% endtab %}
 
