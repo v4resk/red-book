@@ -80,7 +80,7 @@ By default, Certipy uses LDAPS, which is not always supported by the domain cont
 {% endtab %}
 
 {% tab title="Windows" %}
-From Windows systems, the [Certify](https://github.com/GhostPack/Certify) (C#) tool can be used to enumerate these sensitive access control entries. At the time of writing (October 21st, 2021) [BloodHound](../../../a-d/recon/tools/bloodhound.md) doesn't support (yet) enumeration of these access controls. [PowerView](https://github.com/PowerShellMafia/PowerSploit/blob/master/Recon/PowerView.ps1) can be used to modify the template.
+From Windows systems, the [Certify](https://github.com/GhostPack/Certify) (C#) tool can be used to enumerate these sensitive access control entries. At the time of writing (October 21st, 2021) [BloodHound](../../recon/tools/bloodhound.md) doesn't support (yet) enumeration of these access controls. [PowerView](https://github.com/PowerShellMafia/PowerSploit/blob/master/Recon/PowerView.ps1) can be used to modify the template.
 
 ```powershell
 # 1. Enumerate sensitive access control entries

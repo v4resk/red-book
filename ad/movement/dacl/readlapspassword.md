@@ -2,7 +2,7 @@
 
 This abuse can be carried out when controlling an object that has `GenericAll` or `AllExtendedRights` (or combination of `GetChanges` and (`GetChangesInFilteredSet` or `GetChangesAll`) for domain-wise synchronization) over the target computer configured for LAPS. The attacker can then read the LAPS password of the computer account (i.e. the password of the computer's local administrator).
 
-This page is about LAPS-based attacks, you may have a look on [LAPS-based persistences](../../../a-d/persistence/laps.md) and [LAPS enumeration](../../../a-d/recon/objects-and-settings/laps.md).
+This page is about LAPS-based attacks, you may have a look on [LAPS-based persistences](../../persistence/laps.md) and [LAPS enumeration](../../recon/objects-and-settings/laps.md).
 
 {% tabs %}
 {% tab title="UNIX-like" %}

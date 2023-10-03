@@ -57,7 +57,7 @@ Users are known to be a weak (if not the weakest) link of security. Unaware user
 
 Testers can try the combinations of user/passwords with the tools mentioned in the "common passwords" technique.
 
-[Smartbrute](https://github.com/ShutdownRepo/smartbrute) (Python) and [sprayhound](https://github.com/Hackndo/sprayhound) (Python) can dynamically fetch the organization's users and lockout policy to only bruteforce accounts that have a few attempts left in order to avoid locking them out. This can only be done when supplying a valid Active Directory account's credentials. These tools have the ability to check if accounts have their username set as password. Finally, a great additional feature is that neo4j is supported and compromised accounts can be set as owned (useful when working with [BloodHound](../../../../a-d/recon/tools/bloodhound.md)).
+[Smartbrute](https://github.com/ShutdownRepo/smartbrute) (Python) and [sprayhound](https://github.com/Hackndo/sprayhound) (Python) can dynamically fetch the organization's users and lockout policy to only bruteforce accounts that have a few attempts left in order to avoid locking them out. This can only be done when supplying a valid Active Directory account's credentials. These tools have the ability to check if accounts have their username set as password. Finally, a great additional feature is that neo4j is supported and compromised accounts can be set as owned (useful when working with [BloodHound](../../../recon/tools/bloodhound.md)).
 
 {% hint style="info" %}
 [username-anarchy](https://github.com/urbanadventurer/username-anarchy) is a tool that can produce a list of usernames based on a firstname and lastname.

@@ -14,14 +14,14 @@ If an object's (called **objectA**) DACL features an ACE stating that another ob
 
 ### Recon
 
-DACL abuse potential paths can be identified by [BloodHound](../../../a-d/recon/tools/bloodhound.md) from UNIX-like (using the Python ingestor [bloodhound.py](https://github.com/fox-it/BloodHound.py)) and Windows (using the [SharpHound](https://github.com/BloodHoundAD/SharpHound3) ingestor) systems.
+DACL abuse potential paths can be identified by [BloodHound](../../recon/tools/bloodhound.md) from UNIX-like (using the Python ingestor [bloodhound.py](https://github.com/fox-it/BloodHound.py)) and Windows (using the [SharpHound](https://github.com/BloodHoundAD/SharpHound3) ingestor) systems.
 
 Other tools like, `Get-DomainObjectAcl` and `Add-DomainObjectAcl` from [Powersploit](https://github.com/PowerShellMafia/PowerSploit/)'s [Powerview](https://github.com/PowerShellMafia/PowerSploit/blob/dev/Recon/PowerView.ps1), `Get-Acl` and `Set-Acl` official Powershell cmdlets, or [Impacket](https://github.com/SecureAuthCorp/impacket)'s dacledit.py script (Python) can be used in order to manually inspect an object's DACL. :warning: _At the time of writing, the Pull Request (_[_#1291_](https://github.com/SecureAuthCorp/impacket/pull/1291)_) offering that dacledit is still being reviewed and in active development. It has the following command-line arguments._
 
 See this page for more details
 
-{% content-ref url="../../../a-d/recon/objects-and-settings/dacls.md" %}
-[dacls.md](../../../a-d/recon/objects-and-settings/dacls.md)
+{% content-ref url="../../recon/objects-and-settings/dacls.md" %}
+[dacls.md](../../recon/objects-and-settings/dacls.md)
 {% endcontent-ref %}
 
 ### Abuse
@@ -57,7 +57,7 @@ With enough permissions (`GenericAll`, `GenericWrite`) over a disabled object, i
 
 ### BloodHound edges
 
-[BloodHound](../../../a-d/recon/tools/bloodhound.md) has the ability to map abuse paths, with some that rely on DACL abuse. The following edges are not includes in the mindmap above:
+[BloodHound](../../recon/tools/bloodhound.md) has the ability to map abuse paths, with some that rely on DACL abuse. The following edges are not includes in the mindmap above:
 
 * `AddKeyCredentialLink`, a write permission on an object's `Key-Credential-Link` attribute, for [Shadow Credentials](../kerberos/shadow-credentials.md) attacks
 * `WriteSPN`, a write permission on an object's `Service-Principal-Name` attribute, for [targeted Kerberoasting](targeted-kerberoasting.md) and [SPN jacking](../kerberos/spn-jacking.md) attacks

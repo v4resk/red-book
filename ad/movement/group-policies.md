@@ -16,8 +16,8 @@ In certain scenarios, an attacker can gain control over GPOs. Some ACEs can give
 
 To enumerate GPO's delegation & permissions, please refer to following page
 
-{% content-ref url="../../a-d/recon/objects-and-settings/group-policies.md" %}
-[group-policies.md](../../a-d/recon/objects-and-settings/group-policies.md)
+{% content-ref url="../recon/objects-and-settings/group-policies.md" %}
+[group-policies.md](../recon/objects-and-settings/group-policies.md)
 {% endcontent-ref %}
 
 ## Practice

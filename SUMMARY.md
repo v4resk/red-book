@@ -233,6 +233,8 @@
 
 * [Reconnaissance](windows/recon/README.md)
   * [Security Solutions](windows/recon/av.md)
+  * [OS Details](windows/recon/os-details.md)
+  * [Processes & Services](windows/recon/processes-and-services.md)
   * [🛠️ FIle/Folder ACLs](windows/recon/acls.md)
 * [Local Privilege Escalation](windows/privesc/README.md)
   * [Credentials In Files](windows/privesc/credentials-in-files.md)
@@ -252,7 +254,9 @@
 
 ## Linux Pentest <a href="#linux" id="linux"></a>
 
-* [Reconnaissance](linux/reconnaissance.md)
+* [Reconnaissance](linux/reconnaissance/README.md)
+  * [OS Details](linux/reconnaissance/os-details.md)
+  * [🛠️ Process & Services](linux/reconnaissance/process-and-services.md)
 * [Local Privilege Escalation](linux/privesc/README.md)
   * [Kernel Exploits](linux/privesc/kernel-exploits.md)
     * [CVE-2023-0386 (OverlayFS)](linux/privesc/kernel-exploits/cve-2023-0386-overlayfs.md)

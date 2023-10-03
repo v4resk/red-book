@@ -10,17 +10,13 @@ Microsoft Windows offers a wide range of fine-grained permissions and privileges
 
 ## Practice
 
-To get a list of all services, we can use following commands:
+### Enumerate
 
-```
-net start
-wmic service list brief
-wmic service get name,displayname,pathname,startmode
-sc query
-Get-Service
-```
+{% content-ref url="../../recon/processes-and-services.md" %}
+[processes-and-services.md](../../recon/processes-and-services.md)
+{% endcontent-ref %}
 
-
+### Exploit
 
 {% content-ref url="weak-service-permissions.md" %}
 [weak-service-permissions.md](weak-service-permissions.md)

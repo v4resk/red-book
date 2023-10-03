@@ -53,7 +53,7 @@ findDelegation.py -user "account" "DOMAIN"/"USER":"PASSWORD"
 {% endtab %}
 
 {% tab title="Windows" %}
-From Windows systems, [BloodHound](../../../../a-d/recon/tools/bloodhound.md) can be used to identify unconstrained and constrained delegation.
+From Windows systems, [BloodHound](../../../recon/tools/bloodhound.md) can be used to identify unconstrained and constrained delegation.
 
 The following queries can be used to audit delegations.
 
