@@ -14,7 +14,7 @@ BloodHound needs to be fed JSON files containing info on the objects and relatio
 {% tab title="Windows" %}
 SharpHound ([sources](https://github.com/BloodHoundAD/SharpHound), [builds](https://github.com/BloodHoundAD/BloodHound/tree/master/Collectors)) is designed targeting .Net 4.5. It can be used as a compiled executable.
 
-It must be run from the context of a domain user, either directly through a logon or through another method such as runas (`runas /netonly /user:$DOMAIN\$USER`) (see [Impersonation](../../../ad/movement/credentials/impersonation.md)). Alternatively, SharpHound can be used with the `LdapUsername` and `LdapPassword` flags for that matter.
+It must be run from the context of a domain user, either directly through a logon or through another method such as runas (`runas /netonly /user:$DOMAIN\$USER`) (see [Impersonation](../../movement/credentials/impersonation.md)). Alternatively, SharpHound can be used with the `LdapUsername` and `LdapPassword` flags for that matter.
 
 ```bash
 SharpHound.exe --collectionmethod All
@@ -43,7 +43,7 @@ More help on the CLI commands [here](https://github.com/BloodHoundAD/SharpHound#
 {% hint style="success" %}
 Here are a few **tips and tricks** on the collection process
 
-* Testers can absolutely run SharpHound from a computer that is not enrolled in the AD domain, by running it in a domain user context (e.g. with runas, [pass-the-hash](../../../ad/movement/ntlm/pth.md) or [overpass-the-hash](../../../ad/movement/kerberos/ptk.md)). This is useful when domain computers have antivirus or other protections preventing (or slowing) testers from using enumerate or exploitation tools.
+* Testers can absolutely run SharpHound from a computer that is not enrolled in the AD domain, by running it in a domain user context (e.g. with runas, [pass-the-hash](../../movement/ntlm/pth.md) or [overpass-the-hash](../../movement/kerberos/ptk.md)). This is useful when domain computers have antivirus or other protections preventing (or slowing) testers from using enumerate or exploitation tools.
 * When obtaining a foothold on an AD domain, testers should first run SharpHound with all collection methods, and then start a loop collection to enumerate more sessions.
 {% endhint %}
 {% endtab %}
@@ -60,6 +60,31 @@ bloodhound.py --zip -c All -d $DOMAIN -u $USERNAME -p $PASSWORD -dc $DOMAIN_CONT
 {% hint style="info" %}
 This ingestor is not as powerful as the C# one. It mostly misses GPO collection methods **but** a good news is that it can do pass-the-hash. It becomes really useful when compromising a domain account's NT hash.
 {% endhint %}
+
+If this is necessary for any reason, we can use LDAP dumps, also known as LDIF files, and covert them into JSON files ingestible by BloodHound using [ldif2bloodhound](https://github.com/SySS-Research/ldif2bloodhound).
+
+```bash
+# Dump LDAP with ldapsearch
+# The second -E argument is needed so that ACLs are also dumped.
+# In case StartTLS does not work, remove the -ZZ flag and replace ldap:// with ldaps://
+$ for base in "" "CN=Schema,CN=Configuration," ; do \
+    LDAPTLS_REQCERT=never ldapsearch \
+    -H ldap://<DC> \
+    -D <USERNAME>@corp.local \
+    -w <PASSWORD> \
+    -b "${base}DC=corp,DC=local" \
+    -x \
+    -o ldif-wrap=no \
+    -E pr=1000/noprompt \
+    -E '!1.2.840.113556.1.4.801=::MAMCAQc=' \
+    -LLL \
+    -ZZ \
+    '(objectClass=*)' \
+    ; done >> output_$(date +%s).ldif
+    
+# Convert LDIF to JSON files ingestible by BloodHound
+$ ldif2bloodhound output_*.ldif -o /tmp/OutputFolder
+```
 {% endtab %}
 {% endtabs %}
 
@@ -76,7 +101,7 @@ Once the collection is over, the data can be uploaded and analysed in BloodHound
 * Find information about selected nodes: sessions, properties, group membership/members, local admin rights, Kerberos delegations, RDP rights, outbound/inbound control rights (ACEs), and so on
 * Find help about edges/attacks (abuse, opsec considerations, references)
 
-Using BloodHound can help find attack paths and abuses like [ACEs abuse](broken-reference), [Kerberos delegations abuse](../../../ad/movement/kerberos/delegations/), [credential dumping](../../../ad/movement/credentials/dumping/) and [credential shuffling](../../../ad/movement/credentials/credential-shuffling.md), [GPOs abuse](../../../ad/movement/group-policies.md), [Kerberoast](../../../ad/movement/kerberos/kerberoast.md), [ASREProast](../../../ad/movement/kerberos/asreproast.md), [domain trusts attacks](../../../ad/movement/domain-trusts.md), etc.
+Using BloodHound can help find attack paths and abuses like [ACEs abuse](broken-reference), [Kerberos delegations abuse](../../movement/kerberos/delegations/), [credential dumping](../../movement/credentials/dumping/) and [credential shuffling](../../movement/credentials/credential-shuffling.md), [GPOs abuse](../../movement/group-policies.md), [Kerberoast](../../movement/kerberos/kerberoast.md), [ASREProast](../../movement/kerberos/asreproast.md), [domain trusts attacks](../../movement/domain-trusts.md), etc.
 
 ![](../../../.gitbook/assets/Screenshot%20from%202020-12-08%2015-29-30.png)
 
@@ -85,10 +110,10 @@ For detailed and official documentation on the analysis process, testers can che
 {% hint style="success" %}
 Here are some examples of quick wins to spot with BloodHound
 
-* **shadow admins**: users that are not members of privileged Active Directory groups but have sensitive privileges over the domain (run graph queries like "find principals with [DCSync](../../../ad/movement/credentials/dumping/dcsync.md) rights", "users with most local admin rights", or check "inbound control rights" in the domain and privileged groups node info panel)
+* **shadow admins**: users that are not members of privileged Active Directory groups but have sensitive privileges over the domain (run graph queries like "find principals with [DCSync](../../movement/credentials/dumping/dcsync.md) rights", "users with most local admin rights", or check "inbound control rights" in the domain and privileged groups node info panel)
 * **other over-privileged users**: user that can control many objects ([ACEs](broken-reference)) and that often leads to admins, shadow admins or sensitive servers (check for "outbound control rights" in the node info panel)
-* **over-privileged computers**: find computers that can do [(un)constrained Kerberos delegation](../../../ad/movement/kerberos/delegations/) (run graph queries like "find computer with unconstrained delegations")
-* **admin computers**: find computers (A) that have admin rights against other computers (B). This can be exploited as follows: computer A triggered with an [MS-RPRN abuse (printerbug),](../../../ad/movement/mitm-and-coerced-authentications/ms-rprn.md) authentication is then [relayed](../../../ad/movement/ntlm/relay.md), and credentials are [dumped](../../../ad/movement/credentials/dumping/) on the computer B.
+* **over-privileged computers**: find computers that can do [(un)constrained Kerberos delegation](../../movement/kerberos/delegations/) (run graph queries like "find computer with unconstrained delegations")
+* **admin computers**: find computers (A) that have admin rights against other computers (B). This can be exploited as follows: computer A triggered with an [MS-RPRN abuse (printerbug),](../../movement/mitm-and-coerced-authentications/ms-rprn.md) authentication is then [relayed](../../movement/ntlm/relay.md), and credentials are [dumped](../../movement/credentials/dumping/) on the computer B.
 
 Other quick wins can be easily found with the [bloodhound-quickwin](https://github.com/kaluche/bloodhound-quickwin) Python script
 

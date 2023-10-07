@@ -79,6 +79,12 @@ You can run following command to ignore the certificate:
 ```bash
 LDAPTLS_REQCERT=never ldapsearch -x -H ldaps://<IP> [....] 
 ```
+
+
+{% endhint %}
+
+{% hint style="info" %}
+We may use ldapsearch output (also known as LDIF files) and covert it into JSON files ingestible by BloodHound using [ldif2bloodhound](https://github.com/SySS-Research/ldif2bloodhound). See [this page](../../../ad/recon/tools/bloodhound.md#unix-like) for more informations.
 {% endhint %}
 {% endtab %}
 
@@ -127,6 +133,8 @@ ntlmrelayx -t "ldap://domaincontroller" --dump-adcs --dump-laps --dump-gmsa
 ```
 {% endtab %}
 {% endtabs %}
+
+
 
 
 
