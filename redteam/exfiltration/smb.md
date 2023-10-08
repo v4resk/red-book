@@ -17,7 +17,7 @@ SMB (Server Message Block) exfiltration refers to the unauthorized extraction or
 Tools like [CrackMapExec](https://github.com/Porchetta-Industries/CrackMapExec) can be used to recursively download a SMB share's content.
 
 ```bash
-crackmapexec smb $IP -u $USERNAME -p $PASSWORD -M spider_plus -o DOWNLOAD_FLAG=True
+crackmapexec smb $IP -u $USERNAME -p $PASSWORD -M spider_plus -o DOWNLOAD_FLAG=True MAX_FILE_SIZE=999999
 ```
 
 The previous command generates a json file with the list of accessible files in shares. We may use jq to parse this json output.

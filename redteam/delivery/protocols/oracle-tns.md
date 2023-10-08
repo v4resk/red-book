@@ -306,11 +306,11 @@ odat externaltable -s <IP> -U <username> -P <password> -d <SID> --getFile "C:/Re
 {% endtab %}
 {% endtabs %}
 
-### Elevating Privileges
+### OracleSQL Privilege Escalation
 
 {% tabs %}
 {% tab title="odat" %}
-We may use the [privesc](https://github.com/quentinhardy/odat/wiki/privesc) module from odat to escalate privileges. In that link you can find **several ways to escalate privileges using odat.**
+We may use the [privesc](https://github.com/quentinhardy/odat/wiki/privesc) module from odat to escalate our privileges on the DB. On that link you will find **several ways to escalate privileges using odat.**
 
 ```bash
 #Get module Help

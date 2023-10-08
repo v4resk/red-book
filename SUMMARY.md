@@ -183,6 +183,7 @@
     * [RDP](redteam/delivery/protocols/rdp.md)
     * [SMB](redteam/delivery/protocols/smb.md)
     * [WinRM](redteam/delivery/protocols/winrm.md)
+    * [MSSQL](redteam/delivery/protocols/mssql.md)
     * [🛠️ RPC Port Mapper](redteam/delivery/protocols/rpc-port-mapper.md)
     * [🛠️ FTP](redteam/delivery/protocols/ftp.md)
     * [🛠️ Telnet](redteam/delivery/protocols/telnet.md)

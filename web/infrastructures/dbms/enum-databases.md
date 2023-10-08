@@ -2,12 +2,12 @@
 
 ## Theory
 
-When exploiting SQL injection vulnerabilities, or when you gain access to the database itself, it is often necessary to gather some information about the database itself. This includes the type and version of the database software, and the contents of the database in terms of which tables and columns it contains.
+When exploiting SQL injection vulnerabilities, or when you gain access to the database itself, it is often necessary to gather some information about the database itself. This includes the type and version of the database software, and the contents of the database in terms of which tables and columns it contains or even users and permissions informations.
 
 ## Practice
 
 {% hint style="info" %}
-All queries on this page can be used with different techniques as UNION or Blind based attacks
+Some queries on this page can be used with different [SQLi techniques](../../web-vulnerabilities/server-side/sql-injection/) as UNION or Blind based attacks
 {% endhint %}
 
 ### Database version
@@ -77,8 +77,11 @@ We can list all databases with the following queries:
 
 ```sql
 SELECT name FROM master..sysdatabases;
-/*or*/
+#Or
 SELECT DB_NAME(N); — for N = 0, 1, 2, …
+
+#Or in mssqlclient's impacket shell
+enum_db
 ```
 {% endtab %}
 
@@ -210,6 +213,171 @@ SELECT column_name FROM information_schema.columns WHERE table_name='TABLE-NAME-
 {% tab title="SQLite" %}
 ```sql
 SELECT sql FROM sqlite_master WHERE type!='meta' AND sql NOT NULL AND name ='table_name';
+```
+{% endtab %}
+{% endtabs %}
+
+### DB Users
+
+Additionally, we may enumerate DB users with following queries.
+
+{% tabs %}
+{% tab title="MySQL" %}
+```sql
+#Get all users
+SELECT * FROM mysql.user;
+
+#Get current user
+SELECT user();
+```
+{% endtab %}
+
+{% tab title="MSSQL" %}
+```sql
+#Get all users
+select sp.name as login, sp.type_desc as login_type, sl.password_hash, sp.create_date, sp.modify_date, case when sp.is_disabled = 1 then 'Disabled' else 'Enabled' end as status from sys.server_principals sp left join sys.sql_logins sl on sp.principal_id = sl.principal_id where sp.type not in ('G', 'R') order by sp.name;
+
+#Get current user
+select user_name();
+
+#Or in mssqlclient's impacket shell
+enum_users
+```
+{% endtab %}
+
+{% tab title="OracleSQL" %}
+```sql
+#Get all users in the Oracle Databas
+SELECT * FROM dba_users;
+#Get all users that are visible to the current user
+SELECT * FROM all_users;
+
+#Get current user
+SELECT * FROM user_users;
+```
+{% endtab %}
+
+{% tab title="PostgreSQL" %}
+```sql
+#Get all users
+SELECT * FROM pg_catalog.pg_user;
+#Or
+SELECT usename AS role_name,
+ CASE
+  WHEN usesuper AND usecreatedb THEN
+    CAST('superuser, create database' AS pg_catalog.text)
+  WHEN usesuper THEN
+    CAST('superuser' AS pg_catalog.text)
+  WHEN usecreatedb THEN
+    CAST('create database' AS pg_catalog.text)
+  ELSE
+    CAST('' AS pg_catalog.text)
+ END role_attributes
+FROM pg_catalog.pg_user
+ORDER BY role_name desc;
+#Or if in a SQL Shell
+postgres> \du+
+
+#Get current user
+SELECT current_user;
+```
+{% endtab %}
+{% endtabs %}
+
+### Permissions & Privileges
+
+Sometimes it can be useful to enumerate user's permissions or privileges. We can acheive this with the following queries.&#x20;
+
+{% tabs %}
+{% tab title="MySQL" %}
+```sql
+#Show privileges granted to the current MySQL user
+mysql> SHOW GRANTS;
+
+#Show privileges granted to a particular MySQL user account from a given host
+mysql> SHOW GRANTS FOR 'user_name'@'host';
+mysql> SHOW GRANTS FOR 'root'@'localhost';
+```
+{% endtab %}
+
+{% tab title="MSSQL" %}
+Introduction about some MSSQL terms:
+
+1. **Securable:** These are the resources to which the SQL Server Database Engine authorization system controls access. There are three broader categories under which a securable can be differentiated:
+   * Server – For example databases, logins, endpoints, availability groups and server roles
+   * Database – For example database role, application roles, schema, certificate, full text catalog, user
+   * Schema – For example table, view, procedure, function, synonym
+2. **Permission:** Every SQL Server securable has associated permissions like ALTER, CONTROL, CREATE that can be granted to a principal. Permissions are managed at the server level using logins and at the database level using users.
+3. **Principal:** The entity that receives permission to a securable is called a principal. The most common principals are logins and database users. Access to a securable is controlled by granting or denying permissions or by adding logins and users to roles which have access.
+
+```sql
+# Show all different securables names
+SELECT distinct class_desc FROM sys.fn_builtin_permissions(DEFAULT);
+
+# Show all possible permissions in MSSQL
+SELECT * FROM sys.fn_builtin_permissions(DEFAULT);
+
+# Get all my permissions over securable type SERVER
+SELECT * FROM fn_my_permissions(NULL, 'SERVER');
+
+# Get all my permissions over a database
+USE <database>
+SELECT * FROM fn_my_permissions(NULL, 'DATABASE');
+
+# Get members of the role "sysadmin"
+Use master
+EXEC sp_helpsrvrolemember 'sysadmin';
+
+# Get if the current user is sysadmin
+SELECT IS_SRVROLEMEMBER('sysadmin');
+
+# Get users that can run xp_cmdshell (except DBA)
+Use master
+EXEC sp_helprotect 'xp_cmdshell'
+
+# Make user DB Admin (DBA)
+EXEC master.dbo.sp_addsrvrolemember 'user', 'sysadmin;
+```
+{% endtab %}
+
+{% tab title="OracleSQL" %}
+```sql
+# Get all system privileges granted to all users 
+# GRANTEE is the name, role, or user that was assigned the privilege.
+# PRIVILEGE is the privilege that is assigned.
+# ADMIN_OPTION indicates if the granted privilege also includes the ADMIN option.
+SELECT * FROM DBA_SYS_PRIVS;
+
+# Get which users have direct grant access to a table
+# GRANTEE is the name, role, or user that was assigned the privilege.
+# TABLE_NAME is the name of the object (table, index, sequence, etc).
+# PRIVILEGE is the privilege assigned to the GRANTEE for the associated object.
+SELECT * FROM DBA_TAB_PRIVS;
+
+#Get current user's privilegs
+SELECT * FROM USER_SYS_PRIVS;
+```
+
+Privileges that are inhereted through other roles will not be readily shown. To resolve this, it is advisable to use this advanced script by David Arthur:&#x20;
+
+{% file src="../../../.gitbook/assets/find_all_privs2.sql" %}
+{% endtab %}
+
+{% tab title="PostgreSQL" %}
+```sql
+#Enumerate users privileges over databases (in a SQL Shell)
+postgres> \l
+
+#Enumerate users privileges over tables
+SELECT * FROM information_schema.table_privileges;
+#in a SQL Shell
+postgres> \du+
+
+#Enumerate specific user privileges
+SELECT * from information_schema.table_privileges WHERE grantee = 'username';
+
+#Enumerate users privileges over a specific table
+SELECT * from information_schema.table_privileges WHERE table_name = 'MyTableName';
 ```
 {% endtab %}
 {% endtabs %}
