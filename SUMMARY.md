@@ -266,7 +266,7 @@
       * [CVE-2021-3493](linux/privesc/kernel-exploits/overlayfs-exploits/cve-2021-3493.md)
     * [Looney Tunables](linux/privesc/kernel-exploits/looney-tunables.md)
     * [CVE-2023-32233 (CAP\_NET\_ADMIN)](linux/privesc/kernel-exploits/nf\_tables.md)
-    * [🛠️ DirtyPipe](linux/privesc/kernel-exploits/dirtypipe.md)
+    * [Dirty Pipe](linux/privesc/kernel-exploits/dirtypipe.md)
     * [🛠️ DirtyCow](linux/privesc/kernel-exploits/dirtycow.md)
     * [🛠️ RDS](linux/privesc/kernel-exploits/rds.md)
     * [🛠️ Full Nelson](linux/privesc/kernel-exploits/full-nelson.md)
