@@ -1,3 +1,9 @@
+---
+description: >-
+  MITRE ATT&CK™ Event Triggered Execution: Image File Execution Options
+  Injection - Technique T1546.012
+---
+
 # Image File Execution Options
 
 ## Theory
@@ -35,3 +41,5 @@ REG ADD "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution 
 ## Resources
 
 {% embed url="https://pentestlab.blog/2020/01/13/persistence-image-file-execution-options-injection/" %}
+
+{% embed url="https://attack.mitre.org/techniques/T1546/012/" %}
