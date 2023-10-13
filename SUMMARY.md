@@ -248,8 +248,11 @@
     * [Weak Registry Permissions](windows/privesc/services/weak-registry-permissions.md)
     * [Unquoted Service Path](windows/privesc/services/unquoted-service-path.md)
 * [Persistence](windows/persistence/README.md)
+  * [Registry](windows/persistence/registry/README.md)
+    * [Run Keys](windows/persistence/registry/run-keys.md)
+    * [Winlogon](windows/persistence/registry/winlogon.md)
+    * [Image File Execution Options](windows/persistence/registry/image-file-execution-options.md)
   * [WMI Event Subscription](windows/persistence/wmi-event-subscription.md)
-  * [Image File Execution Options](windows/persistence/image-file-execution-options.md)
   * [Logon Triggered](windows/persistence/logon-triggered.md)
   * [Accessibility features Backdoor](windows/persistence/accessibility-features-backdoor.md)
 
