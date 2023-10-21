@@ -153,6 +153,7 @@
 
 * [Reconnaissance](redteam/recon/README.md)
   * [DNS Enumeration](redteam/recon/dns-enum.md)
+  * [Subdomains enumeration](redteam/recon/subdomains-enumeration.md)
   * [Email Harvesting](redteam/recon/email-harvesting.md)
   * [Google Dorks](redteam/recon/google-dorks.md)
   * [🛠️ OSINT](redteam/recon/osint.md)

@@ -31,6 +31,14 @@ But we can use it to only do passive enumeration
 amass enum --passive -d "domain.com"
 ```
 {% endtab %}
+
+{% tab title="crt.sh" %}
+We may use crt.sh and curl to find subdomains
+
+```bash
+curl -s 'https://crt.sh/?q=<TARGET.URL>&output=json'|jq
+```
+{% endtab %}
 {% endtabs %}
 
 ### Virtual host fuzzing
