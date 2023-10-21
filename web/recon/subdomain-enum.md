@@ -39,6 +39,10 @@ We may use crt.sh and curl to find subdomains
 curl -s 'https://crt.sh/?q=<TARGET.URL>&output=json'|jq
 ```
 {% endtab %}
+
+{% tab title="netcraft" %}
+[Netcraft](https://searchdns.netcraft.com) is an internet service company, based in England, offering a free web portal that performs various information gathering functions including subdomain passive enumeration.
+{% endtab %}
 {% endtabs %}
 
 ### Virtual host fuzzing
