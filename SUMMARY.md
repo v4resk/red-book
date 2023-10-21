@@ -156,6 +156,7 @@
   * [Subdomains enumeration](redteam/recon/subdomains-enumeration.md)
   * [Email Harvesting](redteam/recon/email-harvesting.md)
   * [Google Dorks](redteam/recon/google-dorks.md)
+  * [Open-Source Code](redteam/recon/open-source-code.md)
   * [🛠️ OSINT](redteam/recon/osint.md)
   * [🛠️ Maltego](redteam/recon/maltego.md)
   * [🛠️ Specialized Search Engines](redteam/recon/specialized-search-engines.md)
