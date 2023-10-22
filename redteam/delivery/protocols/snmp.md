@@ -58,7 +58,14 @@ In versions 1 and 2/2c if you to use a **bad** community string the server wont 
 Alternatively, we can use a tool such as [onesixtyone](https://github.com/trailofbits/onesixtyone), which will attempt a brute force attack against an IP or list of IP addresses.
 
 ```bash
-onesixtyone -c /usr/share/seclists/Discovery/SNMP/snmp.txt <target-ip/target-file>
+# Single host
+onesixtyone -c /usr/share/seclists/Discovery/SNMP/snmp.txt <TARGET_IP>
+
+# Scan a subnet with public string
+onesixtyone 192.168.4.0/24 public
+
+# Targets file
+onesixtyone -c /usr/share/seclists/Discovery/SNMP/snmp.txt -i <TARGETS_FILE>
 ```
 {% endtab %}
 
