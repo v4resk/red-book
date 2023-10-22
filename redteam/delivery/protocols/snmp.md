@@ -88,8 +88,12 @@ We can probe and query SNMP values using the snmpwalk tool
 # -v: SNMP version
 # -c: Community string
 # -t: Timeout (in seconds)
+# -Oa: translate any hexadecimal string into ASCII
 # Enum all
 snmpwalk -v <SNMP_VERSION> -c <COMMUNITY_STRING> -t 10 <TARGET_IP> .1
+
+# ASCII mode
+snmpwalk -v <SNMP_VERSION> -c <COMMUNITY_STRING> -t 10 -Oa <TARGET_IP> .1
 
 # Get extended
 snmpwalk -v <SNMP_VERSION> -c <COMMUNITY_STRING> -t 10 <TARGET_IP> NET-SNMP-EXTEND-MIB::nsExtendObject
