@@ -157,6 +157,8 @@
   * [Email Harvesting](redteam/recon/email-harvesting.md)
   * [Google Dorks](redteam/recon/google-dorks.md)
   * [Open-Source Code](redteam/recon/open-source-code.md)
+  * [Host Discovery](redteam/recon/host-discovery.md)
+  * [TCP/UDP Service Scanning](redteam/recon/tcp-udp-service-scanning.md)
   * [🛠️ OSINT](redteam/recon/osint.md)
   * [🛠️ Maltego](redteam/recon/maltego.md)
   * [🛠️ Specialized Search Engines](redteam/recon/specialized-search-engines.md)
