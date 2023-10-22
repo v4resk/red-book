@@ -31,6 +31,6 @@ nmblookup -A $IPAdress
 Some NBT-NS recon can be carried out with the enum4linux tool (see [this page](../../../ad/recon/tools/enum4linux.md)).
 {% endhint %}
 
-## Ressources
+## Resources
 
 {% embed url="https://wiki.wireshark.org/NetBIOS/NBNS" %}

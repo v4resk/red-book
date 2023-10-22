@@ -190,6 +190,7 @@
     * [RDP](redteam/delivery/protocols/rdp.md)
     * [SMB](redteam/delivery/protocols/smb.md)
     * [SMTP](redteam/delivery/protocols/smtp.md)
+    * [SNMP](redteam/delivery/protocols/snmp.md)
     * [WinRM](redteam/delivery/protocols/winrm.md)
     * [🛠️ RPC Port Mapper](redteam/delivery/protocols/rpc-port-mapper.md)
     * [🛠️ FTP](redteam/delivery/protocols/ftp.md)

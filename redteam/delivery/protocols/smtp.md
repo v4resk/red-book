@@ -36,7 +36,7 @@ We may list all supported enhanced functions of a SMTP server as follow
 220 example.com SMTP Server Banner 
 >> HELO 
 250 example.com Hello [x.x.x.x] 
-<strong>>> EHLO all
+<strong>>> EHLO all #or EHLO domain.com
 </strong></code></pre>
 {% endtab %}
 
@@ -187,6 +187,10 @@ nc <target-ip> 25
 
 # Telnet
 telnet <target-ip> 25
+
+# From Windows
+dism /online /Enable-Feature /FeatureName:TelnetClient
+telnet <target-ip> 25
 ```
 {% endtab %}
 
@@ -336,9 +340,7 @@ python3 magicspoofmail.py -d victim.com -t -e destination@gmail.com --subject TE
 {% endtab %}
 {% endtabs %}
 
-
-
-## Ressources
+## Resources
 
 {% embed url="https://book.hacktricks.xyz/network-services-pentesting/pentesting-smtp" %}
 
