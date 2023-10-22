@@ -1,5 +1,5 @@
 ---
-description: Port TCP 5985,5986
+description: Ports TCP 5985,5986
 ---
 
 # WinRM

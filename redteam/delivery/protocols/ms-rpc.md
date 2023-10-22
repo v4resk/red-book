@@ -1,5 +1,5 @@
 ---
-description: Port TCP 135,593
+description: Ports TCP 135,593
 ---
 
 # MS-RPC

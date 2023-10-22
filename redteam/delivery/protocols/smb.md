@@ -8,10 +8,10 @@ description: Ports TCP 445,139
 
 The Server Message Block Protocol (SMB Protocol) is a client-server communication protocol used for sharing access to files, printers, serial ports, and data on a network. It can also carry transaction protocols for authenticated inter-process communication.
 
-SMB protocols operate on different ports depending on the type of communication:
+SMB protocol operate on different ports depending on the type of communication:
 
 * **Port 445 (TCP)**: This port is used for direct SMB communication over TCP/IP, including file and printer sharing, remote administration, and inter-process communication.
-* **Port 139 (TCP)**: This port is used for SMB over NetBIOS, which is an underlying protocol that SMB relies on for name resolution and session establishment.
+* **Port 139 (TCP)**: This port is used for SMB over [NetBIOS](nbt-ns-netbios.md), which is an underlying protocol that SMB relies on for name resolution and session establishment.
 
 ## Practice
 
@@ -187,6 +187,14 @@ nmap --script="smb-enum-shares" -p 445 <IP>
 nmap --script="smb-enum-shares" --script-args smbusername=administrator,smbpassword=mypassword_1 -p 445 <IP>
 ```
 {% endtab %}
+
+{% tab title="Net" %}
+One useful tool for enumerating SMB shares from a Windows host is [net view](https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-server-2012-r2-and-2012/hh875576\(v=ws.11\)).
+
+```powershell
+net view \\<COMPUTER_NAME> /all
+```
+{% endtab %}
 {% endtabs %}
 
 #### ACLs of Share's File/Folder
@@ -212,10 +220,6 @@ find /mnt/Share|sed 's|/mnt/Share/||g' > smb_items.txt
 #Get all ACLs
 for i in $(cat smb_items.txt); do echo $i; smbcacls -N '\\10.10.10.103\Department Shares' $i; echo ; done > smb_acls.txt
 ```
-{% endtab %}
-
-{% tab title="Second Tab" %}
-
 {% endtab %}
 {% endtabs %}
 
