@@ -6,3 +6,14 @@ Using the Windows Registry as a persistence vector is a common technique employe
 
 ## Practice
 
+{% content-ref url="run-keys.md" %}
+[run-keys.md](run-keys.md)
+{% endcontent-ref %}
+
+{% content-ref url="winlogon.md" %}
+[winlogon.md](winlogon.md)
+{% endcontent-ref %}
+
+{% content-ref url="image-file-execution-options.md" %}
+[image-file-execution-options.md](image-file-execution-options.md)
+{% endcontent-ref %}
