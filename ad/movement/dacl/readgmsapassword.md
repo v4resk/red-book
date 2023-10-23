@@ -12,7 +12,7 @@ On UNIX-like systems, [gMSADumper](https://github.com/micahvandeusen/gMSADumper)
 gMSADumper.py -u 'user' -p 'password' -d 'domain.local'
 ```
 
-
+***
 
 **Alternative #1**: Impacket's [ntlmrelayx](https://github.com/SecureAuthCorp/impacket/blob/master/examples/ntlmrelayx.py) tool can be used to read and decode gMSA passwords. :warning: Some tests showed ntlmrelayx missed entries gMSADumper didn't.
 
