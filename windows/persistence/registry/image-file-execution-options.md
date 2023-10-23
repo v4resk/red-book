@@ -13,6 +13,10 @@ In both scenarios code execution will achieved and the trigger will be either th
 
 ## Practice
 
+{% hint style="danger" %}
+By editing Image File Execution Options, the original exe will not start
+{% endhint %}
+
 {% tabs %}
 {% tab title="GlobalFlag" %}
 With the GlobalFlag persistence technique, payload is triggered when the target application is closed.

