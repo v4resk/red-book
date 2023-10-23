@@ -259,6 +259,7 @@
     * [Run Keys](windows/persistence/registry/run-keys.md)
     * [Winlogon](windows/persistence/registry/winlogon.md)
     * [Image File Execution Options](windows/persistence/registry/image-file-execution-options.md)
+    * [AEDebug Keys](windows/persistence/registry/aedebug-keys.md)
     * [Natural Language 6 DLLs](windows/persistence/registry/natural-language-6-dlls.md)
   * [WMI Event Subscription](windows/persistence/wmi-event-subscription.md)
   * [Logon Triggered](windows/persistence/logon-triggered.md)

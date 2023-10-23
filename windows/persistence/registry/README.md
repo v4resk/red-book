@@ -17,3 +17,11 @@ Using the Windows Registry as a persistence vector is a common technique employe
 {% content-ref url="image-file-execution-options.md" %}
 [image-file-execution-options.md](image-file-execution-options.md)
 {% endcontent-ref %}
+
+{% content-ref url="aedebug-keys.md" %}
+[aedebug-keys.md](aedebug-keys.md)
+{% endcontent-ref %}
+
+{% content-ref url="natural-language-6-dlls.md" %}
+[natural-language-6-dlls.md](natural-language-6-dlls.md)
+{% endcontent-ref %}
