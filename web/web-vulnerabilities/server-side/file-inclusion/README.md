@@ -22,6 +22,14 @@ In PHP, vulnerable functions are: `require`, `require_once`, `include`, `include
 
 ## Practice
 
+{% hint style="danger" %}
+When using curl for LFI/RFI/Path Traversal testing, we should use the `--path-as-is` argument to prevent curl from editing our request
+
+```
+curl 'http://10.10.10.8/../../../../etc/passwd' --path-as-is
+```
+{% endhint %}
+
 #### Basic LFI
 
 {% tabs %}
