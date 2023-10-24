@@ -30,11 +30,11 @@ reg add "HKCU\Environment" /v UserInitMprLogonScript /d "C:\Windows\shell.exe" /
 {% endtab %}
 
 {% tab title="Registry" %}
-You can also force a user to execute a program on logon via the registry. [Check this page for more details](registry/run-keys.md)
+You can also force a user to execute a program on logon via the registry. [Check this page for more details](run-keys.md)
 {% endtab %}
 
 {% tab title="WinLogon" %}
-Winlogon, the Windows component that loads your user profile right after authentication can be abuse for persistence. [Check this page for more details](registry/winlogon.md).
+Winlogon, the Windows component that loads your user profile right after authentication can be abuse for persistence. [Check this page for more details](winlogon.md).
 {% endtab %}
 {% endtabs %}
 

@@ -16,7 +16,7 @@ The concept here is pretty simple. Windows supports some built in accessibility 
 {% tab title="Utilman.exe" %}
 We can replace the `C:\Windows\System32\Utilman.exe` with a cmd.exe and rename it (utilman.exe). You may need to change utilman.exe owner to yourself first as TrustedIntaller may be giving you a hard time.
 
-An other way is just to edit the [Image File Execution Options](registry/image-file-execution-options.md) registry
+An other way is just to edit the [Image File Execution Options](image-file-execution-options.md) registry
 
 ```bash
 #Windows
@@ -32,7 +32,7 @@ Know, press `Windows Key`+`U` to spawn an elevated shell
 {% tab title="Sethc.exe" %}
 We can replace the `C:\Windows\System32\sethc.exe` with a cmd.exe and rename it (sethc.exe). You may need to change sethc.exe owner to yourself first as TrustedIntaller may be giving you a hard time.
 
-An other way is just to edit the [Image File Execution Options](registry/image-file-execution-options.md) registry
+An other way is just to edit the [Image File Execution Options](image-file-execution-options.md) registry
 
 ```bash
 #Windows
