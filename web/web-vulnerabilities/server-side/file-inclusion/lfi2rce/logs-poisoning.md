@@ -78,14 +78,14 @@ You may find the access.log files on the following locations, for more locations
 /var/log/httpd-access.log
 
 ## Windows
-C:\xampp\apache\logs
+C:\xampp\apache\logs\access.log
 
 # NGINX LOG FILE
 ## Linux
 /var/log/nginx/access.log
 
 ## Windows
-C:\nginx\log
+C:\nginx\logs\access.log
 ```
 
 </details>
@@ -126,14 +126,14 @@ You may find the access.log files on the following locations, for more locations
 /var/log/httpd-error.log
 
 ## Windows
-C:\xampp\apache\logs
+C:\xampp\apache\logs\access.log
 
 # NGINX LOG FILE
 ## Linux
 /var/log/nginx/error.log
 
 ## Windows
-C:\nginx\log
+C:\nginx\logs\error.log
 ```
 
 </details>
