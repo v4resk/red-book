@@ -39,7 +39,7 @@ Below is a checklist to go through when conducting a pentest. Order is irrelevan
 
 * [ ] Caching of domain users is limited on workstations and avoided on servers to prevent [credential dumping](credentials/dumping/) of LSA secrets from registry.
 * [ ] [Group Policy Preferences Passwords](credentials/dumping/group-policies-preferences.md) are not used.
-* [ ] LSA protection are enabled to prevent [LSASS dumping](credentials/dumping/lsass.md).
+* [ ] LSA protection are enabled to prevent [LSASS dumping](credentials/dumping/lsass/).
 * [ ] Network shares readable by all domain users don't contain sensitive data like passwords or certificates limiting [credential dumping](credentials/dumping/network-shares.md).
 
 ### Domain-level configuration and best-practices
