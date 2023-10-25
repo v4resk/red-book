@@ -262,7 +262,7 @@
   * [Logon Triggered](windows/persistence/logon-triggered.md)
   * [LSA](windows/persistence/lsa/README.md)
     * [Security Support Provider DLLs](windows/persistence/lsa/security-support-provider-dlls.md)
-    * [🛠️ Authentication Package](windows/persistence/lsa/authentication-package.md)
+    * [Authentication Package](windows/persistence/lsa/authentication-package.md)
   * [Natural Language 6 DLLs](windows/persistence/natural-language-6-dlls.md)
   * [Run Keys](windows/persistence/run-keys.md)
   * [Winlogon](windows/persistence/winlogon.md)
