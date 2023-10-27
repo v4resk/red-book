@@ -72,7 +72,7 @@ Using [mssqlclient](https://github.com/fortra/impacket/blob/master/examples/mssq
 #Classic login
 mssqlclient.py -port 1433 DOMAIN/username:password@<target-ip>
 
-#Use Windows Authentication
+#Use Windows Authentication (forces NTLM authentication)
 mssqlclient.py -port 1433 DOMAIN/username:password@<target-ip> -windows-auth
 
 #Use Kerberos
