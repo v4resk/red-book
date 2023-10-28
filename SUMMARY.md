@@ -354,7 +354,7 @@
       * [Blind Attacks](web/web-vulnerabilities/server-side/sql-injection/blind-sqli/README.md)
         * [Boolean Based](web/web-vulnerabilities/server-side/sql-injection/blind-sqli/boolean-based.md)
         * [Time Based](web/web-vulnerabilities/server-side/sql-injection/blind-sqli/time-based.md)
-        * [🛠️ Error Based](web/web-vulnerabilities/server-side/sql-injection/blind-sqli/error-based.md)
+        * [Error Based](web/web-vulnerabilities/server-side/sql-injection/blind-sqli/error-based.md)
     * [Insecure Deserialization](web/web-vulnerabilities/server-side/deserialization/README.md)
       * [.NET Deserialization](web/web-vulnerabilities/server-side/deserialization/dotnet.md)
       * [Python Deserialization](web/web-vulnerabilities/server-side/deserialization/python.md)
