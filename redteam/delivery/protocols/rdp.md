@@ -8,6 +8,8 @@ description: Port TCP 3389
 
 **Remote Desktop** Protocol (**RDP**) is a proprietary protocol developed by Microsoft, which provides a user with a graphical interface to connect to another computer over a network connection. The user employs **RDP** client software for this purpose, while the other computer must run **RDP** server software.
 
+**NLA** will allow us to authenticate the user before the opening of an RDP session, thus avoiding unnecessary demands on the server if the person cannot authenticate. The [CredSSP protocol](https://learn.microsoft.com/en-us/windows/win32/secauthn/credential-security-support-provider) is used for authentication.
+
 ## Practice
 
 ### Enumerate

