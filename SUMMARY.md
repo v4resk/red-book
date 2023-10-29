@@ -168,17 +168,18 @@
   * [Code & Process Injection](redteam/weapon/code-and-process-injection/README.md)
     * [.NET Reflective Assembly](redteam/weapon/code-and-process-injection/.net-reflective-assembly.md)
   * [Code Execution](redteam/weapon/code-execution/README.md)
-    * [MSHTA](redteam/weapon/code-execution/mshta.md)
-    * [WSH](redteam/weapon/code-execution/wsh.md)
-    * [VBA (Macro)](redteam/weapon/code-execution/vba.md)
-    * [RegSrv32](redteam/weapon/code-execution/regsrv32.md)
-    * [Powershell Without Powershell.exe](redteam/weapon/code-execution/whithout-powershell.md)
-    * [MSBuild](redteam/weapon/code-execution/msbuild.md)
-    * [WMI](redteam/weapon/code-execution/wmic.md)
     * [CMSTP](redteam/weapon/code-execution/cmstp.md)
+    * [MSBuild](redteam/weapon/code-execution/msbuild.md)
+    * [MSHTA](redteam/weapon/code-execution/mshta.md)
+    * [MS Office - RTF Files RCE](redteam/weapon/code-execution/ms-word-rtf-files-rce.md)
+    * [Powershell Without Powershell.exe](redteam/weapon/code-execution/whithout-powershell.md)
+    * [RegSrv32](redteam/weapon/code-execution/regsrv32.md)
     * [Scheduled Tasks](redteam/weapon/code-execution/scheduled-tasks.md)
     * [Services](redteam/weapon/code-execution/services.md)
-    * [MS Office - RTF Files RCE](redteam/weapon/code-execution/ms-word-rtf-files-rce.md)
+    * [VBA (Macro)](redteam/weapon/code-execution/vba.md)
+    * [Windows Library Files](redteam/weapon/code-execution/windows-library-files.md)
+    * [WMI](redteam/weapon/code-execution/wmic.md)
+    * [WSH](redteam/weapon/code-execution/wsh.md)
 * [Initial Access](redteam/delivery/README.md)
   * [Network services](redteam/delivery/protocols/README.md)
     * [DNS](redteam/delivery/protocols/dns.md)
@@ -241,7 +242,7 @@
   * [Over HTTP(s)](redteam/exfiltration/http.md)
   * [Over SMB](redteam/exfiltration/smb.md)
 
-## Windows Pentest <a href="#windows" id="windows"></a>
+## Windows
 
 * [Reconnaissance](windows/recon/README.md)
   * [Security Solutions](windows/recon/av.md)
@@ -271,7 +272,7 @@
   * [Winlogon](windows/persistence/winlogon.md)
   * [WMI Event Subscription](windows/persistence/wmi-event-subscription.md)
 
-## Linux Pentest <a href="#linux" id="linux"></a>
+## Linux
 
 * [Reconnaissance](linux/reconnaissance/README.md)
   * [OS Details](linux/reconnaissance/os-details.md)
@@ -320,7 +321,7 @@
 * [Persistence](linux/persistence/README.md)
   * [SSH](linux/persistence/ssh.md)
 
-## Web Pentest <a href="#web" id="web"></a>
+## Web
 
 * [Reconnaissance](web/recon/README.md)
   * [Subdomains enumeration](web/recon/subdomain-enum.md)
