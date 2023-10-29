@@ -6,7 +6,7 @@ description: The Art of Offensive CyberSecurity
 
 <figure><img src=".gitbook/assets/v4resk_a_design_logo_in_dark_and_red_with_a_bushido_a509518b-b4fe-4d65-9c54-06ec53c9dbcd(1).png" alt=""><figcaption></figcaption></figure>
 
-**The Red-Book** is offering a collection of **technical notes** and **cheat sheets**. Our goal is to provide you with practical knowledge rooted in real-world experience. All the information you find within these pages has been meticulously sourced from a diverse range of valuable resources on the internet.
+**The Red-Book** by **infiltr8** is offering a collection of **technical notes** and **cheat sheets**. Our goal is to provide you with practical knowledge rooted in real-world experience. All the information you find within these pages has been meticulously sourced from a diverse range of valuable resources on the internet.
 
 We have scoured numerous reputable sources, including research papers, industry blogs, documentation, and expert opinions, to bring you the most relevant and up-to-date content. The techniques, methodologies, and concepts presented in **The Red-Book** have been carefully vetted and tested (we still human, it's possible there's some mistakes).
 
@@ -17,13 +17,7 @@ As you embark on this journey with us, keep in mind that offensive cybersecurity
 :tada:Please feel free to contribute, give feedback/suggestions or reach out to me on Discord (**v4resk#0430**).
 
 {% hint style="danger" %}
-A big thanks to [David Gee](https://twitter.com/davedotdev) for his support and generosity in providing this domain name. If you haven't already, be sure to check out his website: [https://dave.dev/](https://dave.dev/).
-{% endhint %}
-
-{% hint style="danger" %}
-Around 90%, of the content relating to "Active Directory" comes from [The Hacker Recipes](https://www.thehacker.recipes/) website.
-
-Many thanks to [Charlie Bromberg](https://twitter.com/\_nwodtuhs) for his valuable work.
+Around 90%, of the content relating to "Active Directory" comes from [The Hacker Recipes](https://www.thehacker.recipes/) website. Many thanks to [Charlie Bromberg](https://twitter.com/\_nwodtuhs) for his valuable work.
 {% endhint %}
 
 {% hint style="danger" %}
@@ -33,6 +27,6 @@ The 🛠️ emoji is used where work has to be done.
 {% endhint %}
 
 {% hint style="info" %}
-Fell free to contribute with donation in cryptocurency\
-ETH: 0x6F8274f1BEF5ca774769A73AB520C5461fB22219
+Fell free to contribute with donation in cryptocurrency\
+ETH/BSC: 0x6F8274f1BEF5ca774769A73AB520C5461fB22219
 {% endhint %}

