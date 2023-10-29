@@ -161,6 +161,7 @@
   * [Vulnerability Scanning](redteam/recon/vulnerability-scanning.md)
   * [Google Dorks](redteam/recon/google-dorks.md)
   * [Open-Source Code](redteam/recon/open-source-code.md)
+  * [Files Metadata](redteam/recon/files-metadata.md)
   * [🛠️ Maltego](redteam/recon/maltego.md)
   * [🛠️ Specialized Search Engines](redteam/recon/specialized-search-engines.md)
 * [Weaponization](redteam/weapon/README.md)

