@@ -33,7 +33,7 @@ The **tokens that appear as Disabled** can be enable, you you actually can abuse
 ### Enable/Recover All the tokens
 
 {% tabs %}
-{% tab title="Second Tab" %}
+{% tab title="FullPowers" %}
 On Windows, some services executed as `LOCAL SERVICE` or `NETWORK SERVICE` are configured to **run with a restricted set of privileges**. However, when you **create a scheduled task**, the new process created by the **Task Scheduler Service** has **all the default privileges** of the associated user account (except _SeImpersonate_). Therefore, with some token manipulations, you can spawn a new process with all the missing privileges.
 
 We can use [FullPowers](https://github.com/itm4n/FullPowers) to recover the default privilege set of a LOCAL/NETWORK SERVICE account:
