@@ -1,8 +1,12 @@
-# Online
+---
+description: MITRE ATT&CK™ Brute Force - Technique T1110
+---
+
+# Online - Attacking Services
 
 ## Theory
 
-Online brute-force attacks targets publicly-exposed network services by submitting many passwords or passphrases with the hope of eventually guessing correctly.&#x20;
+Online password attacks target publicly-exposed network services by submitting many passwords or passphrases with the hope of eventually guessing correctly.&#x20;
 
 ## Practice
 
