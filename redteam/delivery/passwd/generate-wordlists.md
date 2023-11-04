@@ -96,7 +96,7 @@ You can also use the [OneRuleToRuleThemAll](https://github.com/NotSoSecure/passw
 
 To create your own rules, you definitely want to check this [hashcat documentation](https://hashcat.net/wiki/doku.php?id=rule\_based\_attack), but here is an example of creating your custom rule and some notes about useful functions:
 
-<table><thead><tr><th width="180">Description</th><th width="98">Function</th><th width="139">Example Rule</th><th width="148"> Ex. Input</th><th> Ex. Output</th></tr></thead><tbody><tr><td>Append Char</td><td>$X</td><td>$1$2</td><td>Password</td><td>Password12</td></tr><tr><td>Prepend Char</td><td>^X</td><td>$1$2</td><td>Password</td><td>12Password</td></tr><tr><td>Capitalize the first letter and lower the rest</td><td>c</td><td>c</td><td>password</td><td>Password</td></tr></tbody></table>
+<table><thead><tr><th width="180">Description</th><th width="98">Function</th><th width="139">Example Rule</th><th width="148"> Ex. Input</th><th> Ex. Output</th></tr></thead><tbody><tr><td>Append Char</td><td>$X</td><td>$1$2</td><td>Password</td><td>Password12</td></tr><tr><td>Prepend Char</td><td>^X</td><td>$1$2</td><td>Password</td><td>12Password</td></tr><tr><td>Capitalize the first letter and lower the rest</td><td>c</td><td>c</td><td>password</td><td>Password</td></tr><tr><td>Uppercase all letters</td><td>u</td><td>u</td><td>password</td><td>PASSWORD</td></tr></tbody></table>
 
 Note that if the rule functions are:&#x20;
 
