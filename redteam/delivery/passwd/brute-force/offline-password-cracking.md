@@ -149,6 +149,7 @@ To generate a rule-based wordlists, [see this page](../generate-wordlists.md#rul
 ```bash
 # Crack hash using rule + wordlist
 hashcat -m <mode> -a 0 hash.txt wordlist.txt -r /usr/share/rules/best64.rule
+hashcat -m <mode> -a 0 hash.txt /usr/share/wordlist/rockyou -r /usr/share/hashcat/rules/rockyou-30000.rule
 
 # Crack hash with combinor
 # each word of a dictionary is appended to each word in another dictionary. (left and right)
