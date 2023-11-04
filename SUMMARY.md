@@ -58,7 +58,7 @@
     * [Generate Wordlists](redteam/delivery/passwd/generate-wordlists.md)
     * [Brute-Force](redteam/delivery/passwd/brute-force/README.md)
       * [Online](redteam/delivery/passwd/brute-force/online.md)
-      * [Offline](redteam/delivery/passwd/brute-force/offline.md)
+      * [🛠️ Offline](redteam/delivery/passwd/brute-force/offline.md)
   * [MITM and coerced auths](redteam/delivery/mitm-and-coerced-auths.md)
   * [🛠️ Phishing](redteam/delivery/phishing.md)
 * [Credential Access](redteam/credential-access/README.md)
