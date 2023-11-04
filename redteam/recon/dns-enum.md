@@ -1,5 +1,5 @@
 ---
-description: MITRE ATT&CK™  Gather Victim Network Information - DNS - T1590.002
+description: 'MITRE ATT&CK™  Gather Victim Network Information: DNS - T1590.002'
 ---
 
 # DNS Enumeration
