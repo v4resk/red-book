@@ -45,6 +45,7 @@ python2 /usr/share/john/ssh2john.py private_key.txt > hash.txt
 Crack the password of the private key using the formatted text.
 
 ```bash
+#John
 john --wordlist=wordlist.txt hash.txt
 ```
 {% endtab %}
