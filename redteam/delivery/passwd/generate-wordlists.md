@@ -82,21 +82,63 @@ python3 cupp.py -a
 **Rule-Based attacks** assume the attacker knows something about the password policy. Rules are applied to create passwords within the guidelines of the given password policy and should, in theory, only generate valid passwords. Using pre-existing wordlists may be useful when generating passwords that fit a policy — for example, manipulating or 'mangling' a password such as `password`: `p@ssword`, `Pa$$word`, `Passw0rd`, and so on.
 
 {% tabs %}
-{% tab title="John" %}
-[John the ripper](https://github.com/openwall/john) has a config file that contains rule sets, which is located at `/etc/john/john.conf` or `/opt/john/john.conf` depending on your distro or how john was installed. You can read /etc/john/john.conf and look for List.Rules to see all the available rules:
-
-```bash
-# Create wordlist from a rule
-john --wordlist=/tmp/single-password-list.txt --rules=best64 --stdout > wordlist.txt
-```
-{% endtab %}
-
 {% tab title="Hashcat" %}
-[Hashcat](https://github.com/hashcat/hashcat) has rule sets located at `/usr/share/hashcat/rules/`. To create your own rules, you may check this [hashcat documentation](https://hashcat.net/wiki/doku.php?id=rule\_based\_attack).
+[Hashcat](https://github.com/hashcat/hashcat) rule sets are located at `/usr/share/hashcat/rules/`. You can generate a wordlist using a rule as follow:
 
 ```bash
 # Create wordlist from a rule
 hashcat -r /usr/share/rules/best64.rule wordlist.txt --stdout > new_wordlist.txt
+```
+
+You can also use the [OneRuleToRuleThemAll](https://github.com/NotSoSecure/password\_cracking\_rules/blob/master/OneRuleToRuleThemAll.rule) rule to generate a wordlist.
+
+#### Create your own rules
+
+To create your own rules, you definitely want to check this [hashcat documentation](https://hashcat.net/wiki/doku.php?id=rule\_based\_attack), but here is an example of creating your custom rule and some notes about useful functions:
+
+<table><thead><tr><th width="180">Description</th><th width="98">Function</th><th width="139">Example Rule</th><th width="148"> Ex. Input</th><th> Ex. Output</th></tr></thead><tbody><tr><td>Append Char</td><td>$X</td><td>$1$2</td><td>Password</td><td>Password12</td></tr><tr><td>Prepend Char</td><td>^X</td><td>$1$2</td><td>Password</td><td>12Password</td></tr><tr><td>Capitalize the first letter and lower the rest</td><td>c</td><td>c</td><td>password</td><td>Password</td></tr></tbody></table>
+
+Note that if the rule functions are:&#x20;
+
+* **On the same line,** separated by a space: Hashcat will use them consecutively on each password of the word list.&#x20;
+* **On separate lines:** Hashcat will use each rule separately on each password of the word list.&#x20;
+
+```bash
+# Using following rule file:
+# $1 c
+$ hashcat -r my.rule password.txt --stdout 
+Password1
+
+# Using following rule file:
+# $1
+# c
+$ hashcat -r my.rule password.txt --stdout
+password1
+Password
+```
+
+Let's assume an [AD password policy](../../../ad/recon/objects-and-settings/password-policy.md) that requires an upper case letter, a special character, and a numerical value. We may use the following rules along with hashcat:
+
+```bash
+# Rules file
+# Capital letter at the beginning, 
+# random number and special character at the end -> common human behaviour ;)
+$ cat my.rule
+c $1 $!
+c $2 $!
+c $1 $2 $3 $!
+
+# Generate the wordlist
+hashcat -r my.rule passwords.txt --stdout > new_passwords.txt
+```
+{% endtab %}
+
+{% tab title="John" %}
+[John the ripper](https://github.com/openwall/john) has a config file that contains rule sets, which is located at `/etc/john/john.conf` or `/opt/john/john.conf` depending on your distro or how john was installed. You can read /etc/john/john.conf and look for `List.Rules` to see all the available rules:
+
+```bash
+# Create wordlist from a rule
+john --wordlist=/tmp/single-password-list.txt --rules=best64 --stdout > wordlist.txt
 ```
 {% endtab %}
 
