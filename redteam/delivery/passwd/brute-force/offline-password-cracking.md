@@ -29,7 +29,7 @@ To do this, we can use the `-h` or `--example-hashes` arguments. Alternatively w
 We may use `hashid` against a hash to do identify the hash type
 
 ```bash
-echo '$S$C33783772bRXEx1aCsvY.dqgaaSu76XmVlKrW9Qu8IQlvxHlmzLf' |hashid
+$ hashid '$S$C33783772bRXEx1aCsvY.dqgaaSu76XmVlKrW9Qu8IQlvxHlmzLf'
 Analyzing '$S$C33783772bRXEx1aCsvY.dqgaaSu76XmVlKrW9Qu8IQlvxHlmzLf'
 [+] Drupal > v7.x
 ```
