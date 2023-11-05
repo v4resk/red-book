@@ -22,9 +22,9 @@ Note that John is mainly a CPU-based cracking tool that also supports GPUs, whil
 {% tab title="Hashcat" %}
 Hashcat offers different modes that you can use to crack a specific algorithm. When you crack a hash with hashcat, the first step is to find the right mode.
 
-To do this, we can use the `--example-hash` argument or use the [example\_hash](https://hashcat.net/wiki/doku.php?id=example\_hashes) online resource.
+To do this, we can use the `-h` or `--example-hashes` arguments. Alternatively we may refers to the [example\_hash](https://hashcat.net/wiki/doku.php?id=example\_hashes) online resource.
 
-#### HashId
+#### HashId & Help
 
 We may use `hashid` against a hash to do identify the hash type
 
@@ -34,16 +34,14 @@ Analyzing '$S$C33783772bRXEx1aCsvY.dqgaaSu76XmVlKrW9Qu8IQlvxHlmzLf'
 [+] Drupal > v7.x
 ```
 
-Then we can use following commands to retrieve that the hashcat mode is 7900
+Then we can use following commands to retrieve that the Hashcat mode is 7900
 
 ```bash
-$ hashcat --example-hashes|grep -i Drupal -C 1
-Hash mode #7900
-  Name................: Drupal7
-  Category............: Forums, CMS, E-Commerce
+$ hashcat -h |grep -i 'Drupal'
+   7900 | Drupal7  | Forums, CMS, E-Commerce
 ```
 
-#### Hashcat & Grep
+#### Example\_hashes & Grep
 
 We may directly use the `--example-hash` argument to find the right mode. Using the previous hash, we can easily find the 7900 mode.
 
