@@ -19,17 +19,24 @@ We may search for cleartext passwords in various files stored locally. There is 
 [Dir](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/dir) command can be use to find configuration files by recursively searching files with a specific extension or name.
 
 ```powershell
-# /s: recursive search
-dir /s *pass* == *cred* == *vnc* == *.config*
+# /s : Recursive search
+# /b : Displays a bare list of directories and files, w/o additional information.
+# Check for config/password related files
+cd C:\folder\to\search\in
+dir /s /b *pass* == *cred* == *vnc* == *.config*
 
-# /A:H display hidden files 
+# /A:H : display hidden files 
 dir /A:H /s "c:\program files"
 
 # Check Recycle.bin and SID Folder
 dir /s \'$Recycle.Bin'
+
+# Check for juicy extensions
+cd C:\folder\to\search\in
+dir /s /b *.txt == *.pdf == *.xls == *.xlsx == *.doc == *.docx == *.ini
 ```
 
-Using [Get-ChildItem](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.management/get-childitem?view=powershell-7.3) Powershell cmdlet, we may acheive the same actions
+Using [Get-ChildItem](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.management/get-childitem?view=powershell-7.3) Powershell cmdlet, we may achieve the same actions
 
 ```powershell
 # Files
@@ -40,6 +47,9 @@ Get-ChildItem -Force -Path c:\\ -Directory -Filter "*pass*" -Recurse 2>$null
 
 # Check Recycle.bin and SID Folder
 Get-ChildItem -Force -Path \'$Recycle.Bin'
+
+# Check for juicy extensions
+Get-ChildItem -Path C:\ -Include *.txt,*.pdf,*.xls,*.xlsx,*.doc,*.docx,*.ini -File -Recurse -ErrorAction SilentlyContinue
 ```
 {% endtab %}
 {% endtabs %}

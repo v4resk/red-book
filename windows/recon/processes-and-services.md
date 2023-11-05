@@ -41,6 +41,8 @@ To obtain a list of all processes, we can use one of the following commands
 wmic process list brief
 wmic process get name,executablepath,processid
 wmic process get processid,commandline 
+#Get commandline for a given process
+wmic process where processid="2484" get name,commandline,processid
 
 # TaskList
 tasklist /V
