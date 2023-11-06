@@ -1,3 +1,7 @@
+---
+description: MITRE ATT&CK™ File and Directory Discovery - Technique T1083
+---
+
 # FIle/Folder ACLs
 
 ## Theory
@@ -30,3 +34,5 @@ UKNOWN
 ## Resources
 
 {% embed url="https://learn.microsoft.com/en-us/windows/win32/secauthz/access-control-lists" %}
+
+{% embed url="https://attack.mitre.org/techniques/T1083/" %}

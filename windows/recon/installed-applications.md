@@ -1,3 +1,7 @@
+---
+description: MITRE ATT&CK™ Software Discovery - Technique T1518
+---
+
 # Installed applications
 
 ## Theory
@@ -37,7 +41,7 @@ Using WMI, we can easily enumerate installed applications
 Get-WmiObject -Class Win32_Product | Select-Object Name, Version
 
 # CMD
-wmic product get Name, Version
+wmic product get Name,Version
 ```
 {% endtab %}
 
@@ -56,3 +60,7 @@ dir "C:\Users\<your-user>\Downloads"
 ```
 {% endtab %}
 {% endtabs %}
+
+## Resources
+
+{% embed url="https://attack.mitre.org/techniques/T1518/" %}

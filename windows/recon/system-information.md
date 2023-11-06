@@ -1,4 +1,8 @@
-# OS Details
+---
+description: MITRE ATT&CK™  System Information Discovery - Technique T1082
+---
+
+# System Information
 
 ## Theory
 

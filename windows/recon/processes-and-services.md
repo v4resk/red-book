@@ -1,3 +1,9 @@
+---
+description: >-
+  MITRE ATT&CK™  Process Discovery & System Service Discovery  - Technique T1057
+  & T1007
+---
+
 # Processes & Services
 
 ## Theory
@@ -56,3 +62,9 @@ Get-Process
 ```
 {% endtab %}
 {% endtabs %}
+
+## Resources
+
+{% embed url="https://attack.mitre.org/techniques/T1007/" %}
+
+{% embed url="https://attack.mitre.org/techniques/T1057/" %}

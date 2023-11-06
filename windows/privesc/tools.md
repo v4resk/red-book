@@ -38,6 +38,18 @@ Invoke-AllChecks
 ```
 {% endtab %}
 
+{% tab title=" Seatbelt" %}
+[Seatbelt](https://github.com/GhostPack/Seatbelt) is a C# project that performs a number of security oriented host-survey "safety checks" relevant from both offensive and defensive security perspectives.
+
+```powershell
+.\Seatbelt.exe -group=all
+```
+
+{% hint style="info" %}
+Compiled binaries can be found [here](https://github.com/r3motecontrol/Ghostpack-CompiledBinaries).
+{% endhint %}
+{% endtab %}
+
 {% tab title="Watson" %}
 [Watson](https://github.com/rasta-mouse/Watson) is a .NET tool designed to enumerate missing KBs and suggest exploits for Privilege Escalation vulnerabilities.
 

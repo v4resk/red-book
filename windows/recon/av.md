@@ -1,3 +1,9 @@
+---
+description: >-
+  MITRE ATT&CK™ Software Discovery: Security Software Discovery - Technique
+  T1518.001
+---
+
 # Security Solutions
 
 ## Theory
@@ -127,3 +133,5 @@ PS C:\> Get-AppLockerPolicy -Domain -LDAP "LDAP:// DC13.Contoso.com/CN={31B2F340
 ## Resources
 
 {% embed url="https://tryhackme.com/room/thelayoftheland" %}
+
+{% embed url="https://attack.mitre.org/techniques/T1518/001/" %}
