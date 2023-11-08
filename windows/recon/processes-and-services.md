@@ -8,16 +8,20 @@ description: >-
 
 ## Theory
 
-This page provides useful commands for Windows enumeration that can be used to query process and services informations.
+This page provides useful commands for Windows enumeration that can be used to query process and services information.
 
 ## Practice
 
 ### Services
 
-To obtain a list of all the services, we can use one of the following commands
+{% hint style="danger" %}
+When using a network logon like WinRM or a bind shell, use of `Get-CimInstance` or `Get-Service` with a non-administrative user leads to a "permission denied". However, employing an interactive logon, such as RDP, resolves this issue.
+{% endhint %}
 
 {% tabs %}
-{% tab title="Enumerate" %}
+{% tab title="CMD" %}
+To obtain a list of all the services, we can use one of the following commands
+
 ```powershell
 #Net command
 net start
@@ -28,9 +32,24 @@ wmic service get name,displayname,pathname,startmode
 
 #sc.exe
 sc.exe query state= all
+```
+{% endtab %}
 
-#Powershell
+{% tab title="PowerShell" %}
+To obtain a list of all the services, we can use one of the following commands
+
+```powershell
+# WMI
+## Basic Usage
+Get-CimInstance -ClassName win32_service | Select Name,State,PathName
+## Running Services
+Get-CimInstance -ClassName win32_service | Select Name,State,PathName | Where-Object {$_.State -like 'Running'}
+
+# WMI Wrapper
+## Basic Usage
 Get-Service
+## Running Services
+Get-Service | Where-Object {$_.Status -eq "Running"}
 ```
 {% endtab %}
 {% endtabs %}
@@ -38,7 +57,7 @@ Get-Service
 ### Processes
 
 {% tabs %}
-{% tab title="Enumerate" %}
+{% tab title="CMD" %}
 To obtain a list of all processes, we can use one of the following commands
 
 ```powershell
@@ -56,9 +75,17 @@ tasklist /V
 tasklist /SVC
 ## Display detailled information for process not running as SYSTEM
 tasklist /FI "USERNAME ne NT AUTHORITY\SYSTEM" /FI "STATUS eq running" /V
+```
+{% endtab %}
 
-#Powershell
+{% tab title="PowerShell" %}
+```powershell
+# WMI Wrapper
+## Basic Usage
 Get-Process
+
+## By name + print all attributes
+Get-Process winword | Format-List *
 ```
 {% endtab %}
 {% endtabs %}
