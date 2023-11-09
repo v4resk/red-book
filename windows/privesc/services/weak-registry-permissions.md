@@ -16,7 +16,9 @@ An attacker can leverage this misconfiguration to modify the ImagePath of servic
 
 {% tabs %}
 {% tab title="Enumerate" %}
-We can check our permissions over services registry doing:
+We can check our permissions over services registry using one of the following methods:
+
+#### CMD
 
 ```powershell
 #Get the binary paths of the services
@@ -24,12 +26,18 @@ reg query hklm\System\CurrentControlSet\Services /s /v imagepath
 
 #Try to write every service with its current content (to check if you have write permissions)
 for /f %a in ('reg query hklm\system\currentcontrolset\services') do del %temp%\reg.hiv 2>nul & reg save %a %temp%\reg.hiv 2>nul && reg restore %a %temp%\reg.hiv 2>nul && echo You can modify %a
+```
 
+#### Powershell
+
+```powershell
 #With PowerShell
 get-acl HKLM:\System\CurrentControlSet\services\* | Format-List * | findstr /i "<Username> Users Path Everyone"
 
 Get-Acl -Path HKLM:\SYSTEM\CurrentControlSet\Services\<ServiceName> | fl
 ```
+
+#### AccessChk
 
 Alternativly, we can use [AccessChk](https://learn.microsoft.com/fr-fr/sysinternals/downloads/accesschk) from sysinternals tools to enum permissions over services.
 
@@ -43,6 +51,8 @@ accesschk64.exe /accepteula -kvuqsw hklm\System\CurrentControlSet\services
 #List everyone rights on specific service registry
 accesschk64.exe /accepteula -kvuqsw hklm\System\CurrentControlSet\services\<Name>
 ```
+
+#### winPEAS
 
 Or we can use the `servicesinfo` module of [WinPeas](https://github.com/carlospolop/PEASS-ng/tree/master/winPEAS)
 

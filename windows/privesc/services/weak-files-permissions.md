@@ -30,12 +30,13 @@ for /f eol^=^"^ delims^=^" %a in (%temp%\perm.txt) do cmd.exe /c icacls "%a" 2>n
 #### PowerShell
 
 ```powershell
-Get-WmiObject Win32_Service | ForEach-Object { $serviceName = $_.Name; $path = $_.PathName; if ($path -ne $null -and $path -ne "") { $formattedPath = if ($path -match '.*\.exe') { if ($path -match '^"(.+?\.exe)') { $matches[1] } else { $path -replace '^(.*\.exe).*', '$1' } } else { $path }; $acl = try { Get-Acl -Path $formattedPath -ErrorAction Stop } catch { $null }; if ($acl -ne $null) { $relevantACE = $acl | Select-Object -ExpandProperty Access | Where-Object { $_.FileSystemRights -match 'Write|FullControl|Modify' }; if ($relevantACE) { [PSCustomObject]@{ ServiceName = $serviceName; FormattedPath = $formattedPath; ACL = $relevantACE | Select-Object -Property IdentityReference, FileSystemRights | Format-List | Out-String } } } } } | Sort-Object -Property FormattedPath -Unique | Format-List
+Get-WmiObject Win32_Service | ForEach-Object { $serviceName = $_.Name; $path = $_.PathName; $startName = $_.StartName; if ($path -ne $null -and $path -ne "") { $formattedPath = if ($path -match '.*\.exe') { if ($path -match '^"(.+?\.exe)') { $matches[1] } else { $path -replace '^(.*\.exe).*', '$1' } } else { $path }; $acl = try { Get-Acl -Path $formattedPath -ErrorAction Stop } catch { $null }; if ($acl -ne $null) { $relevantACE = $acl | Select-Object -ExpandProperty Access | Where-Object { $_.FileSystemRights -match 'Write|FullControl|Modify' }; if ($relevantACE) { [PSCustomObject]@{ ServiceName = $serviceName; FormattedPath = $formattedPath; StartName = $startName; ACL = $relevantACE | Select-Object -Property IdentityReference, FileSystemRights | Format-List | Out-String } } } } } | Sort-Object -Property FormattedPath -Unique | Format-List
 ```
 
 #### PowerUp
 
 ```powershell
+. .\PowerUp.ps1
 Get-ModifiableServiceFile
 ```
 
@@ -108,7 +109,7 @@ In case you have write permissions over the service binary folder, we can write 
 We can enumerate permissive service folders by using the following PowerShell command
 
 ```powershell
-Get-WmiObject Win32_Service | ForEach-Object { $serviceName = $_.Name; $path = $_.PathName; if ($path -ne $null -and $path -ne "") { $executableFolder = if ($path -match '.*\.exe') { if ($path -match '^"(.+\\)') { $matches[1] } else { $path -replace '^(.*\\).*', '$1' } } else { $path }; $acl = try { Get-Acl -Path $executableFolder -ErrorAction Stop } catch { $null }; if ($acl -ne $null) { $relevantACE = $acl | Select-Object -ExpandProperty Access | Where-Object { $_.FileSystemRights -match 'Write|FullControl|Modify' }; if ($relevantACE) { [PSCustomObject]@{ ServiceName = $serviceName; ExecutableFolder = $executableFolder; FolderACL = $relevantACE | Select-Object -Property IdentityReference, FileSystemRights | Format-List | Out-String } } } } } | Sort-Object -Property ExecutableFolder -Unique | Format-List
+Get-WmiObject Win32_Service | ForEach-Object { $s = $_.Name; $p = $_.PathName; $start = $_.StartName; if ($p -ne $null -and $p -ne "") { $f = if ($p -match '.*\.exe') { if ($p -match '^"(.+\\)') { $matches[1] } else { $p -replace '^(.*\\).*', '$1' } } else { $p }; $a = try { (Get-Acl -Path $f -ErrorAction Stop).Access | Where-Object { $_.FileSystemRights -match 'Write|FullControl|Modify' } } catch { $null }; if ($a) { [PSCustomObject]@{ ServiceName = $s; StartName = $start; ExecutableFolder = $f; FolderACL = $a | Select-Object IdentityReference, FileSystemRights | Format-List | Out-String } } } } | Sort-Object -Property ExecutableFolder -Unique | Format-List
 ```
 
 If we find a writable service folder, we first want to exfiltrate its service binary to a local windows machine. On this controlled computer, download [Process Monitor (procmon)](https://learn.microsoft.com/en-us/sysinternals/downloads/procmon) to monitor for missing or hijackable DLLs.
