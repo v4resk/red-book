@@ -6,7 +6,7 @@ description: MITRE ATT&CK™  Hijack Execution Flow - Technique T1574
 
 ## Theory
 
-Microsoft Windows offers a wide range of fine-grained permissions and privileges for controlling access to Windows components including services. We can take advantage of missconfiguration to elevate our privileges.
+One of the basic features of Microsoft Windows is the ability to run services. These are background processes, similar to Unix deamons. They are managed by the [Service Control Manager](https://learn.microsoft.com/en-us/windows/win32/services/service-control-manager). If they are misconfigured, as they usually run as a local system account, they can lead to privilege escalation.
 
 ## Practice
 
