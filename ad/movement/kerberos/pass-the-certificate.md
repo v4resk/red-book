@@ -87,7 +87,8 @@ Evil WinRM doesn't directly support PFX files and need a PEM certificate and pri
 openssl pkcs12 -in <PATH_TO_PFX_CERT> -clcerts -nokeys -out <PATH_TO_NEW_PEM_CERT>
 
 # Extrcat PEM key
-openssl pkcs12 -in <PATH_TO_PFX_CERT> -nocerts -noenc -out <PATH_TO_NEW_PEM_KEY>
+openssl pkcs12 -in <PATH_TO_PFX_CERT> -nocerts -out <ENC_PEM_KEY>
+openssl rsa -in <ENC_PEM_KEY> -out <FINAL_PEM_KEY>
 ```
 {% endtab %}
 
