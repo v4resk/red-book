@@ -6,10 +6,10 @@ description: MITRE ATT&CK™ Protocol Tunneling  - Technique T1572
 
 ## Theory
 
-Tunneling over the HTTP protocol technique encapsulates other protocols and sends them back and forth via the HTTP protocol. HTTP tunneling sends and receives many HTTP requests depending on the communication channel. We can pivoting throught this.
+HTTP tunneling is a technique that involves encapsulating non-HTTP traffic within HTTP to traverse network restrictions or security measures. It allows data to be transmitted in a way that appears as regular HTTP traffic, making it more likely to pass through firewalls and other filtering mechanisms that may be in place. Its a valuable pivoting technique to concidere.
 
 {% hint style="danger" %}
-We can also use HTTP(S) Tunneling as a good [exfiltration](../exfiltration/) channel.
+HTTP(S) Tunneling may also be used as an [exfiltration](../exfiltration/) channel.
 {% endhint %}
 
 ## Practice

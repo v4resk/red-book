@@ -6,7 +6,11 @@ description: MITRE ATT&CK™ Protocol Tunneling  - Technique T1572
 
 ## Theory
 
-DNS Tunneling also known as **TCP over DNS**, where an attacker encapsulates other protocols, such as HTTP requests, over the DNS protocol using the [DNS Data Exfiltration technique](../exfiltration/dns.md). DNS Tunneling establishes a communication channel where data is sent and received continuously.
+DNS Tunneling also known as **TCP over DNS**, is another method used for covert communication and circumventing network security measures. In DNS tunneling, data is encoded in DNS queries and responses to create a communication channel between two endpoints. DNS, which is primarily designed for translating domain names to IP addresses, becomes a carrier for data that may not be related to traditional domain resolution.
+
+{% hint style="danger" %}
+DNS tunneling may also be used as an [exfiltration](../exfiltration/dns.md) channel.
+{% endhint %}
 
 ## Practice
 

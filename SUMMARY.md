@@ -85,6 +85,7 @@
   * [Linux](redteam/persistence/linux.md)
 * [Lateral Movement](redteam/pivoting/README.md)
   * [Port Forwarding](redteam/pivoting/portfwd.md)
+  * [SSH Tunneling](redteam/pivoting/ssh-tunneling.md)
   * [HTTP(s) Tunneling](redteam/pivoting/http-tunneling.md)
   * [DNS Tunneling](redteam/pivoting/dnsTunneling.md)
   * [SMB-based](redteam/pivoting/smb-based.md)
