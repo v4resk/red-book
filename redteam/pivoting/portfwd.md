@@ -300,6 +300,48 @@ puttygen private_key -o private_key.ppk
 {% endtab %}
 {% endtabs %}
 
+## Netsh
+
+On windows target, we can perform port forwarding using the the built-in firewall configuration tool [Netsh](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/netsh) (also known as Network Shell).
+
+{% hint style="danger" %}
+On windows, Netsh requires administrative privileges to create a port forward.
+{% endhint %}
+
+{% tabs %}
+{% tab title="Local Forwarding" %}
+We can setup a Local Port Forward using the Netsh commands on the compromised host (Jump Box).
+
+The following command will open the local port `2222` on the Jump Box, and forward any connection from it to `192.168.50.44:22`.
+
+```bash
+# Create the Port Foward
+netsh interface portproxy add v4tov4 listenport=2222 connectaddress=192.168.50.44 connectport=22
+
+# Check if created
+netsh interface portproxy show all
+```
+
+Then, we ensure that the connections will be allowed on firewall
+
+```bash
+netsh advfirewall firewall add rule name="PortForwarding 2222" dir=in action=allow protocol=TCP localport=2222
+netsh advfirewall firewall add rule name="PortForwarding Out 2222" dir=out action=allow protocol=TCP localport=2222
+```
+
+After we successfully performed our port forwarding, we can clear our tracks like so.
+
+```bash
+# Remove Firewalls Rules
+netsh advfirewall firewall delete rule name="PortForwarding 2222"
+netsh advfirewall firewall delete rule name="PortForwarding 22"
+
+# Remove Port Forwar Rule
+netsh interface portproxy del v4tov4 listenport=2222 listenaddress=192.168.50.44
+```
+{% endtab %}
+{% endtabs %}
+
 ## Resources
 
 {% embed url="https://attack.mitre.org/techniques/T1572/" %}

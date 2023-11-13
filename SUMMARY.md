@@ -159,6 +159,7 @@
     * [MS-RPRN abuse (PrinterBug)](ad/movement/mitm-and-coerced-authentications/ms-rprn.md)
     * [MS-FSRVP abuse (ShadowCoerce)](ad/movement/mitm-and-coerced-authentications/ms-fsrvp.md)
     * [MS-DFSNM abuse (DFSCoerce)](ad/movement/mitm-and-coerced-authentications/ms-dfsnm.md)
+    * [MS-EVEN abuse (CheeseOunce)](ad/movement/mitm-and-coerced-authentications/ms-even-abuse-cheeseounce.md)
     * [PushSubscription abuse](ad/movement/mitm-and-coerced-authentications/pushsubscription-abuse.md)
     * [WebClient abuse (WebDAV)](ad/movement/mitm-and-coerced-authentications/webclient.md)
     * [Living off the land](ad/movement/mitm-and-coerced-authentications/living-off-the-land.md)

