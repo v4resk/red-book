@@ -31,7 +31,7 @@ Now let's discuss the Data Exfiltration over DNS requirements and steps, which a
 {% tabs %}
 {% tab title="Manualy" %}
 {% hint style="info" %}
-We concider that a NS record named `t1.tunnel.com` as been registred. It's poiting the Attacking IP.
+We consider that a NS record named `t1.tunnel.com` has been registered and is pointing the Attacking IP.
 {% endhint %}
 
 In order to receive any DNS request on the attacking machine, we need to capture the network traffic for any incoming UDP/53 packets using the [tcpdump](https://github.com/the-tcpdump-group/tcpdump) tool.

