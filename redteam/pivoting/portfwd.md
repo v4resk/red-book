@@ -170,7 +170,7 @@ This method doesn't require opening up a port on the compromised server.
 
 ### CHISEL
 
-[Chisel](https://github.com/jpillora/chisel) is an awesome tool which can be used to quickly and easily set up a tunnelled proxy or port forward through a compromised system, regardless of whether you have SSH access or not. It's written in Golang and can be easily compiled for any system (with static release binaries for Linux and Windows provided).
+[Chisel](https://github.com/jpillora/chisel) is an awesome tool which can be used to quickly and easily set up a tunnelled proxy or port forward through a compromised system regardless of whether you have SSH access or not. It's written in Golang and can be easily compiled for any system (with static release binaries for Linux and Windows provided). It tunnels connections within the HTTP protocol and uses the SSH protocol within this tunnel to encrypt our data.
 
 {% tabs %}
 {% tab title="Reverse Proxy" %}

