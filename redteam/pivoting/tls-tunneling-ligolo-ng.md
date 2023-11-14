@@ -103,6 +103,25 @@ sudo ip link set ligolo up
 {% endtab %}
 {% endtabs %}
 
+{% hint style="info" %}
+To perform **double pivoting** with ligolo-ng, we can add a listener on any agent. For example, if Agent2 only has access to Agent1 and we want to proxy its traffic.
+
+We must add a listener on Agent1 from Ligolo Server:
+
+```bash
+# Where 11601 is the Ligolo LISTENING_SVR_PORT
+# And 172.16.5.15:4455 the Agent1 listening IP and Port
+[Agent : pwned@Agent1] » listener_add –addr 172.16.5.15:4455 –to 127.0.0.1:11601
+```
+
+Then, we can join Agent2 as follow
+
+```powershell
+# Where 172.16.5.15:4455 is the Agent1 listening IP and Port
+.\agent.exe -connect 172.16.5.15:4455 [-ignore-cert]
+```
+{% endhint %}
+
 ## Resources
 
 {% embed url="https://github.com/nicocha30/ligolo-ng/tree/v0.4.4#building--usage" %}
