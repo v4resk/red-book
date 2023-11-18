@@ -22,26 +22,28 @@ It run on port TCP 389 and 636(ldaps). The Global Catalog (LDAP in ActiveDirecto
 
 A lot of information on an AD domain can be obtained through LDAP. Most of the information can only be obtained with an authenticated bind but metadata (naming contexts, DNS server name, Domain Functional Level (DFL)) can be obtainable anonymously, even with anonymous binding disabled.
 
+#### UNIX-Like
+
 {% tabs %}
 {% tab title="ldapsearch" %}
 The [ldapsearch](https://linux.die.net/man/1/ldapsearch) command is a shell-accessible interface to the [ldap\_search\_ext(3)](https://linux.die.net/man/3/ldap\_search\_ext) library call. It can be used to enumerate essential informations.
 
 #### Anonymous Enumeration:
 
-Enumerate the base domain
+Enumerate the base domain.
 
 ```bash
 #Simple bind authentification (-x) as anonymous.
 ldapsearch -H ldap://$IP -x -s base namingcontexts
 ```
 
-Dump all readable ldap informations as anonymous
+Dump all readable ldap information as anonymous.
 
 ```bash
 ldapsearch -H ldap://$IP -x -b "DC=contoso,DC=local"
 ```
 
-Dump ldap informations as anonymous and filter
+Dump ldap information as anonymous and filter.
 
 ```bash
 #With (objectClass=User) as the query and sAMAccountName the filter.
@@ -79,13 +81,40 @@ You can run following command to ignore the certificate:
 ```bash
 LDAPTLS_REQCERT=never ldapsearch -x -H ldaps://<IP> [....] 
 ```
-
-
 {% endhint %}
 
 {% hint style="info" %}
 We may use ldapsearch output (also known as LDIF files) and covert it into JSON files ingestible by BloodHound using [ldif2bloodhound](https://github.com/SySS-Research/ldif2bloodhound). See [this page](../../../ad/recon/tools/bloodhound.md#unix-like) for more informations.
 {% endhint %}
+{% endtab %}
+
+{% tab title="CrackMapExec" %}
+[CrackMapExec](https://github.com/byt3bl33d3r/CrackMapExec) (Python) also has useful modules that can be used to
+
+* map information regarding [AD-CS (Active Directory Certificate Services)](../../../ad/movement/ad-cs/)
+* show subnets listed in AD-SS (Active Directory Sites and Services)
+* list the users description
+* print the [Machine Account Quota](../../../ad/movement/domain-settings/machineaccountquota.md) domain-level attribute's value
+
+```bash
+# list PKIs/CAs
+cme ldap "domain_controller" -d "domain" -u "user" -p "password" -M adcs
+
+# list subnets referenced in AD-SS
+cme ldap "domain_controller" -d "domain" -u "user" -p "password" -M subnets
+
+# machine account quota
+cme ldap "domain_controller" -d "domain" -u "user" -p "password" -M maq
+
+# users description
+cme ldap "domain_controller" -d "domain" -u "user" -p "password" -M get-desc-users
+```
+
+The PowerShell equivalent to CrackMapExec's `subnets` modules is the following
+
+```powershell
+[System.DirectoryServices.ActiveDirectory.Forest]::GetCurrentForest().Sites.Subnets
+```
 {% endtab %}
 
 {% tab title="ldapsearch-ad" %}
@@ -134,36 +163,91 @@ ntlmrelayx -t "ldap://domaincontroller" --dump-adcs --dump-laps --dump-gmsa
 {% endtab %}
 {% endtabs %}
 
+#### Windows
 
+{% tabs %}
+{% tab title="PowerShell" %}
+Using PowerShell and .NET classes, we can enumerate the domain using LDAP. This can be very handy if we have compromised a computer in the domain with no administrative access and no RSAT module installed.
 
+To acheive this, we can use the following function.
 
+{% code title="ldapsearch.ps1" %}
+```powershell
+function LDAPSearch {
+    param (
+        [string]$LDAPQuery
+    )
 
-[CrackMapExec](https://github.com/byt3bl33d3r/CrackMapExec) (Python) also has useful modules that can be used to
+    $PDC = [System.DirectoryServices.ActiveDirectory.Domain]::GetCurrentDomain().PdcRoleOwner.Name
+    $DN = ([adsi]'').distinguishedName
 
-* map information regarding [AD-CS (Active Directory Certificate Services)](../../../ad/movement/ad-cs/)
-* show subnets listed in AD-SS (Active Directory Sites and Services)
-* list the users description
-* print the [Machine Account Quota](../../../ad/movement/domain-settings/machineaccountquota.md) domain-level attribute's value
+    $DIR_ENTRY = New-Object System.DirectoryServices.DirectoryEntry("LDAP://$PDC/$DN")
 
-```bash
-# list PKIs/CAs
-cme ldap "domain_controller" -d "domain" -u "user" -p "password" -M adcs
+    $DIR_SEARCHER = New-Object System.DirectoryServices.DirectorySearcher($DIR_ENTRY, $LDAPQuery)
 
-# list subnets referenced in AD-SS
-cme ldap "domain_controller" -d "domain" -u "user" -p "password" -M subnets
+    return $DIR_SEARCHER.FindAll()
 
-# machine account quota
-cme ldap "domain_controller" -d "domain" -u "user" -p "password" -M maq
-
-# users description
-cme ldap "domain_controller" -d "domain" -u "user" -p "password" -M get-desc-users
+}
 ```
-
-The PowerShell equivalent to CrackMapExec's `subnets` modules is the following
+{% endcode %}
 
 ```powershell
-[System.DirectoryServices.ActiveDirectory.Forest]::GetCurrentForest().Sites.Subnets
+# Import the function
+. .\ldapsearch.ps1
 ```
+
+Then, we can use it as in following examples, by specifing our filter.
+
+```powershell
+# Dump all objects
+LDAPSearch -LDAPQuery '(objectClass=*)'
+
+# Enum Users
+## Filter on Users
+LDAPSearch -LDAPQuery "(objectClass=User)"
+
+## Print some properties for each users
+$res = foreach ($obj in $(LDAPSearch -LDAPQuery "objectClass=User")) {$obj.properties | select {$_.name}, {$_.memberof}}
+$res|fl
+
+# Enum Groups
+## Filter on Groups
+LDAPSearch -LDAPQuery "(objectClass=Group)"
+
+## Print some properties for each groups
+$res = foreach ($obj in $(LDAPSearch -LDAPQuery "objectClass=Group")) {$obj.properties | select {$_.cn}, {$_.member}}
+$res|fl
+
+## Query for specific group and print a property
+$res = LDAPSearch -LDAPQuery "(&(objectCategory=group)(cn=Domain Admins))"
+$res.properties.member
+```
+{% endtab %}
+
+{% tab title="PowerView" %}
+Some [PowerView](https://github.com/PowerShellMafia/PowerSploit/blob/master/Recon/PowerView.ps1) functions use LDAP to retreive information.&#x20;
+
+```powershell
+# Import it
+Import-Module .\PowerView.ps1
+
+# Enum Domain CN
+Get-NetDomain
+
+# Enum Groups
+Get-NetGroup
+Get-NetGroup "Domain Admins"
+Get-NetGroup | select cn
+
+# Enum Users
+Get-NetUser
+Get-NetUser "user01"
+Get-NetUser | select cn,pwdlastset,lastlogon
+```
+
+Fore more powerview commands and enumeration, refer to [this page](../../../ad/recon/tools/powerview.md).
+{% endtab %}
+{% endtabs %}
 
 {% hint style="info" %}
 LDAP anonymous binding is usually disabled but it's worth checking. It could be handy to list the users and test for [ASREProasting](../../../ad/movement/kerberos/asreproast.md) (since this attack needs no authentication).
