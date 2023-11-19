@@ -10,10 +10,10 @@ Windows systems come with a built-in Administrator (with an RID of 500) that mos
 
 * **Issue 1**: the password is set to be the same for every (set of) machine(s) the Group Policy applies to. If the attacker finds the admin's hash or password, he can gain administrative access to all (or set of) machines.
 * **Issue 2**: by default, knowing the built-in Administrator's hash (RID 500) allows for powerful [Pass-the-Hash](../../ntlm/pth.md) attacks ([read more](../../ntlm/pth.md#limitations-tips-and-tricks)).
-* **Issue 3**: all Group Policies are stored in the Domain Controllers' `SYSVOL` share. All domain users have read access to it. This means all domain users can read the encrypted password set in Group Policy Preferences, and since Microsoft published the encryption key around 2012, the password can be decrypted:man_shrugging:.
+* **Issue 3**: all Group Policies are stored in the Domain Controllers' `SYSVOL` share. All domain users have read access to it. This means all domain users can read the encrypted password set in Group Policy Preferences, and since Microsoft published the encryption key around 2012, the password can be decrypted:man\_shrugging:.
 
-{% hint style="error" %}
-In 2015, Microsoft removed storing the encrypted password in the SYSVOL folder. It introduced the [[Local Administrator Password Solution (LAPS)](./laps-secrets.md), which offers a much more secure approach to remotely managing the local administrator password.
+{% hint style="info" %}
+In 2015, Microsoft removed storing the encrypted password in the SYSVOL folder. It introduced the \[[Local Administrator Password Solution (LAPS)](laps-secrets.md), which offers a much more secure approach to remotely managing the local administrator password.
 {% endhint %}
 
 ## Practice
@@ -54,8 +54,8 @@ sudo mount\
 sudo grep -ria cpassword /tmp/sysvol/'domain.local'/Policies/ 2>/dev/null
 
 # decrypt the string and recover the password
-pypykatz gppass j1Uyj3Vx8TY9LtLZil2uAuZkFQA/4latT76ZwgdHdhw
-gpp-decrypt j1Uyj3Vx8TY9LtLZil2uAuZkFQA/4latT76ZwgdHdhw
+pypykatz crypto gppass 'j1Uyj3Vx8TY9LtLZil2uAuZkFQA/4latT76ZwgdHdhw'
+gpp-decrypt 'j1Uyj3Vx8TY9LtLZil2uAuZkFQA/4latT76ZwgdHdhw'
 ```
 {% endtab %}
 
@@ -71,7 +71,7 @@ Get-GPPPassword
 
 This can also be achieved without tools, by "manually" looking for the `cpassword` string in xml files and by then manually decrypting the matches.
 
-```bash
+```powershell
 findstr /S cpassword %logonserver%\sysvol\*.xml
 ```
 
@@ -96,4 +96,3 @@ The decryption process is as follows
 {% embed url="https://podalirius.net/en/articles/exploiting-windows-group-policy-preferences/" %}
 
 {% embed url="https://docs.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/2c15cbf0-f086-4c74-8b70-1f2fa45dd4be" %}
-
