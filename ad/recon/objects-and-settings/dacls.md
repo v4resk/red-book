@@ -6,7 +6,7 @@ DACL abuse potential paths can be identified by [BloodHound](../tools/bloodhound
 
 Other tools like, `Get-DomainObjectAcl` and `Add-DomainObjectAcl` from [Powersploit](https://github.com/PowerShellMafia/PowerSploit/)'s [Powerview](https://github.com/PowerShellMafia/PowerSploit/blob/dev/Recon/PowerView.ps1), `Get-Acl` and `Set-Acl` official Powershell cmdlets, or [Impacket](https://github.com/SecureAuthCorp/impacket)'s dacledit.py script (Python) can be used in order to manually inspect an object's DACL. :warning: _At the time of writing, the Pull Request (_[_#1291_](https://github.com/SecureAuthCorp/impacket/pull/1291)_) offering that dacledit is still being reviewed and in active development. It has the following command-line arguments._
 
-This page is about enumeration, for DACL-based attacks, please refer to [this page](../../../ad/movement/dacl/).
+This page is about enumeration, for DACL-based attacks, please refer to [this page](../../movement/dacl/).
 
 ## Practice
 
@@ -20,14 +20,21 @@ We can dump all Domain Object's ACL and convert it to a json file using `Get-Dom
 Get-DomainObjectAcl -ResolveGUIDs|select-object @{Name='SecurityIdentifierName';Expression={"$($_.SecurityIdentifier.Value|Convert-SidToName)"}},@{Name='SecurityIdentifierSID';Expression={"$($_.SecurityIdentifier.Value)"}},@{Name='ActiveDirectoryRights';Expression={"$($_.ActiveDirectoryRights)"}},ObjectDN,@{Name='ObjectName';Expression={"$($_.ObjectSID|Convert-SidToName)"}},ObjectSID|ConvertTo-Json -Compress|Out-File acls.json
 ```
 
-Then, on your attacking machine, we can use the following command to format results
+Transfer the file to the attacking machine, then use the following command to convert the output file to UNIX format.
 
 ```bash
-#From UTF-16LE to UTF-8
+#Convert the file
 dos2unix acls.json
+```
 
-#Parsing json results
+One of the following commands can be used to format and read the output file.
+
+```bash
+# Print one ACE by line 
 cat acls.json|jq '.[]| "\(.SecurityIdentifierName):\(.SecurityIdentifierSID) | Have: \(.ActiveDirectoryRights) | On: \(.ObjectName):\(.ObjectSID)"'
+
+# Get all ACE of an object
+cat acls.json|jq '.[] | select(.ObjectName=="CONTOSO\\user01")'
 ```
 
 {% hint style="info" %}
@@ -118,7 +125,7 @@ bloodhound.py --zip -c ACL -d $DOMAIN -u $USERNAME -p $PASSWORD -dc $DOMAIN_CONT
 {% tab title="Windows" %}
 SharpHound ([sources](https://github.com/BloodHoundAD/SharpHound), [builds](https://github.com/BloodHoundAD/BloodHound/tree/master/Collectors)) is designed targeting .Net 4.5. It can be used as a compiled executable.
 
-It must be run from the context of a domain user, either directly through a logon or through another method such as runas (`runas /netonly /user:$DOMAIN\$USER`) (see [Impersonation](../../../ad/movement/credentials/impersonation.md)). Alternatively, SharpHound can be used with the `LdapUsername` and `LdapPassword` flags for that matter.
+It must be run from the context of a domain user, either directly through a logon or through another method such as runas (`runas /netonly /user:$DOMAIN\$USER`) (see [Impersonation](../../movement/credentials/impersonation.md)). Alternatively, SharpHound can be used with the `LdapUsername` and `LdapPassword` flags for that matter.
 
 Using the ACL CollectionMethod in SharpHound, we just collect abusable permissions on objects in Active Directory
 
