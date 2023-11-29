@@ -6,8 +6,8 @@ description: Port TCP/UDP 53
 
 See the following pages for informations about the LDAP protocol.&#x20;
 
-{% content-ref url="../../../ad/recon/network/dns.md" %}
-[dns.md](../../../ad/recon/network/dns.md)
+{% content-ref url="broken-reference" %}
+[Broken link](broken-reference)
 {% endcontent-ref %}
 
 {% content-ref url="../../recon/dns-enum.md" %}
