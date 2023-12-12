@@ -392,8 +392,8 @@
       * [RFI to RCE](web/web-vulnerabilities/server-side/file-inclusion/rfi-to-rce.md)
     * [Command Injection](web/web-vulnerabilities/server-side/command-injection.md)
     * [Brute-Force](web/web-vulnerabilities/server-side/brute-force.md)
+    * [SSTI (Server-Side Template Injection)](web/web-vulnerabilities/server-side/ssti.md)
     * [🛠️ File Upload](web/web-vulnerabilities/server-side/file-upload.md)
-    * [🛠️ SSTI](web/web-vulnerabilities/server-side/ssti.md)
   * [Client-Side](web/web-vulnerabilities/client-side/README.md)
     * [XSS (Cross-Site Scripting)](web/web-vulnerabilities/client-side/xss-cross-site-scripting.md)
 
