@@ -182,7 +182,7 @@ grep -i "login\|fail" *.snmp
 ```
 {% endtab %}
 
-{% tab title="Untitled" %}
+{% tab title="Emails" %}
 We may find emails in MIB tables
 
 ```bash
