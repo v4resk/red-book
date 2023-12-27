@@ -9,6 +9,24 @@ Online repositories of code hold a window into an organization's technology stac
 To automate the process of searching sensitives files and hardcoded credentials in **Git repositories**, we may use following tools
 
 {% tabs %}
+{% tab title="Noseyparker" %}
+[Noseyparker](https://github.com/praetorian-inc/noseyparker) is a command-line program that finds secrets and sensitive information in textual data and Git history.
+
+```bash
+# Scan a repo
+noseyparker scan --datastore np.myDataStore --git-url <repo-url>
+
+# Scan all repo of an user
+noseyparker scan --datastore np.myDataStore --github-user <username>
+
+# Scan all repo of an organization
+noseyparker scan --datastore np.myDataStore --github-organization <NAME>
+
+# Show result of a scan
+noseyparker report -d np.myDataStore
+```
+{% endtab %}
+
 {% tab title="Gitleaks" %}
 [Gitleaks](https://github.com/gitleaks/gitleaks) (Go) is a SAST tool for **detecting** and **preventing** hardcoded secrets like passwords, api keys, and tokens in git repos.
 
