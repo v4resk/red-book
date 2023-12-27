@@ -34,7 +34,7 @@ dir C:\Users\(username)\.ssh\
 
 {% tabs %}
 {% tab title="Brute-Force" %}
-First of all, you need to format the private key to make John to recognize it.
+If an SSH private key is password protected, in order to crack it we need to format this key to make John recognize it.
 
 ```bash
 ssh2john private_key.txt > hash.txt
