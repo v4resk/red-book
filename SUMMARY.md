@@ -140,6 +140,7 @@
       * [LSASS secrets](ad/movement/credentials/dumping/lsass/README.md)
         * [Security Support Provider DLLs](ad/movement/credentials/dumping/lsass/security-support-provider-dlls.md)
       * [DCSync](ad/movement/credentials/dumping/dcsync.md)
+      * [Kerberos key list](ad/movement/credentials/dumping/kerberos-key-list.md)
       * [Group Policy Preferences](ad/movement/credentials/dumping/group-policies-preferences.md)
       * [AutoLogon Registry](ad/movement/credentials/dumping/autologon-registry.md)
       * [Network shares](ad/movement/credentials/dumping/network-shares.md)
