@@ -69,7 +69,6 @@
   * [Windows](redteam/persistence/windows.md)
   * [Linux](redteam/persistence/linux.md)
 * [Privilege Escalation](redteam/privilege-escalation/README.md)
-  * [Active Directory](redteam/privilege-escalation/active-directory.md)
   * [Windows](redteam/privilege-escalation/windows.md)
   * [Linux](redteam/privilege-escalation/linux.md)
 * [Defense Evasion](redteam/evasion/README.md)
