@@ -398,7 +398,7 @@
   * [Client-Side](web/web-vulnerabilities/client-side/README.md)
     * [XSS (Cross-Site Scripting)](web/web-vulnerabilities/client-side/xss-cross-site-scripting.md)
 
-## 🛠️ Cloud CI/CD <a href="#cloud-cicd" id="cloud-cicd"></a>
+## 🛠️ Cloud & CI/CD <a href="#cloud-cicd" id="cloud-cicd"></a>
 
 * [Containers](cloud-cicd/containers/README.md)
   * [Docker](cloud-cicd/containers/reconnaissance/README.md)
