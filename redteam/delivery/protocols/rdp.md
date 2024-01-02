@@ -63,7 +63,7 @@ crackmapexec rdp 10.10.10.0/24 -u <userlist> -p 'password123'
 {% endtab %}
 {% endtabs %}
 
-### Logging in <a href="#00ef" id="00ef"></a>
+### Logging in <a href="#id-00ef" id="id-00ef"></a>
 
 {% tabs %}
 {% tab title="XfreeRDP" %}
@@ -347,8 +347,8 @@ beacon> upload C:\Payloads\pivot.exe
 
 Using **stickykeys** or **utilman** as a persistence vetcor, you will be able to access a administrative CMD and any RDP session anytime
 
-{% content-ref url="../../../windows/persistence/accessibility-features-backdoor.md" %}
-[accessibility-features-backdoor.md](../../../windows/persistence/accessibility-features-backdoor.md)
+{% content-ref url="../../persistence/persistence/accessibility-features-backdoor.md" %}
+[accessibility-features-backdoor.md](../../persistence/persistence/accessibility-features-backdoor.md)
 {% endcontent-ref %}
 
 ## Resources

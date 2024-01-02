@@ -6,9 +6,9 @@ description: MITRE ATT&CK™ Lateral Movement - Tactic TA0008
 
 ## Theory
 
-Lateral Movement consists of techniques that we use to enter and control remote systems on a network. Following through on their primary objective often requires exploring the network to find their target and subsequently gaining access to it. Lateral moveement dosn't involve privilege escalation, it's just the process of pivoting.
+Lateral Movement consists of techniques that adversaries use to enter and control remote systems on a network. Following through on their primary objective often requires exploring the network to find their target and subsequently gaining access to it. Reaching their objective often involves pivoting through multiple systems and accounts to gain. Adversaries might install their own remote access tools to accomplish Lateral Movement or use legitimate credentials with native network and operating system tools, which may be stealthier.
 
-![](../../.gitbook/assets/cyberkillchain.png)
+![](../../.gitbook/assets/killchain-trough.png)
 
 ## Resources
 

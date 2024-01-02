@@ -103,8 +103,8 @@ Some private keys require a password or passphrase for operation, so we may atte
 
 It's possible to backdoor an SSH public key using the `command=` argument. The backdoor will execute whenever the user logs in using this key.
 
-{% content-ref url="../../../linux/persistence/ssh.md" %}
-[ssh.md](../../../linux/persistence/ssh.md)
+{% content-ref url="../../persistence/persistence-1/ssh.md" %}
+[ssh.md](../../persistence/persistence-1/ssh.md)
 {% endcontent-ref %}
 
 ## Resources
