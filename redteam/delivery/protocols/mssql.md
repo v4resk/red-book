@@ -230,8 +230,8 @@ REVERT
 The user running MSSQL server will have enabled the privilege token **SeImpersonatePrivilege.**\
 You probably will be able to **escalate to Administrator or NT AUTHORITY\SYSTEM** following this page:
 
-{% content-ref url="../../privilege-escalation/privesc/abusing-tokens.md" %}
-[abusing-tokens.md](../../privilege-escalation/privesc/abusing-tokens.md)
+{% content-ref url="../../privilege-escalation/windows/abusing-tokens.md" %}
+[abusing-tokens.md](../../privilege-escalation/windows/abusing-tokens.md)
 {% endcontent-ref %}
 
 ## Resources

@@ -90,7 +90,7 @@ mimikatz # sekurlsa::tickets /export
 
 ### Ask a TGS
 
-Using tools like **Giuda ,** we can avoid dumping LSASS memory. With the [SeTcbPrivilege](../../../../redteam/privilege-escalation/privesc/abusing-tokens.md#setcbprivilege), we can read LSA storage, extract the SESSION KEY from TGT, and forge a request asking for a TGS; We must use LUID instead of Username.
+Using tools like **Giuda ,** we can avoid dumping LSASS memory. With the [SeTcbPrivilege](../../../../redteam/privilege-escalation/windows/abusing-tokens.md#setcbprivilege), we can read LSA storage, extract the SESSION KEY from TGT, and forge a request asking for a TGS; We must use LUID instead of Username.
 
 {% tabs %}
 {% tab title="Giuda" %}

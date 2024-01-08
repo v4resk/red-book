@@ -10,8 +10,8 @@ If its misconfigured, it can be an interesting vector for privilege escalation.
 
 ### Enumerate
 
-{% content-ref url="../../../discovery/recon/scheduled-tasks.md" %}
-[scheduled-tasks.md](../../../discovery/recon/scheduled-tasks.md)
+{% content-ref url="../../../discovery/windows/scheduled-tasks.md" %}
+[scheduled-tasks.md](../../../discovery/windows/scheduled-tasks.md)
 {% endcontent-ref %}
 
 ### Exploit

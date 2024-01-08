@@ -56,7 +56,7 @@ When having a domain name as scope, operating virtual host (a.k.a. vhost) fuzzin
 [Gobuster](https://github.com/OJ/gobuster) (go) can be used to do virtual host bruteforcing
 
 ```bash
-gobuster vhost --useragent "PENTEST" --wordlist "/path/to/wordlist.txt" --url $URL
+gobuster vhost --useragent "PENTEST" --wordlist "/path/to/wordlist.txt" --url http://$BASE_DOMAIN/ --append-domain
 ```
 {% endtab %}
 

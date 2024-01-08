@@ -208,7 +208,7 @@ wmic.exe /node:TARGET /user:DOMAIN\USER /password:PASSWORD path Win32_Service wh
 
 ### Lateral Movement via WMI Event Subscription
 
-Using WMI on a remote endpoint, we can perform lateral movements based on[ WMI Event Subscription Persitence](../persistence/persistence/wmi-event-subscription.md).
+Using WMI on a remote endpoint, we can perform lateral movements based on[ WMI Event Subscription Persitence](../persistence/windows/wmi-event-subscription.md).
 
 Typically, WMI event subscription requires creation of the following three classes which are used to store the payload or the arbitrary command, to specify the event that will trigger the payload and to relate the two classes (\_\_EventConsumer &\_\_EventFilter) so execution and trigger to bind together.
 

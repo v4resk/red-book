@@ -12,8 +12,8 @@ One of the basic features of Microsoft Windows is the ability to run services. T
 
 ### Enumerate
 
-{% content-ref url="../../../discovery/recon/processes-and-services.md" %}
-[processes-and-services.md](../../../discovery/recon/processes-and-services.md)
+{% content-ref url="../../../discovery/windows/processes-and-services.md" %}
+[processes-and-services.md](../../../discovery/windows/processes-and-services.md)
 {% endcontent-ref %}
 
 ### Exploit

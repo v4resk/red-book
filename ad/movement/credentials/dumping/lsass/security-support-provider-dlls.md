@@ -8,7 +8,7 @@ We may abuse [security support providers (SSPs)](https://learn.microsoft.com/en-
 
 ### In memory Loading
 
-We may directly inject [SSP DLLs](https://learn.microsoft.com/en-us/windows-server/security/windows-authentication/security-support-provider-interface-architecture) into memory. It prevent us from editing registries but using this approach, it will not persist accross reboot like with [this method](../../../../../redteam/persistence/persistence/lsa/security-support-provider-dlls.md).
+We may directly inject [SSP DLLs](https://learn.microsoft.com/en-us/windows-server/security/windows-authentication/security-support-provider-interface-architecture) into memory. It prevent us from editing registries but using this approach, it will not persist accross reboot like with [this method](../../../../../redteam/persistence/windows/lsa/security-support-provider-dlls.md).
 
 {% tabs %}
 {% tab title="Mimikatz" %}
@@ -87,8 +87,8 @@ extern "C" __declspec(dllexport) NTSTATUS NTAPI SpLsaModeInitialize(ULONG LsaVer
 
 ### Loading from disk - Persistence
 
-{% content-ref url="../../../../../redteam/persistence/persistence/lsa/security-support-provider-dlls.md" %}
-[security-support-provider-dlls.md](../../../../../redteam/persistence/persistence/lsa/security-support-provider-dlls.md)
+{% content-ref url="../../../../../redteam/persistence/windows/lsa/security-support-provider-dlls.md" %}
+[security-support-provider-dlls.md](../../../../../redteam/persistence/windows/lsa/security-support-provider-dlls.md)
 {% endcontent-ref %}
 
 ## Resources

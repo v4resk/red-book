@@ -28,7 +28,7 @@ You should always first check the Command History File before checking other reg
 
 # Print ConsoleHost_history.txt (default location)
 type $env:APPDATA\Microsoft\Windows\PowerShell\PSReadLine\ConsoleHost_history.txt
-type C:\Users\<USERNAME>\AppData\Microsoft\Windows\PowerShell\PSReadLine\ConsoleHost_history.txt
+type C:\Users\<USERNAME>\AppData\Roaming\Microsoft\Windows\PowerShell\PSReadLine\ConsoleHost_history.txt
 ```
 
 We may also check the `Get-History` cmdlet, but its contents may be deleted by administrators using `Clear-History`. Note that `Clear-History` does not clear the command history recorded by PSReadline.

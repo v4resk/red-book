@@ -97,6 +97,7 @@ snmpwalk -v <SNMP_VERSION> -c <COMMUNITY_STRING> -t 10 -Oa <TARGET_IP> .1
 
 # Get extended
 snmpwalk -v <SNMP_VERSION> -c <COMMUNITY_STRING> -t 10 <TARGET_IP> NET-SNMP-EXTEND-MIB::nsExtendObject
+snmpwalk -v <SNMP_VERSION> -c <COMMUNITY_STRING> -t 10 <TARGET_IP>NET-SNMP-EXTEND-MIB::nsExtendOutputFull
 
 # Get IPv6 (needed dec2hex)
 snmpwalk -v <SNMP_VERSION> -c <COMMUNITY_STRING> -t 10 <TARGET_IP> 1.3.6.1.2.1.4.34.1.3

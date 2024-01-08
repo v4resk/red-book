@@ -347,8 +347,8 @@ beacon> upload C:\Payloads\pivot.exe
 
 Using **stickykeys** or **utilman** as a persistence vetcor, you will be able to access a administrative CMD and any RDP session anytime
 
-{% content-ref url="../../persistence/persistence/accessibility-features-backdoor.md" %}
-[accessibility-features-backdoor.md](../../persistence/persistence/accessibility-features-backdoor.md)
+{% content-ref url="../../persistence/windows/accessibility-features-backdoor.md" %}
+[accessibility-features-backdoor.md](../../persistence/windows/accessibility-features-backdoor.md)
 {% endcontent-ref %}
 
 ## Resources
