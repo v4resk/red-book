@@ -57,8 +57,14 @@ From UNIX-like system, a non-official (but very effective nonetheless) Python ve
 bloodhound.py --zip -c All -d $DOMAIN -u $USERNAME -p $PASSWORD -dc $DOMAIN_CONTROLLER
 ```
 
+[NetExec](https://github.com/Pennyw0rth/NetExec) also includes the bloodhound.py ingestor and can be run as follows.
+
+```bash
+nxc ldap $TARGET -u $USERNAME -p $PASSWORD --bloodhound -ns $DC_IP -c All
+```
+
 {% hint style="info" %}
-This ingestor is not as powerful as the C# one. It mostly misses GPO collection methods **but** a good news is that it can do pass-the-hash. It becomes really useful when compromising a domain account's NT hash.
+This ingestors is not as powerful as the C# one. It mostly misses GPO collection methods **but** a good news is that it can do pass-the-hash. It becomes really useful when compromising a domain account's NT hash.
 {% endhint %}
 
 If this is necessary for any reason, we can use LDAP dumps, also known as LDIF files, and covert them into JSON files ingestible by BloodHound using [ldif2bloodhound](https://github.com/SySS-Research/ldif2bloodhound).
