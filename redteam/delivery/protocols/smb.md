@@ -25,8 +25,8 @@ SMB protocol operate on different ports depending on the type of communication:
 #SmbClient
 smbclient -U '' -N -L '\\<IP>\'
 
-#CrackMapExec
-crackmapexec smb <IP> -u '' -p '' --shares
+#NetExec
+netexec smb <IP> -u '' -p '' --shares
 ```
 {% endtab %}
 
@@ -38,8 +38,8 @@ The inclusion of `Anonymous` and `Everyone` access group in the `pre-Windows 200
 smbclient -N -L '\\<IP>\'
 smbclient -U 'a' -N -L '\\<IP>\'
 
-#CrackMapExec
-crackmapexec smb <IP> -u 'a' -p '' --shares
+#NetExec
+netexec smb <IP> -u 'a' -p '' --shares
 ```
 {% endtab %}
 
@@ -67,15 +67,15 @@ Using [nmap](https://github.com/nmap/nmap), we can enumerate sessions/shares/use
 #### Version & Configuration
 
 {% tabs %}
-{% tab title="CrackMapExec" %}
-Tools like [CrackMapExec](https://github.com/Porchetta-Industries/CrackMapExec) can be used to enumerate supported protocols, dialects and signing configuration of SMB.
+{% tab title="NetExec" %}
+Tools like [NetExec](https://github.com/Pennyw0rth/NetExec) can be used to enumerate supported protocols, dialects and signing configuration of SMB.
 
 ```bash
 #Enum host with SMB signing not required
-crackmapexec smb 192.168.1.0/24 --gen-relay-list relaylistOutputFilename.txt
+netexec smb 192.168.1.0/24 --gen-relay-list relaylistOutputFilename.txt
 
 #Simply fingerprint SMB versipn
-crackmapexec smb <TARGET>
+netexec smb <TARGET>
 ```
 {% endtab %}
 
@@ -98,18 +98,18 @@ nmap --script smb-security-mode.nse,smb2-security-mode.nse -p445 192.168.1.0/24
 #### Users
 
 {% tabs %}
-{% tab title="CrackMapExec" %}
-[CrackMapExec](https://github.com/Porchetta-Industries/CrackMapExec) can be used to enumerate users over SMB.
+{% tab title="NetExec" %}
+[NetExec](https://github.com/Pennyw0rth/NetExec) can be used to enumerate users over SMB.
 
 ```bash
 # Enumerate domain users over \pipe\samr 
-crackmapexec smb <TARGET> -u <USER> -p <PASSWORD> --users
+netexec smb <TARGET> -u <USER> -p <PASSWORD> --users
 
 # Enumerate local users over \pipe\samr 
-crackmapexec smb <TARGET> -u <USER> -p <PASSWORD> --local-users
+netexec smb <TARGET> -u <USER> -p <PASSWORD> --local-users
 
 #Brute force RID using querydispinfo over \pipe\samr 
-crackmapexec smb <TARGET> -u <USER> -p <PASSWORD> --rid-brute 5000
+netexec smb <TARGET> -u <USER> -p <PASSWORD> --rid-brute 5000
 ```
 {% endtab %}
 
@@ -129,18 +129,18 @@ nmap --script="smb-enum-users" --script-args smbusername=administrator,smbpasswo
 #### Groups
 
 {% tabs %}
-{% tab title="CrackMapExec" %}
-[CrackMapExec](https://github.com/Porchetta-Industries/CrackMapExec) can be used to enumerate groups over SMB.
+{% tab title="NetExec" %}
+[NetExec](https://github.com/Pennyw0rth/NetExec) can be used to enumerate groups over SMB.
 
 ```bash
 # Enumerate domain groups over \pipe\samr 
-crackmapexec smb <TARGET> -u <USER> -p <PASSWORD> --groups
+netexec smb <TARGET> -u <USER> -p <PASSWORD> --groups
 
 #Enum local groups over \pipe\samr
-crackmapexec smb $IP -u $USER -p $PASS --local-group
+netexec smb $IP -u $USER -p $PASS --local-group
 
 #Brute force RID using querydispinfo over \pipe\samr 
-crackmapexec smb <TARGET> -u <USER> -p <PASSWORD> --rid-brute 5000
+netexec smb <TARGET> -u <USER> -p <PASSWORD> --rid-brute 5000
 ```
 {% endtab %}
 
@@ -168,11 +168,11 @@ smbclient -U <USER> -L '\\<IP>\'
 ```
 {% endtab %}
 
-{% tab title="CrackMapExec" %}
-[CrackMapExec](https://github.com/Porchetta-Industries/CrackMapExec) can be used to enumerate SMB shares.
+{% tab title="NetExec" %}
+[NetExec](https://github.com/Pennyw0rth/NetExec) can be used to enumerate SMB shares.
 
 ```bash
-crackmapexec smb <TARGET> -u <USER> -p <PASSWORD> --shares
+netexec smb <TARGET> -u <USER> -p <PASSWORD> --shares
 ```
 {% endtab %}
 
@@ -226,15 +226,15 @@ for i in $(cat smb_items.txt); do echo $i; smbcacls -N '\\10.10.10.103\Departmen
 #### Sessions
 
 {% tabs %}
-{% tab title="CrackMapExec" %}
-[CrackMapExec](https://github.com/Porchetta-Industries/CrackMapExec) can be used to enumerate active sessions and logged in users over SMB.
+{% tab title="NetExec" %}
+[NetExec](https://github.com/Pennyw0rth/NetExec) can be used to enumerate active sessions and logged in users over SMB.
 
 ```bash
 #Enumerate active sessions
-crackmapexec smb <TARGET> -u <USER> -p <PASSWORD> --sessions
+netexec smb <TARGET> -u <USER> -p <PASSWORD> --sessions
 
 #Enumerate logged-on in users
-crackmapexec smb <TARGET> -u <USER> -p <PASSWORD> --loggedon-users
+netexec smb <TARGET> -u <USER> -p <PASSWORD> --loggedon-users
 ```
 {% endtab %}
 
@@ -254,12 +254,12 @@ nmap --script="smb-enum-sessions" --script-args smbusername=administrator,smbpas
 #### Password Policy
 
 {% tabs %}
-{% tab title="CrackMapExec" %}
-[CrackMapExec](https://github.com/Porchetta-Industries/CrackMapExec) can be used to enumerate various objects over SMB like the domain password policy.
+{% tab title="NetExec" %}
+[NetExec](https://github.com/Pennyw0rth/NetExec) can be used to enumerate various objects over SMB like the domain password policy.
 
 ```bash
 #Enumerate the password policy
-crackmapexec smb <TARGET> -u <USER> -p <PASSWORD> --pass-pol
+netexec smb <TARGET> -u <USER> -p <PASSWORD> --pass-pol
 ```
 {% endtab %}
 {% endtabs %}
@@ -292,10 +292,10 @@ Tools like [nmap](https://github.com/nmap/nmap) can be used to detect the presen
 sudo nmap -p 445 --script="smb-vuln-ms17-010" <IP>
 ```
 
-[CrackMapExec](https://github.com/byt3bl33d3r/CrackMapExec) (Python) can be used to check if the target is vulnerable to MS17-010.
+[NetExec](https://github.com/Pennyw0rth/NetExec) (Python) can be used to check if the target is vulnerable to MS17-010.
 
 ```bash
-crackmapexec smb <IP> -u <USER> -p <PASSWORD> -M ms17-010
+netexec smb <IP> -u <USER> -p <PASSWORD> -M ms17-010
 ```
 {% endtab %}
 

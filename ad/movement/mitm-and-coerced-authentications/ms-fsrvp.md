@@ -22,10 +22,10 @@ In June 2022, Microsoft patched [CVE-2022-30154](https://msrc.microsoft.com/upda
 
 {% tabs %}
 {% tab title="Enumerate" %}
-[CrackMapExec](https://github.com/byt3bl33d3r/CrackMapExec) (Python) can be used to check if the target is vulnerable to ShadowCoerce.
+[NetExec](https://github.com/Pennyw0rth/NetExec) (Python) can be used to check if the target is vulnerable to ShadowCoerce.
 
 ```bash
-crackmapexec smb <TARGET> -u <USER> -p <PASSWORD> -M shadowcoerce
+netexec smb <TARGET> -u <USER> -p <PASSWORD> -M shadowcoerce
 ```
 {% endtab %}
 

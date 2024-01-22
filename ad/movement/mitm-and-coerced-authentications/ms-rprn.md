@@ -28,13 +28,13 @@ We can check if the spooler service is available on a target using [rpcdump.py](
 rpcdump.py $TARGET | grep -A 6 "spoolsv"
 ```
 
-#### CrackMapExec
+#### NetExec
 
-[CrackMapExec](https://github.com/byt3bl33d3r/CrackMapExec) (Python) can be used to check if the spooler service is running.
+[NetExec](https://github.com/Pennyw0rth/NetExec) (Python) can be used to check if the spooler service is running.
 
 ```bash
-crackmapexec smb <TARGET> -u <USER> -p <PASSWORD> -M spooler
-crackmapexec smb <TARGET> -u <USER> -p <PASSWORD> --local-auth -M spooler
+netexec smb <TARGET> -u <USER> -p <PASSWORD> -M spooler
+netexec smb <TARGET> -u <USER> -p <PASSWORD> --local-auth -M spooler
 ```
 
 #### SpoolerScanner

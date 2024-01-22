@@ -83,10 +83,10 @@ cat records.csv
 
 {% endtab %}
 
-{% tab title="crackmapexec" %}
-CrackMapExec's [Enum_dns](https://www.infosecmatter.com/crackmapexec-module-library/?cmem=smb-enum_dns) module utilizes WMI to dump DNS information from an Active Directory DNS Server. It extracts `MicrosoftDNS_ResourceRecord` (complete zone information) from all found domains.
+{% tab title="netexec" %}
+NetExec's [Enum_dns](https://www.infosecmatter.com/netexec-module-library/?netexecm=smb-enum_dns) module utilizes WMI to dump DNS information from an Active Directory DNS Server. It extracts `MicrosoftDNS_ResourceRecord` (complete zone information) from all found domains.
 ```bash
-crackmapexec smb -u <USERNAME> -p <PASSWORD> -d <DOMAIN> -M enum_dns
+netexec smb -u <USERNAME> -p <PASSWORD> -d <DOMAIN> -M enum_dns
 ```
 {% hint style="info" %}
 So far this module only works with Administrative privileges.

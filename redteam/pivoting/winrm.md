@@ -18,14 +18,14 @@ WinRM is the name of both a Windows service and a protocol that allows a user to
 
 {% tabs %}
 {% tab title="UNIX-like" %}
-We can use [crackmapexec](https://github.com/mpgn/CrackMapExec) to remotely execute a command on the target over WinRM.
+We can use [netexec](https://github.com/mpgn/NetExec) to remotely execute a command on the target over WinRM.
 
 ```bash
 #Execute command
-crackmapexec winrm <IP> -u <user> -p <password> -x "whoami"
+netexec winrm <IP> -u <user> -p <password> -x "whoami"
 
 #Execute PowerShell command
-crackmapexec winrm <IP> -u <user> -p <password> -x "$(Get-WMIObject -class Win32_ComputerSystem | select username).username"
+netexec winrm <IP> -u <user> -p <password> -x "$(Get-WMIObject -class Win32_ComputerSystem | select username).username"
 ```
 {% endtab %}
 

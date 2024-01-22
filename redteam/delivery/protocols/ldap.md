@@ -88,8 +88,8 @@ We may use ldapsearch output (also known as LDIF files) and covert it into JSON 
 {% endhint %}
 {% endtab %}
 
-{% tab title="CrackMapExec" %}
-[CrackMapExec](https://github.com/byt3bl33d3r/CrackMapExec) (Python) also has useful modules that can be used to
+{% tab title="NetExec" %}
+[NetExec](https://github.com/Pennyw0rth/NetExec) (Python) also has useful modules that can be used to
 
 * map information regarding [AD-CS (Active Directory Certificate Services)](../../../ad/movement/ad-cs/)
 * show subnets listed in AD-SS (Active Directory Sites and Services)
@@ -98,19 +98,19 @@ We may use ldapsearch output (also known as LDIF files) and covert it into JSON 
 
 ```bash
 # list PKIs/CAs
-cme ldap "domain_controller" -d "domain" -u "user" -p "password" -M adcs
+netexec ldap "domain_controller" -d "domain" -u "user" -p "password" -M adcs
 
 # list subnets referenced in AD-SS
-cme ldap "domain_controller" -d "domain" -u "user" -p "password" -M subnets
+netexec ldap "domain_controller" -d "domain" -u "user" -p "password" -M subnets
 
 # machine account quota
-cme ldap "domain_controller" -d "domain" -u "user" -p "password" -M maq
+netexec ldap "domain_controller" -d "domain" -u "user" -p "password" -M maq
 
 # users description
-cme ldap "domain_controller" -d "domain" -u "user" -p "password" -M get-desc-users
+netexec ldap "domain_controller" -d "domain" -u "user" -p "password" -M get-desc-users
 ```
 
-The PowerShell equivalent to CrackMapExec's `subnets` modules is the following
+The PowerShell equivalent to NetExec's `subnets` modules is the following
 
 ```powershell
 [System.DirectoryServices.ActiveDirectory.Forest]::GetCurrentForest().Sites.Subnets

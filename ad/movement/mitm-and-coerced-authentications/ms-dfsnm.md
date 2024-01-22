@@ -10,10 +10,10 @@ In mid-2022, [Filip Dragovic](https://twitter.com/filip\_dragovic) demonstrated 
 
 {% tabs %}
 {% tab title="Enumerate" %}
-[CrackMapExec](https://github.com/byt3bl33d3r/CrackMapExec) (Python) can be used to check if the target is vulnerable to DFSCoerce.
+[NetExec](https://github.com/Pennyw0rth/NetExec) (Python) can be used to check if the target is vulnerable to DFSCoerce.
 
 ```bash
-crackmapexec smb <TARGET> -u <USER> -p <PASSWORD> -M dfscoerce
+netexec smb <TARGET> -u <USER> -p <PASSWORD> -M dfscoerce
 ```
 {% endtab %}
 

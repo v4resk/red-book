@@ -60,7 +60,7 @@ bloodhound.py --zip -c All -d $DOMAIN -u $USERNAME -p $PASSWORD -dc $DOMAIN_CONT
 [NetExec](https://github.com/Pennyw0rth/NetExec) also includes the bloodhound.py ingestor and can be run as follows.
 
 ```bash
-nxc ldap $TARGET -u $USERNAME -p $PASSWORD --bloodhound -ns $DC_IP -c All
+netexec ldap $TARGET -u $USERNAME -p $PASSWORD --bloodhound -ns $DC_IP -c All
 ```
 
 {% hint style="info" %}

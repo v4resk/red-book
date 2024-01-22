@@ -19,7 +19,7 @@ The easiest way to detect whether WinRM is available is by seeing if the port is
 Be careful, brute-forcing winrm could block users.
 
 ```bash
-crackmapexec winrm <IP> -d <Domain Name> -u <userlist> -p <passwlist>
+netexec winrm <IP> -d <Domain Name> -u <userlist> -p <passwlist>
 ```
 {% endtab %}
 
@@ -27,7 +27,7 @@ crackmapexec winrm <IP> -d <Domain Name> -u <userlist> -p <passwlist>
 We can use following command to password spray
 
 ```bash
-crackmapexec winrm <IP> -d <Domain Name> -u <userlist> -p 'Passw0rd!'
+netexec winrm <IP> -d <Domain Name> -u <userlist> -p 'Passw0rd!'
 ```
 {% endtab %}
 {% endtabs %}

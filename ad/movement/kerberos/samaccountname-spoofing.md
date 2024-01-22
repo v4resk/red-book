@@ -46,10 +46,10 @@ Some of the tools and features that allow exploitation of these vulnerabilities 
 
 {% tabs %}
 {% tab title="UNIX-like" %}
-[CrackMapExec](https://github.com/byt3bl33d3r/CrackMapExec) (Python) can be used to check if the target is vulnerable to NoPac.
+[NetExec](https://github.com/Pennyw0rth/NetExec) (Python) can be used to check if the target is vulnerable to NoPac.
 
 ```bash
-crackmapexec smb $IP -u $USER -p $PASSWORD -M nopac
+netexec smb $IP -u $USER -p $PASSWORD -M nopac
 ```
 {% endtab %}
 {% endtabs %}

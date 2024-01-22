@@ -17,10 +17,10 @@ The following MS-EFSR's methods were detected vulnerable
 
 {% tabs %}
 {% tab title="Enumerate" %}
-[CrackMapExec](https://github.com/byt3bl33d3r/CrackMapExec) (Python) can be used to check if the target is vulnerable to PetitPotam.
+[NetExec](https://github.com/Pennyw0rth/NetExec) (Python) can be used to check if the target is vulnerable to PetitPotam.
 
 ```bash
-crackmapexec smb <TARGET> -u <USER> -p <PASSWORD> -M petitpotam -o PIPE=netlogon
+netexec smb <TARGET> -u <USER> -p <PASSWORD> -M petitpotam -o PIPE=netlogon
 ```
 {% endtab %}
 

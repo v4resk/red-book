@@ -65,23 +65,23 @@ smbexec.py <domain>/<username>:<password>@<host>
 {% endtab %}
 {% endtabs %}
 
-### CrackMapExec
+### NetExec
 
-You can utilize [CrackMapExec](https://github.com/byt3bl33d3r/CrackMapExec) as a powerful alternative to SMBexec or PsExec for executing code over SMB connections. You can specify the execution methode and the shell interpretor (cmd or powershell.
+You can utilize [NetExec](https://github.com/Pennyw0rth/NetExec) as a powerful alternative to SMBexec or PsExec for executing code over SMB connections. You can specify the execution methode and the shell interpretor (cmd or powershell.
 
 {% tabs %}
 {% tab title="UNIX-like" %}
-[CrackMapExec](https://github.com/byt3bl33d3r/CrackMapExec) can execute a remote process.
+[NetExec](https://github.com/Pennyw0rth/NetExec) can execute a remote process.
 
 ```bash
 #Execute cmd command through smbexec method (methods: mmcexec,atexec,smbexec,wmiexec)
-crackmapexec smb <TARGET> -u <USER> -p <PASSWORD> --exec-method smbexec -x whoami
+netexec smb <TARGET> -u <USER> -p <PASSWORD> --exec-method smbexec -x whoami
 
 #Execute powershell command through atexec method (methods: mmcexec,atexec,smbexec,wmiexec)
-crackmapexec smb <TARGET> -u <USER> -p <PASSWORD> --exec-method atexec -X whoami
+netexec smb <TARGET> -u <USER> -p <PASSWORD> --exec-method atexec -X whoami
 
 #Execute powershell (32bits) command through default wmiexec method (methods: mmcexec,atexec,smbexec,wmiexec)
-crackmapexec smb <TARGET> -u <USER> -p <PASSWORD> --force-ps32 -X whoami
+netexec smb <TARGET> -u <USER> -p <PASSWORD> --force-ps32 -X whoami
 ```
 {% endtab %}
 {% endtabs %}

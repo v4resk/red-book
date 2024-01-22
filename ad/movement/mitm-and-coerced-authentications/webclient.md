@@ -14,11 +14,11 @@ Attackers can remotely enumerate systems on which the WebClient is running, whic
 
 {% tabs %}
 {% tab title="UNIX-like" %}
-From UNIX-like systems, this can be achieved with [webclientservicescanner](https://github.com/Hackndo/WebclientServiceScanner) (Python) or using [CrackMapExec](https://github.com/byt3bl33d3r/CrackMapExec) (Python).
+From UNIX-like systems, this can be achieved with [webclientservicescanner](https://github.com/Hackndo/WebclientServiceScanner) (Python) or using [NetExec](https://github.com/Pennyw0rth/NetExec) (Python).
 
 ```bash
 webclientservicescanner 'domain.local'/'user':'password'@'machine'
-crackmapexec smb <IP> -d <DOMAIN> -u <USERT> -p <PASSWORD> -M webdav
+netexec smb <IP> -d <DOMAIN> -u <USERT> -p <PASSWORD> -M webdav
 ```
 {% endtab %}
 
