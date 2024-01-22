@@ -190,7 +190,7 @@
   * [Over HTTP(s)](redteam/exfiltration/http.md)
   * [Over SMB](redteam/exfiltration/smb.md)
 
-## Active Directory <a href="#ad" id="ad"></a>
+## Active Directory <a href="#a-d" id="a-d"></a>
 
 * [Reconnaissance](ad/recon/README.md)
   * [Tools ⚙️](ad/recon/tools/README.md)
@@ -284,7 +284,7 @@
       * [Bronze Bit](ad/movement/kerberos/delegations/bronze-bit.md)
     * [Shadow Credentials](ad/movement/kerberos/shadow-credentials.md)
     * [UnPAC the hash](ad/movement/kerberos/unpac-the-hash.md)
-    * [Pass the Certificate](ad/movement/kerberos/pass-the-certificate.md)
+    * [Pass the Certificate - PKINIT](ad/movement/kerberos/pass-the-certificate.md)
     * [sAMAccountName spoofing](ad/movement/kerberos/samaccountname-spoofing.md)
     * [SPN-jacking](ad/movement/kerberos/spn-jacking.md)
   * [Netlogon](ad/movement/netlogon/README.md)
@@ -307,6 +307,8 @@
     * [Access controls](ad/movement/ad-cs/access-controls.md)
     * [Web endpoints](ad/movement/ad-cs/web-endpoints.md)
     * [Certifried](ad/movement/ad-cs/certifried.md)
+  * [Schannel](a-d/movement/schannel/README.md)
+    * [Pass the Certificate - Schannel](a-d/movement/schannel/pass-the-certificate-schannel.md)
   * [SCCM / MECM](ad/movement/sccm-mecm.md)
   * [Exchange services](ad/movement/exchange-services/README.md)
     * [PrivExchange](ad/movement/exchange-services/privexchange.md)
