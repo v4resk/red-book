@@ -17,6 +17,16 @@ If an attacker obtains control over a CA server, he may be able to retrieve the 
 
 {% tabs %}
 {% tab title="UNIX-like" %}
+#### Certsync
+
+[Certsync](https://github.com/zblurx/certsync) is a tools that extract the DPAPI-protected CA cert private key to forge a certificate offline for each user. It then performs [UnPAC the hash](../../movement/kerberos/unpac-the-hash.md) attacks for each user to recover the NT and LM hashes.
+
+```bash
+certsync -u $USER -p $PASSWORD -d $DOMAIN -ca-ip $CA_IP -dc-ip $DC_IP
+```
+
+#### Certipy
+
 Extracting the DPAPI-protected CA cert private key can be done remotely from UNIX-like systems with [Certipy](https://github.com/ly4k/Certipy) (Python).
 
 {% code overflow="wrap" %}
