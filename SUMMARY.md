@@ -169,6 +169,7 @@
     * [VNC Config](redteam/credential-access/credentials-in-files/vnc-config.md)
     * [SSH Private Keys](redteam/credential-access/credentials-in-files/ssh-private-keys.md)
     * [Git Repositories](redteam/credential-access/credentials-in-files/git-repositories.md)
+  * [Credentials from Web Browsers](redteam/credential-access/credentials-from-web-browsers.md)
   * [MITM and coerced auths](redteam/credential-access/mitm-and-coerced-auths.md)
   * [Password managers](redteam/credential-access/password-managers.md)
   * [Veeam Backup](redteam/credential-access/veeam-backup.md)
