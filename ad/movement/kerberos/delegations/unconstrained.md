@@ -11,7 +11,7 @@ If the coerced account is "[is sensitive and cannot be delegated](https://learn.
 {% endhint %}
 
 {% hint style="info" %}
-Unconstrained delegation abuses are usually combined with an [MS-RPRN abuse (printerbug)](../../mitm-and-coerced-authentications/ms-rprn.md), [MS-EFSR abuse (petitpotam)](../../mitm-and-coerced-authentications/ms-efsr.md), [MS-FSRVP abuse (shadowcoerce)](../../mitm-and-coerced-authentications/ms-fsrvp.md), r [PrivExchange](../../exchange-services/privexchange.md) to gain domain admin privileges.
+Unconstrained delegation abuses are usually combined with an [MS-RPRN abuse (printerbug)](broken-reference), [MS-EFSR abuse (petitpotam)](broken-reference), [MS-FSRVP abuse (shadowcoerce)](broken-reference), r [PrivExchange](../../exchange-services/privexchange.md) to gain domain admin privileges.
 {% endhint %}
 
 ![](../../../../.gitbook/assets/Kerberos\_delegations-unconstrained.drawio.png)
@@ -30,7 +30,7 @@ All of this can be done from UNIX-like systems with [addspn](https://github.com/
 When attacking accounts able to delegate without constraints, there are two major scenarios
 
 * **the account is a computer**: computers can edit their own SPNs via the `msDS-AdditionalDnsHostName` attribute. Since ticket received by krbrelayx will be encrypted with AES256 (by default), attackers will need to either supply the right AES256 key for the unconstrained delegations account (`--aesKey` argument) or the salt and password (`--krbsalt` and `--krbpass` arguments).
-* **the account is a user**: users can't edit their own SPNs like computers do. Attackers need to control an [account operator](broken-reference) (or any other user that has the needed privileges) to edit the user's SPNs. Moreover, since tickets received by krbrelayx will be encrypted with RC4, attackers will need to either supply the NT hash (`-hashes` argument) or the salt and password (`--krbsalt` and `--krbpass` arguments)
+* **the account is a user**: users can't edit their own SPNs like computers do. Attackers need to control an [account operator](broken-reference/) (or any other user that has the needed privileges) to edit the user's SPNs. Moreover, since tickets received by krbrelayx will be encrypted with RC4, attackers will need to either supply the NT hash (`-hashes` argument) or the salt and password (`--krbsalt` and `--krbpass` arguments)
 {% endhint %}
 
 {% hint style="success" %}
@@ -58,9 +58,9 @@ krbrelayx.py --krbsalt 'DOMAINusername' --krbpass 'password'
 In case, for some reason, attacking a Domain Controller doesn't work (i.e. error saying`Ciphertext integrity failed.`) try to attack others (if you're certain the credentials you supplied were correct). Some replication and propagation issues could get in the way.
 {% endhint %}
 
-Once the krbrelayx listener is ready, an [authentication coercion attack](../../mitm-and-coerced-authentications/) (e.g. [PrinterBug](../../mitm-and-coerced-authentications/#ms-rprn-abuse-a-k-a-printer-bug), [PrivExchange](../../mitm-and-coerced-authentications/#pushsubscription-abuse-a-k-a-privexchange), [PetitPotam](../../mitm-and-coerced-authentications/ms-efsr.md)) can be operated. The listener will then receive a Kerberos authentication, hence a ST, containing a TGT.
+Once the krbrelayx listener is ready, an [authentication coercion attack](../../mitm-and-coerced-authentications/) (e.g. [PrinterBug](../../mitm-and-coerced-authentications/#ms-rprn-abuse-a-k-a-printer-bug), [PrivExchange](../../mitm-and-coerced-authentications/#pushsubscription-abuse-a-k-a-privexchange), [PetitPotam](broken-reference)) can be operated. The listener will then receive a Kerberos authentication, hence a ST, containing a TGT.
 
-The TGT will then be usable with [Pass the Ticket](../ptt.md) (to act as the victim) or with [S4U2self abuse](s4u2self-abuse.md) (to obtain local admin privileges over the victim).
+The TGT will then be usable with [Pass the Ticket](broken-reference) (to act as the victim) or with [S4U2self abuse](s4u2self-abuse.md) (to obtain local admin privileges over the victim).
 {% endtab %}
 
 {% tab title="From the compromised computer (Windows)" %}

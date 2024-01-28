@@ -117,6 +117,7 @@
       * [Weak File/Folder Permissions](redteam/privilege-escalation/windows/services/weak-files-permissions.md)
       * [Weak Registry Permissions](redteam/privilege-escalation/windows/services/weak-registry-permissions.md)
       * [Unquoted Service Path](redteam/privilege-escalation/windows/services/unquoted-service-path.md)
+    * [Impersonation](redteam/privilege-escalation/windows/impersonation.md)
     * [AlwaysInstallElevated](redteam/privilege-escalation/windows/alwaysinstallelevated.md)
     * [AutoLogon Registry](redteam/privilege-escalation/windows/autologon-registry.md)
     * [Insecure Scheduled Tasks](redteam/privilege-escalation/windows/insecure-scheduled-tasks/README.md)
@@ -191,7 +192,7 @@
   * [Over HTTP(s)](redteam/exfiltration/http.md)
   * [Over SMB](redteam/exfiltration/smb.md)
 
-## Active Directory <a href="#a-d" id="a-d"></a>
+## Active Directory <a href="#ad" id="ad"></a>
 
 * [Reconnaissance](ad/recon/README.md)
   * [Tools ⚙️](ad/recon/tools/README.md)
@@ -308,8 +309,8 @@
     * [Access controls](ad/movement/ad-cs/access-controls.md)
     * [Web endpoints](ad/movement/ad-cs/web-endpoints.md)
     * [Certifried](ad/movement/ad-cs/certifried.md)
-  * [Schannel](a-d/movement/schannel/README.md)
-    * [Pass the Certificate - Schannel](a-d/movement/schannel/pass-the-certificate-schannel.md)
+  * [Schannel](ad/movement/schannel/README.md)
+    * [Pass the Certificate - Schannel](ad/movement/schannel/pass-the-certificate-schannel.md)
   * [SCCM / MECM](ad/movement/sccm-mecm.md)
   * [Exchange services](ad/movement/exchange-services/README.md)
     * [PrivExchange](ad/movement/exchange-services/privexchange.md)

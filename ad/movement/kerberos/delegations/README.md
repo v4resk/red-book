@@ -31,7 +31,7 @@ Kerberos delegations can be abused by attackers to obtain access to valuable ass
 
     S4U2Proxy always results in a forwardable ST, even when the ticket used as evidence wasn't forwardable.
 
-Some of the following parts allow to obtain modified or crafted Kerberos tickets. Once obtained, these tickets can be used with [Pass-the-Ticket](../ptt.md).
+Some of the following parts allow to obtain modified or crafted Kerberos tickets. Once obtained, these tickets can be used with [Pass-the-Ticket](broken-reference).
 
 ## Practice
 
@@ -53,7 +53,7 @@ findDelegation.py -user "account" "DOMAIN"/"USER":"PASSWORD"
 {% endtab %}
 
 {% tab title="Windows" %}
-From Windows systems, [BloodHound](../../../recon/tools/bloodhound.md) can be used to identify unconstrained and constrained delegation.
+From Windows systems, [BloodHound](broken-reference) can be used to identify unconstrained and constrained delegation.
 
 The following queries can be used to audit delegations.
 

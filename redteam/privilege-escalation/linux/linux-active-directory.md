@@ -52,7 +52,7 @@ export KRB5CCNAME=/tmp/krb5cc_1569901115
 ```
 
 {% hint style="info" %}
-You may use the ticket using [Pass The Ticket ](../../../ad/movement/kerberos/ptt.md)techniques
+You may use the ticket using [Pass The Ticket ](broken-reference)techniques
 {% endhint %}
 {% endtab %}
 {% endtabs %}

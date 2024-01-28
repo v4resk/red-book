@@ -117,7 +117,7 @@ password1
 Password
 ```
 
-Let's assume an [AD password policy](../../../ad/recon/objects-and-settings/password-policy.md) that requires an upper case letter, a special character, and a numerical value. We may use the following rules along with hashcat:
+Let's assume an [AD password policy](broken-reference) that requires an upper case letter, a special character, and a numerical value. We may use the following rules along with hashcat:
 
 ```bash
 # Rules file

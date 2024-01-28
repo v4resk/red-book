@@ -32,7 +32,8 @@ GoldenGMSA.exe kdsinfo
 
 With the `--forest` argument specifying the target domain or forest, SYSTEM privileges are required on the corresponding domain or forest Domain Controller. In case a child domain is specified, the parent domain keys will be dumped as well.
 
-<pre class="language-batch"><code class="lang-batch"><strong>GoldenGMSA.exe kdsinfo --forest child.lab.local</strong></code></pre>
+<pre class="language-batch"><code class="lang-batch"><strong>GoldenGMSA.exe kdsinfo --forest child.lab.local
+</strong></code></pre>
 {% endtab %}
 
 {% tab title="UNIX-like" %}
@@ -42,7 +43,7 @@ _At the time of writing this recipe, September 24th, 2022, no equivalent exists 
 
 ### Retrieving gMSA passwords
 
-Later on, the attacker can then, with low-privileged access to the domain:&#x20;
+Later on, the attacker can then, with low-privileged access to the domain:
 
 1. [dump some information relative to the gMSA account](goldengmsa.md#2.-account-information-dump) to retrieve the password for
 2. use those elements to [calculate the gMSA password](goldengmsa.md#3.-password-calculation)
@@ -89,7 +90,7 @@ GoldenGMSA.exe compute --sid "S-1-5-21-[...]1586295871-1112" --kdskey "AQA[...]j
 
 Since the password is randomly generated and is not intended to be used by real users with a keyboard (but instead by servers, programs, scripts, etc.) the password is very long, complex and can include non-printable characters. [GoldenGMSA](https://github.com/Semperis/GoldenGMSA) will output the password in base64.
 
-In order to use the password, its MD4 (i.e. NT) hash can be calculated, for [pth.md](../movement/ntlm/pth.md "mention").
+In order to use the password, its MD4 (i.e. NT) hash can be calculated, for [Broken link](broken-reference "mention").
 
 {% code overflow="wrap" %}
 ```bash

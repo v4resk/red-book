@@ -9,11 +9,11 @@ The Web Proxy Automatic Discovery (WPAD) protocol helps clients in finding a pro
 1. WinHTTP/WinINET
 2. DHCP
 3. DNS
-4. Internet Explorer's LAN settings, or configuration file&#x20;
+4. Internet Explorer's LAN settings, or configuration file
 
 ## Practice
 
-WPAD spoofing can be combined with&#x20;
+WPAD spoofing can be combined with
 
 * [LLMNR and NBT-NS spoofing](llmnr-nbtns-mdns-spoofing.md)
 * [DHCP poisoning](dhcp-poisoning.md) combined (or not) with DNS spoofing
@@ -22,8 +22,8 @@ WPAD spoofing can be combined with&#x20;
 {% hint style="info" %}
 Proxy auth NTLM authentication can either be
 
-* forced and [captured](../ntlm/capture.md) with Responder with `--wredir` and `--ProxyAuth`&#x20;
-* forced and [relayed](../ntlm/relay.md) with [ntlmrelayx](https://github.com/SecureAuthCorp/impacket/blob/master/examples/ntlmrelayx.py) by using the `--http-port 3128` argument
+* forced and [captured](../ntlm/capture.md) with Responder with `--wredir` and `--ProxyAuth`
+* forced and [relayed](broken-reference) with [ntlmrelayx](https://github.com/SecureAuthCorp/impacket/blob/master/examples/ntlmrelayx.py) by using the `--http-port 3128` argument
 {% endhint %}
 
 ### through LLMNR, NBT-NS spoofing
@@ -72,7 +72,7 @@ New-ADIDNSNode -Node wpad -Type DNAME -Data 'pentester01.TARGETDOMAIN.LOCAL'
 
 #### Post CVE-2018-8320
 
-On machines that are patched against that CVE, registering a name server (NS) record could still work.&#x20;
+On machines that are patched against that CVE, registering a name server (NS) record could still work.
 
 ```bash
 New-ADIDNSNode -Node wpad -Type NS -Data 'pentester01.TARGETDOMAIN.LOCAL'
@@ -95,4 +95,3 @@ This attack can be conducted with [mitm6](https://github.com/fox-it/mitm6) (Pyth
 {% embed url="https://blog.netspi.com/adidns-revisited/" %}
 
 {% embed url="https://www.fox-it.com/en/news/blog/mitm6-compromising-ipv4-networks-via-ipv6/" %}
-

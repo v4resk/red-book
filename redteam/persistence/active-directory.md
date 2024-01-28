@@ -2,6 +2,6 @@
 
 Refer to the following section for persistence topics in Active Directory environments
 
-{% content-ref url="../../ad/persistence/" %}
-[persistence](../../ad/persistence/)
+{% content-ref url="linux/" %}
+[linux](linux/)
 {% endcontent-ref %}

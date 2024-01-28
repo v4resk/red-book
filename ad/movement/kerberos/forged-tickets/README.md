@@ -4,25 +4,25 @@ description: MITRE ATT&CK™ Sub-techniques T1558.001 and T1558.002
 
 # Forged tickets
 
-Silver, Golden, Diamond and Sapphire tickets are forged or modified Kerberos tickets that can be used with [pass-the-ticket](../ptt.md) to access services in an Active Directory domain.
+Silver, Golden, Diamond and Sapphire tickets are forged or modified Kerberos tickets that can be used with [pass-the-ticket](broken-reference) to access services in an Active Directory domain.
 
 <details>
 
 <summary>Glossary</summary>
 
-**PAC (Privileged Authentication Certificate)**: a special set of data contained in the ticket (TGT or Service Ticket) that give information about the requesting user (username, groups, UserAccountControl, etc.).&#x20;
+**PAC (Privileged Authentication Certificate)**: a special set of data contained in the ticket (TGT or Service Ticket) that give information about the requesting user (username, groups, UserAccountControl, etc.).
 
 **Long-term key**: the long-term key of an account refers to its NT hash (when the RC4 etype is not disabled in the domain) or another Kerberos key (DES, AES128, AES256).
 
 </details>
 
-**Silver ticket**: the long-term key of a service account can be used to forge a Service ticket that can later be used with [pass-the-ticket](../ptt.md) to access that service. In a Silver Ticket scenario, an attacker will forge a Service Ticket containing a PAC that features arbitrary information about the requesting user, effectively granting lots of access.
+**Silver ticket**: the long-term key of a service account can be used to forge a Service ticket that can later be used with [pass-the-ticket](broken-reference) to access that service. In a Silver Ticket scenario, an attacker will forge a Service Ticket containing a PAC that features arbitrary information about the requesting user, effectively granting lots of access.
 
 {% content-ref url="silver.md" %}
 [silver.md](silver.md)
 {% endcontent-ref %}
 
-**Golden ticket**: the long-term key of the `krbtgt` account can be used to forge a special TGT (Ticket Granting Ticket) that can later be used with [pass-the-ticket](../ptt.md) to access any resource within the AD domain. The `krbtgt`'s key is used to encrypt the PAC. In a Golden Ticket scenario, an attacker that has knowledge of the `krbtgt` long-term key, will usually forge a PAC indicating that the user belongs to privileged groups. This PAC will be embedded in a forged TGT. The TGT will be used to request Service Tickets than will then feature the PAC presented in the TGT, hence granting lots of access to the attacker.
+**Golden ticket**: the long-term key of the `krbtgt` account can be used to forge a special TGT (Ticket Granting Ticket) that can later be used with [pass-the-ticket](broken-reference) to access any resource within the AD domain. The `krbtgt`'s key is used to encrypt the PAC. In a Golden Ticket scenario, an attacker that has knowledge of the `krbtgt` long-term key, will usually forge a PAC indicating that the user belongs to privileged groups. This PAC will be embedded in a forged TGT. The TGT will be used to request Service Tickets than will then feature the PAC presented in the TGT, hence granting lots of access to the attacker.
 
 {% content-ref url="golden.md" %}
 [golden.md](golden.md)

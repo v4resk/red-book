@@ -14,15 +14,15 @@ For this attack to work, the attacker needs to populate the target attribute wit
 * an account with a trailing `$` in the `sAMAccountName` (i.e. a computer accounts)
 * any other account and conduct [SPN-less RBCD](rbcd.md#rbcd-on-spn-less-users) with [U2U (User-to-User) authentication](../#user-to-user-authentication)
 
-The common way to conduct these attacks is to create a computer account. This is usually possible thanks to a domain-level attribute called [`MachineAccountQuota`](../../domain-settings/machineaccountquota.md) that allows regular users to create up to 10 computer accounts.
+The common way to conduct these attacks is to create a computer account. This is usually possible thanks to a domain-level attribute called [`MachineAccountQuota`](broken-reference) that allows regular users to create up to 10 computer accounts.
 
 {% hint style="info" %}
-In 2022, [Jame Forshaw](https://twitter.com/tiraniddo) demonstrated that the SPN requirement wasn't completely mandatory and RBCD could be operated without: [Exploiting RBCD using a normal user](https://www.tiraniddo.dev/2022/05/exploiting-rbcd-using-normal-user.html). While this technique is a bit trickier and should absolutely be avoided on regular user accounts (the technique renders them unusable for normal people), it allows to abuse RBCD even if the [`MachineAccountQuota`](../../domain-settings/machineaccountquota.md) is set to 0. The technique is demonstrated later on in this page ([RBCD on SPN-less user](rbcd.md#rbcd-on-spn-less-users)).
+In 2022, [Jame Forshaw](https://twitter.com/tiraniddo) demonstrated that the SPN requirement wasn't completely mandatory and RBCD could be operated without: [Exploiting RBCD using a normal user](https://www.tiraniddo.dev/2022/05/exploiting-rbcd-using-normal-user.html). While this technique is a bit trickier and should absolutely be avoided on regular user accounts (the technique renders them unusable for normal people), it allows to abuse RBCD even if the [`MachineAccountQuota`](broken-reference) is set to 0. The technique is demonstrated later on in this page ([RBCD on SPN-less user](rbcd.md#rbcd-on-spn-less-users)).
 {% endhint %}
 
 Then, in order to abuse this, the attacker has to control the account (A) the target object's (B) attribute has been populated with. Using that account's (A) credentials, the attacker can obtain a ticket through `S4U2Self` and `S4U2Proxy` requests, just like constrained delegation with protocol transition.
 
-In the end, an RBCD abuse results in a Service Ticket to authenticate on the target service (B) on behalf of a user. Once the final Service Ticket is obtained, it can be used with [Pass-the-Ticket](../ptt.md) to access the target service (B).
+In the end, an RBCD abuse results in a Service Ticket to authenticate on the target service (B) on behalf of a user. Once the final Service Ticket is obtained, it can be used with [Pass-the-Ticket](broken-reference) to access the target service (B).
 
 {% hint style="warning" %}
 If the "impersonated" account is "[is sensitive and cannot be delegated](https://learn.microsoft.com/en-us/windows-server/identity/ad-ds/manage/how-to-configure-protected-accounts)" or a member of the "[Protected Users](https://learn.microsoft.com/en-us/windows-server/security/credentials-protection-and-management/protected-users-security-group)" group, the delegation will (probably) fail.
@@ -39,7 +39,7 @@ There are a few additional details to keep in mind, valid as of the time of writ
 {% endhint %}
 
 {% hint style="success" %}
-A technique called [AnySPN or "service class modification"](../ptt.md#modifying-the-spn) can be used concurrently with pass-the-ticket to change the service class the Service Ticket was destined to (e.g. for the `cifs/target.domain.local` SPN, the service class is `cifs`).
+A technique called [AnySPN or "service class modification"](broken-reference) can be used concurrently with pass-the-ticket to change the service class the Service Ticket was destined to (e.g. for the `cifs/target.domain.local` SPN, the service class is `cifs`).
 {% endhint %}
 
 ![](../../../../.gitbook/assets/Kerberos\_delegations-rbcd.png)
@@ -65,11 +65,11 @@ rbcd.py -delegate-from 'controlledaccountwithSPN' -delegate-to 'target$' -dc-ip 
 ```
 
 {% hint style="success" %}
-Testers can also use [ntlmrelayx](https://github.com/SecureAuthCorp/impacket/blob/master/examples/ntlmrelayx.py) to set the delegation rights with the `--delegate-access` option when conducting this attack from a [relayed authentication](../../ntlm/relay.md).
+Testers can also use [ntlmrelayx](https://github.com/SecureAuthCorp/impacket/blob/master/examples/ntlmrelayx.py) to set the delegation rights with the `--delegate-access` option when conducting this attack from a [relayed authentication](broken-reference).
 {% endhint %}
 
 {% hint style="info" %}
-In this example, `controlledaccount` can be [a computer account created for the attack](../../domain-settings/machineaccountquota.md#create-a-computer-account), or any other account -with at least one Service Principal Name set for the usual technique, or without for [SPN-less RBCD](rbcd.md#rbcd-on-spn-less-users)- which credentials are known to the attacker.
+In this example, `controlledaccount` can be [a computer account created for the attack](broken-reference), or any other account -with at least one Service Principal Name set for the usual technique, or without for [SPN-less RBCD](rbcd.md#rbcd-on-spn-less-users)- which credentials are known to the attacker.
 {% endhint %}
 
 **2 - Obtain a ticket (delegation operation)** :ticket: \*\*\*\*
@@ -85,12 +85,12 @@ In [some cases](./#theory), the delegation will not work. Depending on the conte
 {% endhint %}
 
 {% hint style="info" %}
-The SPN (Service Principal Name) set can have an impact on what services will be reachable. For instance, `cifs/target.domain` or `host/target.domain` will allow most remote dumping operations (more info on [adsecurity.org](https://adsecurity.org/?page\_id=183)). There however scenarios where the SPN can be changed ([AnySPN](../ptt.md#modifying-the-spn)) to access more service. This technique is automatically tried by Impacket scripts when doing pass-the-ticket.
+The SPN (Service Principal Name) set can have an impact on what services will be reachable. For instance, `cifs/target.domain` or `host/target.domain` will allow most remote dumping operations (more info on [adsecurity.org](https://adsecurity.org/?page\_id=183)). There however scenarios where the SPN can be changed ([AnySPN](broken-reference)) to access more service. This technique is automatically tried by Impacket scripts when doing pass-the-ticket.
 {% endhint %}
 
 **3 - Pass-the-ticket** :passport\_control: \*\*\*\*
 
-Once the ticket is obtained, it can be used with [pass-the-ticket](../ptt.md).
+Once the ticket is obtained, it can be used with [pass-the-ticket](broken-reference).
 {% endtab %}
 
 {% tab title="Windows" %}
@@ -156,12 +156,12 @@ In [some cases](./#theory), the delegation will not work. Depending on the conte
 {% endhint %}
 
 {% hint style="info" %}
-The SPN (Service Principal Name) set can have an impact on what services will be reachable. For instance, `cifs/target.domain` or `host/target.domain` will allow most remote dumping operations (more info on [adsecurity.org](https://adsecurity.org/?page\_id=183)). There however scenarios where the SPN can be changed ([AnySPN](../ptt.md#modifying-the-spn)) to access more service**s**. This technique can be exploited with the `/altservice` flag with Rubeus.
+The SPN (Service Principal Name) set can have an impact on what services will be reachable. For instance, `cifs/target.domain` or `host/target.domain` will allow most remote dumping operations (more info on [adsecurity.org](https://adsecurity.org/?page\_id=183)). There however scenarios where the SPN can be changed ([AnySPN](broken-reference)) to access more service**s**. This technique can be exploited with the `/altservice` flag with Rubeus.
 {% endhint %}
 
 **3 - Pass-the-ticket** :passport\_control: \*\*\*\*
 
-Once the ticket is injected, it can natively be used when accessing the service (see [pass-the-ticket](../ptt.md)).
+Once the ticket is injected, it can natively be used when accessing the service (see [pass-the-ticket](broken-reference)).
 {% endtab %}
 {% endtabs %}
 

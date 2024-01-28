@@ -20,7 +20,7 @@ The "certificate + private key" pair is usually used in the following manner
 {% hint style="danger" %}
 If you encounter the error**`KDC_ERR_PADATA_TYPE_NOSUPP`**when attempting to pass the certificate through PKINIT, this may be an indication that the targeted KDC do not have certificates with the necessary EKUs (Extended Key Usages). Specifically, for a KDC to support PKINIT, its certificates must include the **`Smart Card Logon`** EKU.\
 \
-**However, you can try to** [**pass the certificate using Schannel**](../../../a-d/movement/schannel/pass-the-certificate-schannel.md)**.**
+**However, you can try to** [**pass the certificate using Schannel**](../schannel/pass-the-certificate-schannel.md)**.**
 {% endhint %}
 
 {% tabs %}
