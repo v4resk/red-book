@@ -18,7 +18,7 @@ An LDAP directory is organized in a simple "tree" hierarchy consisting of the fo
 
 It run on port TCP 389 and 636(ldaps). The Global Catalog (LDAP in ActiveDirectory) is available by default on ports 3268, and 3269 for LDAPS.
 
-## Practice&#x20;
+## Practice
 
 A lot of information on an AD domain can be obtained through LDAP. Most of the information can only be obtained with an authenticated bind but metadata (naming contexts, DNS server name, Domain Functional Level (DFL)) can be obtainable anonymously, even with anonymous binding disabled.
 
@@ -28,7 +28,7 @@ A lot of information on an AD domain can be obtained through LDAP. Most of the i
 {% tab title="ldapsearch" %}
 The [ldapsearch](https://linux.die.net/man/1/ldapsearch) command is a shell-accessible interface to the [ldap\_search\_ext(3)](https://linux.die.net/man/3/ldap\_search\_ext) library call. It can be used to enumerate essential informations.
 
-#### Anonymous Enumeration:
+**Anonymous Enumeration:**
 
 Enumerate the base domain.
 
@@ -50,9 +50,9 @@ Dump ldap information as anonymous and filter.
 ldapsearch -H ldap://$IP -x -b "DC=contoso,DC=local" '(objectClass=User)' sAMAccountName
 ```
 
-#### Authenticated Enumeration:
+**Authenticated Enumeration:**
 
-Dump readable ldap informations with **NTLM** based authentication&#x20;
+Dump readable ldap informations with **NTLM** based authentication
 
 ```bash
 #With (objectClass=User) as the query and sAMAccountName the filter.
@@ -74,7 +74,7 @@ ldapsearch -H ldap://$IP -Y GSSAPI -b "DC=contoso,DC=local" '(objectClass=User)'
 ```
 
 {% hint style="info" %}
-If you have the following error using ldaps: **ldap\_sasl\_bind(SIMPLE): Can't contact LDAP server (-1),** it's probably because of an invalide certificate.&#x20;
+If you have the following error using ldaps: **ldap\_sasl\_bind(SIMPLE): Can't contact LDAP server (-1),** it's probably because of an invalide certificate.
 
 You can run following command to ignore the certificate:
 
@@ -86,6 +86,44 @@ LDAPTLS_REQCERT=never ldapsearch -x -H ldaps://<IP> [....]
 {% hint style="info" %}
 We may use ldapsearch output (also known as LDIF files) and covert it into JSON files ingestible by BloodHound using [ldif2bloodhound](https://github.com/SySS-Research/ldif2bloodhound). See [this page](../../../ad/recon/tools/bloodhound.md#unix-like) for more informations.
 {% endhint %}
+{% endtab %}
+
+{% tab title="Powerview.py" %}
+[Powerview.py](https://github.com/aniqfakhrul/powerview.py) is an alternative for the original [PowerView.ps1](https://github.com/PowerShellMafia/PowerSploit/blob/master/Recon/PowerView.ps1) script that allow us to perform Powerview commands directly from our attacking host using LDAP.
+
+First we need to authenticate using similar commands
+
+```bash
+### Authenticate
+# Simple
+powerview $DOMAIN/$USER:$PASSWORD@$TARGET_IP --dc-ip $DC_IP
+# Pass the ticket
+powerview $DOMAIN/$USER@$TARGET_IP --dc-ip $DC_IP -k --no-pass
+# Pass the key
+powerview $DOMAIN/$USER@$TARGET_IP --dc-ip $DC_IP --aes-key $AES_KEY
+# Pass the hash
+powerview $DOMAIN/$USER@$TARGET_IP --dc-ip $DC_IP -H $NTLM_HASH
+
+### Protocols
+# Use LDAP (Port 389)
+powerview $DOMAIN/$USER:$PASSWORD@$TARGET_IP --dc-ip $DC_IP --ldap
+# Use LDAPS (Port 636)
+powerview $DOMAIN/$USER:$PASSWORD@$TARGET_IP --dc-ip $DC_IP --ldap
+# Use LDAP Global Catalog (Port 3268)
+powerview $DOMAIN/$USER:$PASSWORD@$TARGET_IP --dc-ip $DC_IP --ldap
+# Use LDAPS Global Catalog  (Port 3269)
+powerview $DOMAIN/$USER:$PASSWORD@$TARGET_IP --dc-ip $DC_IP --ldap
+```
+
+Once connected, we should be able to use the powerview.py console. Here are a few examples.
+
+```bash
+(LDAP)-[10.10.16.2]-[CONTOSO\SimpleUser]
+PV > Get-DomainUser -SPN -Select samaccountname,msDS-SupportedEncryptionTypes
+
+DAP)-[10.10.16.2]-[CONTOSO\SimpleUser]
+PV > Get-DomainUser -PreAuthNotRequired
+```
 {% endtab %}
 
 {% tab title="NetExec" %}
@@ -225,7 +263,7 @@ $res.properties.member
 {% endtab %}
 
 {% tab title="PowerView" %}
-Some [PowerView](https://github.com/PowerShellMafia/PowerSploit/blob/master/Recon/PowerView.ps1) functions use LDAP to retreive information.&#x20;
+Some [PowerView](https://github.com/PowerShellMafia/PowerSploit/blob/master/Recon/PowerView.ps1) functions use LDAP to retreive information.
 
 ```powershell
 # Import it
