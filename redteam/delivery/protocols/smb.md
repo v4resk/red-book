@@ -61,7 +61,7 @@ nmap --script smb-brute -p 445 <IP>
 {% hint style="info" %}
 Using [nmap](https://github.com/nmap/nmap), we can enumerate sessions/shares/users/domains/groups at one time using the following command :
 
-&#x20;`nmap --script="smb-enum*" -p 445 <IP>`
+`nmap --script="smb-enum*" -p 445 <IP>`
 {% endhint %}
 
 #### Version & Configuration
@@ -282,7 +282,11 @@ sudo nmap -p 445 --script="smb-vuln-*" <IP>
 
 #### EternalBlue - MS17-010
 
-Eternalblue is a flaw that allows remote attackers to execute arbitrary code on a target system by sending specially crafted messages to the SMBv1 server.
+Eternalblue is a flaw that allows remote attackers to execute arbitrary code on a target system by sending specially crafted messages to the SMBv1 server.&#x20;
+
+{% hint style="info" %}
+**Windows Vista, Windows 7, Windows 8.1, Windows 10, Windows Server 2008, Windows Server 2012 et Windows Server 2016** versions using **SMBv1** are likely vulnerable if not patched.
+{% endhint %}
 
 {% tabs %}
 {% tab title="Enumerate" %}
