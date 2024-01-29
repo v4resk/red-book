@@ -22,6 +22,8 @@ This method is much more discreet than the one used by psexec, smbexec and the o
 
 {% tabs %}
 {% tab title="UNIX-like" %}
+#### Impacket
+
 The [Impacket](https://github.com/fortra/impacket)'s [wmiexec](https://github.com/fortra/impacket/blob/master/examples/wmiexec.py) script give you a semi-interactive shell by leveraging DCOM and the MS-WMI protocol.
 
 ```bash
@@ -30,6 +32,26 @@ wmiexec.py <domain>/<username>:<password>@<target>
 
 #SilentCommand, mor likely to bypass security solutions
 wmiexec.py -silentcommand <domain>/<username>:<password>@<target> <COMMAND>
+```
+
+#### NetExec
+
+We may use [netexec](https://github.com/mpgn/NetExec) to remotely execute commands on a remote target using WMI.
+
+```bash
+## Check if you can remote WMI
+# With SMB port open
+nxc wmi <target> -u <username> -p <password>
+# With SMB port close, add the flag -d DOMAIN
+nxc wmi <target> -u <username> -p <password> -d <domain>
+
+## Execute commands
+# wmiexec
+nxc wmi <target> -u <username> -p <password> -x whoami
+# wmiexec-event
+nxc wmi <target> -u <username> -p <password> -x whoami --exec-method wmiexec-event
+# wmiexec-event + SilentCommand, mor likely to bypass security solutions
+nxc wmi <target> -u <username> -p <password> -x whoami --exec-method wmiexec-event --no-output
 ```
 {% endtab %}
 
