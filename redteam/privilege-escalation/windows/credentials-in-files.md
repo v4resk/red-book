@@ -14,8 +14,8 @@ We may search for cleartext passwords in various files stored locally. There is 
 
 Refers to the following page for practice and technical details
 
-{% content-ref url="../../credential-access/credentials-in-files/" %}
-[credentials-in-files](../../credential-access/credentials-in-files/)
+{% content-ref url="../../credential/credentials-in-files/" %}
+[credentials-in-files](../../credential/credentials-in-files/)
 {% endcontent-ref %}
 
 ## Resources
