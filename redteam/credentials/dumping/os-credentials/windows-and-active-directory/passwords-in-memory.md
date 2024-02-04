@@ -11,18 +11,11 @@ Just like [LSASS dumping](broken-reference), this technique needs the attacker t
 {% endhint %}
 
 {% tabs %}
-{% tab title="UNIX-like" %}
-On UNIX-like systems, tools like [mimipenguin](https://github.com/huntergregal/mimipenguin) (C, Shell, Python), [mimipy](https://github.com/n1nj4sec/mimipy) (Python) and [LaZagne](https://github.com/AlessandroZ/LaZagne) (Python) can be used to extract passwords from memory.
-
-```bash
-mimipenguin
-laZagne memory
-```
-{% endtab %}
-
 {% tab title="Windows" %}
 On Windows systems, tools like [LaZagne](https://github.com/AlessandroZ/LaZagne) (Python) and [mimikatz](https://github.com/gentilkiwi/mimikatz) (C) can be used to extract passwords from memory but they focus on [LSASS dumping](broken-reference).
+
+```powershell
+LaZagne.exe all
+```
 {% endtab %}
 {% endtabs %}
-
-## Resources

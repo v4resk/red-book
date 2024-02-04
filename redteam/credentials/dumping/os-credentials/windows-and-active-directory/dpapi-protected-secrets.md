@@ -82,5 +82,3 @@ dpapi::cred /in:"C:\path\to\encrypted\file" /masterkey:$MASTERKEY
 ## Resources
 
 {% embed url="https://book.hacktricks.xyz/windows/windows-local-privilege-escalation/dpapi-extracting-passwords" %}
-
-{% embed url="https://www.synacktiv.com/ressources/univershell_2017_dpapi.pdf" %}
