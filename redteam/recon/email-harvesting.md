@@ -17,7 +17,7 @@ We can recursively crawl a website and pipe it over a regex to extract emails.
 ```bash
 # Recursively get emails on a website with wget
 wget -r -O crawl.txt https://target.url
-grep -hio "\b[a-z0-9.-]\+@[a-z0-9.-]\+\.[a-z]\{2,4\}\+\b" crawl.txt
+grep -haio "\b[a-z0-9.-]\+@[a-z0-9.-]\+\.[a-z]\{2,4\}\+\b" crawl.txt
 
 # Get emails one a specific page with curl
 curl -kfsSL https://target.url | grep -hio "\b[a-z0-9.-]\+@[a-z0-9.-]\+\.[a-z]\{2,4\}\+\b"
