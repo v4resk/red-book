@@ -141,8 +141,8 @@ int main()
 
 We may directly inject [SSP DLLs](https://learn.microsoft.com/en-us/windows-server/security/windows-authentication/security-support-provider-interface-architecture) into memory. It prevent us from editing registries but using this approach, it will not persist accross reboots.
 
-{% content-ref url="../../../../ad/movement/credentials/dumping/lsass/security-support-provider-dlls.md" %}
-[security-support-provider-dlls.md](../../../../ad/movement/credentials/dumping/lsass/security-support-provider-dlls.md)
+{% content-ref url="broken-reference" %}
+[Broken link](broken-reference)
 {% endcontent-ref %}
 
 ## Resources

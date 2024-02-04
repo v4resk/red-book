@@ -125,7 +125,7 @@ bloodhound.py --zip -c ACL -d $DOMAIN -u $USERNAME -p $PASSWORD -dc $DOMAIN_CONT
 {% tab title="Windows" %}
 SharpHound ([sources](https://github.com/BloodHoundAD/SharpHound), [builds](https://github.com/BloodHoundAD/BloodHound/tree/master/Collectors)) is designed targeting .Net 4.5. It can be used as a compiled executable.
 
-It must be run from the context of a domain user, either directly through a logon or through another method such as runas (`runas /netonly /user:$DOMAIN\$USER`) (see [Impersonation](../../movement/credentials/impersonation.md)). Alternatively, SharpHound can be used with the `LdapUsername` and `LdapPassword` flags for that matter.
+It must be run from the context of a domain user, either directly through a logon or through another method such as runas (`runas /netonly /user:$DOMAIN\$USER`) (see [Impersonation](../../../redteam/credentials/impersonation.md)). Alternatively, SharpHound can be used with the `LdapUsername` and `LdapPassword` flags for that matter.
 
 Using the ACL CollectionMethod in SharpHound, we just collect abusable permissions on objects in Active Directory
 

@@ -22,7 +22,7 @@ There are multiple scenarios where ARP spoofing can be used to operate lateral m
 1. [NTLM capture](../ntlm/capture.md) and [NTLM relay](broken-reference) : spoof an SMB server and reroute received SMB packets to internal capture or relay servers **(rerouting technique)**.
 2. [DNS spoofing](dns-spoofing.md) : spoof an internal DNS server, so that DNS queries can be answered with fake resolutions **(rerouting technique)**.
 3. [WSUS spoofing](wsus-spoofing.md) : spoof the WSUS server and deliver evil configurations to Windows clients. This can either be done by intercepting all update request and running a fully functional WSUS server **(rerouting technique)** or by intercepting, forwarding and tampering packets between clients and the legitimate WSUS server **(proxy technique)**.
-4. [Dumping network secrets](../credentials/dumping/network-protocols.md) : reroute any traffic and dump secrets that were insecurely sent (i.e. FTP, HTTP, SMTP, ...). In this scenario, both outgoing and incoming traffic should be captured. This implies the poisoning of both the client's and the server's ARP tables **(proxy technique)**.
+4. [Dumping network secrets](../../../redteam/credentials/dumping/unsecured-credentials/network-protocols.md) : reroute any traffic and dump secrets that were insecurely sent (i.e. FTP, HTTP, SMTP, ...). In this scenario, both outgoing and incoming traffic should be captured. This implies the poisoning of both the client's and the server's ARP tables **(proxy technique)**.
 
 ### Network topology
 
@@ -86,7 +86,7 @@ Bettercap's logging can be controlled so that only essential information is show
 
 ## Scenarios examples
 
-Below are examples or targetted ARP poisoning attacks where the attacker wants to hijack packets aimed at a specific server (SMB, DNS, WSUS, ...), to answer with evil responses. The "dumping network secrets" scenario is the one attackers use to [dump credentials on the network](../credentials/dumping/network-protocols.md) (usually in order to find an initial foothold).
+Below are examples or targetted ARP poisoning attacks where the attacker wants to hijack packets aimed at a specific server (SMB, DNS, WSUS, ...), to answer with evil responses. The "dumping network secrets" scenario is the one attackers use to [dump credentials on the network](../../../redteam/credentials/dumping/unsecured-credentials/network-protocols.md) (usually in order to find an initial foothold).
 
 {% tabs %}
 {% tab title="SMB spoofing" %}

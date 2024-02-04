@@ -14,7 +14,7 @@ BloodHound needs to be fed JSON files containing info on the objects and relatio
 {% tab title="Windows" %}
 SharpHound ([sources](https://github.com/BloodHoundAD/SharpHound), [builds](https://github.com/BloodHoundAD/BloodHound/tree/master/Collectors)) is designed targeting .Net 4.5. It can be used as a compiled executable.
 
-It must be run from the context of a domain user, either directly through a logon or through another method such as runas (`runas /netonly /user:$DOMAIN\$USER`) (see [Impersonation](../../movement/credentials/impersonation.md)). Alternatively, SharpHound can be used with the `LdapUsername` and `LdapPassword` flags for that matter.
+It must be run from the context of a domain user, either directly through a logon or through another method such as runas (`runas /netonly /user:$DOMAIN\$USER`) (see [Impersonation](../../../redteam/credentials/impersonation.md)). Alternatively, SharpHound can be used with the `LdapUsername` and `LdapPassword` flags for that matter.
 
 ```bash
 SharpHound.exe --collectionmethod All
@@ -107,19 +107,19 @@ Once the collection is over, the data can be uploaded and analysed in BloodHound
 * Find information about selected nodes: sessions, properties, group membership/members, local admin rights, Kerberos delegations, RDP rights, outbound/inbound control rights (ACEs), and so on
 * Find help about edges/attacks (abuse, opsec considerations, references)
 
-Using BloodHound can help find attack paths and abuses like [ACEs abuse](broken-reference), [Kerberos delegations abuse](../../movement/kerberos/delegations/), [credential dumping](../../movement/credentials/dumping/) and [credential shuffling](../../movement/credentials/credential-shuffling.md), [GPOs abuse](../../movement/group-policies.md), [Kerberoast](../../movement/kerberos/kerberoast.md), [ASREProast](../../movement/kerberos/asreproast.md), [domain trusts attacks](../../movement/domain-trusts.md), etc.
+Using BloodHound can help find attack paths and abuses like [ACEs abuse](broken-reference/), [Kerberos delegations abuse](../../movement/kerberos/delegations/), [credential dumping](../../movement/credentials/dumping.md) and [credential shuffling](../../movement/credentials/credential-shuffling.md), [GPOs abuse](../../movement/group-policies.md), [Kerberoast](../../movement/kerberos/kerberoast.md), [ASREProast](../../movement/kerberos/asreproast.md), [domain trusts attacks](../../movement/domain-trusts.md), etc.
 
-![](../../../.gitbook/assets/Screenshot%20from%202020-12-08%2015-29-30.png)
+![](<../../../.gitbook/assets/Screenshot from 2020-12-08 15-29-30.png>)
 
 For detailed and official documentation on the analysis process, testers can check the following resources: [the BloodHound GUI](https://bloodhound.readthedocs.io/en/latest/data-analysis/bloodhound-gui.html), [nodes](https://bloodhound.readthedocs.io/en/latest/data-analysis/nodes.html) and [edges](https://bloodhound.readthedocs.io/en/latest/data-analysis/edges.html).
 
 {% hint style="success" %}
 Here are some examples of quick wins to spot with BloodHound
 
-* **shadow admins**: users that are not members of privileged Active Directory groups but have sensitive privileges over the domain (run graph queries like "find principals with [DCSync](../../movement/credentials/dumping/dcsync.md) rights", "users with most local admin rights", or check "inbound control rights" in the domain and privileged groups node info panel)
-* **other over-privileged users**: user that can control many objects ([ACEs](broken-reference)) and that often leads to admins, shadow admins or sensitive servers (check for "outbound control rights" in the node info panel)
+* **shadow admins**: users that are not members of privileged Active Directory groups but have sensitive privileges over the domain (run graph queries like "find principals with [DCSync](../../../redteam/credentials/dumping/os-credentials/windows-and-active-directory/dcsync.md) rights", "users with most local admin rights", or check "inbound control rights" in the domain and privileged groups node info panel)
+* **other over-privileged users**: user that can control many objects ([ACEs](broken-reference/)) and that often leads to admins, shadow admins or sensitive servers (check for "outbound control rights" in the node info panel)
 * **over-privileged computers**: find computers that can do [(un)constrained Kerberos delegation](../../movement/kerberos/delegations/) (run graph queries like "find computer with unconstrained delegations")
-* **admin computers**: find computers (A) that have admin rights against other computers (B). This can be exploited as follows: computer A triggered with an [MS-RPRN abuse (printerbug),](../../movement/mitm-and-coerced-authentications/ms-rprn.md) authentication is then [relayed](../../movement/ntlm/relay.md), and credentials are [dumped](../../movement/credentials/dumping/) on the computer B.
+* **admin computers**: find computers (A) that have admin rights against other computers (B). This can be exploited as follows: computer A triggered with an [MS-RPRN abuse (printerbug),](../../movement/mitm-and-coerced-authentications/ms-rprn.md) authentication is then [relayed](../../movement/ntlm/relay.md), and credentials are [dumped](../../movement/credentials/dumping.md) on the computer B.
 
 Other quick wins can be easily found with the [bloodhound-quickwin](https://github.com/kaluche/bloodhound-quickwin) Python script
 

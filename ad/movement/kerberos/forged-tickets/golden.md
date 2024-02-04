@@ -10,7 +10,7 @@ The long-term key of the `krbtgt` account can be used to forge a special TGT (Ti
 When forging tickets, before November 2021 updates, the user-id and groups-ids were useful but the username supplied was mostly useless. As of Nov. 2021 updates, if the username supplied doesn't exist in Active Directory, the ticket gets rejected. This also applies to Silver Tickets.
 {% endhint %}
 
-In order to craft a golden ticket, testers need to find the `krbtgt`'s RC4 key (i.e. NT hash) or AES key (128 or 256 bits). In most cases, this can only be achieved with domain admin privileges through a [DCSync attack](../../credentials/dumping/dcsync.md). Because of this, golden tickets only allow lateral movement and not privilege escalation.
+In order to craft a golden ticket, testers need to find the `krbtgt`'s RC4 key (i.e. NT hash) or AES key (128 or 256 bits). In most cases, this can only be achieved with domain admin privileges through a [DCSync attack](../../../../redteam/credentials/dumping/os-credentials/windows-and-active-directory/dcsync.md). Because of this, golden tickets only allow lateral movement and not privilege escalation.
 
 {% hint style="info" %}
 Microsoft now uses AES 256 bits by default. Using this encryption algorithm (instead of giving the NThash) will be stealthier.

@@ -2,9 +2,9 @@
 
 This abuse can be carried out when controlling an object that has `WriteDacl` over another object.
 
-The attacker can write a new ACE to the target object’s DACL (Discretionary Access Control List). This can give the attacker full control of the target object.&#x20;
+The attacker can write a new ACE to the target object’s DACL (Discretionary Access Control List). This can give the attacker full control of the target object.
 
-Instead of giving full control, the same process can be applied to allow an object to [DCSync](../credentials/dumping/dcsync.md) by adding two ACEs with specific Extended Rights (`DS-Replication-Get-Changes` and `DS-Replication-Get-Changes-All`). Giving full control leads to the same thing since `GenericAll` includes all `ExtendedRights`, hence the two extended rights needed for DCSync to work.
+Instead of giving full control, the same process can be applied to allow an object to [DCSync](../../../redteam/credentials/dumping/os-credentials/windows-and-active-directory/dcsync.md) by adding two ACEs with specific Extended Rights (`DS-Replication-Get-Changes` and `DS-Replication-Get-Changes-All`). Giving full control leads to the same thing since `GenericAll` includes all `ExtendedRights`, hence the two extended rights needed for DCSync to work.
 
 Story time, Exchange Servers used to have `WriteDacl` over domain objects, allowing attackers to conduct a [PrivExchange](../exchange-services/privexchange.md) attack where control would be gained over an Exchange Server which would then be used to grant an attacker-controlled object DCSync privileges to the domain.
 

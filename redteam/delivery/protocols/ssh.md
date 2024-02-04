@@ -70,7 +70,7 @@ msf> use auxiliary/scanner/ssh/ssh_enumusers
 ### Brute-Force Credentials
 
 {% hint style="info" %}
-If the target host opens port 80 or 443, you can generate [wordlist from the contents of the website](../passwd/generate-wordlists.md#cewl) then use it with your tool.
+If the target host opens port 80 or 443, you can generate [wordlist from the contents of the website](../../credentials/passwd/generate-wordlists.md#cewl) then use it with your tool.
 {% endhint %}
 
 {% tabs %}
@@ -93,10 +93,10 @@ hydra -l username -P passwords.txt ssh://<target-ip>:2222 -t 4
 
 ### Crack SSH Private Key
 
-Some private keys require a password or passphrase for operation, so we may attempt to [Brute Force](https://attack.mitre.org/techniques/T1110) the passphrase [off-line](../passwd/brute-force/offline-password-cracking.md).
+Some private keys require a password or passphrase for operation, so we may attempt to [Brute Force](https://attack.mitre.org/techniques/T1110) the passphrase [off-line](../../credentials/passwd/brute-force/offline-password-cracking.md).
 
-{% content-ref url="../../credential/credentials-in-files/ssh-private-keys.md" %}
-[ssh-private-keys.md](../../credential/credentials-in-files/ssh-private-keys.md)
+{% content-ref url="../../credentials/dumping/unsecured-credentials/ssh-private-keys.md" %}
+[ssh-private-keys.md](../../credentials/dumping/unsecured-credentials/ssh-private-keys.md)
 {% endcontent-ref %}
 
 ### Persistence

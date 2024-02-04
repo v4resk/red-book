@@ -2,9 +2,9 @@
 
 ## Theory
 
-We may attempt to brute-force a web service as we may not be able to fully interact with it without credentials. Most web services come with a default user account such as **admin** and may use [common, default, weak or leaked passwords](../../../redteam/delivery/passwd/default-weak-and-leaked-passwords.md).&#x20;
+We may attempt to brute-force a web service as we may not be able to fully interact with it without credentials. Most web services come with a default user account such as **admin** and may use [common, default, weak or leaked passwords](../../../redteam/credentials/passwd/default-weak-and-leaked-passwords.md).&#x20;
 
-For our brute-force attack, it will dramatically increase our chances of success and reduce the expected duration of our attack. We even may [generate our own wordlist](../../../redteam/delivery/passwd/generate-wordlists.md) for this purpose.
+For our brute-force attack, it will dramatically increase our chances of success and reduce the expected duration of our attack. We even may [generate our own wordlist](../../../redteam/credentials/passwd/generate-wordlists.md) for this purpose.
 
 ## Practice
 

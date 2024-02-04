@@ -8,7 +8,7 @@ The pre-authentication requires the requesting user to supply its secret key (DE
 
 This technique is similar to [ASREProasting](broken-reference) but doesn't rely on a misconfiguration. It relies instead on an attacker successfully obtain a powerful enough [man-in-the-middle](../mitm-and-coerced-authentications/) position (i.e. [ARP poisoning](../mitm-and-coerced-authentications/arp-poisoning.md), [ICMP redirect](../mitm-and-coerced-authentications/icmp-redirect.md), [DHCPv6 spoofing](../mitm-and-coerced-authentications/dhcpv6-spoofing.md)).
 
-This technique can be categorized as a [plaintext protocol credential dumping](../credentials/dumping/network-protocols.md) technique.
+This technique can be categorized as a [plaintext protocol credential dumping](../../../redteam/credentials/dumping/unsecured-credentials/network-protocols.md) technique.
 
 ## Practice
 

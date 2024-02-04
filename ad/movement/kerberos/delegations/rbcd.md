@@ -94,7 +94,7 @@ Once the ticket is obtained, it can be used with [pass-the-ticket](broken-refere
 {% endtab %}
 
 {% tab title="Windows" %}
-In order to run the following commands and tools as other users, testers can check the [user impersonation](../../credentials/impersonation.md) part.
+In order to run the following commands and tools as other users, testers can check the [user impersonation](../../../../redteam/credentials/impersonation.md) part.
 
 **1 - Edit the target's security descriptor (ACE abuse)**:pencil2: \*\*\*\*
 

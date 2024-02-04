@@ -44,7 +44,7 @@ print(connection.entries[0])
 {% endtab %}
 
 {% tab title="Windows" %}
-In order to run the following commands and tools as other users, testers can check the [user impersonation](../credentials/impersonation.md) part.
+In order to run the following commands and tools as other users, testers can check the [user impersonation](../../../redteam/credentials/impersonation.md) part.
 
 The following command, using the [PowerShell ActiveDirectory module](https://docs.microsoft.com/en-us/powershell/module/addsadministration/?view=win10-ps)'s cmdlets Get-ADDomain and Get-ADObject, will help testers make sure the controlled domain user can create computer accounts (the MachineAccountQuota domain-level attribute needs to be set higher than 0. It is set to 10 by default).
 

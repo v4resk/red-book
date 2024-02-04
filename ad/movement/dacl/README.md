@@ -10,7 +10,7 @@ When misconfigured, ACEs can be abused to operate lateral movement or privilege 
 
 ## Practice
 
-If an object's (called **objectA**) DACL features an ACE stating that another object (called **objectB**) has a specific right (e.g. `GenericAll`) over it (i.e. over **objectA**), attackers need to be in control of **objectB** to take control of **objectA**. The following abuses can only be carried out when running commands as the user mentioned in the ACE (**objectB**) (see [impersonation techniques](../credentials/impersonation.md)).
+If an object's (called **objectA**) DACL features an ACE stating that another object (called **objectB**) has a specific right (e.g. `GenericAll`) over it (i.e. over **objectA**), attackers need to be in control of **objectB** to take control of **objectA**. The following abuses can only be carried out when running commands as the user mentioned in the ACE (**objectB**) (see [impersonation techniques](../../../redteam/credentials/impersonation.md)).
 
 ### Recon
 
@@ -36,7 +36,7 @@ All of the aforementioned attacks (red blocks) are detailed in the child notes, 
 * **Shadow Credentials:** see [ADDS > Movement > Kerberos > Shadow Credentials](../kerberos/shadow-credentials.md)
 * **Kerberos RBCD**: see [ADDS > Movement > Kerberos > Kerberos Delegations > RBCD](../kerberos/delegations/rbcd.md)
 * **GPO abuses**: see [ADDS > Movement > GPOs](../group-policies.md)
-* **DCSync** : see [ADDS > Movement > Credential > Dumping > DCSync](../credentials/dumping/dcsync.md)
+* **DCSync** : see [ADDS > Movement > Credential > Dumping > DCSync](../../../redteam/credentials/dumping/os-credentials/windows-and-active-directory/dcsync.md)
 
 {% hint style="success" %}
 **Self-attacks**

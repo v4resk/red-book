@@ -14,7 +14,7 @@ There are many tools that implement pass-the-hash: [Impacket scripts](https://gi
 
 {% tabs %}
 {% tab title="Credentials dumping" %}
-The Impacket script [secretsdump](https://github.com/SecureAuthCorp/impacket/blob/master/examples/secretsdump.py) (Python) has the ability to remotely dump hashes and LSA secrets from a machine (`LMhash` can be empty) (see [dumping credentials from registry hives](../credentials/dumping/#windows-computer-registry-hives)).
+The Impacket script [secretsdump](https://github.com/SecureAuthCorp/impacket/blob/master/examples/secretsdump.py) (Python) has the ability to remotely dump hashes and LSA secrets from a machine (`LMhash` can be empty) (see [dumping credentials from registry hives](../credentials/dumping.md#windows-computer-registry-hives)).
 
 ```bash
 secretsdump.py -hashes 'LMhash:NThash' 'DOMAIN/USER@TARGET'
@@ -22,7 +22,7 @@ secretsdump.py -hashes ':NThash' 'DOMAIN/USER@TARGET'
 secretsdump.py 'DOMAIN/USER:PASSWORD@TARGET'
 ```
 
-[NetExec](https://github.com/Pennyw0rth/NetExec) (Python) has the ability to do it on a set of targets. The `bh_owned` has the ability to set targets as "owned" in [BloodHound](https://github.com/BloodHoundAD/BloodHound) (see [dumping credentials from registry hives](../credentials/dumping/#windows-computer-registry-hives)).
+[NetExec](https://github.com/Pennyw0rth/NetExec) (Python) has the ability to do it on a set of targets. The `bh_owned` has the ability to set targets as "owned" in [BloodHound](https://github.com/BloodHoundAD/BloodHound) (see [dumping credentials from registry hives](../credentials/dumping.md#windows-computer-registry-hives)).
 
 ```bash
 netexec smb $TARGETS -u $USER -H $NThash --sam --local-auth
@@ -30,7 +30,7 @@ netexec smb $TARGETS -d $DOMAIN -u $USER -H $NThash --lsa
 netexec smb $TARGETS -d $DOMAIN -u $USER -H $NThash --ntds
 ```
 
-[Lsassy](https://github.com/Hackndo/lsassy) (Python) has the ability to do it with higher success probabilities as it offers multiple dumping methods. This tool can set targets as "owned" in [BloodHound](https://github.com/BloodHoundAD/BloodHound). It works in standalone but also as a [NetExec](https://github.com/Pennyw0rth/NetExec) module (see [dumping credentials from lsass process memory](../credentials/dumping/#windows-computer-lsass-exe)).
+[Lsassy](https://github.com/Hackndo/lsassy) (Python) has the ability to do it with higher success probabilities as it offers multiple dumping methods. This tool can set targets as "owned" in [BloodHound](https://github.com/BloodHoundAD/BloodHound). It works in standalone but also as a [NetExec](https://github.com/Pennyw0rth/NetExec) module (see [dumping credentials from lsass process memory](../credentials/dumping.md#windows-computer-lsass-exe)).
 
 ```bash
 netexec smb $TARGETS -d $DOMAIN -u $USER -H $NThash -M lsassy
@@ -109,9 +109,9 @@ Testers should look out for environments with WinRM enabled. During the WinRM co
 {% hint style="info" %}
 **Machine accounts**
 
-Just like with any other domain account, a machine account's NT hash can be used with pass-the-hash, but it is not possible to operate remote operations that require local admin rights (such as [SAM & LSA secrets dump](../credentials/dumping/sam-and-lsa-secrets.md)). These operations can instead be conducted with a [Silver Ticket](../kerberos/forged-tickets/#silver-ticket) since the machine accounts validates Kerberos tickets used to authenticate to a said computer/service.
+Just like with any other domain account, a machine account's NT hash can be used with pass-the-hash, but it is not possible to operate remote operations that require local admin rights (such as [SAM & LSA secrets dump](../../../redteam/credentials/dumping/os-credentials/windows-and-active-directory/sam-and-lsa-secrets.md)). These operations can instead be conducted with a [Silver Ticket](../kerberos/forged-tickets/#silver-ticket) since the machine accounts validates Kerberos tickets used to authenticate to a said computer/service.
 
-A domain controller machine account's NT hash can be used with pass-the-hash to [dump the domain hashes (NTDS.dit)](broken-reference).
+A domain controller machine account's NT hash can be used with pass-the-hash to [dump the domain hashes (NTDS.dit)](broken-reference/).
 {% endhint %}
 
 ## References

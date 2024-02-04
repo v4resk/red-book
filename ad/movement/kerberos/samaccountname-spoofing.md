@@ -33,7 +33,7 @@ The attack can then be conducted as follows.
 3. Request a TGT for the controlled machine account
 4. Reset the controlled machine account `sAMAccountName` to its old value (or anything else different than the Domain Controller's name without the trailing `$`)
 5. Request a service ticket with S4U2self by presenting the TGT obtained before -> [CVE-2021-42287](samaccountname-spoofing.md#cve-2021-42287-kdc-lookup)
-6. Get access to the domain controller (i.e. [DCSync](../credentials/dumping/dcsync.md))
+6. Get access to the domain controller (i.e. [DCSync](../../../redteam/credentials/dumping/os-credentials/windows-and-active-directory/dcsync.md))
 
 {% hint style="warning" %}
 Some of the tools and features that allow exploitation of these vulnerabilities are still in development
@@ -96,7 +96,7 @@ On Windows systems, the steps mentioned above can be conducted with
 
 * [PowerMad](https://github.com/Kevin-Robertson/Powermad/)'s (PowerShell) `New-MachineAccount` and `Set-MachineAccountAttribute` functions for the creation and manipulation of a computer account
 * with [Rubeus](https://github.com/GhostPack/Rubeus) (C#) for the requests of Kerberos TGT and Service Ticket
-* with [Mimikatz](https://github.com/gentilkiwi/mimikatz) (C) for the [DCSync](../credentials/dumping/dcsync.md) operation
+* with [Mimikatz](https://github.com/gentilkiwi/mimikatz) (C) for the [DCSync](../../../redteam/credentials/dumping/os-credentials/windows-and-active-directory/dcsync.md) operation
 
 ```powershell
 # 0. create a computer account
@@ -140,7 +140,7 @@ In the screenshot below, the `-spn` argument is used in the `getST.py` command. 
 
 ### User account
 
-An alternative to using computer accounts is to have enough permissions against a user account (cf. [Access Controls abuse](broken-reference)) to edit its `sAMAccountName` attribute (i.e. `WriteProperty` on the attribute, or on the « general information » or « public information » property sets, or `GenericWrite`, or `GenericAll`).
+An alternative to using computer accounts is to have enough permissions against a user account (cf. [Access Controls abuse](broken-reference/)) to edit its `sAMAccountName` attribute (i.e. `WriteProperty` on the attribute, or on the « general information » or « public information » property sets, or `GenericWrite`, or `GenericAll`).
 
 This attack path also requires knowledge of the user account password or hash (to obtain a TGT), which can be obtained (or set) in many ways (e.g. [Targeted Kerberoasting](../dacl/targeted-kerberoasting.md), [Shadow Credentials](shadow-credentials.md), [Forced Password Change](../dacl/forcechangepassword.md)).
 
