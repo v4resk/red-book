@@ -18,10 +18,10 @@ We can enumerate AV software using Windows built-in tools, such as `wmic`
 
 ```powershell
 #CMD
-PS C:\Users\v4resk> wmic /namespace:\\root\securitycenter2 path antivirusproduct
+wmic /namespace:\\root\securitycenter2 path antivirusproduct
 
 #PowerShell cmdlet
-PS C:\Users\v4resk> Get-CimInstance -Namespace root/SecurityCenter2 -ClassName AntivirusProduct
+Get-CimInstance -Namespace root/SecurityCenter2 -ClassName AntivirusProduct
 ```
 {% endtab %}
 
@@ -30,15 +30,15 @@ We can enumerate if Windows Defender is running:
 
 ```powershell
 #Check if running
-PS C:\Users\v4resk>  Get-Service WinDefend
+Get-Service WinDefend
 ```
 
 Next, we can start using the Get-MpComputerStatus cmdlet to get the current Windows Defender status.
 
 ```powershell
 #PowerShell cmdlet
-PS C:\Users\v4resk> Get-MpComputerStatus
-PS C:\Users\v4resk> Get-MpComputerStatus | select RealTimeProtectionEnabled
+Get-MpComputerStatus
+Get-MpComputerStatus | select RealTimeProtectionEnabled
 ```
 
 We can try to disable it using the Set-MpPreference cmdlet.
@@ -57,24 +57,24 @@ We can enumerate the `Windows Firewall` software with powershell.
 
 ```powershell
 #Enum if its enabled
-PS C:\Users\v4resk> Get-NetFirewallProfile
-PS C:\Users\v4resk> Get-NetFirewallProfile | Format-Table Name, Enabled
+Get-NetFirewallProfile
+Get-NetFirewallProfile | Format-Table Name, Enabled
 
 #Enum rules
-PS C:\Users\v4resk> Get-NetFirewallRule | findstr "Rule-Name"
+Get-NetFirewallRule | findstr "Rule-Name"
 ```
 
 We can try to disable it using the Set-NetFirewallProfile cmdlet.
 
 ```powershell
-PS C:\Users\v4resk> Set-NetFirewallProfile -Profile Domain, Public, Private -Enabled False
+Set-NetFirewallProfile -Profile Domain, Public, Private -Enabled False
 ```
 
 We can now use built-in windows tools to test connections:
 
 ```powershell
-PS C:\Users\v4resk> Test-NetConnection -ComputerName 127.0.0.1 -Port 80
-PS C:\Users\v4resk> (New-Object System.Net.Sockets.TcpClient("127.0.0.1", "80")).Connected
+Test-NetConnection -ComputerName 127.0.0.1 -Port 80
+(New-Object System.Net.Sockets.TcpClient("127.0.0.1", "80")).Connected
 ```
 
 {% hint style="info" %}
@@ -88,15 +88,14 @@ To detect sysmon on a target we can do:
 
 ```powershell
 # With process list
-PS C:\Users\v4resk> Get-Process | Where-Object { $_.ProcessName -eq "Sysmon" }
+Get-Process | Where-Object { $_.ProcessName -eq "Sysmon" }
 
 # With services list
-PS C:\Users\v4resk> Get-CimInstance win32_service -Filter "Description = 'System Monitor service'"
-PS C:\Users\v4resk> Get-Service | where-object {$_.DisplayName -like "*sysm*"}
+Get-CimInstance win32_service -Filter "Description = 'System Monitor service'"
+Get-Service | where-object {$_.DisplayName -like "*sysm*"}
 
 #Windows Registry
-
-PS C:\Users\v4resk> reg query HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\WINEVT\Channels\Microsoft-Windows-Sysmon/Operational
+reg query HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\WINEVT\Channels\Microsoft-Windows-Sysmon/Operational
 ```
 
 If the target system is running Sysmon, we must try to locate its configuration file
@@ -110,7 +109,7 @@ findstr /si '<ProcessCreate onmatch="exclude">' C:\*
 We can use scripts for enumerating security products within the machine, such as [SharpEDRChecker](https://github.com/PwnDexter/SharpEDRChecker).
 
 ```powershell
-PS C:\Users\v4resk> Invoke-EDRChecker
+Invoke-EDRChecker
 ```
 {% endtab %}
 
@@ -119,13 +118,13 @@ Discover the AppLocker policies. You may need to retrieve the AppLocker policy b
 
 ```powershell
 #CMD
-C:\> reg query HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Windows\SrpV2\Exe\
+reg query HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Windows\SrpV2\Exe\
 
 #Powershell
-PS C:\> (Get-AppLockerPolicy -Local).RuleCollections
-PS C:\> Get-AppLockerPolicy -Effective -Xml
-PS C:\> Get-ChildItem -Path HKLM:Software\Policies\Microsoft\Windows\SrpV2 -Recurse
-PS C:\> Get-AppLockerPolicy -Domain -LDAP "LDAP:// DC13.Contoso.com/CN={31B2F340-016D-11D2-945F-00C04FB984F9},CN=Policies,CN=System,DC=Contoso,DC=com
+(Get-AppLockerPolicy -Local).RuleCollections
+Get-AppLockerPolicy -Effective -Xml
+Get-ChildItem -Path HKLM:Software\Policies\Microsoft\Windows\SrpV2 -Recurse
+Get-AppLockerPolicy -Domain -LDAP "LDAP:// DC13.Contoso.com/CN={31B2F340-016D-11D2-945F-00C04FB984F9},CN=Policies,CN=System,DC=Contoso,DC=com
 ```
 {% endtab %}
 {% endtabs %}
