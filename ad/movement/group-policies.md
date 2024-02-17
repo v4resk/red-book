@@ -84,7 +84,7 @@ Sometimes, you will find the built-in Administrator's password in a Group Polici
 [group-policies-preferences.md](../../redteam/credentials/dumping/os-credentials/windows-and-active-directory/group-policies-preferences.md)
 {% endcontent-ref %}
 
-## References
+## Resources
 
 {% embed url="https://www.harmj0y.net/blog/redteaming/abusing-gpo-permissions/" %}
 

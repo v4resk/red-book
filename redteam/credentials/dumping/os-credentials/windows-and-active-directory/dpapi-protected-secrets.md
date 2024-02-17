@@ -25,7 +25,9 @@ C:\Users\$USER\AppData\Roaming\Microsoft\Credentials\
 
 {% tabs %}
 {% tab title="UNIX-like" %}
-From UNIX-like systems, DPAPI-data can be manipulated (mainly offline) with tools like [dpapick](https://github.com/jordanbtucker/dpapick) (Python), [dpapilab](https://github.com/dfirfpi/dpapilab) (Python), [Impacket](https://github.com/SecureAuthCorp/impacket)'s [dpapi.py](https://github.com/SecureAuthCorp/impacket/blob/master/examples/dpapi.py) and [secretsdump.py](https://github.com/SecureAuthCorp/impacket/blob/master/examples/secretsdump.py) (Python).
+### DPAPI.py
+
+&#x20;[Impacket](https://github.com/SecureAuthCorp/impacket)'s [dpapi.py](https://github.com/SecureAuthCorp/impacket/blob/master/examples/dpapi.py) can be used to interact with DPAPI.
 
 ```bash
 # Decrypt a master key
@@ -39,11 +41,15 @@ dpapi.py masterkey -file "/path/to/masterkey_file" -pvk "/path/to/backup_key.pvk
 dpapi.py credential -file "/path/to/protected_file" -key $MASTERKEY
 ```
 
+### DonPAPI
+
 [DonPAPI](https://github.com/login-securite/DonPAPI) (Python) can also be used to remotely extract a user's DPAPI secrets more easily. It supports [pass-the-hash](broken-reference), [pass-the-ticket](broken-reference) and so on.
 
 ```bash
 DonPAPI.py 'domain'/'username':'password'@<'targetName' or 'address/mask'>
 ```
+
+### Hekatomb
 
 [Hekatomb](https://github.com/Processus-Thief/HEKATOMB) (python script) can also be used. It connects to LDAP directory to retrieve all computers and users informations. Then it will download all DPAPI blob of all users from all computers and uses Domain backup keys to decrypt them.
 

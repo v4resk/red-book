@@ -6,7 +6,21 @@ description: MITRE ATT&CK™ Sub-technique T1003.001
 
 ## Theory
 
-The Local Security Authority Subsystem Service (LSASS) is a Windows service responsible for enforcing the security policy on the system. It verifies users logging in, handles password changes and creates access tokens.&#x20;
+The Local Security Authority Subsystem Service (LSASS) is a Windows service responsible for enforcing the security policy on the system. LSASS hosts security-related services such as :
+
+* **AuthN SSPI**: An [SSPI ](https://learn.microsoft.com/en-us/windows/win32/secauthn/sspi)API, allowing applications to use network security protocols
+* **SAM**: Interface for the [SAM database](sam-and-lsa-secrets.md).
+* **Vault**: Allowing to manage credentials in the [Windows Credential Manager](../../password-stores/windows-credential-manager.md).
+* **Audit**: Enforced audit policy to generate audit records in the security event log.
+* **Key Isolation**: Provides key process isolation to private keys and associated cryptographic operations
+* **EFS**: Allow to perform some cryptographic operations for File encryption&#x20;
+* **DPAPI**: [Data Protection API](dpapi-protected-secrets.md) Interface for the CryptAPI library, allowing to protect data.
+
+{% hint style="info" %}
+LSASS services are reachable trough RPC
+{% endhint %}
+
+<figure><img src="../../../../../.gitbook/assets/lsass-rpc-shcema.png" alt=""><figcaption></figcaption></figure>
 
 ## Practice
 
@@ -121,7 +135,7 @@ We can directly **inject** [**SSP DLLs**](https://learn.microsoft.com/en-us/wind
 {% tab title="Mimikatz" %}
 Mimikatz support in memory SSP DLL injection to the LSASS process.
 
-```powershell
+```
 mimikatz# privilege::debug
 mimikatz# misc::memssp
 ```
