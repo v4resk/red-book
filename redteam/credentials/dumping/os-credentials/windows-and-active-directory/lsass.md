@@ -214,6 +214,8 @@ Alternatively, we may modify LSA Registry keys to add new SSPs which will be loa
 
 ## References
 
+{% embed url="https://www.thehacker.recipes/ad/movement/credentials/dumping/lsass" %}
+
 {% embed url="https://en.hackndo.com/remote-lsass-dump-passwords/" %}
 
 {% embed url="https://www.ired.team/offensive-security/credential-access-and-credential-dumping/intercepting-logon-credentials-via-custom-security-support-provider-and-authentication-package" %}

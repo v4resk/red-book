@@ -6,7 +6,7 @@ description: MITRE ATT&CK™ Steal or Forge Kerberos Tickets - Technique T1558
 
 ## Theory
 
-In Windows, [Kerberos](../../../../../ad/persistence/kerberos/) tickets are **handled and stored by the** [**lsass** (Local Security Authority Subsystem Service)](broken-reference) process, which is responsible for security. Hence, to retrieve tickets from a Windows system, it is necessary to **communicate with lsass and ask for them**. As a **non-administrative user only owned tickets can be fetched**, however, as machine **administrator**, **all** of them can be harvested using tools like **Mimikatz, Rubeus** or **Giuda.**
+In Windows, [Kerberos](../../../../../ad/persistence/kerberos/) tickets are **handled and stored by the** [**lsass** (Local Security Authority Subsystem Service) ](lsass.md)process, which is responsible for security. Hence, to retrieve tickets from a Windows system, it is necessary to **communicate with lsass and ask for them**. As a **non-administrative user only owned tickets can be fetched**, however, as machine **administrator**, **all** of them can be harvested using tools like **Mimikatz, Rubeus** or **Giuda.**
 
 ## Practice
 
@@ -26,7 +26,7 @@ klist sessions
 {% endtab %}
 
 {% tab title="Rubeus" %}
-[Rubeus](https://github.com/GhostPack/Rubeus) can be use to enumerate tickets&#x20;
+[Rubeus](https://github.com/GhostPack/Rubeus) can be use to enumerate tickets on windows.
 
 ```powershell
 .\Rubeus.exe triage
@@ -37,8 +37,8 @@ klist sessions
 ### Dump tickets
 
 {% tabs %}
-{% tab title="Unix-Like" %}
-From an Unix attacking machine, we can remotely dump tickets using [lsassy](https://github.com/Hackndo/lsassy).
+{% tab title="UNIX-Like" %}
+From an Unix attacking machine, we can remotely dump tickets using [lsassy](https://github.com/Hackndo/lsassy) (python).
 
 ```bash
 # With a password
@@ -85,8 +85,6 @@ mimikatz # sekurlsa::tickets /export
 ```
 {% endtab %}
 {% endtabs %}
-
-
 
 ### Ask a TGS
 

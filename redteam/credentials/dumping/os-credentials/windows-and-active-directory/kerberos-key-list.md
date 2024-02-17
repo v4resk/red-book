@@ -40,6 +40,6 @@ Rubeus.exe asktgs /enctype:aes256 /keyList /ticket:ticket.kirbi /service:krbtgt/
 
 ## Resources
 
-{% embed url="https://www.secureauth.com/blog/the-kerberos-key-list-attack-the-return-of-the-read-only-domain-controllers/" %}
-
 {% embed url="https://www.thehacker.recipes/ad/movement/credentials/dumping/kerberos-key-list" %}
+
+{% embed url="https://www.secureauth.com/blog/the-kerberos-key-list-attack-the-return-of-the-read-only-domain-controllers/" %}

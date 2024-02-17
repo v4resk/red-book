@@ -137,3 +137,7 @@ ntdsdotsqlite ntds.dit -o ntds.sqlite --system SYSTEM.hive
 ```
 {% endtab %}
 {% endtabs %}
+
+## Resources
+
+{% embed url="https://www.thehacker.recipes/ad/movement/credentials/dumping/ntds" %}

@@ -91,4 +91,6 @@ For an undocumented reason, Impacket's secretsdump relies on SMB before doing a 
 
 ## Resources
 
+{% embed url="https://www.thehacker.recipes/ad/movement/credentials/dumping/dcsync" %}
+
 {% embed url="https://attack.stealthbits.com/privilege-escalation-using-mimikatz-dcsync" %}

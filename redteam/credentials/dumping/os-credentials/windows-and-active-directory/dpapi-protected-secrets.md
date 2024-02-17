@@ -87,4 +87,6 @@ dpapi::cred /in:"C:\path\to\encrypted\file" /masterkey:$MASTERKEY
 
 ## Resources
 
+{% embed url="https://www.thehacker.recipes/ad/movement/credentials/dumping/dpapi-protected-secrets" %}
+
 {% embed url="https://book.hacktricks.xyz/windows/windows-local-privilege-escalation/dpapi-extracting-passwords" %}
