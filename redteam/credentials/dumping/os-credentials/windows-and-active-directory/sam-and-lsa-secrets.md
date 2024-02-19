@@ -20,7 +20,7 @@ The Security Account Manager (SAM) component is responsible for user management.
 
 That's information are stored in registries, with the exception of domain controllers, which store the information in the [NTDS.dit](ntds.md) file. SAM is accessible trought RPC.
 
-<figure><img src="../../../../../.gitbook/assets/SAM-internal-Schem(1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../../../.gitbook/assets/SAM-internal-Schem(2).png" alt=""><figcaption></figcaption></figure>
 
 ### Post Exploitation
 
