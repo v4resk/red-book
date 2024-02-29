@@ -21,10 +21,10 @@ However, misconfiguration and security flaws are found in these applications tha
 
 ### KeePass
 
+{% tabs %}
+{% tab title="Cracking Master Password" %}
 #### Cracking Master Password
 
-{% tabs %}
-{% tab title="Find and Crack" %}
 If we gained access to the keepass database, we may be able to extract it and crack the master database password.&#x20;
 
 Keepass database is stored as a `.kdbx` file, we can search for such files using following commands:
@@ -78,6 +78,10 @@ Uname: User Name
   URL: https://keepass.info/
 Notes: Notes
 </code></pre>
+{% endtab %}
+
+{% tab title="KeePass Triggers" %}
+TO DO
 {% endtab %}
 {% endtabs %}
 
