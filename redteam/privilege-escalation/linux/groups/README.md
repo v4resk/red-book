@@ -1,2 +1,2 @@
-# 🛠️ Interesting Groups
+# Interesting Groups
 

@@ -1,4 +1,4 @@
-# HTTP API V2
+# 🛠️ HTTP API V2
 
 ## Theory
 
@@ -9,12 +9,6 @@ While the V1 registry protocol is usable, there are several problems with the ar
 {% endhint %}
 
 ## Practice
-
-{% tabs %}
-{% tab title="UNIX-like" %}
-
-{% endtab %}
-{% endtabs %}
 
 ## Resources
 

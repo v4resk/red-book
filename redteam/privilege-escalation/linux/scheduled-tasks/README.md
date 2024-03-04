@@ -1,2 +1,2 @@
-# 🛠️ Scheduled tasks
+# Scheduled tasks
 

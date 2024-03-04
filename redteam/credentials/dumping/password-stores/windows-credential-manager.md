@@ -1,18 +1,17 @@
-# 🛠️ Windows Credential Manager
+# Windows Credential Manager
 
 ## Theory
 
 Credential Manager is a Windows feature that stores logon-sensitive information for websites, applications, and networks. It contains login credentials such as usernames, passwords, and internet addresses. There are four credential categories:
 
-   - Web credentials contain authentication details stored in Internet browsers or other applications.
-   - Windows credentials contain Windows authentication details, such as NTLM or Kerberos.
-   - Generic credentials contain basic authentication details, such as clear-text usernames and passwords.
-   - Certificate-based credentials: Athunticated details based on certifications.
+* Web credentials contain authentication details stored in Internet browsers or other applications.
+* Windows credentials contain Windows authentication details, such as NTLM or Kerberos.
+* Generic credentials contain basic authentication details, such as clear-text usernames and passwords.
+* Certificate-based credentials: Athunticated details based on certifications.
 
 ## Practice
 
 {% tabs %}
-
 {% tab title="Enum" %}
 On Windows systems Vaultcmd & cmdkey can be used to list credentials.
 
@@ -63,8 +62,6 @@ mimikatz# sekurlsa::credman
 {% endtab %}
 {% endtabs %}
 
-
 ## Resources
 
 {% embed url="https://tryhackme.com/room/credharvesting" %}
-
