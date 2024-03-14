@@ -67,8 +67,8 @@ Test-WSMan -ComputerName <TARGET>
 
 ### Execute Remote Commands
 
-{% content-ref url="../../pivoting/winrm.md" %}
-[winrm.md](../../pivoting/winrm.md)
+{% content-ref url="../../redteam/pivoting/winrm.md" %}
+[winrm.md](../../redteam/pivoting/winrm.md)
 {% endcontent-ref %}
 
 ## **Resources**

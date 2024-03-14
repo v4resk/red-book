@@ -97,20 +97,20 @@ The NFS server configuration can be found in its local files
 
 Some settings can be dangerous and even allow local privileges escalation:
 
-| Option           | Description                                                                                                                                                                  |
-| ---------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `rw`             | Read and write permissions.                                                                                                                                                  |
-| `insecure`       | Ports above 1024 will be used. in secure mode, forces the client to communicate using a port below 1024, hence proving they are root                                         |
-| `nohide`         | If another file system was mounted below an exported directory, this directory is exported by its own exports entry.                                                         |
-| `no_root_squash` | All files created by root are kept with the UID/GID 0. See[ this page](../../privilege-escalation/linux/nfs-no\_root\_squash-no\_all\_squash.md).                            |
-| `no_all_squash`  | This is similar to **no\_root\_squash** option but applies to **non-root users.** See [this page](../../privilege-escalation/linux/nfs-no\_root\_squash-no\_all\_squash.md). |
+| Option           | Description                                                                                                                                                                          |
+| ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `rw`             | Read and write permissions.                                                                                                                                                          |
+| `insecure`       | Ports above 1024 will be used. in secure mode, forces the client to communicate using a port below 1024, hence proving they are root                                                 |
+| `nohide`         | If another file system was mounted below an exported directory, this directory is exported by its own exports entry.                                                                 |
+| `no_root_squash` | All files created by root are kept with the UID/GID 0. See[ this page](../../redteam/privilege-escalation/linux/nfs-no\_root\_squash-no\_all\_squash.md).                            |
+| `no_all_squash`  | This is similar to **no\_root\_squash** option but applies to **non-root users.** See [this page](../../redteam/privilege-escalation/linux/nfs-no\_root\_squash-no\_all\_squash.md). |
 
 ### Local Privilege Escalation
 
 We can abuse the no\_root\_squash and no\_all\_squash NFS configurations, as explained on this page.
 
-{% content-ref url="../../privilege-escalation/linux/nfs-no_root_squash-no_all_squash.md" %}
-[nfs-no\_root\_squash-no\_all\_squash.md](../../privilege-escalation/linux/nfs-no\_root\_squash-no\_all\_squash.md)
+{% content-ref url="../../redteam/privilege-escalation/linux/nfs-no_root_squash-no_all_squash.md" %}
+[nfs-no\_root\_squash-no\_all\_squash.md](../../redteam/privilege-escalation/linux/nfs-no\_root\_squash-no\_all\_squash.md)
 {% endcontent-ref %}
 
 ## Resources

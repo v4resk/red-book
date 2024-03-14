@@ -17,7 +17,7 @@ Depending on the target service, different tools can be used
 * [Kerbrute](https://github.com/ropnop/kerbrute) (Go) and [smartbrute](https://github.com/ShutdownRepo/smartbrute) (Python) can be used against [Kerberos pre-authentication](../../../../ad/movement/kerberos/pre-auth-bruteforce.md).
 
 {% hint style="info" %}
-For brute-force techniques against a specific protocol, you may have a look on the [following pages (Network Services)](../../../delivery/protocols/) or [this page for HTTP/HTTPS](../../../../web/web-vulnerabilities/server-side/brute-force.md).
+For brute-force techniques against a specific protocol, you may have a look on the [following pages (Network Services)](../../../../network/protocols/) or [this page for HTTP/HTTPS](../../../../web/web-vulnerabilities/server-side/brute-force.md).
 {% endhint %}
 
 We may use these tools with a [specifically generated wordlists](../generate-wordlists.md), or using [common, default, weak or leaked passwords](../default-weak-and-leaked-passwords.md).

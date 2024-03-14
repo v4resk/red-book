@@ -20,6 +20,8 @@
 {% endtab %}
 {% endtabs %}
 
+### Enumeration
+
 ## Resources
 
 {% embed url="https://docs.microsoft.com/en-us/previous-versions/windows/it-pro/windows-server-2003/cc759554(v=ws.10)?redirectedfrom=MSDN" %}

@@ -76,7 +76,7 @@ arp -a
 
 {% tabs %}
 {% tab title="nbtstat" %}
-The `nbtstat` command may be used to displays the [NetBIOS](../../delivery/protocols/nbt-ns-netbios.md) name table cache, listing the NetBIOS names and their corresponding IP addresses cached on the local system.
+The `nbtstat` command may be used to displays the [NetBIOS](../../../network/protocols/nbt-ns-netbios.md) name table cache, listing the NetBIOS names and their corresponding IP addresses cached on the local system.
 
 ```powershell
 nbtstat -c

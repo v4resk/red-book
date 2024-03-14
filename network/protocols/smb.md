@@ -266,8 +266,8 @@ netexec smb <TARGET> -u <USER> -p <PASSWORD> --pass-pol
 
 ### Execute Remote Commands
 
-{% content-ref url="../../pivoting/smb-based.md" %}
-[smb-based.md](../../pivoting/smb-based.md)
+{% content-ref url="../../redteam/pivoting/smb-based.md" %}
+[smb-based.md](../../redteam/pivoting/smb-based.md)
 {% endcontent-ref %}
 
 ### Vulnerabilities
@@ -390,8 +390,8 @@ python ms08-067.py 10.10.10.4 4 445
 
 ## Exfiltration
 
-{% content-ref url="../../exfiltration/smb.md" %}
-[smb.md](../../exfiltration/smb.md)
+{% content-ref url="../../redteam/exfiltration/smb.md" %}
+[smb.md](../../redteam/exfiltration/smb.md)
 {% endcontent-ref %}
 
 ## Resources

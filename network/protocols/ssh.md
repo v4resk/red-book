@@ -70,7 +70,7 @@ msf> use auxiliary/scanner/ssh/ssh_enumusers
 ### Brute-Force Credentials
 
 {% hint style="info" %}
-If the target host opens port 80 or 443, you can generate [wordlist from the contents of the website](../../credentials/passwd/generate-wordlists.md#cewl) then use it with your tool.
+If the target host opens port 80 or 443, you can generate [wordlist from the contents of the website](../../redteam/credentials/passwd/generate-wordlists.md#cewl) then use it with your tool.
 {% endhint %}
 
 {% tabs %}
@@ -93,18 +93,18 @@ hydra -l username -P passwords.txt ssh://<target-ip>:2222 -t 4
 
 ### Crack SSH Private Key
 
-Some private keys require a password or passphrase for operation, so we may attempt to [Brute Force](https://attack.mitre.org/techniques/T1110) the passphrase [off-line](../../credentials/passwd/brute-force/offline-password-cracking.md).
+Some private keys require a password or passphrase for operation, so we may attempt to [Brute Force](https://attack.mitre.org/techniques/T1110) the passphrase [off-line](../../redteam/credentials/passwd/brute-force/offline-password-cracking.md).
 
-{% content-ref url="../../credentials/dumping/unsecured-credentials/ssh-private-keys.md" %}
-[ssh-private-keys.md](../../credentials/dumping/unsecured-credentials/ssh-private-keys.md)
+{% content-ref url="../../redteam/credentials/dumping/unsecured-credentials/ssh-private-keys.md" %}
+[ssh-private-keys.md](../../redteam/credentials/dumping/unsecured-credentials/ssh-private-keys.md)
 {% endcontent-ref %}
 
 ### Persistence
 
 It's possible to backdoor an SSH public key using the `command=` argument. The backdoor will execute whenever the user logs in using this key.
 
-{% content-ref url="../../persistence/linux/ssh.md" %}
-[ssh.md](../../persistence/linux/ssh.md)
+{% content-ref url="../../redteam/persistence/linux/ssh.md" %}
+[ssh.md](../../redteam/persistence/linux/ssh.md)
 {% endcontent-ref %}
 
 ## Resources

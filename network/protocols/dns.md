@@ -10,6 +10,6 @@ See the following pages for informations about the LDAP protocol.&#x20;
 [Broken link](broken-reference)
 {% endcontent-ref %}
 
-{% content-ref url="../../recon/dns-enum.md" %}
-[dns-enum.md](../../recon/dns-enum.md)
+{% content-ref url="../../redteam/recon/dns-enum.md" %}
+[dns-enum.md](../../redteam/recon/dns-enum.md)
 {% endcontent-ref %}

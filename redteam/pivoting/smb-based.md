@@ -6,7 +6,7 @@ description: 'MITRE ATT&CK™ Remote Services: SMB/Windows Admin Shares - Techni
 
 ## Theory
 
-[SMB Protocol](../delivery/protocols/smb.md) can be abuse by attackers to execute remote code and perform lateral movements.
+[SMB Protocol](../../network/protocols/smb.md) can be abuse by attackers to execute remote code and perform lateral movements.
 
 ## Practice
 
@@ -51,7 +51,7 @@ psexec64.exe \\MACHINE_IP -u Administrator -p Mypass123 -i cmd.exe
 
 ### SmbExec
 
-SmbExec is an [Impacket](https://github.com/fortra/impacket) script that works similarly to PsExec without using RemComSvc. The main difference is that smbexec avoids transferring a potentially detectable binary to the target site. Instead, it lives completely off the land by running the local Windows command shell. \
+SmbExec is an [Impacket](https://github.com/fortra/impacket) script that works similarly to PsExec without using RemComSvc. The main difference is that smbexec avoids transferring a potentially detectable binary to the target site. Instead, it lives completely off the land by running the local Windows command shell.\
 implementation goes one step further, instantiating a local smbserver to receive the output of the commands. This is useful in the situation where the target machine **does NOT have a writeable share** available.
 
 {% tabs %}

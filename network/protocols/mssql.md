@@ -41,8 +41,8 @@ nmap --script ms-sql-info,ms-sql-empty-password,ms-sql-xp-cmdshell,ms-sql-config
 
 To enumerate Databases, Tables, Columns, Users, Permissions, refers to the following page
 
-{% content-ref url="../../../web/infrastructures/dbms/enum-databases.md" %}
-[enum-databases.md](../../../web/infrastructures/dbms/enum-databases.md)
+{% content-ref url="../../web/infrastructures/dbms/enum-databases.md" %}
+[enum-databases.md](../../web/infrastructures/dbms/enum-databases.md)
 {% endcontent-ref %}
 
 ### Brute Force Credentials
@@ -53,7 +53,7 @@ If you **don't** **have credentials** you can try to guess them. You can use nma
 
 {% tabs %}
 {% tab title="Hydra" %}
-Using Hydra, we may bruteforce MSSQL credentials.&#x20;
+Using Hydra, we may bruteforce MSSQL credentials.
 
 ```bash
 hydra -L usernames.txt –p password <target-ip> mssql
@@ -116,16 +116,16 @@ netexec mssql <TARGET> -d <DOMAIN> -u <USER> -p <PASSWORD> -x "whoami"
 
 To directly execute or read/write files on a MSSQL instance, check the following page:
 
-{% content-ref url="../../../web/infrastructures/dbms/exploit-databases.md" %}
-[exploit-databases.md](../../../web/infrastructures/dbms/exploit-databases.md)
+{% content-ref url="../../web/infrastructures/dbms/exploit-databases.md" %}
+[exploit-databases.md](../../web/infrastructures/dbms/exploit-databases.md)
 {% endcontent-ref %}
 
 ### Coerced Auths (Stealing NTLM Hash)
 
 On MS-SQL (Microsoft SQL) servers, the EXEC method can be used to access a remote SMB share. MSSQL uses **Keberos** to authenticate users so we can retrieve the NTLM hash.
 
-{% content-ref url="../../../ad/movement/mitm-and-coerced-authentications/living-off-the-land.md" %}
-[living-off-the-land.md](../../../ad/movement/mitm-and-coerced-authentications/living-off-the-land.md)
+{% content-ref url="../../ad/movement/mitm-and-coerced-authentications/living-off-the-land.md" %}
+[living-off-the-land.md](../../ad/movement/mitm-and-coerced-authentications/living-off-the-land.md)
 {% endcontent-ref %}
 
 ### MSSQL Privilege Escalation
@@ -230,8 +230,8 @@ REVERT
 The user running MSSQL server will have enabled the privilege token **SeImpersonatePrivilege.**\
 You probably will be able to **escalate to Administrator or NT AUTHORITY\SYSTEM** following this page:
 
-{% content-ref url="../../privilege-escalation/windows/abusing-tokens.md" %}
-[abusing-tokens.md](../../privilege-escalation/windows/abusing-tokens.md)
+{% content-ref url="../../redteam/privilege-escalation/windows/abusing-tokens.md" %}
+[abusing-tokens.md](../../redteam/privilege-escalation/windows/abusing-tokens.md)
 {% endcontent-ref %}
 
 ## Resources

