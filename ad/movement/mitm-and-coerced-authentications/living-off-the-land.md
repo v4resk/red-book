@@ -28,7 +28,7 @@ The rpcping command can also be used to trigger an authentication. The perk of t
 On MS-SQL (Microsoft SQL) servers, the EXEC method can be used to access a remote SMB share. This leads to an outgoing traffic using SMB.
 
 {% hint style="danger" %}
-You can check if who (apart sysadmins) has permissions to run those MSSQL functions with:
+You can check who (apart sysadmins) has permissions to run those MSSQL functions with:
 
 ```sql
 Use master;
