@@ -85,6 +85,14 @@ The following files can then be exported
 If the NTDS database is very large (several gigabytes), the generation of a defragmented backup with ntdsutil consumes a lot of CPU and disk resources on the server, which can cause slowdowns and other undesirable effects on the domain controller.
 {% endhint %}
 
+### Esentutl
+
+Esentutl is a command-line tool that provides a database utilities for the Extensible Storage Engine (ESE). It can be used to copy a (locked) file using Volume Shadow Copy.
+
+```powershell
+esentutl.exe /y /vss c:\windows\ntds\ntds.dit /d c:\folder\ntds.dit
+```
+
 ### Volume Shadow Copy (VSSAdmin)
 
 VSS (Volume Shadow Copy) is a Microsoft Windows technology, implemented as a service, that allows the creation of backup copies of files or volumes, even when they are in use. The following command will create the shadow copy and will print two values that will be used later: the ID and the Name of the shadow copy.
