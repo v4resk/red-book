@@ -429,3 +429,7 @@
     * [Movement](cloud-cicd/cloud/azure-ad/movement.md)
     * [Persistence](cloud-cicd/cloud/azure-ad/persistence.md)
   * [AWS](cloud-cicd/cloud/aws.md)
+
+## 🛠️ Smart Contracts
+
+* [Introduction](smart-contracts/introduction.md)
