@@ -218,6 +218,7 @@
   * [🛠️ MySQL](network/protocols/mysql.md)
 * [🛠️ WiFi](network/wifi.md)
 * [🛠️ RFID](network/rfid.md)
+* [🛠️ Bluetooth](network/bluetooth.md)
 
 ## Active Directory <a href="#ad" id="ad"></a>
 
