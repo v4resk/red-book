@@ -4,7 +4,7 @@
 
 The **System Center Configuration Manager** (SCCM), now (since 2020) known as **Microsoft Endpoint Configuration Manager** (MECM), is a software developed by Microsoft to help system administrators manage the servers and workstations in large Active Directory environments. It provides lots of features including remote control, patch management, task automation, application distribution, hardware and software inventory, compliance management and security policy administration.
 
-SCCM is an **on-premise** solution, but Microsoft also maintains a cloud-native client management suite named **Intune**. Both Intune and SCCM are part of the "**Microsoft Endpoint Manager**"  umbrella.
+SCCM is an **on-premise** solution, but Microsoft also maintains a cloud-native client management suite named **Intune**. Both Intune and SCCM are part of the "**Microsoft Endpoint Manager**" umbrella.
 
 ### Topology
 
@@ -65,7 +65,7 @@ _Nota bene, there is a_ [_feature_](https://learn.microsoft.com/en-us/mem/config
 
 ### Attack path overview
 
-<figure><img src="../../../.gitbook/assets/SCCM-Attack-Surface-Overview.png" alt=""><figcaption><p>SCCM Attack Surface Overview</p></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image.avif" alt=""><figcaption><p>SCCM Attack Surface Overview</p></figcaption></figure>
 
 ### Recon
 
@@ -73,18 +73,25 @@ SCCM reconnaissance can be performed in many ways. The goal is to enumerate whet
 
 {% tabs %}
 {% tab title="UNIX-like" %}
+### PXEThiefy.py
+
 [pxethiefy.py](https://github.com/sse-secure-systems/Active-Directory-Spotlights/tree/master/SCCM-MECM/pxethiefy) (Python), which is based on [PXEThief](https://github.com/MWR-CyberSec/PXEThief), can be used to query for PXE boot media. The Pre-Boot Execution Environment (PXE) is a mechanism for booting a computer over the network. Specifically, instead of booting from a CD drive, USB key or hard disk and finding the boot program, the PC will use the network to read such a program from the PXE server.
 
-<figure><img src="../../../.gitbook/assets/SCCM_Recon_Linux_pxethiefy.png" alt=""><figcaption></figcaption></figure>
+```bash
+sudo python3 pxethiefy.py explore -i eth0
+```
 
 There are a few things to note:
 
 * [pxethiefy.py](https://github.com/sse-secure-systems/Active-Directory-Spotlights/tree/master/SCCM-MECM/pxethiefy) uses broadcast requests to request DHCP PXE boot options. An SCCM setup does not have to support PXE boot and a "found" PXE server does not have to be an SCCM component. Be cautious of false positive results.
 * In this case a PXE server was found and PXE media was downloaded. The location of the PXE media on the TFTP server is `\SMSTemp\...`, which indicates that this is indeed an SCCM server.
 
+### SCCMHunter
+
 [sccmhunter](https://github.com/garrettfoster13/sccmhunter) (Python) can also be used to explore the Active Directory and search for SCCM/MECM assets. For this tool, a first user account is required. The first step is to retrieve the different assets in the LDAP annuary, and extract informations from the identified servers SMB shares.
 
 For each servers, the extracted informations are :
+
 * the SCCM site code
 * if the server is a Central Administration Site (CAS) or not
 * the SMB signing status (useful to perform later [NTLM relay](../ntlm/relay.md) attacks)
@@ -163,6 +170,8 @@ After the SCCM infrastructure compromise, this page will describe how to pivot t
 {% endcontent-ref %}
 
 ## Resources
+
+{% embed url="https://www.thehacker.recipes/ad/movement/sccm-mecm" %}
 
 {% embed url="https://www.securesystems.de/blog/active-directory-spotlight-attacking-the-microsoft-configuration-manager/" %}
 
