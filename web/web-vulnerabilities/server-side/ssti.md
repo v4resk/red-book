@@ -68,7 +68,7 @@ Some possible payloads that may cause errors:
 {% tab title="Decisional Tree" %}
 The following tree can be used to identify which template engine is used
 
-<figure><img src="../../../.gitbook/assets/image (3).png" alt=""><figcaption><p>SSTI decision tree</p></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (3) (1).png" alt=""><figcaption><p>SSTI decision tree</p></figcaption></figure>
 {% endtab %}
 {% endtabs %}
 
