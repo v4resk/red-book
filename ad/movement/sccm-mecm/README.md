@@ -73,7 +73,7 @@ SCCM reconnaissance can be performed in many ways. The goal is to enumerate whet
 
 {% tabs %}
 {% tab title="UNIX-like" %}
-### PXEThiefy.py
+### PXEThiefy.py <a href="#pxethiefy.py" id="pxethiefy.py"></a>
 
 [pxethiefy.py](https://github.com/sse-secure-systems/Active-Directory-Spotlights/tree/master/SCCM-MECM/pxethiefy) (Python), which is based on [PXEThief](https://github.com/MWR-CyberSec/PXEThief), can be used to query for PXE boot media. The Pre-Boot Execution Environment (PXE) is a mechanism for booting a computer over the network. Specifically, instead of booting from a CD drive, USB key or hard disk and finding the boot program, the PC will use the network to read such a program from the PXE server.
 
@@ -86,7 +86,7 @@ There are a few things to note:
 * [pxethiefy.py](https://github.com/sse-secure-systems/Active-Directory-Spotlights/tree/master/SCCM-MECM/pxethiefy) uses broadcast requests to request DHCP PXE boot options. An SCCM setup does not have to support PXE boot and a "found" PXE server does not have to be an SCCM component. Be cautious of false positive results.
 * In this case a PXE server was found and PXE media was downloaded. The location of the PXE media on the TFTP server is `\SMSTemp\...`, which indicates that this is indeed an SCCM server.
 
-### SCCMHunter
+### SCCMHunter <a href="#sccmhunter" id="sccmhunter"></a>
 
 [sccmhunter](https://github.com/garrettfoster13/sccmhunter) (Python) can also be used to explore the Active Directory and search for SCCM/MECM assets. For this tool, a first user account is required. The first step is to retrieve the different assets in the LDAP annuary, and extract informations from the identified servers SMB shares.
 
@@ -94,7 +94,7 @@ For each servers, the extracted informations are :
 
 * the SCCM site code
 * if the server is a Central Administration Site (CAS) or not
-* the SMB signing status (useful to perform later [NTLM relay](../ntlm/relay.md) attacks)
+* the SMB signing status (useful to perform later [NTLM relay](https://red.infiltr8.io/a-d/movement/ntlm/relay) attacks)
 * if the server is the SCCM Primary Site server or not
 * if it is the SCCM Distribution Point or not
 * if it is the SCCM SMS Provider or not
@@ -133,7 +133,7 @@ Using LDAP queries from a **domain-joined** Windows machine:
 ([ADSISearcher]("objectClass=mSSMSManagementPoint")).FindAll() | % {$_.Properties}
 ```
 
-<figure><img src="../../../.gitbook/assets/SCCM_Recon_ADSI.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (1).avif" alt=""><figcaption></figcaption></figure>
 
 Using WMI queries or [SharpSCCM](https://github.com/Mayyhem/SharpSCCM) to query a clients local WMI database:
 
@@ -145,9 +145,32 @@ Get-WmiObject -Class SMS_Authority -Namespace root\CCM
 SharpSCCM.exe local site-info
 ```
 
-<figure><img src="../../../.gitbook/assets/SCCM_Recon_WMI-SharpSCCM.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (2).avif" alt=""><figcaption></figcaption></figure>
+{% endtab %}
+
+{% tab title="Network" %}
+We can use nmap and scan for [ports used in Configuration Manager](https://learn.microsoft.com/en-us/mem/configmgr/core/plan-design/hierarchy/ports), in order to identify SCCM servers.
+
+```bash
+# Site Server, Management Point
+nmap -p 80,443,445,1433,10123,8530,8531 -sS -sV $TARGET_IP
+
+# Distribution Point
+nmap -p 80,443,445,49152-49159 -sS -sV $TARGET_IP
+
+# Operating System Deployment OSD
+nmap -p 67,68,69,4011,547 -sU $TARGET_IP
+```
+
+To enumerate further, we may check the certificate on the client notification port (10123)
+
+```bash
+openssl s_client -connect $TARGET_IP:10123
+```
 {% endtab %}
 {% endtabs %}
+
+
 
 ### Abuse
 

