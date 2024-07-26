@@ -220,7 +220,7 @@
 * [🛠️ RFID](network/rfid.md)
 * [🛠️ Bluetooth](network/bluetooth.md)
 
-## Active Directory <a href="#ad" id="ad"></a>
+## Active Directory <a href="#a-d" id="a-d"></a>
 
 * [Reconnaissance](ad/recon/README.md)
   * [Tools ⚙️](ad/recon/tools/README.md)
@@ -415,6 +415,7 @@
     * [🛠️ File Upload](web/web-vulnerabilities/server-side/file-upload.md)
   * [Client-Side](web/web-vulnerabilities/client-side/README.md)
     * [XSS (Cross-Site Scripting)](web/web-vulnerabilities/client-side/xss-cross-site-scripting.md)
+    * [CORS (Cross-origin resource sharing)](web/web-vulnerabilities/client-side/cors-cross-origin-resource-sharing.md)
 
 ## 🛠️ Cloud & CI/CD <a href="#cloud-cicd" id="cloud-cicd"></a>
 
