@@ -16,6 +16,19 @@ Server-side template injection is when an attacker is able to use native templat
 ./tplmap.py -u 'http://www.target.com/page?name=John'
 ```
 {% endtab %}
+
+{% tab title="One-Liner" %}
+Here is an handy one-liner to automate SSTI scans on multiple URLs using tools like [gau](https://github.com/lc/gau), [hakrawler](https://github.com/hakluke/hakrawler), [waybackurls](https://github.com/tomnomnom/waybackurls), [katana](https://github.com/projectdiscovery/katana), [uro](https://github.com/s0md3v/uro), [qsreplace](https://github.com/tomnomnom/qsreplace), [httpx](https://github.com/projectdiscovery/httpx), [Gxss](https://github.com/KathanP19/Gxss), [Dalfox](https://github.com/hahwul/dalfox).
+
+{% hint style="success" %}
+It may be usefull for bug bounty hunting
+{% endhint %}
+
+```bash
+# tplmap from targets url file
+for url in $(cat targets.txt); do python3 tplmap.py -u $url; print $url; done
+```
+{% endtab %}
 {% endtabs %}
 
 ### Fuzzing
