@@ -69,6 +69,9 @@ We can use [xfreerdp ](https://linux.die.net/man/1/xfreerdp)to connect into a RD
 #With credentials 
 xfreerdp [/d:domain] /u:<username> /p:<password> /v:<IP>
 
+#Dynamic screen, clipboard and mount local folder as SMB share on the RDP server  
+xfreerdp [/d:domain] /u:<username> /p:<password> /v:<IP> +clipboard /dynamic-resolution /drive:/usr/share/windows-resources,share
+
 #Pass the hash
 xfreerdp [/d:domain] /u:<username> /pth:<hash> /v:<IP>
 ```
