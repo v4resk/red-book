@@ -18,9 +18,13 @@ Here are some handy one-liners to automate CORS scans on domains using tools lik
 It may be usefull for bug bounty hunting
 {% endhint %}
 
+{% hint style="info" %}
+**domains.txt** -> text file containing domain names (ex: test.domain.com)
+{% endhint %}
+
 ```bash
 # CURL One-Liner
-echo target.com | (gau || hakrawler || waybackurls || katana) | while read url;do target=$(curl -s -I -H "Origin: https://evil.com" -X GET $url) | if grep 'https://evil.com'; then [Potentional CORS Found]echo $url;else echo Nothing on "$url";fi;done
+cat domains.txt | (gau || hakrawler || waybackurls || katana) | while read url;do target=$(curl -s -I -H "Origin: https://evil.com" -X GET $url) | if grep 'https://evil.com'; then [Potentional CORS Found]echo $url;else echo Nothing on "$url";fi;done
 ```
 {% endtab %}
 {% endtabs %}

