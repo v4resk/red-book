@@ -2,7 +2,7 @@
 
 ## Theory
 
-Cmstp.exe is a windows binary that allow administrator to installs or removes a Connection Manager service profile. As a red teamer, we can abuse it to execute code and bypass application whitelisting.
+Cmstp.exe is a indows binary that allow administrator to installs or removes a Connection Manager service profile. As a red teamer, we can abuse it to execute code and bypass application whitelisting.
 
 ## Practice
 
