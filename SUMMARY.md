@@ -223,7 +223,10 @@
   * [🛠️ FTP](network/protocols/ftp.md)
   * [🛠️ Telnet](network/protocols/telnet.md)
   * [🛠️ MySQL](network/protocols/mysql.md)
-* [🛠️ WiFi](network/wifi.md)
+* [WiFi](network/wifi/README.md)
+  * [🛠️ WEP](network/wifi/wep.md)
+  * [🛠️ WPA2](network/wifi/wpa2.md)
+  * [🛠️ WPS](network/wifi/wps.md)
 * [🛠️ RFID](network/rfid.md)
 * [🛠️ Bluetooth](network/bluetooth.md)
 
@@ -441,6 +444,13 @@
     * [Persistence](cloud-cicd/cloud/azure-ad/persistence.md)
   * [AWS](cloud-cicd/cloud/aws.md)
 
-## 🛠️ Smart Contracts
+## Smart Contracts
 
-* [Introduction](smart-contracts/introduction.md)
+* [Solidity](smart-contracts/solidity/README.md)
+  * [Vulnerabilities](smart-contracts/solidity/vulnerabilities/README.md)
+    * [Delegatecall Attack](smart-contracts/solidity/vulnerabilities/delegatecall-attack.md)
+    * [Denial of Service Attack](smart-contracts/solidity/vulnerabilities/denial-of-service-attack.md)
+    * [Overflow & Underflow](smart-contracts/solidity/vulnerabilities/overflow-and-underflow.md)
+    * [Reentrancy Attack](smart-contracts/solidity/vulnerabilities/reentrancy-attack.md)
+    * [Self Destruct Attack](smart-contracts/solidity/vulnerabilities/self-destruct-attack.md)
+    * [Tx Origin Attack](smart-contracts/solidity/vulnerabilities/tx-origin-attack.md)
