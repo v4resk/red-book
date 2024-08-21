@@ -6,9 +6,11 @@ WebDAV is a set of extensions to the Hypertext Transfer Protocol, which allows u
 
 ## Practice
 
+{% hint style="info" %}
+On Windows, users can also access and mount WebDAV shares via UNC paths, such as `\\10.37.129.2@80\example_webdav_folder`.
+{% endhint %}
+
 ### Brute-force (HTTP Basic Auth)
-
-
 
 {% tabs %}
 {% tab title="hydra" %}
