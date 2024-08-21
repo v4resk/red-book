@@ -1,6 +1,6 @@
 # Open-Source Code
 
-## Theory
+Theory
 
 Online repositories of code hold a window into an organization's technology stack, revealing the programming languages and frameworks they employ. In some rare instances, developers have unintentionally exposed sensitive information, including critical data and credentials, within public repositories. These inadvertent revelations may present a unique opportunity us.
 
@@ -9,6 +9,40 @@ Online repositories of code hold a window into an organization's technology stac
 To automate the process of searching sensitives files and hardcoded credentials in **Git repositories**, we may use following tools
 
 {% tabs %}
+{% tab title="Github Dorks" %}
+[Github-dorks](https://github.com/techgaun/github-dorks) is a python tools used to search leaked secrets via github search. Its collection of Github dorks can reveal sensitive personal and/or organizational information such as private keys, credentials, authentication tokens, etc.&#x20;
+
+```bash
+# search a single repo
+github-dork.py -r techgaun/github-dorks
+
+# search all repos of a user
+github-dork.py -u techgaun  
+
+# search all repos of an organization
+github-dork.py -u dev-nepal
+```
+
+Alternatively, we can manualy search for specific dorks, without using [Github-dorks](https://github.com/techgaun/github-dorks) :&#x20;
+
+<figure><img src="../../.gitbook/assets/Capture d’écran_2024-08-22_00-29-55 (1).png" alt=""><figcaption></figcaption></figure>
+
+Examples of Github Dorks are :
+
+| Dork                                           | Description                                          |
+| ---------------------------------------------- | ---------------------------------------------------- |
+| filename:.npmrc \_auth                         | npm registry authentication data                     |
+| filename:.dockercfg auth                       | docker registry authentication data                  |
+| extension:pem private                          | private keys                                         |
+| extension:ppk private                          | puttygen private keys                                |
+| filename:id\_rsa or filename:id\_dsa           | private ssh keys                                     |
+| filename:wp-config.php                         | wordpress config files                               |
+| filename:.env MAIL\_HOST=smtp.gmail.com gmail  | smtp configuration (try different smtp services too) |
+| shodan\_api\_key language:python               | Shodan API keys (try other languages too)            |
+| /"sk-\[a-zA-Z0-9]{20,50}"/ language:Shell      | Open AI API Keys                                     |
+| "api\_hash" "api\_id"                          | Telegram API token                                   |
+{% endtab %}
+
 {% tab title="Noseyparker" %}
 [Noseyparker](https://github.com/praetorian-inc/noseyparker) is a command-line program that finds secrets and sensitive information in textual data and Git history.
 
@@ -49,3 +83,7 @@ gitrob -github-access-token <TOKEN> <TARGET>
 ```
 {% endtab %}
 {% endtabs %}
+
+## Resources
+
+{% embed url="https://github.com/techgaun/github-dorks" %}
