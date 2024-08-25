@@ -61,6 +61,21 @@ noseyparker report -d np.myDataStore
 ```
 {% endtab %}
 
+{% tab title="GitHunt" %}
+[GitHunt](https://github.com/v4resk/GitHunt) is a (Python) tool for detecting sensitive data exposure in GitHub repositories, leveraging GitHub's search functionality.
+
+```bash
+# See available hunting modules
+python GitHunt.py hunt -h
+
+# Hunt for OpenAI API Keys
+python GitHunt.py hunt -m OpenAI
+
+# Export all valid OpenAI API keys found in a json 
+python GitHunt.py db -m OpenAI -f json -o ~/export.json
+```
+{% endtab %}
+
 {% tab title="Gitleaks" %}
 [Gitleaks](https://github.com/gitleaks/gitleaks) (Go) is a SAST tool for **detecting** and **preventing** hardcoded secrets like passwords, api keys, and tokens in git repos.
 

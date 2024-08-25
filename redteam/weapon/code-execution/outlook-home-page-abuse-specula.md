@@ -63,7 +63,7 @@ Since this is the first time you are starting Specula it will ask you for a vari
 
 To hook an agent, all you need to do is to create the registry `REG_SZ` value of `URL` under `HKCU\Software\Microsoft\Office\16.0\Outlook\WebView\Inbox` and add the value pointing to your validation url on the Specula server.
 
-<figure><img src="../../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (11).png" alt=""><figcaption></figcaption></figure>
 
 To avoid issues with ActiveX, it is recommended to adjust a few settings. Users can generate a full reg file with the recommended settings by running `generatehooker` from the root of the Specula menu. This reg file can then be copied to a Windows client with Outlook and imported. To ensure the registry key takes effect, Outlook should be stopped and restarted if it is running.
 
@@ -71,7 +71,7 @@ To avoid issues with ActiveX, it is recommended to adjust a few settings. Users 
 SpeculaC2> generatehooker 
 ```
 
-<figure><img src="../../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (1) (3).png" alt=""><figcaption></figcaption></figure>
 
 ### Approve Agent
 

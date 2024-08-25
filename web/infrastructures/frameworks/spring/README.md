@@ -1,4 +1,4 @@
-# Spring
+# Spring Framework
 
 ## Theory
 
@@ -7,13 +7,15 @@ Spring is an application framework and inversion of control container for the Ja
 ## Practice
 
 {% tabs %}
-{% tab title="Enumerate" %}
-If we get the **Whitelabel Error Page**, the website uses Spring Boot.
+{% tab title="Fingerprinting" %}
+We can attempt to trigger an error on the website as a method of fingerprinting. If the error results in a "**Whitelabel Error Page**," this indicates that the website is running Spring Boot.
 
 ```bash
-$ curl http://cozyhosting.htb/DoesNotExist
+$ curl http://target.com/DoesNotExist
 {"timestamp":"2023-09-03T18:49:24.100+00:00","status":404,"error":"Not Found","path":"/DoesNotExist"}
 ```
+
+<figure><img src="../../../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
 {% endtab %}
 {% endtabs %}
 

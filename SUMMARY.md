@@ -380,7 +380,7 @@
     * [Nginx](web/infrastructures/web-servers/nginx.md)
     * [Apache](web/infrastructures/web-servers/apache/README.md)
       * [Apache Commons Text](web/infrastructures/web-servers/apache/apache-commons-text.md)
-      * [🛠️ Tomcat](web/infrastructures/web-servers/apache/tomcat.md)
+      * [Apache Tomcat](web/infrastructures/web-servers/apache/tomcat.md)
   * [CMS](web/infrastructures/cms/README.md)
     * [Wordpress](web/infrastructures/cms/wordpress.md)
     * [🛠️ Joomla](web/infrastructures/cms/joomla.md)
