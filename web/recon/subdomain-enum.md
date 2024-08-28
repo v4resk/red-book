@@ -11,10 +11,29 @@ When conducting penetration tests on a website, or on a `*.domain.com` scope, fi
 Passive enumeration is the process of collecting information about a specific target from publicly available sources that can be accessed by anyone. Attackers don't connect directly to the target systems and stay under the radar.
 
 {% tabs %}
+{% tab title="One-Liners" %}
+Here are some handy one-liners to automate subdomains enumeration using tools like [subfinder](https://github.com/projectdiscovery/subfinder) and [assetfinder](https://github.com/tomnomnom/assetfinder).
+
+{% hint style="success" %}
+It may be usefull for bug bounty hunting
+{% endhint %}
+
+```bash
+echo 'target.com'|(subfinder -all||assetfinder -subs-only)|uniq -u > domains.txt
+```
+{% endtab %}
+
 {% tab title="Subfinder " %}
 [Subfinder](https://github.com/projectdiscovery/subfinder) is a fast passive subdomain enumeration tool wich rely on multiple OSINT techniques like Certificate Transparency logs enumeration.
 
+{% hint style="info" %}
+To set API keys, add them to `$HOME/.config/subfinder/provider-config.yaml`. See [the ProjectDiscovery's Documentation](https://docs.projectdiscovery.io/tools/subfinder/install#post-install-configuration) for details.
+{% endhint %}
+
 ```bash
+# Subfinder One-Liner
+subfinder -d target.domain -all -cs > tmp.txt ; cat tmp.txt | cut -d "," -f 1 > domains.txt ; rm tmp.txt
+
 # Standard enumeration with subfinder
 subfinder -d "target.domain"
 

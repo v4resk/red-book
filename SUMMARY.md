@@ -376,6 +376,8 @@
   * [DBMS](web/infrastructures/dbms/README.md)
     * [Enum Databases](web/infrastructures/dbms/enum-databases.md)
     * [Read/Write/Execute](web/infrastructures/dbms/exploit-databases.md)
+  * [DNS](web/infrastructures/dns/README.md)
+    * [Subdomain Takeover](web/infrastructures/dns/subdomain-takeover.md)
   * [Web Servers](web/infrastructures/web-servers/README.md)
     * [Nginx](web/infrastructures/web-servers/nginx.md)
     * [Apache](web/infrastructures/web-servers/apache/README.md)
