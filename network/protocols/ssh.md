@@ -95,8 +95,8 @@ hydra -l username -P passwords.txt ssh://<target-ip>:2222 -t 4
 
 Some private keys require a password or passphrase for operation, so we may attempt to [Brute Force](https://attack.mitre.org/techniques/T1110) the passphrase [off-line](../../redteam/credentials/passwd/brute-force/offline-password-cracking.md).
 
-{% content-ref url="../../redteam/credentials/dumping/unsecured-credentials/ssh-private-keys.md" %}
-[ssh-private-keys.md](../../redteam/credentials/dumping/unsecured-credentials/ssh-private-keys.md)
+{% content-ref url="../../redteam/credentials/unsecured-credentials/ssh-private-keys.md" %}
+[ssh-private-keys.md](../../redteam/credentials/unsecured-credentials/ssh-private-keys.md)
 {% endcontent-ref %}
 
 ### Persistence

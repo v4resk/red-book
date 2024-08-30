@@ -80,8 +80,8 @@ In addition to the aforementioned exploitation paths, GPOs can be abused in othe
 
 Sometimes, you will find the built-in Administrator's password in a Group Policies.
 
-{% content-ref url="../../redteam/credentials/dumping/os-credentials/windows-and-active-directory/group-policies-preferences.md" %}
-[group-policies-preferences.md](../../redteam/credentials/dumping/os-credentials/windows-and-active-directory/group-policies-preferences.md)
+{% content-ref url="../../redteam/credentials/os-credentials/windows-and-active-directory/group-policies-preferences.md" %}
+[group-policies-preferences.md](../../redteam/credentials/os-credentials/windows-and-active-directory/group-policies-preferences.md)
 {% endcontent-ref %}
 
 ## Resources

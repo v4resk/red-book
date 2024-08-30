@@ -15,7 +15,7 @@ manspider.py --threads 50 $IP_RANGE/$MASK -d $DOMAIN -u $USER -p $PASSWORD --con
 ```
 
 {% hint style="info" %}
-Manually, shares can also be mounted or [exfiltrated](../../../exfiltration/smb.md) and grepped for interesting information.
+Manually, shares can also be mounted or [exfiltrated](../../exfiltration/smb.md) and grepped for interesting information.
 {% endhint %}
 {% endtab %}
 

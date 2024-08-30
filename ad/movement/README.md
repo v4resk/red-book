@@ -22,7 +22,7 @@ Below is a checklist to go through when conducting a pentest. Order is irrelevan
 * [ ] Domain Controllers are patched against [ZeroLogon](broken-reference).
 * [ ] Domain Controllers are patched against [Kerberos sAMAccountName spoofing](broken-reference).
 * [ ] [MS14-068](kerberos/forged-tickets/#ms-14-068-cve-2014-6324) is patched, preventing forging of powerful Kerberos tickets.
-* [ ] [PrivExchange](exchange-services/privexchange.md) patches are applied, protecting Exchange servers from [authentication coercion attacks relying on the PushSubscription API](mitm-and-coerced-authentications/pushsubscription-abuse.md), and [ACE abuse](broken-reference) attacks relying on the `EXCHANGE WINDOWS PERMISSION` group having `WriteDacl` permissions against the domain object allowing for [DCSync](../../redteam/credentials/dumping/os-credentials/windows-and-active-directory/dcsync.md).
+* [ ] [PrivExchange](exchange-services/privexchange.md) patches are applied, protecting Exchange servers from [authentication coercion attacks relying on the PushSubscription API](mitm-and-coerced-authentications/pushsubscription-abuse.md), and [ACE abuse](broken-reference) attacks relying on the `EXCHANGE WINDOWS PERMISSION` group having `WriteDacl` permissions against the domain object allowing for [DCSync](../../redteam/credentials/os-credentials/windows-and-active-directory/dcsync.md).
 * [ ] Patches for NTLM tampering vulnerabilities (e.g. CVE-2019-1040, CVE-2019-1019, CVE-2019-1166) are applied to limit [NTLM relay](broken-reference) attacks.
 * [ ] Latest security patched are applied (e.g. for ProxyLogon, ProxyShell, PrintNightmare, ...).
 
@@ -38,9 +38,9 @@ Below is a checklist to go through when conducting a pentest. Order is irrelevan
 ### Credentials Management
 
 * [ ] Caching of domain users is limited on workstations and avoided on servers to prevent [credential dumping](credentials/dumping.md) of LSA secrets from registry.
-* [ ] [Group Policy Preferences Passwords](../../redteam/credentials/dumping/os-credentials/windows-and-active-directory/group-policies-preferences.md) are not used.
+* [ ] [Group Policy Preferences Passwords](../../redteam/credentials/os-credentials/windows-and-active-directory/group-policies-preferences.md) are not used.
 * [ ] LSA protection are enabled to prevent [LSASS dumping](broken-reference).
-* [ ] Network shares readable by all domain users don't contain sensitive data like passwords or certificates limiting [credential dumping](../../redteam/credentials/dumping/unsecured-credentials/network-shares.md).
+* [ ] Network shares readable by all domain users don't contain sensitive data like passwords or certificates limiting [credential dumping](../../redteam/credentials/unsecured-credentials/network-shares.md).
 
 ### Domain-level configuration and best-practices
 
@@ -58,9 +58,9 @@ Below is a checklist to go through when conducting a pentest. Order is irrelevan
 * [ ] A record exists in ADIDNS for the `*` (wildcard) preventing powerful [ADIDNS poisoning](mitm-and-coerced-authentications/adidns-spoofing.md#wildcard-records) attacks. Preferably, this is a `TXT` record.
 * [ ] The print spooler is disabled on Domain Controllers and sensitive servers to prevent the [PrinterBug](print-spooler-service/printerbug.md) authentication coercion attack.
 * [ ] The WSUS server (if any) is configured with HTTPS, to prevent ARP poisoning with [WSUS spoofing](mitm-and-coerced-authentications/wsus-spoofing.md) attacks.
-* [ ] Set-up packet filtering & inspection and enable port security on network switched to prevent [ARP poisoning](mitm-and-coerced-authentications/arp-poisoning.md) attacks and [network secrets dumping](../../redteam/credentials/dumping/unsecured-credentials/network-protocols.md).
+* [ ] Set-up packet filtering & inspection and enable port security on network switched to prevent [ARP poisoning](mitm-and-coerced-authentications/arp-poisoning.md) attacks and [network secrets dumping](../../redteam/credentials/unsecured-credentials/network-protocols.md).
 * [ ] Set-up VLANs, 802.1X or other [NAC (Network Access Control)](../../physical/networking/network-access-control.md) securities to limit the attackers progress within the network.
-* [ ] Plaintext protocols are avoided when using credentials (HTTP, FTP, ...), in order to minimize the risks of the [capture of credentials transiting on the network](../../redteam/credentials/dumping/unsecured-credentials/network-protocols.md).
+* [ ] Plaintext protocols are avoided when using credentials (HTTP, FTP, ...), in order to minimize the risks of the [capture of credentials transiting on the network](../../redteam/credentials/unsecured-credentials/network-protocols.md).
 
 ### Active Directory Certificate Services
 

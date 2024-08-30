@@ -6,7 +6,7 @@ description: MITRE ATT&CK™ Steal or Forge Kerberos Tickets - Technique T1558
 
 ## Theory
 
-In Windows, [Kerberos](../../../../../ad/persistence/kerberos/) tickets are **handled and stored by the** [**lsass** (Local Security Authority Subsystem Service) ](lsass.md)process, which is responsible for security. Hence, to retrieve tickets from a Windows system, it is necessary to **communicate with lsass and ask for them**. As a **non-administrative user only owned tickets can be fetched**, however, as machine **administrator**, **all** of them can be harvested using tools like **Mimikatz, Rubeus** or **Giuda.**
+In Windows, [Kerberos](../../../../ad/persistence/kerberos/) tickets are **handled and stored by the** [**lsass** (Local Security Authority Subsystem Service) ](lsass.md)process, which is responsible for security. Hence, to retrieve tickets from a Windows system, it is necessary to **communicate with lsass and ask for them**. As a **non-administrative user only owned tickets can be fetched**, however, as machine **administrator**, **all** of them can be harvested using tools like **Mimikatz, Rubeus** or **Giuda.**
 
 ## Practice
 
@@ -88,7 +88,7 @@ mimikatz # sekurlsa::tickets /export
 
 ### Ask a TGS
 
-Using tools like **Giuda ,** we can avoid dumping LSASS memory. With the [SeTcbPrivilege](../../../../privilege-escalation/windows/abusing-tokens.md#setcbprivilege), we can read LSA storage, extract the SESSION KEY from TGT, and forge a request asking for a TGS; We must use LUID instead of Username.
+Using tools like **Giuda ,** we can avoid dumping LSASS memory. With the [SeTcbPrivilege](../../../privilege-escalation/windows/abusing-tokens.md#setcbprivilege), we can read LSA storage, extract the SESSION KEY from TGT, and forge a request asking for a TGS; We must use LUID instead of Username.
 
 {% tabs %}
 {% tab title="Giuda" %}

@@ -1,6 +1,6 @@
 # Impersonation
 
-On windows or Active Directory environments, when credentials are found (through [dumping](dumping/) or [cracking](../../ad/movement/credentials/cracking.md) for instance), attackers try to use them to obtain access to new resources. Depending on the harvested credential material type, the impersonation can be done in different ways.
+On windows or Active Directory environments, when credentials are found (through [dumping](broken-reference) or [cracking](../../ad/movement/credentials/cracking.md) for instance), attackers try to use them to obtain access to new resources. Depending on the harvested credential material type, the impersonation can be done in different ways.
 
 * **LM or NT password hash**: [pass-the-hash](broken-reference)
 * **RC4 Kerberos key (i.e. NT hash)**: [overpass-the-hash](../../ad/movement/kerberos/ptk.md)

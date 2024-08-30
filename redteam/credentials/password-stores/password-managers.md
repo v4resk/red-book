@@ -43,7 +43,7 @@ One we exfiltrate the database to our attacking computer, we can start by using 
 keepass2john keepass.kdbx > keepass.hash
 ```
 
-Then, we may crack the master password using hashcat. See [this page](../../passwd/brute-force/offline-password-cracking.md) for more details about cracking passwords.
+Then, we may crack the master password using hashcat. See [this page](../passwd/brute-force/offline-password-cracking.md) for more details about cracking passwords.
 
 ```bash
 hashcat -a 0 -m 13400 keepass.hash /usr/share/wordlists/rockyou.txt --user

@@ -106,7 +106,7 @@ Below are different use-cases of ntlmrelayx.
 
 {% tabs %}
 {% tab title="Cred dump" %}
-The following command will try to relay the authentication over SMB and attempt a remote [dump of the SAM & LSA secrets](../../../redteam/credentials/dumping/os-credentials/windows-and-active-directory/sam-and-lsa-secrets.md) from the target if the relayed victim has the right privileges.
+The following command will try to relay the authentication over SMB and attempt a remote [dump of the SAM & LSA secrets](../../../redteam/credentials/os-credentials/windows-and-active-directory/sam-and-lsa-secrets.md) from the target if the relayed victim has the right privileges.
 
 At the time of this article update (12th Feb. 2022), [a pull request](https://github.com/SecureAuthCorp/impacket/pull/1253) adding LSA dump to the existing SAM dump is pending.
 
@@ -122,7 +122,7 @@ The following command will try to relay the authentication and open [SOCKS proxi
 ntlmrelayx.py -tf targets.txt -socks
 ```
 
-The attacker will be able to use some tools along with proxychains to operate attack through the relayed authenticated session. In this case, secretsdump can be used to dump hashes from the remote target's [SAM and LSA secrets](../../../redteam/credentials/dumping/os-credentials/windows-and-active-directory/sam-and-lsa-secrets.md).
+The attacker will be able to use some tools along with proxychains to operate attack through the relayed authenticated session. In this case, secretsdump can be used to dump hashes from the remote target's [SAM and LSA secrets](../../../redteam/credentials/os-credentials/windows-and-active-directory/sam-and-lsa-secrets.md).
 
 ```bash
 proxychains secretsdump.py -no-pass $DOMAIN/$USER@$TARGET
@@ -192,7 +192,7 @@ secretsdump.py -k $RELAYED_VICTIM
 {% endtab %}
 
 {% tab title="DCSync" %}
-A [DCSync](../../../redteam/credentials/dumping/os-credentials/windows-and-active-directory/dcsync.md) can also be operated with a relayed NTLM authentication, but only if the target domain controller is vulnerable to [Zerologon](../netlogon/zerologon.md) since the DRSUAPI always requires signing.
+A [DCSync](../../../redteam/credentials/os-credentials/windows-and-active-directory/dcsync.md) can also be operated with a relayed NTLM authentication, but only if the target domain controller is vulnerable to [Zerologon](../netlogon/zerologon.md) since the DRSUAPI always requires signing.
 
 ```bash
 # target vulnerable to Zerologon, dump DC's secrets only

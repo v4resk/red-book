@@ -93,6 +93,18 @@ python3 subdover.py -d example.com
 SubOver -l domains.txt
 ```
 {% endtab %}
+
+{% tab title="mx-takeover" %}
+[mx-takeover](https://github.com/musana/mx-takeover) focuses DNS MX records and detects misconfigured MX records. It currently support three technique. These are,
+
+* MX domains that will expire soon
+* Unregistered MX domains
+* Domains that points to not currently in use by mailgun.
+
+```bash
+cat domains.txt| mx-takeover -mailgun-api <API-KEY> -check-whois -w 64
+```
+{% endtab %}
 {% endtabs %}
 
 ### Subdomain Takeover

@@ -6,6 +6,6 @@ Online repositories of code hold a window into an organization's technology stac
 
 ## Practice
 
-{% content-ref url="../../../recon/open-source-code.md" %}
-[open-source-code.md](../../../recon/open-source-code.md)
+{% content-ref url="../../recon/open-source-code.md" %}
+[open-source-code.md](../../recon/open-source-code.md)
 {% endcontent-ref %}

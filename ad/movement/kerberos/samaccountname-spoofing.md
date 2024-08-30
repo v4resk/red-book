@@ -33,7 +33,7 @@ The attack can then be conducted as follows.
 3. Request a TGT for the controlled machine account
 4. Reset the controlled machine account `sAMAccountName` to its old value (or anything else different than the Domain Controller's name without the trailing `$`)
 5. Request a service ticket with S4U2self by presenting the TGT obtained before -> [CVE-2021-42287](samaccountname-spoofing.md#cve-2021-42287-kdc-lookup)
-6. Get access to the domain controller (i.e. [DCSync](../../../redteam/credentials/dumping/os-credentials/windows-and-active-directory/dcsync.md))
+6. Get access to the domain controller (i.e. [DCSync](../../../redteam/credentials/os-credentials/windows-and-active-directory/dcsync.md))
 
 {% hint style="warning" %}
 Some of the tools and features that allow exploitation of these vulnerabilities are still in development
@@ -96,7 +96,7 @@ On Windows systems, the steps mentioned above can be conducted with
 
 * [PowerMad](https://github.com/Kevin-Robertson/Powermad/)'s (PowerShell) `New-MachineAccount` and `Set-MachineAccountAttribute` functions for the creation and manipulation of a computer account
 * with [Rubeus](https://github.com/GhostPack/Rubeus) (C#) for the requests of Kerberos TGT and Service Ticket
-* with [Mimikatz](https://github.com/gentilkiwi/mimikatz) (C) for the [DCSync](../../../redteam/credentials/dumping/os-credentials/windows-and-active-directory/dcsync.md) operation
+* with [Mimikatz](https://github.com/gentilkiwi/mimikatz) (C) for the [DCSync](../../../redteam/credentials/os-credentials/windows-and-active-directory/dcsync.md) operation
 
 ```powershell
 # 0. create a computer account

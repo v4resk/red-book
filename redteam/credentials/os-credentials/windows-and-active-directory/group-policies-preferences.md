@@ -9,11 +9,11 @@ description: MITRE ATT&CK™ Sub-technique T1552.006
 Windows systems come with a built-in Administrator (with an RID of 500) that most organizations want to change the password of. This can be achieved in multiple ways but there is one that is to be avoided: setting the built-in Administrator's password through Group Policies.
 
 * **Issue 1**: the password is set to be the same for every (set of) machine(s) the Group Policy applies to. If the attacker finds the admin's hash or password, he can gain administrative access to all (or set of) machines.
-* **Issue 2**: by default, knowing the built-in Administrator's hash (RID 500) allows for powerful [Pass-the-Hash](../../../../../ad/movement/ntlm/pth.md) attacks ([read more](broken-reference)).
+* **Issue 2**: by default, knowing the built-in Administrator's hash (RID 500) allows for powerful [Pass-the-Hash](../../../../ad/movement/ntlm/pth.md) attacks ([read more](broken-reference)).
 * **Issue 3**: all Group Policies are stored in the Domain Controllers' `SYSVOL` share. All domain users have read access to it. This means all domain users can read the encrypted password set in Group Policy Preferences, and since Microsoft published the encryption key around 2012, the password can be decrypted:man\_shrugging:.
 
 {% hint style="info" %}
-In 2015, Microsoft removed storing the encrypted password in the SYSVOL folder. It introduced the [Local Administrator Password Solution (LAPS)](../../../../../ad/recon/objects-and-settings/laps.md), which offers a much more secure approach to remotely managing the local administrator password.
+In 2015, Microsoft removed storing the encrypted password in the SYSVOL folder. It introduced the [Local Administrator Password Solution (LAPS)](../../../../ad/recon/objects-and-settings/laps.md), which offers a much more secure approach to remotely managing the local administrator password.
 {% endhint %}
 
 ## Practice
@@ -60,7 +60,7 @@ gpp-decrypt 'j1Uyj3Vx8TY9LtLZil2uAuZkFQA/4latT76ZwgdHdhw'
 {% endtab %}
 
 {% tab title="Windows" %}
-From Windows systems, the GPP password can only be recovered from an authenticated (i.e. domain user) context (see [impersonation](../../../impersonation.md)).
+From Windows systems, the GPP password can only be recovered from an authenticated (i.e. domain user) context (see [impersonation](../../impersonation.md)).
 
 [PowerSploit](https://github.com/PowerShellMafia/PowerSploit/)'s [Get-GPPPassword](https://github.com/PowerShellMafia/PowerSploit/blob/master/Exfiltration/Get-GPPPassword.ps1) searches a Domain Controller's SYSVOL share `Groups.xml`, `Services.xml`, `Scheduledtasks.xml`, `DataSources.xml`, `Printers.xml` and `Drives.xml` files and returns plaintext passwords
 
