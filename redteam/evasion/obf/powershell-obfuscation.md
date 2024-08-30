@@ -109,5 +109,3 @@ Enter path for output file (or leave blank for default): obf.ps1
 {% endtab %}
 {% endtabs %}
 
-### Unicorn
-
