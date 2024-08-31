@@ -92,13 +92,11 @@ Terminator.exe
 
 ### Windows Filtering Platform (WPF) Callout Driver
 
-
+A callout driver implements one or more [callouts](https://learn.microsoft.com/en-us/windows-hardware/drivers/network/callout). Callouts extend the capabilities of the [Windows Filtering Platform](https://learn.microsoft.com/en-us/windows/win32/fwp/windows-filtering-platform-start-page) by processing TCP/IP-based network data in ways that are beyond the scope of the simple filtering functionality. By exploiting such driver we can block outbound traffic from EDR processes.
 
 {% tabs %}
 {% tab title="EDRPrison" %}
 [EDRPrison](https://github.com/senzee1984/EDRPrison) leverages a legitimate WFP callout driver, [WinDivert](https://reqrypt.org/windivert.html), to effectively silence EDR systems. This project focuses on network-based evasion techniques.&#x20;
-
-EDRPrison installs and loads an external legitimate WFP callout driver instead of relying solely on the built-in WFP. Additionally, it blocks outbound traffic from EDR processes by dynamically adding runtime filters without directly interacting with the EDR processes or their executables.
 
 ```
 EDRPrison.exe
@@ -108,12 +106,38 @@ EDRPrison.exe
 
 ### Kernel Object Tampering
 
-Notify Routine callbacks, Object Callbacks and ETW TI provider
+{% tabs %}
+{% tab title="EDRSandblast" %}
+[EDRSandblast](https://github.com/wavestone-cdt/EDRSandblast) is a tool written in `C` that weaponize a vulnerable signed driver to bypass EDR detections (Notify Routine callbacks, Object Callbacks and `ETW TI` provider) and `LSASS` protections. Multiple userland unhooking techniques are also implemented to evade userland monitoring.
 
-[https://github.com/wavestone-cdt/EDRSandblast](https://github.com/wavestone-cdt/EDRSandblast)\
-
+```
+Usage: EDRSandblast.exe [-h | --help] [-v | --verbose] <audit | dump | cmd | credguard | firewall | load_unsigned_driver>
+[--usermode] [--unhook-method <N>] [--direct-syscalls] [--add-dll <dll name or path>]*
+[--kernelmode] [--dont-unload-driver] [--no-restore]
+    [--nt-offsets <NtoskrnlOffsets.csv>] [--fltmgr-offsets <FltmgrOffsets.csv>] [--wdigest-offsets <WdigestOffsets.csv>] [--ci-offsets <CiOffsets.csv>] [--internet]
+    [--vuln-driver <RTCore64.sys>] [--vuln-service <SERVICE_NAME>]
+    [--unsigned-driver <evil.sys>] [--unsigned-service <SERVICE_NAME>]
+    [--no-kdp]
+[-o | --dump-output <DUMP_FILE>]
+```
+{% endtab %}
+{% endtabs %}
 
 ### Hijacking Valid Drivers
+
+{% hint style="info" %}
+The technique will not work on HVCI systems due to the impossibility to change the LSTAR pointers if protected by the Hyper-V
+{% endhint %}
+
+{% tabs %}
+{% tab title="DriverJack" %}
+[**DriverJack**](https://github.com/klezVirus/DriverJack) is a tool designed to load a vulnerable driver by abusing lesser-known NTFS techniques. These method bypass the registration of a Driver Service on the system by hijacking an existing service, and also spoof the image path presented in the Driver Load event. To further masquerade the presence of a vulnerable driver, the attack also abuses an Emulated Filesystem Read-Only bypass to swap the content of a driver file on a mounted ISO before loading it.
+
+```
+DriverJack.exe
+```
+{% endtab %}
+{% endtabs %}
 
 [https://github.com/klezVirus/DriverJack](https://github.com/klezVirus/DriverJack)
 
