@@ -233,6 +233,7 @@
   * [SSH](network/protocols/ssh.md)
   * [WebDAV](network/protocols/webdav.md)
   * [WinRM](network/protocols/winrm.md)
+  * [XMPP/Jabber](network/protocols/xmpp-jabber.md)
   * [🛠️ RPC Port Mapper](network/protocols/rpc-port-mapper.md)
   * [🛠️ FTP](network/protocols/ftp.md)
   * [🛠️ Telnet](network/protocols/telnet.md)
