@@ -2,7 +2,7 @@
 description: MITRE ATT&CK™ Exploitation for Privilege Escalation - Technique T1068
 ---
 
-# 🛠️ Bring Your Own Vulnerable Driver (BYOVD)
+# Bring Your Own Vulnerable Driver (BYOVD)
 
 ## Theory
 
@@ -139,6 +139,6 @@ DriverJack.exe
 {% endtab %}
 {% endtabs %}
 
-[https://github.com/klezVirus/DriverJack](https://github.com/klezVirus/DriverJack)
-
 ## Resources
+
+{% embed url="https://www.trendmicro.com/en_us/research/24/a/kasseika-ransomware-deploys-byovd-attacks-abuses-psexec-and-expl.html" %}

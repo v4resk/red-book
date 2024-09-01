@@ -6,6 +6,18 @@ Virtualization-based security, or VBS, uses hardware virtualization and the Wind
 
 ## Practice
 
+{% content-ref url="../endpoint-detection-respons-edr-bypass/hypervisor-code-integrity-hvci-disallowed-images.md" %}
+[hypervisor-code-integrity-hvci-disallowed-images.md](../endpoint-detection-respons-edr-bypass/hypervisor-code-integrity-hvci-disallowed-images.md)
+{% endcontent-ref %}
+
+{% content-ref url="credential-guard-bypass.md" %}
+[credential-guard-bypass.md](credential-guard-bypass.md)
+{% endcontent-ref %}
+
+{% content-ref url="windows-defender-application-control-wdac-bypass.md" %}
+[windows-defender-application-control-wdac-bypass.md](windows-defender-application-control-wdac-bypass.md)
+{% endcontent-ref %}
+
 ## Resources
 
 {% embed url="https://learn.microsoft.com/en-us/windows-hardware/design/device-experiences/oem-vbs" %}

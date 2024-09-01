@@ -74,7 +74,7 @@
     * [🛠️ PE Obfuscation](redteam/evasion/obf/pe-obfuscation.md)
     * [🛠️ String Encryption](redteam/evasion/obf/string-encryption.md)
   * [Endpoint Detection Respons (EDR) Bypass](redteam/evasion/endpoint-detection-respons-edr-bypass/README.md)
-    * [🛠️ Bring Your Own Vulnerable Driver (BYOVD)](redteam/evasion/endpoint-detection-respons-edr-bypass/bring-your-own-vulnerable-driver-byovd.md)
+    * [Bring Your Own Vulnerable Driver (BYOVD)](redteam/evasion/endpoint-detection-respons-edr-bypass/bring-your-own-vulnerable-driver-byovd.md)
     * [🛠️ Load Unsigned Drivers](redteam/evasion/endpoint-detection-respons-edr-bypass/load-unsigned-drivers.md)
     * [🛠️ Minifilter Altitude](redteam/evasion/endpoint-detection-respons-edr-bypass/minifilter-altitude.md)
     * [🛠️ Windows Defender Application Control (WDAC)](redteam/evasion/endpoint-detection-respons-edr-bypass/windows-defender-application-control-wdac.md)
