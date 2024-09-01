@@ -47,10 +47,10 @@ dcomexec.py -silentcommand domain/user:password@IP <command>
 
 #semi-interactive shell using ShellWindows object
 # -object [{ShellWindows,ShellBrowserWindow,MMC20}]
-dcomexec.py domain/user:password@IP -object ShellWindows <command>
+dcomexec.py -object ShellWindows domain/user:password@IP <command>
 
 #semi-interactive shell with powershell command processor
-dcomexec.py domain/user:password@IP -shell-type powershell <command> 
+dcomexec.py -shell-type powershell domain/user:password@IP <command> 
 ```
 {% endtab %}
 
