@@ -10,6 +10,8 @@ Online repositories of code hold a window into an organization's technology stac
 
 ## Practice
 
+### Github Dorks & Sensitive Data Exposure
+
 To automate the process of searching sensitives files and hardcoded credentials in **Git repositories**, we may use following tools
 
 {% tabs %}

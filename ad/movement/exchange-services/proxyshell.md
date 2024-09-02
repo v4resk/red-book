@@ -16,7 +16,7 @@ Explicit Logon feature is a legitimate feature that enables users to open a new 
 
 When opening the new window, the Exchange Backend server reads the URI and parses it for receiving the mailbox address. It looks like:
 
-<figure><img src="../../../.gitbook/assets/image (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 In order to exploit this vulnerability, the attacker just needs to replace the mailbox address with the following string: /autodiscover/autodiscover.json:
 

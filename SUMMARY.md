@@ -439,6 +439,7 @@
     * [Command Injection](web/web-vulnerabilities/server-side/command-injection.md)
     * [Brute-Force](web/web-vulnerabilities/server-side/brute-force.md)
     * [SSTI (Server-Side Template Injection)](web/web-vulnerabilities/server-side/ssti.md)
+    * [Exposed Git Repositories](web/web-vulnerabilities/server-side/exposed-git-repositories.md)
     * [🛠️ File Upload](web/web-vulnerabilities/server-side/file-upload.md)
   * [Client-Side](web/web-vulnerabilities/client-side/README.md)
     * [XSS (Cross-Site Scripting)](web/web-vulnerabilities/client-side/xss-cross-site-scripting.md)
