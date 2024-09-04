@@ -15,7 +15,7 @@ We can also use [HTTP(S) Tunneling](../pivoting/http-tunneling.md) as a good [ex
 ## Practice
 
 {% tabs %}
-{% tab title="POST" %}
+{% tab title="Linux - POST" %}
 We will host a simple PHP server in order to retrieve encoded POST data.
 
 First write the following code in your `index.php` file
@@ -54,7 +54,7 @@ v4resk㉿kali$ cat /tmp/http.bs64 | base64 -d | tar xvfz -
 ```
 {% endtab %}
 
-{% tab title="PUT" %}
+{% tab title="Linux - PUT" %}
 Using the following code, we will host a simple python server in order to retrieve PUT data.&#x20;
 
 {% code title="http-put-server.py" %}

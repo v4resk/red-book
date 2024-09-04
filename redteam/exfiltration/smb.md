@@ -25,8 +25,6 @@ The previous command generates a json file with the list of accessible files in 
 ```bash
 cat 10.10.10.111.json | jq '. | map_values(keys)'
 ```
-
-
 {% endtab %}
 
 {% tab title="smbclient" %}
@@ -44,7 +42,7 @@ mget *
 ### Exfiltrate Data
 
 {% tabs %}
-{% tab title="UNIX-like" %}
+{% tab title="Windows" %}
 To exfiltrate the data from the target, we can compress the data and transfer it via an SMB shared folder hosted on our attacking host.
 
 First, start a SMB server on your attacking host using [smbserver.py](https://github.com/fortra/impacket/blob/master/examples/smbserver.py) from impacket
