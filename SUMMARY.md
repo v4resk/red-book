@@ -38,6 +38,7 @@
     * [HTML Help Files](redteam/weapon/code-execution/html-help-files.md)
     * [WMI](redteam/weapon/code-execution/wmic.md)
     * [Script Exploits](redteam/weapon/code-execution/script-exploits.md)
+    * [🛠️ Sliver C2](redteam/weapon/code-execution/sliver-c2.md)
 * [Initial Access](redteam/delivery/README.md)
   * [Network Services](redteam/delivery/network-services.md)
   * [Password Attacks](redteam/delivery/password-attacks.md)
