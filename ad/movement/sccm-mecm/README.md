@@ -194,6 +194,8 @@ After the SCCM infrastructure compromise, this page will describe how to pivot t
 
 ## Resources
 
+{% embed url="https://viperone.gitbook.io/pentest-everything/everything/everything-active-directory/sccm-mecm" %}
+
 {% embed url="https://www.thehacker.recipes/ad/movement/sccm-mecm" %}
 
 {% embed url="https://www.securesystems.de/blog/active-directory-spotlight-attacking-the-microsoft-configuration-manager/" %}

