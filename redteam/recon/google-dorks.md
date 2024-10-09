@@ -4,7 +4,7 @@
 
 Google dorking is a technique of using the Google search engine to search for vulnerabilities or to retrieve sensitive data. This technique relies on the results of the exploration and indexation of websites by the Googlebot. We can perform advanced search queries using various operators that allow us to reach our goal.
 
-<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3).png" alt=""><figcaption></figcaption></figure>
 
 ## Practice
 

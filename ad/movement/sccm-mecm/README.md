@@ -65,7 +65,7 @@ _Nota bene, there is a_ [_feature_](https://learn.microsoft.com/en-us/mem/config
 
 ### Attack path overview
 
-<figure><img src="../../../.gitbook/assets/image (3).png" alt=""><figcaption><p>SCCM Attack Surface Overview</p></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (3) (1).png" alt=""><figcaption><p>SCCM Attack Surface Overview</p></figcaption></figure>
 
 ### Recon
 
