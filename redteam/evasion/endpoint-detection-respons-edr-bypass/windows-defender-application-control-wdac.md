@@ -26,7 +26,7 @@ On a fresh installed Windows Virtual machine, we will install:
 
 * [Dotnet 8 SDK](https://dotnet.microsoft.com/en-us/download/dotnet/thank-you/sdk-8.0.403-windows-x64-installer)
 * [WDAC Wizzard](https://webapp-wdac-wizard.azurewebsites.net/)
-* The targetted EDR Agen
+* The targetted EDR Agent
 
 ### 2. Create a WDAC Policy
 
