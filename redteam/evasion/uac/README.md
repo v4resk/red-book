@@ -92,6 +92,12 @@ If you want to test for method 33, you can do the following from a command promp
 ```bash
 C:\tools>UACME-Akagi64.exe 33
 ```
+
+| Method Id | Bypass technique                        |
+| --------- | --------------------------------------- |
+| 33        | fodhelper.exe                           |
+| 34        | DiskCleanup scheduled task              |
+| 70        | fodhelper.exe using CurVer registry key |
 {% endtab %}
 {% endtabs %}
 

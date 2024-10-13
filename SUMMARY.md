@@ -84,6 +84,7 @@
     * [🛠️ Commandline Obfusaction](redteam/evasion/obf/commandline-obfusaction.md)
     * [🛠️ PE Obfuscation](redteam/evasion/obf/pe-obfuscation.md)
     * [🛠️ String Encryption](redteam/evasion/obf/string-encryption.md)
+  * [🛠️ Kill Windows Defender](redteam/evasion/kill-windows-defender.md)
   * [🛠️ Virtualization-based security (VBS) Bypass](redteam/evasion/virtualization-based-security-vbs-bypass/README.md)
     * [🛠️ Credential Guard bypass](redteam/evasion/virtualization-based-security-vbs-bypass/credential-guard-bypass.md)
     * [🛠️ hypervisor-protected code integrity (HVCI) Bypass](redteam/evasion/virtualization-based-security-vbs-bypass/hypervisor-protected-code-integrity-hvci-bypass.md)
