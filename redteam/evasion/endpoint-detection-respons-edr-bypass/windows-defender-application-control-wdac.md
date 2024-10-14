@@ -67,7 +67,7 @@ Instead, **focus on blocking the minimal components, necessary to interfere with
 
 ### 3. Apply the WDAC Policy
 
-Using the previous builded PolicyBinary file, we can [apply the WDAC Policy](https://learn.microsoft.com/en-us/windows/security/application-security/application-control/app-control-for-business/deployment/appcontrol-deployment-guide).
+We can now upload the previously build PolicyBinary file to a target host, and [apply it](https://learn.microsoft.com/en-us/windows/security/application-security/application-control/app-control-for-business/deployment/appcontrol-deployment-guide).
 
 ```powershell
 # Windows 11 22H2 and above
@@ -90,11 +90,11 @@ Invoke-CimMethod -Namespace root\Microsoft\Windows\CI -ClassName PS_UpdateAndCom
 
 <figure><img src="../../../.gitbook/assets/image-20241008161514514.png" alt=""><figcaption></figcaption></figure>
 
-Once the successful execution, **restart the host.**
+Once successful execution, **restart the host.**
 
 ### 4. Enjoy
 
-After reboot, (and maybe several tests) the EDR should be disabled.
+After reboot, (and maybe several tests to identify which process/driver to block) the EDR should be disabled.
 {% endtab %}
 {% endtabs %}
 
