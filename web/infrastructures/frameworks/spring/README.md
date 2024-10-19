@@ -15,7 +15,7 @@ $ curl http://target.com/DoesNotExist
 {"timestamp":"2023-09-03T18:49:24.100+00:00","status":404,"error":"Not Found","path":"/DoesNotExist"}
 ```
 
-<figure><img src="../../../../.gitbook/assets/image (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../../.gitbook/assets/image (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 {% endtab %}
 {% endtabs %}
 

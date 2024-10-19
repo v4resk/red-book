@@ -1,2 +1,2 @@
-# 🛠️ Phishing
+# Phishing
 
