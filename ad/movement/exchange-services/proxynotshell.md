@@ -11,12 +11,12 @@ ProxyNotShell is identified with the following CVEs: CVE-2022–41040 and CVE-20
 **CVE-2022-41040** : SSRF\
 This vulnerability allow attackers to send an arbitrary request with a controlled URI and controlled data to an arbitrary backend service with LocalSystem privilege. (Request is very similar to the [ProxyShell](proxyshell.md) one)
 
-<figure><img src="../../../.gitbook/assets/image (1) (1) (1) (1) (1) (1).png" alt=""><figcaption><p><strong>CVE-2022-41040 - SSRF</strong><br></p></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption><p><strong>CVE-2022-41040 - SSRF</strong><br></p></figcaption></figure>
 
 **CVE-2022-41082** : RCE\
 By abusing CVE-2022-41040 **authenticated** users may exploit CVE-2022-41082 to run arbitrary commands in vulnerable Exchange Servers.
 
-<figure><img src="../../../.gitbook/assets/image (1) (1) (1) (1) (1).png" alt=""><figcaption><p><strong>CVE-2022-41082</strong> - RCE Request</p></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (1) (1) (1) (1) (1) (1).png" alt=""><figcaption><p><strong>CVE-2022-41082</strong> - RCE Request</p></figcaption></figure>
 
 ## Practice
 

@@ -63,7 +63,7 @@ Instead, **focus on blocking the minimal components, necessary to interfere with
 
 6. When done, wait for the WDAC Policy to build. It will create an XML and PolicyBinary file.
 
-<figure><img src="../../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
 
 ### 3. Apply the WDAC Policy
 

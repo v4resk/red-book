@@ -16,7 +16,7 @@ We can attempt to trigger an error on the website as a method of fingerprinting.
 $ curl http://target.com/DoesNotExist
 ```
 
-<figure><img src="../../../../.gitbook/assets/image (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../../.gitbook/assets/image (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 {% endtab %}
 
 {% tab title="Version Identification" %}
