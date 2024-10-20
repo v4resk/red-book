@@ -26,7 +26,7 @@
     * [CMSTP](redteam/weapon/code-execution/cmstp.md)
     * [MSBuild](redteam/weapon/code-execution/msbuild.md)
     * [MSHTA](redteam/weapon/code-execution/mshta.md)
-    * [WSH](redteam/weapon/code-execution/wsh.md)
+    * [Windows Script Host (WSH)](redteam/weapon/code-execution/wsh.md)
     * [MS Office - RTF Files RCE](redteam/weapon/code-execution/ms-word-rtf-files-rce.md)
     * [Outlook Home Page Abuse (Specula)](redteam/weapon/code-execution/outlook-home-page-abuse-specula.md)
     * [Powershell Without Powershell.exe](redteam/weapon/code-execution/whithout-powershell.md)
