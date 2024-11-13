@@ -1,4 +1,4 @@
-# AppLocker Bypass
+# 🛠️ AppLocker Bypass
 
 ## Theory
 
@@ -41,8 +41,6 @@ Get-AppLockerPolicy -Effective | select -ExpandProperty RuleCollections
 ```
 {% endtab %}
 {% endtabs %}
-
-
 
 ## Resources
 
