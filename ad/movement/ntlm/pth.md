@@ -100,6 +100,17 @@ In short, by default, only the following accounts can fully take advantage of pa
 * **domain accounts** : all domain accounts with local admin rights
 {% endhint %}
 
+{% hint style="warning" %}
+**RDP Pass-the-hash**
+
+[Restricted Admin Mode ](https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-server-2012-r2-and-2012/dn408190\(v=ws.11\)#restricted-admin-mode-for-remote-desktop-connection)must be enabled to allow pass-the-hash attacks over RDP. \
+It is disabled by default, but we can enable it via the `DisableRestrictedAdmin` registry entry, as follows:
+
+```powershell
+reg add HKLM\SYSTEM\CurrentControlSet\Control\Lsa /v DisableRestrictedAdmin /d 0 /t REG_DWORD
+```
+{% endhint %}
+
 {% hint style="info" %}
 **WinRM enables pass-the-hash**
 
