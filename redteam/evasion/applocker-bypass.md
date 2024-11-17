@@ -1,4 +1,4 @@
-# 🛠️ AppLocker Bypass
+# AppLocker Bypass
 
 ## Theory
 

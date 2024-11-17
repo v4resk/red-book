@@ -2,7 +2,7 @@
 
 ## Theory
 
-Upon gaining access to a Windows target, such as after exploiting a [command injection vulnerability](../../../web-pentesting/web-vulnerabilities/server-side/command-injection.md) in a web service, the exact type of shell might not always be immediately evident. This section delves into specific tricks to discern the type of shell (CMD or PowerShell) and even determine the architecture of the process (x32 or x64).&#x20;
+Upon gaining access to a Windows target, such as after exploiting a [command injection vulnerability](../../../web/web-vulnerabilities/server-side/command-injection.md) in a web service, the exact type of shell might not always be immediately evident. This section delves into specific tricks to discern the type of shell (CMD or PowerShell) and even determine the architecture of the process (x32 or x64).&#x20;
 
 Understanding these aspects is crucial, especially when tailoring specific techniques, payloads , or powershell exploits for successful execution.
 

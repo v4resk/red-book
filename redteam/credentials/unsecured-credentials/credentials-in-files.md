@@ -25,7 +25,7 @@ noseyparker report -d np.myDataStore
 ```
 
 {% hint style="info" %}
-You may use this tools to search sensitives files in a [mounted NFS share](../../../network-pentesting/protocols/nfs.md#mount-nfs-shares), a [mounted SMB share](../../../network-pentesting/protocols/smb.md#acls-of-shares-file-folder), or even [exiltrated data](../../exfiltration/).
+You may use this tools to search sensitives files in a [mounted NFS share](../../../network/protocols/nfs.md#mount-nfs-shares), a [mounted SMB share](../../../network/protocols/smb.md#acls-of-shares-file-folder), or even [exiltrated data](../../exfiltration/).
 {% endhint %}
 {% endtab %}
 {% endtabs %}

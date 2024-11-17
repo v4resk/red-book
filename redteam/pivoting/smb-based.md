@@ -6,7 +6,7 @@ description: 'MITRE ATT&CK™ Remote Services: SMB/Windows Admin Shares - Techni
 
 ## Theory
 
-[SMB Protocol](../../network-pentesting/protocols/smb.md) can be abuse by attackers to execute remote code and perform lateral movements.
+[SMB Protocol](../../network/protocols/smb.md) can be abuse by attackers to execute remote code and perform lateral movements.
 
 ## Practice
 

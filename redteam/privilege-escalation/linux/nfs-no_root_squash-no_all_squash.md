@@ -67,7 +67,7 @@ You can copy the **/bin/bash** binary directly and give it SUID rights instead o
 {% tab title="Exploit - Local" %}
 If the `/etc/exports` has an explicit list of IP addresses allowed to mount the share, we won't be able to make the remote exploit and you will need to **abuse this trick and exploit no\_root\_squash/no\_all\_squash locally with an unprivileged user**.
 
-When [listing the NFS shares](../../../network-pentesting/protocols/nfs.md#showmount), it will show IP allowed to mount the share:
+When [listing the NFS shares](../../../network/protocols/nfs.md#showmount), it will show IP allowed to mount the share:
 
 ```bash
 $ showmount -e nfs-server
