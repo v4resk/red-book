@@ -10,6 +10,6 @@ Online repositories of code hold a window into an organization's technology stac
 [open-source-code.md](../../recon/open-source-code.md)
 {% endcontent-ref %}
 
-{% content-ref url="../../../web/web-vulnerabilities/server-side/exposed-git-repositories.md" %}
-[exposed-git-repositories.md](../../../web/web-vulnerabilities/server-side/exposed-git-repositories.md)
+{% content-ref url="../../../web-pentesting/web-vulnerabilities/server-side/exposed-git-repositories.md" %}
+[exposed-git-repositories.md](../../../web-pentesting/web-vulnerabilities/server-side/exposed-git-repositories.md)
 {% endcontent-ref %}

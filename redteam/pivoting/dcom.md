@@ -226,7 +226,7 @@ $com.Navigate("http://192.168.100.1/exploit")
 
 ### Passing credentials - non-interactive shell
 
-DCOM objects **runs under current user session** which can be a problem if we have a non-interactive shell and we want to run it under higher privileged user. A quick solution is to use [RunAsCs](https://github.com/antonioCoco/RunasCs), an implementation of RunAs by antonioCoco in C# , which we can integrate  with our chosen DCOM object to pass credentials in non-interactive shell (note this will be a better choice than invoke-command since it uses [WinRM](../../network/protocols/winrm.md))
+DCOM objects **runs under current user session** which can be a problem if we have a non-interactive shell and we want to run it under higher privileged user. A quick solution is to use [RunAsCs](https://github.com/antonioCoco/RunasCs), an implementation of RunAs by antonioCoco in C# , which we can integrate  with our chosen DCOM object to pass credentials in non-interactive shell (note this will be a better choice than invoke-command since it uses [WinRM](../../network-pentesting/protocols/winrm.md))
 
 {% tabs %}
 {% tab title="Windows - Powershell" %}
