@@ -1,2 +1,2 @@
-# GitLab
+# 🛠️ GitLab
 

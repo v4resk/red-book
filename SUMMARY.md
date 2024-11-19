@@ -468,19 +468,20 @@
     * [XSS (Cross-Site Scripting)](web/web-vulnerabilities/client-side/xss-cross-site-scripting.md)
     * [CORS (Cross-origin resource sharing)](web/web-vulnerabilities/client-side/cors-cross-origin-resource-sharing.md)
 
-## 🛠️ Cloud & CI/CD Pentesting <a href="#cloud-cicd-pentesting" id="cloud-cicd-pentesting"></a>
+## Cloud & CI/CD Pentesting <a href="#cloud-cicd-pentesting" id="cloud-cicd-pentesting"></a>
 
 * [CI/CD](cloud-cicd/ci-cd/README.md)
   * [Ansible Pentesting](cloud-cicd-pentesting/ci-cd/ansible-pentesting.md)
+  * [Artifactory Pentesting](cloud-cicd-pentesting/ci-cd/artifactory-pentesting.md)
   * [Docker Registry](cloud-cicd/containers/reconnaissance/registry/README.md)
     * [🛠️ HTTP API V2](cloud-cicd/containers/reconnaissance/registry/apiv2.md)
-  * [Kubernetes](cloud-cicd/containers/kubernetes.md)
-  * [GitLab](cloud-cicd/ci-cd/gitlab.md)
-  * [Github](cloud-cicd/ci-cd/github.md)
-  * [Gitea](cloud-cicd-pentesting/ci-cd/gitea.md)
-  * [Jenkins](cloud-cicd-pentesting/ci-cd/jenkins.md)
-  * [Terraform](cloud-cicd-pentesting/ci-cd/terraform.md)
-* [Cloud](cloud-cicd/cloud/README.md)
+  * [🛠️ Kubernetes](cloud-cicd/containers/kubernetes.md)
+  * [🛠️ GitLab](cloud-cicd/ci-cd/gitlab.md)
+  * [🛠️ Github](cloud-cicd/ci-cd/github.md)
+  * [🛠️ Gitea](cloud-cicd-pentesting/ci-cd/gitea.md)
+  * [🛠️ Jenkins](cloud-cicd-pentesting/ci-cd/jenkins.md)
+  * [🛠️ Terraform](cloud-cicd-pentesting/ci-cd/terraform.md)
+* [🛠️ Cloud](cloud-cicd/cloud/README.md)
   * [Azure AD Pentesting](cloud-cicd/cloud/azure-ad/README.md)
     * [Reconnaissance](cloud-cicd/cloud/azure-ad/reconnaissance.md)
     * [Movement](cloud-cicd/cloud/azure-ad/movement.md)
