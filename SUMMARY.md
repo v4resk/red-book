@@ -210,6 +210,7 @@
     * [Linux](redteam/credentials/os-credentials/linux/README.md)
       * [Shadow File](redteam/credentials/os-credentials/linux/shadow-file.md)
       * [In-memory secrets](redteam/credentials/os-credentials/linux/passwords-in-memory.md)
+      * [Linux Cached Kerberos tickets](redteam/credentials/os-credentials/linux/cached-kerberos-tickets.md)
   * [MITM and coerced auths](redteam/credentials/mitm-and-coerced-auths.md)
   * [Password Attacks](redteam/credentials/passwd/README.md)
     * [Default, weak & Leaked Passwords](redteam/credentials/passwd/default-weak-and-leaked-passwords.md)
@@ -489,7 +490,7 @@
   * [AWS Pentesting](cloud-cicd/cloud/aws.md)
   * [GCP Pentesting](cloud-cicd-pentesting/cloud/gcp-pentesting.md)
 
-## Smart Contracts Pentesting
+## 🛠️ Smart Contracts Pentesting
 
 * [Solidity](smart-contracts/solidity/README.md)
   * [Vulnerabilities](smart-contracts/solidity/vulnerabilities/README.md)
