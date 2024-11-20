@@ -52,7 +52,7 @@ export KRB5CCNAME=/tmp/krb5cc_1569901115
 ```
 
 {% hint style="info" %}
-You may use the ticket using [Pass The Ticket ](broken-reference)techniques
+You may use this ticket using [Pass The Ticket](../../../ad/movement/kerberos/ptt.md) techniques
 {% endhint %}
 {% endtab %}
 {% endtabs %}
@@ -101,13 +101,13 @@ python3 SSSDKCMExtractor.py --database secrets.ldb --key secrets.mkey
 {% endtab %}
 {% endtabs %}
 
-### Extract accounts from /etc/krb5.keytab
+### Extract Accounts From Keytab Files
 
 The service keys used by services that run as root are usually stored in the keytab file **`/etc/krb5.keytab`**. This service key is the equivalent of the service's password, and must be kept secure.
 
 {% tabs %}
 {% tab title="Unix-Like" %}
-On Linux you can use [KeyTabExtract](https://github.com/sosdave/KeyTabExtract). We want RC4 HMAC hash to reuse the NLTM hash.
+On Linux you can use [KeyTabExtract](https://github.com/sosdave/KeyTabExtract) to extracts Key values from .keytab files
 
 ```
 python3 keytabextract.py krb5.keytab 
@@ -116,6 +116,12 @@ python3 keytabextract.py krb5.keytab
         REALM : DOMAIN
         SERVICE PRINCIPAL : host/computer.domain
         NTLM HASH : 31d6cfe0d16ae931b73c59d7e0c089c0 # Lucky
+```
+
+You can also use the .keytab file to request a TGT directly.
+
+```bash
+kinit administrator@local.com -k -t /tmp/administrator.keytab
 ```
 {% endtab %}
 
