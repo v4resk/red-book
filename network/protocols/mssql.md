@@ -1,5 +1,5 @@
 ---
-description: Port TCP 1433
+description: Pentesting MSSQL - TCP Port 1433
 ---
 
 # MSSQL

@@ -1,5 +1,5 @@
 ---
-description: Port TCP 3389
+description: Pentesting RDP - TCP Port 3389
 ---
 
 # RDP

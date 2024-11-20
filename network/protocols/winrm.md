@@ -1,5 +1,5 @@
 ---
-description: Ports TCP 5985,5986
+description: Pentesting WinRM - TCP Ports 5985,5986
 ---
 
 # WinRM

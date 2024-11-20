@@ -1,5 +1,5 @@
 ---
-description: Ports TCP 5222, 5269, 8010
+description: Pentesting XMPP/Jabber - TCP Ports 5222, 5269, 8010
 ---
 
 # XMPP/Jabber

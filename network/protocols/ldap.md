@@ -1,5 +1,5 @@
 ---
-description: Ports TCP 389,3268,636,3269
+description: Pentesting LDAP - TCP Ports 389,3268,636,3269
 ---
 
 # LDAP

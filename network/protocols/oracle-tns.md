@@ -1,5 +1,5 @@
 ---
-description: Ports TCP 1521,1522-1529
+description: Pentesting Oracle TNS - TCP Ports 1521,1522-1529
 ---
 
 # Oracle TNS

@@ -1,5 +1,5 @@
 ---
-description: Port UDP 161,162,10161,10162
+description: Pentesting SNMP - UDP Ports 161,162,10161,10162
 ---
 
 # SNMP

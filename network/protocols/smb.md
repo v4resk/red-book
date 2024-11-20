@@ -1,5 +1,5 @@
 ---
-description: Ports TCP 445,139
+description: Pentesting SMB - TCP Ports 445,139
 ---
 
 # SMB

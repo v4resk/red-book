@@ -1,5 +1,5 @@
 ---
-description: Ports TCP 25,465,587
+description: Pentesting SMTP - TCP Ports 25,465,587
 ---
 
 # SMTP

@@ -1,5 +1,5 @@
 ---
-description: Port TCP/UDP 137,138,139
+description: Pentesting NBT-NS - TCP/UDP Ports 137,138,139
 ---
 
 # NBT-NS (NetBIOS)

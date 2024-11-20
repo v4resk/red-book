@@ -1,5 +1,5 @@
 ---
-description: Ports TCP 135,593
+description: Pentesting MS-RPC - TCP Ports 135,593
 ---
 
 # MS-RPC

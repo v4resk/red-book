@@ -1,5 +1,5 @@
 ---
-description: Port TCP 22
+description: Pentesting SSH - TCP Port 22
 ---
 
 # SSH

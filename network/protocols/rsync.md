@@ -1,5 +1,5 @@
 ---
-description: Ports TCP 873
+description: Pentesting RSync - TCP Ports 873
 ---
 
 # Rsync
