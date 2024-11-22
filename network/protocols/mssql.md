@@ -35,7 +35,29 @@ nmap --script ms-sql-* -p 1433 <target-ip>
 nmap --script ms-sql-info,ms-sql-empty-password,ms-sql-xp-cmdshell,ms-sql-config,ms-sql-ntlm-info,ms-sql-tables,ms-sql-hasdbaccess,ms-sql-dac,ms-sql-dump-hashes --script-args mssql.instance-port=1433,mssql.username=sa,mssql.password=,mssql.instance-name=MSSQLSERVER -sV -p 1433 <IP>
 ```
 {% endtab %}
+
+{% tab title="SPNs" %}
+In Active Directory environements, we can directly request the Domain Controller for a list of SPNs, to stealthly identify MSSQL servers.
+
+From a Windows Domain-Joined Computer, we can use the [setspn](https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-server-2012-r2-and-2012/cc731241\(v=ws.11\)) or [GetUserSPNs.ps1](https://github.com/nidem/kerberoast/blob/master/GetUserSPNs.ps1) command as follows.
+
+```bash
+# Setspn LOLBIN
+setspn -T domain.local -Q MSSQLSvc/*
+
+# Using GetUserSPNs
+. .\GetUserSPNs.ps1
+```
+
+From an UNIX-Like hosts, we can directly search using [GetUserSPNs ](https://github.com/SecureAuthCorp/impacket/blob/master/examples/GetUserSPNs.py)from impacket:
+
+```bash
+GetUserSPNs.py -dc-ip <DC_IP> '<DOMAIN>/<USER>:<Password>'
+```
+{% endtab %}
 {% endtabs %}
+
+
 
 ### Enumerate DB Objects
 
