@@ -46,6 +46,20 @@ wmic useraccount where sid='<SID>' get name, caption,FullName
 {% endhint %}
 {% endtab %}
 
+{% tab title="Dump All DACLs for Current User" %}
+We can dump all **Domain** **Users** that our current account has rights on using `Get-DomainObjectAcl` from [Powersploit](https://github.com/PowerShellMafia/PowerSploit/)'s [Powerview](https://github.com/PowerShellMafia/PowerSploit/blob/dev/Recon/PowerView.ps1).
+
+```powershell
+Get-DomainUser | Get-ObjectAcl -ResolveGUIDs | Foreach-Object {$_ | Add-Member -NotePropertyName Identity -NotePropertyValue (ConvertFrom-SID $_.SecurityIdentifier.value) -Force; $_} | Foreach-Object {if ($_.Identity -eq $("$env:UserDomain\$env:Username")) {$_}}
+```
+
+We can also dump all **Domain** **Groups** that our current account has rights on using `Get-DomainObjectAcl`
+
+```powershell
+Get-DomainGroup | Get-ObjectAcl -ResolveGUIDs | Foreach-Object {$_ | Add-Member -NotePropertyName Identity -NotePropertyValue (ConvertFrom-SID $_.SecurityIdentifier.value) -Force; $_} | Foreach-Object {if ($_.Identity -eq $("$env:UserDomain\$env:Username")) {$_}}
+```
+{% endtab %}
+
 {% tab title="Interesting DACLs" %}
 We can enumerate interesting Domain Object's ACL using `Get-DomainObjectAcl` from [Powersploit](https://github.com/PowerShellMafia/PowerSploit/)'s [Powerview](https://github.com/PowerShellMafia/PowerSploit/blob/dev/Recon/PowerView.ps1).
 
@@ -57,13 +71,12 @@ $SID = Get-DomainSid ; Get-DomainComputer | Get-DomainObjectAcl -ResolveGUIDs | 
 Find-InterestingDomainAcl -ResolveGUIDs  | Where-Object {$_.IdentityReference –eq [System.Security.Principal.WindowsIdentity]::GetCurrent().Name}
 
 # Get ACLs for User
-Get-DomainObjectAcl -Identity it_admin -ResolveGUIDs ? { $_.SecurityIdentifier -Match $(ConvertTo-SID yourUserName) }
-
+Get-DomainObjectAcl -Identity <TARGET_USERNAME>  -ResolveGUIDs ? { $_.SecurityIdentifier -Match $(ConvertTo-SID <YOUR_USERNAME>) }
+Get-ObjectAcl -Identity <TARGET_USERNAME> -ResolveGUIDs | Foreach-Object {$_ | Add-Member -NotePropertyName Identity -NotePropertyValue (ConvertFrom-SID $_.SecurityIdentifier.value) -Force; $_}
 
 # Get ACLs for specific AD Object
 Get-DomainObjectAcl -SamAccountName <SAM> -ResolveGUIDs
 Get-DomainObjectAcl -Identity <Identity> -ResolveGUIDs
-
 
 # Get ACLs for specified prefix
 Get-DomainObjectAcl -ADSprefix 'CN=Administrators,CN=Users' -Verbose
