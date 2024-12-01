@@ -10,15 +10,19 @@ If the "impersonated" account is "[is sensitive and cannot be delegated](https:/
 **Nota bene**: the native, RID 500, "Administrator" account doesn't benefit from that restriction, even if it's added to the Protected Users group (source: [sensepost.com](https://sensepost.com/blog/2023/protected-users-you-thought-you-were-safe-uh/)).
 {% endhint %}
 
-Constrained delegation can be configured with or without protocol transition. Abuse methodology differs for each scenario. The paths differ but the result is the same: a Service Ticket to authenticate on a target service on behalf of a user.
-
-Once the final Service Ticket is obtained, it can be used with [Pass-the-Ticket](broken-reference) to access the target service.
-
-{% hint style="success" %}
-On a side note, a technique called [AnySPN or "service class modification"](broken-reference) can be used concurrently with pass-the-ticket to change the service class the Service Ticket was destined to (e.g. for the `cifs/target.domain.local` SPN, the service class is `cifs`).
+{% hint style="warning" %}
+Configuring constrained delegation requires the `SeEnableDelegationPrivilege` on the domain controller, which is typically only enabled for Domain Admins.
 {% endhint %}
 
-![](../../../../.gitbook/assets/Kerberos\_delegations-constrained.png)
+Constrained delegation can be configured with or without protocol transition. Abuse methodology differs for each scenario. The paths differ but the result is the same: a Service Ticket to authenticate on a target service on behalf of a user.
+
+Once the final Service Ticket is obtained, it can be used with [Pass-the-Ticket](../ptt.md) to access the target service.
+
+{% hint style="success" %}
+On a side note, a technique called [AnySPN or "service class modification"](../ptt.md#modifying-the-spn) can be used concurrently with pass-the-ticket to change the service class the Service Ticket was destined to (e.g. for the `cifs/target.domain.local` SPN, the service class is `cifs`).
+{% endhint %}
+
+![](../../../../.gitbook/assets/Kerberos_delegations-constrained.png)
 
 ## Practice
 

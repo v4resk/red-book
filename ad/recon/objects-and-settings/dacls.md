@@ -53,10 +53,16 @@ We can dump all **Domain** **Users** that our current account has rights on usin
 Get-DomainUser | Get-ObjectAcl -ResolveGUIDs | Foreach-Object {$_ | Add-Member -NotePropertyName Identity -NotePropertyValue (ConvertFrom-SID $_.SecurityIdentifier.value) -Force; $_} | Foreach-Object {if ($_.Identity -eq $("$env:UserDomain\$env:Username")) {$_}}
 ```
 
-We can also dump all **Domain** **Groups** that our current account has rights on using `Get-DomainObjectAcl`
+We can dump all **Domain** **Groups** that our current account has rights on using `Get-DomainObjectAcl`
 
 ```powershell
 Get-DomainGroup | Get-ObjectAcl -ResolveGUIDs | Foreach-Object {$_ | Add-Member -NotePropertyName Identity -NotePropertyValue (ConvertFrom-SID $_.SecurityIdentifier.value) -Force; $_} | Foreach-Object {if ($_.Identity -eq $("$env:UserDomain\$env:Username")) {$_}}
+```
+
+We can also dump all **Domain** **Computers** that our current account has rights on using `Get-DomainObjectAcl`
+
+```powershell
+Get-DomainComputer | Get-ObjectAcl -ResolveGUIDs | Foreach-Object {$_ | Add-Member -NotePropertyName Identity -NotePropertyValue (ConvertFrom-SID $_.SecurityIdentifier.value) -Force; $_} | Foreach-Object {if ($_.Identity -eq $("$env:UserDomain\$env:Username")) {$_}}
 ```
 {% endtab %}
 
