@@ -362,7 +362,7 @@
     * [Logon script](ad/movement/dacl/logon-script.md)
     * [Rights on RODC object](ad/movement/dacl/rights-on-rodc-object.md)
   * [Group policies](ad/movement/group-policies.md)
-  * [🛠️ Trusts](ad/movement/domain-trusts.md)
+  * [Trusts](ad/movement/domain-trusts.md)
   * [Certificate Services (AD-CS)](ad/movement/ad-cs/README.md)
     * [Certificate templates](ad/movement/ad-cs/certificate-templates.md)
     * [Certificate authority](ad/movement/ad-cs/certificate-authority.md)
