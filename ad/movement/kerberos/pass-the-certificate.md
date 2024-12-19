@@ -18,7 +18,7 @@ The "certificate + private key" pair is usually used in the following manner
 ## Practice
 
 {% hint style="danger" %}
-If you encounter the error**`KDC_ERR_PADATA_TYPE_NOSUPP`**when attempting to pass the certificate through PKINIT, this may be an indication that the targeted KDC do not have certificates with the necessary EKUs (Extended Key Usages). Specifically, for a KDC to support PKINIT, its certificates must include the **`Smart Card Logon`** EKU.\
+If you encounter the erro&#x72;**`KDC_ERR_PADATA_TYPE_NOSUPP`**&#x77;hen attempting to pass the certificate through PKINIT, this may be an indication that the targeted KDC do not have certificates with the necessary EKUs (Extended Key Usages). Specifically, for a KDC to support PKINIT, its certificates must include the **`Smart Card Logon`** EKU.\
 \
 **However, you can try to** [**pass the certificate using Schannel**](../schannel/pass-the-certificate-schannel.md)**.**
 {% endhint %}
@@ -27,7 +27,7 @@ If you encounter the error**`KDC_ERR_PADATA_TYPE_NOSUPP`**when attempting to pas
 {% tab title="UNIX-like" %}
 #### PKINITtools
 
-From UNIX-like systems, [Dirk-jan](https://twitter.com/\_dirkjan)'s [gettgtpkinit.py](https://github.com/dirkjanm/PKINITtools/blob/master/gettgtpkinit.py) from [PKINITtools](https://github.com/dirkjanm/PKINITtools/) tool to request a TGT (Ticket Granting Ticket) for the target object. That tool supports the use of the certificate in multiple forms.
+From UNIX-like systems, [Dirk-jan](https://twitter.com/_dirkjan)'s [gettgtpkinit.py](https://github.com/dirkjanm/PKINITtools/blob/master/gettgtpkinit.py) from [PKINITtools](https://github.com/dirkjanm/PKINITtools/) tool to request a TGT (Ticket Granting Ticket) for the target object. That tool supports the use of the certificate in multiple forms.
 
 ```python
 # PFX certificate (file) + password (string, optionnal)

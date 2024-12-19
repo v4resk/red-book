@@ -77,7 +77,7 @@ Export list for nfs-server:
 
 {% hint style="info" %}
 Another required requirement for the exploit to work is that **the export inside `/etc/export`** **must be using the `insecure` flag**.\
-_I'm not sure that if `/etc/export` is indicating an IP address this trick will work_
+&#xNAN;_&#x49;'m not sure that if `/etc/export` is indicating an IP address this trick will work_
 {% endhint %}
 
 This exploit relies on a problem in the NFSv3 specification that mandates that it’s up to the client to advertise its uid/gid when accessing the share. Thus it’s possible to fake the uid/gid by forging the NFS RPC calls if the share is already mounted!

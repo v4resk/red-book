@@ -47,10 +47,10 @@ On a good note, if the service name is specified as something else than an SPN (
 
 If the service ticket is requested through a specific [U2U (User-to-User)](./#user-to-user-authentication) request, then neither of the conditions above will be required, the target ~~service~~ user can be specified by its UPN (`userPrincipalName`).
 
-_(sources:_ [_Twitter_](https://twitter.com/SteveSyfuhs/status/1613956603807690753) _and_ [_\[MS-KILE\] section 3.3.5.1.1_](https://learn.microsoft.com/en-us/openspecs/windows\_protocols/ms-kile/a7ad31b0-37a4-4344-b9a7-01d4d086097e)_)._
+_(sources:_ [_Twitter_](https://twitter.com/SteveSyfuhs/status/1613956603807690753) _and_ [_\[MS-KILE\] section 3.3.5.1.1_](https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-kile/a7ad31b0-37a4-4344-b9a7-01d4d086097e)_)._
 {% endhint %}
 
-The TGT is used to ask for STs. TGTs can be obtained when supplying a valid secret key. That key can be one of the following (read [more](https://www.sstic.org/media/SSTIC2014/SSTIC-actes/secrets\_dauthentification\_pisode\_ii\_\_kerberos\_cont/SSTIC2014-Article-secrets\_dauthentification\_pisode\_ii\_\_kerberos\_contre-attaque-bordes\_2.pdf)).
+The TGT is used to ask for STs. TGTs can be obtained when supplying a valid secret key. That key can be one of the following (read [more](https://www.sstic.org/media/SSTIC2014/SSTIC-actes/secrets_dauthentification_pisode_ii__kerberos_cont/SSTIC2014-Article-secrets_dauthentification_pisode_ii__kerberos_contre-attaque-bordes_2.pdf)).
 
 | Key name (a.k.a. etype) | Details on key calculation                     |
 | ----------------------- | ---------------------------------------------- |
@@ -156,9 +156,9 @@ For this extension to work properly, the service needs to supply a Service Ticke
 For an S4U2proxy request to work and have the KDC issue a Service Ticket:
 
 * the ST used as "additional-ticket" must have the **forwardable** flag set.
-* alternatively, in the `TGS-REQ`, in the pre-authentication data, the `PA-PAC-OPTIONS` structure must contain a padata value with the resource-based constrained delegation bit set ([doc](https://docs.microsoft.com/en-us/openspecs/windows\_protocols/ms-sfu/aeecfd82-a5e4-474c-92ab-8df9022cf955)).\
-  _nota bene 1: this only applies if the **resource-based constrained delegation (RBCD)** is actually possible and authorized in the proper AD objects attributes._\
-  _nota bene 2: Rubeus and Impacket's getST always set that bit when doing S4U2proxy._
+* alternatively, in the `TGS-REQ`, in the pre-authentication data, the `PA-PAC-OPTIONS` structure must contain a padata value with the resource-based constrained delegation bit set ([doc](https://docs.microsoft.com/en-us/openspecs/windows_protocols/ms-sfu/aeecfd82-a5e4-474c-92ab-8df9022cf955)).\
+  &#xNAN;_&#x6E;ota bene 1: this only applies if the **resource-based constrained delegation (RBCD)** is actually possible and authorized in the proper AD objects attributes._\
+  &#xNAN;_&#x6E;ota bene 2: Rubeus and Impacket's getST always set that bit when doing S4U2proxy._
 
 On a side note, S4U2Proxy always results in a forwardable ST, even when the ticket used as evidence wasn't forwardable.
 
@@ -171,11 +171,11 @@ On a side note, S4U2Proxy always results in a forwardable ST, even when the tick
 S4U2self and S4U2proxy are variations of Service Ticket requests (`KRB_TGS_REQ`). Below is what differentiates a S4U2self from a S4U2proxy from a standard `KRB_TGS_REQ`.​
 
 * **S4U2self**
-  * Request contains a `PA-FOR-USER` padata type structure containing the name and the realm of the user to impersonate ([doc](https://docs.microsoft.com/en-us/openspecs/windows\_protocols/ms-sfu/aceb70de-40f0-4409-87fa-df00ca145f5a)).
+  * Request contains a `PA-FOR-USER` padata type structure containing the name and the realm of the user to impersonate ([doc](https://docs.microsoft.com/en-us/openspecs/windows_protocols/ms-sfu/aceb70de-40f0-4409-87fa-df00ca145f5a)).
   * the `cname` (user name authenticating) and the `sname` (service name being requested) are the same. In order to succeed and not have the KDC throw an `KDC_ERR_S_PRINCIPAL_UNKNOWN`, the `sname` should refer to an account that has at least one SPN (`Service Principal Name`) set.
 * **S4U2proxy**
   * Request contains an `additional-tickets` field containing a service ticket. In order to succeed and not have the KDC throw an `KDC_ERR_BADOPTION`, the ticket should have the `forwardable` flag set. In a standard constrained delegation or rbcd scenario, the ticket added in the `additional-tickets` field is the one obtained through S4U2self.
-  * Request contains the `CNAME-IN-ADDL-TKT` flag in the `kdc-options` field, indicating S4U2proxy is used ([doc](https://docs.microsoft.com/en-us/openspecs/windows\_protocols/ms-sfu/17b9af82-d45a-437d-a05c-79547fe969f5)).
+  * Request contains the `CNAME-IN-ADDL-TKT` flag in the `kdc-options` field, indicating S4U2proxy is used ([doc](https://docs.microsoft.com/en-us/openspecs/windows_protocols/ms-sfu/17b9af82-d45a-437d-a05c-79547fe969f5)).
 
 </details>
 
@@ -183,7 +183,7 @@ S4U2self and S4U2proxy are variations of Service Ticket requests (`KRB_TGS_REQ`)
 
 U2U has nothing to do with S4U mechanisms and plays no part in delegation internals.
 
-> \[U2U] allows users to host secure application services on their desktop machines. \[...] In the user-to-user protocol, one user acts as a server, and the other user acts as a client. ([Frequently Asked Questions about Kerberos](http://www.di-srv.unisa.it/\~ads/corso-security/www/CORSO-0001/kerberos/ref/kerberos-faq.html#u2uauth)).
+> \[U2U] allows users to host secure application services on their desktop machines. \[...] In the user-to-user protocol, one user acts as a server, and the other user acts as a client. ([Frequently Asked Questions about Kerberos](http://www.di-srv.unisa.it/~ads/corso-security/www/CORSO-0001/kerberos/ref/kerberos-faq.html#u2uauth)).
 
 <details>
 
@@ -192,7 +192,7 @@ U2U has nothing to do with S4U mechanisms and plays no part in delegation intern
 A U2U request is a variation of a common Service Ticket request (`KRB_TGS_REQ`). Below is what differentiates a U2U from a standard `KRB_TGS_REQ`. It allows a user to request a service ticket to another user.
 
 * Request contains an `additional-tickets` field containing the target user TGT.
-* Request contains the `ENC-TKT-IN-SKEY` flag in the `kdc-options` field, indicating that the ticket for the end server is to be encrypted in the session key from the additional TGT provided ([doc](https://docs.microsoft.com/en-us/openspecs/windows\_protocols/ms-sfu/17b9af82-d45a-437d-a05c-79547fe969f5)).
+* Request contains the `ENC-TKT-IN-SKEY` flag in the `kdc-options` field, indicating that the ticket for the end server is to be encrypted in the session key from the additional TGT provided ([doc](https://docs.microsoft.com/en-us/openspecs/windows_protocols/ms-sfu/17b9af82-d45a-437d-a05c-79547fe969f5)).
 * The `sname` refers to a UPN (`User Principal Name`) of an account that doesn't necessarily have to have an SPN set.
 
 A ticket produced with u2u is encrypted with the session key of the TGT included as `additional-ticket` instead of the target service long-term key (i.e. DES, RC4 or AES128/256 key).

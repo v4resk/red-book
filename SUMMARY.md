@@ -50,6 +50,7 @@
   * [Password Attacks](redteam/delivery/password-attacks.md)
   * [Phishing](redteam/delivery/phishing/README.md)
     * [HTML Smuggling](redteam/delivery/phishing/html-smuggling.md)
+    * [Phishing with Calendars (.ICS Files)](redteam/delivery/phishing/phishing-with-calendars-.ics-files.md)
     * [🛠️ Phishing with MS Office](redteam/delivery/phishing/phishing-with-ms-office.md)
     * [🛠️ Phishing via Proxy](redteam/delivery/phishing/phishing-via-proxy/README.md)
       * [Adversary in the Middle (AitM) Phishing](redteam/delivery/phishing/phishing-via-proxy/adversary-in-the-middle-aitm-phishing/README.md)

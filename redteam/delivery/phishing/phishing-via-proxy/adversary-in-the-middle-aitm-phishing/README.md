@@ -10,7 +10,11 @@ AitM phishing is a technique that uses dedicated tooling to act as a proxy betwe
 
 Adversaries may attempt to proxy multi-domain destination traffic (both TLS and non-TLS) over a single domain, without a requirement of installing any additional certificate on the client.
 
+<figure><img src="../../../../../.gitbook/assets/schéma-2-1-1024x588.png" alt=""><figcaption></figcaption></figure>
+
 ## Practice
+
+
 
 ## Resources
 
