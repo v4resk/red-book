@@ -19,7 +19,7 @@ AppLocker consists of two core components:
   * The `AppIDSvc` service primarily functions as a policy manager, responsible for administrating the whitelist ruleset and performing tasks that are impractical to handle at the kernel level, such as comprehensive code signature verification.
   * The `AppIDSvc` interacts with the `APPID.SYS` driver via Remote Procedure Calls (RPC) to verify digital signatures and validate applications against AppLocker policies.
 
-<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption><p><a href="https://www.tiraniddo.dev/2019/11/the-internals-of-applocker-part-1.html">https://www.tiraniddo.dev/2019/11/the-internals-of-applocker-part-1.html</a></p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2).png" alt=""><figcaption><p><a href="https://www.tiraniddo.dev/2019/11/the-internals-of-applocker-part-1.html">https://www.tiraniddo.dev/2019/11/the-internals-of-applocker-part-1.html</a></p></figcaption></figure>
 
 ## Practice
 
@@ -130,7 +130,7 @@ C:\Windows\Tasks\malware.exe
 
 ### Alternate Data Stream <a href="#alternate-data-stream" id="alternate-data-stream"></a>
 
-An [**Alternate Data Stream (ADS)** ](https://learn.microsoft.com/en-us/openspecs/windows\_protocols/ms-fscc/e2b19412-a925-4360-b009-86e3b8a020c8)is a feature of the NTFS file system that allows files to store additional data streams as metadata. This functionality can be exploited to hide or append binary data (like scripts or executables) to existing files without affecting their primary content. **We can leverage this to bypass AppLocker** or other application control mechanisms by hiding and **executing malicious scripts or binaries in trusted locations**.
+An [**Alternate Data Stream (ADS)** ](https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-fscc/e2b19412-a925-4360-b009-86e3b8a020c8)is a feature of the NTFS file system that allows files to store additional data streams as metadata. This functionality can be exploited to hide or append binary data (like scripts or executables) to existing files without affecting their primary content. **We can leverage this to bypass AppLocker** or other application control mechanisms by hiding and **executing malicious scripts or binaries in trusted locations**.
 
 {% tabs %}
 {% tab title="Enumerate" %}

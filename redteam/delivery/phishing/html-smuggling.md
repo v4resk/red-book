@@ -12,7 +12,7 @@ We may smuggle data and files past content filters by hiding malicious payloads 
 
 When a target user opens the HTML in their web browser, the browser decodes the malicious payload, which, in turn, assembles the payload on the host device. Thus, instead of having a malicious executable pass directly through a network, the victime builds the malware locally behind a firewall.
 
-<figure><img src="../../../.gitbook/assets/image (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ## Practice
 

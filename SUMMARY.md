@@ -82,7 +82,7 @@
   * [Endpoint Detection Respons (EDR) Bypass](redteam/evasion/endpoint-detection-respons-edr-bypass/README.md)
     * [Bring Your Own Vulnerable Driver (BYOVD)](redteam/evasion/endpoint-detection-respons-edr-bypass/bring-your-own-vulnerable-driver-byovd.md)
     * [Safe Mode With Networking](redteam/evasion/endpoint-detection-respons-edr-bypass/safe-mode-with-networking.md)
-    * [Windows Defender Application Control (WDAC)](redteam/evasion/endpoint-detection-respons-edr-bypass/windows-defender-application-control-wdac.md)
+    * [Windows Defender Application Control (WDAC): Killing EDR](redteam/evasion/endpoint-detection-respons-edr-bypass/windows-defender-application-control-wdac-killing-edr.md)
     * [🛠️ Load Unsigned Drivers](redteam/evasion/endpoint-detection-respons-edr-bypass/load-unsigned-drivers.md)
     * [🛠️ Minifilter Altitude](redteam/evasion/endpoint-detection-respons-edr-bypass/minifilter-altitude.md)
     * [🛠️ Hypervisor Code Integrity (HVCI) Disallowed Images](redteam/evasion/endpoint-detection-respons-edr-bypass/hypervisor-code-integrity-hvci-disallowed-images.md)
