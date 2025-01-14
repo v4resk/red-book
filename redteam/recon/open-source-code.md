@@ -49,6 +49,22 @@ Examples of Github Dorks are :
 | "api\_hash" "api\_id"                          | Telegram API token                                   |
 {% endtab %}
 
+{% tab title="GitHound" %}
+[GitHound](https://github.com/tillson/git-hound) hunts down exposed API keys and other sensitive information on GitHub using GitHub code search, pattern matching, and commit history searching.
+
+```bash
+# Basic Usage
+git-hound --subdomain-file subdomains.txt
+echo "\"example.com\"" | git-hound
+
+# Searching for exposed API keys
+echo "api.halcorp.biz" | githound --dig-files --dig-commits --many-results --rules halcorp-api-regexes.txt --results-only | python halapitester.py
+
+# Bug Bounty Hunters: Searching for leaked employee API tokens
+echo "\"uberinternal.com\"" | githound --dig-files --dig-commits --many-results --languages common-languages.txt --threads 100
+```
+{% endtab %}
+
 {% tab title="Noseyparker" %}
 [Noseyparker](https://github.com/praetorian-inc/noseyparker) is a command-line program that finds secrets and sensitive information in textual data and Git history.
 
