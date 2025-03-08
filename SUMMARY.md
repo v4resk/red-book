@@ -356,6 +356,7 @@
     * [AddMember](ad/movement/dacl/addmember.md)
     * [ForceChangePassword](ad/movement/dacl/forcechangepassword.md)
     * [Targeted Kerberoasting](ad/movement/dacl/targeted-kerberoasting.md)
+    * [WriteOwner](ad/movement/dacl/writeowner.md)
     * [ReadLAPSPassword](ad/movement/dacl/readlapspassword.md)
     * [ReadGMSAPassword](ad/movement/dacl/readgmsapassword.md)
     * [Grant ownership](ad/movement/dacl/grant-ownership.md)
