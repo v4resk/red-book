@@ -26,6 +26,7 @@
     * [Vector Exception Handler Shellcode Execution](redteam/weapon/code-and-process-injection/vector-exception-handler-shellcode-execution.md)
     * [NtQueueApcThread & NtTestAlert Shellcode Execution](redteam/weapon/code-and-process-injection/ntqueueapcthread-and-nttestalert-shellcode-execution.md)
     * [Thread Pool Callback Shellcode Execution](redteam/weapon/code-and-process-injection/thread-pool-callback-shellcode-execution.md)
+    * [Module Stomping Shellcode Injection](redteam/weapon/code-and-process-injection/module-stomping-shellcode-injection.md)
     * [🛠️ DLL Injection](redteam/weapon/code-and-process-injection/dll-injection.md)
     * [🛠️ CreateRemoteThread Injection](redteam/weapon/code-and-process-injection/createremotethread-injection.md)
     * [🛠️ Reflective DLL Injection](redteam/weapon/code-and-process-injection/reflective-dll-injection.md)

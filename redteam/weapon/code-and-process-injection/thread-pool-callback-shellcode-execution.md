@@ -33,6 +33,7 @@ Thread Pool API is a mechanism in Windows that allows efficient management of mu
 {% tab title="C++" %}
 The following code implements this technique:
 
+{% code title="PoolCallback.cpp" %}
 ```cpp
 #include <iostream>
 #include <windows.h>
@@ -149,6 +150,13 @@ int main()
     esc_main(NULL);
     return 0;
 }
+```
+{% endcode %}
+
+We can compile it from linux using following command
+
+```bash
+x86_64-w64-mingw32-g++ PoolCallback.cpp -o PoolCallback.exe -std=c++20 -static
 ```
 {% endtab %}
 {% endtabs %}
