@@ -4,12 +4,13 @@ description: >-
   Injection - Technique T1546.012
 ---
 
-# Image File Execution Options
+# Image File Execution Options (IFEO) Persistence
 
 ## Theory
 
-Image File Execution Options is a Windows registry key which enables developers to attach a debugger to an application and to enable “**GlobalFlag**” for application debugging. This behavior of Windows opens the door for persistence since an arbitrary executable can be used as a debugger of a specific process or as a “**MonitorProcess**“. \
-In both scenarios code execution will achieved and the trigger will be either the creation of a process or the exit of an application. However it should be noted that the implementation of this technique requires Administrator level privileges as the registry location which the keys needs to be added is under **HKLM**
+**Image File Execution Options (IFEO)** is a Windows registry key designed for developers to attach a debugger to an application and enable debugging features such as `GlobalFlag`. However, this functionality can be abused for persistence by specifying an arbitrary executable as the debugger for a target process or by using the `MonitorProcess` feature.
+
+In both cases, code execution is achieved, with the trigger being either the creation of the specified process or the termination of an application. Notably, implementing this technique requires Administrator privileges, as modifications must be made under the `HKLM` registry hive.
 
 ## Practice
 

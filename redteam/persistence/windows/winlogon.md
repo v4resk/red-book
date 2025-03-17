@@ -4,11 +4,19 @@ description: >-
   Technique T1547.001
 ---
 
-# Winlogon
+# Winlogon Persistence
 
 ## Theory
 
-Winlogon, the Windows component that loads your user profile right after authentication. It can be abuse for persistence. We may edit the `Shell,` `Userinit & Notify` keys under HKLM\Software\Microsoft\Windows NT\CurrentVersion\Winlogon\ to make Winlogon load and execute malicious DLLs and/or executables.
+Winlogon is a critical Windows component responsible for handling user logins, loading user profiles, and managing session behaviors post-authentication. Attackers can abuse **Winlogon registry keys** to establish persistence by configuring **malicious executables or DLLs** to execute during the login process.
+
+#### **Registry Keys & Their Behaviors:**
+
+The following keys can be modified for persistence:
+
+* **`Shell`** – Specifies the user shell (default: `explorer.exe`). Replacing this value with a malicious executable ensures it is launched instead of (or alongside) Explorer.
+* **`Userinit`** – Defines the path of `userinit.exe`, which is responsible for setting up the user environment after login. Adding a malicious binary here ensures execution before the user's desktop loads.
+* **`Notify`** – Points to a DLL that is loaded into Winlogon’s process for handling session-related events (e.g., lock, unlock, login, logout). A malicious DLL here will be loaded by `winlogon.exe`, often running with **SYSTEM privileges**.
 
 ## Practice
 
@@ -29,7 +37,7 @@ We may edit the `Userinit` key to make our payload executed during Windows logon
 * HKLM\Software\Microsoft\Windows NT\CurrentVersion\Winlogon\Userinit&#x20;
 
 ```bash
-reg add "HKLM\Software\Microsoft\Windows NT\CurrentVersion\Winlogon" /v Userinit /d "C:\Windows\System32\Userinit.exe, C:\Windows\shell.exe" /f
+reg add "HKLM\Software\Microsoft\Windows NT\CurrentVersion\Winlogon" /v Userinit /d "C:\Windows\System32\Userinit.exe, C:\Windows\evil.exe" /f
 ```
 {% endtab %}
 
@@ -40,7 +48,7 @@ We may edit the `Shell` key to make our payload executed during Windows logon
 * HKLM\Software\Microsoft\Windows NT\CurrentVersion\Winlogon\Shell
 
 ```bash
-reg add "HKLM\Software\Microsoft\Windows NT\CurrentVersion\Winlogon" /v Shell /d "explorer.exe, C:\Windows\shell.exe" /f
+reg add "HKLM\Software\Microsoft\Windows NT\CurrentVersion\Winlogon" /v Shell /d "explorer.exe, C:\Windows\evil.exe" /f
 ```
 {% endtab %}
 

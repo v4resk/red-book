@@ -1,8 +1,20 @@
-# Natural Language 6 DLLs
+# Natural Language 6 DLLs Persistence
 
 ## Theory
 
-Under any of the languages in the Natural Language Development Platform 6 library (NaturalLanguage6.dll) registry keys, we can set the value of either `StemmerDLLPathOverride` or `WBDLLPathOverride` to the location of our malicious DLL. The DLL will be loaded via LoadLibrary executed by SearchIndexer.exe.
+The **Natural Language Development Platform 6 (NaturalLanguage6.dll) Persistence** technique leverages registry keys associated with the **Natural Language Development Platform 6 library** to achieve code execution by loading a malicious DLL.
+
+By modifying the registry values **`StemmerDLLPathOverride`** or **`WBDLLPathOverride`** under the relevant keys, an attacker can specify the path to a custom DLL. When **`SearchIndexer.exe`**, a built-in Windows service responsible for indexing files, initializes, it calls **`LoadLibrary`** to load the DLL specified in these registry values.
+
+#### **Trigger Condition:**
+
+This persistence mechanism is triggered whenever **`SearchIndexer.exe`** starts or restarts, which typically occurs:
+
+* At system startup
+* When the Windows Search service (`WSearch`) is restarted
+* Periodically, depending on system activity and indexing behavior
+
+Since **`SearchIndexer.exe`** runs with SYSTEM privileges, this technique can provide high-privileged code execution, making it a stealthy and effective persistence method.
 
 ## Practice
 
@@ -26,3 +38,5 @@ reg add "HKLM\System\CurrentControlSet\Control\ContentIndex\Language\English_US"
 ## Resources
 
 {% embed url="https://www.hexacorn.com/blog/2018/12/30/beyond-good-ol-run-key-part-98/" %}
+
+{% embed url="https://persistence-info.github.io/Data/naturallanguage6.html" %}

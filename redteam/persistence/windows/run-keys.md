@@ -4,11 +4,20 @@ description: >-
   Folder - Technique T1547.001
 ---
 
-# Run Keys
+# Run Keys Persistence
 
 ## Theory&#x20;
 
-We may achieve persistence by referencing a program with a Registry run key. Adding an entry to the "run keys" in the Registry or startup folder will cause the program referenced to be executed when a user logs in. These programs will be executed under the context of the user and will have the account's associated permissions level.
+A classic and widely used persistence technique involves adding an entry to the **Registry "Run" keys**, causing a specified program to execute automatically when a user logs in. This ensures that the attacker’s payload is launched every time the system starts or a user session begins.
+
+#### **Trigger Condition:**
+
+The execution of the referenced program occurs when a user logs in to Windows. The specific privilege level of the executed process depends on the security context of the affected user account:
+
+* If added under **`HKCU\Software\Microsoft\Windows\CurrentVersion\Run`**, the program runs in the context of the current user.
+* If added under **`HKLM\Software\Microsoft\Windows\CurrentVersion\Run`**, the program executes for all users on the system, requiring Administrator privileges to modify.
+
+This technique is simple, effective, and often overlooked, making it a popular choice for persistence in both malware and post-exploitation scenarios.
 
 ## Practice
 

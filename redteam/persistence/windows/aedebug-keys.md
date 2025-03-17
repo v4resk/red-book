@@ -1,8 +1,8 @@
-# AEDebug Keys
+# AEDebug Keys Persistence
 
 ## Theory
 
-The executable in the Debugger property is run when a process crashes. Gained access depends on whose context the debugged process runs in; if the Auto property of the same registry key is set to 1, the debugger starts without user interaction.
+**AEDebug Keys** is a persistence and backdoor technique that leverages the Windows registry's `Debugger` property to execute a specified executable when a process crashes. The level of access gained depends on the security context of the debugged process. Additionally, if the `Auto` property of the same registry key is set to `1`, the debugger launches automatically without requiring user interaction, further enhancing persistence.
 
 {% hint style="info" %}
 &#x20;A value of `C:\Windows\system32\vsjitdebugger.exe` might be seen if you have Visual Studio Community installed.
