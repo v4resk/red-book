@@ -63,7 +63,7 @@ Instead, **focus on blocking the minimal components, necessary to interfere with
 
 6. When done, wait for the WDAC Policy to build. It will create an XML and PolicyBinary file.
 
-<figure><img src="../../../.gitbook/assets/image (2) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (2) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### 3. Apply the WDAC Policy
 
@@ -118,7 +118,7 @@ Additionally a purpose-built tool has been created to carry out this attack. [**
 inlineExecute-Assembly --dotnetassembly C:\Tools\Krueger.exe --assemblyargs --host ms01
 ```
 
-<figure><img src="../../../.gitbook/assets/image (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 {% endtab %}
 {% endtabs %}
 

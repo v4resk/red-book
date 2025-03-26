@@ -16,7 +16,7 @@ When AV is identifying a signature, whether manually or automated, we must emplo
 
 {% tabs %}
 {% tab title="ThreatCheck" %}
-[ThreatCheck](https://github.com/rasta-mouse/ThreatCheck) takes a binary as input and splits it until it pinpoints that exact byte that Microsoft Defender will flag on, and then prints those offending bytes to the screen.
+[ThreatCheck](https://github.com/rasta-mouse/ThreatCheck) (C#) takes a binary as input and splits it until it pinpoints that exact byte that Microsoft Defender will flag on, and then prints those offending bytes to the screen.
 
 ```powershell
 # Defender Scan
@@ -31,13 +31,37 @@ ThreatCheck.exe -f Downloads\launcher.ps1 -e AMSI -t Script
 {% endtab %}
 
 {% tab title="AMSITrigger" %}
-[AMSITrigger](https://github.com/RythmStick/AMSITrigger) will leverage the AMSI engine and scan functions against a provided PowerShell script and report any specific sections of code it believes need to be alerted on.
+[AMSITrigger](https://github.com/RythmStick/AMSITrigger) (C#) will leverage the AMSI engine and scan functions against a provided PowerShell script and report any specific sections of code it believes need to be alerted on.
 
 ```powershell
 .\amsitrigger.exe -i bypass.ps1 -f 3
 ```
 {% endtab %}
+
+{% tab title="ExpandDefenderSig.ps1" %}
+[ExpandDefenderSig](https://gist.github.com/mattifestation/3af5a472e11b7e135273e71cb5fed866) (Powershell) can decompresses Windows Defender Antivirus signatures, and allows to reverse engineering the Microsoft's Defender signature database.
+
+```powershell
+# Import ExpandDefenderSig
+Import-Module C:\Tools\ExpandDefenderSig.ps1
+
+# Decompresses mpasbase.vdm (GUID may change)
+ls "C:\ProgramData\Microsoft\Windows Defender\Definition Updates\{433D632E-1EC6-4581-B07F-B2CDADA89FBA}\mpasbase.vdm" | Expand-DefenderAVSignatureDB -OutputFileName mpavbase.raw
+```
+
+Using [Strings](https://learn.microsoft.com/en-us/sysinternals/downloads/strings) from Sysinternals, we can check if a string is in Microsoft's signature database:
+
+```powershell
+.\strings64.exe .\mpavbase.raw | Select-String -Pattern "taskkill /f /im msseces.exe"
+```
+
+Example:
+
+<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+{% endtab %}
 {% endtabs %}
+
+
 
 #### Obfuscation
 

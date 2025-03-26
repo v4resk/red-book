@@ -19,7 +19,7 @@ AppLocker consists of two core components:
   * The `AppIDSvc` service primarily functions as a policy manager, responsible for administrating the whitelist ruleset and performing tasks that are impractical to handle at the kernel level, such as comprehensive code signature verification.
   * The `AppIDSvc` interacts with the `APPID.SYS` driver via Remote Procedure Calls (RPC) to verify digital signatures and validate applications against AppLocker policies.
 
-<figure><img src="../../.gitbook/assets/image (2).png" alt=""><figcaption><p><a href="https://www.tiraniddo.dev/2019/11/the-internals-of-applocker-part-1.html">https://www.tiraniddo.dev/2019/11/the-internals-of-applocker-part-1.html</a></p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (1).png" alt=""><figcaption><p><a href="https://www.tiraniddo.dev/2019/11/the-internals-of-applocker-part-1.html">https://www.tiraniddo.dev/2019/11/the-internals-of-applocker-part-1.html</a></p></figcaption></figure>
 
 ## Practice
 
