@@ -498,7 +498,7 @@
     * [Internal Reconnaissance](cloud-cicd-pentesting/azure-ad/reconnaissance/internal-reconnaissance.md)
   * [Movement](cloud-cicd-pentesting/azure-ad/movement/README.md)
     * [Credentials](cloud-cicd-pentesting/azure-ad/movement/credentials/README.md)
-      * [Credential spraying](cloud-cicd-pentesting/azure-ad/movement/credentials/credential-spraying.md)
+      * [Password Spraying](cloud-cicd-pentesting/azure-ad/movement/credentials/password-spraying.md)
       * [Token Manipulation](cloud-cicd-pentesting/azure-ad/movement/credentials/token-manipulation/README.md)
         * [Pass-The-Cookie (PTC)](cloud-cicd-pentesting/azure-ad/movement/credentials/token-manipulation/pass-the-cookie-ptc.md)
         * [Pass the Certificate (Azure)](cloud-cicd-pentesting/azure-ad/movement/credentials/token-manipulation/pass-the-certificate-azure.md)
