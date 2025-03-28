@@ -60,3 +60,20 @@ systeminfo
 ```
 {% endtab %}
 {% endtabs %}
+
+#### .NET Versions
+
+{% tabs %}
+{% tab title="Ennumerate" %}
+Following powershell commands allows to enumerate installed .NET Framework versions. It can be usefull to target specific version when dealing with malware development.
+
+```powershell
+# Using registries and Get-ChildItem
+Get-ChildItem 'HKLM:\SOFTWARE\Microsoft\NET Framework Setup\NDP' -Recurse | Get-ItemProperty -Name Version -ErrorAction SilentlyContinue | Select-Object PSChildName, Version
+
+#Using dotnet.exe For .NET Core and .NET (formerly .NET Core 5+):
+dotnet --list-runtimes
+```
+{% endtab %}
+{% endtabs %}
+
