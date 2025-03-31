@@ -338,8 +338,7 @@
   * [🛠️ WEP](network/wifi/wep.md)
   * [🛠️ WPA2](network/wifi/wpa2.md)
   * [🛠️ WPS](network/wifi/wps.md)
-* [🛠️ RFID](network/rfid.md)
-* [🛠️ Bluetooth](network/bluetooth.md)
+* [Bluetooth](network/bluetooth.md)
 
 ## Active Directory Pentesting <a href="#a-d" id="a-d"></a>
 
