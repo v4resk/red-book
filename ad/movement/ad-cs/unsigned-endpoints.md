@@ -1,8 +1,8 @@
-# Web endpoints
+# Unsigned endpoints
 
 ## Theory
 
-In [their research papers](https://posts.specterops.io/certified-pre-owned-d95910965cd2), [Will Schroeder](https://twitter.com/harmj0y) and [Lee Christensen](https://twitter.com/tifkin\_) found a domain escalation vector based on web endpoints vulnerable to [NTLM relay attacks](broken-reference). The escalation vector was dubbed [ESC8](https://posts.specterops.io/certified-pre-owned-d95910965cd2#48bd).
+In [their research papers](https://posts.specterops.io/certified-pre-owned-d95910965cd2), [Will Schroeder](https://twitter.com/harmj0y) and [Lee Christensen](https://twitter.com/tifkin_) found a domain escalation vector based on web endpoints vulnerable to [NTLM relay attacks](https://www.thehacker.recipes/ad/movement/ntlm/relay). The escalation vector was dubbed [ESC8](https://posts.specterops.io/certified-pre-owned-d95910965cd2#48bd).
 
 > AD CS supports several HTTP-based enrollment methods via additional server roles that administrators can optionally install \[(The certificate enrollment web interface, Certificate Enrollment Service (CES), Network Device Enrollment Service (NDES)).]
 >
@@ -12,7 +12,11 @@ In [their research papers](https://posts.specterops.io/certified-pre-owned-d9591
 >
 > ([specterops.io](https://posts.specterops.io/certified-pre-owned-d95910965cd2#5c3c))
 
-This attack, like all [NTLM relay attacks](broken-reference), requires a victim account to authenticate to an attacker-controlled machine. An attacker can coerce authentication by many means, see [MITM and coerced authentication coercion techniques](../mitm-and-coerced-authentications/). Once the incoming authentication is received by the attacker, it can be relayed to an AD CS web endpoint.
+Following this, [Sylvain Heiniger](https://twitter.com/sploutchy) from Compass Security has found a similar vulnerability on the AD CS RPC enrollment endpoint. As described in [his article](https://blog.compass-security.com/2022/11/relaying-to-ad-certificate-services-over-rpc/), each RPC interface checks the NTLM signature independently.
+
+For certificate request purposes, the `MS-ICPR` (ICertPassage Remote Protocol) RPC interface is used. According to the [Microsoft documentation](https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-icpr/0c6f150e-3ead-4006-b37f-ebbf9e2cf2e7), packet privacy is enabled if the `IF_ENFORCEENCRYPTICERTREQUEST` flag is set (default configuration), meaning that NTLM relay attacks are not possible.
+
+These attacks, like all [NTLM relay attacks](https://www.thehacker.recipes/ad/movement/ntlm/relay), require a victim account to authenticate to an attacker-controlled machine. An attacker can coerce authentication by many means, see [MITM and coerced authentication coercion techniques](https://www.thehacker.recipes/ad/movement/mitm-and-coerced-authentications/). Once the incoming authentication is received by the attacker, it can be relayed to an AD CS web endpoint.
 
 Once the relayed session is obtained, the attacker poses as the relayed account and can request a client authentication certificate. The certificate template used needs to be configured for authentication (i.e. EKUs like Client Authentication, PKINIT Client Authentication, Smart Card Logon, Any Purpose (`OID 2.5.29.37.0`), or no EKU (`SubCA`)) and allowing low-priv users to enroll can be abused to authenticate as any other user/machine/admin.
 
@@ -24,44 +28,52 @@ This allows for lateral movement, account persistence, and in some cases privile
 
 ## Practice
 
+### Web endpoint (ESC8) <a href="#web-endpoint-esc8" id="web-endpoint-esc8"></a>
+
 {% tabs %}
 {% tab title="UNIX-like" %}
-**1 - Setting up the relay servers** :tools:
+**1. Relay servers setup 🧰**
 
 From UNIX-like systems, [Impacket](https://github.com/SecureAuthCorp/impacket)'s [ntlmrelayx](https://github.com/SecureAuthCorp/impacket/blob/master/examples/ntlmrelayx.py) (Python) can be used to conduct the ESC8 escalation scenario.
 
-```python
-ntlmrelayx -t "http://CA/certsrv/certfnsh.asp" --adcs --template "Template name"
+```bash
+ntlmrelayx -t http://$PKI.domain.local/certsrv/certfnsh.asp --adcs --template "Template name"
 ```
 
 {% hint style="info" %}
-The certificate template flag (i.e. `--template`) can either be left blank (default to **Machine** at the time of writing, October 20th 2012) or chosen among the certificate templates that fill the requirements.
+The certificate template flag (i.e. `--template`) can either be left blank (defaults to Machine or User whether relayed account name ends with `$`) or chosen among the certificate templates that fill the requirements.
+
+For instance, if the relayed principal is a domain controller, the `DomainController` template must be specified.
 {% endhint %}
 
-[Certipy](https://github.com/ly4k/Certipy) (Python) can be used to enumerate information regarding the certificate templates (EKUs allowing for authentication, allowing low-priv users to enroll, etc.).
+[Certipy](https://github.com/ly4k/Certipy) (Python) can be used to enumerate information regarding the certificate templates (EKUs allowing for authentication, allowing low-priv users to enroll, etc.) and identify enabled HTTP endpoint ([how to enumerate](https://www.thehacker.recipes/ad/movement/adcs/#attack-paths)).
 
-<pre class="language-python"><code class="lang-python"><strong># find ESC8-vulnerable CAs
-</strong><strong>certipy find -u "$USER@$DOMAIN" -p "$PASSWORD" -dc-ip "$DC_IP" -stdout | grep -B20 ESC8
-</strong>
-<strong># find and look through enabled templates for ones that could be used for authentication
-</strong>certipy find -u "$USER@$DOMAIN" -p "$PASSWORD" -dc-ip "$DC_IP" -stdout -enabled
-</code></pre>
+```bash
+# find ESC8-vulnerable CAs
+certipy find -u "$USER@$DOMAIN" -p "$PASSWORD" -dc-ip "$DC_IP" -stdout | grep -B20 ESC8
+# find and look through enabled templates for ones that could be used for authentication
+certipy find -u "$USER@$DOMAIN" -p "$PASSWORD" -dc-ip "$DC_IP" -stdout -enabled
+```
 
 {% hint style="info" %}
 By default, Certipy uses LDAPS, which is not always supported by the domain controllers. The `-scheme` flag can be used to set whether to use LDAP or LDAPS.
 {% endhint %}
 
-**2 - Authentication coercion** :chains:
+***
 
-Just like any other NTLM relay attack, once the relay servers are running and waiting for incoming NTLM authentications, authentication coercion techniques can be used (e.g. [PrinterBug](broken-reference), [PetitPotam](broken-reference), [PrivExchange](../mitm-and-coerced-authentications/pushsubscription-abuse.md)) to force accounts/machines to authenticate to the relay servers.
+**2. Authentication coercion ⛓️**
 
-{% content-ref url="../mitm-and-coerced-authentications/" %}
-[mitm-and-coerced-authentications](../mitm-and-coerced-authentications/)
-{% endcontent-ref %}
+Just like any other NTLM relay attack, once the relay servers are running and waiting for incoming NTLM authentications, authentication coercion techniques can be used (e.g. [PrinterBug](https://www.thehacker.recipes/ad/movement/mitm-and-coerced-authentications/ms-rprn), [PetitPotam](https://www.thehacker.recipes/ad/movement/mitm-and-coerced-authentications/ms-efsr), [PrivExchange](https://www.thehacker.recipes/ad/movement/exchange-services/privexchange)) to force accounts/machines to authenticate to the relay servers.
 
-**3 - Loot** :tada:
+{% hint style="info" %}
+Read the [mitm-and-coerced-authentications](../mitm-and-coerced-authentications/) article for more insight.
+{% endhint %}
 
-Once incoming NTLM authentications are relayed and authenticated sessions abused, base64-encoded PFX certificates will be obtained and usable with [Pass-the-Certificate](../kerberos/pass-the-certificate.md) to obtain a TGT and authenticate.
+***
+
+**3. Loot 🎉**
+
+Once incoming NTLM authentications are relayed and authenticated sessions abused, base64-encoded PFX certificates will be obtained and usable with [Pass-the-Certificate](https://www.thehacker.recipes/ad/movement/kerberos/pass-the-certificate) to obtain a TGT and authenticate.
 {% endtab %}
 
 {% tab title="Windows" %}
@@ -74,6 +86,59 @@ Certify.exe cas
 {% hint style="warning" %}
 If web endpoints are enabled, switch to UNIX because at the time of writing (October 20th, 2021), I don't know how to easily conduct the ESC8 abuse from Windows.
 {% endhint %}
+{% endtab %}
+{% endtabs %}
+
+### RPC endpoint (ESC11) <a href="#rpc-endpoint-esc11" id="rpc-endpoint-esc11"></a>
+
+{% tabs %}
+{% tab title="UNIX-like" %}
+**1. Relay servers setup 🧰**
+
+From UNIX-like systems, [Impacket](https://github.com/SecureAuthCorp/impacket)'s [ntlmrelayx](https://github.com/SecureAuthCorp/impacket/blob/master/examples/ntlmrelayx.py) (Python) can be used to conduct the ESC11 escalation scenario.
+
+```bash
+ntlmrelayx -t rpc://$PKI.domain.local -rpc-mode ICPR -icpr-ca-name $CA_NAME -smb2support --template "Template name"
+```
+
+{% hint style="info" %}
+The certificate template flag (i.e. `--template`) can either be left blank (defaults to Machine or User whether relayed account name ends with `$`) or chosen among the certificate templates that fill the requirements.
+
+For instance, if the relayed principal is a domain controller, the `DomainController` template must be specified.
+{% endhint %}
+
+[Certipy](https://github.com/ly4k/Certipy) (Python) can be used to enumerate information regarding the certificate templates (EKUs allowing for authentication, allowing low-priv users to enroll, etc.) and identify a vulnerable RPC endpoint ([how to enumerate](https://www.thehacker.recipes/ad/movement/adcs/#attack-paths)).
+
+```bash
+# find ESC11-vulnerable CAs
+certipy find -u "$USER@$DOMAIN" -p "$PASSWORD" -dc-ip "$DC_IP" -stdout | grep -B20 ESC11
+# find and look through enabled templates for ones that could be used for authentication
+certipy find -u "$USER@$DOMAIN" -p "$PASSWORD" -dc-ip "$DC_IP" -stdout -enabled
+```
+
+{% hint style="info" %}
+By default, Certipy uses LDAPS, which is not always supported by the domain controllers. The `-scheme` flag can be used to set whether to use LDAP or LDAPS.
+{% endhint %}
+
+***
+
+**2. Authentication coercion ⛓️**
+
+Just like any other NTLM relay attack, once the relay servers are running and waiting for incoming NTLM authentications, authentication coercion techniques can be used (e.g. [PrinterBug](https://www.thehacker.recipes/ad/movement/mitm-and-coerced-authentications/ms-rprn), [PetitPotam](https://www.thehacker.recipes/ad/movement/mitm-and-coerced-authentications/ms-efsr), [PrivExchange](https://www.thehacker.recipes/ad/movement/exchange-services/privexchange)) to force accounts/machines to authenticate to the relay servers.
+
+{% hint style="info" %}
+Read the [mitm-and-coerced-authentications](../mitm-and-coerced-authentications/) article for more insight.
+{% endhint %}
+
+***
+
+**3. Loot 🎉**
+
+Once incoming NTLM authentications are relayed and authenticated sessions abused, base64-encoded PFX certificates will be obtained and usable with [Pass-the-Certificate](https://www.thehacker.recipes/ad/movement/kerberos/pass-the-certificate) to obtain a TGT and authenticate.
+{% endtab %}
+
+{% tab title="Windows" %}
+_From Windows systems, at the time of writing (April 24th, 2024) no tool permits to identify and exploit the ESC11 vulnerability. Look at the UNIX-like tab to perform the exploitation._
 {% endtab %}
 {% endtabs %}
 
