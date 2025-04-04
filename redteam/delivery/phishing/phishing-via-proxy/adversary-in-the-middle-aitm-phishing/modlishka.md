@@ -13,3 +13,5 @@ description: MITRE ATT&CK™ Adversary-in-the-Middle - Technique T1557
 ## Resources
 
 {% embed url="https://github.com/drk1wi/Modlishka" %}
+
+{% embed url="https://www.ired.team/offensive-security/red-team-infrastructure/how-to-setup-modliska-reverse-http-proxy-for-phishing" %}

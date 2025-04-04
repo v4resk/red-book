@@ -1,4 +1,4 @@
-# VBA (Macro)
+# MS Office - VBA (Macros)
 
 ## Theory
 
@@ -40,7 +40,7 @@ Using the newer **.docx**  extension, we can't embed or save the macro in the do
 {% endtab %}
 
 {% tab title="ActiveX Macro" %}
-We may leverage ActiveX Objects which provide access to underlying operating system commands using the following VBA template. This can be achieved with WScript through the [Windows Script Host Shell](wsh.md) object.
+We may leverage ActiveX Objects which provide access to underlying operating system commands using the following VBA template. This can be achieved with WScript through the [Windows Script Host Shell](../../../weapon/code-execution/wsh.md) object.
 
 Fisrt, create a base64 powershell payload
 
@@ -91,7 +91,7 @@ End Sub
 {% tab title="Shellcode Runners" %}
 Examples of much more advanced Macros can be found on the [OSEP-Tools-v2](https://github.com/hackinaggie/OSEP-Tools-v2/tree/main/Macros) and [OffensiveVBA](https://github.com/S3cur3Th1sSh1t/OffensiveVBA) repositories.&#x20;
 
-For instance `WordMacroInject.vbs`  will check on wich architechure (i.e x64 or x86) it is running and will Inject a shellcode into explorer.exe (64-bit Word) or a random 32-bit process. It will also perform some [AMSI bypass](../../evasion/amsi/).&#x20;
+For instance `WordMacroInject.vbs`  will check on wich architechure (i.e x64 or x86) it is running and will Inject a shellcode into explorer.exe (64-bit Word) or a random 32-bit process. It will also perform some [AMSI bypass](../../../evasion/amsi/).&#x20;
 
 {% code title="WordMacroInject.vbs" %}
 ```vba
