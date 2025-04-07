@@ -59,7 +59,7 @@
     * [Phishing With Microsoft Office](redteam/delivery/phishing/phishing-with-ms-office/README.md)
       * [MS Office - VBA (Macros)](redteam/delivery/phishing/phishing-with-ms-office/vba.md)
       * [MS Office - RTF Files RCE](redteam/delivery/phishing/phishing-with-ms-office/ms-word-rtf-files-rce.md)
-      * [🛠️ MS Office - Custom XML parts](redteam/delivery/phishing/phishing-with-ms-office/ms-office-custom-xml-parts.md)
+      * [MS Office - Custom XML parts](redteam/delivery/phishing/phishing-with-ms-office/ms-office-custom-xml-parts.md)
       * [🛠️ MS Office - Excel 4.0 (XLM) Macros](redteam/delivery/phishing/phishing-with-ms-office/ms-office-excel-4.0-xlm-macros.md)
       * [🛠️ MS Office - VBA Stomping](redteam/delivery/phishing/phishing-with-ms-office/ms-office-vba-stomping.md)
       * [🛠️ MS Office - Remote Dotm Template Injection](redteam/delivery/phishing/phishing-with-ms-office/ms-office-remote-dotm-template-injection.md)
