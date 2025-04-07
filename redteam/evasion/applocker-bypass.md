@@ -39,6 +39,12 @@ Get-AppLockerPolicy -Effective -Xml
 Get-ChildItem -Path HKLM:\SOFTWARE\Policies\Microsoft\Windows\SrpV2 -Recurse
 Get-AppLockerPolicy -Effective | select -ExpandProperty RuleCollections
 ```
+
+To determine whether a specific file could be executed without actually running it, we can use the [`Test-AppLockerPolicy`](https://learn.microsoft.com/en-us/powershell/module/applocker/test-applockerpolicy?view=windowsserver2022-ps) PowerShell cmdlet as follows:
+
+```powershell
+Get-AppLockerPolicy -Effective | Test-AppLockerPolicy -Path C:\Path\To\Test\procexp.exe -User UserToTest
+```
 {% endtab %}
 {% endtabs %}
 
@@ -111,6 +117,24 @@ if(Test-Path -Path $file_path -PathType Container)
         cd $tools
         icacls.exe $file_path | out-file -FilePath C:/users/<USER>/Desktop/folder-permissions.txt -Append
     }
+}
+```
+
+Or this script will do the same thing, enumerating where standard users can both `write` and `execute`,  without relying on the accesschk.exe binary.
+
+```powershell
+Get-ChildItem $env:windir -Directory -Recurse -ErrorAction SilentlyContinue | ForEach-Object {
+    $dir = $_;
+    $ErrorActionPreference = "SilentlyContinue";
+    (Get-Acl $dir.FullName).Access | ForEach-Object {
+        if ($_.AccessControlType -eq "Allow") {
+            if ($_.IdentityReference.Value -eq "NT AUTHORITY\Authenticated Users" -or $_.IdentityReference.Value -eq "BUILTIN\Users") {
+                if (($_.FileSystemRights -like "*Write*" -or $_.FileSystemRights -like "*Create*") -and $_.FileSystemRights -like "*Execute*") {
+                    Write-Host ($dir.FullName + ": " + $_.IdentityReference.Value + " (" + $_.FileSystemRights + ")");
+                }
+            }
+        }
+    };
 }
 ```
 {% endtab %}
