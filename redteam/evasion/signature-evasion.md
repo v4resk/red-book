@@ -15,6 +15,22 @@ It then performs a set of comparisons between existing files within the operatin
 When AV is identifying a signature, whether manually or automated, we must employ an iterative process to determine what byte a signature starts at. By recursively splitting a compiled binary in half and testing it, we can get a rough estimate of a byte-range to investigate further.
 
 {% tabs %}
+{% tab title="GoCheck" %}
+[Gocheck](https://github.com/gatariee/gocheck) (Go) is a golang implementation of [DefenderCheck](https://github.com/matterpreter/DefenderCheck). It takes a binary as input and splits it until it pinpoints that exact byte that Microsoft Defender will flag on.
+
+```powershell
+# Scan using defender
+gocheck check --defender fileToScan.exe
+
+# Scan using AMSI
+gocheck check --amsi fileToScan.exe
+```
+
+An example output of GoCheck:
+
+<figure><img src="../../.gitbook/assets/image (28).png" alt=""><figcaption></figcaption></figure>
+{% endtab %}
+
 {% tab title="ThreatCheck" %}
 [ThreatCheck](https://github.com/rasta-mouse/ThreatCheck) (C#) takes a binary as input and splits it until it pinpoints that exact byte that Microsoft Defender will flag on, and then prints those offending bytes to the screen.
 
@@ -60,8 +76,6 @@ Example:
 <figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
 {% endtab %}
 {% endtabs %}
-
-
 
 #### Obfuscation
 
