@@ -55,7 +55,7 @@ dcomexec.py -shell-type powershell domain/user:password@IP <command>
 {% endtab %}
 
 {% tab title="Windows - Powershell" %}
-The Powershell script [**Invoke-DCOM.ps1**](https://github.com/EmpireProject/Empire/blob/master/data/module\_source/lateral\_movement/Invoke-DCOM.ps1) allows to easily invoke various DCOM methods to execute code on remote targets.
+The Powershell script [**Invoke-DCOM.ps1**](https://github.com/EmpireProject/Empire/blob/master/data/module_source/lateral_movement/Invoke-DCOM.ps1) allows to easily invoke various DCOM methods to execute code on remote targets.
 
 ```powershell
 #Execute code using MMC20.Application object
@@ -72,6 +72,14 @@ Invoke-DCOM -ComputerName '<IP>' -Method ServiceStart "MyService"
 ```
 {% endtab %}
 {% endtabs %}
+
+### IDispatch **WaaSRemediation**
+
+This technique allows loading and executing a .NET assembly in a remote computer's WaaS Medic Service svchost.exe process for DCOM lateral movement.
+
+{% content-ref url="../weapon/code-and-process-injection/remote-.net-assembly-loading-through-waasremediation-dcom-abuse.md" %}
+[remote-.net-assembly-loading-through-waasremediation-dcom-abuse.md](../weapon/code-and-process-injection/remote-.net-assembly-loading-through-waasremediation-dcom-abuse.md)
+{% endcontent-ref %}
 
 ### MMC20.Application
 
