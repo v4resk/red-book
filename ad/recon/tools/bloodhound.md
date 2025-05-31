@@ -49,6 +49,8 @@ Here are a few **tips and tricks** on the collection process
 {% endtab %}
 
 {% tab title="UNIX-like" %}
+### BloodHound.py
+
 From UNIX-like system, a non-official (but very effective nonetheless) Python version can be used.
 
 [BloodHound.py](https://github.com/fox-it/BloodHound.py) is a Python ingestor for BloodHound.
@@ -67,7 +69,17 @@ netexec ldap $TARGET -u $USERNAME -p $PASSWORD --bloodhound --dns-server $DC_IP 
 This ingestors is not as powerful as the C# one. It mostly misses GPO collection methods **but** a good news is that it can do pass-the-hash. It becomes really useful when compromising a domain account's NT hash.
 {% endhint %}
 
-If this is necessary for any reason, we can use LDAP dumps, also known as LDIF files, and covert them into JSON files ingestible by BloodHound using [ldif2bloodhound](https://github.com/SySS-Research/ldif2bloodhound).
+### Bloodhound.py for Trusted domains
+
+The official `bloodhound.py` package does not retrieve data across all trusted or child domains. However, you can use [@n3rada's fork](https://github.com/n3rada/BloodHound.py) to achieve this.
+
+```bash
+bloodhound-python --crawl --zip -c All -d $DOMAIN -u $USERNAME -p $PASSWORD -dc $DOMAIN_CONTROLLER
+```
+
+### Ldapsearch to Bloodhound
+
+If this is necessary for any reason, we can use [LDAP dumps](../../../network/protocols/ldap.md), also known as LDIF files, and covert them into JSON files ingestible by BloodHound using [ldif2bloodhound](https://github.com/SySS-Research/ldif2bloodhound).
 
 ```bash
 # Dump LDAP with ldapsearch
@@ -134,7 +146,7 @@ bhqc.py -u $neo4juser -p $neo4jpassword
 
 ## Resources
 
-![https://github.com/SadProcessor/HandsOnBloodHound/blob/master/BH21/BH4\_SharpHound\_Cheat.pdf](../../../.gitbook/assets/BH4\_SharpHound\_Cheat.png)
+![https://github.com/SadProcessor/HandsOnBloodHound/blob/master/BH21/BH4\_SharpHound\_Cheat.pdf](../../../.gitbook/assets/BH4_SharpHound_Cheat.png)
 
 {% embed url="https://blog.riccardoancarani.it/bloodhound-tips-and-tricks/" %}
 
