@@ -67,6 +67,7 @@ Take note of interesting agent interfaces that may be use for pivoting, and add 
 
 ```bash
 # Linux
+# With ligolo the interface name, replace if different
 $ sudo ip route add 10.10.10.0/24 dev ligolo
 
 # Windows
@@ -83,12 +84,18 @@ Finally, start the tunnel on the ligolo proxy server:
 
 ```bash
 [Agent : pwned@target] » start
+
+# OR
+
+[Agent : pwned@target] » tunnel_start --tun ligolo
 ```
 
 Done ! We can now access the `10.10.10.0/24` agent network from the proxy server.
 {% endtab %}
 
 {% tab title="Setup" %}
+### All Versions
+
 [Ligolo-ng](https://github.com/nicocha30/ligolo-ng) fisrt need to be configured. We need to create a tun interface on the Proxy Server (Attacking Host, or Jumb Box):
 
 ```bash
@@ -100,8 +107,18 @@ sudo ip link set ligolo up
 # You need to download the Wintun driver and place the "wintun.dll" in the same folder as Ligolo (make sure you use the right architecture).
 # https://www.wintun.net/
 ```
+
+### Versions ≥ 0.46
+
+Alternatively, on **Ligolo-ng >= v0.6**, you can now use the `interface_create` command to create a new interface! No need to use ip tuntap!
+
+```sh
+ligolo-ng » interface_create --name "ligolo"
+```
 {% endtab %}
 {% endtabs %}
+
+
 
 {% hint style="info" %}
 To perform **double pivoting** with ligolo-ng, we can add a listener on any agent. For example, if Agent2 only has access to Agent1 and we want to proxy its traffic.
