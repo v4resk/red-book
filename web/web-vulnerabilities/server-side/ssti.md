@@ -64,6 +64,7 @@ By manually testing different language-specific payloads and study how they are 
 | `{{ '7'*7 }}`       | Angular, Django, Flask, Go, Jinja2, Tornado, Twig, ??? |
 | `{{:2*3}}`          | JsRender                                               |
 | `{% debug %}`       | Django                                                 |
+| `@(7*7)'`           | Razor (.NET)                                           |
 {% endtab %}
 
 {% tab title="Errors" %}
@@ -97,6 +98,7 @@ Once you have identified the engine, refers to the corresponding page to exploit
 * [Pug](https://exploit-notes.hdks.org/exploit/web/template-engine/pug-pentesting/)
 * [Spring](https://exploit-notes.hdks.org/exploit/web/framework/java/spring-pentesting/)
 * [Tornado](https://exploit-notes.hdks.org/exploit/web/framework/python/tornado-pentesting/)
+* [Razor](https://knowledge-base.secureflag.com/vulnerabilities/server_side_template_injection/server_side_template_injection__net.html)
 
 ## Resources&#x20;
 
