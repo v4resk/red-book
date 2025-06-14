@@ -439,7 +439,7 @@
     * [Grant rights](ad/movement/dacl/grant-rights.md)
     * [Logon script](ad/movement/dacl/logon-script.md)
     * [Rights on RODC object](ad/movement/dacl/rights-on-rodc-object.md)
-    * [🛠️ BadSuccessor (dMSA abuse)](a-d/movement/dacl/badsuccessor-dmsa-abuse.md)
+    * [BadSuccessor (dMSA abuse)](a-d/movement/dacl/badsuccessor-dmsa-abuse.md)
   * [Group policies](ad/movement/group-policies.md)
   * [Trusts](ad/movement/domain-trusts.md)
   * [Certificate Services (AD-CS)](ad/movement/ad-cs/README.md)
