@@ -1,3 +1,7 @@
+---
+description: 'MITRE ATT&CK™ Unsecured Credentials: Credentials In Files - Technique T1552.00'
+---
+
 # VNC Config
 
 ## Theory

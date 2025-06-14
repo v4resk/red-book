@@ -88,7 +88,7 @@ find / -type f -name *pass* 2>/dev/null
 
 {% tabs %}
 {% tab title="Windows" %}
-[Find](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/find) command can be use to find passwords in files by recursively searching text patterns
+[Findstr](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/find) command can be use to find passwords in files by recursively searching text patterns
 
 ```powershell
 # /s: recursive search
