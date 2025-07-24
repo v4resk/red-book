@@ -424,6 +424,7 @@
     * [Shadow Credentials](ad/movement/kerberos/shadow-credentials.md)
     * [UnPAC the hash](ad/movement/kerberos/unpac-the-hash.md)
     * [Pass the Certificate - PKINIT](ad/movement/kerberos/pass-the-certificate.md)
+    * [Kerberos relay](a-d/movement/kerberos/kerberos-relay.md)
     * [sAMAccountName spoofing](ad/movement/kerberos/samaccountname-spoofing.md)
     * [SPN-jacking](ad/movement/kerberos/spn-jacking.md)
   * [Netlogon](ad/movement/netlogon/README.md)
