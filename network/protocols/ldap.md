@@ -26,7 +26,7 @@ A lot of information on an AD domain can be obtained through LDAP. Most of the i
 
 {% tabs %}
 {% tab title="ldapsearch" %}
-The [ldapsearch](https://linux.die.net/man/1/ldapsearch) command is a shell-accessible interface to the [ldap\_search\_ext(3)](https://linux.die.net/man/3/ldap\_search\_ext) library call. It can be used to enumerate essential informations.
+The [ldapsearch](https://linux.die.net/man/1/ldapsearch) command is a shell-accessible interface to the [ldap\_search\_ext(3)](https://linux.die.net/man/3/ldap_search_ext) library call. It can be used to enumerate essential informations.
 
 **Anonymous Enumeration:**
 
@@ -85,6 +85,25 @@ LDAPTLS_REQCERT=never ldapsearch -x -H ldaps://<IP> [....]
 
 {% hint style="info" %}
 We may use ldapsearch output (also known as LDIF files) and covert it into JSON files ingestible by BloodHound using [ldif2bloodhound](https://github.com/SySS-Research/ldif2bloodhound). See [this page](../../ad/recon/tools/bloodhound.md#unix-like) for more informations.
+{% endhint %}
+{% endtab %}
+
+{% tab title="ldeep" %}
+[ldeep](https://github.com/franc-pentest/ldeep) (Python) can be used to enumerate LDAP informations
+
+```bash
+# Dump All 
+ldeep ldap -u $USER -p $PASSWORD -d $DOMAIN -s ldap://$DC_IP all output_folder/my_prefix
+
+# Enumerate users from previous cache
+ldeep cache -d output_folder -p my_prefix users
+
+# Enumerate users
+ldeep ldap -u $USER -p $PASSWORD -d $DOMAIN -s ldap://$DC_IP users
+```
+
+{% hint style="warning" %}
+For Kerberos, you will need to configure the `/etc/krb5.conf`
 {% endhint %}
 {% endtab %}
 
@@ -152,35 +171,6 @@ The PowerShell equivalent to NetExec's `subnets` modules is the following
 
 ```powershell
 [System.DirectoryServices.ActiveDirectory.Forest]::GetCurrentForest().Sites.Subnets
-```
-{% endtab %}
-
-{% tab title="ldapsearch-ad" %}
-The [ldapsearch-ad](https://github.com/yaap7/ldapsearch-ad) Python script can also be used to enumerate essential information like domain admins that have their password set to never expire, default password policies and the ones found in GPOs, trusts, kerberoastable accounts, and so on.
-
-```bash
-ldapsearch-ad --type all --server $DOMAIN_CONTROLLER --domain $DOMAIN --username $USER --password $PASSWORD
-```
-
-The FFL (Forest Functional Level), DFL (Domain Functional Level), DCFL (Domain Controller Functionality Level) and naming contexts can be listed with the following command.
-
-```bash
-ldapsearch-ad --type info --server $DOMAIN_CONTROLLER --domain $DOMAIN --username $USER --password $PASSWORD
-```
-{% endtab %}
-
-{% tab title="windapsearch" %}
-The windapsearch script ([Go](https://github.com/ropnop/go-windapsearch) (preferred) or [Python](https://github.com/ropnop/windapsearch)) can be used to enumerate basic but useful information.
-
-```bash
-# enumerate users (authenticated bind)
-windapsearch -d $DOMAIN -u $USER -p $PASSWORD --dc $DomainController --module users
-
-# enumerate users (anonymous bind)
-windapsearch --dc $DomainController --module users
-
-# obtain metadata (anonymous bind)
-windapsearch --dc $DomainController --module metadata
 ```
 {% endtab %}
 
