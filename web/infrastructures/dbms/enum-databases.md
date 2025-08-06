@@ -233,6 +233,15 @@ SELECT user();
 {% endtab %}
 
 {% tab title="MSSQL" %}
+In MSSQL, [**logins** ](https://learn.microsoft.com/en-us/sql/relational-databases/security/authentication-access/create-a-login?view=sql-server-ver16)and [**users** ](https://learn.microsoft.com/en-us/sql/relational-databases/security/authentication-access/create-a-database-user?view=sql-server-ver16)are both types of [_security principals_](https://learn.microsoft.com/en-us/sql/relational-databases/security/authentication-access/principals-database-engine?view=sql-server-ver16), but they operate at different scopes. &#x20;
+
+* A **login** is defined at the **server level** and is used to authenticate access to the SQL Server instance
+* An **user** is defined at the **database level** and controls access to specific database resources.&#x20;
+
+A single login can be associated with **one user per database**, allowing it to access multiple databases under distinct user contexts.
+
+#### Enumerate Users
+
 ```sql
 #Get all users
 select sp.name as login, sp.type_desc as login_type, sl.password_hash, sp.create_date, sp.modify_date, case when sp.is_disabled = 1 then 'Disabled' else 'Enabled' end as status from sys.server_principals sp left join sys.sql_logins sl on sp.principal_id = sl.principal_id where sp.type not in ('G', 'R') order by sp.name;
@@ -242,6 +251,16 @@ select user_name();
 
 #Or in mssqlclient's impacket shell
 enum_users
+```
+
+#### Enumerate Logins
+
+```sql
+# Get all logins
+SELECT r.name, r.type_desc, r.is_disabled, sl.sysadmin, sl.securityadmin, sl.serveradmin, sl.setupadmin, sl.processadmin, sl.diskadmin, sl.dbcreator, sl.bulkadmin FROM master.sys.server_principals r LEFT JOIN master.sys.syslogins sl ON sl.sid = r.sid WHERE r.type IN ('S','E','X','U','G');
+
+#Or in mssqlclient's impacket shell
+enum_logins
 ```
 {% endtab %}
 
@@ -283,6 +302,10 @@ SELECT current_user;
 ```
 {% endtab %}
 {% endtabs %}
+
+
+
+
 
 ### Permissions & Privileges
 
