@@ -4,7 +4,7 @@ description: The Art of Offensive CyberSecurity
 
 # The Red-Book
 
-<figure><img src=".gitbook/assets/v4resk_a_design_logo_in_dark_and_red_with_a_bushido_a509518b-b4fe-4d65-9c54-06ec53c9dbcd(1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src=".gitbook/assets/logo-blanc-rouge.png" alt=""><figcaption></figcaption></figure>
 
 **The Red-Book** by **infiltr8** is offering a collection of **technical notes** and **cheat sheets**. Our goal is to provide you with practical knowledge rooted in real-world experience. All the information you find within these pages has been meticulously sourced from a diverse range of valuable resources on the internet.
 
@@ -17,7 +17,7 @@ As you embark on this journey with us, keep in mind that offensive cybersecurity
 :tada:Please feel free to contribute, give feedback/suggestions or reach out to me on Discord (**v4resk#0430**).
 
 {% hint style="danger" %}
-Around 90%, of the content relating to "Active Directory" comes from [The Hacker Recipes](https://www.thehacker.recipes/) website. Many thanks to [Charlie Bromberg](https://twitter.com/\_nwodtuhs) for his valuable work.
+Around 90%, of the content relating to "Active Directory" comes from [The Hacker Recipes](https://www.thehacker.recipes/) website. Many thanks to [Charlie Bromberg](https://twitter.com/_nwodtuhs) for his valuable work.
 {% endhint %}
 
 {% hint style="info" %}
