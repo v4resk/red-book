@@ -16,7 +16,7 @@ One of the most creative and effective ways that Blue Teamers have come up with 
 
 ### Checking System Information
 
-### Querying Network Information 
+### Querying Network Information<br>
 
 ## Resources
 
