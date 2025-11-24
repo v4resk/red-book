@@ -490,6 +490,7 @@
 * [On-Chain Analysis](smart-contracts-pentesting/on-chain-analysis.md)
 * [Smart Contract Vulnerabilities](smart-contracts-pentesting/vulnerabilities/README.md)
   * [EVM Attack Surfaces](smart-contracts-pentesting/vulnerabilities/evm-attack-surfaces/README.md)
+    * [Sensitive Data Exposure](smart-contracts-pentesting/vulnerabilities/evm-attack-surfaces/sensitive-data-exposure.md)
     * [Integer overflow/underflow](smart-contracts-pentesting/vulnerabilities/evm-attack-surfaces/integer-overflow-underflow.md)
     * [Insecure DelegateCall](smart-contracts-pentesting/vulnerabilities/evm-attack-surfaces/insecure-delegatecall.md)
   * [Contract Lifecycle & Upgradeability](smart-contracts-pentesting/vulnerabilities/contract-lifecycle-and-upgradeability/README.md)
