@@ -485,6 +485,24 @@
   * [🛠️ DC Shadow](ad/persistence/dcshadow.md)
   * [🛠️ Access controls](ad/persistence/access-controls.md)
 
+## 🛠️ Smart Contracts Pentesting
+
+* [On-Chain Analysis](smart-contracts-pentesting/on-chain-analysis.md)
+* [Smart Contract Vulnerabilities](smart-contracts-pentesting/vulnerabilities/README.md)
+  * [EVM Attack Surfaces](smart-contracts-pentesting/vulnerabilities/evm-attack-surfaces/README.md)
+    * [Access Control](smart-contracts-pentesting/vulnerabilities/evm-attack-surfaces/access-control.md)
+    * [Arithmetic & Logic](smart-contracts-pentesting/vulnerabilities/evm-attack-surfaces/arithmetic-and-logic/README.md)
+      * [Integer overflow/underflow](smart-contracts-pentesting/vulnerabilities/evm-attack-surfaces/arithmetic-and-logic/integer-overflow-underflow.md)
+    * [Storage & Memory](smart-contracts-pentesting/vulnerabilities/evm-attack-surfaces/storage-and-memory.md)
+    * [External Call](smart-contracts-pentesting/vulnerabilities/evm-attack-surfaces/external-call.md)
+    * [Reentrancy](smart-contracts-pentesting/vulnerabilities/evm-attack-surfaces/reentrancy.md)
+  * [Contract Lifecycle & Upgradeability](smart-contracts-pentesting/vulnerabilities/contract-lifecycle-and-upgradeability/README.md)
+    * [Incorrect Constructor Name](smart-contracts-pentesting/vulnerabilities/contract-lifecycle-and-upgradeability/incorrect-constructor-name.md)
+  * [Protocol Layer Attack Surfaces](smart-contracts-pentesting/vulnerabilities/protocol-layer-attack-surfaces/README.md)
+    * [AMMs (Automated Market Makers)](smart-contracts-pentesting/vulnerabilities/protocol-layer-attack-surfaces/amms-automated-market-makers.md)
+    * [Oracles](smart-contracts-pentesting/vulnerabilities/protocol-layer-attack-surfaces/oracles.md)
+    * [Lending Protocols](smart-contracts-pentesting/vulnerabilities/protocol-layer-attack-surfaces/lending-protocols.md)
+
 ## 🛠️ Cloud & CI/CD Pentesting <a href="#cloud-cicd-pentesting" id="cloud-cicd-pentesting"></a>
 
 * [CI/CD](cloud-cicd-pentesting/ci-cd/README.md)
@@ -529,21 +547,3 @@
   * [Persistence](cloud-cicd-pentesting/azure-ad/persistence.md)
 * [GCP Pentesting](cloud-cicd-pentesting/gcp-pentesting.md)
 * [AWS Pentesting](cloud-cicd-pentesting/aws.md)
-
-## 🛠️ Smart Contracts Pentesting
-
-* [On-Chain Analysis](smart-contracts-pentesting/on-chain-analysis.md)
-* [Smart Contract Vulnerabilities](smart-contracts-pentesting/vulnerabilities/README.md)
-  * [EVM Attack Surfaces](smart-contracts-pentesting/vulnerabilities/evm-attack-surfaces/README.md)
-    * [Access Control](smart-contracts-pentesting/vulnerabilities/evm-attack-surfaces/access-control.md)
-    * [Arithmetic & Logic](smart-contracts-pentesting/vulnerabilities/evm-attack-surfaces/arithmetic-and-logic.md)
-    * [Storage & Memory](smart-contracts-pentesting/vulnerabilities/evm-attack-surfaces/storage-and-memory.md)
-    * [External Call](smart-contracts-pentesting/vulnerabilities/evm-attack-surfaces/external-call.md)
-    * [Reentrancy](smart-contracts-pentesting/vulnerabilities/evm-attack-surfaces/reentrancy.md)
-    * [Page](smart-contracts-pentesting/vulnerabilities/evm-attack-surfaces/page.md)
-  * [Contract Lifecycle & Upgradeability](smart-contracts-pentesting/vulnerabilities/contract-lifecycle-and-upgradeability/README.md)
-    * [Incorrect Constructor Name](smart-contracts-pentesting/vulnerabilities/contract-lifecycle-and-upgradeability/incorrect-constructor-name.md)
-  * [Protocol Layer Attack Surfaces](smart-contracts-pentesting/vulnerabilities/protocol-layer-attack-surfaces/README.md)
-    * [AMMs (Automated Market Makers)](smart-contracts-pentesting/vulnerabilities/protocol-layer-attack-surfaces/amms-automated-market-makers.md)
-    * [Oracles](smart-contracts-pentesting/vulnerabilities/protocol-layer-attack-surfaces/oracles.md)
-    * [Lending Protocols](smart-contracts-pentesting/vulnerabilities/protocol-layer-attack-surfaces/lending-protocols.md)
