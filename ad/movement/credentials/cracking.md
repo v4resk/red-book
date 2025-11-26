@@ -6,13 +6,13 @@ description: MITRE ATT&CK™ Sub-technique T1110.002
 
 ## Theory
 
-Attacking Active Directory domains often leads to obtaining password interesting, but either hashed or encrypted data. When this information cannot be directly leveraged for higher privileges (like with [pass-the-hash](broken-reference), [overpass-the-hash](../kerberos/ptk.md)), it is required to crack it.
+Attacking Active Directory domains often leads to obtaining password interesting, but either hashed or encrypted data. When this information cannot be directly leveraged for higher privileges (like with [pass-the-hash](/broken/pages/6MHzmbXpK7Ge11Xc9oZf), [overpass-the-hash](../kerberos/ptk.md)), it is required to crack it.
 
 Cracking is an operation that can be carried out through different types of attacks:
 
 * **Brute-force**: every possibility for a given character set and a given length (i.e. `aaa`, `aab`, `aac`, ...) is hashed and compared against the target hash.
 * **Dictionary**: every word of a given list (a.k.a. dictionary) is hashed and compared against the target hash.
-* **Rainbow tables**: the hash is looked for in a pre-computed table. It is a [time-memory trade-off](https://en.wikipedia.org/wiki/Space%E2%80%93time\_tradeoff) that allows cracking hashes faster, but costing a greater amount of memory than traditional brute-force of dictionary attacks. This attack cannot work if the hashed value is salted (i.e. hashed with an additional random value as prefix/suffix, making the pre-computed table irrelevant)
+* **Rainbow tables**: the hash is looked for in a pre-computed table. It is a [time-memory trade-off](https://en.wikipedia.org/wiki/Space%E2%80%93time_tradeoff) that allows cracking hashes faster, but costing a greater amount of memory than traditional brute-force of dictionary attacks. This attack cannot work if the hashed value is salted (i.e. hashed with an additional random value as prefix/suffix, making the pre-computed table irrelevant)
 
 There are many other and more complex types of attacks (incremental, mask, rules, hybrid types, ...) but the major/core ones are the three above.
 
@@ -27,19 +27,19 @@ One of the greatest tools that can be used for cracking is [hashcat](https://has
 
 Below is a short list of the most useful hash types for Active Directory hunting.
 
-| Hash type                                              | `-m/--hash-type` number                                                              |
-| ------------------------------------------------------ | ------------------------------------------------------------------------------------ |
-| LM hash                                                | 3000                                                                                 |
-| NT hash                                                | 1000                                                                                 |
-| [LM response](../ntlm/capture.md)                      | [not supported](https://github.com/hashcat/hashcat/issues/78#issuecomment-276048841) |
-| [LMv2 response](../ntlm/capture.md)                    | [not supported](https://github.com/hashcat/hashcat/issues/78#issuecomment-276048841) |
-| [NTLM response](../ntlm/capture.md)                    | 5500                                                                                 |
-| [NTLMv2 response](../ntlm/capture.md)                  | 5600                                                                                 |
-| [(DCC1) Domain Cached Credentials](broken-reference)   | 1100                                                                                 |
-| [(DCC2) Domain Cached Credentials 2](broken-reference) | 2100                                                                                 |
-| [ASREQroast](../kerberos/asreqroast.md)                | 7500                                                                                 |
-| [ASREProast](broken-reference)                         | 18200                                                                                |
-| [Kerberoast](broken-reference)                         | 13100                                                                                |
+| Hash type                                                                | `-m/--hash-type` number                                                              |
+| ------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ |
+| LM hash                                                                  | 3000                                                                                 |
+| NT hash                                                                  | 1000                                                                                 |
+| [LM response](../ntlm/capture.md)                                        | [not supported](https://github.com/hashcat/hashcat/issues/78#issuecomment-276048841) |
+| [LMv2 response](../ntlm/capture.md)                                      | [not supported](https://github.com/hashcat/hashcat/issues/78#issuecomment-276048841) |
+| [NTLM response](../ntlm/capture.md)                                      | 5500                                                                                 |
+| [NTLMv2 response](../ntlm/capture.md)                                    | 5600                                                                                 |
+| [(DCC1) Domain Cached Credentials](/broken/pages/3llRWtbOW9nOdqiXY6Xm)   | 1100                                                                                 |
+| [(DCC2) Domain Cached Credentials 2](/broken/pages/3llRWtbOW9nOdqiXY6Xm) | 2100                                                                                 |
+| [ASREQroast](../kerberos/asreqroast.md)                                  | 7500                                                                                 |
+| [ASREProast](/broken/pages/aMCfYwIroVqgnglotzZr)                         | 18200                                                                                |
+| [Kerberoast](/broken/pages/RWjMvoWZjJMlHX6oZQpX)                         | 13100                                                                                |
 
 ### Dictionnary attack
 
@@ -125,7 +125,7 @@ A robust alternative to hashcat is [John the Ripper](https://github.com/openwall
 * Google offers services like [Colab](https://colab.research.google.com/) and [Cloud Shell](https://console.cloud.google.com/home/dashboard?cloudshell=true) that can be used for "cloud cracking". There are projects like [penglab](https://github.com/mxrch/penglab), [google-colab-hashcat](https://github.com/ShutdownRepo/google-colab-hashcat) and [cloudtopolis](https://github.com/JoelGMSec/Cloudtopolis) that can help testers to setup a cracking session on such resources
 * Other solutions, cloud-based or not, can be used to improve cracking speed: [setting up a rig](https://www.netmux.com/blog/how-to-build-a-password-cracking-rig) for instance.
 * LM and NTLM ChallengeResponses can be cracked really fast (and for free depending on the hash) on [crack.sh](https://crack.sh/get-cracking/), a remote service that cracks the hash with rainbow tables ([here's how to capture those hashes](../ntlm/capture.md#practice)).
-* Testers that manage to pwn a domain admin or a distributed local admin should try to operate multiple [LSASS dumps](broken-reference) to create a custom wordlist for a dictionary attack
+* Testers that manage to pwn a domain admin or a distributed local admin should try to operate multiple [LSASS dumps](/broken/pages/wAjDzPwV8LLtm6RWJbLf) to create a custom wordlist for a dictionary attack
 * Cracking LM and NT hash can be optimized by following [these advice](https://blog.didierstevens.com/2016/07/25/practice-ntds-dit-file-overview/).
 {% endhint %}
 

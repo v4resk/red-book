@@ -19,7 +19,7 @@ The two major use cases of ARP spoofing are the following.
 
 There are multiple scenarios where ARP spoofing can be used to operate lateral movement within Active Directory domains (not an comprehensive list).
 
-1. [NTLM capture](../ntlm/capture.md) and [NTLM relay](broken-reference) : spoof an SMB server and reroute received SMB packets to internal capture or relay servers **(rerouting technique)**.
+1. [NTLM capture](../ntlm/capture.md) and [NTLM relay](/broken/pages/PFGlaZOk9WQQxTsZmSJ0) : spoof an SMB server and reroute received SMB packets to internal capture or relay servers **(rerouting technique)**.
 2. [DNS spoofing](dns-spoofing.md) : spoof an internal DNS server, so that DNS queries can be answered with fake resolutions **(rerouting technique)**.
 3. [WSUS spoofing](wsus-spoofing.md) : spoof the WSUS server and deliver evil configurations to Windows clients. This can either be done by intercepting all update request and running a fully functional WSUS server **(rerouting technique)** or by intercepting, forwarding and tampering packets between clients and the legitimate WSUS server **(proxy technique)**.
 4. [Dumping network secrets](../../../redteam/credentials/unsecured-credentials/network-protocols.md) : reroute any traffic and dump secrets that were insecurely sent (i.e. FTP, HTTP, SMTP, ...). In this scenario, both outgoing and incoming traffic should be captured. This implies the poisoning of both the client's and the server's ARP tables **(proxy technique)**.
@@ -90,7 +90,7 @@ Below are examples or targetted ARP poisoning attacks where the attacker wants t
 
 {% tabs %}
 {% tab title="SMB spoofing" %}
-Start the SMB server for [capture](../ntlm/capture.md) or [relay](broken-reference) then start the poisoning attack.
+Start the SMB server for [capture](../ntlm/capture.md) or [relay](/broken/pages/PFGlaZOk9WQQxTsZmSJ0) then start the poisoning attack.
 
 {% code title="smb_spoofing.cap" %}
 ```bash

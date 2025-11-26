@@ -30,7 +30,7 @@ On a side note, a technique called [AnySPN or "service class modification"](../p
 
 ![Domain Controller > Active Directory Users and Computers > delegation properties of a user](<../../../../.gitbook/assets/kcd with protocol transition.png>)
 
-If a service is configured with constrained delegation **with protocol transition**, then it can obtain a service ticket on behalf of a user by combining S4U2self and S4U2proxy requests, as long as the user is not sensitive for delegation, or a member of the "Protected Users" group. The service ticket can then be used with [pass-the-ticket](broken-reference). This process is similar to [resource-based contrained delegation](rbcd.md) exploitation.
+If a service is configured with constrained delegation **with protocol transition**, then it can obtain a service ticket on behalf of a user by combining S4U2self and S4U2proxy requests, as long as the user is not sensitive for delegation, or a member of the "Protected Users" group. The service ticket can then be used with [pass-the-ticket](/broken/pages/WzYZzG0ZhkKkcln8Wb4o). This process is similar to [resource-based contrained delegation](rbcd.md) exploitation.
 
 {% content-ref url="rbcd.md" %}
 [rbcd.md](rbcd.md)

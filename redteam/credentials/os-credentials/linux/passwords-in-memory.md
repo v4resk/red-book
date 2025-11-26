@@ -6,7 +6,7 @@ description: 'MITRE ATT&CK™ OS Credential Dumping: Proc Filesystem - Technique
 
 ## Theory
 
-Just like the LSASS process on Windows systems allowing for [LSASS dumping](broken-reference), some programs sometimes handle credentials in the memory allocated to their processes, sometimes allowing attackers to dump them.
+Just like the LSASS process on Windows systems allowing for [LSASS dumping](/broken/pages/wAjDzPwV8LLtm6RWJbLf), some programs sometimes handle credentials in the memory allocated to their processes, sometimes allowing attackers to dump them.
 
 ## Practice
 

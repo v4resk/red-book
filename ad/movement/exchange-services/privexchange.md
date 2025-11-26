@@ -6,9 +6,9 @@ description: CVE-2018-8581
 
 ## Theory
 
-PrivExchange relay on the [PushSubscription coerced authentication](../mitm-and-coerced-authentications/pushsubscription-abuse.md), PushSubscription is an API on Exchange Web Services that allows to subscribe to push notifications. Attackers abuse it to make Exchange servers authenticate to a target of their choosing. **The coerced authentication is made over HTTP**, which is particularly powerful when doing [NTLM relay](broken-reference) ([because of the Session Signing and MIC mitigations](broken-reference)).&#x20;
+PrivExchange relay on the [PushSubscription coerced authentication](../mitm-and-coerced-authentications/pushsubscription-abuse.md), PushSubscription is an API on Exchange Web Services that allows to subscribe to push notifications. Attackers abuse it to make Exchange servers authenticate to a target of their choosing. **The coerced authentication is made over HTTP**, which is particularly powerful when doing [NTLM relay](/broken/pages/PFGlaZOk9WQQxTsZmSJ0) ([because of the Session Signing and MIC mitigations](/broken/pages/PFGlaZOk9WQQxTsZmSJ0#mic-message-integrity-code)).&#x20;
 
-As Exchange servers usually have high privileges in a domain (i.e. `WriteDacl`, see [Abusing ACLs](broken-reference)), the forced authentication can then be relayed and abused to obtain domain admin privileges (see [NTLM Relay](broken-reference) and [Kerberos Unconstrained Delegations](../kerberos/delegations/#unconstrained-delegations-kud)).
+As Exchange servers usually have high privileges in a domain (i.e. `WriteDacl`, see [Abusing ACLs](/broken/pages/4BIFRCf5fXqahfOIAeGb)), the forced authentication can then be relayed and abused to obtain domain admin privileges (see [NTLM Relay](/broken/pages/PFGlaZOk9WQQxTsZmSJ0) and [Kerberos Unconstrained Delegations](../kerberos/delegations/#unconstrained-delegations-kud)).
 
 <figure><img src="../../../.gitbook/assets/image (4).png" alt=""><figcaption></figcaption></figure>
 
@@ -44,7 +44,7 @@ secretsdump.py $DOMAIN/$USER_TO_ESCALATE@$DC -just-dc
 {% endtab %}
 
 {% tab title="Exploit - without creds" %}
-If you don't have any credentials, it is still possible to [relay the authentication](broken-reference) to make the API call. The [httpattack.py](https://github.com/dirkjanm/PrivExchange/blob/master/httpattack.py) script can be used with ntlmrelayx.py to perform this attack. It uses NTLM Relaying with LLMNR / NBT-NS to relay captured credentials over the network.
+If you don't have any credentials, it is still possible to [relay the authentication](/broken/pages/PFGlaZOk9WQQxTsZmSJ0) to make the API call. The [httpattack.py](https://github.com/dirkjanm/PrivExchange/blob/master/httpattack.py) script can be used with ntlmrelayx.py to perform this attack. It uses NTLM Relaying with LLMNR / NBT-NS to relay captured credentials over the network.
 
 Using the modified httpattack.py, we can use ntlmrelayx to perform this attack.
 

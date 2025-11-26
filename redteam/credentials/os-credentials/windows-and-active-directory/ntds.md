@@ -8,19 +8,19 @@ description: MITRE ATT&CK™ Sub-technique T1003.003
 
 NTDS (Windows NT Directory Services) is the directory services used by Microsoft Windows NT to locate, manage, and organize network resources. The NTDS.dit file is a database that stores the Active Directory data (including users, groups, security descriptors and password hashes). This file is stored on the domain controllers.
 
-Once the secrets are extracted, they can be used for various attacks: [credential spraying](../../../../../ad/movement/credentials/bruteforcing/password-spraying.md), [stuffing](../../../../../ad/movement/credentials/bruteforcing/stuffing.md), [shuffling](../../../../../ad/movement/credentials/credential-shuffling.md), [cracking](../../../../../ad/movement/credentials/cracking.md), [pass-the-hash](broken-reference), [overpass-the-hash](../../../../../ad/movement/kerberos/ptk.md) or [silver or golden tickets](../../../../../ad/movement/kerberos/forged-tickets.md).
+Once the secrets are extracted, they can be used for various attacks: [credential spraying](../../../../ad/movement/credentials/bruteforcing/password-spraying.md), [stuffing](../../../../ad/movement/credentials/bruteforcing/stuffing.md), [shuffling](../../../../ad/movement/credentials/credential-shuffling.md), [cracking](../../../../ad/movement/credentials/cracking.md), [pass-the-hash](/broken/pages/6MHzmbXpK7Ge11Xc9oZf), [overpass-the-hash](../../../../ad/movement/kerberos/ptk.md) or [silver or golden tickets](../../../../ad/movement/kerberos/forged-tickets.md).
 
 ## Practice
 
 Since the NTDS.dit is constantly used by AD processes such as the Kerberos KDC, it can't be copied like any other file. In order to exfiltrate it from a live domain controller and extract password hashes from it, many techniques can be used.
 
-Just like with [SAM & LSA secrets](broken-reference), the SYSTEM registry hive contains enough info to decrypt the NTDS.dit data. The hive file (`\system32\config\system`) can either be exfiltrated the same way the NTDS.dit file is, or it can be exported with `reg save HKLM\SYSTEM 'C:\Windows\Temp\system.save'`.
+Just like with [SAM & LSA secrets](/broken/pages/3llRWtbOW9nOdqiXY6Xm), the SYSTEM registry hive contains enough info to decrypt the NTDS.dit data. The hive file (`\system32\config\system`) can either be exfiltrated the same way the NTDS.dit file is, or it can be exported with `reg save HKLM\SYSTEM 'C:\Windows\Temp\system.save'`.
 
 {% tabs %}
 {% tab title="UNIX-Like" %}
 ### Secretsdump.py
 
-[Impacket](https://github.com/SecureAuthCorp/impacket)'s [secretsdump](https://github.com/SecureAuthCorp/impacket/blob/master/examples/secretsdump.py) (Python) can be used to remotely dump NTDS.dit through Volume Shadow Copy. Several authentication methods can be used like [pass-the-hash](../../../../../ad/movement/ntlm/pth.md) (LM/NTLM), or [pass-the-ticket](../../../../../ad/movement/kerberos/ptt.md) (Kerberos).
+[Impacket](https://github.com/SecureAuthCorp/impacket)'s [secretsdump](https://github.com/SecureAuthCorp/impacket/blob/master/examples/secretsdump.py) (Python) can be used to remotely dump NTDS.dit through Volume Shadow Copy. Several authentication methods can be used like [pass-the-hash](../../../../ad/movement/ntlm/pth.md) (LM/NTLM), or [pass-the-ticket](../../../../ad/movement/kerberos/ptt.md) (Kerberos).
 
 ```bash
 # Remote dumping of NTDS.dit using Shadow Copy
@@ -38,7 +38,7 @@ secretsdump.py -system '/path/to/system.save' -ntds ntds.dit.save LOCAL
 
 ### NetExec
 
-[NetExec](https://github.com/Pennyw0rth/NetExec) (Python) can also be used to remotely dump NTDS.dit through Volume Shadow Copy or NTDSUtil. It offers several authentication methods like [pass-the-hash](../../../../../ad/movement/ntlm/pth.md) (NTLM), or [pass-the-ticket](../../../../../ad/movement/kerberos/ptt.md) (Kerberos)
+[NetExec](https://github.com/Pennyw0rth/NetExec) (Python) can also be used to remotely dump NTDS.dit through Volume Shadow Copy or NTDSUtil. It offers several authentication methods like [pass-the-hash](../../../../ad/movement/ntlm/pth.md) (NTLM), or [pass-the-ticket](../../../../ad/movement/kerberos/ptt.md) (Kerberos)
 
 ```bash
 ### Shadow Copy

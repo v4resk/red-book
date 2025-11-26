@@ -4,7 +4,7 @@
 
 The "Local Administrator Password Solution" (LAPS) provides management of local account passwords of domain joined computers. Passwords are stored in Active Directory (AD) and protected by ACL, so only eligible users can read it or request its reset.
 
-This page is about persitence, you may have a look on [LAPS-based attacks](broken-reference) and [LAPS enumeration](../recon/objects-and-settings/laps.md).
+This page is about persitence, you may have a look on [LAPS-based attacks](/broken/pages/sAGzsBG0vZ8ATlsbgPaT) and [LAPS enumeration](../recon/objects-and-settings/laps.md).
 
 ## Practice
 

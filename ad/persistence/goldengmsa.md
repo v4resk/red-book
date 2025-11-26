@@ -9,7 +9,7 @@ Within an Active Directory environment, service accounts are often created and u
 The password of a gMSA account can legitimately be requested by authorized applications. In that case, an LDAP request is made to the domain controller, asking for the gMSA account's `msDS-ManagedPassword` attribute's value.
 
 {% hint style="info" %}
-A gMSA account's `msDS-ManagedPassword` attribute doesn't actually store the password (it's a [constructed attribute](https://learn.microsoft.com/en-us/openspecs/windows\_protocols/ms-adts/a3aff238-5f0e-4eec-8598-0a59c30ecd56)). Everytime that attribute is requested by an authorized principal, the domain controller computes it and returns the result. The calculation is detailed a bit more in the [password calculation](goldengmsa.md#part-3-password-calculation) part of this recipe, but simply said, it relies on a static master key (i.e. one of the KDS root keys) and some additional data relative to the gMSA account.
+A gMSA account's `msDS-ManagedPassword` attribute doesn't actually store the password (it's a [constructed attribute](https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-adts/a3aff238-5f0e-4eec-8598-0a59c30ecd56)). Everytime that attribute is requested by an authorized principal, the domain controller computes it and returns the result. The calculation is detailed a bit more in the [password calculation](goldengmsa.md#part-3-password-calculation) part of this recipe, but simply said, it relies on a static master key (i.e. one of the KDS root keys) and some additional data relative to the gMSA account.
 {% endhint %}
 
 The "GoldenGMSA" persistence lies in the fact that the KDS root keys used for gMSA password calculation don't change (at least not without some admin intervention or custom automation). Once they are exfiltrated and saved, any gMSA account password can be calculated since the additional values needed can be obtained by any low-privileged user.
@@ -90,7 +90,7 @@ GoldenGMSA.exe compute --sid "S-1-5-21-[...]1586295871-1112" --kdskey "AQA[...]j
 
 Since the password is randomly generated and is not intended to be used by real users with a keyboard (but instead by servers, programs, scripts, etc.) the password is very long, complex and can include non-printable characters. [GoldenGMSA](https://github.com/Semperis/GoldenGMSA) will output the password in base64.
 
-In order to use the password, its MD4 (i.e. NT) hash can be calculated, for [Broken link](broken-reference "mention").
+In order to use the password, its MD4 (i.e. NT) hash can be calculated, for [Broken link](/broken/pages/6MHzmbXpK7Ge11Xc9oZf "mention").
 
 {% code overflow="wrap" %}
 ```bash

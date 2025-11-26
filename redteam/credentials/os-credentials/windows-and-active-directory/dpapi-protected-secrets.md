@@ -43,7 +43,7 @@ dpapi.py credential -file "/path/to/protected_file" -key $MASTERKEY
 
 ### DonPAPI
 
-[DonPAPI](https://github.com/login-securite/DonPAPI) (Python) can also be used to remotely extract a user's DPAPI secrets more easily. It supports [pass-the-hash](broken-reference), [pass-the-ticket](broken-reference) and so on.
+[DonPAPI](https://github.com/login-securite/DonPAPI) (Python) can also be used to remotely extract a user's DPAPI secrets more easily. It supports [pass-the-hash](/broken/pages/6MHzmbXpK7Ge11Xc9oZf), [pass-the-ticket](/broken/pages/WzYZzG0ZhkKkcln8Wb4o) and so on.
 
 ```bash
 DonPAPI.py 'domain'/'username':'password'@<'targetName' or 'address/mask'>

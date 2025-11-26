@@ -1,6 +1,6 @@
 # Forged tickets
 
-Silver and Golden tickets are forged Kerberos tickets that can be used with [pass-the-ticket](broken-reference) to access services in an Active Directory domain.
+Silver and Golden tickets are forged Kerberos tickets that can be used with [pass-the-ticket](/broken/pages/WzYZzG0ZhkKkcln8Wb4o) to access services in an Active Directory domain.
 
 * When one of `krbtgt`'s Kerberos keys is known, a [golden ticket](../../movement/kerberos/forged-tickets/#golden-ticket) attack can be conducted to keep privileged access until that account's password is changed.
 * Let `service` be an account in charge of various services indicated in its `ServicePrincipalNames` attribute, when one of `service`'s Kerberos keys is known, a [silver ticket](../../movement/kerberos/forged-tickets/#silver-ticket) attack can be conducted to keep privileged access to those managed services until that account's password is changed.

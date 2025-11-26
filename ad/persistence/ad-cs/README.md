@@ -1,7 +1,7 @@
 # Certificate Services (AD-CS)
 
 {% hint style="info" %}
-See [AD > Movement > Certificate Services (AD-CS)](broken-reference) to know more about it.
+See [AD > Movement > Certificate Services (AD-CS)](/broken/pages/GAojOJGKYLxxzUAAYPra) to know more about it.
 {% endhint %}
 
 ## Theory

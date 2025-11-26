@@ -2,13 +2,13 @@
 
 ## Theory
 
-The Kerberos authentication protocol works with tickets in order to grant access. An ST (Service Ticket) can be obtained by presenting a TGT (Ticket Granting Ticket). That prior TGT can only be obtained by validating a first step named "pre-authentication" (except if that requirement is explicitly removed for some accounts, making them vulnerable to [ASREProast](broken-reference)). The pre-authentication can be validated symmetrically (with a DES, RC4, AES128 or AES256 key) or asymmetrically (with certificates). The asymmetrical way of pre-authenticating is called PKINIT.
+The Kerberos authentication protocol works with tickets in order to grant access. An ST (Service Ticket) can be obtained by presenting a TGT (Ticket Granting Ticket). That prior TGT can only be obtained by validating a first step named "pre-authentication" (except if that requirement is explicitly removed for some accounts, making them vulnerable to [ASREProast](/broken/pages/aMCfYwIroVqgnglotzZr)). The pre-authentication can be validated symmetrically (with a DES, RC4, AES128 or AES256 key) or asymmetrically (with certificates). The asymmetrical way of pre-authenticating is called PKINIT.
 
 > The client has a public-private key pair, and encrypts the pre-authentication data with their private key, and the KDC decrypts it with the client’s public key. The KDC also has a public-private key pair, allowing for the exchange of a session key. ([specterops.io](https://posts.specterops.io/shadow-credentials-abusing-key-trust-account-mapping-for-takeover-8ee1a53566ab))
 
 Active Directory user and computer objects have an attribute called `msDS-KeyCredentialLink` where raw public keys can be set. When trying to pre-authenticate with PKINIT, the KDC will check that the authenticating user has knowledge of the matching private key, and a TGT will be sent if there is a match.
 
-There are multiple scenarios where an attacker can have control over an account that has the ability to edit the `msDS-KeyCredentialLink` (a.k.a. "kcl") attribute of other objects (e.g. member of a [special group](broken-reference), has [powerful ACEs](broken-reference), etc.). This allows attackers to create a key pair, append to raw public key in the attribute, and obtain persistent and stealthy access to the target object (can be a user or a computer).
+There are multiple scenarios where an attacker can have control over an account that has the ability to edit the `msDS-KeyCredentialLink` (a.k.a. "kcl") attribute of other objects (e.g. member of a [special group](/broken/pages/KBCrHromBogYiIquu36M), has [powerful ACEs](/broken/pages/4BIFRCf5fXqahfOIAeGb), etc.). This allows attackers to create a key pair, append to raw public key in the attribute, and obtain persistent and stealthy access to the target object (can be a user or a computer).
 
 ## Practice
 
@@ -26,7 +26,7 @@ If those per-requisites are met, an attacker can
 
 1. create an RSA key pair
 2. create an X509 certificate configured with the public key
-3. create a [KeyCredential](https://docs.microsoft.com/en-us/openspecs/windows\_protocols/ms-adts/de61eb56-b75f-4743-b8af-e9be154b47af) structure featuring the raw public key and add it to the `msDs-KeyCredentialLink` attribute
+3. create a [KeyCredential](https://docs.microsoft.com/en-us/openspecs/windows_protocols/ms-adts/de61eb56-b75f-4743-b8af-e9be154b47af) structure featuring the raw public key and add it to the `msDs-KeyCredentialLink` attribute
 4. authenticate using PKINIT and the certificate and private key
 
 {% tabs %}
@@ -75,7 +75,7 @@ When the public key has been set in the `msDs-KeyCredentialLink` of the target, 
 {% hint style="info" %}
 **Nota bene**
 
-User objects can't edit their own `msDS-KeyCredentialLink` attribute while computer objects can. This means the following scenario could work: [trigger an NTLM authentication](../mitm-and-coerced-authentications/) from DC01, [relay it](broken-reference) to DC02, make pywhisker edit DC01's attribute to create a Kerberos PKINIT pre-authentication backdoor on it, and have persistent access to DC01 with PKINIT and [pass-the-cache](ptc.md).
+User objects can't edit their own `msDS-KeyCredentialLink` attribute while computer objects can. This means the following scenario could work: [trigger an NTLM authentication](../mitm-and-coerced-authentications/) from DC01, [relay it](/broken/pages/PFGlaZOk9WQQxTsZmSJ0) to DC02, make pywhisker edit DC01's attribute to create a Kerberos PKINIT pre-authentication backdoor on it, and have persistent access to DC01 with PKINIT and [pass-the-cache](ptc.md).
 
 Computer objects can edit their own `msDS-KeyCredentialLink` attribute but can only add a KeyCredential if none already exists.
 {% endhint %}

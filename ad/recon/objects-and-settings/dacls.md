@@ -2,7 +2,7 @@
 
 ## Theory
 
-DACL abuse potential paths can be identified by [BloodHound](broken-reference) from UNIX-like (using the Python ingestor [bloodhound.py](https://github.com/fox-it/BloodHound.py)) and Windows (using the [SharpHound](https://github.com/BloodHoundAD/SharpHound3) ingestor) systems.
+DACL abuse potential paths can be identified by [BloodHound](/broken/pages/LC5HbzI57PEFYfKswdsj) from UNIX-like (using the Python ingestor [bloodhound.py](https://github.com/fox-it/BloodHound.py)) and Windows (using the [SharpHound](https://github.com/BloodHoundAD/SharpHound3) ingestor) systems.
 
 Other tools like, `Get-DomainObjectAcl` and `Add-DomainObjectAcl` from [Powersploit](https://github.com/PowerShellMafia/PowerSploit/)'s [Powerview](https://github.com/PowerShellMafia/PowerSploit/blob/dev/Recon/PowerView.ps1), `Get-Acl` and `Set-Acl` official Powershell cmdlets, or [Impacket](https://github.com/SecureAuthCorp/impacket)'s dacledit.py script (Python) can be used in order to manually inspect an object's DACL. :warning: _At the time of writing, the Pull Request (_[_#1291_](https://github.com/SecureAuthCorp/impacket/pull/1291)_) offering that dacledit is still being reviewed and in active development. It has the following command-line arguments._
 
@@ -128,7 +128,7 @@ dsacls.exe "cn=domain admins,cn=users,dc=contoso,dc=local" | findstr "v4resk"
 
 ### SharpHound
 
-DACL abuse potential paths can be identified by [BloodHound](broken-reference) from UNIX-like (using the Python ingestor [bloodhound.py](https://github.com/fox-it/BloodHound.py)) and Windows (using the [SharpHound](https://github.com/BloodHoundAD/SharpHound3) ingestor) systems.
+DACL abuse potential paths can be identified by [BloodHound](/broken/pages/LC5HbzI57PEFYfKswdsj) from UNIX-like (using the Python ingestor [bloodhound.py](https://github.com/fox-it/BloodHound.py)) and Windows (using the [SharpHound](https://github.com/BloodHoundAD/SharpHound3) ingestor) systems.
 
 {% tabs %}
 {% tab title="UNIX-Like" %}

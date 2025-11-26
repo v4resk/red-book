@@ -22,7 +22,7 @@ cewl -w list.txt -d 5 -m 5 http://target.net
 {% tab title="User List" %}
 Gathering employees' names in the enumeration stage is essential. We can generate username lists from the target's website. For the following example, we'll assume we have a {first name} {last name} (ex: John Smith) and a method of generating usernames.
 
-Thankfully, there is a tool [username\_generator](https://github.com/therodri2/username\_generator.git) that could help create a list with most of the possible combinations if we have a first name and last name.
+Thankfully, there is a tool [username\_generator](https://github.com/therodri2/username_generator.git) that could help create a list with most of the possible combinations if we have a first name and last name.
 
 ```bash
 python3 username_generator.py -w users.lst
@@ -90,11 +90,11 @@ python3 cupp.py -a
 hashcat -r /usr/share/rules/best64.rule wordlist.txt --stdout > new_wordlist.txt
 ```
 
-You can also use the [OneRuleToRuleThemAll](https://github.com/NotSoSecure/password\_cracking\_rules/blob/master/OneRuleToRuleThemAll.rule) rule to generate a wordlist.
+You can also use the [OneRuleToRuleThemAll](https://github.com/NotSoSecure/password_cracking_rules/blob/master/OneRuleToRuleThemAll.rule) rule to generate a wordlist.
 
 #### Create your own rules
 
-To create your own rules, you definitely want to check this [hashcat documentation](https://hashcat.net/wiki/doku.php?id=rule\_based\_attack), but here is an example of creating your custom rule and some notes about useful functions:
+To create your own rules, you definitely want to check this [hashcat documentation](https://hashcat.net/wiki/doku.php?id=rule_based_attack), but here is an example of creating your custom rule and some notes about useful functions:
 
 <table><thead><tr><th width="180">Description</th><th width="98">Function</th><th width="139">Example Rule</th><th width="148"> Ex. Input</th><th> Ex. Output</th></tr></thead><tbody><tr><td>Append Char</td><td>$X</td><td>$1$2</td><td>Password</td><td>Password12</td></tr><tr><td>Prepend Char</td><td>^X</td><td>$1$2</td><td>Password</td><td>12Password</td></tr><tr><td>Capitalize the first letter and lower the rest</td><td>c</td><td>c</td><td>password</td><td>Password</td></tr><tr><td>Uppercase all letters</td><td>u</td><td>u</td><td>password</td><td>PASSWORD</td></tr></tbody></table>
 
@@ -117,7 +117,7 @@ password1
 Password
 ```
 
-Let's assume an [AD password policy](broken-reference) that requires an upper case letter, a special character, and a numerical value. We may use the following rules along with hashcat:
+Let's assume an [AD password policy](/broken/pages/bQSuZvmYAABvEBXFB2HB) that requires an upper case letter, a special character, and a numerical value. We may use the following rules along with hashcat:
 
 ```bash
 # Rules file

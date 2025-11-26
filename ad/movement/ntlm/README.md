@@ -46,20 +46,20 @@ This is meant to protect the user's password from eavesdropping by implementing 
 [cracking.md](../credentials/cracking.md)
 {% endcontent-ref %}
 
-The problem is that Microsoft has poorly implemented the zero-knowledge proof concept in the LM and NTLM protocols. The LM or NT hash is used "as is" to compute the response. This means an attacker knowing an LM or NT hash could use it to authenticate as a user without knowing the user's password. This technique is called [Pass the hash](broken-reference).
+The problem is that Microsoft has poorly implemented the zero-knowledge proof concept in the LM and NTLM protocols. The LM or NT hash is used "as is" to compute the response. This means an attacker knowing an LM or NT hash could use it to authenticate as a user without knowing the user's password. This technique is called [Pass the hash](/broken/pages/6MHzmbXpK7Ge11Xc9oZf#pass-the-hash-ntlm).
 
-{% content-ref url="broken-reference" %}
-[Broken link](broken-reference)
+{% content-ref url="/broken/pages/6MHzmbXpK7Ge11Xc9oZf" %}
+[Broken link](/broken/pages/6MHzmbXpK7Ge11Xc9oZf)
 {% endcontent-ref %}
 
-Attackers could also rely on [forced authentications and phishing](../mitm-and-coerced-authentications/) to [relay incoming authentications](broken-reference).
+Attackers could also rely on [forced authentications and phishing](../mitm-and-coerced-authentications/) to [relay incoming authentications](/broken/pages/PFGlaZOk9WQQxTsZmSJ0).
 
 {% content-ref url="../mitm-and-coerced-authentications/" %}
 [mitm-and-coerced-authentications](../mitm-and-coerced-authentications/)
 {% endcontent-ref %}
 
-{% content-ref url="broken-reference" %}
-[Broken link](broken-reference)
+{% content-ref url="/broken/pages/PFGlaZOk9WQQxTsZmSJ0" %}
+[Broken link](/broken/pages/PFGlaZOk9WQQxTsZmSJ0)
 {% endcontent-ref %}
 
 ## Resources

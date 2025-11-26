@@ -1,11 +1,11 @@
 # Impersonation
 
-On windows or Active Directory environments, when credentials are found (through [dumping](broken-reference) or [cracking](../../ad/movement/credentials/cracking.md) for instance), attackers try to use them to obtain access to new resources. Depending on the harvested credential material type, the impersonation can be done in different ways.
+On windows or Active Directory environments, when credentials are found (through [dumping](/broken/pages/rBecEZmO58HE4hRhwD4E) or [cracking](../../ad/movement/credentials/cracking.md) for instance), attackers try to use them to obtain access to new resources. Depending on the harvested credential material type, the impersonation can be done in different ways.
 
-* **LM or NT password hash**: [pass-the-hash](broken-reference)
+* **LM or NT password hash**: [pass-the-hash](/broken/pages/6MHzmbXpK7Ge11Xc9oZf)
 * **RC4 Kerberos key (i.e. NT hash)**: [overpass-the-hash](../../ad/movement/kerberos/ptk.md)
 * **non-RC4 Kerberos key (i.e. DES or AES)**: [pass-the-key](../../ad/movement/kerberos/ptk.md) (alias for overpass-the-hash)
-* **Kerberos ticket**: [pass-the-ticket](broken-reference)
+* **Kerberos ticket**: [pass-the-ticket](/broken/pages/WzYZzG0ZhkKkcln8Wb4o)
 * **plaintext password**: the techniques listed below
 
 {% tabs %}

@@ -485,17 +485,18 @@
   * [🛠️ DC Shadow](ad/persistence/dcshadow.md)
   * [🛠️ Access controls](ad/persistence/access-controls.md)
 
-## 🛠️ Smart Contracts Pentesting
+## Smart Contracts Pentesting
 
-* [On-Chain Analysis](smart-contracts-pentesting/on-chain-analysis.md)
+* [🛠️ On-Chain Analysis](smart-contracts-pentesting/on-chain-analysis.md)
 * [Smart Contract Vulnerabilities](smart-contracts-pentesting/vulnerabilities/README.md)
   * [EVM Attack Surfaces](smart-contracts-pentesting/vulnerabilities/evm-attack-surfaces/README.md)
     * [Sensitive Data Exposure](smart-contracts-pentesting/vulnerabilities/evm-attack-surfaces/sensitive-data-exposure.md)
     * [Integer overflow/underflow](smart-contracts-pentesting/vulnerabilities/evm-attack-surfaces/integer-overflow-underflow.md)
     * [Insecure DelegateCall](smart-contracts-pentesting/vulnerabilities/evm-attack-surfaces/insecure-delegatecall.md)
+    * [Reentrancy](smart-contracts-pentesting/vulnerabilities/evm-attack-surfaces/reentrancy.md)
   * [Contract Lifecycle & Upgradeability](smart-contracts-pentesting/vulnerabilities/contract-lifecycle-and-upgradeability/README.md)
     * [Incorrect Constructor Name](smart-contracts-pentesting/vulnerabilities/contract-lifecycle-and-upgradeability/incorrect-constructor-name.md)
-  * [Protocol Layer Attack Surfaces](smart-contracts-pentesting/vulnerabilities/protocol-layer-attack-surfaces/README.md)
+  * [🛠️ Protocol Layer Attack Surfaces](smart-contracts-pentesting/vulnerabilities/protocol-layer-attack-surfaces/README.md)
     * [AMMs (Automated Market Makers)](smart-contracts-pentesting/vulnerabilities/protocol-layer-attack-surfaces/amms-automated-market-makers.md)
     * [Oracles](smart-contracts-pentesting/vulnerabilities/protocol-layer-attack-surfaces/oracles.md)
     * [Lending Protocols](smart-contracts-pentesting/vulnerabilities/protocol-layer-attack-surfaces/lending-protocols.md)

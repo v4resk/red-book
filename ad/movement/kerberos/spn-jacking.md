@@ -2,11 +2,11 @@
 
 ## Theory
 
-This attack combines [Kerberos Constrained delegation abuse](delegations/constrained.md) and [DACL abuse](broken-reference). A service configured for Kerberos Constrained Delegation (KCD) can impersonate users on a set of services. The "set of services" is specified in the constrained delegation configuration. It is a list of SPNs (Service Principal Names) written in the `msDS-AllowedToDelegateTo` attribute of the KCD service's object.
+This attack combines [Kerberos Constrained delegation abuse](delegations/constrained.md) and [DACL abuse](/broken/pages/4BIFRCf5fXqahfOIAeGb). A service configured for Kerberos Constrained Delegation (KCD) can impersonate users on a set of services. The "set of services" is specified in the constrained delegation configuration. It is a list of SPNs (Service Principal Names) written in the `msDS-AllowedToDelegateTo` attribute of the KCD service's object.
 
-In standard KCD abuse scenarios, an attacker that gains control over a "KCD service" can operate lateral movement and obtain access to the other services/SPNs. Since KCD allows for impersonation, the attacker can also impersonate users (e.g. domain admins) on the target services. Depending on the SPNs, or if it's possible to [modify it](broken-reference), the attacker could also gain admin access to the server the "listed SPN" belongs to.
+In standard KCD abuse scenarios, an attacker that gains control over a "KCD service" can operate lateral movement and obtain access to the other services/SPNs. Since KCD allows for impersonation, the attacker can also impersonate users (e.g. domain admins) on the target services. Depending on the SPNs, or if it's possible to [modify it](/broken/pages/WzYZzG0ZhkKkcln8Wb4o#modifying-the-spn), the attacker could also gain admin access to the server the "listed SPN" belongs to.
 
-On top of all that, if attacker is able to move a "listed SPN" from the original object to the another one, he could be able to compromise it. This is called SPN-jacking and it was intially discovered and explaine by [Elad Shamir](https://twitter.com/elad\_shamir) in [this post](https://www.semperis.com/blog/spn-jacking-an-edge-case-in-writespn-abuse/).
+On top of all that, if attacker is able to move a "listed SPN" from the original object to the another one, he could be able to compromise it. This is called SPN-jacking and it was intially discovered and explaine by [Elad Shamir](https://twitter.com/elad_shamir) in [this post](https://www.semperis.com/blog/spn-jacking-an-edge-case-in-writespn-abuse/).
 
 1. In order to "move the SPN", the attacker must have the right to edit the target object's `ServicePrincipalName` attribute (i.e. `GenericAll`, `GenericWrite` over the object or`WriteProperty` over the attribute (called `WriteSPN` [since BloodHound 4.1](https://posts.specterops.io/introducing-bloodhound-4-1-the-three-headed-hound-be3c4a808146)), etc.).
 2. If the "listed SPN" already belongs to an object, it must be removed from it first. This would require the same privileges (`GenericAll`, `GenericWrite`, etc.) over the SPN owner as well (_a.k.a. "Live SPN-jacking"_). Else, the SPN can be simply be added to the target object (_a.k.a. "Ghost SPN-jacking"_).
@@ -16,7 +16,7 @@ On top of all that, if attacker is able to move a "listed SPN" from the original
 {% hint style="info" %}
 In this scenario, we assume the Kerberos Constrained Delegation is configured [with protocol transition](delegations/constrained.md#with-protocol-transition) in order to keep things simple. However, the SPN-jacking attack can be conducted on [KCD without protocol transition](delegations/constrained.md#without-protocol-transition) as well (cf. [RBCD technique](delegations/constrained.md#rbcd-approach)).
 
-In this scenario (following [Elad](https://twitter.com/elad\_shamir)'s [post](https://www.semperis.com/blog/spn-jacking-an-edge-case-in-writespn-abuse/)):
+In this scenario (following [Elad](https://twitter.com/elad_shamir)'s [post](https://www.semperis.com/blog/spn-jacking-an-edge-case-in-writespn-abuse/)):
 
 * serverA is configured for KCD
 * serverB's SPN is listed in serverA's KCD configuration
@@ -49,7 +49,7 @@ getST -spn "cifs/serverB" -impersonate "administrator" 'domain/serverA$:password
 tgssub.py -in serverB.ccache -out newticket.ccache -altservice "cifs/serverC"
 ```
 
-Once the final service ticket is obtained, it can be used with [Pass the Cache](ptc.md) / [Pass the Ticket](broken-reference) to access the target.
+Once the final service ticket is obtained, it can be used with [Pass the Cache](ptc.md) / [Pass the Ticket](/broken/pages/WzYZzG0ZhkKkcln8Wb4o) to access the target.
 {% endtab %}
 
 {% tab title="Windows" %}
@@ -72,7 +72,7 @@ Rubeus.exe s4u /nowrap /msdsspn:"cifs/serverB" /impersonateuser:"administrator" 
 Rubeus.exe tgssub /nowrap /altservice:"host/serverC" /ticket:"ba64ticket"
 ```
 
-Once the final service ticket is obtained, it can be used with [Pass the Ticket](broken-reference) to access the target.
+Once the final service ticket is obtained, it can be used with [Pass the Ticket](/broken/pages/WzYZzG0ZhkKkcln8Wb4o) to access the target.
 {% endtab %}
 {% endtabs %}
 

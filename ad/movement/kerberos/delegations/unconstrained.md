@@ -11,10 +11,10 @@ If the coerced account is "[is sensitive and cannot be delegated](https://learn.
 {% endhint %}
 
 {% hint style="info" %}
-Unconstrained delegation abuses are usually combined with an [MS-RPRN abuse (printerbug)](broken-reference), [MS-EFSR abuse (petitpotam)](broken-reference), [MS-FSRVP abuse (shadowcoerce)](broken-reference), r [PrivExchange](../../exchange-services/privexchange.md) to gain domain admin privileges.
+Unconstrained delegation abuses are usually combined with an [MS-RPRN abuse (printerbug)](/broken/pages/sbHEBTh7GvLgHedLOgWJ), [MS-EFSR abuse (petitpotam)](/broken/pages/NEIL6rOH7n5a8Hz6LD73), [MS-FSRVP abuse (shadowcoerce)](/broken/pages/xfLXVbuXEdJcFCMnNS7c), r [PrivExchange](../../exchange-services/privexchange.md) to gain domain admin privileges.
 {% endhint %}
 
-![](../../../../.gitbook/assets/Kerberos\_delegations-unconstrained.drawio.png)
+![](../../../../.gitbook/assets/Kerberos_delegations-unconstrained.drawio.png)
 
 ## Practice
 
@@ -58,9 +58,9 @@ krbrelayx.py --krbsalt 'DOMAINusername' --krbpass 'password'
 In case, for some reason, attacking a Domain Controller doesn't work (i.e. error saying`Ciphertext integrity failed.`) try to attack others (if you're certain the credentials you supplied were correct). Some replication and propagation issues could get in the way.
 {% endhint %}
 
-Once the krbrelayx listener is ready, an [authentication coercion attack](../../mitm-and-coerced-authentications/) (e.g. [PrinterBug](../../mitm-and-coerced-authentications/#ms-rprn-abuse-a-k-a-printer-bug), [PrivExchange](../../mitm-and-coerced-authentications/#pushsubscription-abuse-a-k-a-privexchange), [PetitPotam](broken-reference)) can be operated. The listener will then receive a Kerberos authentication, hence a ST, containing a TGT.
+Once the krbrelayx listener is ready, an [authentication coercion attack](../../mitm-and-coerced-authentications/) (e.g. [PrinterBug](../../mitm-and-coerced-authentications/#ms-rprn-abuse-a-k-a-printer-bug), [PrivExchange](../../mitm-and-coerced-authentications/#pushsubscription-abuse-a-k-a-privexchange), [PetitPotam](/broken/pages/NEIL6rOH7n5a8Hz6LD73)) can be operated. The listener will then receive a Kerberos authentication, hence a ST, containing a TGT.
 
-The TGT will then be usable with [Pass the Ticket](broken-reference) (to act as the victim) or with [S4U2self abuse](s4u2self-abuse.md) (to obtain local admin privileges over the victim).
+The TGT will then be usable with [Pass the Ticket](/broken/pages/WzYZzG0ZhkKkcln8Wb4o) (to act as the victim) or with [S4U2self abuse](s4u2self-abuse.md) (to obtain local admin privileges over the victim).
 {% endtab %}
 
 {% tab title="From the compromised computer (Windows)" %}

@@ -31,7 +31,7 @@ Kerberos delegations can be abused by attackers to obtain access to valuable ass
 
     S4U2Proxy always results in a forwardable ST, even when the ticket used as evidence wasn't forwardable.
 
-Some of the following parts allow to obtain modified or crafted Kerberos tickets. Once obtained, these tickets can be used with [Pass-the-Ticket](broken-reference).
+Some of the following parts allow to obtain modified or crafted Kerberos tickets. Once obtained, these tickets can be used with [Pass-the-Ticket](/broken/pages/WzYZzG0ZhkKkcln8Wb4o).
 
 ## Practice
 
@@ -53,7 +53,7 @@ findDelegation.py -user "account" "DOMAIN"/"USER":"PASSWORD"
 {% endtab %}
 
 {% tab title="Windows" %}
-From Windows systems, [BloodHound](broken-reference) can be used to identify unconstrained and constrained delegation.
+From Windows systems, [BloodHound](/broken/pages/LC5HbzI57PEFYfKswdsj) can be used to identify unconstrained and constrained delegation.
 
 The following queries can be used to audit delegations.
 
@@ -91,19 +91,19 @@ Get-ADComputer "Account" -Properties TrustedForDelegation, TrustedToAuthForDeleg
 [unconstrained.md](unconstrained.md)
 {% endcontent-ref %}
 
-![](../../../../.gitbook/assets/Kerberos\_delegations-unconstrained.drawio.png)
+![](../../../../.gitbook/assets/Kerberos_delegations-unconstrained.drawio.png)
 
 {% content-ref url="constrained.md" %}
 [constrained.md](constrained.md)
 {% endcontent-ref %}
 
-![](../../../../.gitbook/assets/Kerberos\_delegations-constrained.png)
+![](../../../../.gitbook/assets/Kerberos_delegations-constrained.png)
 
 {% content-ref url="rbcd.md" %}
 [rbcd.md](rbcd.md)
 {% endcontent-ref %}
 
-![](../../../../.gitbook/assets/Kerberos\_delegations-rbcd.png)
+![](../../../../.gitbook/assets/Kerberos_delegations-rbcd.png)
 
 ## Talk :microphone:
 
