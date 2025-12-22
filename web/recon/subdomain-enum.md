@@ -12,7 +12,7 @@ Passive enumeration is the process of collecting information about a specific ta
 
 {% tabs %}
 {% tab title="One-Liners" %}
-Here are some handy one-liners to automate subdomains enumeration using tools like [subfinder](https://github.com/projectdiscovery/subfinder) and [assetfinder](https://github.com/tomnomnom/assetfinder).
+Here are some handy one-liners to automate subdomains enumeration using tools like [subfinder](https://github.com/projectdiscovery/subfinder), [assetfinder](https://github.com/tomnomnom/assetfinder)
 
 {% hint style="success" %}
 It may be usefull for bug bounty hunting
@@ -33,6 +33,7 @@ To set API keys, add them to `$HOME/.config/subfinder/provider-config.yaml`. See
 ```bash
 # Subfinder One-Liner
 subfinder -d target.domain -all -cs > tmp.txt ; cat tmp.txt | cut -d "," -f 1 > domains.txt ; rm tmp.txt
+subfinder -d target.com -all -silent | anew subs.txt
 
 # Standard enumeration with subfinder
 subfinder -d "target.domain"
@@ -48,6 +49,7 @@ But we can use it to only do passive enumeration
 
 ```bash
 amass enum --passive -d "domain.com"
+amass enum -passive -d target.com | anew subs.txt
 ```
 {% endtab %}
 
@@ -66,7 +68,7 @@ curl -s 'https://crt.sh/?q=<TARGET.URL>&output=json'|jq
 
 ### Virtual host fuzzing
 
-A web server can host multiple websites for multiple domain names (websites). In order to choose what website to show for what domain, many use what is called "virtual hosting". Virtual hosting can be based on a name, an IP, or a port ([read more](https://en.wikipedia.org/wiki/Virtual\_hosting#Name-based)).
+A web server can host multiple websites for multiple domain names (websites). In order to choose what website to show for what domain, many use what is called "virtual hosting". Virtual hosting can be based on a name, an IP, or a port ([read more](https://en.wikipedia.org/wiki/Virtual_hosting#Name-based)).
 
 When having a domain name as scope, operating virtual host (a.k.a. vhost) fuzzing is recommended to possibly find alternate domain names of subdomains that point to a virtual host.
 
