@@ -492,6 +492,7 @@
   * [EVM Attack Surfaces](smart-contracts-pentesting/vulnerabilities/evm-attack-surfaces/README.md)
     * [Sensitive Data Exposure](smart-contracts-pentesting/vulnerabilities/evm-attack-surfaces/sensitive-data-exposure.md)
     * [Integer overflow/underflow](smart-contracts-pentesting/vulnerabilities/evm-attack-surfaces/integer-overflow-underflow.md)
+    * [Dynamic Array Underflow](smart-contracts-pentesting/vulnerabilities/evm-attack-surfaces/dynamic-array-underflow.md)
     * [Insecure DelegateCall](smart-contracts-pentesting/vulnerabilities/evm-attack-surfaces/insecure-delegatecall.md)
     * [Reentrancy](smart-contracts-pentesting/vulnerabilities/evm-attack-surfaces/reentrancy.md)
   * [Contract Lifecycle & Upgradeability](smart-contracts-pentesting/vulnerabilities/contract-lifecycle-and-upgradeability/README.md)
