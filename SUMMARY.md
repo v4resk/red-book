@@ -487,7 +487,9 @@
 
 ## Smart Contracts Pentesting
 
-* [🛠️ On-Chain Analysis](smart-contracts-pentesting/on-chain-analysis.md)
+* [On-Chain Analysis](smart-contracts-pentesting/on-chain-analysis/README.md)
+  * [Events Analysis](smart-contracts-pentesting/on-chain-analysis/events-analysis.md)
+  * [🛠️ Transactions Analysis](smart-contracts-pentesting/on-chain-analysis/transactions-analysis.md)
 * [Smart Contract Vulnerabilities](smart-contracts-pentesting/vulnerabilities/README.md)
   * [EVM Attack Surfaces](smart-contracts-pentesting/vulnerabilities/evm-attack-surfaces/README.md)
     * [Sensitive Data Exposure](smart-contracts-pentesting/vulnerabilities/evm-attack-surfaces/sensitive-data-exposure.md)
