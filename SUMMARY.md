@@ -506,9 +506,9 @@
     * [Oracles](smart-contracts-pentesting/vulnerabilities/protocol-layer-attack-surfaces/oracles.md)
     * [Lending Protocols](smart-contracts-pentesting/vulnerabilities/protocol-layer-attack-surfaces/lending-protocols.md)
 
-## 🛠️ Cloud & CI/CD Pentesting <a href="#cloud-cicd-pentesting" id="cloud-cicd-pentesting"></a>
+## Cloud & CI/CD Pentesting <a href="#cloud-cicd-pentesting" id="cloud-cicd-pentesting"></a>
 
-* [Kubernetes](cloud-cicd-pentesting/kubernetes/README.md)
+* [Kubernetes](cloud-cicd-pentesting/containers/kubernetes.md)
   * [Reconnaissance and Enumeration](cloud-cicd-pentesting/kubernetes/reconnaissance-and-enumeration.md)
   * [Initial Access](cloud-cicd-pentesting/kubernetes/initial-access.md)
   * [PrivEsc and RBAC Exploitation](cloud-cicd-pentesting/kubernetes/privesc-and-rbac-exploitation.md)
@@ -529,7 +529,7 @@
     * [Tools ⚙️](cloud-cicd-pentesting/azure-ad/reconnaissance/tools.md)
     * [Unauthenticated Reconnaissance](cloud-cicd-pentesting/azure-ad/reconnaissance/unauthenticated-reconnaissance.md)
     * [Internal Reconnaissance](cloud-cicd-pentesting/azure-ad/reconnaissance/internal-reconnaissance.md)
-  * [Movement](cloud-cicd-pentesting/azure-ad/movement/README.md)
+  * [🛠️ Movement](cloud-cicd-pentesting/azure-ad/movement/README.md)
     * [Credentials](cloud-cicd-pentesting/azure-ad/movement/credentials/README.md)
       * [Password Spraying](cloud-cicd-pentesting/azure-ad/movement/credentials/password-spraying.md)
       * [Token Manipulation](cloud-cicd-pentesting/azure-ad/movement/credentials/token-manipulation/README.md)
@@ -552,6 +552,6 @@
       * [Seamless SSO](cloud-cicd-pentesting/azure-ad/movement/hybrid-identity/seamless-sso.md)
       * [Cloud Kerberos Trust](cloud-cicd-pentesting/azure-ad/movement/hybrid-identity/cloud-kerberos-trust.md)
     * [Cross-Tenant Access](cloud-cicd-pentesting/azure-ad/movement/cross-tenant-access.md)
-  * [Persistence](cloud-cicd-pentesting/azure-ad/persistence.md)
-* [GCP Pentesting](cloud-cicd-pentesting/gcp-pentesting.md)
-* [AWS Pentesting](cloud-cicd-pentesting/aws.md)
+  * [🛠️ Persistence](cloud-cicd-pentesting/azure-ad/persistence.md)
+* [🛠️ GCP Pentesting](cloud-cicd-pentesting/gcp-pentesting.md)
+* [🛠️ AWS Pentesting](cloud-cicd-pentesting/aws.md)
