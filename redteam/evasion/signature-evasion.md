@@ -73,7 +73,7 @@ Using [Strings](https://learn.microsoft.com/en-us/sysinternals/downloads/strings
 
 Example:
 
-<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1).png" alt=""><figcaption></figcaption></figure>
 {% endtab %}
 {% endtabs %}
 

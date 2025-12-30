@@ -508,12 +508,17 @@
 
 ## 🛠️ Cloud & CI/CD Pentesting <a href="#cloud-cicd-pentesting" id="cloud-cicd-pentesting"></a>
 
+* [Kubernetes](cloud-cicd-pentesting/kubernetes/README.md)
+  * [Reconnaissance and Enumeration](cloud-cicd-pentesting/kubernetes/reconnaissance-and-enumeration.md)
+  * [Initial Access](cloud-cicd-pentesting/kubernetes/initial-access.md)
+  * [PrivEsc and RBAC Exploitation](cloud-cicd-pentesting/kubernetes/privesc-and-rbac-exploitation.md)
+  * [Persistence and Lateral Movement](cloud-cicd-pentesting/kubernetes/persistence-and-lateral-movement.md)
+  * [Data Exfiltration](cloud-cicd-pentesting/kubernetes/data-exfiltration.md)
 * [CI/CD](cloud-cicd-pentesting/ci-cd/README.md)
   * [Ansible Pentesting](cloud-cicd-pentesting/ci-cd/ansible-pentesting.md)
   * [Artifactory Pentesting](cloud-cicd-pentesting/ci-cd/artifactory-pentesting.md)
   * [Docker Registry](cloud-cicd-pentesting/containers/reconnaissance/registry/README.md)
     * [🛠️ HTTP API V2](cloud-cicd-pentesting/containers/reconnaissance/registry/apiv2.md)
-  * [🛠️ Kubernetes](cloud-cicd-pentesting/containers/kubernetes.md)
   * [🛠️ GitLab](cloud-cicd-pentesting/ci-cd/gitlab.md)
   * [🛠️ Github](cloud-cicd-pentesting/ci-cd/github.md)
   * [🛠️ Gitea](cloud-cicd-pentesting/ci-cd/gitea.md)
