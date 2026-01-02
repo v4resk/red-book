@@ -517,6 +517,7 @@
 * [CI/CD](cloud-cicd-pentesting/ci-cd/README.md)
   * [Ansible Pentesting](cloud-cicd-pentesting/ci-cd/ansible-pentesting.md)
   * [Artifactory Pentesting](cloud-cicd-pentesting/ci-cd/artifactory-pentesting.md)
+  * [Docker](cloud-cicd-pentesting/ci-cd/docker.md)
   * [Docker Registry](cloud-cicd-pentesting/containers/reconnaissance/registry/README.md)
     * [🛠️ HTTP API V2](cloud-cicd-pentesting/containers/reconnaissance/registry/apiv2.md)
   * [🛠️ GitLab](cloud-cicd-pentesting/ci-cd/gitlab.md)
