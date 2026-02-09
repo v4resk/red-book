@@ -18,7 +18,7 @@ Just like with [SAM & LSA secrets](/broken/pages/3llRWtbOW9nOdqiXY6Xm), the SYST
 
 {% tabs %}
 {% tab title="UNIX-Like" %}
-### Secretsdump.py
+#### Secretsdump.py
 
 [Impacket](https://github.com/SecureAuthCorp/impacket)'s [secretsdump](https://github.com/SecureAuthCorp/impacket/blob/master/examples/secretsdump.py) (Python) can be used to remotely dump NTDS.dit through Volume Shadow Copy. Several authentication methods can be used like [pass-the-hash](../../../../ad/movement/ntlm/pth.md) (LM/NTLM), or [pass-the-ticket](../../../../ad/movement/kerberos/ptt.md) (Kerberos).
 
@@ -36,7 +36,7 @@ secretsdump.py -k -no-pass 'DOMAIN/USER@DC_TARGET' -use-vss -just-dc
 secretsdump.py -system '/path/to/system.save' -ntds ntds.dit.save LOCAL
 ```
 
-### NetExec
+#### NetExec
 
 [NetExec](https://github.com/Pennyw0rth/NetExec) (Python) can also be used to remotely dump NTDS.dit through Volume Shadow Copy or NTDSUtil. It offers several authentication methods like [pass-the-hash](../../../../ad/movement/ntlm/pth.md) (NTLM), or [pass-the-ticket](../../../../ad/movement/kerberos/ptt.md) (Kerberos)
 
@@ -68,7 +68,7 @@ In addition when using **NetExec** or **Secretsdump**, the `-exec-method` option
 {% endtab %}
 
 {% tab title="Windows" %}
-### AD maintenance (NTDSUtil)
+#### AD maintenance (NTDSUtil)
 
 NTDSUtil.exe is a diagnostic tool available as part of Active Directory. It has the ability to save a snapshot of the Active Directory data. Running the following command will copy the NTDS.dit database and the SYSTEM and SECURITY hives to `C:\Windows\Temp`.
 
@@ -85,7 +85,7 @@ The following files can then be exported
 If the NTDS database is very large (several gigabytes), the generation of a defragmented backup with ntdsutil consumes a lot of CPU and disk resources on the server, which can cause slowdowns and other undesirable effects on the domain controller.
 {% endhint %}
 
-### Esentutl
+#### Esentutl
 
 Esentutl is a command-line tool that provides a database utilities for the Extensible Storage Engine (ESE). It can be used to copy a (locked) file using Volume Shadow Copy.
 
@@ -93,7 +93,7 @@ Esentutl is a command-line tool that provides a database utilities for the Exten
 esentutl.exe /y /vss c:\windows\ntds\ntds.dit /d c:\folder\ntds.dit
 ```
 
-### Volume Shadow Copy (VSSAdmin)
+#### Volume Shadow Copy (VSSAdmin)
 
 VSS (Volume Shadow Copy) is a Microsoft Windows technology, implemented as a service, that allows the creation of backup copies of files or volumes, even when they are in use. The following command will create the shadow copy and will print two values that will be used later: the ID and the Name of the shadow copy.
 
@@ -114,7 +114,7 @@ Once the required files are exfiltrated, the shadow copy can be removed
 vssadmin delete shadows /shadow=$ShadowCopyId
 ```
 
-### Invoke-NinjaCopy
+#### Invoke-NinjaCopy
 
 [Invoke-NinjaCopy](https://github.com/PowerShellMafia/PowerSploit/blob/master/Exfiltration/Invoke-NinjaCopy.ps1) is a PowerShell script part of the PowerSploit suite able to "copy files off an NTFS volume by opening a read handle to the entire volume (such as c:) and parsing the NTFS structures. **This technique is stealthier than the others.**
 
@@ -124,7 +124,7 @@ Invoke-NinjaCopy.ps1 -Path "C:\Windows\NTDS\NTDS.dit" -LocalDestination "C:\Wind
 {% endtab %}
 
 {% tab title="NTDS Parsing" %}
-## Secrets dump
+### Secrets dump
 
 Once the required files are exfiltrated, they can be parsed by tools like [secretsdump](https://github.com/SecureAuthCorp/impacket/blob/master/examples/secretsdump.py) (Python, part of [Impacket](https://github.com/SecureAuthCorp/impacket/)) or [gosecretsdump](https://github.com/c-sto/gosecretsdump) (Go, faster for big files).
 
@@ -133,7 +133,7 @@ secretsdump -ntds ntds.dit.save -system system.save LOCAL
 gosecretsdump -ntds ntds.dit.save -system system.save
 ```
 
-### NTDS Directory parsing and extraction
+#### NTDS Directory parsing and extraction
 
 With the required files, it is possible to extract more information than just secrets. The NTDS file is responsible for storing the entire directory, with users, groups, OUs, trusted domains etc... This data can be retrieved by parsing the NTDS with tools like [ntdsdotsqlite](https://github.com/almandin/ntdsdotsqlite). With the NTDS alone, objects can be extracted from the NTDS such as user and machine accounts, with a lot of information about them: descriptions, user account control flags, last logon and password change timestamps etc. This information is stored as an SQLite database which is easier to browse and query.
 

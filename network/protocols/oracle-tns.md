@@ -8,9 +8,9 @@ description: Pentesting Oracle TNS - TCP Ports 1521,1522-1529
 
 Oracle clients communicate with the database using the Transparent Network Substrate (TNS) protocol. When the listener receives a connection request (1521/TCP, -you may also get secondary listeners on 1522–1529-), it starts up a new database process and establishes a connection between the client and the Oracle database.
 
-## Practice&#x20;
+## Practice
 
-### &#x20;**Enumerate v**ersion
+### **Enumerate v**ersion
 
 {% tabs %}
 {% tab title="nmap" %}
@@ -51,7 +51,7 @@ tnscmd10g save_config -p 1521 -h <IP>
 ```
 
 {% hint style="danger" %}
-If you **receive an error**, could be because **TNS versions are incompatible** (Use the `--10G` parameter with `tnscmd10`) and if the **error persist,** the listener may be **password protected**&#x20;
+If you **receive an error**, could be because **TNS versions are incompatible** (Use the `--10G` parameter with `tnscmd10`) and if the **error persist,** the listener may be **password protected**
 {% endhint %}
 
 We can use hydra to brute-force TNS-Listener password
@@ -68,7 +68,7 @@ The SID (Service Identifier) is essentially the database name, depending on the 
 
 {% tabs %}
 {% tab title="Bruteforce" %}
-We can brute-force SID  using [Hydra](https://github.com/vanhauser-thc/thc-hydra) or [Odat](https://github.com/quentinhardy/odat)
+We can brute-force SID using [Hydra](https://github.com/vanhauser-thc/thc-hydra) or [Odat](https://github.com/quentinhardy/odat)
 
 ```bash
 #Using Hydra
@@ -134,18 +134,18 @@ cat /usr/share/oscanner/accounts.default
 {% tab title="Default Passwords" %}
 Below are some of the default passwords associated with Oracle:
 
-* **DBSNMP/DBSNMP**  —  Intelligent Agent uses this to talk to the db server (its some work to change it)&#x20;
-* **SYS/CHANGE\_ON\_INSTALL**  —  Default sysdba account before and including Oracle v9, as of version 10g this has to be different!&#x20;
-* **PCMS\_SYS/PCMS\_SYS**  —  Default x account&#x20;
-* **WMSYS/WMSYS**  —  Default x account&#x20;
-* **OUTLN/OUTLN**  —  Default x account&#x20;
+* **DBSNMP/DBSNMP**  —  Intelligent Agent uses this to talk to the db server (its some work to change it)
+* **SYS/CHANGE\_ON\_INSTALL**  —  Default sysdba account before and including Oracle v9, as of version 10g this has to be different!
+* **PCMS\_SYS/PCMS\_SYS**  —  Default x account
+* **WMSYS/WMSYS**  —  Default x account
+* **OUTLN/OUTLN**  —  Default x account
 * **SCOTT/TIGER**  —  Default x account
 
-Other default passwords can be found [here ](http://www.petefinnigan.com/default/oracle\_default\_passwords.htm)and [here](https://cirt.net/passwords?vendor=Oracle)
+Other default passwords can be found [here ](http://www.petefinnigan.com/default/oracle_default_passwords.htm)and [here](https://cirt.net/passwords?vendor=Oracle)
 {% endtab %}
 
 {% tab title="Steal/Dump Passwords" %}
-### Stealremotepwds - CVE-2012-3137
+#### Stealremotepwds - CVE-2012-3137
 
 {% hint style="info" %}
 **The versions 11.1.0.6, 11.1.0.7, 11.2.0.1, 11.2.0.2, and 11.2.0.3 are vulnerable** to this technique
@@ -181,7 +181,7 @@ odat stealremotepwds -s <IP> -U <username> -P <password> -d <SID> --test-module
 odat stealremotepwds -s <IP> -U <username> -P <password> -d <SID> --get-all-passwords --user-list /usr/share/nmap/nselib/data/oracle-default-accounts.lst
 ```
 
-### Dump Oracle Hashes
+#### Dump Oracle Hashes
 
 Password hashes in Oracle are stored in the **sys.users$** or **dba\_users** tables. With permissions, we can extract them using odat
 

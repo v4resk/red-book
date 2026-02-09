@@ -346,7 +346,7 @@
   * [🛠️ WPS](network/wifi/wps.md)
 * [Bluetooth](network/bluetooth.md)
 
-## Active Directory Pentesting <a href="#a-d" id="a-d"></a>
+## Active Directory Pentesting <a href="#ad" id="ad"></a>
 
 * [Reconnaissance](ad/recon/README.md)
   * [Tools ⚙️](ad/recon/tools/README.md)
@@ -424,7 +424,7 @@
     * [Shadow Credentials](ad/movement/kerberos/shadow-credentials.md)
     * [UnPAC the hash](ad/movement/kerberos/unpac-the-hash.md)
     * [Pass the Certificate - PKINIT](ad/movement/kerberos/pass-the-certificate.md)
-    * [Kerberos relay](a-d/movement/kerberos/kerberos-relay.md)
+    * [Kerberos relay](ad/movement/kerberos/kerberos-relay.md)
     * [sAMAccountName spoofing](ad/movement/kerberos/samaccountname-spoofing.md)
     * [SPN-jacking](ad/movement/kerberos/spn-jacking.md)
   * [Netlogon](ad/movement/netlogon/README.md)
@@ -440,7 +440,7 @@
     * [Grant rights](ad/movement/dacl/grant-rights.md)
     * [Logon script](ad/movement/dacl/logon-script.md)
     * [Rights on RODC object](ad/movement/dacl/rights-on-rodc-object.md)
-    * [BadSuccessor (dMSA abuse)](a-d/movement/dacl/badsuccessor-dmsa-abuse.md)
+    * [BadSuccessor (dMSA abuse)](ad/movement/dacl/badsuccessor-dmsa-abuse.md)
   * [Group policies](ad/movement/group-policies.md)
   * [Trusts](ad/movement/domain-trusts.md)
   * [Certificate Services (AD-CS)](ad/movement/ad-cs/README.md)

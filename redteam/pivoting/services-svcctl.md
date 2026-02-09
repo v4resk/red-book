@@ -4,14 +4,14 @@
 
 Windows services can also be leveraged to run arbitrary commands since they execute a command when started. When using sc, it will try to connect to the Service Control Manager (SVCCTL) remote service program through RPC in several ways:
 
-* By using [MS-SCMR](https://learn.microsoft.com/en-us/openspecs/windows\_protocols/ms-scmr/705b624a-13de-43cc-b8a2-99573da3635f) protocols over RPC to connect EMP at port 135. WIll ask for the SVCCTL RPC Endpoint wich is a dynamic port
+* By using [MS-SCMR](https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-scmr/705b624a-13de-43cc-b8a2-99573da3635f) protocols over RPC to connect EMP at port 135. WIll ask for the SVCCTL RPC Endpoint wich is a dynamic port
 * Try to reach SVCCTL Through SMB named pipes (\PIPE\svcctl) on port 445 (SMB) or 139 (SMB over NetBIOS)
 
 ## Practice
 
 {% tabs %}
 {% tab title="UNIX-like" %}
-### Service.py
+#### Service.py
 
 The [Impacket](https://github.com/SecureAuthCorp/impacket) script [service.py](https://github.com/SecureAuthCorp/impacket/blob/master/examples/service.py) can be use to interact with services remotely.
 
@@ -49,7 +49,7 @@ services.py <DOMAIN>/<user>@<TARGET> delete -name addme
 You will get an error starting the service but the commands will still be executed
 {% endhint %}
 
-### Scshell.py
+#### Scshell.py
 
 The script [scshell.py](https://github.com/SecureAuthCorp/impacket/blob/master/examples/scshell.py) can automate the process to spawn a shell
 

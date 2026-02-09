@@ -49,7 +49,7 @@ Here are a few **tips and tricks** on the collection process
 {% endtab %}
 
 {% tab title="UNIX-like" %}
-### BloodHound.py
+#### BloodHound.py
 
 From UNIX-like system, a non-official (but very effective nonetheless) Python version can be used.
 
@@ -69,7 +69,7 @@ netexec ldap $TARGET -u $USERNAME -p $PASSWORD --bloodhound --dns-server $DC_IP 
 This ingestors is not as powerful as the C# one. It mostly misses GPO collection methods **but** a good news is that it can do pass-the-hash. It becomes really useful when compromising a domain account's NT hash.
 {% endhint %}
 
-### Bloodhound.py for Trusted domains
+#### Bloodhound.py for Trusted domains
 
 The official `bloodhound.py` package does not retrieve data across all trusted or child domains. However, you can use [@n3rada's fork](https://github.com/n3rada/BloodHound.py) to achieve this.
 
@@ -77,7 +77,7 @@ The official `bloodhound.py` package does not retrieve data across all trusted o
 bloodhound-python --crawl --zip -c All -d $DOMAIN -u $USERNAME -p $PASSWORD -dc $DOMAIN_CONTROLLER
 ```
 
-### Ldapsearch to Bloodhound
+#### Ldapsearch to Bloodhound
 
 If this is necessary for any reason, we can use [LDAP dumps](../../../network/protocols/ldap.md), also known as LDIF files, and covert them into JSON files ingestible by BloodHound using [ldif2bloodhound](https://github.com/SySS-Research/ldif2bloodhound).
 

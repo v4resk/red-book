@@ -20,7 +20,7 @@ In order to set up a Windows Defender Application Control (WDAC) policy that can
 
 {% tabs %}
 {% tab title="Locally" %}
-### 1. Setup Your Environement
+#### 1. Setup Your Environement
 
 On a fresh installed Windows Virtual machine, we will install:
 
@@ -28,7 +28,7 @@ On a fresh installed Windows Virtual machine, we will install:
 * [WDAC Wizzard](https://webapp-wdac-wizard.azurewebsites.net/)
 * The targetted EDR Agent
 
-### 2. Create a WDAC Policy
+#### 2. Create a WDAC Policy
 
 When all setup, we can start creating an EDR-Blocking WDAC Policy using the WDAC Wizzard utility:
 
@@ -55,7 +55,7 @@ For this technique to be effective in tampering with EDR functions, it is essent
 {% endhint %}
 
 {% hint style="danger" %}
-However, avoid blocking entire EDR related drivers and processes, as this may lead to system crashes or blue screens. \
+However, avoid blocking entire EDR related drivers and processes, as this may lead to system crashes or blue screens.\
 Instead, **focus on blocking the minimal components, necessary to interfere with the essential functions of the EDR.**
 {% endhint %}
 
@@ -65,7 +65,7 @@ Instead, **focus on blocking the minimal components, necessary to interfere with
 
 <figure><img src="../../../.gitbook/assets/image (2) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
-### 3. Apply the WDAC Policy
+#### 3. Apply the WDAC Policy
 
 We can now upload the previously build PolicyBinary file to a target host, and [apply it](https://learn.microsoft.com/en-us/windows/security/application-security/application-control/app-control-for-business/deployment/appcontrol-deployment-guide) using below command lines:
 
@@ -90,7 +90,7 @@ Invoke-CimMethod -Namespace root\Microsoft\Windows\CI -ClassName PS_UpdateAndCom
 
 <figure><img src="../../../.gitbook/assets/image-20241008161514514.png" alt=""><figcaption></figcaption></figure>
 
-### 4. Reboot
+#### 4. Reboot
 
 After reboot, (and maybe several tests to identify which process/driver to block) the EDR should be now disabled.
 {% endtab %}

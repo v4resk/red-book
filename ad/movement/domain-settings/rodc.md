@@ -10,7 +10,7 @@ description: Read-Only Domain Controller
 >
 > (By Elad Shamir on [specterops.io](https://posts.specterops.io/at-the-edge-of-tier-zero-the-curious-case-of-the-rodc-ef5f1799ca06))
 
-RODC holds a read-only filtered copy of the Active Directory database with all the sensitives attributes deleted, like the LAPS passwords (this refers to [RODC Filtered Attribute Set](https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-server-2008-R2-and-2008/cc753459\(v=ws.10\)#rodc-fas) (FAS)), and cache only specific credentials.&#x20;
+RODC holds a read-only filtered copy of the Active Directory database with all the sensitives attributes deleted, like the LAPS passwords (this refers to [RODC Filtered Attribute Set](https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-server-2008-R2-and-2008/cc753459\(v=ws.10\)#rodc-fas) (FAS)), and cache only specific credentials.
 
 ### RODC Management
 
@@ -23,17 +23,13 @@ To authenticate a principal locally, the RODC must be allowed to retrieve his cr
 > **The default PRP (Password Replication Policy) specifies that no account passwords can be cached on any RODC**, and certain accounts are explicitly denied from being cached on any RODC.\
 > ([Microsoft](https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-server-2008-R2-and-2008/cc753459\(v=ws.10\)#credential-caching))
 
-In case the RODC has cached the principal's credentials and thus, is able to authenticate it locally, it will issue a TGT. To do so, the RODC holds a derived version of the `krbtgt` key named `krbtgt_XXXXX`(where XXXXX is its random version number) and uses it to sign and encrypt the generated TGT. This `krbtgt` account's version number can also be found in its `msDS-SecondaryKrbTgtNumber` attribute.&#x20;
+In case the RODC has cached the principal's credentials and thus, is able to authenticate it locally, it will issue a TGT. To do so, the RODC holds a derived version of the `krbtgt` key named `krbtgt_XXXXX`(where XXXXX is its random version number) and uses it to sign and encrypt the generated TGT. This `krbtgt` account's version number can also be found in its `msDS-SecondaryKrbTgtNumber` attribute.
 
 {% hint style="info" %}
 The RODC computer account has reset rights on the account `krbtgt_XXXXX`'s password.
 {% endhint %}
 
 When the RODC generates the TGT, it indicates in the `kvno` field the version number of the key used to generate the ticket. With this TGT, it is possible to request a Service Ticket (ST) against the RODC or any accessible standard writable Domain Controller (provided that the principal is listed in `msDS-RevealOnDemandGroup` and not listed in `msDS-NeverRevealGroup`).
-
-<figure><img src="../../../.gitbook/assets/RODC-Authentication mindmap.png" alt=""><figcaption><p>RODC authentication flow</p></figcaption></figure>
-
-<figure><img src="../../../.gitbook/assets/RODC-Access to resources mindmap.png" alt=""><figcaption><p>RODC service access flow</p></figcaption></figure>
 
 ## Practice
 

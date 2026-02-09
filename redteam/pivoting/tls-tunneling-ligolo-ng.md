@@ -6,9 +6,9 @@ description: MITRE ATT&CK™ Protocol Tunneling  - Technique T1572
 
 ## Theory
 
-[Ligolo-ng](https://github.com/nicocha30/ligolo-ng) (Golang) is a network pivoting tool that allows us to establish tunnels from a **reverse TCP/TLS** connection using a **tun interface** (without the need of SOCKS).&#x20;
+[Ligolo-ng](https://github.com/nicocha30/ligolo-ng) (Golang) is a network pivoting tool that allows us to establish tunnels from a **reverse TCP/TLS** connection using a **tun interface** (without the need of SOCKS).
 
-It utilizes a local proxy server and remote agents to make process tunneling from remote hosts simple and easy to manage. It has features other tools lack, such as building a network interface in the system userland that does not require elevated privileges to establish and **encrypt VPN tunneling**.&#x20;
+It utilizes a local proxy server and remote agents to make process tunneling from remote hosts simple and easy to manage. It has features other tools lack, such as building a network interface in the system userland that does not require elevated privileges to establish and **encrypt VPN tunneling**.
 
 {% hint style="info" %}
 Using ligolo-ng, we can perform SYN scan or send ICMP packets trought the created interface. (in contrast with SOCKS pivoting techniques like with [Chisel](portfwd.md#chisel) or [SSH](portfwd.md#ssh-tunneling)).
@@ -94,7 +94,7 @@ Done ! We can now access the `10.10.10.0/24` agent network from the proxy server
 {% endtab %}
 
 {% tab title="Setup" %}
-### All Versions
+#### All Versions
 
 [Ligolo-ng](https://github.com/nicocha30/ligolo-ng) fisrt need to be configured. We need to create a tun interface on the Proxy Server (Attacking Host, or Jumb Box):
 
@@ -108,7 +108,7 @@ sudo ip link set ligolo up
 # https://www.wintun.net/
 ```
 
-### Versions ≥ 0.46
+#### Versions ≥ 0.46
 
 Alternatively, on **Ligolo-ng >= v0.6**, you can now use the `interface_create` command to create a new interface! No need to use ip tuntap!
 
@@ -117,8 +117,6 @@ ligolo-ng » interface_create --name "ligolo"
 ```
 {% endtab %}
 {% endtabs %}
-
-
 
 {% hint style="info" %}
 To perform **double pivoting** with ligolo-ng, we can add a listener on any agent. For example, if Agent2 only has access to Agent1 and we want to proxy its traffic.

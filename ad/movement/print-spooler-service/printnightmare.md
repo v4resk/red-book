@@ -23,8 +23,8 @@ The Print Spooler is a Microsoft built-in service that manages printing jobs. It
 In a detailed blogpost ([here](https://cyberwatch.fr/actualite/cve-2021-34527-comment-identifier-et-neutraliser-la-vulnerabilite-printnightmare/)), Cyberwatch describes that the vulnerability lies in the functions allowing remote driver installation by users, `RpcAddPrinterDriverEx` and `RpcAddPrinterDriver`:
 
 1. The attacker stores the driver DLL file on a SMB share reachable from the server.
-2. The client creates a [`DRIVER_INFO_2`](https://learn.microsoft.com/en-us/openspecs/windows\_protocols/ms-rprn/39bbfc30-8768-4cd4-9930-434857e2c2a2) object containing the path to the attacker's DLL and passes it into the DRIVER\_CONTAINER object.
-3. The client calls [`RpcAddPrinterDriverEx`](https://learn.microsoft.com/en-us/openspecs/windows\_protocols/ms-rprn/b96cc497-59e5-4510-ab04-5484993b259b) with the `DRIVER_CONTAINER` to load the attacker's DLL into the server's dynamic library and with multiple bit values within the `dwFileCopyFlags` \*\*\*\* in order to bypass the `SeLoadDriverPrivilege` \*\*\*\* privilege verification by the server.
+2. The client creates a [`DRIVER_INFO_2`](https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-rprn/39bbfc30-8768-4cd4-9930-434857e2c2a2) object containing the path to the attacker's DLL and passes it into the DRIVER\_CONTAINER object.
+3. The client calls [`RpcAddPrinterDriverEx`](https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-rprn/b96cc497-59e5-4510-ab04-5484993b259b) with the `DRIVER_CONTAINER` to load the attacker's DLL into the server's dynamic library and with multiple bit values within the `dwFileCopyFlags` \*\*\*\* in order to bypass the `SeLoadDriverPrivilege` \*\*\*\* privilege verification by the server.
 4. The attacker's DLL is executed on the server within `SYSTEM` context.
 
 ### Constraints
@@ -33,15 +33,7 @@ As [@StanHacked](https://twitter.com/StanHacked/) stated on Twitter, there are s
 
 #### MS-RPRN conditional tree
 
-<div>
-
-<figure><img src="../../../.gitbook/assets/PrintNightmare_MS-RPRN.jpeg" alt=""><figcaption></figcaption></figure>
-
- 
-
 <figure><img src="../../../.gitbook/assets/E5ShO9wXwAAPAC9.jpeg" alt=""><figcaption></figcaption></figure>
-
-</div>
 
 #### MS-PAR conditional tree
 

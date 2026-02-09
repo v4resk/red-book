@@ -8,7 +8,7 @@ SCCM is an **on-premise** solution, but Microsoft also maintains a cloud-native 
 
 ### Topology
 
-SCCM operates in a Client-Server architecture deployed on a "site", representing the SCCM environment. Each client (server or workstation) has an agent installed used to communicate with its SCCM server, the [Primary Site server](https://learn.microsoft.com/en-us/mem/configmgr/core/plan-design/hierarchy/design-a-hierarchy-of-sites#BKMK\_ChoosePriimary).
+SCCM operates in a Client-Server architecture deployed on a "site", representing the SCCM environment. Each client (server or workstation) has an agent installed used to communicate with its SCCM server, the [Primary Site server](https://learn.microsoft.com/en-us/mem/configmgr/core/plan-design/hierarchy/design-a-hierarchy-of-sites#BKMK_ChoosePriimary).
 
 Clients are logically grouped into [boundary groups](https://learn.microsoft.com/en-us/mem/configmgr/core/servers/deploy/configure/boundary-groups), that are a set of network locations allowing clients to communicate with the SCCM closest resources in an SCCM site.
 
@@ -18,7 +18,7 @@ Boundary groups also allow for [automatic site assignment](https://learn.microso
 Each SCCM site is identified by a three-character code to distinguish it in an SCCM hierarchy. This is needed at the client registration process.
 {% endhint %}
 
-The primary site server manages the clients (like distributing software updates) and can have child servers attached to it ([secondary sites](https://learn.microsoft.com/en-us/mem/configmgr/core/plan-design/hierarchy/design-a-hierarchy-of-sites#BKMK\_ChooseSecondary)), generally for scalability purpose. In case of high availability in required, it is also possible to find a [passive site server](https://learn.microsoft.com/en-us/mem/configmgr/core/servers/deploy/configure/site-server-high-availability) that will be used only if the active site server stop working.
+The primary site server manages the clients (like distributing software updates) and can have child servers attached to it ([secondary sites](https://learn.microsoft.com/en-us/mem/configmgr/core/plan-design/hierarchy/design-a-hierarchy-of-sites#BKMK_ChooseSecondary)), generally for scalability purpose. In case of high availability in required, it is also possible to find a [passive site server](https://learn.microsoft.com/en-us/mem/configmgr/core/servers/deploy/configure/site-server-high-availability) that will be used only if the active site server stop working.
 
 Between the site server and clients sites [the management point](https://learn.microsoft.com/en-us/mem/configmgr/core/plan-design/hierarchy/plan-for-site-system-servers-and-site-system-roles#management-point) which is an SCCM server role allowing to provide clients with necessary policies and configuration to communicate with the site server and receive configuration data from them.
 
@@ -73,7 +73,7 @@ SCCM reconnaissance can be performed in many ways. The goal is to enumerate whet
 
 {% tabs %}
 {% tab title="UNIX-like" %}
-### PXEThiefy.py <a href="#pxethiefy.py" id="pxethiefy.py"></a>
+#### PXEThiefy.py <a href="#pxethiefy.py" id="pxethiefy.py"></a>
 
 [pxethiefy.py](https://github.com/sse-secure-systems/Active-Directory-Spotlights/tree/master/SCCM-MECM/pxethiefy) (Python), which is based on [PXEThief](https://github.com/MWR-CyberSec/PXEThief), can be used to query for PXE boot media. The Pre-Boot Execution Environment (PXE) is a mechanism for booting a computer over the network. Specifically, instead of booting from a CD drive, USB key or hard disk and finding the boot program, the PC will use the network to read such a program from the PXE server.
 
@@ -86,7 +86,7 @@ There are a few things to note:
 * [pxethiefy.py](https://github.com/sse-secure-systems/Active-Directory-Spotlights/tree/master/SCCM-MECM/pxethiefy) uses broadcast requests to request DHCP PXE boot options. An SCCM setup does not have to support PXE boot and a "found" PXE server does not have to be an SCCM component. Be cautious of false positive results.
 * In this case a PXE server was found and PXE media was downloaded. The location of the PXE media on the TFTP server is `\SMSTemp\...`, which indicates that this is indeed an SCCM server.
 
-### SCCMHunter <a href="#sccmhunter" id="sccmhunter"></a>
+#### SCCMHunter <a href="#sccmhunter" id="sccmhunter"></a>
 
 [sccmhunter](https://github.com/garrettfoster13/sccmhunter) (Python) can also be used to explore the Active Directory and search for SCCM/MECM assets. For this tool, a first user account is required. The first step is to retrieve the different assets in the LDAP annuary, and extract informations from the identified servers SMB shares.
 
@@ -169,8 +169,6 @@ openssl s_client -connect $TARGET_IP:10123
 ```
 {% endtab %}
 {% endtabs %}
-
-
 
 ### Abuse
 

