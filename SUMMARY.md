@@ -509,11 +509,11 @@
 ## Cloud & CI/CD Pentesting <a href="#cloud-cicd-pentesting" id="cloud-cicd-pentesting"></a>
 
 * [Kubernetes](cloud-cicd-pentesting/containers/kubernetes.md)
-  * [Reconnaissance and Enumeration](cloud-cicd-pentesting/kubernetes/reconnaissance-and-enumeration.md)
+  * [Reconnaissance](cloud-cicd-pentesting/kubernetes/reconnaissance-and-enumeration.md)
   * [Initial Access](cloud-cicd-pentesting/kubernetes/initial-access.md)
-  * [PrivEsc and RBAC Exploitation](cloud-cicd-pentesting/kubernetes/privesc-and-rbac-exploitation.md)
+  * [Privilege Escalation](cloud-cicd-pentesting/kubernetes/privesc-and-rbac-exploitation.md)
   * [Persistence and Lateral Movement](cloud-cicd-pentesting/kubernetes/persistence-and-lateral-movement.md)
-  * [Data Exfiltration](cloud-cicd-pentesting/kubernetes/data-exfiltration.md)
+  * [Post-Exploitation](cloud-cicd-pentesting/kubernetes/data-exfiltration.md)
 * [CI/CD](cloud-cicd-pentesting/ci-cd/README.md)
   * [Ansible Pentesting](cloud-cicd-pentesting/ci-cd/ansible-pentesting.md)
   * [Artifactory Pentesting](cloud-cicd-pentesting/ci-cd/artifactory-pentesting.md)
@@ -554,5 +554,7 @@
       * [Cloud Kerberos Trust](cloud-cicd-pentesting/azure-ad/movement/hybrid-identity/cloud-kerberos-trust.md)
     * [Cross-Tenant Access](cloud-cicd-pentesting/azure-ad/movement/cross-tenant-access.md)
   * [🛠️ Persistence](cloud-cicd-pentesting/azure-ad/persistence.md)
+* [🛠️ AWS Pentesting](cloud-cicd-pentesting/aws/README.md)
+  * [Reconnaissance](cloud-cicd-pentesting/aws/reconnaissance.md)
+  * [Movement](cloud-cicd-pentesting/aws/movement.md)
 * [🛠️ GCP Pentesting](cloud-cicd-pentesting/gcp-pentesting.md)
-* [🛠️ AWS Pentesting](cloud-cicd-pentesting/aws.md)
