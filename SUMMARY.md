@@ -563,7 +563,7 @@
       * [Roles & AssumeRole](cloud-cicd-pentesting/aws/movement/aws-iam/roles-and-assumerole.md)
       * [Access Keys](cloud-cicd-pentesting/aws/movement/aws-iam/access-keys.md)
       * [Policies](cloud-cicd-pentesting/aws/movement/aws-iam/policies.md)
-      * [🛠️ PassRole & Service Principals](cloud-cicd-pentesting/aws/movement/aws-iam/passrole-and-service-principals.md)
+      * [PassRole & Service Principals](cloud-cicd-pentesting/aws/movement/aws-iam/passrole-and-service-principals.md)
       * [🛠️ MFA](cloud-cicd-pentesting/aws/movement/aws-iam/mfa.md)
       * [🛠️ Identity Center](cloud-cicd-pentesting/aws/movement/aws-iam/identity-center.md)
       * [🛠️ Federation (SAML & OIDC)](cloud-cicd-pentesting/aws/movement/aws-iam/federation-saml-and-oidc.md)
