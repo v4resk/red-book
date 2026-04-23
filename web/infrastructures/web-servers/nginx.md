@@ -8,7 +8,7 @@ NGINX is open source software for web serving, reverse proxying, caching, load b
 
 ### Tools
 
-There are several tools available, such as [Gixy](https://github.com/yandex/gixy) and [Nginxpwner](https://github.com/stark0de/nginxpwner), which can automate the process of identifying misconfigurations in Nginx.
+There are several tools available, such as [Gixy](https://github.com/yandex/gixy), [Gixy-Next](https://gixy.io/) and [Nginxpwner](https://github.com/stark0de/nginxpwner), which can automate the process of identifying misconfigurations in Nginx.
 
 {% tabs %}
 {% tab title="Gixy" %}
@@ -18,6 +18,8 @@ There are several tools available, such as [Gixy](https://github.com/yandex/gixy
 #Static analyze
 gixy /etc/nginx/nginx.conf
 ```
+
+The original Gixy does not really work with Python3, but a fork [Gixy-Next](https://github.com/megamansec/gixy-next) adds support.
 {% endtab %}
 
 {% tab title="Nginxpwner" %}
