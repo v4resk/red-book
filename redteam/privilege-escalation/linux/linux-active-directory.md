@@ -2,9 +2,54 @@
 
 ## Theory
 
-A linux machine can also be present inside an Active Directory environment.
+Linux systems can be integrated into an Active Directory environment in several different ways. The most common stacks are:
 
-A linux machine in an AD might be **storing different CCACHE tickets inside files. This tickets can be used and abused as any other kerberos ticket**. In order to read this tickets you will need to be the user owner of the ticket or **root** inside the machine.
+* `realmd` for joining the host to the domain
+* `sssd` for identity, authentication, and cache management
+* Samba / Winbind for SMB integration and AD-aware name and auth handling
+* Kerberos client utilities such as `kinit`, `klist`, and `libkrb5`
+* host and service keytabs such as `/etc/krb5.keytab`
+
+These components solve different problems, and each one may create different credential artifacts worth looting.
+
+#### **realmd**
+
+`realmd` is usually the onboarding layer. It helps a Linux host join an AD domain and writes the configuration needed for tools such as `sssd` or Samba to use the domain.
+
+`realmd` is not usually the credential source you loot directly, but it is useful because it confirms that the machine is domain-joined, helps reveal which backend was chosen for integration, and shows where to pivot next for secrets, caches, and key material.
+
+#### **sssd**
+
+`sssd` stands for System Security Services Daemon. In AD-backed Linux environments it commonly handles user lookup, identity resolution, domain authentication, offline credential caching, policy caching, and Kerberos cache management through KCM. From an exploitation perspective, `sssd` matters because it can centralize sensitive material under `/var/lib/sss/`, including secret databases and Kerberos-related cache data that may not appear as ordinary files in `/tmp`.
+
+#### **Samba**
+
+Samba is the Linux implementation of SMB/CIFS and several Microsoft-compatible directory and authentication components. In AD environments, Samba may be used in two very different roles:
+
+* as a member server integrated into an existing Windows AD
+* as a Samba AD Domain Controller storing directory data locally
+
+This distinction is critical because on a member server you are mostly interested in local machine secrets and integration artifacts, while on a Samba AD DC local compromise can expose domain directory data and have DC-level impact.
+
+#### **Winbind**
+
+`winbindd` is Samba's AD-aware identity and authentication service. It maps domain users and groups to the local UNIX system and helps the host interact with AD identities.
+
+From an operator perspective, Winbind is useful because it shows that the host is AD-aware even if `sssd` is not used, that Samba private directories may contain useful machine-account material, and that SMB-oriented integration paths may be more relevant than SSSD-specific ones.
+
+#### **Keytabs**
+
+A keytab is a file containing Kerberos keys for a host or service principal. It is the Kerberos equivalent of storing a reusable secret for non-interactive authentication.
+
+From an exploitation perspective, a keytab may allow requesting a TGT as the host or service, authenticating to Kerberos-aware services without a password prompt, or extracting key material that can sometimes be transformed into reusable credentials.
+
+From a post-exploitation perspective, this matters because **the credential material is not stored in a single place**. Depending on the integration stack, a compromised Linux host may expose:
+
+* Kerberos ticket caches for logged-in users or services
+* host and service keytabs
+* SSSD-managed secret databases
+* Samba private databases with machine-account or trust-related secrets
+* directory data if the Linux host is running as a Samba AD Domain ControllerIn other words, do not limit triage to `/tmp/krb5cc_*`. A Linux host joined to AD can hold **user-scoped**, **service-scoped**, and **host-scoped** authentication material.
 
 ## Practice
 
@@ -32,15 +77,27 @@ ticketConverter.py $ticket.ccache $ticket.kirbi
 linikatz.sh
 ```
 {% endtab %}
+
+{% tab title="KrbNixPwn" %}
+[KrbNixPwn](https://github.com/0xTal/KrbNixPwn) is useful when you want a single workflow to target several Linux Kerberos cache backends. It is relevant when tickets may be stored as `FILE`, `DIR`, `KEYRING`, or `KCM`.
+
+```bash
+./KrbNixPwn.sh dump
+#OR
+./KrbNixPwn.sh monitor
+```
+{% endtab %}
 {% endtabs %}
 
 ### CCACHE ticket reuse from /tmp
 
+Kerberos tickets are often stored in file-backed CCACHE files. These caches are usually tied to a specific user session, but if you can read the file you can often **reuse the ticket without knowing the user's password**.
+
+These files are commonly stored in `/tmp` with permissions such as `600`, and the ticket name often follows the format `krb5cc_%{uid}`.
+
 {% tabs %}
 {% tab title="Reuse tickets" %}
-When tickets are set to be stored as a file on disk, the standard format and type is a CCACHE file. This is a simple binary file format to store Kerberos credentials. These files are typically stored in /tmp and scoped with 600 permissions
-
-List the current ticket used for authentication with `env | grep KRB5CCNAME`. The format is portable and the ticket can be **reused by setting the environment variable** with `export KRB5CCNAME=/tmp/ticket.ccache`. Kerberos ticket name format is `krb5cc_%{uid}` where uid is the user UID.
+List the current ticket used for authentication with `env | grep KRB5CCNAME`. The format is portable and the ticket can be **reused by setting the environment variable** with `export KRB5CCNAME=/tmp/ticket.ccache`.
 
 ```bash
 ls /tmp/ | grep krb5cc
@@ -57,14 +114,39 @@ You may use this ticket using [Pass The Ticket](../../../ad/movement/kerberos/pt
 {% endtab %}
 {% endtabs %}
 
-### CCACHE ticket reuse from keyring
+### CCACHE ticket reuse from DIR caches
+
+Some Linux systems use a directory-backed cache instead of a single `krb5cc_*` file. In that configuration, the cache name may point to a directory that contains multiple ticket cache entries.
+
+This matters because a quick search for `/tmp/krb5cc_*` may miss all valid Kerberos material.
 
 {% tabs %}
 {% tab title="Reuse tickets" %}
-Processes may **store kerberos tickets inside their memory**, the [tickey](https://github.com/TarlogicSecurity/tickey) tool can be useful to extract those tickets&#x20;
+Look for `DIR:` values in environment variables and Kerberos configuration, then inspect the target directory.
+
+```bash
+env | grep KRB5CCNAME
+grep -R "default_ccache_name" /etc/krb5.conf /etc/krb5.conf.d 2>/dev/null
+
+ls -lah /tmp/ 2>/dev/null
+find /tmp -maxdepth 2 -type d -name "*krb*" 2>/dev/null
+find /run -maxdepth 3 -type d -name "*krb*" 2>/dev/null
+```
+
+If the cache name resolves to a `DIR:` backend, inspect the directory contents and point `KRB5CCNAME` to the correct cache target.
+{% endtab %}
+{% endtabs %}
+
+### CCACHE ticket reuse from keyring
+
+Some Linux systems store Kerberos tickets in a kernel keyring-backed cache instead of a plain file. In that case, there may be no obvious `krb5cc_*` file even though the host is actively using Kerberos.
+
+{% tabs %}
+{% tab title="Reuse tickets" %}
+Processes may **store kerberos tickets inside their memory**, the [tickey](https://github.com/TarlogicSecurity/tickey) tool can be useful to extract those tickets
 
 {% hint style="info" %}
-ptrace protection should be disabled in the machine `/proc/sys/kernel/yama/ptrace_scope = 0`&#x20;
+ptrace protection should be disabled in the machine `/proc/sys/kernel/yama/ptrace_scope = 0`
 {% endhint %}
 
 ```bash
@@ -93,7 +175,7 @@ make CONF=Release
 {% tab title="Reuse tickets" %}
 SSSD maintains a copy of the database at the path `/var/lib/sss/secrets/secrets.ldb`. The corresponding key is stored as a hidden file at the path `/var/lib/sss/secrets/.secrets.mkey`. By default, the key is only readable if you have **root** permissions.
 
-Invoking [SSSDKCMExtractor](https://github.com/mandiant/SSSDKCMExtractor)  with the --database and --key parameters will parse the database and **decrypt the secrets**.
+Invoking [SSSDKCMExtractor](https://github.com/mandiant/SSSDKCMExtractor) with the `--database` and `--key` parameters will parse the database and **decrypt the secrets**.
 
 ```bash
 python3 SSSDKCMExtractor.py --database secrets.ldb --key secrets.mkey
