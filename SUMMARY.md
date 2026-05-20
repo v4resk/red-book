@@ -225,6 +225,7 @@
       * [Shadow File](redteam/credentials/os-credentials/linux/shadow-file.md)
       * [In-memory secrets](redteam/credentials/os-credentials/linux/passwords-in-memory.md)
       * [Linux Cached Kerberos tickets](redteam/credentials/os-credentials/linux/cached-kerberos-tickets.md)
+      * [Samba LDB files](redteam/credentials/os-credentials/linux/samba-ldb-files.md)
   * [MITM and coerced auths](redteam/credentials/mitm-and-coerced-auths.md)
   * [Password Attacks](redteam/credentials/passwd/README.md)
     * [Default, weak & Leaked Passwords](redteam/credentials/passwd/default-weak-and-leaked-passwords.md)
