@@ -571,3 +571,11 @@
       * [🛠️ Federation (SAML & OIDC)](cloud-cicd-pentesting/aws/movement/aws-iam/federation-saml-and-oidc.md)
   * [🛠️ Persistence](cloud-cicd-pentesting/aws/persistence.md)
 * [🛠️ GCP Pentesting](cloud-cicd-pentesting/gcp-pentesting.md)
+
+## 🛠️ AI RED-TEAMING
+
+* [Large Language Model (LLM)](ai-red-teaming/large-language-model-llm.md)
+* [Retrieval Augmented Generation (RAG)](ai-red-teaming/retrieval-augmented-generation-rag.md)
+* [Machine Learning (ML)](ai-red-teaming/machine-learning-ml.md)
+* [AI Agents](ai-red-teaming/ai-agents.md)
+* [Training Infrastructure](ai-red-teaming/training-infrastructure.md)
