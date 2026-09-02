@@ -12,6 +12,7 @@ import { getMDXComponents } from '@/components/mdx';
 import type { Metadata } from 'next';
 import { createRelativeLink } from 'fumadocs-ui/mdx';
 import { Callout } from 'fumadocs-ui/components/callout';
+import { SectionIndex, type SectionChild } from '@/components/section-index';
 import { gitConfig } from '@/lib/shared';
 import { absolute, breadcrumbs, jsonLd, siteName, techArticle } from '@/lib/seo';
 
@@ -22,6 +23,19 @@ export default async function Page(props: PageProps<'/[[...slug]]'>) {
 
   const MDX = page.data.body;
   const markdownUrl = getPageMarkdownUrl(page).url;
+
+  // direct children of this section, for the auto-generated contents listing
+  const depth = page.slugs.length;
+  const children: SectionChild[] = source
+    .getPages()
+    .filter((p) => p.slugs.length === depth + 1 &&
+                   p.slugs.slice(0, depth).join('/') === page.slugs.join('/'))
+    .map((p) => ({
+      url: p.url,
+      title: p.data.title,
+      description: p.data.description,
+      wip: (p.data as { wip?: boolean }).wip,
+    }));
 
   // breadcrumb trail from the page's slug chain; unresolved ancestors (a
   // '## group' heading has no page of its own) are skipped
@@ -61,6 +75,7 @@ export default async function Page(props: PageProps<'/[[...slug]]'>) {
             a: createRelativeLink(source, page),
           })}
         />
+        <SectionIndex items={children} />
       </DocsBody>
     </DocsPage>
   </>

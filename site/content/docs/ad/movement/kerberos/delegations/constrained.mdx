@@ -22,11 +22,11 @@ Configuring constrained delegation requires the `SeEnableDelegationPrivilege` on
 
 Constrained delegation can be configured with or without protocol transition. Abuse methodology differs for each scenario. The paths differ but the result is the same: a Service Ticket to authenticate on a target service on behalf of a user.
 
-Once the final Service Ticket is obtained, it can be used with [Pass-the-Ticket](/ad/movement/kerberos/ptt) to access the target service.
+Once the final Service Ticket is obtained, it can be used with [Pass-the-Ticket](/ad/movement/kerberos/pass-the/ptt) to access the target service.
 
 <Callout type="success">
 
-On a side note, a technique called [AnySPN or "service class modification"](/ad/movement/kerberos/ptt#modifying-the-spn) can be used concurrently with pass-the-ticket to change the service class the Service Ticket was destined to (e.g. for the `cifs/target.domain.local` SPN, the service class is `cifs`).
+On a side note, a technique called [AnySPN or "service class modification"](/ad/movement/kerberos/pass-the/ptt#modifying-the-spn) can be used concurrently with pass-the-ticket to change the service class the Service Ticket was destined to (e.g. for the `cifs/target.domain.local` SPN, the service class is `cifs`).
 
 </Callout>
 
@@ -38,7 +38,7 @@ On a side note, a technique called [AnySPN or "service class modification"](/ad/
 
 ![Domain Controller > Active Directory Users and Computers > delegation properties of a user](&lt;/assets/kcd with protocol transition.png>)
 
-If a service is configured with constrained delegation **with protocol transition**, then it can obtain a service ticket on behalf of a user by combining S4U2self and S4U2proxy requests, as long as the user is not sensitive for delegation, or a member of the "Protected Users" group. The service ticket can then be used with [pass-the-ticket](/ad/movement/kerberos/ptt). This process is similar to [resource-based contrained delegation](/ad/movement/kerberos/delegations/rbcd) exploitation.
+If a service is configured with constrained delegation **with protocol transition**, then it can obtain a service ticket on behalf of a user by combining S4U2self and S4U2proxy requests, as long as the user is not sensitive for delegation, or a member of the "Protected Users" group. The service ticket can then be used with [pass-the-ticket](/ad/movement/kerberos/pass-the/ptt). This process is similar to [resource-based contrained delegation](/ad/movement/kerberos/delegations/rbcd) exploitation.
 
 <Card href="/ad/movement/kerberos/delegations/rbcd" title="(RBCD) Resource-based constrained" />
 

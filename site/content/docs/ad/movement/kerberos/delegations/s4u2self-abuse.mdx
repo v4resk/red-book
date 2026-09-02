@@ -40,7 +40,7 @@ This step revolves around the `tgtdeleg` feature from [Rubeus](https://github.co
 Rubeus.exe tgtdeleg /nowrap
 ```
 
-The TGT can then be used with [Pass the Ticket](/ad/movement/kerberos/ptt) for the next step, which can be conducted remotely if needed, unlike this initial step.
+The TGT can then be used with [Pass the Ticket](/ad/movement/kerberos/pass-the/ptt) for the next step, which can be conducted remotely if needed, unlike this initial step.
 
 Alternatively, if the machine account credentials are known, a TGT can be requested commonly.
 
@@ -73,7 +73,7 @@ The TGT can then be used along with S4U2self to obtain a Service Ticket imperson
 <Tabs items={['UNIX-like', 'Windows']}>
 <Tab value="UNIX-like">
 
-From UNIX-like systems, [Impacket](https://github.com/SecureAuthCorp/impacket)'s getST.py (Python) script can be used for the purpose. If needed, `.kirbi` files can be converted to `.ccache` (cf. [Pass the Ticket](/ad/movement/kerberos/ptt)).
+From UNIX-like systems, [Impacket](https://github.com/SecureAuthCorp/impacket)'s getST.py (Python) script can be used for the purpose. If needed, `.kirbi` files can be converted to `.ccache` (cf. [Pass the Ticket](/ad/movement/kerberos/pass-the/ptt)).
 
 ```bash
 export KRB5CCNAME="/path/to/ticket.ccache"
@@ -93,7 +93,7 @@ Rubeus.exe s4u /self /nowrap /impersonateuser:"DomainAdmin" /altservice:"cifs/ma
 </Tab>
 </Tabs>
 
-Once a Service Ticket is received, it can be used with [pass-the-ticket](/ad/movement/kerberos/ptt)/[pass-the-cache](/ad/movement/kerberos/ptc) to obtain access to oneself as the "DomainAdmin" (the user can be changed in the request. Attackers should select a domain user which has local admin rights on the machine).
+Once a Service Ticket is received, it can be used with [pass-the-ticket](/ad/movement/kerberos/pass-the/ptt)/[pass-the-cache](/ad/movement/kerberos/pass-the/ptc) to obtain access to oneself as the "DomainAdmin" (the user can be changed in the request. Attackers should select a domain user which has local admin rights on the machine).
 
 <Callout type="info">
 

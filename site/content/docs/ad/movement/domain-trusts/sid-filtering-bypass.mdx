@@ -1,0 +1,71 @@
+---
+title: "SID Filtering Bypass"
+description: "Spoofing a domain SID to smuggle privileged SIDs across a forest trust"
+wip: true
+icon: Construction
+---
+
+## Theory
+
+SID filtering is what makes the forest, rather than the domain, the security
+boundary: SIDs that do not belong to the trusted domain are stripped from
+authorisation data crossing the trust. See
+[SID filtering](/ad/movement/domain-trusts#sid-filtering) for the mechanics and
+the `trustAttributes` flags that govern it.
+
+The filtering is not absolute. A few SIDs are (almost) never filtered:
+
+> the "Enterprise Domain Controllers" (S-1-5-9) SID and those described by the
+> [trusted domain object (TDO)](https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-pac/f2ef15b6-1e9b-48b5-bf0b-019f061d41c8#gt_f2ceef4e-999b-4276-84cd-2e2829de5fc4),
+> as well as seven well-known SIDs (see the [MS-PAC doc](https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-pac/55fc19f2-55ba-4251-8a6a-103dd7c66280)
+> and [improsec's post](https://improsec.com/tech-blog/sid-filter-as-security-boundary-between-domains-part-3-sid-filtering-explained)).
+
+Anything that gets a privileged SID into that unfiltered set, or that makes the
+trusting forest treat an attacker-chosen SID as belonging to the trusted forest,
+bypasses the boundary.
+
+## Practice
+
+### CVE-2020-0665
+
+[CVE-2020-0665](https://msrc.microsoft.com/update-guide/en-US/vulnerability/CVE-2020-0665)
+bypasses SID filtering to authenticate as a server in the trusting forest,
+targeting that server's local administrator (RID 500).
+
+The local domain SID of the target server is spoofed to fake a child domain in
+the trusted forest. After 24 hours that SID is added to the list of trusted SIDs
+in the trusting forest domain's TDO. A referral ticket is then forged with the
+spoofed SID as an extra SID and used to request a service ticket to that server.
+
+The attack runs in three steps:
+
+1. **Get the target server's local domain SID.** Uses MS-LSAT RPC to query the
+   server. This requires Windows older than build 1607 (or pre-Server 2016);
+   newer versions restrict it and require administrative privileges on the target.
+2. **Spoof that local domain SID.** Must run as `SYSTEM` on the trusted forest's
+   domain controller. The published Frida script targets Windows Server 2016
+   1607; other versions need different address offsets and extra preparation.
+3. **Forge the ticket.** See
+   [Kerberos authentication](/ad/movement/domain-trusts#kerberos-authentication)
+   for which trust key applies, then follow
+   [Forging tickets across trusts](/ad/movement/domain-trusts/forged-tickets).
+
+<Callout type="warn">
+Preconditions for reproducing this:
+
+* full control over the trusted forest
+* the ability to modify information flowing to the trusting forest
+* at least one server joined to a domain in the trusting forest
+</Callout>
+
+<Callout type="info">
+For how this works underneath, see
+[dirkjanm.io](https://dirkjanm.io/active-directory-forest-trusts-part-two-trust-transitivity/)
+by [Dirk-jan Mollema](https://twitter.com/_dirkjan).
+</Callout>
+
+## Resources
+
+<ResourceCard href="https://improsec.com/tech-blog/sid-filter-as-security-boundary-between-domains-part-4-bypass-sid-filtering-research" title="SID filter as security boundary between domains (part 4): bypass research" description="improsec.com" />
+<ResourceCard href="https://dirkjanm.io/active-directory-forest-trusts-part-two-trust-transitivity/" title="Active Directory forest trusts part 2: trust transitivity" description="dirkjanm.io" />
+<ResourceCard href="https://msrc.microsoft.com/update-guide/en-US/vulnerability/CVE-2020-0665" title="CVE-2020-0665" description="msrc.microsoft.com" />

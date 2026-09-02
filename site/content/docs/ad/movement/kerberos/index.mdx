@@ -74,9 +74,9 @@ _(_[_Kerberos keys calculation_](https://snovvcrash.rocks/2021/05/21/calculating
 
 </Callout>
 
-Again, Microsoft has poorly implemented the zero-knowledge proof concept in Kerberos. An attacker knowing a user's NT hash could use it to ask the KDC for a TGT (if RC4 key is accepted). This is called [Overpass-the-hash](/ad/movement/kerberos/ptk).
+Again, Microsoft has poorly implemented the zero-knowledge proof concept in Kerberos. An attacker knowing a user's NT hash could use it to ask the KDC for a TGT (if RC4 key is accepted). This is called [Overpass-the-hash](/ad/movement/kerberos/pass-the/ptk).
 
-<Card href="/ad/movement/kerberos/ptk" title="Pass the key" />
+<Card href="/ad/movement/kerberos/pass-the/ptk" title="Pass the key" />
 
 Users are not the only ones whose NT hashes can be used to abuse Kerberos.
 
@@ -85,23 +85,23 @@ Users are not the only ones whose NT hashes can be used to abuse Kerberos.
 
 <Card href="/ad/movement/kerberos/forged-tickets" title="Forged tickets" />
 
-[Overpass-the-hash](/ad/movement/kerberos/ptk), [silver ticket](forged-tickets.md#silver-ticket) and [golden ticket](forged-tickets.md#golden-ticket) attacks are used by attackers to obtain illegitimate tickets that can then be used to access services using Kerberos without knowing any password. This is called [Pass-the-ticket](/ad/movement/kerberos/ptt).
+[Overpass-the-hash](/ad/movement/kerberos/pass-the/ptk), [silver ticket](forged-tickets.md#silver-ticket) and [golden ticket](forged-tickets.md#golden-ticket) attacks are used by attackers to obtain illegitimate tickets that can then be used to access services using Kerberos without knowing any password. This is called [Pass-the-ticket](/ad/movement/kerberos/pass-the/ptt).
 
-<Card href="/ad/movement/kerberos/ptt" title="WzYZzG0ZhkKkcln8Wb4o" />
+<Card href="/ad/movement/kerberos/pass-the/ptt" title="WzYZzG0ZhkKkcln8Wb4o" />
 
 ## Roasting
 
 If Kerberos preauthentication is disabled for a user, it is possible to request a TGT for that specific user without knowing any credentials. When the TGT is requested, the KDC sends it along with a session key in the `KRB_AS_REP` message to the requesting client. The session key being encrypted with the requested user's NT hash, it is possible to crack that session key offline in a an attempt to find the user's password. This is called ASREProasting.
 
-<Card href="/ad/movement/kerberos/asreproast" title="aMCfYwIroVqgnglotzZr" />
+<Card href="/ad/movement/kerberos/roasting/asreproast" title="aMCfYwIroVqgnglotzZr" />
 
 If an attacker finds himself in a man-in-the-middle position, effectively capturing Kerberos messages, he could capture `KRB_AS_REQ` messages and operate a similar cracking attempt.
 
-<Card href="/ad/movement/kerberos/asreqroast" title="ASREQroast" />
+<Card href="/ad/movement/kerberos/roasting/asreqroast" title="ASREQroast" />
 
 When attackers have a foothold in the domain (i.e. valid domain credentials), they have the (intended) ability to request a service ticket (ST) for any valid SPN (ServicePrincipalName). The ST being encrypted with the service account's NT hash, when that service account's password is weak, it is then possible to crack the ST offline in a an attempt to find the password. This is called Kerberoasting. On a side note, obtaining a service ticket for a service specified by its SAN in an attempt to Kerberoast the account will only work if the service has at least one SPN.
 
-<Card href="/ad/movement/kerberos/kerberoast" title="RWjMvoWZjJMlHX6oZQpX" />
+<Card href="/ad/movement/kerberos/roasting/kerberoast" title="RWjMvoWZjJMlHX6oZQpX" />
 
 ## Delegations
 
@@ -197,7 +197,7 @@ In some specific scenarios, S4U2self and U2U can be combined, in which case the 
 
 This allows to
 
-* operate [RBCD attacks from SPN-less accounts](/ad/movement/kerberos/delegations/rbcd#rbcd-on-spn-less-users)
+* operate [RBCD attacks from SPN-less accounts](/ad/movement/kerberos/delegations/rbcd)
 * operate an [unPAC-the-hash](/ad/movement/kerberos/unpac-the-hash) attack
 * retrieve and decrypt the PAC (Privileged Attribute Certificate) of any account. Could be used to obtain a [sapphire ticket](/ad/movement/kerberos/forged-tickets).
 

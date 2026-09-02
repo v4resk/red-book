@@ -4,7 +4,7 @@ title: "Pass the Certificate - PKINIT"
 
 ## Theory
 
-The Kerberos authentication protocol works with tickets in order to grant access. An ST (Service Ticket) can be obtained by presenting a TGT (Ticket Granting Ticket). That prior TGT can only be obtained by validating a first step named "pre-authentication" (except if that requirement is explicitly removed for some accounts, making them vulnerable to [ASREProast](/ad/movement/kerberos/asreproast)). The pre-authentication can be validated symmetrically (with a DES, RC4, AES128 or AES256 key) or asymmetrically (with certificates). The asymmetrical way of pre-authenticating is called PKINIT.
+The Kerberos authentication protocol works with tickets in order to grant access. An ST (Service Ticket) can be obtained by presenting a TGT (Ticket Granting Ticket). That prior TGT can only be obtained by validating a first step named "pre-authentication" (except if that requirement is explicitly removed for some accounts, making them vulnerable to [ASREProast](/ad/movement/kerberos/roasting/asreproast)). The pre-authentication can be validated symmetrically (with a DES, RC4, AES128 or AES256 key) or asymmetrically (with certificates). The asymmetrical way of pre-authenticating is called PKINIT.
 
 Pass the Certificate is the fancy name given to the pre-authentication operation relying on a certificate (i.e. key pair) to pass in order to obtain a TGT. This operation is often conducted along [shadow credentials](/ad/movement/kerberos/shadow-credentials), [AD CS escalation](/ad/movement/ad-cs) and [UnPAC-the-hash attacks](/ad/movement/kerberos/unpac-the-hash).
 
@@ -49,7 +49,7 @@ gettgtpkinit.py -cert-pem "PATH_TO_PEM_CERT" -key-pem "PATH_TO_PEM_KEY" "FQDN_DO
 
 The ticket obtained can then be used to
 
-* authenticate with [pass-the-cache](/ad/movement/kerberos/ptc)
+* authenticate with [pass-the-cache](/ad/movement/kerberos/pass-the/ptc)
 * conduct an [UnPAC-the-hash](/ad/movement/kerberos/unpac-the-hash) attack. This can be done with [getnthash.py](https://github.com/dirkjanm/PKINITtools/blob/master/getnthash.py) from [PKINITtools](https://github.com/dirkjanm/PKINITtools/).
 * obtain access to the account's SPN with an S4U2Self. This can be done with [gets4uticket.py](https://github.com/dirkjanm/PKINITtools/blob/master/gets4uticket.py) from [PKINITtools](https://github.com/dirkjanm/PKINITtools).
 
@@ -134,7 +134,7 @@ openssl pkcs12 -in cert.pem -inkey key-pem.key -export -out cert.pfx
 
 The ticket obtained can then be used to
 
-* authenticate with [pass-the-ticket](/ad/movement/kerberos/ptt)
+* authenticate with [pass-the-ticket](/ad/movement/kerberos/pass-the/ptt)
 * conduct an [UnPAC-the-hash](/ad/movement/kerberos/unpac-the-hash) attack (add the `/getcredentials` flag to Rubeus's asktgt command)
 * obtain access to the account's SPN with an S4U2Self.
 

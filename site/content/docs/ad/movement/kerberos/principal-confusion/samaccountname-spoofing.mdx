@@ -30,10 +30,10 @@ The ability to edit a machine account's `sAMAccountName` and `servicePrincipalNa
 The attack can then be conducted as follows.
 
 1. Clear the controlled machine account `servicePrincipalName` attribute of any value that points to its name (e.g. `host/machine.domain.local`, `RestrictedKrbHost/machine.domain.local`)
-2. Change the controlled machine account `sAMAccountName` to a Domain Controller's name without the trailing `$` -> [CVE-2021-42278](/ad/movement/kerberos/samaccountname-spoofing#cve-2021-42278-name-impersonation)
+2. Change the controlled machine account `sAMAccountName` to a Domain Controller's name without the trailing `$` -> [CVE-2021-42278](/ad/movement/kerberos/principal-confusion/samaccountname-spoofing#cve-2021-42278---name-impersonation)
 3. Request a TGT for the controlled machine account
 4. Reset the controlled machine account `sAMAccountName` to its old value (or anything else different than the Domain Controller's name without the trailing `$`)
-5. Request a service ticket with S4U2self by presenting the TGT obtained before -> [CVE-2021-42287](/ad/movement/kerberos/samaccountname-spoofing#cve-2021-42287-kdc-lookup)
+5. Request a service ticket with S4U2self by presenting the TGT obtained before -> [CVE-2021-42287](/ad/movement/kerberos/principal-confusion/samaccountname-spoofing)
 6. Get access to the domain controller (i.e. [DCSync](/redteam/credentials/os-credentials/windows-and-active-directory/dcsync))
 
 <Callout type="warn">
@@ -157,7 +157,7 @@ An alternative to using computer accounts is to have enough permissions against 
 
 This attack path also requires knowledge of the user account password or hash (to obtain a TGT), which can be obtained (or set) in many ways (e.g. [Targeted Kerberoasting](/ad/movement/dacl/targeted-kerberoasting), [Shadow Credentials](/ad/movement/kerberos/shadow-credentials), [Forced Password Change](/ad/movement/dacl/forcechangepassword)).
 
-Appart from the computer account creation and SPNs manipulation, the exploitation steps are the same as with a [machine account](/ad/movement/kerberos/samaccountname-spoofing#machine-account). If the account has SPNs that point to its name, they will have to be removed for the renaming operation to work.
+Appart from the computer account creation and SPNs manipulation, the exploitation steps are the same as with a [machine account](/ad/movement/kerberos/principal-confusion/samaccountname-spoofing#machine-account). If the account has SPNs that point to its name, they will have to be removed for the renaming operation to work.
 
 ## Resources
 

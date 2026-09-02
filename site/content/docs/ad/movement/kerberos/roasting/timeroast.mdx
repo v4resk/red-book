@@ -1,0 +1,133 @@
+---
+title: "Timeroasting"
+description: "Extracting computer account hashes over NTP, without authentication"
+---
+
+## Theory
+
+Timeroasting abuses Microsoft's proprietary NTP extension to extract password-equivalent hashes for **computer and trust accounts** from a domain controller, **without any authentication**. The hashes are then cracked offline.
+
+Domain-joined machines synchronise their clocks against domain controllers. To compensate for NTP having no authentication of its own, Microsoft added an extension that authenticates NTP responses using computer account credentials: the client includes its computer account's **RID** in the request, and the DC replies with a MAC computed using that account's NT hash as the key.
+
+Because the request needs no credentials, an attacker can ask for **any RID** and receive a salted hash for that account.
+
+<Callout type="info">
+
+This is harmless where computer accounts hold strong random passwords. It matters in domains where accounts were provisioned manually or by legacy processes, which tends to leave weak or predictable passwords behind.
+
+</Callout>
+
+Compared with the other roasting techniques:
+
+| | Kerberoasting | Timeroasting |
+| :--- | :--- | :--- |
+| Credentials needed | valid domain account | **none** |
+| Targets | accounts with an SPN (usually service accounts) | computer and trust accounts |
+| Returns | account name | **RID only** |
+| Hash type | TGS-REP (etype 23) | SNTP |
+| Cracking speed | baseline | roughly 10x faster |
+| Noise | notable, SPN requests for every host | low, NTP is ubiquitous |
+
+Since only RIDs come back, mapping them to hostnames needs SMB NULL session enumeration where available, or correlation against computer names gathered during recon.
+
+## Practice
+
+### Unauthenticated Timeroasting
+
+<Callout type="warn">
+
+Unlike [Kerberoasting](/ad/movement/kerberos/roasting/kerberoast), this needs **no prior foothold**, which makes it useful for initial access.
+
+</Callout>
+
+It returns RIDs rather than names, so mapping hashes to accounts is a separate step.
+
+<Tabs items={['UNIX-like', 'Windows']}>
+<Tab value="UNIX-like">
+
+[Timeroast](https://github.com/SecuraBV/Timeroast) (Python) extracts computer account hashes from a domain controller.
+
+```bash
+python3 timeroast.py "$DC_IP"
+```
+
+[NetExec](https://github.com/Pennyw0rth/NetExec) also ships a module that performs the attack unauthenticated.
+
+```bash
+netexec smb "$DC_IP" -M timeroast
+```
+
+</Tab>
+
+<Tab value="Windows">
+
+[Timeroast](https://github.com/SecuraBV/Timeroast) also has a PowerShell version.
+
+```powershell
+. .\timeroast.ps1
+```
+
+</Tab>
+</Tabs>
+
+### Authenticated Timeroasting
+
+Running it with valid credentials is still worthwhile:
+
+* **RIDs resolve automatically** to computer account names through AD queries, removing the correlation step.
+* **Cracking is roughly 10x faster** than TGS-REP (etype 23). That will not make a random machine password crackable, but it materially improves the odds against weak ones.
+* **Quieter.** Kerberoasting can be pointed at computer accounts by requesting SPNs for every host, but that generates a lot of traffic and is well detected. NTP traffic is unremarkable by comparison.
+
+<Tabs items={['Windows']}>
+<Tab value="Windows">
+
+[Invoke-AuthenticatedTimeRoast](https://github.com/The-Viper-One/Invoke-AuthenticatedTimeRoast) (PowerShell) performs authenticated Timeroasting and resolves RIDs to hostnames itself.
+
+```powershell
+# Default execution
+Invoke-AuthenticatedTimeRoast -DomainController $DC_IP
+
+# Generate a wordlist from the computer names
+Invoke-AuthenticatedTimeRoast -DomainController $DC_IP -GenerateWordlist
+```
+
+</Tab>
+</Tabs>
+
+### Cracking SNTP hashes
+
+<Tabs items={['Hashcat', 'timecrack']}>
+<Tab value="Hashcat">
+
+Mode **31300**, which requires Hashcat **v7.0.0 or later** (v6.2.6 does not support the format).
+
+When the file holds RIDs as usernames, as `netexec` and `timeroast.py` output them, `--username` is required for correct parsing.
+
+```bash
+hashcat -m 31300 -a 0 -O hashes.txt $wordlist --username
+```
+
+</Tab>
+
+<Tab value="timecrack">
+
+[timecrack](https://github.com/SecuraBV/Timeroast/blob/main/extra-scripts/timecrack.py) (Python) runs a dictionary attack, slower than an optimised Hashcat run.
+
+```bash
+timecrack.py extracted_hashes.txt $wordlist
+```
+
+</Tab>
+</Tabs>
+
+<Callout type="success">
+
+Supplement the usual wordlists with the computer account names themselves, lowercased and without the trailing `$`. Machine passwords matching their hostname is a recurring pattern where accounts were created with `net computer`, or with the "Assign this computer account as a pre-Windows 2000 Computer" option in ADUC.
+
+</Callout>
+
+## Resources
+
+<ResourceCard href="https://github.com/SecuraBV/Timeroast" title="SecuraBV/Timeroast" description="github.com" />
+<ResourceCard href="https://github.com/The-Viper-One/Invoke-AuthenticatedTimeRoast" title="The-Viper-One/Invoke-AuthenticatedTimeRoast" description="github.com" />
+<ResourceCard href="https://cybersecurity.bureauveritas.com/uploads/whitepapers/Secura-WP-Timeroasting-v3.pdf" title="Timeroasting, Trustroasting and Computer Spraying" description="cybersecurity.bureauveritas.com" />

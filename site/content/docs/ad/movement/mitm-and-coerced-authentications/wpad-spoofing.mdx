@@ -71,7 +71,7 @@ On up-to-date machines (i.e. with the MS16-077 security update applied), WPAD ca
 
 #### Pre CVE-2018-8320
 
-On machines that are not patched against [CVE-2018-8320](https://portal.msrc.microsoft.com/en-US/security-guidance/advisory/CVE-2018-8320), there are two ways to bypass the GQBL: by [registering a wildcard record](/ad/movement/mitm-and-coerced-authentications/adidns-spoofing#manuel-record-addition) or by registering a domain alias (DNAME) record, which can be conducted as follows with [Powermad](https://github.com/Kevin-Robertson/Powermad) (Powershell).
+On machines that are not patched against [CVE-2018-8320](https://portal.msrc.microsoft.com/en-US/security-guidance/advisory/CVE-2018-8320), there are two ways to bypass the GQBL: by [registering a wildcard record](/ad/movement/mitm-and-coerced-authentications/adidns-spoofing) or by registering a domain alias (DNAME) record, which can be conducted as follows with [Powermad](https://github.com/Kevin-Robertson/Powermad) (Powershell).
 
 ```bash
 New-ADIDNSNode -Node '*' -Data 'Pentest_IP_Address'

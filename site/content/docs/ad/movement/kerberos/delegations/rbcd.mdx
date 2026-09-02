@@ -16,19 +16,19 @@ For this attack to work, the attacker needs to populate the target attribute wit
 
 * a user account having a `ServicePrincipalName` set
 * an account with a trailing `$` in the `sAMAccountName` (i.e. a computer accounts)
-* any other account and conduct [SPN-less RBCD](/ad/movement/kerberos/delegations/rbcd#rbcd-on-spn-less-users) with [U2U (User-to-User) authentication](/ad/movement/kerberos#user-to-user-authentication)
+* any other account and conduct [SPN-less RBCD](/ad/movement/kerberos/delegations/rbcd) with [U2U (User-to-User) authentication](/ad/movement/kerberos#user-to-user-authentication)
 
 The common way to conduct these attacks is to create a computer account. This is usually possible thanks to a domain-level attribute called [`MachineAccountQuota`](/ad/movement/domain-settings/machineaccountquota) that allows regular users to create up to 10 computer accounts.
 
 <Callout type="info">
 
-In 2022, [Jame Forshaw](https://twitter.com/tiraniddo) demonstrated that the SPN requirement wasn't completely mandatory and RBCD could be operated without: [Exploiting RBCD using a normal user](https://www.tiraniddo.dev/2022/05/exploiting-rbcd-using-normal-user.html). While this technique is a bit trickier and should absolutely be avoided on regular user accounts (the technique renders them unusable for normal people), it allows to abuse RBCD even if the [`MachineAccountQuota`](/ad/movement/domain-settings/machineaccountquota) is set to 0. The technique is demonstrated later on in this page ([RBCD on SPN-less user](/ad/movement/kerberos/delegations/rbcd#rbcd-on-spn-less-users)).
+In 2022, [Jame Forshaw](https://twitter.com/tiraniddo) demonstrated that the SPN requirement wasn't completely mandatory and RBCD could be operated without: [Exploiting RBCD using a normal user](https://www.tiraniddo.dev/2022/05/exploiting-rbcd-using-normal-user.html). While this technique is a bit trickier and should absolutely be avoided on regular user accounts (the technique renders them unusable for normal people), it allows to abuse RBCD even if the [`MachineAccountQuota`](/ad/movement/domain-settings/machineaccountquota) is set to 0. The technique is demonstrated later on in this page ([RBCD on SPN-less user](/ad/movement/kerberos/delegations/rbcd)).
 
 </Callout>
 
 Then, in order to abuse this, the attacker has to control the account (A) the target object's (B) attribute has been populated with. Using that account's (A) credentials, the attacker can obtain a ticket through `S4U2Self` and `S4U2Proxy` requests, just like constrained delegation with protocol transition.
 
-In the end, an RBCD abuse results in a Service Ticket to authenticate on the target service (B) on behalf of a user. Once the final Service Ticket is obtained, it can be used with [Pass-the-Ticket](/ad/movement/kerberos/ptt) to access the target service (B).
+In the end, an RBCD abuse results in a Service Ticket to authenticate on the target service (B) on behalf of a user. Once the final Service Ticket is obtained, it can be used with [Pass-the-Ticket](/ad/movement/kerberos/pass-the/ptt) to access the target service (B).
 
 <Callout type="warn">
 
@@ -50,7 +50,7 @@ There are a few additional details to keep in mind, valid as of the time of writ
 
 <Callout type="success">
 
-A technique called [AnySPN or "service class modification"](/ad/movement/kerberos/ptt#modifying-the-spn) can be used concurrently with pass-the-ticket to change the service class the Service Ticket was destined to (e.g. for the `cifs/target.domain.local` SPN, the service class is `cifs`).
+A technique called [AnySPN or "service class modification"](/ad/movement/kerberos/pass-the/ptt#modifying-the-spn) can be used concurrently with pass-the-ticket to change the service class the Service Ticket was destined to (e.g. for the `cifs/target.domain.local` SPN, the service class is `cifs`).
 
 </Callout>
 
@@ -87,7 +87,7 @@ Testers can also use [ntlmrelayx](https://github.com/SecureAuthCorp/impacket/blo
 
 <Callout type="info">
 
-In this example, `controlledaccount` can be [a computer account created for the attack](/ad/movement/domain-settings/machineaccountquota#create-a-computer-account), or any other account -with at least one Service Principal Name set for the usual technique, or without for [SPN-less RBCD](/ad/movement/kerberos/delegations/rbcd#rbcd-on-spn-less-users)- which credentials are known to the attacker.
+In this example, `controlledaccount` can be [a computer account created for the attack](/ad/movement/domain-settings/machineaccountquota#create-a-computer-account), or any other account -with at least one Service Principal Name set for the usual technique, or without for [SPN-less RBCD](/ad/movement/kerberos/delegations/rbcd)- which credentials are known to the attacker.
 
 </Callout>
 
@@ -107,13 +107,13 @@ In [some cases](/ad/movement/kerberos/delegations#theory), the delegation will n
 
 <Callout type="info">
 
-The SPN (Service Principal Name) set can have an impact on what services will be reachable. For instance, `cifs/target.domain` or `host/target.domain` will allow most remote dumping operations (more info on [adsecurity.org](https://adsecurity.org/?page_id=183)). There however scenarios where the SPN can be changed ([AnySPN](/ad/movement/kerberos/ptt#modifying-the-spn)) to access more service. This technique is automatically tried by Impacket scripts when doing pass-the-ticket.
+The SPN (Service Principal Name) set can have an impact on what services will be reachable. For instance, `cifs/target.domain` or `host/target.domain` will allow most remote dumping operations (more info on [adsecurity.org](https://adsecurity.org/?page_id=183)). There however scenarios where the SPN can be changed ([AnySPN](/ad/movement/kerberos/pass-the/ptt#modifying-the-spn)) to access more service. This technique is automatically tried by Impacket scripts when doing pass-the-ticket.
 
 </Callout>
 
 **3 - Pass-the-ticket** :passport\_control: \*\*\*\*
 
-Once the ticket is obtained, it can be used with [pass-the-ticket](/ad/movement/kerberos/ptt).
+Once the ticket is obtained, it can be used with [pass-the-ticket](/ad/movement/kerberos/pass-the/ptt).
 
 </Tab>
 
@@ -184,13 +184,13 @@ In [some cases](/ad/movement/kerberos/delegations#theory), the delegation will n
 
 <Callout type="info">
 
-The SPN (Service Principal Name) set can have an impact on what services will be reachable. For instance, `cifs/target.domain` or `host/target.domain` will allow most remote dumping operations (more info on [adsecurity.org](https://adsecurity.org/?page_id=183)). There however scenarios where the SPN can be changed ([AnySPN](/ad/movement/kerberos/ptt#modifying-the-spn)) to access more service**s**. This technique can be exploited with the `/altservice` flag with Rubeus.
+The SPN (Service Principal Name) set can have an impact on what services will be reachable. For instance, `cifs/target.domain` or `host/target.domain` will allow most remote dumping operations (more info on [adsecurity.org](https://adsecurity.org/?page_id=183)). There however scenarios where the SPN can be changed ([AnySPN](/ad/movement/kerberos/pass-the/ptt#modifying-the-spn)) to access more service**s**. This technique can be exploited with the `/altservice` flag with Rubeus.
 
 </Callout>
 
 **3 - Pass-the-ticket** :passport\_control: \*\*\*\*
 
-Once the ticket is injected, it can natively be used when accessing the service (see [pass-the-ticket](/ad/movement/kerberos/ptt)).
+Once the ticket is injected, it can natively be used when accessing the service (see [pass-the-ticket](/ad/movement/kerberos/pass-the/ptt)).
 
 </Tab>
 </Tabs>

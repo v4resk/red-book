@@ -59,9 +59,14 @@ html > body[data-scroll-locked] {
   color: var(--color-fd-primary);
 }
 
-/* children sit quieter beneath the category */
-#nd-sidebar a[style*="calc(5 * var(--spacing))"],
-#nd-sidebar button[style*="calc(5 * var(--spacing))"] {
-  font-size: 0.8125rem;
+/* Depth 0 (the categories and the intro link) aligns with depth 1 rather than
+   sitting further out: a category is a toggleable section title, not a level
+   of its own, so the tree reads as one column.
+
+   Everything below depth 0 keeps the theme's own size. An earlier rule shrank
+   only depth 1, which made "Credential Access" smaller than its own children. */
+#nd-sidebar a[style*="calc(2 * var(--spacing))"],
+#nd-sidebar button[style*="calc(2 * var(--spacing))"] {
+  padding-inline-start: calc(5 * var(--spacing)) !important;
 }
 

@@ -15,11 +15,20 @@ export function getMDXComponents(components?: MDXComponents) {
     ...defaultMdxComponents,
     // GitBook -> Fumadocs conversion emits these: 662 <Tabs>, 1432 <Tab>,
     // 815 <Card>, 484 <Callout>
-    // raw <img src="/assets/…"> in MDX is emitted verbatim by Next, so prefix
-    // basePath here rather than baking it into 558 content files
-    img: ({ src, ...rest }: ImgHTMLAttributes<HTMLImageElement>) => (
-      <img src={typeof src === 'string' ? withBase(src) : src} {...rest} />
-    ),
+    // Raw <img src="/assets/…"> in MDX is emitted verbatim by Next, so the
+    // basePath has to be added here rather than baked into 558 content files.
+    //
+    // Markdown images (![](…)) are rewritten by remark-image into a static
+    // import OBJECT, not a string. Those must go to Fumadocs' own image
+    // component (which handles basePath itself); rendering them as a raw <img>
+    // stringifies the object into src="[object Object]".
+    img: (props: ImgHTMLAttributes<HTMLImageElement>) => {
+      if (typeof props.src !== 'string') {
+        const Default = defaultMdxComponents.img as React.ComponentType<typeof props>;
+        return <Default {...props} />;
+      }
+      return <img {...props} src={withBase(props.src)} />;
+    },
     Favicon,
     ResourceCard,
     Img,
@@ -27,14 +36,6 @@ export function getMDXComponents(components?: MDXComponents) {
     A,
     ...TabsComponents,
     ...CardComponents,
-    // Fumadocs' Card renders a plain <a>, so an internal href needs basePath.
-    // External resource-card hrefs (http…) pass through untouched.
-    Card: ({ href, ...rest }: React.ComponentProps<typeof CardComponents.Card>) => (
-      <CardComponents.Card
-        href={typeof href === 'string' ? withBase(href) : href}
-        {...rest}
-      />
-    ),
     Callout,
     ...components,
   } satisfies MDXComponents;

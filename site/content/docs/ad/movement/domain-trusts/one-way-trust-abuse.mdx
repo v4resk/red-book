@@ -1,0 +1,123 @@
+---
+title: "One-Way Trust Account Abuse"
+description: "Reversing a one-way trust by extracting the trust account credentials from the TDO"
+---
+
+## Theory
+
+When a one-way trust is established between a trusting domain (B) and a trusted
+domain (A), Windows automatically creates a trust account (`DOMAIN_B$`) in the
+**trusted** domain (A). The password of that account is stored in the
+[TDO](https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-adts/b645c125-a7da-4097-84a1-2fa7cea07714#gt_f2ceef4e-999b-4276-84cd-2e2829de5fc4)
+of the **trusting** domain (B), in cleartext and as Kerberos keys.
+
+An attacker holding Domain Admin on the trusting domain (B) can therefore extract
+those credentials and authenticate to the trusted domain (A), **reversing the
+expected direction of the one-way trust**.
+
+<Callout type="warn">
+This requires full compromise of the **trusting** domain. Domain Admin (or
+equivalent) is a prerequisite, so this extends an existing compromise rather
+than establishing one.
+</Callout>
+
+## Practice
+
+### 1. Extract TDO credentials
+
+The password stored in the TDO on the trusting domain is the same as the
+password of the trust account (`DOMAIN_B$`) on the trusted domain, so extracting
+it yields valid credentials there.
+
+<Callout type="info">
+What comes out differs by tool, and that determines the authentication options in
+step 2:
+
+* **UNIX-like**: `tdo_dump` returns the trust account's actual Kerberos
+  AES-256/AES-128 keys and NT hash, so AES-based Kerberos authentication works.
+* **Windows**: Mimikatz returns *inter-realm* trust keys. Only the
+  `rc4_hmac_nt` value corresponds to the trust account NT hash and can be used
+  to request a TGT. The AES keys shown are inter-realm derivations and cannot.
+</Callout>
+
+<Tabs items={['UNIX-like', 'Windows']}>
+<Tab value="UNIX-like">
+
+[tdo_dump](https://github.com/AlmondOffSec/tdo_dump) (Python) works remotely over
+Directory Replication Services (DRS) and returns the full Kerberos keys of the
+trust account (see the [Almond write-up](https://offsec.almond.consulting/trust-no-one_are-one-way-trusts-really-one-way.html)).
+
+It needs two GUIDs: the `TDO` object for the trusted domain, and the `ntDSDSA`
+object of the trusting DC.
+
+```bash
+# Retrieve the TDO GUID
+ldeep ldap -u "$USER" -p "$PASSWORD" -d "$DOMAIN" -s ldap://"$DC_IP" \
+  search "(objectClass=trustedDomain)" objectguid,distinguishedname
+
+# Retrieve the ntDSDSA GUID
+ldeep ldap -u "$USER" -p "$PASSWORD" -d "$DOMAIN" -s ldap://"$DC_IP" \
+  -b "CN=Configuration,DC=domain,DC=lab" search "(name=NTDS Settings)" objectguid,distinguishedname
+
+# Extract the credentials
+python3 tdo_dump.py -u "$USER" -d "$DOMAIN" -t "$DC_HOST.$DOMAIN" -p "$PASSWORD" \
+  --tdo-guid "$TDO_GUID" --dsa-guid "$DSA_GUID"
+```
+
+The tool returns the trust account password in cleartext, as an NT hash, and as
+Kerberos AES-256/AES-128 keys.
+</Tab>
+
+<Tab value="Windows">
+
+From a domain controller, [Mimikatz](https://github.com/gentilkiwi/mimikatz) dumps
+the trust secrets from LSASS. This needs local execution on the DC with
+administrative privileges.
+
+```powershell
+# On the trusting DC
+mimikatz.exe "lsadump::trust /patch" "exit"
+```
+
+The output carries the inter-realm keys for each trust relationship, split into
+`[In]` and `[Out]` sections:
+
+```
+* aes256_hmac       <AES256_KEY>
+* aes128_hmac       <AES128_KEY>
+* rc4_hmac_nt       <NT_HASH>
+```
+
+<Callout type="warn">
+Only `rc4_hmac_nt` (the trust account NT hash) is usable in step 2. The AES keys
+shown here are inter-realm derivations and cannot request a TGT for the trust
+account.
+</Callout>
+</Tab>
+</Tabs>
+
+### 2. Authenticate to the trusted domain
+
+With the trust account's Kerberos keys, authenticate to the trusted domain. The
+trust account **cannot authenticate over NTLM**, so Kerberos is the only option.
+The inter-realm keys are of little use here since the attacker already controls
+the trusting domain.
+
+The trust account name is the NetBIOS name of the trusting domain followed by
+`$`. Following the example above, the account created in domain A for the
+trusting domain B is `DOMAIN_B$`. Request a TGT for it on the trusted domain
+using the credentials from step 1.
+
+That TGT then supports authenticated recon and further attacks against the
+trusted domain, exactly as any other domain account would.
+
+<Callout type="info">
+For the ticket mechanics, see [Pass-the-Ticket](/ad/movement/kerberos/pass-the/ptt)
+and [Pass-the-Key](/ad/movement/kerberos/pass-the/ptk).
+</Callout>
+
+## Resources
+
+<ResourceCard href="https://offsec.almond.consulting/trust-no-one_are-one-way-trusts-really-one-way.html" title="Trust no one: are one-way trusts really one way?" description="offsec.almond.consulting" />
+<ResourceCard href="https://itm8.com/articles/sid-filter-as-security-boundary-between-domains-part-7" title="SID filter as security boundary between domains (part 7)" description="itm8.com" />
+<ResourceCard href="https://lorenzomeacci.com/trust-issues-attacking-trust-in-active-directory" title="Trust issues: attacking trust in Active Directory" description="lorenzomeacci.com" />

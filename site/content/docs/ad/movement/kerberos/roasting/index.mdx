@@ -1,0 +1,23 @@
+---
+title: "Roasting"
+description: "Offline cracking of Kerberos tickets and pre-auth material"
+---
+
+## Theory
+
+"Roasting" attacks abuse the fact that parts of the Kerberos exchange are
+encrypted with a key derived from an account's password. An attacker who can
+obtain that encrypted material can take it offline and crack it, without any
+failed-logon events on the target.
+
+The variants differ in which message is harvested and what is required to get
+it:
+
+| Attack | Harvests | Requires |
+| :--- | :--- | :--- |
+| Kerberoasting | Service ticket (TGS-REP) encrypted with the service account key | valid domain credentials, target SPN or SAN |
+| ASREProasting | AS-REP encrypted with the user key | no credentials; target must have pre-auth disabled |
+| ASREQroasting | AS-REQ timestamp encrypted with the user key | a MitM position on the client |
+
+Accounts with human-set passwords are the useful targets. Machine accounts have
+long random passwords and are not realistically crackable.

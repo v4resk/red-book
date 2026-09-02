@@ -9,7 +9,7 @@ Netlogon is a service verifying logon requests, registering, authenticating, and
 
 The CVE-2020-1472 findings demonstrated that MS-NRPC used a custom and insecure cryptographic protocol (i.e. it reuses a known, static, zero-value Initialization Vector (IV) in an AES-CFB8 mode) when establishing a Netlogon Secure Channel connection to a Domain Controller allowing for an Elevation of Privilege vulnerability.
 
-There were many concepts to understand in the original exploit scenario (the "[password change](/ad/movement/netlogon/zerologon#password-change-disruptive)" one).
+There were many concepts to understand in the original exploit scenario (the "[password change](/ad/movement/netlogon/zerologon#password-change--warning-disruptive)" one).
 
 * **Concept #1**: authentication through MS-NRPC uses AES-CFB8. This means that for 1 in 256 possibilities, every block of the ciphertext will be `\x00` bytes if both the IV and the plaintext are `\x00` bytes.
 * **Concept #2**: authentication through MS-NRPC uses a static and null IV (only `\x00` bytes, hence partly validating concept #1).

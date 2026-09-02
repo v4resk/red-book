@@ -1,0 +1,15 @@
+---
+title: "Principal Confusion"
+description: "Making the KDC issue tickets for the wrong principal"
+---
+
+## Theory
+
+Kerberos identifies accounts by attributes that are not always immutable or
+unique. If an attacker can change one of them, the KDC can be persuaded to
+issue a ticket describing a *different* principal from the one that
+authenticated, and the resulting ticket is legitimately signed.
+
+These attacks turn on the relationship between an account's `sAMAccountName`,
+its `servicePrincipalName` and the `sname` in a ticket request, and on how the
+KDC resolves a principal when those disagree.

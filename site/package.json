@@ -4,12 +4,13 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "next build && python3 verify.py",
     "start": "serve out",
     "links": "python3 fetch_link_meta.py",
     "links:apply": "python3 fetch_link_meta.py --apply-only",
     "links:refresh": "python3 fetch_link_meta.py --refresh",
-    "types:check": "next typegen && tsc --noEmit"
+    "types:check": "next typegen && tsc --noEmit",
+    "verify": "python3 verify.py"
   },
   "dependencies": {
     "cnfast": "^0.1.0",

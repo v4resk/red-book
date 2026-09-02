@@ -71,9 +71,9 @@ In case, for some reason, attacking a Domain Controller doesn't work (i.e. error
 
 </Callout>
 
-Once the krbrelayx listener is ready, an [authentication coercion attack](/ad/movement/mitm-and-coerced-authentications) (e.g. [PrinterBug](/ad/movement/mitm-and-coerced-authentications#ms-rprn-abuse-a-k-a-printer-bug), [PrivExchange](/ad/movement/mitm-and-coerced-authentications#pushsubscription-abuse-a-k-a-privexchange), [PetitPotam](/ad/movement/mitm-and-coerced-authentications/ms-efsr)) can be operated. The listener will then receive a Kerberos authentication, hence a ST, containing a TGT.
+Once the krbrelayx listener is ready, an [authentication coercion attack](/ad/movement/mitm-and-coerced-authentications) (e.g. [PrinterBug](/ad/movement/mitm-and-coerced-authentications), [PrivExchange](/ad/movement/mitm-and-coerced-authentications), [PetitPotam](/ad/movement/mitm-and-coerced-authentications/ms-efsr)) can be operated. The listener will then receive a Kerberos authentication, hence a ST, containing a TGT.
 
-The TGT will then be usable with [Pass the Ticket](/ad/movement/kerberos/ptt) (to act as the victim) or with [S4U2self abuse](/ad/movement/kerberos/delegations/s4u2self-abuse) (to obtain local admin privileges over the victim).
+The TGT will then be usable with [Pass the Ticket](/ad/movement/kerberos/pass-the/ptt) (to act as the victim) or with [S4U2self abuse](/ad/movement/kerberos/delegations/s4u2self-abuse) (to obtain local admin privileges over the victim).
 
 </Tab>
 
@@ -85,7 +85,7 @@ Once the KUD capable host is compromised, [Rubeus](https://github.com/GhostPack/
 Rubeus.exe monitor /interval:5
 ```
 
-Once the monitor is ready, a [forced authentication attack](/ad/movement/mitm-and-coerced-authentications) (e.g. [PrinterBug](/ad/movement/mitm-and-coerced-authentications#ms-rprn-abuse-a-k-a-printer-bug), [PrivExchange](/ad/movement/mitm-and-coerced-authentications#pushsubscription-abuse-a-k-a-privexchange)) can be operated. Rubeus will then receive an authentication (hence a Service Ticket, containing a TGT). The TGT can be used to request a Service Ticket for another service.
+Once the monitor is ready, a [forced authentication attack](/ad/movement/mitm-and-coerced-authentications) (e.g. [PrinterBug](/ad/movement/mitm-and-coerced-authentications), [PrivExchange](/ad/movement/mitm-and-coerced-authentications)) can be operated. Rubeus will then receive an authentication (hence a Service Ticket, containing a TGT). The TGT can be used to request a Service Ticket for another service.
 
 ```bash
 Rubeus.exe asktgs /ticket:$base64_extracted_TGT /service:$target_SPN /ptt

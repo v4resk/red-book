@@ -1,0 +1,21 @@
+---
+title: "Pass-the-"
+description: "Authenticating with stolen Kerberos secrets instead of a password"
+---
+
+## Theory
+
+Kerberos secrets can be replayed directly: given the right material, an attacker
+authenticates as the victim without ever knowing their password. Which technique
+applies depends on what was recovered.
+
+| Technique | Material | Result |
+| :--- | :--- | :--- |
+| Pass-the-Ticket (PTT) | a TGT or service ticket | reuse the ticket as-is |
+| Overpass-the-Hash (OPTH) | NT hash or AES key | request a fresh TGT |
+| Pass-the-Key (PTK) | AES/RC4 Kerberos key | request a fresh TGT |
+| Pass-the-Cache (PTC) | a ccache file from a UNIX-like host | reuse the cached ticket |
+| Pass-the-Certificate | a certificate with client-auth EKU | request a TGT via PKINIT |
+
+These abuse Kerberos as designed rather than exploiting a vulnerability, which
+is what makes them durable and hard to distinguish from legitimate traffic.
