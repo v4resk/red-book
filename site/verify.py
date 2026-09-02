@@ -67,6 +67,20 @@ def main():
             if BASE and url.startswith('/') and not url.startswith(BASE + '/') and url != BASE:
                 faults['missing-basepath'].append(f'{route}  {url}')
                 continue
+            # 3b. relative internal link. Next emits every internal link as a
+            # basePath-absolute URL, so a bare relative href is an unconverted
+            # source link (classically a leftover GitBook `foo/bar.md`). These
+            # were invisible before because local_path() skipped anything not
+            # starting with '/'. Resolve against the page's own directory.
+            if not url.startswith('/'):
+                rel = urllib.parse.unquote(url.split('#')[0].split('?')[0])
+                if rel:
+                    cand = os.path.normpath(os.path.join(os.path.dirname(p), rel))
+                    if os.path.isdir(cand):
+                        cand = os.path.join(cand, 'index.html')
+                    if not os.path.exists(cand):
+                        faults['dead-relative'].append(f'{route}  {attr}="{url}"')
+                continue
             # 4. target does not exist on disk
             lp = local_path(url)
             if lp is None:
@@ -115,7 +129,7 @@ def main():
     total = sum(len(v) for v in faults.values())
     print(f'verify: {len(pages)} pages, {len(routes)} routes')
     for kind in ('object-stringified', 'double-basepath', 'missing-basepath',
-                 'dead-target', 'dead-anchor'):
+                 'dead-relative', 'dead-target', 'dead-anchor'):
         items = faults.get(kind, [])
         print(f'  {kind:20} {len(items)}')
         for x in items[:8]:

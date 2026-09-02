@@ -1,7 +1,9 @@
 {
   "title": "SCCM / MECM",
   "pages": [
-    "privilege-escalation",
+    "credential-harvesting",
+    "client-push-coercion",
+    "site-takeover",
     "post-exploitation",
     "..."
   ]

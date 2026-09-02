@@ -36,7 +36,7 @@ PV > Set-DomainObject -Identity RODC-server$ -Clear msDS-NeverRevealGroup
 ```
 
 
-Then, dump the `krbtgt_XXXXX` key on the RODC server with admin access on the host (this can be done by modifying the `managedBy` attribute for example), and use it to forge a [RODC golden ticket](/ad/movement/kerberos/forged-tickets/rodc-golden-tickets) and conduct a [key list attack](../credentials/dumping/kerberos-key-list.md) to retrieve the domain Administrator's password hash.
+Then, dump the `krbtgt_XXXXX` key on the RODC server with admin access on the host (this can be done by modifying the `managedBy` attribute for example), and use it to forge a [RODC golden ticket](/ad/movement/kerberos/forged-tickets/rodc-golden-tickets) and conduct a [key list attack](/redteam/credentials/os-credentials/windows-and-active-directory/kerberos-key-list) to retrieve the domain Administrator's password hash.
 
 </Tab>
 
@@ -52,7 +52,7 @@ Set-DomainObject -Identity RODC-Server$ -Set @{'msDS-RevealOnDemandGroup'=@('CN=
 Set-DomainObject -Identity RODC-Server$ -Clear 'msDS-NeverRevealGroup'
 ```
 
-Then, dump the `krbtgt_XXXXX` key on the RODC server with admin access on the host (this can be done by modifying the `managedBy` attribute for example), and use it to forge a [RODC golden ticket](/ad/movement/kerberos/forged-tickets/rodc-golden-tickets) and conduct a [key list attack](../credentials/dumping/kerberos-key-list.md) to retrieve the domain Administrator's password hash.
+Then, dump the `krbtgt_XXXXX` key on the RODC server with admin access on the host (this can be done by modifying the `managedBy` attribute for example), and use it to forge a [RODC golden ticket](/ad/movement/kerberos/forged-tickets/rodc-golden-tickets) and conduct a [key list attack](/redteam/credentials/os-credentials/windows-and-active-directory/kerberos-key-list) to retrieve the domain Administrator's password hash.
 
 </Tab>
 </Tabs>

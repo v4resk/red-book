@@ -35,3 +35,14 @@ redirect is needed for it; only the forged-tickets anchors moved.
 | /ad/movement/domain-trusts                       | /redbook/ad/movement/domain-trusts            (unchanged path) |
 | /ad/movement/domain-trusts#referral-ticket       | /redbook/ad/movement/domain-trusts/forged-tickets#referral-ticket |
 | /ad/movement/domain-trusts#golden-ticket         | /redbook/ad/movement/domain-trusts/forged-tickets#golden-ticket   |
+
+## SCCM / MECM split
+
+`privilege-escalation` was split into three technique pages
+(credential-harvesting, client-push-coercion, site-takeover). The old page is
+removed, so its URL needs a redirect; the new pages default to credential
+harvesting, the first step of an SCCM compromise.
+
+| old (GitBook)                                   | new                                                              |
+| :---------------------------------------------- | :--------------------------------------------------------------- |
+| /ad/movement/sccm-mecm/privilege-escalation     | /redbook/ad/movement/sccm-mecm/credential-harvesting             |
