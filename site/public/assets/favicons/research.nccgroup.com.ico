@@ -1,0 +1,1789 @@
+<!DOCTYPE html>
+<html class=" content" lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Cyber Security Research | NCC Group</title>
+<meta name="robots" content="index, follow" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="canonical" href="https://www.nccgroup.com/research/" />
+    <meta property="og:title" content="Cyber Security Research" />
+    <meta property="og:description" content="Cutting-edge cyber security research from NCC Group. Find public reports, technical advisories, analyses, & other novel insights from our global experts." />
+    <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://www.nccgroup.com/research" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="Cyber Security Research" />
+    <meta name="twitter:description" content="Cutting-edge cyber security research from NCC Group. Find public reports, technical advisories, analyses, & other novel insights from our global experts." />
+
+<meta class="swiftype" name="description" data-type="string" content="Cutting-edge cyber security research from NCC Group. Find public reports, technical advisories, analyses, &amp;amp; other novel insights from our global experts." />
+<meta class="swiftype" name="type" data-type="enum" content="content" />
+<meta class="swiftype" name="keywords" data-type="string">
+<meta class="swiftype" name="lang" data-type="string" content="en">
+<meta class="swiftype" name="hide_from_search" data-type="integer" content="0">
+<meta class="swiftype" name="assurance" data-type="integer" content="1">
+<meta class="swiftype" name="adelard" data-type="integer" content="0">
+<meta class="swiftype" name="node_id" data-type="integer" content="11525">
+<meta class="swiftype" name="node_key" data-type="enum" content="5d88a940-7d3c-41e0-ad61-39be2d2ab14c">
+<meta class="swiftype" name="content_type" data-type="string" content="content">
+<meta class="swiftype" name="env" data-type="enum" content="Production">
+        <meta class="swiftype" name="sortable_date" data-type="date" content="2026-04-15T09:08:30.5000000Z" />
+            <meta class="swiftype" name="ancestor_id" data-type="integer" content="1345">
+            <meta class="swiftype" name="ancestor_key" data-type="enum" content="c18fe486-ee90-423a-a1b9-58b8e41a2c39">
+
+    <meta name="format-detection" content="telephone=no" />
+
+    <script nonce="2815b940659c15">
+        var root = document.getElementsByTagName('html')[0];
+        root.className += ' js';
+        window.dataLayer = window.dataLayer || [];
+        if (document.referrer.indexOf('https://explore.tanium.com') != 0) {
+        try { top.document.domain } catch (e) {
+        var f = function () { document.body.innerHTML = ''; }
+        setInterval(f, 1);
+        if (document.body) document.body.onload = f;
+        }
+        }
+
+        document.documentElement.className += ' advanced';
+        if (window.IntersectionObserver) document.documentElement.className += ' js-obs-active';
+    </script>
+
+    <link rel="preconnect" crossorigin href="https://ajax.googleapis.com/">
+    <link rel="preconnect" crossorigin href="https://cc.cdn.civiccomputing.com">
+    <link rel="preconnect" crossorigin href="https://cdnjs.cloudflare.com">
+    <link rel="dns-prefetch" href="https://ajax.googleapis.com">
+    <link rel="dns-prefetch" href="https://cc.cdn.civiccomputing.com">
+    <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
+
+    <script async src="/Static-a/scripts/latex.js?v=jXKDMVH3HS_Ju1pm2BhbjvkFxSa_OdLFAztj8ZPO4os"></script>
+
+    
+<style>
+@import url(https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap);@font-face{font-family:Montserrat;font-weight:500;font-style:normal;font-display:swap;src:url(/static-a/fonts/Montserrat-Medium.woff2) format("woff2"),url(/static-a/fonts/Montserrat-Medium.woff) format("woff")}@font-face{font-family:Montserrat;font-weight:500;font-style:italic;font-display:swap;src:url(/static-a/fonts/Montserrat-MediumItalic.woff2) format("woff2"),url(/static-a/fonts/Montserrat-MediumItalic.woff) format("woff")}@font-face{font-family:Montserrat;font-weight:600;font-style:normal;font-display:swap;src:url(/static-a/fonts/Montserrat-SemiBold.woff2) format("woff2"),url(/static-a/fonts/Montserrat-SemiBold.woff) format("woff")}@font-face{font-family:Montserrat;font-weight:600;font-style:italic;font-display:swap;src:url(/static-a/fonts/Montserrat-SemiBoldItalic.woff2) format("woff2"),url(/static-a/fonts/Montserrat-SemiBoldItalic.woff) format("woff")}@font-face{font-family:"Montserrat var";font-weight:100 900;font-display:swap;font-style:normal;src:url(/static-a/fonts/Montserrat-VF.woff2) format("woff2")}@font-face{font-family:"Montserrat var";font-weight:100 900;font-display:swap;font-style:italic;src:url(/static-a/fonts/Montserrat-Italic-VF.woff2) format("woff2")}html{-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box}*,:after,:before{-webkit-box-sizing:inherit;-moz-box-sizing:inherit;box-sizing:inherit}html{color:#2b2b2b;font-family:"Montserrat var",Montserrat,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";font-size:1rem;font-weight:400;line-height:1.4;min-height:100vh;scroll-behavior:smooth;text-rendering:optimizeSpeed;-webkit-text-size-adjust:100%;-moz-text-size-adjust:100%;-ms-text-size-adjust:100%;text-size-adjust:100%}div,p{font-family:"Open Sans",sans-serif}blockquote,body,dd,div,dl,dt,fieldset,form,h1,h2,h3,h4,h5,h6,input,li,ol,p,pre,td,textarea,th,ul{margin:0;padding:0}fieldset,img{border:0}address,caption,cite,code,dfn,th,var{font-style:normal;font-weight:400}caption,th{text-align:left}a:not([class]){-webkit-text-decoration-skip:ink;text-decoration-skip-ink:auto}h1,h2,h3,h4,h5,h6{font-size:100%;font-weight:400}abbr,acronym{border:0}embed,img,object{height:auto;max-width:100%}img{display:block}button,input,select,textarea{font:inherit}button{background:0 0;border:none;padding:0}a,button{cursor:pointer}a:hover,button:hover{cursor:pointer}img{vertical-align:bottom}figcaption,figure{margin:0}.e-btn,[type=submit],button{background-color:#000fff;border:2px solid #000fff;-webkit-border-radius:40px;-moz-border-radius:40px;border-radius:40px;color:#fff;font-size:1rem;cursor:pointer;display:inline-block;font-family:"Open Sans",sans-serif;font-weight:600;line-height:1.4;margin-bottom:.625rem;padding:.7rem 1.7rem;-webkit-transition:.2s background-color ease-in-out,.2s border-color ease-in-out,.2s color ease-in-out,.2s background-image ease-in-out;-o-transition:.2s background-color ease-in-out,.2s border-color ease-in-out,.2s color ease-in-out,.2s background-image ease-in-out;-moz-transition:.2s background-color ease-in-out,.2s border-color ease-in-out,.2s color ease-in-out,.2s background-image ease-in-out;transition:.2s background-color ease-in-out,.2s border-color ease-in-out,.2s color ease-in-out,.2s background-image ease-in-out;width:auto}@media only screen and (min-width:75em){.e-btn,[type=submit],button{font-size:1.125rem}}.e-btn:focus,.e-btn:hover,[type=submit]:focus,[type=submit]:hover,button:focus,button:hover{background-color:#00008b;border-color:#00008b;color:#fff;text-decoration:none}.e-btn:active,[type=submit]:active,button:active{opacity:.9}.e-btn--secondary,button--secondary{background-color:#ff3b0b;border-color:#ff3b0b;color:#0b0820}.e-btn--secondary:focus,.e-btn--secondary:hover,button--secondary:focus,button--secondary:hover{background-color:#cc3700;border-color:#cc3700;color:#fff}.e-btn--outline,button--outline{background-color:#fff;border:2px solid #000fff;color:#000fff}.e-btn--outline:focus,.e-btn--outline:hover,button--outline:focus,button--outline:hover{background-color:#e6e6fa;border-color:#00008b;color:#000fff;text-decoration:none}.e-btn--outline:focus,button--outline:focus{background-color:#e6e6fa}.e-btn--bare,button--bare{background:0 0;border:none;-webkit-border-radius:0;-moz-border-radius:0;border-radius:0;color:#fff;padding:0}.e-btn--bare:focus,.e-btn--bare:hover,button--bare:focus,button--bare:hover{background-color:transparent;color:#fff;text-decoration:underline}@media only screen and (min-width:75em){.e-btn--smaller,button--smaller{font-size:.875rem}}@media only screen and (min-width:75em){.e-btn--larger,button--larger{font-size:1.5rem}}@media only screen and (min-width:50em){.shortanswer input{width:66%;display:block}}@media only screen and (min-width:50em){.o-flex .shortanswer input{width:100%;display:block}}input,select,textarea{border:none;border-bottom:3px solid #2b2b2b;-webkit-border-radius:0;-moz-border-radius:0;border-radius:0;display:inline-block;font-size:1rem;margin:0;padding:.7rem .7rem .7rem .7rem;width:100%;resize:vertical}@media only screen and (min-width:75em){input,select,textarea{font-size:1.125rem}}input.error,select.error,textarea.error{border-color:red;color:red}[type=checkbox],[type=radio]{margin:0 .5rem 0 0;width:auto}[type=submit]{-webkit-appearance:none;-moz-appearance:none;appearance:none;border:none!important;margin-top:2rem}fieldset{margin-bottom:1rem}label,legend{display:inline-block;font-family:"Open Sans",sans-serif;font-weight:600;font-size:.9rem;margin-bottom:.5rem}select{-webkit-appearance:none;-moz-appearance:none;appearance:none;background-image:url(/Static-a/img/icons/icon-select-chevron.svg);-webkit-background-size:18px 18px;-moz-background-size:18px;background-size:18px;background-repeat:no-repeat;background-position:-webkit-calc(100% - 10px) center;background-position:-moz-calc(100% - 10px) center;background-position:calc(100% - 10px) center;padding-right:20px}.c-form-short input,.c-form-short select,.c-form-short textarea{border:1px solid #b4c9e2}.t-bay-of-many .c-form-short input,.t-bay-of-many .c-form-short select,.t-bay-of-many .c-form-short textarea,.t-blue-lagoon .c-form-short input,.t-blue-lagoon .c-form-short select,.t-blue-lagoon .c-form-short textarea,.t-neon-blue .c-form-short input,.t-neon-blue .c-form-short select,.t-neon-blue .c-form-short textarea,.t-seabuckthorn .c-form-short input,.t-seabuckthorn .c-form-short select,.t-seabuckthorn .c-form-short textarea{border:1px solid #000fff}.t-crimson .c-form-short input,.t-crimson .c-form-short select,.t-crimson .c-form-short textarea,.t-red-orange .c-form-short input,.t-red-orange .c-form-short select,.t-red-orange .c-form-short textarea{border:1px solid #ff3b0b}.t-raspberry .c-form-short input,.t-raspberry .c-form-short select,.t-raspberry .c-form-short textarea,.t-royal-heath .c-form-short input,.t-royal-heath .c-form-short select,.t-royal-heath .c-form-short textarea{border:1px solid #ff4495}.t-dark-lavender .c-form-short input,.t-dark-lavender .c-form-short select,.t-dark-lavender .c-form-short textarea,.t-disco .c-form-short input,.t-disco .c-form-short select,.t-disco .c-form-short textarea{border:1px solid #5d47d7}.t-blue-calico .c-form-short input,.t-blue-calico .c-form-short select,.t-blue-calico .c-form-short textarea,.t-matisse .c-form-short input,.t-matisse .c-form-short select,.t-matisse .c-form-short textarea{border:1px solid #86cdf2}.t-blue-zodiac .c-form-short input,.t-blue-zodiac .c-form-short select,.t-blue-zodiac .c-form-short textarea,.t-tourmaline-black .c-form-short input,.t-tourmaline-black .c-form-short select,.t-tourmaline-black .c-form-short textarea{border:1px solid #0b0820}.c-form-short .c-checkbox{margin-top:2rem;margin-left:1.45rem;-webkit-appearance:none;-moz-appearance:none;appearance:none;border:2px solid #b4c9e2;height:.8rem;width:.8rem;cursor:pointer}.t-bay-of-many .c-form-short .c-checkbox,.t-blue-lagoon .c-form-short .c-checkbox,.t-neon-blue .c-form-short .c-checkbox,.t-seabuckthorn .c-form-short .c-checkbox{border:2px solid #000fff}.t-crimson .c-form-short .c-checkbox,.t-red-orange .c-form-short .c-checkbox{border:2px solid #ff3b0b}.t-raspberry .c-form-short .c-checkbox,.t-royal-heath .c-form-short .c-checkbox{border:2px solid #ff4495}.t-dark-lavender .c-form-short .c-checkbox,.t-disco .c-form-short .c-checkbox{border:2px solid #5d47d7}.t-blue-calico .c-form-short .c-checkbox,.t-matisse .c-form-short .c-checkbox{border:2px solid #86cdf2}.t-blue-zodiac .c-form-short .c-checkbox,.t-tourmaline-black .c-form-short .c-checkbox{border:2px solid #0b0820}.c-form-short .c-checkbox~label{margin-top:1.25rem}.c-form-short .c-checkbox:checked{position:relative}.c-form-short .c-checkbox:checked::before{content:"";position:absolute;height:.15rem;width:.5rem;left:3px;bottom:5px;background-color:#000;-webkit-transform:rotate(35deg);-moz-transform:rotate(35deg);-ms-transform:rotate(35deg);-o-transform:rotate(35deg);transform:rotate(35deg)}.c-form-short .c-checkbox:checked::after{content:"";position:absolute;height:1.2rem;width:.15rem;right:8px;bottom:2px;background-color:#000;-webkit-transform:rotate(35deg);-moz-transform:rotate(35deg);-ms-transform:rotate(35deg);-o-transform:rotate(35deg);transform:rotate(35deg)}.c-form-short .c-contact__group{margin-bottom:.2rem!important}.c-form-short .c-select-label{-webkit-transform:translate(5%,140%);-moz-transform:translate(5%,140%);-ms-transform:translate(5%,140%);-o-transform:translate(5%,140%);transform:translate(5%,140%);padding-left:.5rem}.c-form-short .c-select-label+select{margin-top:-1rem;background-image:url(../img/icons/icon-menu-chevron-yellow.svg)}.c-form-short label{background-color:#fff;padding:0 2px;-webkit-transform:translate(5px,18px);-moz-transform:translate(5px,18px);-ms-transform:translate(5px,18px);-o-transform:translate(5px,18px);transform:translate(5px,18px);display:inline-block!important}.c-form-short textarea::-webkit-resizer{border-left:16px solid transparent;border-top:16px solid transparent;border-right:16px solid #000fff}.t-bay-of-many .c-form-short textarea::-webkit-resizer,.t-blue-lagoon .c-form-short textarea::-webkit-resizer,.t-neon-blue .c-form-short textarea::-webkit-resizer,.t-seabuckthorn .c-form-short textarea::-webkit-resizer{border-right:16px solid #000fff}.t-crimson .c-form-short textarea::-webkit-resizer,.t-red-orange .c-form-short textarea::-webkit-resizer{border-right:16px solid #ff3b0b}.t-raspberry .c-form-short textarea::-webkit-resizer,.t-royal-heath .c-form-short textarea::-webkit-resizer{border-right:16px solid #ff4495}.t-dark-lavender .c-form-short textarea::-webkit-resizer,.t-disco .c-form-short textarea::-webkit-resizer{border-right:16px solid #5d47d7}.t-blue-calico .c-form-short textarea::-webkit-resizer,.t-matisse .c-form-short textarea::-webkit-resizer{border-right:16px solid #86cdf2}.t-blue-zodiac .c-form-short textarea::-webkit-resizer,.t-tourmaline-black .c-form-short textarea::-webkit-resizer{border-right:16px solid #0b0820}h1,h2,h3,h4,h5,h6{color:#0b0820;font-family:"Montserrat var",Montserrat,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";font-weight:600;line-height:1;margin:0 0 1rem}.e-h1,.e-h2,.e-h3,.e-h4,.e-h5,.e-h6{color:#2b2b2b;font-family:"Open Sans",sans-serif;font-weight:600;line-height:1;margin:0 0 1rem}.e-hsb{font-weight:600}.e-h1,h1{font-size:2.5rem}@media only screen and (min-width:50rem){.e-h1,h1{font-size:3rem}}@media only screen and (min-width:75em){.e-h1,h1{font-size:4rem}}.e-h2,h2{font-size:1.75rem}@media only screen and (min-width:50rem){.e-h2,h2{font-size:2rem}}@media only screen and (min-width:75em){.e-h2,h2{font-size:3rem}}.e-h3,h3{font-size:1.25rem}@media only screen and (min-width:50rem){.e-h3,h3{font-size:1.5rem}}@media only screen and (min-width:75em){.e-h3,h3{font-size:2.125rem}}.e-h3{font-weight:400}@media only screen and (min-width:75em){.e-h3{font-size:1.9rem}}.e-h4,h4{font-size:1.2rem}@media only screen and (min-width:50rem){.e-h4,h4{font-size:1.25rem}}@media only screen and (min-width:75em){.e-h4,h4{font-size:1.875rem}}.e-h5,h5{font-size:1.1rem}@media only screen and (min-width:50rem){.e-h5,h5{font-size:1.125rem}}@media only screen and (min-width:75em){.e-h5,h5{font-size:1.5rem}}.e-h6,h6{font-size:1rem}@media only screen and (min-width:50rem){.e-h6,h6{font-size:1.125rem}}@media only screen and (min-width:75em){.e-h6,h6{font-size:1.2rem}}a{color:#000fff;cursor:pointer;text-decoration:none}a:hover{color:#5d47d7;text-decoration:underline}a:focus{color:#5d47d7}a:active{color:#5d47d7}.e-chvron-link{background-image:url(/Static-a/img/icons/icon-chevron-neon-blue.svg);background-repeat:no-repeat;background-position:0 5px;padding:5px 0 5px 30px}.e-link{color:#000;font-weight:700}.e-link--arrow{background-image:url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMCIgaGVpZ2h0PSIxNyIgdmlld0JveD0iMCAwIDEwIDE3IiBmaWxsPSJub25lIj48cGF0aCBkPSJtMSAxLjQ1NiA3IDctNyA3IiBzdHJva2U9IiM1RDQ3RDciIHN0cm9rZS13aWR0aD0iMi4zMzMiLz48L3N2Zz4=);background-position:right center;background-repeat:no-repeat;padding-right:.9rem}.e-link:focus,.e-link:hover{color:#20245d}.is-link{cursor:pointer}ol[class],ul[class]{list-style:none}.rte ul:not([class]){list-style:none}ol:not([class]),ul:not([class]){margin:0 0 2rem 1rem}.rte ol:not([class]),.rte ul:not([class]){padding-left:.75rem}li{margin-bottom:0;font-size:1rem;position:relative}@media only screen and (min-width:75em){li{font-size:1.125rem}}.rte li{margin-bottom:.5rem}.rte li:last-child{margin-bottom:0}.rte ul li::before{content:"";height:5px;width:5px;-webkit-border-radius:100%;-moz-border-radius:100%;border-radius:100%;background:#0b0820;display:block;position:absolute;left:-16px;top:50%;-webkit-transform:translateY(-50%);-moz-transform:translateY(-50%);-ms-transform:translateY(-50%);-o-transform:translateY(-50%);transform:translateY(-50%)}.t-neon-blue .rte ul li::before{background:#000fff}.t-red-orange .rte ul li::before{background:#ff3b0b}.t-dark-lavender .rte ul li::before{background:#5d47d7}.t-blue-calico .rte ul li::before{background:#86cdf2}.t-raspberry .rte ul li::before{background:#ff4495}.e-bullet-list__li{margin:0 0 1rem 1rem}.e-bullet-list__li:before{background:red;-webkit-border-radius:9px;-moz-border-radius:9px;border-radius:9px;content:"";display:inline-block;height:9px;left:-1rem;position:relative;width:9px}.e-list__item{background-image:url(/Static-a/img/icons/icon-chevron-neon-blue.svg);background-repeat:no-repeat;background-position:0 5px;padding-left:30px}.e-list__item--event,.e-list__item--news{-webkit-background-size:29px 29px;-moz-background-size:29px;background-size:29px;padding-left:50px}.e-list__item--news{background-image:url(/Static-a/img/icons/icon-read.svg)!important}.e-list__item--event{background-image:url(/Static-a/img/icons/icon-event.svg)!important}.e-list--white-chevron .e-list__item{background-image:url(/Static-a/img/icons/icon-chevron-white.svg)}.c-related__overlap .e-list__item{background-image:url(/Static-a/img/icons/icon-chevron-white.svg)}.e-list__item time{font-size:.8rem}.c-related__overlap .e-list__item time{color:#2b2b2b}.e-figure,figure{position:relative;width:100%}.e-figcaption,figcaption{color:#2b2b2b;font-family:"Open Sans",sans-serif;font-size:.9rem;font-weight:600;text-align:center;width:auto;z-index:1}.c-res-iframe{height:0;padding-bottom:56.25%;padding-top:25px;position:relative}.c-res-iframe iframe,.c-res-iframe video{height:100%;left:0;position:absolute;top:0;width:100%}iframe{width:100%;height:inherit}td,th{padding:.5rem 1rem;vertical-align:top;font-size:1rem}@media only screen and (min-width:75em){td,th{font-size:1.125rem}}th{background-color:#5d47d7;color:#fff}th a{color:#fff}th a:hover{color:#fff;text-decoration:underline}td{background-color:#e5e7ff}td[data-line-number]::before{content:attr(data-line-number)}p{margin-bottom:1rem;font-size:1rem}@media only screen and (min-width:75em){p{font-size:1.125rem}}.e-p{font-size:1rem}@media only screen and (min-width:75em){.e-p{font-size:1.125rem}}small{font-size:.85rem}b,strong{font-weight:600}em,i{font-style:italic}.rte{margin-bottom:2rem}.o-flex{display:-webkit-box;display:-webkit-flex;display:-moz-box;display:-ms-flexbox;display:flex;-webkit-box-orient:vertical;-webkit-box-direction:normal;-webkit-flex-direction:column;-moz-box-orient:vertical;-moz-box-direction:normal;-ms-flex-direction:column;flex-direction:column;-webkit-box-pack:justify;-webkit-justify-content:space-between;-moz-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between}@media only screen and (min-width:50em){.o-flex{-webkit-box-orient:horizontal;-webkit-box-direction:normal;-webkit-flex-direction:row;-moz-box-orient:horizontal;-moz-box-direction:normal;-ms-flex-direction:row;flex-direction:row;margin:0 -1.5rem}.o-flex+.o-flex:not(.o-flex--no-gap),.o-flex+.o-row{margin-top:2rem}}@media only screen and (min-width:50em) and (min-width:75em){.o-flex+.o-flex:not(.o-flex--no-gap),.o-flex+.o-row{margin-top:4rem}}.o-flex--wrap{-webkit-flex-wrap:wrap;-ms-flex-wrap:wrap;flex-wrap:wrap;-webkit-box-pack:start;-webkit-justify-content:flex-start;-moz-box-pack:start;-ms-flex-pack:start;justify-content:flex-start}.o-flex--center{-webkit-box-pack:center;-webkit-justify-content:center;-moz-box-pack:center;-ms-flex-pack:center;justify-content:center}.o-flex--no-spacing{-webkit-box-pack:start;-webkit-justify-content:flex-start;-moz-box-pack:start;-ms-flex-pack:start;justify-content:flex-start}@media only screen and (min-width:50em){.o-flex--reverse{-webkit-box-orient:horizontal;-webkit-box-direction:reverse;-webkit-flex-direction:row-reverse;-moz-box-orient:horizontal;-moz-box-direction:reverse;-ms-flex-direction:row-reverse;flex-direction:row-reverse}}.o-flex--no-negative-margin{margin-left:0;margin-right:0}.o-flex--v-align{-webkit-box-align:center;-webkit-align-items:center;-moz-box-align:center;-ms-flex-align:center;align-items:center}.o-flex__col{-webkit-box-flex:1;-webkit-flex:1;-moz-box-flex:1;-ms-flex:1;flex:1;max-width:100%;padding:1rem 0}@media only screen and (min-width:50em){.o-flex__col{padding:0 1.5rem}.o-flex--wrap .o-flex__col{margin-bottom:2rem}.o-flex__col--1{-webkit-flex-basis:8.33333333%;-ms-flex-preferred-size:8.33333333%;flex-basis:8.33333333%;max-width:8.33333333%;min-width:8.33333333%}.o-flex__col--2{-webkit-flex-basis:16.66666667%;-ms-flex-preferred-size:16.66666667%;flex-basis:16.66666667%;max-width:16.66666667%;min-width:16.66666667%}}@media only screen and (min-width:50em) and (min-width:50em){.o-flex__col--2--break{-webkit-flex-basis:20%;-ms-flex-preferred-size:20%;flex-basis:20%;max-width:20%}}@media only screen and (min-width:50em) and (min-width:75em){.o-flex__col--2--break{-webkit-flex-basis:26.5%;-ms-flex-preferred-size:26.5%;flex-basis:26.5%;max-width:26.5%}}@media only screen and (min-width:50em){.o-flex__col--3{-webkit-flex-basis:25%;-ms-flex-preferred-size:25%;flex-basis:25%;max-width:25%;min-width:25%}.o-flex__col--4{-webkit-flex-basis:33.33333%;-ms-flex-preferred-size:33.33333%;flex-basis:33.33333%;max-width:33.33333%;min-width:33.33333%}.o-flex__col--5{-webkit-flex-basis:41.66666667%;-ms-flex-preferred-size:41.66666667%;flex-basis:41.66666667%;max-width:41.66666667%;min-width:41.66666667%}.o-flex__col--6{-webkit-flex-basis:50%;-ms-flex-preferred-size:50%;flex-basis:50%;max-width:50%;min-width:50%}.o-flex__col--7{-webkit-flex-basis:58.33333333%;-ms-flex-preferred-size:58.33333333%;flex-basis:58.33333333%;max-width:58.33333333%;min-width:58.33333333%}.o-flex__col--8{-webkit-flex-basis:66.66666%;-ms-flex-preferred-size:66.66666%;flex-basis:66.66666%;max-width:66.66666%;min-width:66.66666%}.o-flex__col--9{-webkit-flex-basis:75%;-ms-flex-preferred-size:75%;flex-basis:75%;max-width:75%;min-width:75%}.o-flex__col--10{-webkit-flex-basis:83.33333333%;-ms-flex-preferred-size:83.33333333%;flex-basis:83.33333333%;max-width:83.33333333%;min-width:83.33333333%}.o-flex__col--11{-webkit-flex-basis:91.66666667%;-ms-flex-preferred-size:91.66666667%;flex-basis:91.66666667%;max-width:91.66666667%;min-width:91.66666667%}.o-flex__col--12{-webkit-flex-basis:100%;-ms-flex-preferred-size:100%;flex-basis:100%;max-width:100%;min-width:100%}}.o-container{margin:0 auto;width:90%}@media only screen and (min-width:75em){.o-container{max-width:73.125rem;margin:0 auto;width:95%}}.o-container--narrow{max-width:1082px}@media only screen and (min-width:75em){.o-container--wide{max-width:86.25rem}}.o-container--full{max-width:100%;width:100%}@media only screen and (min-width:50em){.o-container--full{max-width:100%;width:100%}}.o-row{overflow:hidden}.o-w-1{width:.25rem}.o-w-2{width:.5rem}.o-w-3{width:.75rem}.o-w-4{width:1rem}.o-w-5{width:1.25rem}.o-w-6{width:1.5rem}.o-w-8{width:2rem}.o-w-10{width:2.5rem}.o-w-12{width:3rem}.o-w-16{width:4rem}.o-w-24{width:6rem}.o-w-32{width:8rem}.o-w-48{width:12rem}.o-w-64{width:16rem}.o-w-auto{width:auto}.o-w-px{width:1px}.o-w-1\/2{width:50%}.o-w-1\/3{width:33.33333%}.o-w-2\/3{width:66.66667%}.o-w-1\/4{width:25%}.o-w-3\/4{width:75%}.o-w-1\/5{width:20%}.o-w-2\/5{width:40%}.o-w-3\/5{width:60%}.o-w-4\/5{width:80%}.o-w-1\/6{width:16.66667%}.o-w-5\/6{width:83.33333%}.o-w-full{width:100%}.o-w-screen{width:100vw}
+/*# sourceMappingURL=style-critical.css.map */
+</style>
+
+
+    
+    <link rel="icon" type="image/png" sizes="32x32" href="/media/nwjboy21/ncc-group-logo-ess.png?width=32&amp;height=32" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/media/nwjboy21/ncc-group-logo-ess.png?width=16&amp;height=16" />
+
+    <link rel="stylesheet" href="/static-a/css/style.css?mv=20251202&amp;v=3U90Y6775Ng7vHHjIQlgKfy8lxnPudWT2OgzlTz-kHY">
+
+    
+
+    <script async src="/static-a/scripts/critical.js?v=bBXYCQ9Ojbstmu-iyS_11qDLE6U_g_Vsp_h6XNwcX4I"></script>
+<script>let url="/umbraco/engage/pagedata/ping",pageviewId="88a461666de64e63a4e261c404fb15fb";if("function"==typeof navigator.sendBeacon&&"function"==typeof Blob){let e=new Blob([pageviewId],{type:"text/plain"});navigator.sendBeacon(url,e)}else{let a=new XMLHttpRequest;a.open("POST",url,1),a.setRequestHeader("Content-Type","text/plain"),a.send(pageviewId)}</script></head>
+<body lang="en">
+    <!-- Google Tag Manager (noscript) -->
+    <noscript>
+        <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P98KKM8" title="gtm"
+        height="0" width="0" style="display:none;visibility:hidden"></iframe>
+    </noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    
+
+    <div class="c-skip">
+    <a href="#siteNav" class="c-skip__item">Skip to navigation</a>
+    <a href="#main" class="c-skip__item">Skip to main content</a>
+    <a href="#footer" class="c-skip__item">Skip to footer</a>
+</div>
+        <style>
+        .c-hd--fixed .c-hd__logo {
+            background-image: url("/media/spskt1as/ncc-group-logo-white2.png") !important;
+        }
+
+        .c-hd--nav-active .c-hd__logo {
+            background-image: url("/media/spskt1as/ncc-group-logo-white2.png") !important;
+        }
+
+        @media only screen and (min-width: 920px) {
+            .c-hd--nav-active .c-hd__logo {
+                background-image: url("/media/spskt1as/ncc-group-logo-white2.png") !important;
+            }
+        }
+    </style>
+<header class="c-hd js-hd c-hd js-hd alt" role="banner">
+    <div class="o-container o-container--wide c-hd__container">
+        <a class="c-hd__logo" href="/"  style="background-image: url('/media/spskt1as/ncc-group-logo-white2.png')"><span class="u-a11y">NCC Group</span></a>
+        <button class="e-btn e-btn--bare c-hd__nav-btn js-nav-btn" aria-controls="c-nav" aria-expanded="false" aria-label="Menu" aria-haspopup="true">
+            <div class="c-hd__nav-lines">
+                <span class="c-hd__nav-line c-hd__nav-line--1"></span>
+                <span class="c-hd__nav-line c-hd__nav-line--2"></span>
+                <span class="c-hd__nav-line c-hd__nav-line--3"></span>
+            </div>
+            <div class="u-a11y">Menu</div>
+        </button>
+        <nav class="c-hd-nav" id="nav">
+                <ul class="c-hd-nav__ul">
+                            <li class="c-hd-nav__li c-hd-nav__li--has-sub">
+        <div class="js-sub-nav-btn c-hd-nav__li-block">
+                <span class="c-hd-nav__a">Services</span>
+                <button class="e-btn e-btn--bare c-hd-nav__plus js-sub-nav-btn" aria-controls="sub-11965018" aria-expanded="false" aria-haspopup="true">
+                    <span class="u-a11y">Open sub menu for Services</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="13" height="8" viewBox="0 0 13 8" fill="none">
+                        <path d="M5.99479 7.73539L0.209273 1.94987C-0.0697575 1.67084 -0.0697575 1.21846 0.209273 0.939462L0.884062 0.264673C1.16262 -0.0138812 1.61407 -0.0144176 1.89328 0.263482L6.50001 4.8486L11.1067 0.263453C11.3859 -0.0144472 11.8374 -0.0139112 12.1159 0.264643L12.7907 0.939432C13.0698 1.21846 13.0698 1.67084 12.7907 1.94984L7.00521 7.73536C6.7262 8.0144 6.27383 8.0144 5.99479 7.73539Z"/>
+                    </svg>
+                </button>
+        </div>
+            <ul class="c-hd-nav__ul c-hd-nav__ul--sub c-hd-nav__ul--cols c-hd-nav__ul--cols-4plus" style="background-color : #" id="sub-11965018">
+
+                    <li class="c-hd-nav__li c-hd-nav__li--col">
+                                <span class="c-hd-nav__title c-hd-nav__title--sm js-sub-nav2-btn" style="color : #">Incident Response</span>
+
+
+                            <ul class="c-hd-nav__ul c-hd-nav__ul--sub-2">
+
+                                    <li class="c-hd-nav__li">
+                                        <a class="c-hd-nav__title c-hd__nav--lg" style="color : #" href="/incident-response/" >
+                                            Incident Response
+                                        </a>
+                                    </li>
+
+                                        <li class="c-hd-nav__li">
+                                            <a class="c-hd-nav__subtitle" href="/incident-response/incident-readiness/" style="color : #" >
+                                                Incident Readiness
+                                            </a>
+                                        </li>
+                                        <li class="c-hd-nav__li">
+                                            <a class="c-hd-nav__subtitle" href="/incident-response/cyber-incident-response-management/" style="color : #" >
+                                                Cyber Incident Response Management
+                                            </a>
+                                        </li>
+                                        <li class="c-hd-nav__li">
+                                            <a class="c-hd-nav__subtitle" href="/incident-response/incident-response-recovery/" style="color : #" >
+                                                Incident Response Recovery
+                                            </a>
+                                        </li>
+                                        <li class="c-hd-nav__li">
+                                            <a class="c-hd-nav__subtitle" href="/incident-response/cyber-incident-response-retainer/" style="color : #" >
+                                                Cyber Incident Response Retainer
+                                            </a>
+                                        </li>
+                            </ul>
+                    </li>
+                    <li class="c-hd-nav__li c-hd-nav__li--col">
+                                <span class="c-hd-nav__title c-hd-nav__title--sm js-sub-nav2-btn" style="color : #">Technical Assurance</span>
+
+
+                            <ul class="c-hd-nav__ul c-hd-nav__ul--sub-2">
+
+                                    <li class="c-hd-nav__li">
+                                        <a class="c-hd-nav__title c-hd__nav--lg" style="color : #" href="/technical-assurance/" >
+                                            Technical Assurance
+                                        </a>
+                                    </li>
+
+                                        <li class="c-hd-nav__li">
+                                            <a class="c-hd-nav__subtitle" href="/penetration-testing-services/" style="color : #" >
+                                                Penetration Testing Services
+                                            </a>
+                                        </li>
+                                        <li class="c-hd-nav__li">
+                                            <a class="c-hd-nav__subtitle" href="/technical-assurance/continuous-penetration-testing/" style="color : #" >
+                                                Continuous Penetration Testing
+                                            </a>
+                                        </li>
+                                        <li class="c-hd-nav__li">
+                                            <a class="c-hd-nav__subtitle" href="/social-engineering-prevention/" style="color : #" >
+                                                Social Engineering Prevention
+                                            </a>
+                                        </li>
+                                        <li class="c-hd-nav__li">
+                                            <a class="c-hd-nav__subtitle" href="/technical-assurance/application-security/" style="color : #" >
+                                                Application Security
+                                            </a>
+                                        </li>
+                                        <li class="c-hd-nav__li">
+                                            <a class="c-hd-nav__subtitle" href="/technical-assurance/attack-simulation/" style="color : #" >
+                                                Attack Simulation
+                                            </a>
+                                        </li>
+                                        <li class="c-hd-nav__li">
+                                            <a class="c-hd-nav__subtitle" href="/technical-assurance/hardware-embedded-services/" style="color : #" >
+                                                Hardware &amp; Embedded Services
+                                            </a>
+                                        </li>
+                                        <li class="c-hd-nav__li">
+                                            <a class="c-hd-nav__subtitle" href="/technical-assurance/network-infrastructure-architecture-container-security/" style="color : #" >
+                                                Network Infrastructure, Architecture &amp; Container Security
+                                            </a>
+                                        </li>
+                                        <li class="c-hd-nav__li">
+                                            <a class="c-hd-nav__subtitle" href="/technical-assurance/cloud-security-services/" style="color : #" >
+                                                Cloud Security Services
+                                            </a>
+                                        </li>
+                                        <li class="c-hd-nav__li">
+                                            <a class="c-hd-nav__subtitle" href="/technical-assurance/cryptography-encryption/" style="color : #" >
+                                                Cryptography &amp; Encryption
+                                            </a>
+                                        </li>
+                                        <li class="c-hd-nav__li">
+                                            <a class="c-hd-nav__subtitle" href="/technical-assurance/blockchain-security/" style="color : #" >
+                                                Blockchain Security
+                                            </a>
+                                        </li>
+                                        <li class="c-hd-nav__li">
+                                            <a class="c-hd-nav__subtitle" href="/technical-assurance/cyber-services-portal/" style="color : #" >
+                                                Cyber Services Portal
+                                            </a>
+                                        </li>
+                            </ul>
+                    </li>
+                    <li class="c-hd-nav__li c-hd-nav__li--col">
+                                <span class="c-hd-nav__title c-hd-nav__title--sm js-sub-nav2-btn" style="color : #">Managed Services</span>
+
+
+                            <ul class="c-hd-nav__ul c-hd-nav__ul--sub-2">
+
+                                    <li class="c-hd-nav__li">
+                                        <a class="c-hd-nav__title c-hd__nav--lg" style="color : #" href="/managed-services/" >
+                                            Managed Services
+                                        </a>
+                                    </li>
+
+                                        <li class="c-hd-nav__li">
+                                            <a class="c-hd-nav__subtitle" href="/managed-services/managed-extended-detection-and-response-mxdr/" style="color : #" >
+                                                Managed Extended Detection &amp; Response (MXDR)
+                                            </a>
+                                        </li>
+                                        <li class="c-hd-nav__li">
+                                            <a class="c-hd-nav__subtitle" href="/managed-services/network-detection-and-response-for-ot/" style="color : #" target="" >
+                                                Network Detection &amp; Response for OT
+                                            </a>
+                                        </li>
+                                        <li class="c-hd-nav__li">
+                                            <a class="c-hd-nav__subtitle" href="/managed-services/vulnerability-scanning-management/" style="color : #" >
+                                                Vulnerability Scanning &amp; Management
+                                            </a>
+                                        </li>
+                                        <li class="c-hd-nav__li">
+                                            <a class="c-hd-nav__subtitle" href="/managed-services/bug-bounty-vulnerability-disclosure-services/" style="color : #" >
+                                                Bug Bounty &amp; Vulnerability Disclosure Services
+                                            </a>
+                                        </li>
+                                        <li class="c-hd-nav__li">
+                                            <a class="c-hd-nav__subtitle" href="/managed-services/attack-surface-management/" style="color : #" >
+                                                Attack Surface Management
+                                            </a>
+                                        </li>
+                                        <li class="c-hd-nav__li">
+                                            <a class="c-hd-nav__subtitle" href="/managed-services/unified-cyber-platform/" style="color : #" >
+                                                Unified Cyber Platform
+                                            </a>
+                                        </li>
+                            </ul>
+                    </li>
+                    <li class="c-hd-nav__li c-hd-nav__li--col">
+                                <span class="c-hd-nav__title c-hd-nav__title--sm js-sub-nav2-btn" style="color : #">Consulting &amp; Implementation</span>
+
+
+                            <ul class="c-hd-nav__ul c-hd-nav__ul--sub-2">
+
+                                    <li class="c-hd-nav__li">
+                                        <a class="c-hd-nav__title c-hd__nav--lg" style="color : #" href="/consulting-implementation/" >
+                                            Consulting &amp; Implementation
+                                        </a>
+                                    </li>
+
+                                        <li class="c-hd-nav__li">
+                                            <a class="c-hd-nav__subtitle" href="/consulting-implementation/identity-access-management/" style="color : #" >
+                                                Identity &amp; Access Management
+                                            </a>
+                                        </li>
+                                        <li class="c-hd-nav__li">
+                                            <a class="c-hd-nav__subtitle" href="/consulting-implementation/operational-technology/" style="color : #" >
+                                                Operational Technology
+                                            </a>
+                                        </li>
+                                        <li class="c-hd-nav__li">
+                                            <a class="c-hd-nav__subtitle" href="/consulting-implementation/people-training-awareness/" style="color : #" >
+                                                People: Training &amp; Awareness
+                                            </a>
+                                        </li>
+                                        <li class="c-hd-nav__li">
+                                            <a class="c-hd-nav__subtitle" href="/consulting-implementation/strategy-risk-compliance/" style="color : #" >
+                                                Strategy, Risk &amp; Compliance
+                                            </a>
+                                        </li>
+                                        <li class="c-hd-nav__li">
+                                            <a class="c-hd-nav__subtitle" href="/consulting-implementation/project-program-management/" style="color : #" >
+                                                Project &amp; Program Management
+                                            </a>
+                                        </li>
+                            </ul>
+                    </li>
+                    <li class="c-hd-nav__li c-hd-nav__li--col">
+                                <span class="c-hd-nav__title c-hd-nav__title--sm js-sub-nav2-btn" style="color : #">Threat Intelligence</span>
+
+
+                            <ul class="c-hd-nav__ul c-hd-nav__ul--sub-2">
+
+                                    <li class="c-hd-nav__li">
+                                        <a class="c-hd-nav__title c-hd__nav--lg" style="color : #" href="/threat-intelligence/" >
+                                            Threat Intelligence
+                                        </a>
+                                    </li>
+
+                                        <li class="c-hd-nav__li">
+                                            <a class="c-hd-nav__subtitle" href="/threat-intelligence/online-exposure-monitoring/" style="color : #" >
+                                                Online Exposure Monitoring
+                                            </a>
+                                        </li>
+                                        <li class="c-hd-nav__li">
+                                            <a class="c-hd-nav__subtitle" href="/threat-intelligence/digital-footprint-review/" style="color : #" >
+                                                Digital Footprint Review
+                                            </a>
+                                        </li>
+                            </ul>
+                    </li>
+            </ul>
+                            </li>
+                            <li class="c-hd-nav__li c-hd-nav__li--has-sub c-hd-nav__li--cols-single">
+        <div class="js-sub-nav-btn c-hd-nav__li-block">
+                <span class="c-hd-nav__a">Solutions</span>
+                <button class="e-btn e-btn--bare c-hd-nav__plus js-sub-nav-btn" aria-controls="sub-27547107" aria-expanded="false" aria-haspopup="true">
+                    <span class="u-a11y">Open sub menu for Solutions</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="13" height="8" viewBox="0 0 13 8" fill="none">
+                        <path d="M5.99479 7.73539L0.209273 1.94987C-0.0697575 1.67084 -0.0697575 1.21846 0.209273 0.939462L0.884062 0.264673C1.16262 -0.0138812 1.61407 -0.0144176 1.89328 0.263482L6.50001 4.8486L11.1067 0.263453C11.3859 -0.0144472 11.8374 -0.0139112 12.1159 0.264643L12.7907 0.939432C13.0698 1.21846 13.0698 1.67084 12.7907 1.94984L7.00521 7.73536C6.7262 8.0144 6.27383 8.0144 5.99479 7.73539Z"/>
+                    </svg>
+                </button>
+        </div>
+            <ul class="c-hd-nav__ul c-hd-nav__ul--sub c-hd-nav__ul--cols c-hd-nav__ul--cols-single" style="background-color : #" id="sub-27547107">
+
+                    <li class="c-hd-nav__li c-hd-nav__li--col">
+                                <a class="c-hd-nav__title" style="color : #ffffff" href="/solutions/cloud-security-transformation/" >
+                                    Cloud Security &amp; Transformation
+                                </a>
+
+
+                    </li>
+                    <li class="c-hd-nav__li c-hd-nav__li--col">
+                                <a class="c-hd-nav__title" style="color : #ffffff" href="/solutions/cyber-governance-assurance/" >
+                                    Cyber Governance &amp; Assurance
+                                </a>
+
+
+                    </li>
+                    <li class="c-hd-nav__li c-hd-nav__li--col">
+                                <a class="c-hd-nav__title" style="color : #ffffff" href="/solutions/digital-identity/" >
+                                    Digital Identity
+                                </a>
+
+
+                    </li>
+                    <li class="c-hd-nav__li c-hd-nav__li--col">
+                                <a class="c-hd-nav__title" style="color : #ffffff" href="/solutions/operational-technology-ot-security/" >
+                                    Operational Technology (OT) Security
+                                </a>
+
+
+                    </li>
+                    <li class="c-hd-nav__li c-hd-nav__li--col">
+                                <a class="c-hd-nav__title" style="color : #ffffff" href="/solutions/proactive-security/" >
+                                    Proactive Security
+                                </a>
+
+
+                    </li>
+                    <li class="c-hd-nav__li c-hd-nav__li--col">
+                                <a class="c-hd-nav__title" style="color : #ffffff" href="/solutions/securing-ai/" >
+                                    Securing AI
+                                </a>
+
+
+                    </li>
+                    <li class="c-hd-nav__li c-hd-nav__li--col">
+                                <a class="c-hd-nav__title" style="color : #ffffff" href="/solutions/supply-chain-third-party-cyber-risk/" >
+                                    Supply Chain &amp; Third-Party Cyber Risk
+                                </a>
+
+
+                    </li>
+                    <li class="c-hd-nav__li c-hd-nav__li--col">
+                                <a class="c-hd-nav__title" style="color : #ffffff" href="/solutions/threat-detection-response/" >
+                                    Threat Detection &amp; Response
+                                </a>
+
+
+                    </li>
+            </ul>
+                            </li>
+                            <li class="c-hd-nav__li c-hd-nav__li--has-sub">
+        <div class="js-sub-nav-btn c-hd-nav__li-block">
+                <span class="c-hd-nav__a">Sectors</span>
+                <button class="e-btn e-btn--bare c-hd-nav__plus js-sub-nav-btn" aria-controls="sub-14991407" aria-expanded="false" aria-haspopup="true">
+                    <span class="u-a11y">Open sub menu for Sectors</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="13" height="8" viewBox="0 0 13 8" fill="none">
+                        <path d="M5.99479 7.73539L0.209273 1.94987C-0.0697575 1.67084 -0.0697575 1.21846 0.209273 0.939462L0.884062 0.264673C1.16262 -0.0138812 1.61407 -0.0144176 1.89328 0.263482L6.50001 4.8486L11.1067 0.263453C11.3859 -0.0144472 11.8374 -0.0139112 12.1159 0.264643L12.7907 0.939432C13.0698 1.21846 13.0698 1.67084 12.7907 1.94984L7.00521 7.73536C6.7262 8.0144 6.27383 8.0144 5.99479 7.73539Z"/>
+                    </svg>
+                </button>
+        </div>
+            <ul class="c-hd-nav__ul c-hd-nav__ul--sub c-hd-nav__ul--cols c-hd-nav__ul--cols-4plus" style="background-color : #" id="sub-14991407">
+
+                    <li class="c-hd-nav__li c-hd-nav__li--col">
+                                <a class="c-hd-nav__title" style="color : #ffffff" href="/financial-services-sector/" >
+                                    Financial Services Sector
+                                </a>
+
+
+                    </li>
+                    <li class="c-hd-nav__li c-hd-nav__li--col">
+                                <a class="c-hd-nav__title" style="color : #ffffff" href="/legal-professional-services/" >
+                                    Legal &amp; Professional Services
+                                </a>
+
+
+                    </li>
+                    <li class="c-hd-nav__li c-hd-nav__li--col">
+                                <a class="c-hd-nav__title" style="color : #ffffff" href="/retail-consumer-markets/" >
+                                    Retail &amp; Consumer Markets
+                                </a>
+
+
+                    </li>
+                    <li class="c-hd-nav__li c-hd-nav__li--col">
+                                <a class="c-hd-nav__title" style="color : #ffffff" href="/public-sector-government-services/" >
+                                    Public Sector &amp; Government Services
+                                </a>
+
+
+                    </li>
+                    <li class="c-hd-nav__li c-hd-nav__li--col">
+                                <a class="c-hd-nav__title" style="color : #ffffff" href="/transport-services/" >
+                                    Transport Services
+                                </a>
+
+
+                    </li>
+                    <li class="c-hd-nav__li c-hd-nav__li--col">
+                                <a class="c-hd-nav__title" style="color : #ffffff" href="/telecommunications-media-technology-services/" >
+                                    Technology, Media &amp; Telecommunications Services
+                                </a>
+
+
+                    </li>
+                    <li class="c-hd-nav__li c-hd-nav__li--col">
+                                <a class="c-hd-nav__title" style="color : #ffffff" href="/energy-utilities-services/" >
+                                    Energy &amp; Utilities Services
+                                </a>
+
+
+                    </li>
+                    <li class="c-hd-nav__li c-hd-nav__li--col">
+                                <a class="c-hd-nav__title" style="color : #ffffff" href="/manufacturing-services/" >
+                                    Manufacturing Services
+                                </a>
+
+
+                    </li>
+                    <li class="c-hd-nav__li c-hd-nav__li--col">
+                                <a class="c-hd-nav__title" style="color : #ffffff" href="/health-sector-services/" >
+                                    Health Services
+                                </a>
+
+
+                    </li>
+            </ul>
+                            </li>
+                            <li class="c-hd-nav__li c-hd-nav__li--has-sub c-hd-nav__li--cols-single">
+        <div class="js-sub-nav-btn c-hd-nav__li-block c-hd-nav__a--active">
+                <span class="c-hd-nav__a">Resources</span>
+                <button class="e-btn e-btn--bare c-hd-nav__plus js-sub-nav-btn" aria-controls="sub-7660414" aria-expanded="false" aria-haspopup="true">
+                    <span class="u-a11y">Open sub menu for Resources</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="13" height="8" viewBox="0 0 13 8" fill="none">
+                        <path d="M5.99479 7.73539L0.209273 1.94987C-0.0697575 1.67084 -0.0697575 1.21846 0.209273 0.939462L0.884062 0.264673C1.16262 -0.0138812 1.61407 -0.0144176 1.89328 0.263482L6.50001 4.8486L11.1067 0.263453C11.3859 -0.0144472 11.8374 -0.0139112 12.1159 0.264643L12.7907 0.939432C13.0698 1.21846 13.0698 1.67084 12.7907 1.94984L7.00521 7.73536C6.7262 8.0144 6.27383 8.0144 5.99479 7.73539Z"/>
+                    </svg>
+                </button>
+        </div>
+            <ul class="c-hd-nav__ul c-hd-nav__ul--sub c-hd-nav__ul--cols c-hd-nav__ul--cols-single" style="background-color : #" id="sub-7660414">
+
+                    <li class="c-hd-nav__li c-hd-nav__li--col">
+                                <a class="c-hd-nav__title" style="color : #ffffff" href="/newsroom/" >
+                                    Newsroom
+                                </a>
+
+
+                    </li>
+                    <li class="c-hd-nav__li c-hd-nav__li--col">
+                                <a class="c-hd-nav__title" style="color : #ffffff" href="/resource-hub/" >
+                                    Resource Hub
+                                </a>
+
+
+                    </li>
+                    <li class="c-hd-nav__li c-hd-nav__li--col">
+                                <a class="c-hd-nav__title" style="color : #ffffff" href="/research/" target="_blank"  rel="noreferrer noopener">
+                                    Our Research
+                                </a>
+
+
+                    </li>
+                    <li class="c-hd-nav__li c-hd-nav__li--col">
+                                <a class="c-hd-nav__title" style="color : #ffffff" href="/event-hub/" >
+                                    Event Hub
+                                </a>
+
+
+                    </li>
+                    <li class="c-hd-nav__li c-hd-nav__li--col">
+                                <a class="c-hd-nav__title" style="color : #ffffff" href="/resource-hub/?resource=3010#hub" >
+                                    Case Studies
+                                </a>
+
+
+                    </li>
+                    <li class="c-hd-nav__li c-hd-nav__li--col">
+                                <a class="c-hd-nav__title" style="color : #ffffff" href="/resource-hub/cyber-threat-intelligence-reports/" >
+                                    Cyber Threat Intelligence Reports
+                                </a>
+
+
+                    </li>
+                    <li class="c-hd-nav__li c-hd-nav__li--col">
+                                <a class="c-hd-nav__title" style="color : #ffffff" href="/global-cyber-policy-radar/" >
+                                    Global Cyber Policy Radar
+                                </a>
+
+
+                    </li>
+                    <li class="c-hd-nav__li c-hd-nav__li--col">
+                                <a class="c-hd-nav__title" style="color : #ffffff" href="/the-state-of-supply-chain-security/" >
+                                    Supply Chain Security Report
+                                </a>
+
+
+                    </li>
+            </ul>
+                            </li>
+                            <li class="c-hd-nav__li c-hd-nav__li--has-sub c-hd-nav__li--cols-single">
+        <div class="js-sub-nav-btn c-hd-nav__li-block">
+                <span class="c-hd-nav__a">About Us</span>
+                <button class="e-btn e-btn--bare c-hd-nav__plus js-sub-nav-btn" aria-controls="sub-2064912" aria-expanded="false" aria-haspopup="true">
+                    <span class="u-a11y">Open sub menu for About Us</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="13" height="8" viewBox="0 0 13 8" fill="none">
+                        <path d="M5.99479 7.73539L0.209273 1.94987C-0.0697575 1.67084 -0.0697575 1.21846 0.209273 0.939462L0.884062 0.264673C1.16262 -0.0138812 1.61407 -0.0144176 1.89328 0.263482L6.50001 4.8486L11.1067 0.263453C11.3859 -0.0144472 11.8374 -0.0139112 12.1159 0.264643L12.7907 0.939432C13.0698 1.21846 13.0698 1.67084 12.7907 1.94984L7.00521 7.73536C6.7262 8.0144 6.27383 8.0144 5.99479 7.73539Z"/>
+                    </svg>
+                </button>
+        </div>
+            <ul class="c-hd-nav__ul c-hd-nav__ul--sub c-hd-nav__ul--cols c-hd-nav__ul--cols-single" style="background-color : #" id="sub-2064912">
+
+                    <li class="c-hd-nav__li c-hd-nav__li--col">
+                                <a class="c-hd-nav__title" style="color : #ffffff" href="/ncc-group-25-years-and-beyond/" >
+                                    Celebrating 25 years and beyond
+                                </a>
+
+
+                    </li>
+                    <li class="c-hd-nav__li c-hd-nav__li--col">
+                                <a class="c-hd-nav__title" style="color : #ffffff" href="/about-us/" >
+                                    About us
+                                </a>
+
+
+                    </li>
+                    <li class="c-hd-nav__li c-hd-nav__li--col">
+                                <a class="c-hd-nav__title" style="color : #ffffff" href="/technology-partners-and-expertise/" >
+                                    Technology partners &amp; expertise
+                                </a>
+
+
+                    </li>
+                    <li class="c-hd-nav__li c-hd-nav__li--col">
+                                <a class="c-hd-nav__title" style="color : #ffffff" href="/our-values/" >
+                                    Our Values
+                                </a>
+
+
+                    </li>
+                    <li class="c-hd-nav__li c-hd-nav__li--col">
+                                <a class="c-hd-nav__title" style="color : #ffffff" href="/our-board-executive-committee/" >
+                                    Our Board &amp; Executive Committee
+                                </a>
+
+
+                    </li>
+                    <li class="c-hd-nav__li c-hd-nav__li--col">
+                                <a class="c-hd-nav__title" style="color : #ffffff" href="/global-policy-advocacy/" >
+                                    Global Policy Advocacy
+                                </a>
+
+
+                    </li>
+                    <li class="c-hd-nav__li c-hd-nav__li--col">
+                                <a class="c-hd-nav__title" style="color : #ffffff" href="/our-office-locations/" >
+                                    Office Locations
+                                </a>
+
+
+                    </li>
+                    <li class="c-hd-nav__li c-hd-nav__li--col">
+                                <a class="c-hd-nav__title" style="color : #ffffff" href="https://www.nccgroupplc.com/sustainability/" target="_blank"  rel="noreferrer noopener">
+                                    Sustainability
+                                </a>
+
+
+                    </li>
+                    <li class="c-hd-nav__li c-hd-nav__li--col">
+                                <a class="c-hd-nav__title" style="color : #ffffff" href="https://www.nccgroupplc.com/investor-relations/" target="_blank"  rel="noreferrer noopener">
+                                    Investor Relations
+                                </a>
+
+
+                    </li>
+                    <li class="c-hd-nav__li c-hd-nav__li--col">
+                                <a class="c-hd-nav__title" style="color : #ffffff" href="https://nccgroup.pinpointhq.com/" target="_blank"  rel="noreferrer noopener">
+                                    Careers
+                                </a>
+
+
+                    </li>
+            </ul>
+                            </li>
+                            <li class="c-hd-nav__li c-hd-nav__li--has-sub">
+        <div class="js-sub-nav-btn c-hd-nav__li-block">
+                <span class="c-hd-nav__a">Investors</span>
+                <button class="e-btn e-btn--bare c-hd-nav__plus js-sub-nav-btn" aria-controls="sub-62983717" aria-expanded="false" aria-haspopup="true">
+                    <span class="u-a11y">Open sub menu for Investors</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="13" height="8" viewBox="0 0 13 8" fill="none">
+                        <path d="M5.99479 7.73539L0.209273 1.94987C-0.0697575 1.67084 -0.0697575 1.21846 0.209273 0.939462L0.884062 0.264673C1.16262 -0.0138812 1.61407 -0.0144176 1.89328 0.263482L6.50001 4.8486L11.1067 0.263453C11.3859 -0.0144472 11.8374 -0.0139112 12.1159 0.264643L12.7907 0.939432C13.0698 1.21846 13.0698 1.67084 12.7907 1.94984L7.00521 7.73536C6.7262 8.0144 6.27383 8.0144 5.99479 7.73539Z"/>
+                    </svg>
+                </button>
+        </div>
+            <ul class="c-hd-nav__ul c-hd-nav__ul--sub c-hd-nav__ul--cols c-hd-nav__ul--cols-3" style="background-color : #" id="sub-62983717">
+
+                    <li class="c-hd-nav__li c-hd-nav__li--col">
+                                <span class="c-hd-nav__title c-hd-nav__title--sm js-sub-nav2-btn" style="color : #">Investor Relations</span>
+
+
+                            <ul class="c-hd-nav__ul c-hd-nav__ul--sub-2">
+
+                                    <li class="c-hd-nav__li">
+                                        <a class="c-hd-nav__title c-hd__nav--lg" style="color : #" href="/investors/" >
+                                            Investor Relations
+                                        </a>
+                                    </li>
+
+                                        <li class="c-hd-nav__li">
+                                            <a class="c-hd-nav__subtitle" href="/investors/why-invest-in-ncc-group/" style="color : #" >
+                                                Why invest in NCC Group?
+                                            </a>
+                                        </li>
+                                        <li class="c-hd-nav__li">
+                                            <a class="c-hd-nav__subtitle" href="/investors/share-price/" style="color : #" >
+                                                Share Price
+                                            </a>
+                                        </li>
+                                        <li class="c-hd-nav__li">
+                                            <a class="c-hd-nav__subtitle" href="/investors/consensus/" style="color : #" >
+                                                Consensus
+                                            </a>
+                                        </li>
+                                        <li class="c-hd-nav__li">
+                                            <a class="c-hd-nav__subtitle" href="/investors/results-media/" style="color : #" >
+                                                Results &amp; Media
+                                            </a>
+                                        </li>
+                                        <li class="c-hd-nav__li">
+                                            <a class="c-hd-nav__subtitle" href="/investors/rns/" style="color : #" >
+                                                RNS
+                                            </a>
+                                        </li>
+                                        <li class="c-hd-nav__li">
+                                            <a class="c-hd-nav__subtitle" href="/investors/investor-toolkit/" style="color : #" >
+                                                Investor Toolkit
+                                            </a>
+                                        </li>
+                                        <li class="c-hd-nav__li">
+                                            <a class="c-hd-nav__subtitle" href="/investors/corporate-governance/" style="color : #" >
+                                                Corporate Governance
+                                            </a>
+                                        </li>
+                                        <li class="c-hd-nav__li">
+                                            <a class="c-hd-nav__subtitle" href="/investors/investor-relations-contacts/" style="color : #" >
+                                                Investor Relations Contacts
+                                            </a>
+                                        </li>
+                            </ul>
+                    </li>
+                    <li class="c-hd-nav__li c-hd-nav__li--col">
+                                <span class="c-hd-nav__title c-hd-nav__title--sm js-sub-nav2-btn" style="color : #">Sustainability</span>
+
+
+                            <ul class="c-hd-nav__ul c-hd-nav__ul--sub-2">
+
+                                    <li class="c-hd-nav__li">
+                                        <a class="c-hd-nav__title c-hd__nav--lg" style="color : #" href="/sustainability/" >
+                                            Sustainability
+                                        </a>
+                                    </li>
+
+                                        <li class="c-hd-nav__li">
+                                            <a class="c-hd-nav__subtitle" href="/sustainability/gender-pay-gap/" style="color : #" >
+                                                Gender Pay Gap
+                                            </a>
+                                        </li>
+                                        <li class="c-hd-nav__li">
+                                            <a class="c-hd-nav__subtitle" href="/sustainability/giving-back/" style="color : #" >
+                                                Giving Back
+                                            </a>
+                                        </li>
+                                        <li class="c-hd-nav__li">
+                                            <a class="c-hd-nav__subtitle" href="/sustainability/governance-and-standards/" style="color : #" >
+                                                Governance &amp; Standards
+                                            </a>
+                                        </li>
+                            </ul>
+                    </li>
+                    <li class="c-hd-nav__li c-hd-nav__li--col">
+                                <span class="c-hd-nav__title c-hd-nav__title--sm js-sub-nav2-btn" style="color : #">Resources</span>
+
+
+                            <ul class="c-hd-nav__ul c-hd-nav__ul--sub-2">
+
+                                    <li class="c-hd-nav__li">
+                                        <span class="c-hd-nav__title c-hd__nav--lg" style="color : #">Resources</span>
+                                    </li>
+                                    <li class="c-hd-nav__li">
+                                        <a href="/media/yppkbneg/ncc-group-carbon-reduction-plan.pdf" style="color : #" target="_blank"  rel="noreferrer noopener" class="c-hd-nav__a">
+                                            Carbon Reduction Plan 2026
+                                        </a>
+                                    </li>
+                                    <li class="c-hd-nav__li">
+                                        <a href="/investors/results-media/annual-report-2025/" style="color : #"  class="c-hd-nav__a">
+                                            Annual Report 2025
+                                        </a>
+                                    </li>
+                                    <li class="c-hd-nav__li">
+                                        <a href="/media/ehbfve0f/ncc-group-fy25-secr.pdf" style="color : #" target="_blank"  rel="noreferrer noopener" class="c-hd-nav__a">
+                                            Streamlined Energy and Carbon Reporting 2025
+                                        </a>
+                                    </li>
+                                    <li class="c-hd-nav__li">
+                                        <a href="/sustainability/anti-bribery-corruption/" style="color : #"  class="c-hd-nav__a">
+                                            Anti-Bribery &amp; Corruption
+                                        </a>
+                                    </li>
+                                    <li class="c-hd-nav__li">
+                                        <a href="/sustainability/anti-slavery-and-human-trafficking/" style="color : #"  class="c-hd-nav__a">
+                                            Anti-slavery and human trafficking
+                                        </a>
+                                    </li>
+                                    <li class="c-hd-nav__li">
+                                        <a href="/sustainability/code-of-ethics/" style="color : #"  class="c-hd-nav__a">
+                                            Code of Ethics
+                                        </a>
+                                    </li>
+                                    <li class="c-hd-nav__li">
+                                        <a href="/sustainability/gender-pay-gap/" style="color : #"  class="c-hd-nav__a">
+                                            Gender Pay Gap
+                                        </a>
+                                    </li>
+                                    <li class="c-hd-nav__li">
+                                        <a href="/sustainability/supply-chain/" style="color : #"  class="c-hd-nav__a">
+                                            Supply Chain
+                                        </a>
+                                    </li>
+                                    <li class="c-hd-nav__li">
+                                        <a href="/sustainability/whistleblowing/" style="color : #"  class="c-hd-nav__a">
+                                            Whistleblowing
+                                        </a>
+                                    </li>
+                                    <li class="c-hd-nav__li">
+                                        <a href="/media/kwyiyewv/ncc_group_environmental_policy_sept_2026.pdf" style="color : #" target="_blank"  rel="noreferrer noopener" class="c-hd-nav__a">
+                                            Environmental Policy
+                                        </a>
+                                    </li>
+                            </ul>
+                    </li>
+            </ul>
+                            </li>
+                            <li class="c-hd-nav__li">
+        <div class="js-sub-nav-btn c-hd-nav__li-block">
+                <a class="c-hd-nav__a" href="/contact-us/" >Contact Us</a>
+        </div>
+                            </li>
+                    <li class="c-hd-nav__li c-hd-nav__li--search">
+                            <div class="c-hd-nav__li-block">
+                                <button class="e-btn e-btn--bare c-hd-nav__a c-hd-nav__a--search js-search-btn">
+                                    <span class="u-a11y">Search</span>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
+                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M7.36375 13.0909C4.20552 13.0909 1.63639 10.5218 1.63639 7.36364C1.63639 4.20545 4.20552 1.63636 7.36375 1.63636C10.522 1.63636 13.0911 4.20545 13.0911 7.36364C13.0911 10.5218 10.522 13.0909 7.36375 13.0909ZM17.7603 16.6036L13.1118 11.9542C14.1199 10.6942 14.7275 9.09927 14.7275 7.36364C14.7275 3.30327 11.4242 0 7.36375 0C3.30332 0 0 3.30327 0 7.36364C0 11.424 3.30332 14.7273 7.36375 14.7273C9.09941 14.7273 10.6943 14.1196 11.9544 13.1116L16.6039 17.76C16.7632 17.9204 16.9726 18 17.1821 18C17.3915 18 17.601 17.9204 17.7603 17.76C18.0799 17.4404 18.0799 16.9233 17.7603 16.6036Z"/>
+                                    </svg>
+                                </button>
+                            </div>
+                    </li>
+                </ul>
+                <ul class="c-hd-nav__ul c-hd-nav__ul--opts c-hd-nav__opts">
+                    <li class="c-hd-nav__li c-hd-nav__li--has-sub">
+                        <div class="c-hd-nav__li-block c-hd-nav__opts-block js-sub-nav-btn">
+                            <span class="c-hd-nav__a c-hd-nav__a--client c-hd-nav__opts-client">
+                                Client login
+                            </span>
+                            <button class="e-btn e-btn--bare c-hd-nav__plus" aria-controls="id-1" aria-expanded="false" aria-haspopup="true">
+                                <span class="u-a11y">
+                                    Open sub menu for Customer Portals
+                                </span>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="13" height="8" viewBox="0 0 13 8">
+                                    <path d="M5.99479 7.73539L0.209273 1.94987C-0.0697575 1.67084 -0.0697575 1.21846 0.209273 0.939462L0.884062 0.264673C1.16262 -0.0138812 1.61407 -0.0144176 1.89328 0.263482L6.50001 4.8486L11.1067 0.263453C11.3859 -0.0144472 11.8374 -0.0139112 12.1159 0.264643L12.7907 0.939432C13.0698 1.21846 13.0698 1.67084 12.7907 1.94984L7.00521 7.73536C6.7262 8.0144 6.27383 8.0144 5.99479 7.73539Z"/>
+                                </svg>
+                            </button>
+                        </div>
+                            <ul class="c-hd-nav__ul c-hd-nav__ul--sub" id="id-1">
+                                    <li class="c-hd-nav__li">
+                                        <a class="c-hd-nav__a" href="https://ucp.nccgroup.com/" target="_blank"  rel="noreferrer noopener">
+Managed Services Unified Cyber Platform (UCP)                                        </a>
+                                    </li>
+                                    <li class="c-hd-nav__li">
+                                        <a class="c-hd-nav__a" href="https://csp.nccgroup.com" target="_blank"  rel="noreferrer noopener">
+Cyber Services Portal                                        </a>
+                                    </li>
+                                    <li class="c-hd-nav__li">
+                                        <a class="c-hd-nav__a" href="https://my.nccgroup.com/prostormlive/login" target="_blank"  rel="noreferrer noopener">
+Managed Scanning Customer Portal                                        </a>
+                                    </li>
+                            </ul>
+                    </li>
+                </ul>
+        </nav>
+<form action="/research/" class="c-search o-container js-search-box" enctype="multipart/form-data" id="formf02631f7d79e4edfbd62ee16d0c4982a" method="post">            <label class="u-a11y" for="search-term">Enter a search term</label>
+            <div class="c-search__inputs">
+                <input type="text" id="search-term" class="c-search__text u-mb-0" name="q">
+                <input type="submit" class="c-search__btn u-mb-0" value="Search">
+            </div>
+            <button class="e-btn e-btn--bare c-search__btn-close js-close-search">&ZeroWidthSpace;</button>
+<input name="ufprt" type="hidden" value="CfDJ8LMl8QDx3pxHr2vxo6HRQ3hMFNEGEDTTWEoxdJ4W2dyxJ5RMG2uueFuNiB7_1KwAoBnyRw0EEYSIav_TIhEyPs3XyX01GD7gEgEML3scfPTKcpHNUJqnSdDPcRkFMDNSCYVehesXs2drnOL57QlNaKh9X0ddXwUsOuv4-e4UuN7E" /></form>    </div>
+</header>
+
+
+
+    <main id="main" class="t-">
+        
+<style>@media screen and (min-width: 320px){.media-image-a6e3cdfd-a47e-4c06-9f00-08e5621dd0db{background-image:url('/media/5cxbgfm2/research-main-banner-darkwatermark-v2.jpg'); }}</style><style>@media screen and (min-width: 800px){.media-image-19b513ff-e3b4-474e-8d3e-28985f8f0ac1{background-image:url('/media/5cxbgfm2/research-main-banner-darkwatermark-v2.jpg'); }}</style><style>@media screen and (min-width: 1200px){.media-image-af019f6a-d71c-43ba-a8c3-ed4b4045d9f7{background-image:url('/media/5cxbgfm2/research-main-banner-darkwatermark-v2.jpg'); }}@media screen and (min-width: 1366px){.media-image-af019f6a-d71c-43ba-a8c3-ed4b4045d9f7{background-image:url('/media/5cxbgfm2/research-main-banner-darkwatermark-v2.jpg'); }}@media screen and (min-width: 1600px){.media-image-af019f6a-d71c-43ba-a8c3-ed4b4045d9f7{background-image:url('/media/5cxbgfm2/research-main-banner-darkwatermark-v2.jpg'); }}</style><div class="c-banner c-banner--center media-image-a6e3cdfd-a47e-4c06-9f00-08e5621dd0db media-image-19b513ff-e3b4-474e-8d3e-28985f8f0ac1 media-image-af019f6a-d71c-43ba-a8c3-ed4b4045d9f7 c-banner--img-text   no-cta-items " style="background-position:50.0% 50.0%">
+    <div class="c-banner__container ">
+        <div class="c-banner__container">
+
+               <div class="c-banner__content u-white-content" id="">
+               <div class="o-container ">
+                    <h1 class="c-banner__header" data-swiftype-name="title" data-swiftype-type="string"><span>Research</span></h1>
+
+
+<p class="c-banner__text u-mb-8">Powering the future of cyber security through<br>breakthrough research and practical innovation</p>
+                    <div class="c-banner__btns">
+                        <a href="/research/research-articles/" class="e-btn u-mr-4 e-btn--outline" >Articles</a>
+                    </div>
+                </div>
+            </div>
+
+
+
+        </div>
+    </div>
+
+</div>
+
+
+
+
+
+
+<div class="body" data-swiftype-name="body" data-swiftype-type="text">
+    
+
+        <section  class="c-section u-bg-tourmaline-black u-white-content" >
+
+
+            <div class="o-container o-container--narrow">
+
+                    <div class="o-flex">
+                            <div class="o-flex__col o-flex__col--12">
+
+
+
+<div class="rte">
+    <p style="text-align: center; padding-left: 40px;"> </p>
+<p style="text-align: center;"><strong>| <a href="#articles" data-anchor="#articles">Research Articles</a> | <a href="#researchactivities" data-anchor="#researchactivities">Research Activities</a> | <a href="#contacts" data-anchor="#contacts">Key Contacts</a> |</strong></p>
+</div>                            </div>
+                    </div>
+            </div>
+        </section>
+        <section  class="c-section u-bg-tourmaline-black u-white-content" >
+
+
+            <div class="o-container o-container--narrow">
+
+                    <div class="o-flex">
+                            <div class="o-flex__col o-flex__col--9">
+
+
+
+<div class="rte">
+    <p style="text-align: left;" class="e-h3"><strong>2025 Annual </strong><br><strong>Research Report</strong></p>
+</div>
+
+
+<div class="u-left-align">
+   
+            <a href="/research/annual-cyber-security-research-report-2025/"
+                target="_blank"
+             rel="noreferrer noopener"
+                class="e-btn c-ani c-ani--fade-in js-ani ">
+
+                Download Report
+            </a>
+</div>
+                            </div>
+                            <div class="o-flex__col o-flex__col--3">
+
+
+
+<div class="rte">
+    <p><strong>Past reports</strong></p>
+<ul>
+<li><a rel="noopener" href="/media/5r2lj233/2024-ncc-group-annual-research-report.pdf" target="_blank" title="2024 NCC Group Annual Research Report">2024</a></li>
+<li><a rel="noopener" href="/media/qzpjwdjj/2023-ncc-group-annual-research-report.pdf" target="_blank" title="2023 NCC Group Annual Research Report">2022 &amp; 2023</a></li>
+<li><a rel="noopener" href="/media/yz0cte3u/2021-ncc-group-annual-research-report.pdf" target="_blank" title="2021 NCC Group Annual Research Report">2021</a></li>
+<li><a rel="noopener" href="/media/3uchuovw/2020-ncc-group-annual-research-report.pdf" target="_blank" title="2020 NCC Group Annual Research Report">2020</a></li>
+</ul>
+</div>                            </div>
+                    </div>
+            </div>
+        </section>
+        <section  class="c-section u-bg-white" >
+
+
+            <div class="o-container o-container--narrow">
+
+                    <div class="o-flex">
+                            <div class="o-flex__col o-flex__col--6">
+
+
+
+<div class="rte">
+    <p class="e-h3">At NCC Group, our Research advances cyber security by discovering vulnerabilities, building open‑source tools, and translating insights into practical guidance for customers and the wider community.</p>
+<p>Our projects span vulnerability research and exploitation, network and system security, malware and ransomware analysis/DFIR, applied cryptography, hardware &amp; embedded systems/IoT, and software/AI security – with a track record of publishing reports and tooling that strengthen real‑world cyber resilience.  </p>
+<p>For over 25 years, NCC Group researchers have contributed deep technical insight across industry and academia, presenting at global conferences and collaborating with partners worldwide. </p>
+</div>                            </div>
+                            <div class="o-flex__col o-flex__col--6">
+
+
+
+<figure class="c-figure c-figure--video vimeo  t-crimson">
+
+    <div class="c-figure__img-container c-res-iframe  c-shadow">
+        <iframe src="https://player.vimeo.com/video/1096984277?app_id=122963&dnt=1" width="360" height="203" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" title="25 years of vulnerability research: past, present and future​​"></iframe>
+    </div>
+
+</figure>
+
+                            </div>
+                    </div>
+            </div>
+        </section>
+        <section  class="c-section u-bg-white" >
+
+
+            <div class="o-container o-container--narrow">
+
+                    <div class="o-flex">
+                            <div class="o-flex__col o-flex__col--12">
+
+
+
+<div class="rte">
+    
+</div>
+
+<div class="rte">
+    <div style="display: flex; flex-wrap: wrap; justify-content: space-between; border: 0; margin-bottom: 20px;"><!-- Column 1 -->
+<div style="flex: 1 1 33%; max-width: 33%; padding: 10px; box-sizing: border-box; text-align: center;">
+<h2 style="margin: 0; font-size: 72px; font-weight: bold; color: #ff4495;">2000+</h2>
+<p style="margin: 8px 0 0; color: #000000;" class="e-h3">person-days of security research annually</p>
+</div>
+<!-- Column 2 -->
+<div style="flex: 1 1 33%; max-width: 33%; padding: 10px; box-sizing: border-box; text-align: center;">
+<h2 style="margin: 0; font-size: 72px; font-weight: bold; color: #5d47d7;">280</h2>
+<p style="margin: 8px 0 0; color: #000000;" class="e-h3">Open-source tools &amp; datasets authored by NCC authors on our public Github</p>
+</div>
+<!-- Column 3 (Image) -->
+<div style="flex: 1 1 33%; max-width: 33%; padding: 10px; box-sizing: border-box; text-align: center;">
+<h2 style="margin: 0; font-size: 72px; font-weight: bold; color: #86cdf2;">150+</h2>
+<p style="margin: 8px 0 0; color: #000000;" class="e-h3">CVEs found since 2020</p>
+</div>
+</div>
+</div>
+
+<div class="rte">
+    <hr style="border: none; height: 1px; background: linear-gradient(to right, #000FFF, #FF3B0B);">
+</div>                            </div>
+                    </div>
+            </div>
+        </section>
+        <section  class="c-section u-bg-white" >
+
+
+            <div class="o-container o-container--narrow">
+
+                    <div class="o-flex">
+                            <div class="o-flex__col o-flex__col--12">
+
+
+
+<div class="rte">
+    <h2 id="articles" style="position: relative; padding-left: 30px;">Research Articles<span style="position: absolute; left: 0; top: 50%; transform: translateY(-50%); width: 20px; height: 20px; background-color: #000fff;"></span></h2>
+</div>                            </div>
+                    </div>
+            </div>
+        </section>
+        <section  class="c-section u-bg-white" >
+
+
+            <div class="o-container o-container--narrow o-container--full">
+
+                    <div class="o-flex">
+                            <div class="o-flex__col o-flex__col--12">
+
+
+<div class="">
+        <div div class="glide glide--ltr glide--carousel glide--swipeable c-in" data-items-per-slide="3" id="js-in-slider">
+            <div class="o-flex o-container">
+                <div class="glide__bullets" data-glide-el="controls[nav]"></div>
+            </div>
+            <div class="o-container o-container--wide">
+                <div class="o-container carousel-wrapper">
+                    <div class="glide__track" data-glide-el="track">
+                        <div class="glide__slides">
+                                <div class="glide__slide c-in__slide">
+                                        <div class="c-in__slide--tag">Research</div>
+                                        <div class="c-in__slide--img t-neon-blue"></div>
+                                    <div class="c-in__slide--text">
+                                        <h3>Gone in 60 Frames &#x2013; USB Video Exploitation (DEF CON 34)</h3>
+                                        <a href="/research/gone-in-60-frames-usb-video-exploitation-def-con-34/" class="c-in__slide--btn">Read more</a>
+                                    </div>
+                                </div>
+                                <div class="glide__slide c-in__slide">
+                                        <div class="c-in__slide--tag">Research</div>
+                                        <div class="c-in__slide--img t-neon-blue"></div>
+                                    <div class="c-in__slide--text">
+                                        <h3>Exploiting USB on a Tesla IVI with Raspberry Pi Devices to bypass KASLR (InsomniHack 2026)</h3>
+                                        <a href="/research/exploiting-usb-on-a-tesla-ivi-with-raspberry-pi-devices-to-bypass-kaslr-insomnihack-2026/" class="c-in__slide--btn">Read more</a>
+                                    </div>
+                                </div>
+                                <div class="glide__slide c-in__slide">
+                                        <div class="c-in__slide--tag">Research</div>
+                                        <div class="c-in__slide--img t-neon-blue"></div>
+                                    <div class="c-in__slide--text">
+                                        <h3>Postcards From Las Vegas &#x2013; BlackHat USA 2026 and Defcon 34</h3>
+                                        <a href="/research/postcards-from-las-vegas-blackhat-usa-2026-and-defcon-34/" class="c-in__slide--btn">Read more</a>
+                                    </div>
+                                </div>
+                                <div class="glide__slide c-in__slide">
+                                        <div class="c-in__slide--tag">Research</div>
+                                        <div class="c-in__slide--img t-neon-blue"></div>
+                                    <div class="c-in__slide--text">
+                                        <h3>Public Report: Go x/crypto/ssh Cryptographic Implementation Review</h3>
+                                        <a href="/research/public-report-go-xcryptossh-cryptographic-implementation-review/" class="c-in__slide--btn">Read more</a>
+                                    </div>
+                                </div>
+                                <div class="glide__slide c-in__slide">
+                                        <div class="c-in__slide--tag">Research</div>
+                                        <div class="c-in__slide--img t-neon-blue"></div>
+                                    <div class="c-in__slide--text">
+                                        <h3>Assurance of Co-operative Intelligent Transportation Systems</h3>
+                                        <a href="/research/assurance-of-co-operative-intelligent-transportation-systems/" class="c-in__slide--btn">Read more</a>
+                                    </div>
+                                </div>
+                                <div class="glide__slide c-in__slide">
+                                        <div class="c-in__slide--tag">Research</div>
+                                        <div class="c-in__slide--img t-neon-blue"></div>
+                                    <div class="c-in__slide--text">
+                                        <h3>Privacy and security challenges of content provenance and authenticity systems</h3>
+                                        <a href="/research/privacy-and-security-challenges-of-content-provenance-and-authenticity-systems/" class="c-in__slide--btn">Read more</a>
+                                    </div>
+                                </div>
+                                <div class="glide__slide c-in__slide">
+                                        <div class="c-in__slide--tag">Research</div>
+                                        <div class="c-in__slide--img t-neon-blue"></div>
+                                    <div class="c-in__slide--text">
+                                        <h3>What the 13% Looks Like: A Case Study</h3>
+                                        <a href="/research/what-the-13-looks-like-a-case-study/" class="c-in__slide--btn">Read more</a>
+                                    </div>
+                                </div>
+                                <div class="glide__slide c-in__slide">
+                                        <div class="c-in__slide--tag">Research</div>
+                                        <div class="c-in__slide--img t-neon-blue"></div>
+                                    <div class="c-in__slide--text">
+                                        <h3>Interpretable Adversarial Attacks in Superposition</h3>
+                                        <a href="/research/interpretable-adversarial-attacks-in-superposition/" class="c-in__slide--btn">Read more</a>
+                                    </div>
+                                </div>
+                                <div class="glide__slide c-in__slide">
+                                        <div class="c-in__slide--tag">Research</div>
+                                        <div class="c-in__slide--img t-neon-blue"></div>
+                                    <div class="c-in__slide--text">
+                                        <h3>Vulnerability Analysis of CVE 2025 22226</h3>
+                                        <a href="/research/vulnerability-analysis-of-cve-2025-22226/" class="c-in__slide--btn">Read more</a>
+                                    </div>
+                                </div>
+                                <div class="glide__slide c-in__slide">
+                                        <div class="c-in__slide--tag">Research</div>
+                                        <div class="c-in__slide--img t-neon-blue"></div>
+                                    <div class="c-in__slide--text">
+                                        <h3>Public Report: TiDB Security Assessment</h3>
+                                        <a href="/research/public-report-tidb-security-assessment/" class="c-in__slide--btn">Read more</a>
+                                    </div>
+                                </div>
+                                <div class="glide__slide c-in__slide">
+                                        <div class="c-in__slide--tag">Research</div>
+                                        <div class="c-in__slide--img t-neon-blue"></div>
+                                    <div class="c-in__slide--text">
+                                        <h3>Time as an Attack Surface</h3>
+                                        <a href="/research/time-as-an-attack-surface/" class="c-in__slide--btn">Read more</a>
+                                    </div>
+                                </div>
+                                <div class="glide__slide c-in__slide">
+                                        <div class="c-in__slide--tag">Research</div>
+                                        <div class="c-in__slide--img t-neon-blue"></div>
+                                    <div class="c-in__slide--text">
+                                        <h3>Dissecting Android Malware - Post 2: Mamont Variant - Advanced Dropper Logic and Encrypted Payload</h3>
+                                        <a href="/research/dissecting-android-malware-post-2-mamont-variant-advanced-dropper-logic-and-encrypted-payload/" class="c-in__slide--btn">Read more</a>
+                                    </div>
+                                </div>
+                        </div>
+                    </div>
+
+                    <div class="glide__arrows" data-glide-el="controls">
+                        <button class="e-btn e-btn--bare glide__arrow glide__arrow--left" data-glide-dir="<"><span class="u-a11y">Previous slide</span></button>
+                        <button class="e-btn e-btn--bare glide__arrow glide__arrow--right" data-glide-dir=">"><span class="u-a11y">Next slide</span></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+</div>                            </div>
+                    </div>
+            </div>
+        </section>
+        <section  class="c-section u-bg-white" >
+
+
+            <div class="o-container o-container--narrow">
+
+                    <div class="o-flex">
+                            <div class="o-flex__col o-flex__col--12">
+
+
+
+<div class="rte">
+    <h2 id="researchactivities" style="position: relative; padding-left: 30px;">Research Activities<span style="position: absolute; left: 0; top: 50%; transform: translateY(-50%); width: 20px; height: 20px; background-color: #5d47d7;"></span></h2>
+</div>                            </div>
+                    </div>
+            </div>
+        </section>
+        <section  class="c-section u-bg-white" >
+
+
+            <div class="o-container o-container--narrow">
+
+                    <div class="o-flex">
+                            <div class="o-flex__col o-flex__col--3">
+
+
+
+<div class="u-flex-center">
+    <figure class="c-figure ">
+
+        <div class="c-figure__img-container ">
+
+            <img src="/media/rzydrxvu/commerical-research.jpg?quality=80" 
+                    alt="Commerical Research" 
+                    >
+
+        </div>
+
+    </figure>
+</div>                            </div>
+                            <div class="o-flex__col o-flex__col--9">
+
+
+
+<div class="rte">
+    <h3>Security Research Services</h3>
+<p>Our Security Research Services help organisations answer complex, high‑risk cyber security questions that lie beyond standard consulting.&nbsp;</p>
+<p>This work:&nbsp;</p>
+<ul>
+<li>Is funded by customers</li>
+<li>Often requires exploration of previously untested hypotheses</li>
+<li>Draws on expertise across cryptography, hardware, AI, vulnerability research, secure systems engineering and more</li>
+<li>Has delivered major projects for the UK public sector and North American technology companies, with ongoing expansion into new geographies&nbsp;</li>
+</ul>
+<p>These services can range from feasibility research and prototype development to deep technical investigations that improve resilience, reduce uncertainty, or validate future defensive approaches.&nbsp;</p>
+</div>                            </div>
+                    </div>
+            </div>
+        </section>
+        <section  class="c-section u-bg-white" >
+
+
+            <div class="o-container o-container--narrow">
+
+                    <div class="o-flex">
+                            <div class="o-flex__col o-flex__col--9">
+
+
+
+<div class="rte">
+    <h3>Exploit Development Group (EDG)</h3>
+<p>The Exploit Development Group is NCC Group’s cutting-edge exploitation team.&nbsp;</p>
+<p>They:</p>
+<ul>
+<li>Deliver high‑impact research with global recognition</li>
+<li>Present at top‑tier conferences worldwide</li>
+<li>Compete in events such as Pwn2Own on behalf of NCC Group</li>
+<li>Provide bespoke exploit development support to our consultants</li>
+<li>Offer secondment opportunities that develop elite exploitation skills within our technical teams&nbsp;</li>
+</ul>
+<p>EDG ensures NCC Group remains an industry leader in vulnerability discovery, exploitation, and advanced security research.&nbsp;</p>
+</div>                            </div>
+                            <div class="o-flex__col o-flex__col--3">
+
+
+
+<div class="u-flex-center">
+    <figure class="c-figure ">
+
+        <div class="c-figure__img-container ">
+
+            <img src="/media/d3zhmz5y/edg.jpg?quality=80" 
+                    alt="EDG" 
+                    >
+
+        </div>
+
+    </figure>
+</div>                            </div>
+                    </div>
+            </div>
+        </section>
+        <section  class="c-section u-bg-white" >
+
+
+            <div class="o-container o-container--narrow">
+
+                    <div class="o-flex">
+                            <div class="o-flex__col o-flex__col--3">
+
+
+
+<div class="u-flex-center">
+    <figure class="c-figure ">
+
+        <div class="c-figure__img-container ">
+
+            <img src="/media/ademijie/academic-v2.jpg?quality=80" 
+                    alt="Academic V2" 
+                    >
+
+        </div>
+
+    </figure>
+</div>                            </div>
+                            <div class="o-flex__col o-flex__col--9">
+
+
+
+<div class="rte">
+    <h3>Academic Partnerships</h3>
+<p>Our academic partnerships extend NCC Group’s mission by collaborating with universities and research institutions to:&nbsp;</p>
+<ul>
+<li>Support PhD and Masters-level research programmes</li>
+<li>Shape undergraduate teaching through challenges, curriculum contributions and student projects</li>
+<li>Deliver STEM outreach and careers engagement</li>
+<li>Build awareness of NCC Group as a destination for future cyber security professionals&nbsp;</li>
+</ul>
+<p>These collaborations provide access to new technologies and early theoretical developments, while enabling the next generation of talent to gain hands‑on experience with real-world security problems.&nbsp;</p>
+</div>                            </div>
+                    </div>
+            </div>
+        </section>
+        <section  class="c-section u-bg-blue-calico-10" >
+
+
+            <div class="o-container o-container--narrow">
+
+                    <div class="o-flex">
+                            <div class="o-flex__col o-flex__col--12">
+
+
+
+<div class="rte">
+    
+</div>
+
+<div class="rte">
+    <h2 id="contacts" style="position: relative; padding-left: 30px;">Key Contacts<span style="position: absolute; left: 0; top: 50%; transform: translateY(-50%); width: 20px; height: 20px; background-color: #ff3b0b;"></span></h2>
+</div>                            </div>
+                    </div>
+            </div>
+        </section>
+        <section  class="c-section u-bg-blue-calico-10" >
+
+
+            <div class="o-container o-container--narrow">
+
+                    <div class="o-flex">
+                            <div class="o-flex__col o-flex__col--3">
+
+
+
+<div class="u-flex-center">
+    <figure class="c-figure ">
+
+        <div class="c-figure__img-container ">
+
+            <img src="/media/5jfhc0ik/andydavis.png?quality=80" 
+                    alt="Andydavis" 
+                    >
+
+        </div>
+
+    </figure>
+</div>                            </div>
+                            <div class="o-flex__col o-flex__col--9">
+
+
+
+<div class="rte">
+    <h3>Andy Davis</h3>
+<p><strong>Global Research Director</strong></p>
+<p>➤<span> <a rel="noopener" href="mailto:andy.davis@nccgroup.com" target="_blank">andy.davis@nccgroup.com</a></span></p>
+</div>                            </div>
+                    </div>
+            </div>
+        </section>
+        <section  class="c-section u-bg-blue-calico-10" >
+
+
+            <div class="o-container o-container--narrow">
+
+                    <div class="o-flex">
+                            <div class="o-flex__col o-flex__col--3">
+
+
+
+<div class="u-flex-center">
+    <figure class="c-figure ">
+
+        <div class="c-figure__img-container ">
+
+            <img src="/media/nreohloq/ristinrivera.png?quality=80" 
+                    alt="Ristinrivera" 
+                    >
+
+        </div>
+
+    </figure>
+</div>                            </div>
+                            <div class="o-flex__col o-flex__col--9">
+
+
+
+<div class="rte">
+    <h3>Ristin Rivera</h3>
+<p><strong>Research Manager</strong></p>
+<p> ➤<a rel="noopener" href="mailto:ristin.rivera@nccgroup.com" target="_blank">ristin.rivera@nccgroup.com</a></p>
+</div>                            </div>
+                    </div>
+            </div>
+        </section>
+        <section  class="c-section u-bg-blue-calico-10" >
+
+
+            <div class="o-container o-container--narrow">
+
+                    <div class="o-flex">
+                            <div class="o-flex__col o-flex__col--12">
+
+
+
+<div class="rte">
+    <h2>Commercial research enquiries</h2>
+</div>                            </div>
+                    </div>
+            </div>
+        </section>
+        <section  class="c-section u-bg-blue-calico-10" >
+
+
+            <div class="o-container o-container--narrow">
+
+                    <div class="o-flex">
+                            <div class="o-flex__col o-flex__col--3">
+
+
+
+<div class="u-flex-center">
+    <figure class="c-figure ">
+
+        <div class="c-figure__img-container ">
+
+            <img src="/media/nj0hzpor/jonrenshaw.png?quality=80" 
+                    alt="Jonrenshaw" 
+                    >
+
+        </div>
+
+    </figure>
+</div>                            </div>
+                            <div class="o-flex__col o-flex__col--9">
+
+
+
+<div class="rte">
+    <h3>Jon Renshaw</h3>
+<p><strong>Director, Commercial Research</strong></p>
+<p>➤<a rel="noopener" href="mailto:jon.renshaw@nccgroup.com" target="_blank">jon.renshaw@nccgroup.com</a></p>
+</div>                            </div>
+                    </div>
+            </div>
+        </section>
+
+
+</div>
+
+    </main>
+    
+
+
+    <script async src="/static-a/scripts/script.js?v=AthiCkU6TuMxirVaWt-TC4RoiWt6aj1HlU2Tcutz-2c"></script>
+
+    
+<footer class="c-f u-white-content c-f--alt" id="footer">
+
+    <div class="o-container">
+
+        <div class="c-f__logo-box">
+            <img src="/media/spskt1as/ncc-group-logo-white2.png" alt="NCC Group" class="c-f__logo" width="220" height="54">
+
+                    <div class="c-f__social o-flex__col">
+                            <a href="https://www.linkedin.com/company/ncc-group" aria-label="Visit NCC&#x27;s LinkedIn page" class="c-f__social-a"><img src="/static-a/img/icons/icon-social-LinkedIn.svg" alt="LinkedIn logo" width="24" height="24"></a>
+                    </div>
+        </div>         
+
+        <div class="o-flex__col c-f__lists">
+
+            <ul class="c-f__list">
+
+                        <li class="c-f__list-li">
+                            <a class="c-f__list-a" href="/terms-and-conditions/" >
+                                Terms and Conditions
+                            </a>
+                        </li>
+                        <li class="c-f__list-li">
+                            <a class="c-f__list-a" href="/data-privacy/" >
+                                Data Privacy
+                            </a>
+                        </li>
+                        <li class="c-f__list-li">
+                            <a class="c-f__list-a" href="/privacy-notice/" >
+                                Privacy Notice
+                            </a>
+                        </li>
+                        <li class="c-f__list-li">
+                            <a class="c-f__list-a" href="/cookie-policy/" >
+                                Cookie Policy
+                            </a>
+                        </li>
+                        <li class="c-f__list-li">
+                            <a class="c-f__list-a" href="/media/fgih55r1/global-vulnerability-disclosure-policy-v10.pdf" target="_blank"  rel="noreferrer noopener">
+                                Global Vulnerability Disclosure Policy
+                            </a>
+                        </li>
+                        <li class="c-f__list-li">
+                            <a class="c-f__list-a" href="/contact-us/" >
+                                Contact Us
+                            </a>
+                        </li>
+            </ul>
+            <ul class="c-f__list">
+
+                        <li class="c-f__list-li">
+                            <a class="c-f__list-a" href="/technical-assurance/" >
+                                Technical Assurance
+                            </a>
+                        </li>
+                        <li class="c-f__list-li">
+                            <a class="c-f__list-a" href="/consulting-implementation/" >
+                                Consulting &amp; Implementation
+                            </a>
+                        </li>
+                        <li class="c-f__list-li">
+                            <a class="c-f__list-a" href="/managed-services/" >
+                                Managed Services
+                            </a>
+                        </li>
+                        <li class="c-f__list-li">
+                            <a class="c-f__list-a" href="/incident-response/" >
+                                Incident Response
+                            </a>
+                        </li>
+                        <li class="c-f__list-li">
+                            <a class="c-f__list-a" href="/threat-intelligence/" >
+                                Threat Intelligence
+                            </a>
+                        </li>
+            </ul>
+            <div class="c-f__list"><p><strong>Get in Touch</strong></p>
+<p>UK &amp; Europe <a href="tel:+441612095200">+44 (0) 161 209 5200</a></p>
+<p>U.S. &amp; Canada <a href="tel:+18008133523">+1 (800) 813 3523</a></p>
+<p>APAC <a href="tel:+61295524451">+61 (0) 2 9552 4451</a></p>
+<p><strong>24/7 Incident Response Hotline</strong><br><a href="tel:+443316300690">+44 331 630 0690</a></p> </div>
+        </div>
+           
+
+        <div class="o-flex o-flex--no-gap c-f__copyright">
+
+            <div class="o-flex__col">
+                <p>&copy; NCC Group 2026. All rights reserved. </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+
+    
+
+    <script nonce="sdfgsq324qAWA2340" crossorigin="anonymous" src="https://cc.cdn.civiccomputing.com/9/cookieControl-9.x.min.js"></script>
+<script nonce="2815b940659c16" defer>
+	window.dataLayer = window.dataLayer || [];
+	function gtag() { dataLayer.push(arguments); }
+	var config = {
+		apiKey: '2798f9f41396d675a576242ad3027909ef2a122d',
+		product: 'PRO_MULTISITE',
+		consentCookieExpiry: 90,
+		subDomains: true,
+		encodeCookie: true,
+		mode: 'gdpr',
+		accessibility: {
+			accessKey: 'C',
+			highlightFocus: false
+		},
+		text: {
+			title: 'This website makes use of cookies.',
+			intro: 'This website uses cookies to ensure you get the best experience on our website. Some of these cookies are essential for the site to function, whilst others are useful to help us to analyse our traffic and collect statistics on how and when the site is being used and how it can be improved. We also share information about your use of our site with our analytics partners.\n\nBy clicking \"Accept All,\" you consent to the storing of cookies on your device to enhance site navigation, analyse site usage, and assist in measuring the success of our marketing efforts.',
+			acceptSettings: 'Accept all cookies',
+			rejectSettings: ' Reject all cookies',
+			necessaryTitle: "Necessary cookies",
+			necessaryDescription: "Necessary cookies enable core functionality as you browse our website such as session management and remembering your cookie preferences. The website cannot function properly without these cookies and can only be disabled by changing your browser preferences.",
+			on: "On",
+			off: "Off",
+		},
+		statement: {
+			description: 'Manage your preferences at any time, on the cookie preference tool at the bottom of the screen, or if you want to learn more, please go to our',
+			name: 'Cookie policy',
+			url: '/cookie-policy/',
+			updated: '28/02/2024'
+		},
+		rejectButton: true,
+		necessaryCookies: ['1P_JAR', 'ARRAffinity', 'XSRF-TOKEN', 'XSRF-V', 'CookieControl', 'APISID', 'GPS', 'HSID', 'IDE', 'SAPISID', 'SID', 'SSID', '__Secure-3PAPISID', '__Secure-3PSID', '__Secure-APISID', '__Secure-HSID', '__Secure-SSID', 'NID', 'SIDCC', 'test_cookie', 'VISITOR_INFO1_LIVE', 'YSD', 'YSC', 'player', 'UMB-*', 'UMB_*', 'Language', 'ASP.NET_SessionId', '__RequestVerificationToken', '__cfduid', 'bcookie', '_uv_id', 'ncc_lang', 'ncc_country'],
+		optionalCookies: [
+			{
+				name: 'analytics',
+				label: 'Analytical Cookies',
+				description: 'Analytical cookies help us to improve our website by collecting and reporting information on its usage.',
+				cookies: ['_ga', '_gali', '_gat', '_dc_gtm_UA-178675028-1', '_gid', '__utma', '__utmb', '__utmc', '__utmt', '__utmv', '__utmz', '_hjid', '_hjTLDTest', '_hjIncludedInSample', '_hjAbsoluteSessionInProgress', 'siteimproveses', 'AWSELB', 'UID', 'UIDR', 'fr', 'personalization_id', 'intercom-id-nncj4mdb', 'intercom-session-nncj4mdb', 'intercom-id-yt1vsveg', 'intercom-session-yt1vsveg', 'cc_temp_ref'],
+				onAccept: function () {
+					(function (w, d, s, l, i) {
+						w[l] = w[l] || []; w[l].push({
+							'gtm.start':
+								new Date().getTime(), event: 'gtm.js'
+						}); var f = d.getElementsByTagName(s)[0],
+							j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+								'https://www.googletagmanager.com/gtm.js?id=' + i + dl; j.id = 'gtmScript'; j.nonce = '2815b940659c20'; f.parentNode.insertBefore(j, f);
+					})(window, document, 'script', 'dataLayer', 'GTM-P98KKM8');
+					gtag('js', new Date());
+					gtag('config', 'UA-178675028-1', { 'anonymize_ip': true });
+					gtag('consent', 'update', { 'analytics_storage': 'granted' });
+
+
+									(function (d, s, l, i) {
+
+										var f = d.getElementsByTagName(s)[0],
+											j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+												'https://www.googletagmanager.com/gtag/js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+
+									})(document, 'script', 'dataLayer', 'AW-842616812')
+								gtag('js', new Date());
+								gtag('config', 'AW-842616812');
+		
+					var intercomContainer = document.getElementById('intercom-container');
+					if (intercomContainer !== null && intercomContainer !== undefined) { intercomContainer.style.display = "block"; }
+
+					var intercomLauncher = document.getElementsByClassName('intercom-lightweight-app');
+					if (intercomLauncher !== null && intercomLauncher !== undefined) {
+						for (var i = intercomLauncher.length - 1; i >= 0; --i) {
+							intercomLauncher[i].style.display = "block";
+						}
+					}
+				},
+				onRevoke: function () {
+					window['ga-disable-UA-178675028-1'] = true;
+
+					var element = document.getElementById('gtmScript');
+					if (element !== null && element !== undefined) { element.remove(); }
+
+					var intercomContainer = document.getElementById('intercom-container');
+					if (intercomContainer !== null && intercomContainer !== undefined) { intercomContainer.style.display = "none"; }
+
+					var intercomLauncher = document.getElementsByClassName('intercom-lightweight-app');
+					if (intercomLauncher !== null && intercomLauncher !== undefined) {
+						for (var i = intercomLauncher.length - 1; i >= 0; --i) {
+							intercomLauncher[i].style.display = "none";
+						}
+					}
+
+					CookieControl.delete("_ga");
+					CookieControl.delete("_gali");
+					CookieControl.delete("_gat");
+					CookieControl.delete("_dc_gtm_UA-178675028-1");
+					CookieControl.delete("_gid");
+					CookieControl.delete("__utma");
+					CookieControl.delete("__utmb");
+					CookieControl.delete("__utmc");
+					CookieControl.delete("__utmt");
+					CookieControl.delete("__utmv");
+					CookieControl.delete("__utmz");
+					CookieControl.delete("_hjid");
+					CookieControl.delete("_hjTLDTest");
+					CookieControl.delete("_hjIncludedInSample");
+					CookieControl.delete("_hjAbsoluteSessionInProgress");
+					CookieControl.delete("siteimproveses");
+					CookieControl.delete("AWSELB");
+					CookieControl.delete("UID");
+					CookieControl.delete("UIDR");
+					CookieControl.delete("fr");
+					CookieControl.delete("personalization_id");
+					CookieControl.delete("intercom-id-nncj4mdb");
+					CookieControl.delete("intercom-session-nncj4mdb");
+					CookieControl.delete("intercom-id-yt1vsveg");
+					CookieControl.delete("intercom-session-yt1vsveg");
+					gtag('consent', 'update', { 'analytics_storage': 'denied' });
+				}
+			},
+			{
+				name: 'marketing',
+				label: 'Google Ad Platforms',
+				description: 'We use marketing cookies to help us improve the relevancy of advertising campaigns you receive.',
+				onAccept: function () {
+					gtag('consent', 'update', { 'ad_storage': 'granted' });
+					gtag('consent', 'update', { 'ad_user_data ': 'granted' });
+					gtag('consent', 'update', { 'ad_personalization ': 'granted' });
+				},
+				onRevoke: function () {
+					gtag('consent', 'update', { 'ad_storage': 'denied' });
+					gtag('consent', 'update', { 'ad_user_data': 'denied' });
+					gtag('consent', 'update', { 'ad_personalization': 'denied' });
+				}
+			}
+		],
+		initialState: "open",
+		position: 'left',
+		theme: 'light',
+		layout: 'popup',
+		branding: {
+			fontFamily: '"Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"',
+			fontColor: "#2B2B2B",
+			backgroundColor: "#ffffff",
+			fontSizeTitle: "1.25em",
+			fontSizeIntro: "1em",
+			fontSizeHeaders: "1em",
+			fontSize: "0.9em",
+			toggleText: "#fff",
+			toggleColor: "#ce5f72",
+			toggleBackground: "#C41230",
+			buttonIcon: '/static-a/img/Cookie-new.svg',
+			buttonIconWidth: "64px",
+			buttonIconHeight: "64px",
+			removeIcon: false,
+			removeAbout: true,
+			acceptBackground: '#FBAA29',
+			acceptText: '#2B2B2B'
+		},
+		sameSiteCookie: "https:" === document.location.protocol ? true : false,
+		sameSiteValue: 'Lax'
+	};
+
+	const onCivicClick = (e) => {
+		if (e.target) {
+			let acceptButton = e.target.closest('#ccc-recommended-settings');
+			let rejectButton = e.target.closest('#ccc-reject-settings');
+			let closeButton = e.target.closest('#ccc-close');
+
+			if (acceptButton) {
+				CookieControl.notifyAccept();
+			}
+
+			if (rejectButton) {
+				CookieControl.notifyReject();
+			}
+
+			if (acceptButton || rejectButton || closeButton) {
+				const ref = document.referrer;
+				if (ref) {
+					const refUrl = URL.parse(ref);
+					if (refUrl && refUrl.hostname !== window.location.hostname) {
+						CookieControl.saveCookie('cc_temp_ref', ref, 1);
+					}
+				}
+				window.location.reload();
+			}
+		}
+	};
+
+	const observerForCivicElements = new MutationObserver(() => {
+		const civicContainer = document.getElementById('ccc');
+
+		if (civicContainer) {
+			observerForCivicElements.disconnect();
+			civicContainer.addEventListener("click", onCivicClick, true);
+		}
+	});
+
+	observerForCivicElements.observe(document.body, { childList: true, subtree: false });
+
+	CookieControl.load(config);
+
+	const tempRef = URL.parse(CookieControl.getCookie('cc_temp_ref'));
+	const ref = document.referrer;
+	const refUrl = URL.parse(ref);
+	if (tempRef) {
+		if (!ref || (refUrl && refUrl.hostname === window.location.hostname && refUrl.pathname === window.location.pathname)) {
+			gtag('set', 'page_referrer', tempRef.href);
+		}
+		CookieControl.delete('cc_temp_ref');
+	}
+</script>   
+
+    
+
+
+
+<script src="/Assets/Umbraco.Engage/Scripts/umbracoEngage.analytics.js"></script>
+
+
+
+
+
+                    <script>
+                    if (typeof umbracoEngage !== 'undefined' && umbracoEngage.analytics) {
+                        umbracoEngage.analytics.init("88a46166-6de6-4e63-a4e2-61c404fb15fb");
+                    } else {
+                        document.addEventListener('umbracoEngageAnalyticsReady', function() {
+                            typeof umbracoEngage !== 'undefined' && umbracoEngage.analytics && umbracoEngage.analytics.init("88a46166-6de6-4e63-a4e2-61c404fb15fb");
+                        });
+                    }
+                    </script></body>
+</html>

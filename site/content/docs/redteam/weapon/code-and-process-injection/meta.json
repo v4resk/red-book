@@ -1,0 +1,23 @@
+{
+  "title": "Code & Process Injection",
+  "pages": [
+    ".net-reflective-assembly",
+    ".net-assembly-from-windows-script-hosting",
+    "process-hollowing",
+    "wndproc-callback-shellcode-execution",
+    "fibers-shellcode-execution",
+    "vector-exception-handler-shellcode-execution",
+    "ntqueueapcthread-and-nttestalert-shellcode-execution",
+    "thread-pool-callback-shellcode-execution",
+    "module-stomping-shellcode-injection",
+    "remote-.net-assembly-loading-through-waasremediation-dcom-abuse",
+    "dll-injection",
+    "createremotethread-injection",
+    "reflective-dll-injection",
+    "ntmapviewofsection-injection",
+    "setwindowhookex-injection",
+    "poolparty",
+    "mockingjay",
+    "..."
+  ]
+}

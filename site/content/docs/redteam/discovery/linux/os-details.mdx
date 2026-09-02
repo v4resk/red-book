@@ -1,0 +1,47 @@
+---
+title: "OS Details"
+---
+
+## Theory
+
+This page provides useful commands for UNIX systems enumeration that can be used to query important OS related informations.
+
+## Practice
+
+### Kernel & OS Version
+
+<Tabs items={['Enumerate']}>
+<Tab value="Enumerate">
+
+Following command can be use to enumerate the OS version
+
+```bash
+#Display Kernel version & CPU informations 
+uname -a
+
+#Display OS Version
+cat /etc/*release*
+
+#Display OS informations
+cat /etc/issue
+
+#Display Kernel informations
+cat /proc/version
+```
+
+</Tab>
+</Tabs>
+
+### Architecture
+
+<Tabs items={['Enumerate']}>
+<Tab value="Enumerate">
+
+Following commands can be use to enumerate OS architecture
+
+```bash
+arch
+```
+
+</Tab>
+</Tabs>

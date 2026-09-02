@@ -1,0 +1,17 @@
+{
+  "title": "Red-Teaming",
+  "defaultOpen": true,
+  "pages": [
+    "recon",
+    "weapon",
+    "delivery",
+    "persistence",
+    "evasion",
+    "discovery",
+    "privilege-escalation",
+    "credentials",
+    "pivoting",
+    "exfiltration",
+    "..."
+  ]
+}

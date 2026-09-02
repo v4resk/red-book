@@ -1,0 +1,13 @@
+{
+  "pages": [
+    "index",
+    "redteam",
+    "web-pentesting",
+    "network-pentesting",
+    "ad",
+    "smart-contracts-pentesting",
+    "cloud-cicd-pentesting",
+    "ai-red-teaming",
+    "..."
+  ]
+}

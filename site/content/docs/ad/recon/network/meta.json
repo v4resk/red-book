@@ -1,0 +1,13 @@
+{
+  "title": "Network",
+  "pages": [
+    "dhcp",
+    "dns",
+    "nbt-ns",
+    "port-scanning",
+    "smb",
+    "ldap",
+    "ms-rpc",
+    "..."
+  ]
+}

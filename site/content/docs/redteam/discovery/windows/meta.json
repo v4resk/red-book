@@ -1,0 +1,14 @@
+{
+  "title": "Windows",
+  "pages": [
+    "system-information",
+    "processes-and-services",
+    "scheduled-tasks",
+    "installed-applications",
+    "network-configuration",
+    "acls",
+    "knowing-your-shell",
+    "av",
+    "..."
+  ]
+}

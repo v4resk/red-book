@@ -1,0 +1,3062 @@
+{
+ "http://blog.carnal0wnage.com/2012/10/group-policy-preferences-and-getting.html": {
+  "domain": "blog.carnal0wnage.com",
+  "icon": "blog.carnal0wnage.com.png",
+  "title": "Group Policy Preferences and Getting Your Domain 0wned Carnal0wnage - Blog Carnal0wnage Blog"
+ },
+ "http://blog.gentilkiwi.com/securite/mimikatz/overpass-the-hash": {
+  "domain": "blog.gentilkiwi.com",
+  "icon": "blog.gentilkiwi.com.png",
+  "title": null
+ },
+ "http://davenport.sourceforge.net/ntlm.html": {
+  "domain": "davenport.sourceforge.net",
+  "icon": null,
+  "title": "The NTLM Authentication Protocol and Security Support Provider"
+ },
+ "http://g-laurent.blogspot.com/2016/10/introducing-responder-multirelay-10.html": {
+  "domain": "g-laurent.blogspot.com",
+  "icon": "g-laurent.blogspot.com.png",
+  "title": "Laurent Gaffi\u00e9 blog: Introducing Responder MultiRelay 1.0"
+ },
+ "http://moyix.blogspot.com/2008/02/decrypting-lsa-secrets.html": {
+  "domain": "moyix.blogspot.com",
+  "icon": "moyix.blogspot.com.png",
+  "title": "Decrypting LSA Secrets"
+ },
+ "http://moyix.blogspot.com/2008/02/syskey-and-sam.html": {
+  "domain": "moyix.blogspot.com",
+  "icon": "moyix.blogspot.com.png",
+  "title": "SysKey and the SAM"
+ },
+ "http://remivernier.com/index.php/2018/08/26/protocoles-nbt-ns-llmnr-et-exploitation-des-failles/": {
+  "domain": "remivernier.com",
+  "icon": "remivernier.com.png",
+  "title": "Protocoles NBT-NS, LLMNR et exploitation des failles - R\u00e9mi VERNIER"
+ },
+ "http://www.harmj0y.net/blog/redteaming/a-guide-to-attacking-domain-trusts/": {
+  "domain": "www.harmj0y.net",
+  "icon": "www.harmj0y.net.png",
+  "title": null
+ },
+ "http://www.harmj0y.net/blog/redteaming/abusing-active-directory-permissions-with-powerview/": {
+  "domain": "www.harmj0y.net",
+  "icon": "www.harmj0y.net.png",
+  "title": null
+ },
+ "http://www.selfadsi.org/deep-inside/ad-security-descriptors.htm": {
+  "domain": "www.selfadsi.org",
+  "icon": null,
+  "title": "SelfADSI : Active Directory Permissions : Security Descriptors"
+ },
+ "https://0xdf.gitlab.io/2019/02/21/htb-legacy.html": {
+  "domain": "0xdf.gitlab.io",
+  "icon": "0xdf.gitlab.io.png",
+  "title": "HTB: Legacy"
+ },
+ "https://0xn3va.gitbook.io/cheat-sheets/framework/spring": {
+  "domain": "0xn3va.gitbook.io",
+  "icon": "0xn3va.gitbook.io.png",
+  "title": "Spring | Application Security Cheat Sheet"
+ },
+ "https://0xn3va.gitbook.io/cheat-sheets/framework/spring/spring-boot-actuators": {
+  "domain": "0xn3va.gitbook.io",
+  "icon": "0xn3va.gitbook.io.png",
+  "title": "Spring Boot Actuators | Application Security Cheat Sheet"
+ },
+ "https://aadapt.mitre.org/techniques/ADT3012.005/": {
+  "domain": "aadapt.mitre.org",
+  "icon": "aadapt.mitre.org.png",
+  "title": "MITRE | AADAPT\u2122"
+ },
+ "https://access.redhat.com/security/cve/cve-2023-32233": {
+  "domain": "access.redhat.com",
+  "icon": "access.redhat.com.png",
+  "title": "CVE-2023-32233 - Red Hat Customer Portal"
+ },
+ "https://actes.sstic.org/SSTIC06/Dissection_RPC_Windows/SSTIC06-article-Pouvesle-Dissection_RPC_Windows.pdf": {
+  "domain": "actes.sstic.org",
+  "icon": null,
+  "title": null
+ },
+ "https://adsecurity.org/?p=1255": {
+  "domain": "adsecurity.org",
+  "icon": "adsecurity.org.ico",
+  "title": "Active Directory Domain Controller Skeleton Key Malware & Mimikatz"
+ },
+ "https://adsecurity.org/?p=1772": {
+  "domain": "adsecurity.org",
+  "icon": "adsecurity.org.ico",
+  "title": "Sneaky Active Directory Persistence #14: SID History"
+ },
+ "https://adsecurity.org/?p=1906": {
+  "domain": "adsecurity.org",
+  "icon": "adsecurity.org.ico",
+  "title": "Sneaky Active Directory Persistence #15: Leverage AdminSDHolder & SDProp to (Re)Gain Domain Admin Rights"
+ },
+ "https://adsecurity.org/?p=2011": {
+  "domain": "adsecurity.org",
+  "icon": "adsecurity.org.ico",
+  "title": "How Attackers Use Kerberos Silver Tickets to Exploit Systems"
+ },
+ "https://adsecurity.org/?p=2288": {
+  "domain": "adsecurity.org",
+  "icon": "adsecurity.org.ico",
+  "title": "Finding Passwords in SYSVOL & Exploiting Group Policy Preferences"
+ },
+ "https://adsecurity.org/?p=2716": {
+  "domain": "adsecurity.org",
+  "icon": "adsecurity.org.ico",
+  "title": "Sneaky Active Directory Persistence #17: Group Policy"
+ },
+ "https://adsecurity.org/?p=3592": {
+  "domain": "adsecurity.org",
+  "icon": "adsecurity.org.ico",
+  "title": "Attacking Read-Only Domain Controllers (RODCs) to Own Active Directory"
+ },
+ "https://adsecurity.org/?p=3658": {
+  "domain": "adsecurity.org",
+  "icon": "adsecurity.org.ico",
+  "title": "Scanning for Active Directory Privileges & Privileged Accounts"
+ },
+ "https://adsecurity.org/?p=483": {
+  "domain": "adsecurity.org",
+  "icon": "adsecurity.org.ico",
+  "title": "Kerberos & KRBTGT: Active Directory\u2019s Domain Kerberos Service Account"
+ },
+ "https://adsecurity.org/?p=525": {
+  "domain": "adsecurity.org",
+  "icon": "adsecurity.org.ico",
+  "title": "MS14-068: Vulnerability in (Active Directory) Kerberos Could Allow Elevation of Privilege"
+ },
+ "https://adsecurity.org/?p=541": {
+  "domain": "adsecurity.org",
+  "icon": "adsecurity.org.ico",
+  "title": "Kerberos Vulnerability in MS14-068 (KB3011780) Explained"
+ },
+ "https://aj-labz.gitbook.io/aj-labz/offensive-cyberz/defense-evasion/evade-heuristic-behaviors/applocker-bypass": {
+  "domain": "aj-labz.gitbook.io",
+  "icon": null,
+  "title": "AppLocker Bypass | AJ-Labz"
+ },
+ "https://appriver.com/resources/blog/june-2020/phishers-are-targeting-your-calendar-ics-files": {
+  "domain": "appriver.com",
+  "icon": "appriver.com.ico",
+  "title": "AppRiver is now OpenText Cybersecurity"
+ },
+ "https://atom.hackstreetboys.ph/linux-privilege-escalation-environment-variables/": {
+  "domain": "atom.hackstreetboys.ph",
+  "icon": null,
+  "title": null
+ },
+ "https://attack.mitre.org/tactics/TA0001/": {
+  "domain": "attack.mitre.org",
+  "icon": "attack.mitre.org.png",
+  "title": "Initial Access, Tactic TA0001 - Enterprise | MITRE ATT&CK"
+ },
+ "https://attack.mitre.org/tactics/TA0003/": {
+  "domain": "attack.mitre.org",
+  "icon": "attack.mitre.org.png",
+  "title": "Persistence, Tactic TA0003 - Enterprise | MITRE ATT&CK"
+ },
+ "https://attack.mitre.org/tactics/TA0004/": {
+  "domain": "attack.mitre.org",
+  "icon": "attack.mitre.org.png",
+  "title": "Privilege Escalation, Tactic TA0004 - Enterprise | MITRE ATT&CK"
+ },
+ "https://attack.mitre.org/tactics/TA0005/": {
+  "domain": "attack.mitre.org",
+  "icon": "attack.mitre.org.png",
+  "title": "Stealth, Tactic TA0005 - Enterprise | MITRE ATT&CK"
+ },
+ "https://attack.mitre.org/tactics/TA0006/": {
+  "domain": "attack.mitre.org",
+  "icon": "attack.mitre.org.png",
+  "title": "Credential Access, Tactic TA0006 - Enterprise | MITRE ATT&CK"
+ },
+ "https://attack.mitre.org/tactics/TA0007/": {
+  "domain": "attack.mitre.org",
+  "icon": "attack.mitre.org.png",
+  "title": "Discovery, Tactic TA0007 - Enterprise | MITRE ATT&CK"
+ },
+ "https://attack.mitre.org/tactics/TA0008/": {
+  "domain": "attack.mitre.org",
+  "icon": "attack.mitre.org.png",
+  "title": "Lateral Movement, Tactic TA0008 - Enterprise | MITRE ATT&CK"
+ },
+ "https://attack.mitre.org/tactics/TA0036/": {
+  "domain": "attack.mitre.org",
+  "icon": "attack.mitre.org.png",
+  "title": "Exfiltration, Tactic TA0036 - Mobile | MITRE ATT&CK"
+ },
+ "https://attack.mitre.org/tactics/TA0043/": {
+  "domain": "attack.mitre.org",
+  "icon": "attack.mitre.org.png",
+  "title": "Reconnaissance, Tactic TA0043 - Enterprise | MITRE ATT&CK"
+ },
+ "https://attack.mitre.org/techniques/T1003/": {
+  "domain": "attack.mitre.org",
+  "icon": "attack.mitre.org.png",
+  "title": "OS Credential Dumping, Technique T1003 - Enterprise | MITRE ATT&CK"
+ },
+ "https://attack.mitre.org/techniques/T1003/007/": {
+  "domain": "attack.mitre.org",
+  "icon": "attack.mitre.org.png",
+  "title": "OS Credential Dumping: Proc Filesystem, Sub-technique T1003.007 - Enterprise | MITRE ATT&CK"
+ },
+ "https://attack.mitre.org/techniques/T1003/008/": {
+  "domain": "attack.mitre.org",
+  "icon": "attack.mitre.org.png",
+  "title": "OS Credential Dumping: /etc/passwd and /etc/shadow, Sub-technique T1003.008 - Enterprise | MITRE ATT&CK"
+ },
+ "https://attack.mitre.org/techniques/T1007/": {
+  "domain": "attack.mitre.org",
+  "icon": "attack.mitre.org.png",
+  "title": "System Service Discovery, Technique T1007 - Enterprise | MITRE ATT&CK"
+ },
+ "https://attack.mitre.org/techniques/T1016/": {
+  "domain": "attack.mitre.org",
+  "icon": "attack.mitre.org.png",
+  "title": "System Network Configuration Discovery, Technique T1016 - Enterprise | MITRE ATT&CK"
+ },
+ "https://attack.mitre.org/techniques/T1021/006/": {
+  "domain": "attack.mitre.org",
+  "icon": "attack.mitre.org.png",
+  "title": "Remote Services: Windows Remote Management, Sub-technique T1021.006 - Enterprise | MITRE ATT&CK"
+ },
+ "https://attack.mitre.org/techniques/T1027/006/": {
+  "domain": "attack.mitre.org",
+  "icon": "attack.mitre.org.png",
+  "title": "Obfuscated Files or Information: HTML Smuggling, Sub-technique T1027.006 - Enterprise | MITRE ATT&CK"
+ },
+ "https://attack.mitre.org/techniques/T1046/": {
+  "domain": "attack.mitre.org",
+  "icon": "attack.mitre.org.png",
+  "title": "Network Service Discovery, Technique T1046 - Enterprise | MITRE ATT&CK"
+ },
+ "https://attack.mitre.org/techniques/T1055/012/": {
+  "domain": "attack.mitre.org",
+  "icon": "attack.mitre.org.png",
+  "title": "Process Injection: Process Hollowing, Sub-technique T1055.012 - Enterprise | MITRE ATT&CK"
+ },
+ "https://attack.mitre.org/techniques/T1057/": {
+  "domain": "attack.mitre.org",
+  "icon": "attack.mitre.org.png",
+  "title": "Process Discovery, Technique T1057 - Enterprise | MITRE ATT&CK"
+ },
+ "https://attack.mitre.org/techniques/T1083/": {
+  "domain": "attack.mitre.org",
+  "icon": "attack.mitre.org.png",
+  "title": "File and Directory Discovery, Technique T1083 - Enterprise | MITRE ATT&CK"
+ },
+ "https://attack.mitre.org/techniques/T1110/002/": {
+  "domain": "attack.mitre.org",
+  "icon": "attack.mitre.org.png",
+  "title": "Brute Force: Password Cracking, Sub-technique T1110.002 - Enterprise | MITRE ATT&CK"
+ },
+ "https://attack.mitre.org/techniques/T1134/005/": {
+  "domain": "attack.mitre.org",
+  "icon": "attack.mitre.org.png",
+  "title": "Access Token Manipulation: SID-History Injection, Sub-technique T1134.005 - Enterprise | MITRE ATT&CK"
+ },
+ "https://attack.mitre.org/techniques/T1482/": {
+  "domain": "attack.mitre.org",
+  "icon": "attack.mitre.org.png",
+  "title": "Domain Trust Discovery, Technique T1482 - Enterprise | MITRE ATT&CK"
+ },
+ "https://attack.mitre.org/techniques/T1518/": {
+  "domain": "attack.mitre.org",
+  "icon": "attack.mitre.org.png",
+  "title": "Software Discovery, Technique T1518 - Enterprise | MITRE ATT&CK"
+ },
+ "https://attack.mitre.org/techniques/T1518/001/": {
+  "domain": "attack.mitre.org",
+  "icon": "attack.mitre.org.png",
+  "title": "Software Discovery: Security Software Discovery, Sub-technique T1518.001 - Enterprise | MITRE ATT&CK"
+ },
+ "https://attack.mitre.org/techniques/T1546/012/": {
+  "domain": "attack.mitre.org",
+  "icon": "attack.mitre.org.png",
+  "title": "Event Triggered Execution: Image File Execution Options Injection, Sub-technique T1546.012 - Enterprise | MITR"
+ },
+ "https://attack.mitre.org/techniques/T1547/001/": {
+  "domain": "attack.mitre.org",
+  "icon": "attack.mitre.org.png",
+  "title": "Boot or Logon Autostart Execution: Registry Run Keys / Startup Folder, Sub-technique T1547.001 - Enterprise | "
+ },
+ "https://attack.mitre.org/techniques/T1547/002/": {
+  "domain": "attack.mitre.org",
+  "icon": "attack.mitre.org.png",
+  "title": "Boot or Logon Autostart Execution: Authentication Package, Sub-technique T1547.002 - Enterprise | MITRE ATT&CK"
+ },
+ "https://attack.mitre.org/techniques/T1547/004/": {
+  "domain": "attack.mitre.org",
+  "icon": "attack.mitre.org.png",
+  "title": "Boot or Logon Autostart Execution: Winlogon Helper DLL, Sub-technique T1547.004 - Enterprise | MITRE ATT&CK"
+ },
+ "https://attack.mitre.org/techniques/T1547/005/": {
+  "domain": "attack.mitre.org",
+  "icon": "attack.mitre.org.png",
+  "title": "Boot or Logon Autostart Execution: Security Support Provider, Sub-technique T1547.005 - Enterprise | MITRE ATT"
+ },
+ "https://attack.mitre.org/techniques/T1552/": {
+  "domain": "attack.mitre.org",
+  "icon": "attack.mitre.org.png",
+  "title": "Unsecured Credentials, Technique T1552 - Enterprise | MITRE ATT&CK"
+ },
+ "https://attack.mitre.org/techniques/T1552/001/": {
+  "domain": "attack.mitre.org",
+  "icon": "attack.mitre.org.png",
+  "title": "Unsecured Credentials: Credentials In Files, Sub-technique T1552.001 - Enterprise | MITRE ATT&CK"
+ },
+ "https://attack.mitre.org/techniques/T1553/005/": {
+  "domain": "attack.mitre.org",
+  "icon": "attack.mitre.org.png",
+  "title": "Subvert Trust Controls: Mark-of-the-Web Bypass, Sub-technique T1553.005 - Enterprise | MITRE ATT&CK"
+ },
+ "https://attack.mitre.org/techniques/T1555/005/": {
+  "domain": "attack.mitre.org",
+  "icon": "attack.mitre.org.png",
+  "title": "Credentials from Password Stores: Password Managers, Sub-technique T1555.005 - Enterprise | MITRE ATT&CK"
+ },
+ "https://attack.mitre.org/techniques/T1557/": {
+  "domain": "attack.mitre.org",
+  "icon": "attack.mitre.org.png",
+  "title": "Adversary-in-the-Middle, Technique T1557 - Enterprise | MITRE ATT&CK"
+ },
+ "https://attack.mitre.org/techniques/T1572/": {
+  "domain": "attack.mitre.org",
+  "icon": "attack.mitre.org.png",
+  "title": "Protocol Tunneling, Technique T1572 - Enterprise | MITRE ATT&CK"
+ },
+ "https://attack.mitre.org/techniques/T1590/002/": {
+  "domain": "attack.mitre.org",
+  "icon": "attack.mitre.org.png",
+  "title": "Gather Victim Network Information: DNS, Sub-technique T1590.002 - Enterprise | MITRE ATT&CK"
+ },
+ "https://attack.mitre.org/techniques/T1595/002/": {
+  "domain": "attack.mitre.org",
+  "icon": "attack.mitre.org.png",
+  "title": "Active Scanning: Vulnerability Scanning, Sub-technique T1595.002 - Enterprise | MITRE ATT&CK"
+ },
+ "https://attack.mitre.org/techniques/T1639/": {
+  "domain": "attack.mitre.org",
+  "icon": "attack.mitre.org.png",
+  "title": "Exfiltration Over Alternative Protocol, Technique T1639 - Mobile | MITRE ATT&CK"
+ },
+ "https://attack.stealthbits.com/privilege-escalation-using-mimikatz-dcsync": {
+  "domain": "attack.stealthbits.com",
+  "icon": "attack.stealthbits.com.png",
+  "title": "Stealthbits"
+ },
+ "https://beierle.win/2024-12-20-Weaponizing-WDAC-Killing-the-Dreams-of-EDR/": {
+  "domain": "beierle.win",
+  "icon": "beierle.win.png",
+  "title": "Weaponizing WDAC: Killing the Dreams of EDR"
+ },
+ "https://beta.hackndo.com/ethereum-virtual-machine/": {
+  "domain": "beta.hackndo.com",
+  "icon": "beta.hackndo.com.png",
+  "title": "Ethereum Virtual Machine"
+ },
+ "https://beta.hackndo.com/gpo-abuse-with-edit-settings/": {
+  "domain": "beta.hackndo.com",
+  "icon": "beta.hackndo.com.png",
+  "title": "GPO - Chemin d\u2019attaque"
+ },
+ "https://blog.bwlryq.net/posts/icmp_exfiltration/": {
+  "domain": "blog.bwlryq.net",
+  "icon": "blog.bwlryq.net.ico",
+  "title": "bWlrYQ | Homepage"
+ },
+ "https://blog.compass-security.com/2020/05/relaying-ntlm-authentication-over-rpc": {
+  "domain": "blog.compass-security.com",
+  "icon": "blog.compass-security.com.png",
+  "title": "Relaying NTLM authentication over RPC \u2013 Compass Security Blog"
+ },
+ "https://blog.detectify.com/2020/11/10/common-nginx-misconfigurations/": {
+  "domain": "blog.detectify.com",
+  "icon": "blog.detectify.com.png",
+  "title": "Common Nginx misconfigurations that leave your web server open to attack"
+ },
+ "https://blog.dixitaditya.com/ethernaut-level-19-alien-codex": {
+  "domain": "blog.dixitaditya.com",
+  "icon": "blog.dixitaditya.com.png",
+  "title": "Ethernaut Level 19 - Alien Codex"
+ },
+ "https://blog.fox-it.com/2018/01/11/mitm6-compromising-ipv4-networks-via-ipv6/": {
+  "domain": "blog.fox-it.com",
+  "icon": "blog.fox-it.com.png",
+  "title": "mitm6 \u2013 compromising IPv4 networks via IPv6"
+ },
+ "https://blog.harmj0y.net/redteaming/another-word-on-delegation/": {
+  "domain": "blog.harmj0y.net",
+  "icon": "blog.harmj0y.net.png",
+  "title": "Another Word on Delegation"
+ },
+ "https://blog.improsec.com/tech-blog/sid-filter-as-security-boundary-between-domains-part-7-trust-account-attack-from-trusting-to-trusted": {
+  "domain": "blog.improsec.com",
+  "icon": "blog.improsec.com.png",
+  "title": "SID filter as security boundary between domains? (Part 7) - Trust account attack - from trusting to trusted"
+ },
+ "https://blog.king-sabri.net/red-team/executing-c-assembly-in-memory-using-assembly.load": {
+  "domain": "blog.king-sabri.net",
+  "icon": null,
+  "title": null
+ },
+ "https://blog.netspi.com/adidns-revisited/": {
+  "domain": "blog.netspi.com",
+  "icon": "blog.netspi.com.png",
+  "title": "ADIDNS Revisited - WPAD, GQBL, and More"
+ },
+ "https://blog.netspi.com/exploiting-adidns/": {
+  "domain": "blog.netspi.com",
+  "icon": "blog.netspi.com.png",
+  "title": "Beyond LLMNR/NBNS Spoofing \u2013 Exploiting Active Directory-Integrated DNS"
+ },
+ "https://blog.netspi.com/machineaccountquota-is-useful-sometimes/": {
+  "domain": "blog.netspi.com",
+  "icon": "blog.netspi.com.png",
+  "title": null
+ },
+ "https://blog.nody.cc/posts/container-breakouts-part1/": {
+  "domain": "blog.nody.cc",
+  "icon": "blog.nody.cc.png",
+  "title": "Container Breakouts \u2013 Part 1: Access to root directory of the Host"
+ },
+ "https://blog.nody.cc/posts/container-breakouts-part2/": {
+  "domain": "blog.nody.cc",
+  "icon": "blog.nody.cc.png",
+  "title": "Container Breakouts \u2013 Part 2: Privileged Container"
+ },
+ "https://blog.nody.cc/posts/container-breakouts-part3/": {
+  "domain": "blog.nody.cc",
+  "icon": "blog.nody.cc.png",
+  "title": "Container Breakouts \u2013 Part 3: Docker Socket"
+ },
+ "https://blog.notso.pro/2020-05-09-offops-in-ad-1/": {
+  "domain": "blog.notso.pro",
+  "icon": null,
+  "title": null
+ },
+ "https://blog.orange.tw/2021/08/proxylogon-a-new-attack-surface-on-ms-exchange-part-1.html": {
+  "domain": "blog.orange.tw",
+  "icon": "blog.orange.tw.png",
+  "title": "Redirecting..."
+ },
+ "https://blog.ploetzli.ch/2014/understanding-linux-capabilities/": {
+  "domain": "blog.ploetzli.ch",
+  "icon": "blog.ploetzli.ch.png",
+  "title": "Understanding Capabilities in Linux - Tinker, Tamper, Alter, Fry"
+ },
+ "https://blog.qualys.com/vulnerabilities-threat-research/2022/01/25/pwnkit-local-privilege-escalation-vulnerability-discovered-in-polkits-pkexec-cve-2021-4034": {
+  "domain": "blog.qualys.com",
+  "icon": "blog.qualys.com.png",
+  "title": "CVE-2021-4034: How PwnKit Exploits Polkit\u2019s pkexec | Qualys"
+ },
+ "https://blog.qualys.com/vulnerabilities-threat-research/2023/10/03/cve-2023-4911-looney-tunables-local-privilege-escalation-in-the-glibcs-ld-so": {
+  "domain": "blog.qualys.com",
+  "icon": "blog.qualys.com.png",
+  "title": "CVE-2023-4911: Local Privilege Escalation in glibc\u2019s ld.so | Qualys"
+ },
+ "https://blog.riccardoancarani.it/bloodhound-tips-and-tricks/": {
+  "domain": "blog.riccardoancarani.it",
+  "icon": null,
+  "title": null
+ },
+ "https://blog.stealthbits.com/constrained-delegation-abuse-abusing-constrained-delegation-to-achieve-elevated-access/": {
+  "domain": "blog.stealthbits.com",
+  "icon": null,
+  "title": null
+ },
+ "https://blog.stealthbits.com/how-to-detect-overpass-the-hash-attacks/": {
+  "domain": "blog.stealthbits.com",
+  "icon": null,
+  "title": null
+ },
+ "https://blog.stealthbits.com/resource-based-constrained-delegation-abuse/": {
+  "domain": "blog.stealthbits.com",
+  "icon": null,
+  "title": null
+ },
+ "https://blog.thc.org/infecting-ssh-public-keys-with-backdoors": {
+  "domain": "blog.thc.org",
+  "icon": "blog.thc.org.png",
+  "title": "Infecting SSH Public Keys with backdoors"
+ },
+ "https://blog.xpnsec.com/kerberos-attacks-part-2/": {
+  "domain": "blog.xpnsec.com",
+  "icon": "blog.xpnsec.com.png",
+  "title": "Kerberos AD Attacks - More Roasting with AS-REP"
+ },
+ "https://blog.xpnsec.com/unobfuscating-network-access-accounts/": {
+  "domain": "blog.xpnsec.com",
+  "icon": "blog.xpnsec.com.png",
+  "title": "Exploring SCCM by Unobfuscating Network Access Accounts"
+ },
+ "https://bloodhound.readthedocs.io/en/latest/": {
+  "domain": "bloodhound.readthedocs.io",
+  "icon": "bloodhound.readthedocs.io.png",
+  "title": "BloodHound: Six Degrees of Domain Admin  BloodHound 4.3.1 documentation"
+ },
+ "https://book.getfoundry.sh/reference/cast/cast-logs": {
+  "domain": "book.getfoundry.sh",
+  "icon": null,
+  "title": null
+ },
+ "https://book.hacktricks.wiki/en/network-services-pentesting/2375-pentesting-docker.html#docker-basics": {
+  "domain": "book.hacktricks.wiki",
+  "icon": "book.hacktricks.wiki.svg",
+  "title": "2375, 2376 Pentesting Docker - HackTricks"
+ },
+ "https://book.hacktricks.xyz/linux-hardening/privilege-escalation": {
+  "domain": "book.hacktricks.xyz",
+  "icon": "book.hacktricks.xyz.svg",
+  "title": "Page not found - HackTricks"
+ },
+ "https://book.hacktricks.xyz/linux-hardening/privilege-escalation#reusing-sudo-tokens": {
+  "domain": "book.hacktricks.xyz",
+  "icon": "book.hacktricks.xyz.svg",
+  "title": "Page not found - HackTricks"
+ },
+ "https://book.hacktricks.xyz/linux-hardening/privilege-escalation/interesting-groups-linux-pe/lxd-privilege-escalation": {
+  "domain": "book.hacktricks.xyz",
+  "icon": "book.hacktricks.xyz.svg",
+  "title": "Page not found - HackTricks"
+ },
+ "https://book.hacktricks.xyz/linux-hardening/privilege-escalation/linux-active-directory": {
+  "domain": "book.hacktricks.xyz",
+  "icon": "book.hacktricks.xyz.svg",
+  "title": "Page not found - HackTricks"
+ },
+ "https://book.hacktricks.xyz/linux-hardening/privilege-escalation/linux-capabilities": {
+  "domain": "book.hacktricks.xyz",
+  "icon": "book.hacktricks.xyz.svg",
+  "title": "Page not found - HackTricks"
+ },
+ "https://book.hacktricks.xyz/linux-hardening/privilege-escalation/nfs-no_root_squash-misconfiguration-pe": {
+  "domain": "book.hacktricks.xyz",
+  "icon": "book.hacktricks.xyz.svg",
+  "title": "Page not found - HackTricks"
+ },
+ "https://book.hacktricks.xyz/network-services-pentesting/1521-1522-1529-pentesting-oracle-listener": {
+  "domain": "book.hacktricks.xyz",
+  "icon": "book.hacktricks.xyz.svg",
+  "title": "1521,1522-1529 - Pentesting Oracle TNS Listener - HackTricks"
+ },
+ "https://book.hacktricks.xyz/network-services-pentesting/5985-5986-pentesting-winrm": {
+  "domain": "book.hacktricks.xyz",
+  "icon": "book.hacktricks.xyz.svg",
+  "title": "5985,5986 - Pentesting WinRM - HackTricks"
+ },
+ "https://book.hacktricks.xyz/network-services-pentesting/873-pentesting-rsync": {
+  "domain": "book.hacktricks.xyz",
+  "icon": "book.hacktricks.xyz.svg",
+  "title": "873 - Pentesting Rsync - HackTricks"
+ },
+ "https://book.hacktricks.xyz/network-services-pentesting/9000-pentesting-fastcgi": {
+  "domain": "book.hacktricks.xyz",
+  "icon": "book.hacktricks.xyz.svg",
+  "title": "9000 - Pentesting FastCGI - HackTricks"
+ },
+ "https://book.hacktricks.xyz/network-services-pentesting/nfs-service-pentesting": {
+  "domain": "book.hacktricks.xyz",
+  "icon": "book.hacktricks.xyz.svg",
+  "title": "2049 - Pentesting NFS Service - HackTricks"
+ },
+ "https://book.hacktricks.xyz/network-services-pentesting/pentesting-kerberos-88/harvesting-tickets-from-windows": {
+  "domain": "book.hacktricks.xyz",
+  "icon": "book.hacktricks.xyz.svg",
+  "title": "Harvesting tickets from Windows - HackTricks"
+ },
+ "https://book.hacktricks.xyz/network-services-pentesting/pentesting-mssql-microsoft-sql-serve": {
+  "domain": "book.hacktricks.xyz",
+  "icon": "book.hacktricks.xyz.svg",
+  "title": "Page not found - HackTricks"
+ },
+ "https://book.hacktricks.xyz/network-services-pentesting/pentesting-rdp": {
+  "domain": "book.hacktricks.xyz",
+  "icon": "book.hacktricks.xyz.svg",
+  "title": "3389 - Pentesting RDP - HackTricks"
+ },
+ "https://book.hacktricks.xyz/network-services-pentesting/pentesting-smtp": {
+  "domain": "book.hacktricks.xyz",
+  "icon": "book.hacktricks.xyz.svg",
+  "title": "Page not found - HackTricks"
+ },
+ "https://book.hacktricks.xyz/network-services-pentesting/pentesting-snmp": {
+  "domain": "book.hacktricks.xyz",
+  "icon": "book.hacktricks.xyz.svg",
+  "title": "Page not found - HackTricks"
+ },
+ "https://book.hacktricks.xyz/network-services-pentesting/pentesting-ssh": {
+  "domain": "book.hacktricks.xyz",
+  "icon": "book.hacktricks.xyz.svg",
+  "title": "22 - Pentesting SSH/SFTP - HackTricks"
+ },
+ "https://book.hacktricks.xyz/network-services-pentesting/pentesting-voip#voip-basic-information": {
+  "domain": "book.hacktricks.xyz",
+  "icon": "book.hacktricks.xyz.svg",
+  "title": "Page not found - HackTricks"
+ },
+ "https://book.hacktricks.xyz/network-services-pentesting/pentesting-web/cgi": {
+  "domain": "book.hacktricks.xyz",
+  "icon": "book.hacktricks.xyz.svg",
+  "title": "CGI - HackTricks"
+ },
+ "https://book.hacktricks.xyz/network-services-pentesting/pentesting-web/nginx": {
+  "domain": "book.hacktricks.xyz",
+  "icon": "book.hacktricks.xyz.svg",
+  "title": "Nginx - HackTricks"
+ },
+ "https://book.hacktricks.xyz/network-services-pentesting/pentesting-web/put-method-webdav": {
+  "domain": "book.hacktricks.xyz",
+  "icon": "book.hacktricks.xyz.svg",
+  "title": "WebDav - HackTricks"
+ },
+ "https://book.hacktricks.xyz/network-services-pentesting/pentesting-web/spring-actuators": {
+  "domain": "book.hacktricks.xyz",
+  "icon": "book.hacktricks.xyz.svg",
+  "title": "Spring Actuators - HackTricks"
+ },
+ "https://book.hacktricks.xyz/network-services-pentesting/pentesting-web/tomcat": {
+  "domain": "book.hacktricks.xyz",
+  "icon": "book.hacktricks.xyz.svg",
+  "title": "Page not found - HackTricks"
+ },
+ "https://book.hacktricks.xyz/network-services-pentesting/pentesting-web/werkzeug": {
+  "domain": "book.hacktricks.xyz",
+  "icon": "book.hacktricks.xyz.svg",
+  "title": "Werkzeug / Flask Debug - HackTricks"
+ },
+ "https://book.hacktricks.xyz/network-services-pentesting/pentesting-web/wordpress": {
+  "domain": "book.hacktricks.xyz",
+  "icon": "book.hacktricks.xyz.svg",
+  "title": "Wordpress - HackTricks"
+ },
+ "https://book.hacktricks.xyz/pentesting-web/deserialization": {
+  "domain": "book.hacktricks.xyz",
+  "icon": "book.hacktricks.xyz.svg",
+  "title": "Page not found - HackTricks"
+ },
+ "https://book.hacktricks.xyz/pentesting-web/deserialization/python-yaml-deserialization": {
+  "domain": "book.hacktricks.xyz",
+  "icon": "book.hacktricks.xyz.svg",
+  "title": "Python Yaml Deserialization - HackTricks"
+ },
+ "https://book.hacktricks.xyz/pentesting-web/domain-subdomain-takeover": {
+  "domain": "book.hacktricks.xyz",
+  "icon": "book.hacktricks.xyz.svg",
+  "title": "Domain/Subdomain takeover - HackTricks"
+ },
+ "https://book.hacktricks.xyz/pentesting-web/file-inclusion": {
+  "domain": "book.hacktricks.xyz",
+  "icon": "book.hacktricks.xyz.svg",
+  "title": "Page not found - HackTricks"
+ },
+ "https://book.hacktricks.xyz/pentesting-web/file-inclusion#lfi2rce": {
+  "domain": "book.hacktricks.xyz",
+  "icon": "book.hacktricks.xyz.svg",
+  "title": "Page not found - HackTricks"
+ },
+ "https://book.hacktricks.xyz/pentesting-web/file-inclusion/lfi2rce-via-phpinfo": {
+  "domain": "book.hacktricks.xyz",
+  "icon": "book.hacktricks.xyz.svg",
+  "title": "LFI2RCE via phpinfo() - HackTricks"
+ },
+ "https://book.hacktricks.xyz/pentesting-web/file-inclusion/lfi2rce-via-segmentation-fault": {
+  "domain": "book.hacktricks.xyz",
+  "icon": "book.hacktricks.xyz.svg",
+  "title": "LFI2RCE via Segmentation Fault - HackTricks"
+ },
+ "https://book.hacktricks.xyz/pentesting-web/nosql-injection": {
+  "domain": "book.hacktricks.xyz",
+  "icon": "book.hacktricks.xyz.svg",
+  "title": "NoSQL injection - HackTricks"
+ },
+ "https://book.hacktricks.xyz/windows-hardening/active-directory-methodology/laps": {
+  "domain": "book.hacktricks.xyz",
+  "icon": "book.hacktricks.xyz.svg",
+  "title": "LAPS - HackTricks"
+ },
+ "https://book.hacktricks.xyz/windows-hardening/active-directory-methodology/laps#backdoor": {
+  "domain": "book.hacktricks.xyz",
+  "icon": "book.hacktricks.xyz.svg",
+  "title": "LAPS - HackTricks"
+ },
+ "https://book.hacktricks.xyz/windows-hardening/active-directory-methodology/rdp-sessions-abuse": {
+  "domain": "book.hacktricks.xyz",
+  "icon": "book.hacktricks.xyz.svg",
+  "title": "RDP Sessions Abuse - HackTricks"
+ },
+ "https://book.hacktricks.xyz/windows-hardening/basic-powershell-for-pentesters/powerview": {
+  "domain": "book.hacktricks.xyz",
+  "icon": "book.hacktricks.xyz.svg",
+  "title": "PowerView/SharpView - HackTricks"
+ },
+ "https://book.hacktricks.xyz/windows-hardening/lateral-movement/dcom-exec": {
+  "domain": "book.hacktricks.xyz",
+  "icon": "book.hacktricks.xyz.svg",
+  "title": "Page not found - HackTricks"
+ },
+ "https://book.hacktricks.xyz/windows-hardening/windows-local-privilege-escalation#services-registry-modify-permissions": {
+  "domain": "book.hacktricks.xyz",
+  "icon": "book.hacktricks.xyz.svg",
+  "title": "Page not found - HackTricks"
+ },
+ "https://book.hacktricks.xyz/windows-hardening/windows-local-privilege-escalation/privilege-escalation-abusing-tokens": {
+  "domain": "book.hacktricks.xyz",
+  "icon": "book.hacktricks.xyz.svg",
+  "title": "Abusing Tokens - HackTricks"
+ },
+ "https://book.hacktricks.xyz/windows-hardening/windows-local-privilege-escalation/privilege-escalation-abusing-tokens/abuse-seloaddriverprivilege": {
+  "domain": "book.hacktricks.xyz",
+  "icon": "book.hacktricks.xyz.svg",
+  "title": "Page not found - HackTricks"
+ },
+ "https://book.hacktricks.xyz/windows/windows-local-privilege-escalation/dpapi-extracting-passwords": {
+  "domain": "book.hacktricks.xyz",
+  "icon": "book.hacktricks.xyz.svg",
+  "title": "Page not found - HackTricks"
+ },
+ "https://buaq.net/go-39069.html": {
+  "domain": "buaq.net",
+  "icon": "buaq.net.png",
+  "title": "LAPS - Part 1"
+ },
+ "https://byt3bl33d3r.github.io/practical-guide-to-ntlm-relaying-in-2017-aka-getting-a-foothold-in-under-5-minutes.html": {
+  "domain": "byt3bl33d3r.github.io",
+  "icon": "byt3bl33d3r.github.io.png",
+  "title": "Practical guide to NTLM Relaying in 2017 (A.K.A getting a foothold in under 5 minutes) // byt3bl33d3r // /dev/"
+ },
+ "https://cheatsheet.haax.fr/passcracking-hashfiles/hashcat_cheatsheet/": {
+  "domain": "cheatsheet.haax.fr",
+  "icon": null,
+  "title": null
+ },
+ "https://cheatsheet.haax.fr/windows-systems/privilege-escalation/dnsadmins_group/": {
+  "domain": "cheatsheet.haax.fr",
+  "icon": null,
+  "title": null
+ },
+ "https://cloud.hacktricks.wiki/en/pentesting-cloud/azure-security/az-basic-information/index.html": {
+  "domain": "cloud.hacktricks.wiki",
+  "icon": "cloud.hacktricks.wiki.svg",
+  "title": "Az - Basic Information - HackTricks Cloud"
+ },
+ "https://cloud.hacktricks.wiki/en/pentesting-cloud/azure-security/az-unauthenticated-enum-and-initial-entry/index.html": {
+  "domain": "cloud.hacktricks.wiki",
+  "icon": "cloud.hacktricks.wiki.svg",
+  "title": "Az - Unauthenticated Enum & Initial Entry - HackTricks Cloud"
+ },
+ "https://cloud.hacktricks.wiki/en/pentesting-cloud/kubernetes-security/kubernetes-basics.html": {
+  "domain": "cloud.hacktricks.wiki",
+  "icon": "cloud.hacktricks.wiki.svg",
+  "title": "Kubernetes Basics - HackTricks Cloud"
+ },
+ "https://cloudbrothers.info/en/exploit-kerberos-samaccountname-spoofing": {
+  "domain": "cloudbrothers.info",
+  "icon": "cloudbrothers.info.png",
+  "title": "Exploit samAccountName spoofing with Kerberos"
+ },
+ "https://cloudsplaining.readthedocs.io": {
+  "domain": "cloudsplaining.readthedocs.io",
+  "icon": "cloudsplaining.readthedocs.io.png",
+  "title": "Cloudsplaining"
+ },
+ "https://connormcgarr.github.io/hvci/": {
+  "domain": "connormcgarr.github.io",
+  "icon": null,
+  "title": "Exploit Development: No Code Execution? No Problem! Living The Age of VBS, HVCI, and Kernel CFG"
+ },
+ "https://cravaterouge.github.io/ad/privesc/2022/05/11/bloodyad-and-CVE-2022-26923.html": {
+  "domain": "cravaterouge.github.io",
+  "icon": null,
+  "title": "https://cravaterouge.com/articles/ad-certifried/"
+ },
+ "https://cube0x0.github.io/Pocing-Beyond-DA/": {
+  "domain": "cube0x0.github.io",
+  "icon": null,
+  "title": null
+ },
+ "https://cube0x0.github.io/Relaying-for-gMSA/": {
+  "domain": "cube0x0.github.io",
+  "icon": null,
+  "title": null
+ },
+ "https://cyberstoph.org/posts/2019/12/an-introduction-to-golden-certificates/": {
+  "domain": "cyberstoph.org",
+  "icon": null,
+  "title": "An introduction to Golden Certificates :: Cyberstoph's blog \u2014 Cyberstoph's Blog"
+ },
+ "https://cyberstoph.org/posts/2021/06/abusing-kerberos-s4u2self-for-local-privilege-escalation": {
+  "domain": "cyberstoph.org",
+  "icon": null,
+  "title": "Abusing Kerberos S4U2self for local privilege escalation :: Cyberstoph's blog \u2014 Cyberstoph's Blog"
+ },
+ "https://cyberwatch.fr/actualite/cve-2021-34527-comment-identifier-et-neutraliser-la-vulnerabilite-printnightmare/": {
+  "domain": "cyberwatch.fr",
+  "icon": null,
+  "title": "CVE-2021-34527 : Comment neutraliser la vuln\u00e9rabilit\u00e9 PrintNightmare ?"
+ },
+ "https://cyberwatch.fr/cve/cve-2021-4034/": {
+  "domain": "cyberwatch.fr",
+  "icon": null,
+  "title": "CVE-2021-4034 : comment d\u00e9tecter et traiter la vuln\u00e9rabilit\u00e9 PwnKit ?"
+ },
+ "https://datafarm-cybersecurity.medium.com/exploit-writeup-for-cve-2021-3156-sudo-baron-samedit-7a9a4282cb31": {
+  "domain": "datafarm-cybersecurity.medium.com",
+  "icon": "datafarm-cybersecurity.medium.com.ico",
+  "title": null
+ },
+ "https://davidhamann.de/2020/04/05/exploiting-python-pickle/": {
+  "domain": "davidhamann.de",
+  "icon": "davidhamann.de.png",
+  "title": "Exploiting Python pickles"
+ },
+ "https://defendtheweb.net/article/blind-sql-injection": {
+  "domain": "defendtheweb.net",
+  "icon": null,
+  "title": null
+ },
+ "https://developer.mozilla.org/en-US/docs/Web/Security/Subdomain_takeovers": {
+  "domain": "developer.mozilla.org",
+  "icon": "developer.mozilla.org.png",
+  "title": "Subdomain takeover - Security | MDN"
+ },
+ "https://dirkjanm.io/abusing-exchange-one-api-call-away-from-domain-admin/": {
+  "domain": "dirkjanm.io",
+  "icon": null,
+  "title": "Abusing Exchange: One API call away from Domain Admin"
+ },
+ "https://dirkjanm.io/krbrelayx-unconstrained-delegation-abuse-toolkit/": {
+  "domain": "dirkjanm.io",
+  "icon": null,
+  "title": "\u201cRelaying\u201d Kerberos - Having fun with unconstrained delegation"
+ },
+ "https://dirkjanm.io/ntlm-relaying-to-ad-certificate-services": {
+  "domain": "dirkjanm.io",
+  "icon": null,
+  "title": "NTLM relaying to AD CS - On certificates, printers and a little hippo"
+ },
+ "https://dirkjanm.io/worst-of-both-worlds-ntlm-relaying-and-kerberos-delegation/": {
+  "domain": "dirkjanm.io",
+  "icon": null,
+  "title": "The worst of both worlds: Combining NTLM Relaying and Kerberos delegation"
+ },
+ "https://dirtypipe.cm4all.com/": {
+  "domain": "dirtypipe.cm4all.com",
+  "icon": null,
+  "title": "The Dirty Pipe Vulnerability \u2014 The Dirty Pipe Vulnerability documentation"
+ },
+ "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configuring-instance-metadata-service.html": {
+  "domain": "docs.aws.amazon.com",
+  "icon": "docs.aws.amazon.com.png",
+  "title": "Use the Instance Metadata Service to access instance metadata - Amazon Elastic Compute Cloud"
+ },
+ "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html": {
+  "domain": "docs.aws.amazon.com",
+  "icon": "docs.aws.amazon.com.png",
+  "title": "Use instance metadata to manage your EC2 instance - Amazon Elastic Compute Cloud"
+ },
+ "https://docs.aws.amazon.com/IAM/latest/UserGuide/confused-deputy.html": {
+  "domain": "docs.aws.amazon.com",
+  "icon": "docs.aws.amazon.com.png",
+  "title": "The confused deputy problem - AWS Identity and Access Management"
+ },
+ "https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html": {
+  "domain": "docs.aws.amazon.com",
+  "icon": "docs.aws.amazon.com.png",
+  "title": "Manage access keys for IAM users - AWS Identity and Access Management"
+ },
+ "https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html#Using_CreateAccessKey": {
+  "domain": "docs.aws.amazon.com",
+  "icon": "docs.aws.amazon.com.png",
+  "title": "Manage access keys for IAM users - AWS Identity and Access Management"
+ },
+ "https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_terms-and-concepts.html": {
+  "domain": "docs.aws.amazon.com",
+  "icon": "docs.aws.amazon.com.png",
+  "title": "IAM roles - AWS Identity and Access Management"
+ },
+ "https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users.html": {
+  "domain": "docs.aws.amazon.com",
+  "icon": "docs.aws.amazon.com.png",
+  "title": "IAM users - AWS Identity and Access Management"
+ },
+ "https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies.html": {
+  "domain": "docs.aws.amazon.com",
+  "icon": "docs.aws.amazon.com.png",
+  "title": "IAM JSON policy reference - AWS Identity and Access Management"
+ },
+ "https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_evaluation-logic.html": {
+  "domain": "docs.aws.amazon.com",
+  "icon": "docs.aws.amazon.com.png",
+  "title": "Policy evaluation logic - AWS Identity and Access Management"
+ },
+ "https://docs.aws.amazon.com/STS/latest/APIReference/API_AssumeRole.html": {
+  "domain": "docs.aws.amazon.com",
+  "icon": "docs.aws.amazon.com.png",
+  "title": "AssumeRole - AWS Security Token Service"
+ },
+ "https://docs.docker.com/registry/spec/api/": {
+  "domain": "docs.docker.com",
+  "icon": "docs.docker.com.png",
+  "title": "Deprecated and retired Docker products and features"
+ },
+ "https://docs.google.com/presentation/d/1rAl-XKrkuFjCpExHBGrp5L8ZwtuFFrOygZMapxMp28I/edit?usp=sharing": {
+  "domain": "docs.google.com",
+  "icon": "docs.google.com.png",
+  "title": "Insomnihack 2022 - Delegating Kerberos To Bypass Kerberos Delegation Limitations"
+ },
+ "https://docs.kernel.org/filesystems/overlayfs.html": {
+  "domain": "docs.kernel.org",
+  "icon": "docs.kernel.org.svg",
+  "title": "Overlay Filesystem \u2014 The Linux Kernel documentation"
+ },
+ "https://docs.ligolo.ng/": {
+  "domain": "docs.ligolo.ng",
+  "icon": "docs.ligolo.ng.png",
+  "title": "Introduction - Ligolo-ng Documentation"
+ },
+ "https://docs.microsoft.com/en-us/archive/blogs/askds/five-common-questions-about-adminsdholder-and-sdprop": {
+  "domain": "docs.microsoft.com",
+  "icon": "docs.microsoft.com.png",
+  "title": "Five common questions about AdminSdHolder and SDProp"
+ },
+ "https://docs.microsoft.com/en-us/archive/blogs/josebda/the-basics-of-smb-signing-covering-both-smb1-and-smb2": {
+  "domain": "docs.microsoft.com",
+  "icon": "docs.microsoft.com.png",
+  "title": "The Basics of SMB Signing (covering both SMB1 and SMB2)"
+ },
+ "https://docs.microsoft.com/en-us/dotnet/api/system.directoryservices.activedirectoryrights": {
+  "domain": "docs.microsoft.com",
+  "icon": "docs.microsoft.com.png",
+  "title": "ActiveDirectoryRights Enum (System.DirectoryServices)"
+ },
+ "https://docs.microsoft.com/en-us/openspecs/windows_protocols/ms-adts/990fb975-ab31-4bc1-8b75-5da132cd4584": {
+  "domain": "docs.microsoft.com",
+  "icon": "docs.microsoft.com.png",
+  "title": "[MS-ADTS]: Access Rights"
+ },
+ "https://docs.microsoft.com/en-us/openspecs/windows_protocols/ms-dfsnm/95a506a8-cae6-4c42-b19d-9c1ed1223979": {
+  "domain": "docs.microsoft.com",
+  "icon": "docs.microsoft.com.png",
+  "title": "[MS-DFSNM]: Distributed File System (DFS): Namespace Management Protocol"
+ },
+ "https://docs.microsoft.com/en-us/openspecs/windows_protocols/ms-fsrvp/dae107ec-8198-4778-a950-faa7edad125b": {
+  "domain": "docs.microsoft.com",
+  "icon": "docs.microsoft.com.png",
+  "title": "[MS-FSRVP]: File Server Remote VSS Protocol"
+ },
+ "https://docs.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/2c15cbf0-f086-4c74-8b70-1f2fa45dd4be": {
+  "domain": "docs.microsoft.com",
+  "icon": "docs.microsoft.com.png",
+  "title": "[MS-GPPREF]: Password Encryption"
+ },
+ "https://docs.microsoft.com/en-us/powershell/module/configurationmanager/?view=sccm-ps": {
+  "domain": "docs.microsoft.com",
+  "icon": "docs.microsoft.com.png",
+  "title": "ConfigurationManager Module - Configuration Manager"
+ },
+ "https://docs.microsoft.com/en-us/previous-versions/windows/it-pro/windows-server-2003/cc759554(v=ws.10)?redirectedfrom=MSDN": {
+  "domain": "docs.microsoft.com",
+  "icon": "docs.microsoft.com.png",
+  "title": "Trust Technologies: Domain and Forest Trusts"
+ },
+ "https://docs.microsoft.com/en-us/troubleshoot/windows-server/identity/security-identifiers-in-windows": {
+  "domain": "docs.microsoft.com",
+  "icon": "docs.microsoft.com.png",
+  "title": "Security Identifiers"
+ },
+ "https://docs.soliditylang.org/en/latest/contracts.html#events": {
+  "domain": "docs.soliditylang.org",
+  "icon": "docs.soliditylang.org.png",
+  "title": "Contracts  Solidity 0.8.37-develop documentation"
+ },
+ "https://docs.soliditylang.org/en/latest/metadata.html": {
+  "domain": "docs.soliditylang.org",
+  "icon": "docs.soliditylang.org.png",
+  "title": "Contract Metadata  Solidity 0.8.37-develop documentation"
+ },
+ "https://docs.soliditylang.org/en/v0.8.13/internals/layout_in_storage.html#mappings-and-dynamic-arrays": {
+  "domain": "docs.soliditylang.org",
+  "icon": "docs.soliditylang.org.png",
+  "title": "Layout of State Variables in Storage  Solidity 0.8.13 documentation"
+ },
+ "https://doublepulsar.com/rdp-hijacking-how-to-hijack-rds-and-remoteapp-sessions-transparently-to-move-through-an-da2a1e73a5f6": {
+  "domain": "doublepulsar.com",
+  "icon": "doublepulsar.com.ico",
+  "title": null
+ },
+ "https://dumpco.re/blog/asreqroast": {
+  "domain": "dumpco.re",
+  "icon": "dumpco.re.png",
+  "title": "dumpco.re - asreqroast"
+ },
+ "https://en.hackndo.com/kerberos": {
+  "domain": "en.hackndo.com",
+  "icon": "en.hackndo.com.png",
+  "title": "Kerberos in Active Directory"
+ },
+ "https://en.hackndo.com/kerberos-silver-golden-tickets/": {
+  "domain": "en.hackndo.com",
+  "icon": "en.hackndo.com.png",
+  "title": "Silver & Golden Tickets"
+ },
+ "https://en.hackndo.com/ntlm-relay/": {
+  "domain": "en.hackndo.com",
+  "icon": "en.hackndo.com.png",
+  "title": "NTLM Relay"
+ },
+ "https://en.hackndo.com/pass-the-hash/": {
+  "domain": "en.hackndo.com",
+  "icon": "en.hackndo.com.png",
+  "title": "Pass the Hash"
+ },
+ "https://en.hackndo.com/remote-lsass-dump-passwords/": {
+  "domain": "en.hackndo.com",
+  "icon": "en.hackndo.com.png",
+  "title": "Extract credentials from lsass remotely"
+ },
+ "https://en.hackndo.com/sensitive-data/": {
+  "domain": "en.hackndo.com",
+  "icon": "en.hackndo.com.png",
+  "title": "Sensitive Data in smart contracts"
+ },
+ "https://en.wikipedia.org/wiki/OverlayFS": {
+  "domain": "en.wikipedia.org",
+  "icon": "en.wikipedia.org.png",
+  "title": "OverlayFS - Wikipedia"
+ },
+ "https://en.wikipedia.org/wiki/XMPP": {
+  "domain": "en.wikipedia.org",
+  "icon": "en.wikipedia.org.png",
+  "title": "XMPP - Wikipedia"
+ },
+ "https://enigma0x3.net/2016/02/": {
+  "domain": "enigma0x3.net",
+  "icon": "enigma0x3.net.png",
+  "title": "February 2016 \u2013 enigma0x3"
+ },
+ "https://exploit-notes.hdks.org/exploit/cryptography/algorithm/ansible-vault-secret/": {
+  "domain": "exploit-notes.hdks.org",
+  "icon": null,
+  "title": null
+ },
+ "https://exploit-notes.hdks.org/exploit/database/mssql-pentesting/": {
+  "domain": "exploit-notes.hdks.org",
+  "icon": null,
+  "title": null
+ },
+ "https://exploit-notes.hdks.org/exploit/email/smtp-pentesting/": {
+  "domain": "exploit-notes.hdks.org",
+  "icon": null,
+  "title": null
+ },
+ "https://exploit-notes.hdks.org/exploit/linux/privilege-escalation/#crack-user-passwords": {
+  "domain": "exploit-notes.hdks.org",
+  "icon": null,
+  "title": null
+ },
+ "https://exploit-notes.hdks.org/exploit/linux/privilege-escalation/pip-download-code-execution/": {
+  "domain": "exploit-notes.hdks.org",
+  "icon": null,
+  "title": null
+ },
+ "https://exploit-notes.hdks.org/exploit/linux/privilege-escalation/polkit-privilege-escalation/#cve-2021-3560": {
+  "domain": "exploit-notes.hdks.org",
+  "icon": null,
+  "title": null
+ },
+ "https://exploit-notes.hdks.org/exploit/linux/privilege-escalation/python-privilege-escalation/": {
+  "domain": "exploit-notes.hdks.org",
+  "icon": null,
+  "title": null
+ },
+ "https://exploit-notes.hdks.org/exploit/linux/privilege-escalation/ruby-privilege-escalation/": {
+  "domain": "exploit-notes.hdks.org",
+  "icon": null,
+  "title": null
+ },
+ "https://exploit-notes.hdks.org/exploit/linux/privilege-escalation/sudo/": {
+  "domain": "exploit-notes.hdks.org",
+  "icon": null,
+  "title": null
+ },
+ "https://exploit-notes.hdks.org/exploit/linux/privilege-escalation/sudo/#reuse-sudo-tokens": {
+  "domain": "exploit-notes.hdks.org",
+  "icon": null,
+  "title": null
+ },
+ "https://exploit-notes.hdks.org/exploit/machine-learning/model/create-malicious-ml-model/": {
+  "domain": "exploit-notes.hdks.org",
+  "icon": null,
+  "title": null
+ },
+ "https://exploit-notes.hdks.org/exploit/network/fastcgi-pentesting/": {
+  "domain": "exploit-notes.hdks.org",
+  "icon": null,
+  "title": null
+ },
+ "https://exploit-notes.hdks.org/exploit/network/protocol/nfs-pentesting/": {
+  "domain": "exploit-notes.hdks.org",
+  "icon": null,
+  "title": null
+ },
+ "https://exploit-notes.hdks.org/exploit/network/protocol/snmp-pentesting/": {
+  "domain": "exploit-notes.hdks.org",
+  "icon": null,
+  "title": null
+ },
+ "https://exploit-notes.hdks.org/exploit/network/protocol/ssh-pentesting": {
+  "domain": "exploit-notes.hdks.org",
+  "icon": null,
+  "title": null
+ },
+ "https://exploit-notes.hdks.org/exploit/network/protocol/ssh-pentesting/#sshuttle": {
+  "domain": "exploit-notes.hdks.org",
+  "icon": null,
+  "title": null
+ },
+ "https://exploit-notes.hdks.org/exploit/network/rsync-pentesting/": {
+  "domain": "exploit-notes.hdks.org",
+  "icon": null,
+  "title": null
+ },
+ "https://exploit-notes.hdks.org/exploit/reconnaissance/google-dorks/": {
+  "domain": "exploit-notes.hdks.org",
+  "icon": null,
+  "title": null
+ },
+ "https://exploit-notes.hdks.org/exploit/reconnaissance/subdomain/subdomain-takeover/": {
+  "domain": "exploit-notes.hdks.org",
+  "icon": null,
+  "title": null
+ },
+ "https://exploit-notes.hdks.org/exploit/web/apache-tomcat-pentesting/": {
+  "domain": "exploit-notes.hdks.org",
+  "icon": null,
+  "title": null
+ },
+ "https://exploit-notes.hdks.org/exploit/web/cgi-pentesting/": {
+  "domain": "exploit-notes.hdks.org",
+  "icon": null,
+  "title": null
+ },
+ "https://exploit-notes.hdks.org/exploit/web/cms/wordpress-pentesting/": {
+  "domain": "exploit-notes.hdks.org",
+  "icon": null,
+  "title": null
+ },
+ "https://exploit-notes.hdks.org/exploit/web/framework/java/spring-pentesting/": {
+  "domain": "exploit-notes.hdks.org",
+  "icon": null,
+  "title": null
+ },
+ "https://exploit-notes.hdks.org/exploit/web/framework/python/python-pickle-rce/": {
+  "domain": "exploit-notes.hdks.org",
+  "icon": null,
+  "title": null
+ },
+ "https://exploit-notes.hdks.org/exploit/web/framework/python/werkzeug-pentesting": {
+  "domain": "exploit-notes.hdks.org",
+  "icon": null,
+  "title": null
+ },
+ "https://exploit-notes.hdks.org/exploit/web/security-risk/json-net-deserialization/": {
+  "domain": "exploit-notes.hdks.org",
+  "icon": null,
+  "title": null
+ },
+ "https://exploit-notes.hdks.org/exploit/web/security-risk/ssti/": {
+  "domain": "exploit-notes.hdks.org",
+  "icon": null,
+  "title": null
+ },
+ "https://exploit-notes.hdks.org/exploit/web/webdav-pentesting/": {
+  "domain": "exploit-notes.hdks.org",
+  "icon": null,
+  "title": null
+ },
+ "https://exploit-notes.hdks.org/exploit/windows/privilege-escalation/": {
+  "domain": "exploit-notes.hdks.org",
+  "icon": null,
+  "title": null
+ },
+ "https://exploit.ph/cve-2021-42287-cve-2021-42278-weaponisation.html": {
+  "domain": "exploit.ph",
+  "icon": "exploit.ph.png",
+  "title": "eXploit - CVE-2021-42287/CVE-2021-42278 Weaponisation"
+ },
+ "https://exploit.ph/delegate-2-thyself.html": {
+  "domain": "exploit.ph",
+  "icon": "exploit.ph.png",
+  "title": "eXploit - Delegate 2 Thyself"
+ },
+ "https://exploit.ph/more-samaccountname-impersonation.html": {
+  "domain": "exploit.ph",
+  "icon": "exploit.ph.png",
+  "title": "eXploit - More sAMAccountName Impersonation"
+ },
+ "https://exploit.ph/revisiting-delegate-2-thyself.html": {
+  "domain": "exploit.ph",
+  "icon": "exploit.ph.png",
+  "title": "eXploit - Revisiting 'Delegate 2 Thyself'"
+ },
+ "https://exploit.ph/user-constrained-delegation.html": {
+  "domain": "exploit.ph",
+  "icon": "exploit.ph.png",
+  "title": "eXploit - Abusing Users Configured with Unconstrained Delegation"
+ },
+ "https://filesec.io/library-ms": {
+  "domain": "filesec.io",
+  "icon": "filesec.io.png",
+  "title": "Filesec.io"
+ },
+ "https://forum.winbatch.com/index.php?topic=1545.0": {
+  "domain": "forum.winbatch.com",
+  "icon": "forum.winbatch.com.png",
+  "title": "Modify the sidHistory attribute"
+ },
+ "https://forums.veeam.com/veeam-backup-replication-f2/recover-esxi-password-in-veeam-t34630.htm": {
+  "domain": "forums.veeam.com",
+  "icon": "forums.veeam.com.png",
+  "title": null
+ },
+ "https://g-laurent.blogspot.com/2021/08/responders-dhcp-poisoner.html": {
+  "domain": "g-laurent.blogspot.com",
+  "icon": "g-laurent.blogspot.com.png",
+  "title": "Laurent Gaffi\u00e9 blog: Responder's DHCP Poisoner"
+ },
+ "https://github.blog/2021-06-10-privilege-escalation-polkit-root-on-linux-with-bug/": {
+  "domain": "github.blog",
+  "icon": "github.blog.png",
+  "title": "Privilege escalation with polkit: How to get root on Linux with a seven-year-old bug"
+ },
+ "https://github.com/0xJs/CARTP-cheatsheet/blob/main/recon.md": {
+  "domain": "github.com",
+  "icon": "github.com.png",
+  "title": "CARTP-cheatsheet/recon.md at main \u00b7 0xJs/CARTP-cheatsheet"
+ },
+ "https://github.com/AmazingAng/WTF-Solidity/tree/main/Languages/en/11_Modifier_en": {
+  "domain": "github.com",
+  "icon": "github.com.png",
+  "title": "WTF-Solidity/Languages/en/11_Modifier_en at main \u00b7 AmazingAng/WTF-Solidity"
+ },
+ "https://github.com/EnableSecurity/wafw00f": {
+  "domain": "github.com",
+  "icon": "github.com.png",
+  "title": "GitHub - EnableSecurity/wafw00f: WAFW00F allows one to identify and fingerprint Web Application Firewall (WAF)"
+ },
+ "https://github.com/LandGrey/SpringBootVulExploit": {
+  "domain": "github.com",
+  "icon": "github.com.png",
+  "title": "GitHub - LandGrey/SpringBootVulExploit: SpringBoot \u76f8\u5173\u6f0f\u6d1e\u5b66\u4e60\u8d44\u6599\uff0c\u5229\u7528\u65b9\u6cd5\u548c\u6280\u5de7\u5408\u96c6\uff0c\u9ed1\u76d2\u5b89\u5168\u8bc4\u4f30 check list"
+ },
+ "https://github.com/Liuk3r/CVE-2023-32233": {
+  "domain": "github.com",
+  "icon": "github.com.png",
+  "title": "GitHub - Liuk3r/CVE-2023-32233: CVE-2023-32233: Linux\u5185\u6838\u4e2d\u7684\u5b89\u5168\u6f0f\u6d1e"
+ },
+ "https://github.com/Orange-Cyberdefense/KeePwn": {
+  "domain": "github.com",
+  "icon": "github.com.png",
+  "title": "GitHub - Orange-Cyberdefense/KeePwn: A python tool to automate KeePass discovery and secret extraction."
+ },
+ "https://github.com/Semperis/GoldenGMSA": {
+  "domain": "github.com",
+  "icon": "github.com.png",
+  "title": "GitHub - Semperis/GoldenGMSA: GolenGMSA tool for working with GMSA passwords"
+ },
+ "https://github.com/ShutdownRepo/pywhisker": {
+  "domain": "github.com",
+  "icon": "github.com.png",
+  "title": "GitHub - ShutdownRepo/pywhisker: Python version of the C# tool for Shadow Credentials attacks"
+ },
+ "https://github.com/SnaffCon/Snaffler": {
+  "domain": "github.com",
+  "icon": "github.com.png",
+  "title": "GitHub - SnaffCon/Snaffler: a tool for pentesters to help find delicious candy, by @l0ss and @Sh3r4 ( Twitter:"
+ },
+ "https://github.com/SofianeHamlaoui/Pentest-Notes/blob/master/Security_cheatsheets/databases/sqlserver/3-command-execution.md": {
+  "domain": "github.com",
+  "icon": "github.com.png",
+  "title": null
+ },
+ "https://github.com/Wh04m1001/DFSCoerce": {
+  "domain": "github.com",
+  "icon": "github.com.png",
+  "title": "GitHub - Wh04m1001/DFSCoerce"
+ },
+ "https://github.com/api0cradle/UltimateAppLockerByPassList": {
+  "domain": "github.com",
+  "icon": "github.com.png",
+  "title": "GitHub - api0cradle/UltimateAppLockerByPassList: The goal of this repository is to document the most common te"
+ },
+ "https://github.com/aquasecurity/kube-hunter": {
+  "domain": "github.com",
+  "icon": "github.com.png",
+  "title": "GitHub - aquasecurity/kube-hunter: Hunt for security weaknesses in Kubernetes clusters"
+ },
+ "https://github.com/blacklanternsecurity/MANSPIDER": {
+  "domain": "github.com",
+  "icon": "github.com.png",
+  "title": "GitHub - blacklanternsecurity/MANSPIDER: Spider entire networks for juicy files sitting on SMB shares. Search "
+ },
+ "https://github.com/cube0x0/CVE-2021-1675": {
+  "domain": "github.com",
+  "icon": "github.com.png",
+  "title": "GitHub - cube0x0/CVE-2021-1675: C# and Impacket implementation of PrintNightmare CVE-2021-1675/CVE-2021-34527"
+ },
+ "https://github.com/cyberark/kubeletctl": {
+  "domain": "github.com",
+  "icon": "github.com.png",
+  "title": "GitHub - cyberark/kubeletctl: A client for kubelet"
+ },
+ "https://github.com/daem0nc0re/Abusing_Weak_ACL_on_Certificate_Templates": {
+  "domain": "github.com",
+  "icon": "github.com.png",
+  "title": "GitHub - daem0nc0re/Abusing_Weak_ACL_on_Certificate_Templates: Investigation about ACL abusing for Active Dire"
+ },
+ "https://github.com/dirkjanm/CVE-2020-1472": {
+  "domain": "github.com",
+  "icon": "github.com.png",
+  "title": "GitHub - dirkjanm/CVE-2020-1472: PoC for Zerologon - all research credits go to Tom Tervoort of Secura"
+ },
+ "https://github.com/drk1wi/Modlishka": {
+  "domain": "github.com",
+  "icon": "github.com.png",
+  "title": "GitHub - drk1wi/Modlishka: Modlishka. Reverse Proxy."
+ },
+ "https://github.com/eladshamir/Whisker": {
+  "domain": "github.com",
+  "icon": "github.com.png",
+  "title": "GitHub - eladshamir/Whisker: Whisker is a C# tool for taking over Active Directory user and computer accounts "
+ },
+ "https://github.com/evilashz/CheeseOunce": {
+  "domain": "github.com",
+  "icon": "github.com.png",
+  "title": "GitHub - evilashz/CheeseOunce: Coerce Windows machines auth via MS-EVEN"
+ },
+ "https://github.com/fin3ss3g0d/evilgophish": {
+  "domain": "github.com",
+  "icon": "github.com.png",
+  "title": "GitHub - fin3ss3g0d/evilgophish: evilginx3 + gophish"
+ },
+ "https://github.com/frizb/PasswordDecrypts": {
+  "domain": "github.com",
+  "icon": "github.com.png",
+  "title": "GitHub - frizb/PasswordDecrypts: Handy Stored Password Decryption Techniques"
+ },
+ "https://github.com/gaffe23/linux-inject": {
+  "domain": "github.com",
+  "icon": "github.com.png",
+  "title": "GitHub - gaffe23/linux-inject: Tool for injecting a shared object into a Linux process"
+ },
+ "https://github.com/gentilkiwi/kekeo/wiki/ms14068": {
+  "domain": "github.com",
+  "icon": "github.com.png",
+  "title": "ms14068"
+ },
+ "https://github.com/gnebbia/hydra_notes": {
+  "domain": "github.com",
+  "icon": "github.com.png",
+  "title": "GitHub - gnebbia/hydra_notes: Some notes about Hydra for bruteforcing"
+ },
+ "https://github.com/hackerschoice/gsocket": {
+  "domain": "github.com",
+  "icon": "github.com.png",
+  "title": "GitHub - hackerschoice/gsocket: Connect like there is no firewall. Securely."
+ },
+ "https://github.com/hfiref0x/UACME": {
+  "domain": "github.com",
+  "icon": "github.com.png",
+  "title": "GitHub - hfiref0x/UACME: Defeating Windows User Account Control"
+ },
+ "https://github.com/infosecn1nja/Red-Teaming-Toolkit#Initial-Access": {
+  "domain": "github.com",
+  "icon": "github.com.png",
+  "title": "GitHub - infosecn1nja/Red-Teaming-Toolkit: This repository contains cutting-edge open-source security tools (O"
+ },
+ "https://github.com/kgretzky/evilginx2": {
+  "domain": "github.com",
+  "icon": "github.com.png",
+  "title": "GitHub - kgretzky/evilginx2: Standalone man-in-the-middle attack framework used for phishing login credentials"
+ },
+ "https://github.com/kljunowsky/CVE-2022-42889-text4shell": {
+  "domain": "github.com",
+  "icon": "github.com.png",
+  "title": "GitHub - kljunowsky/CVE-2022-42889-text4shell: Apache commons text - CVE-2022-42889 Text4Shell proof of concep"
+ },
+ "https://github.com/lgandx/PCredz": {
+  "domain": "github.com",
+  "icon": "github.com.png",
+  "title": "GitHub - lgandx/PCredz: This tool extracts Credit card numbers, NTLM(DCE-RPC, HTTP, SQL, LDAP, etc), Kerberos "
+ },
+ "https://github.com/ly4k/PetitPotam": {
+  "domain": "github.com",
+  "icon": "github.com.png",
+  "title": "GitHub - ly4k/PetitPotam: Python implementation for PetitPotam"
+ },
+ "https://github.com/matheuspd/Linux-Kernel-Module-Backdoor-Demonstration": {
+  "domain": "github.com",
+  "icon": "github.com.png",
+  "title": "GitHub - matheuspd/Linux-Kernel-Module-Backdoor-Demonstration: A simple example of a linux kernel module that "
+ },
+ "https://github.com/mpgn/Spring-Boot-Actuator-Exploit": {
+  "domain": "github.com",
+  "icon": "github.com.png",
+  "title": "GitHub - mpgn/Spring-Boot-Actuator-Exploit: Spring Boot Actuator (jolokia) XXE/RCE"
+ },
+ "https://github.com/muraenateam/muraena": {
+  "domain": "github.com",
+  "icon": "github.com.png",
+  "title": "GitHub - muraenateam/muraena: Muraena is an almost-transparent reverse proxy aimed at automating phishing and "
+ },
+ "https://github.com/nccgroup/Change-Lockscreen": {
+  "domain": "github.com",
+  "icon": "github.com.png",
+  "title": "GitHub - nccgroup/Change-Lockscreen: Offensive tool to trigger network authentications as SYSTEM"
+ },
+ "https://github.com/nicocha30/ligolo-ng": {
+  "domain": "github.com",
+  "icon": "github.com.png",
+  "title": "GitHub - nicocha30/ligolo-ng: An advanced, yet simple, tunneling/pivoting tool that uses a TUN interface."
+ },
+ "https://github.com/nicocha30/ligolo-ng/tree/v0.4.4#building--usage": {
+  "domain": "github.com",
+  "icon": "github.com.png",
+  "title": "GitHub - nicocha30/ligolo-ng at v0.4.4"
+ },
+ "https://github.com/righteousgambit/quiet-riot": {
+  "domain": "github.com",
+  "icon": "github.com.png",
+  "title": "GitHub - righteousgambit/quiet-riot: Unauthenticated enumeration of AWS, Azure, and GCP Principals"
+ },
+ "https://github.com/ropnop/kerbrute": {
+  "domain": "github.com",
+  "icon": "github.com.png",
+  "title": "GitHub - ropnop/kerbrute: A tool to perform Kerberos pre-auth bruteforcing"
+ },
+ "https://github.com/swisskyrepo/PayloadsAllTheThings/blob/master/Insecure%20Deserialization/PHP.md": {
+  "domain": "github.com",
+  "icon": "github.com.png",
+  "title": "PayloadsAllTheThings/Insecure Deserialization/PHP.md at master \u00b7 swisskyrepo/PayloadsAllTheThings"
+ },
+ "https://github.com/swisskyrepo/PayloadsAllTheThings/blob/master/Methodology%20and%20Resources/Linux%20-%20Persistence.md": {
+  "domain": "github.com",
+  "icon": "github.com.png",
+  "title": "PayloadsAllTheThings/Methodology and Resources/Linux - Persistence.md at master \u00b7 swisskyrepo/PayloadsAllTheTh"
+ },
+ "https://github.com/swisskyrepo/PayloadsAllTheThings/blob/master/Methodology%20and%20Resources/Linux%20-%20Privilege%20Escalation.md#sudo": {
+  "domain": "github.com",
+  "icon": "github.com.png",
+  "title": "PayloadsAllTheThings/Methodology and Resources/Linux - Privilege Escalation.md at master \u00b7 swisskyrepo/Payload"
+ },
+ "https://github.com/swisskyrepo/PayloadsAllTheThings/blob/master/Methodology%20and%20Resources/Windows%20-%20Privilege%20Escalation.md#eop---incorrect-permissions-in-services": {
+  "domain": "github.com",
+  "icon": "github.com.png",
+  "title": "PayloadsAllTheThings/Methodology and Resources/Windows - Privilege Escalation.md at master \u00b7 swisskyrepo/Paylo"
+ },
+ "https://github.com/swisskyrepo/PayloadsAllTheThings/blob/master/Methodology%20and%20Resources/Windows%20-%20Privilege%20Escalation.md#eop---unquoted-service-paths": {
+  "domain": "github.com",
+  "icon": "github.com.png",
+  "title": "PayloadsAllTheThings/Methodology and Resources/Windows - Privilege Escalation.md at master \u00b7 swisskyrepo/Paylo"
+ },
+ "https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/Command%20Injection": {
+  "domain": "github.com",
+  "icon": "github.com.png",
+  "title": "PayloadsAllTheThings/Command Injection at master \u00b7 swisskyrepo/PayloadsAllTheThings"
+ },
+ "https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/NoSQL%20Injection#extract-length-information": {
+  "domain": "github.com",
+  "icon": "github.com.png",
+  "title": "PayloadsAllTheThings/NoSQL Injection at master \u00b7 swisskyrepo/PayloadsAllTheThings"
+ },
+ "https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/SQL%20Injection": {
+  "domain": "github.com",
+  "icon": "github.com.png",
+  "title": "PayloadsAllTheThings/SQL Injection at master \u00b7 swisskyrepo/PayloadsAllTheThings"
+ },
+ "https://github.com/techgaun/github-dorks": {
+  "domain": "github.com",
+  "icon": "github.com.png",
+  "title": "GitHub - techgaun/github-dorks: Find leaked secrets via github search"
+ },
+ "https://github.com/topotam/PetitPotam": {
+  "domain": "github.com",
+  "icon": "github.com.png",
+  "title": "GitHub - topotam/PetitPotam: PoC tool to coerce Windows hosts to authenticate to other machines via MS-EFSRPC "
+ },
+ "https://github.com/trustedsec/specula/wiki": {
+  "domain": "github.com",
+  "icon": "github.com.png",
+  "title": "Home"
+ },
+ "https://googleprojectzero.blogspot.com/2025/01/windows-bug-class-accessing-trapped-com.html": {
+  "domain": "googleprojectzero.blogspot.com",
+  "icon": "googleprojectzero.blogspot.com.png",
+  "title": "Windows Bug Class: Accessing Trapped COM Objects with IDispatch"
+ },
+ "https://hackingthe.cloud/aws/exploitation/iam_privilege_escalation/": {
+  "domain": "hackingthe.cloud",
+  "icon": "hackingthe.cloud.png",
+  "title": "AWS IAM Privilege Escalation Techniques - Hacking The Cloud"
+ },
+ "https://hackviser.com/tactics/pentesting/services/rsync": {
+  "domain": "hackviser.com",
+  "icon": "hackviser.com.png",
+  "title": "Rsync Pentesting | Hackviser"
+ },
+ "https://harmj0y.medium.com/s4u2pwnage-36efe1a2777c": {
+  "domain": "harmj0y.medium.com",
+  "icon": "harmj0y.medium.com.ico",
+  "title": null
+ },
+ "https://hashcat.net/wiki/doku.php?id=example_hashes": {
+  "domain": "hashcat.net",
+  "icon": "hashcat.net.png",
+  "title": "example_hashes [hashcat wiki]"
+ },
+ "https://hatching.io/blog/lnk-hta-polyglot/": {
+  "domain": "hatching.io",
+  "icon": "hatching.io.png",
+  "title": "Hatching - Automated malware analysis solutions"
+ },
+ "https://http418infosec.com/ad-cs-the-certified-pre-owned-attacks": {
+  "domain": "http418infosec.com",
+  "icon": "http418infosec.com.png",
+  "title": "AD CS - The 'Certified Pre-Owned' Attacks - HTTP418InfoSec"
+ },
+ "https://http418infosec.com/ad-cs-what-can-be-misconfigured": {
+  "domain": "http418infosec.com",
+  "icon": "http418infosec.com.png",
+  "title": "AD CS - What Can Be Misconfigured? - HTTP418InfoSec"
+ },
+ "https://hunter2.gitbook.io/darthsidious/execution/responder-with-ntlm-relay-and-empire": {
+  "domain": "hunter2.gitbook.io",
+  "icon": null,
+  "title": "Responder with NTLM relay and Empire | DarthSidious"
+ },
+ "https://ine.com/blog/exploiting-pwnkit-cve-20214034": {
+  "domain": "ine.com",
+  "icon": "ine.com.png",
+  "title": "Pwnkit Exploitation Guide: Unveiling CVE-20\u2026"
+ },
+ "https://infosecwriteups.com/exposed-git-directory-exploitation-3e30481e8d75": {
+  "domain": "infosecwriteups.com",
+  "icon": "infosecwriteups.com.ico",
+  "title": null
+ },
+ "https://infosecwriteups.com/samba-active-directory-domain-controller-linux-what-to-do-when-impacket-bloodhound-dont-work-1faee4828d5b": {
+  "domain": "infosecwriteups.com",
+  "icon": "infosecwriteups.com.ico",
+  "title": null
+ },
+ "https://infosecwriteups.com/smart-contract-vulnerabilities-audit-checklist-2023-2c90c635153e": {
+  "domain": "infosecwriteups.com",
+  "icon": "infosecwriteups.com.ico",
+  "title": null
+ },
+ "https://ippsec.rocks": {
+  "domain": "ippsec.rocks",
+  "icon": null,
+  "title": "IppSec - Search"
+ },
+ "https://ired.team/offensive-security-experiments/active-directory-kerberos-abuse/abusing-active-directory-acls-aces#genericall-on-user": {
+  "domain": "ired.team",
+  "icon": null,
+  "title": "Abusing Active Directory ACLs/ACEs | Red Team Notes"
+ },
+ "https://isc.sans.edu/diary/Spam+Delivered+via+ICS+Files/21611": {
+  "domain": "isc.sans.edu",
+  "icon": "isc.sans.edu.png",
+  "title": "Spam Delivered via .ICS Files - SANS Internet Storm Center"
+ },
+ "https://ivanitlearning.wordpress.com/2019/04/07/arp-dns-poisoning-with-bettercap-and-impacket-ntlmrelayx/": {
+  "domain": "ivanitlearning.wordpress.com",
+  "icon": "ivanitlearning.wordpress.com.png",
+  "title": "ARP & DNS Poisoning with Bettercap and Impacket NTLMRelayX"
+ },
+ "https://juggernaut-sec.com/alwaysinstallelevated/": {
+  "domain": "juggernaut-sec.com",
+  "icon": "juggernaut-sec.com.png",
+  "title": "AlwaysInstallElevated \u2013 Windows Privilege Escalation"
+ },
+ "https://juggernaut-sec.com/applocker-bypass/": {
+  "domain": "juggernaut-sec.com",
+  "icon": "juggernaut-sec.com.png",
+  "title": "AppLocker Bypass \u2013 Windows Privilege Escalation"
+ },
+ "https://kubernetes.io/docs/home/": {
+  "domain": "kubernetes.io",
+  "icon": null,
+  "title": "Kubernetes Documentation"
+ },
+ "https://kubernetes.io/fr/docs/reference/kubectl/": {
+  "domain": "kubernetes.io",
+  "icon": null,
+  "title": "CLI kubectl"
+ },
+ "https://labs.detectify.com/2021/02/18/middleware-middleware-everywhere-and-lots-of-misconfigurations-to-fix/": {
+  "domain": "labs.detectify.com",
+  "icon": "labs.detectify.com.png",
+  "title": "Middleware, middleware everywhere - and lots of misconfigurations to fix"
+ },
+ "https://labs.withsecure.com/publications/digging-into-ms14-068-exploitation-and-defence": {
+  "domain": "labs.withsecure.com",
+  "icon": "labs.withsecure.com.png",
+  "title": "W/Labs - WithSecure\u2122"
+ },
+ "https://learn.microsoft.com/en-us/mem/configmgr/core/clients/deploy/assign-clients-to-a-site#automatic-site-assignment": {
+  "domain": "learn.microsoft.com",
+  "icon": "learn.microsoft.com.png",
+  "title": "Assign clients to a site - Configuration Manager"
+ },
+ "https://learn.microsoft.com/en-us/mem/configmgr/core/plan-design/hierarchy/design-a-hierarchy-of-sites": {
+  "domain": "learn.microsoft.com",
+  "icon": "learn.microsoft.com.png",
+  "title": "Design a site hierarchy - Configuration Manager"
+ },
+ "https://learn.microsoft.com/en-us/mem/configmgr/core/servers/deploy/configure/boundary-groups": {
+  "domain": "learn.microsoft.com",
+  "icon": "learn.microsoft.com.png",
+  "title": "About boundary groups - Configuration Manager"
+ },
+ "https://learn.microsoft.com/en-us/mem/configmgr/core/servers/deploy/install/prerequisites-for-installing-sites": {
+  "domain": "learn.microsoft.com",
+  "icon": "learn.microsoft.com.png",
+  "title": "Prerequisites for sites - Configuration Manager"
+ },
+ "https://learn.microsoft.com/en-us/mem/configmgr/core/understand/fundamentals-of-sites-and-hierarchies": {
+  "domain": "learn.microsoft.com",
+  "icon": "learn.microsoft.com.png",
+  "title": "Fundamentals of sites and hierarchies - Configuration Manager"
+ },
+ "https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-even/55b13664-f739-4e4e-bd8d-04eeda59d09f": {
+  "domain": "learn.microsoft.com",
+  "icon": "learn.microsoft.com.png",
+  "title": "[MS-EVEN]: EventLog Remoting Protocol"
+ },
+ "https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-server-2008-R2-and-2008/cc753459(v=ws.10)#credential-caching": {
+  "domain": "learn.microsoft.com",
+  "icon": "learn.microsoft.com.png",
+  "title": "RODC Filtered Attribute Set, Credential Caching, and the Authentication Process with an RODC"
+ },
+ "https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-server-2008-R2-and-2008/cc754218(v=ws.10)?redirectedfrom=MSDN#how-the-authentication-process-works-on-an-rodc": {
+  "domain": "learn.microsoft.com",
+  "icon": "learn.microsoft.com.png",
+  "title": "Appendix A: Read-Only Domain Controller (RODC) Technical Reference Topics"
+ },
+ "https://learn.microsoft.com/en-us/windows-hardware/design/device-experiences/oem-vbs": {
+  "domain": "learn.microsoft.com",
+  "icon": "learn.microsoft.com.png",
+  "title": "Virtualization-based Security (VBS)"
+ },
+ "https://learn.microsoft.com/en-us/windows/win32/ad/using-dsaddsidhistory#operational-constraints": {
+  "domain": "learn.microsoft.com",
+  "icon": "learn.microsoft.com.png",
+  "title": "Using DsAddSidHistory - Win32 apps"
+ },
+ "https://learn.microsoft.com/en-us/windows/win32/adschema/a-sidhistory": {
+  "domain": "learn.microsoft.com",
+  "icon": "learn.microsoft.com.png",
+  "title": "SID-History attribute - Win32 apps"
+ },
+ "https://learn.microsoft.com/en-us/windows/win32/api/ntdsapi/nf-ntdsapi-dsaddsidhistorya": {
+  "domain": "learn.microsoft.com",
+  "icon": "learn.microsoft.com.png",
+  "title": "DsAddSidHistoryA function (ntdsapi.h) - Win32 apps"
+ },
+ "https://learn.microsoft.com/en-us/windows/win32/procthread/fibers": {
+  "domain": "learn.microsoft.com",
+  "icon": "learn.microsoft.com.png",
+  "title": "Fibers - Win32 apps"
+ },
+ "https://learn.microsoft.com/en-us/windows/win32/secauthz/access-control-lists": {
+  "domain": "learn.microsoft.com",
+  "icon": "learn.microsoft.com.png",
+  "title": "Access Control Lists - Win32 apps"
+ },
+ "https://logrhythm.com/blog/what-are-living-off-the-land-attacks/": {
+  "domain": "logrhythm.com",
+  "icon": "logrhythm.com.png",
+  "title": "Blog"
+ },
+ "https://lolbas-project.github.io/#": {
+  "domain": "lolbas-project.github.io",
+  "icon": "lolbas-project.github.io.png",
+  "title": "LOLBAS"
+ },
+ "https://luemmelsec.github.io/Relaying-101/#arp-spoofing": {
+  "domain": "luemmelsec.github.io",
+  "icon": null,
+  "title": "LuemmelSec - Blog"
+ },
+ "https://malicious.link/post/2020/compiling-a-dll-using-mingw/": {
+  "domain": "malicious.link",
+  "icon": "malicious.link.png",
+  "title": "Compiling a DLL using MingGW"
+ },
+ "https://mayfly277.github.io/posts/GOADv2-pwning-part12/": {
+  "domain": "mayfly277.github.io",
+  "icon": "mayfly277.github.io.png",
+  "title": "GOAD - part 12 - Trusts"
+ },
+ "https://medium.com/@SumitVerma101/windows-privilege-escalation-part-1-unquoted-service-path-c7a011a8d8ae": {
+  "domain": "medium.com",
+  "icon": "medium.com.ico",
+  "title": null
+ },
+ "https://medium.com/@_sadshade/veeam-backup-penetration-getting-the-most-out-of-pentest-17e0da021238": {
+  "domain": "medium.com",
+  "icon": "medium.com.ico",
+  "title": null
+ },
+ "https://medium.com/@benichmt1/secretsdump-demystified-bfd0f933dd9b": {
+  "domain": "medium.com",
+  "icon": "medium.com.ico",
+  "title": null
+ },
+ "https://medium.com/@offsecdeer/how-to-dcsync-a-samba-dc-and-maybe-openldap-448c3914b17b": {
+  "domain": "medium.com",
+  "icon": "medium.com.ico",
+  "title": null
+ },
+ "https://medium.com/@pavithra_38952/protecting-your-secrets-with-ansible-cac601a1a5ab": {
+  "domain": "medium.com",
+  "icon": "medium.com.ico",
+  "title": null
+ },
+ "https://medium.com/@rohanzarathustra/ethernaut-level-19-alien-codex-f2c24dac82cc": {
+  "domain": "medium.com",
+  "icon": "medium.com.ico",
+  "title": null
+ },
+ "https://medium.com/r3d-buck3t/breaking-domain-trusts-with-forged-trust-tickets-5f03fb71cd72": {
+  "domain": "medium.com",
+  "icon": "medium.com.ico",
+  "title": null
+ },
+ "https://medium.com/r3d-buck3t/weaponize-chm-files-with-powershell-nishang-c98b93f79f1e": {
+  "domain": "medium.com",
+  "icon": "medium.com.ico",
+  "title": null
+ },
+ "https://medium.com/stolabs/git-exposed-how-to-identify-and-exploit-62df3c165c37": {
+  "domain": "medium.com",
+  "icon": "medium.com.ico",
+  "title": null
+ },
+ "https://mgeeky.tech/payload-crumbs-in-custom-parts/": {
+  "domain": "mgeeky.tech",
+  "icon": "mgeeky.tech.png",
+  "title": "Backdooring Office Structures. Part 2: Payload Crumbs In Custom Parts \u2013 mgeeky's lair"
+ },
+ "https://mikadmin.fr/blog/linux-privilege-escalation-python-library-hijacking/": {
+  "domain": "mikadmin.fr",
+  "icon": "mikadmin.fr.png",
+  "title": "Linux Privilege Escalation : Python Library Hijacking"
+ },
+ "https://mohamed-fakroud.gitbook.io/red-teamings-dojo/abusing-idispatch-for-trapped-com-object-access-and-injecting-into-ppl-processes": {
+  "domain": "mohamed-fakroud.gitbook.io",
+  "icon": null,
+  "title": "Abusing IDispatch for Trapped COM Object Access & Injecting into PPL Processes | Red Teaming&#x27;s Dojo"
+ },
+ "https://mrd0x.com/spoofing-calendar-invites-using-ics-files/": {
+  "domain": "mrd0x.com",
+  "icon": "mrd0x.com.png",
+  "title": null
+ },
+ "https://msrc.microsoft.com/update-guide/vulnerability/CVE-2022-26923": {
+  "domain": "msrc.microsoft.com",
+  "icon": "msrc.microsoft.com.svg",
+  "title": "Security Update Guide - Microsoft Security Response Center"
+ },
+ "https://mucomplex.medium.com/remote-procedure-call-and-active-directory-enumeration-616b234468e5": {
+  "domain": "mucomplex.medium.com",
+  "icon": "mucomplex.medium.com.ico",
+  "title": null
+ },
+ "https://net-security.fr/security/bluekeep-metasploit/": {
+  "domain": "net-security.fr",
+  "icon": "net-security.fr.png",
+  "title": "BlueKeep (CVE-2019-0708) & Metasploit"
+ },
+ "https://nmap.org/book/host-discovery-techniques.html": {
+  "domain": "nmap.org",
+  "icon": "nmap.org.png",
+  "title": "Host Discovery Techniques | Nmap Network Scanning"
+ },
+ "https://nolongerset.com/the-idispatch-interface/": {
+  "domain": "nolongerset.com",
+  "icon": "nolongerset.com.png",
+  "title": "The IDispatch Interface"
+ },
+ "https://notes.offsec-journey.com/enumeration/vnc": {
+  "domain": "notes.offsec-journey.com",
+  "icon": null,
+  "title": null
+ },
+ "https://osandamalith.com/2017/03/24/places-of-interest-in-stealing-netntlm-hashes/": {
+  "domain": "osandamalith.com",
+  "icon": "osandamalith.com.png",
+  "title": "Places of Interest in Stealing NetNTLM Hashes | \ud83d\udd10Blog of Osanda"
+ },
+ "https://owasp.org/www-community/attacks/Brute_force_attack": {
+  "domain": "owasp.org",
+  "icon": "owasp.org.png",
+  "title": "Brute Force Attack | OWASP Foundation"
+ },
+ "https://owasp.org/www-community/attacks/Command_Injection": {
+  "domain": "owasp.org",
+  "icon": "owasp.org.png",
+  "title": "Command Injection | OWASP Foundation"
+ },
+ "https://owasp.org/www-community/attacks/xss/": {
+  "domain": "owasp.org",
+  "icon": "owasp.org.png",
+  "title": "Cross Site Scripting (XSS) | OWASP Foundation"
+ },
+ "https://owasp.org/www-community/vulnerabilities/Unrestricted_File_Upload": {
+  "domain": "owasp.org",
+  "icon": "owasp.org.png",
+  "title": "Unrestricted File Upload | OWASP Foundation"
+ },
+ "https://owasp.org/www-project-top-ten/2017/A3_2017-Sensitive_Data_Exposure": {
+  "domain": "owasp.org",
+  "icon": "owasp.org.png",
+  "title": "OWASP Top Ten 2017 | A3:2017-Sensitive Data Exposure | OWASP Foundation"
+ },
+ "https://owasp.org/www-project-web-security-testing-guide/latest/4-Web_Application_Security_Testing/02-Configuration_and_Deployment_Management_Testing/10-Test_for_Subdomain_Takeover": {
+  "domain": "owasp.org",
+  "icon": "owasp.org.png",
+  "title": "WSTG - Latest | OWASP Foundation"
+ },
+ "https://pentest.y-security.de/OWASP%20Cheat%20Sheet%20Series/Kubernetes_Security_Cheat_Sheet/": {
+  "domain": "pentest.y-security.de",
+  "icon": null,
+  "title": "Y-Security performs Attack Simulations, Penetration Tests, and Security Trainings"
+ },
+ "https://pentestlab.blog/2017/12/13/smb-share-scf-file-attacks/": {
+  "domain": "pentestlab.blog",
+  "icon": "pentestlab.blog.png",
+  "title": "SMB Share \u2013 SCF File Attacks"
+ },
+ "https://pentestlab.blog/2018/04/10/skeleton-key": {
+  "domain": "pentestlab.blog",
+  "icon": "pentestlab.blog.png",
+  "title": "Skeleton Key"
+ },
+ "https://pentestlab.blog/2019/10/21/persistence-security-support-provider/": {
+  "domain": "pentestlab.blog",
+  "icon": "pentestlab.blog.png",
+  "title": "Persistence \u2013 Security Support Provider"
+ },
+ "https://pentestlab.blog/2019/11/13/persistence-accessibility-features/": {
+  "domain": "pentestlab.blog",
+  "icon": "pentestlab.blog.png",
+  "title": "Persistence \u2013 Accessibility Features"
+ },
+ "https://pentestlab.blog/2020/01/13/persistence-image-file-execution-options-injection/": {
+  "domain": "pentestlab.blog",
+  "icon": "pentestlab.blog.png",
+  "title": "Persistence \u2013 Image File Execution Options Injection"
+ },
+ "https://pentestlab.blog/2020/01/21/persistence-wmi-event-subscription/": {
+  "domain": "pentestlab.blog",
+  "icon": "pentestlab.blog.png",
+  "title": "Persistence \u2013 WMI Event Subscription"
+ },
+ "https://pentestlab.blog/2021/10/20/lateral-movement-webclient": {
+  "domain": "pentestlab.blog",
+  "icon": "pentestlab.blog.png",
+  "title": "Lateral Movement \u2013 WebClient"
+ },
+ "https://persistence-info.github.io/Data/aedebug.html": {
+  "domain": "persistence-info.github.io",
+  "icon": null,
+  "title": "AeDebug"
+ },
+ "https://persistence-info.github.io/Data/naturallanguage6.html": {
+  "domain": "persistence-info.github.io",
+  "icon": null,
+  "title": "Natural Language 6 DLLs"
+ },
+ "https://petri.com/active_directory_srv_records": {
+  "domain": "petri.com",
+  "icon": "petri.com.png",
+  "title": "What Are Active Directory SRV Records?"
+ },
+ "https://podalirius.net/en/articles/exploiting-windows-group-policy-preferences/": {
+  "domain": "podalirius.net",
+  "icon": null,
+  "title": null
+ },
+ "https://podalirius.net/en/articles/ssh-port-forwarding/": {
+  "domain": "podalirius.net",
+  "icon": null,
+  "title": "SSH Port forwarding"
+ },
+ "https://porterhau5.com/blog/extending-bloodhound-track-and-visualize-your-compromise/": {
+  "domain": "porterhau5.com",
+  "icon": "porterhau5.com.png",
+  "title": "Extending BloodHound: Track and Visualize Your Compromise"
+ },
+ "https://portswigger.net/web-security/cross-site-scripting": {
+  "domain": "portswigger.net",
+  "icon": "portswigger.net.png",
+  "title": "What is cross-site scripting (XSS) and how to prevent it? | Web Security Academy"
+ },
+ "https://portswigger.net/web-security/deserialization/exploiting": {
+  "domain": "portswigger.net",
+  "icon": "portswigger.net.png",
+  "title": "Exploiting insecure deserialization vulnerabilities | Web Security Academy"
+ },
+ "https://portswigger.net/web-security/file-upload": {
+  "domain": "portswigger.net",
+  "icon": "portswigger.net.png",
+  "title": "File uploads | Web Security Academy"
+ },
+ "https://portswigger.net/web-security/learning-paths/cors": {
+  "domain": "portswigger.net",
+  "icon": "portswigger.net.png",
+  "title": "Cross-origin resource sharing (CORS) - PortSwigger"
+ },
+ "https://portswigger.net/web-security/os-command-injection": {
+  "domain": "portswigger.net",
+  "icon": "portswigger.net.png",
+  "title": "What is OS command injection, and how to prevent it? | Web Security Academy"
+ },
+ "https://portswigger.net/web-security/server-side-template-injection": {
+  "domain": "portswigger.net",
+  "icon": "portswigger.net.png",
+  "title": "Server-side template injection | Web Security Academy"
+ },
+ "https://portswigger.net/web-security/sql-injection": {
+  "domain": "portswigger.net",
+  "icon": "portswigger.net.png",
+  "title": "What is SQL Injection? Tutorial & Examples | Web Security Academy"
+ },
+ "https://posts.specterops.io/at-the-edge-of-tier-zero-the-curious-case-of-the-rodc-ef5f1799ca06": {
+  "domain": "posts.specterops.io",
+  "icon": null,
+  "title": null
+ },
+ "https://posts.specterops.io/certified-pre-owned-d95910965cd2": {
+  "domain": "posts.specterops.io",
+  "icon": null,
+  "title": null
+ },
+ "https://posts.specterops.io/coercing-ntlm-authentication-from-sccm-e6e23ea8260a": {
+  "domain": "posts.specterops.io",
+  "icon": null,
+  "title": null
+ },
+ "https://posts.specterops.io/sccm-hierarchy-takeover-41929c61e087": {
+  "domain": "posts.specterops.io",
+  "icon": null,
+  "title": null
+ },
+ "https://posts.specterops.io/sccm-hierarchy-takeover-with-high-availability-7dcbd3696b43": {
+  "domain": "posts.specterops.io",
+  "icon": null,
+  "title": null
+ },
+ "https://posts.specterops.io/sccm-site-takeover-via-automatic-client-push-installation-f567ec80d5b1": {
+  "domain": "posts.specterops.io",
+  "icon": null,
+  "title": null
+ },
+ "https://posts.specterops.io/shadow-credentials-abusing-key-trust-account-mapping-for-takeover-8ee1a53566ab": {
+  "domain": "posts.specterops.io",
+  "icon": null,
+  "title": null
+ },
+ "https://posts.specterops.io/site-takeover-via-sccms-adminservice-api-d932e22b2bf": {
+  "domain": "posts.specterops.io",
+  "icon": null,
+  "title": null
+ },
+ "https://posts.specterops.io/the-phantom-credentials-of-sccm-why-the-naa-wont-die-332ac7aa1ab9": {
+  "domain": "posts.specterops.io",
+  "icon": null,
+  "title": null
+ },
+ "https://ppn.snovvcra.sh/pentest/perimeter/exchange": {
+  "domain": "ppn.snovvcra.sh",
+  "icon": null,
+  "title": "Exchange | Pentester&#x27;s Promiscuous Notebook"
+ },
+ "https://ppn.snovvcrash.rocks/pentest/infrastructure/ad/attack-trusts": {
+  "domain": "ppn.snovvcrash.rocks",
+  "icon": null,
+  "title": null
+ },
+ "https://ppn.snovvcrash.rocks/pentest/infrastructure/ad/av-edr-evasion/applocker-bypass": {
+  "domain": "ppn.snovvcrash.rocks",
+  "icon": null,
+  "title": null
+ },
+ "https://ppn.snovvcrash.rocks/pentest/infrastructure/ad/av-edr-evasion/dotnet-reflective-assembly": {
+  "domain": "ppn.snovvcrash.rocks",
+  "icon": null,
+  "title": null
+ },
+ "https://ppn.snovvcrash.rocks/pentest/infrastructure/ad/credential-harvesting/keepass": {
+  "domain": "ppn.snovvcrash.rocks",
+  "icon": null,
+  "title": null
+ },
+ "https://ppn.snovvcrash.rocks/pentest/infrastructure/ad/laps#backdoor": {
+  "domain": "ppn.snovvcrash.rocks",
+  "icon": null,
+  "title": null
+ },
+ "https://ppn.snovvcrash.rocks/pentest/infrastructure/devops/ansible": {
+  "domain": "ppn.snovvcrash.rocks",
+  "icon": null,
+  "title": null
+ },
+ "https://ppn.snovvcrash.rocks/pentest/infrastructure/devops/artifactory": {
+  "domain": "ppn.snovvcrash.rocks",
+  "icon": null,
+  "title": null
+ },
+ "https://ppn.snovvcrash.rocks/red-team/maldev/code-injection/shellcode-runners#c-dll-to-jscript": {
+  "domain": "ppn.snovvcrash.rocks",
+  "icon": null,
+  "title": null
+ },
+ "https://proxylogon.com/": {
+  "domain": "proxylogon.com",
+  "icon": "proxylogon.com.png",
+  "title": "ProxyLogon"
+ },
+ "https://pushsecurity.com/blog/phishing-2-0-how-phishing-toolkits-are-evolving-with-aitm/": {
+  "domain": "pushsecurity.com",
+  "icon": "pushsecurity.com.png",
+  "title": "How AitM phishing is being used to circumvent MFA"
+ },
+ "https://rareskills.io/post/where-to-find-solidity-reentrancy-attacks#read-only-reentrancy-also-known-as-cross-contract-reentrancy": {
+  "domain": "rareskills.io",
+  "icon": "rareskills.io.svg",
+  "title": "Where to find solidity reentrancy attacks | RareSkills"
+ },
+ "https://redcanary.com/threat-detection-report/techniques/mark-of-the-web-bypass/": {
+  "domain": "redcanary.com",
+  "icon": "redcanary.com.png",
+  "title": "Mark of the Web Bypass - Red Canary Threat Detection Report"
+ },
+ "https://redfoxsec.com/blog/exploiting-excessive-container-capabilities/": {
+  "domain": "redfoxsec.com",
+  "icon": null,
+  "title": null
+ },
+ "https://research.ifcr.dk/certifried-active-directory-domain-privilege-escalation-cve-2022-26923-9e098fe298f4": {
+  "domain": "research.ifcr.dk",
+  "icon": "research.ifcr.dk.ico",
+  "title": null
+ },
+ "https://research.ifcr.dk/certipy-2-0-bloodhound-new-escalations-shadow-credentials-golden-certificates-and-more-34d1c26f0dc6": {
+  "domain": "research.ifcr.dk",
+  "icon": "research.ifcr.dk.ico",
+  "title": null
+ },
+ "https://research.ifcr.dk/certipy-4-0-esc9-esc10-bloodhound-gui-new-authentication-and-request-methods-and-more-7237d88061f7": {
+  "domain": "research.ifcr.dk",
+  "icon": "research.ifcr.dk.ico",
+  "title": null
+ },
+ "https://research.nccgroup.com/2019/08/20/kerberos-resource-based-constrained-delegation-when-an-image-change-leads-to-a-privilege-escalation": {
+  "domain": "research.nccgroup.com",
+  "icon": "research.nccgroup.com.ico",
+  "title": "Cyber Security Research"
+ },
+ "https://rhinosecuritylabs.com/aws/aws-privilege-escalation-methods-mitigation": {
+  "domain": "rhinosecuritylabs.com",
+  "icon": "rhinosecuritylabs.com.png",
+  "title": "AWS IAM Privilege Escalation \u2013 Methods and Mitigation"
+ },
+ "https://rhinosecuritylabs.com/aws/aws-privilege-escalation-methods-mitigation/": {
+  "domain": "rhinosecuritylabs.com",
+  "icon": "rhinosecuritylabs.com.png",
+  "title": "AWS IAM Privilege Escalation \u2013 Methods and Mitigation"
+ },
+ "https://rodelllemit.medium.com/aws-pentesting-abusing-ec2-runinstances-iam-passrole-permissions-f0408ef2dfe6": {
+  "domain": "rodelllemit.medium.com",
+  "icon": "rodelllemit.medium.com.ico",
+  "title": null
+ },
+ "https://ruuand.github.io/MS14-068/": {
+  "domain": "ruuand.github.io",
+  "icon": null,
+  "title": "MS14-068"
+ },
+ "https://san3ncrypt3d.com/2022/02/19/gc/": {
+  "domain": "san3ncrypt3d.com",
+  "icon": null,
+  "title": "Golden Certificate Attack - Persistence"
+ },
+ "https://scs.owasp.org/SCWE/SCSVS-ARCH/SCWE-070/": {
+  "domain": "scs.owasp.org",
+  "icon": "scs.owasp.org.png",
+  "title": "SCWE-070: Incorrect Constructor Name - OWASP Smart Contract Security"
+ },
+ "https://scs.owasp.org/SCWE/SCSVS-CODE/SCWE-047/": {
+  "domain": "scs.owasp.org",
+  "icon": "scs.owasp.org.png",
+  "title": "SCWE-047: Integer Overflows and Underflows - OWASP Smart Contract Security"
+ },
+ "https://scs.owasp.org/SCWE/SCSVS-COMM/SCWE-035/": {
+  "domain": "scs.owasp.org",
+  "icon": "scs.owasp.org.png",
+  "title": "SCWE-035: Insecure Delegatecall Usage - OWASP Smart Contract Security"
+ },
+ "https://scs.owasp.org/SCWE/SCSVS-CRYPTO/SCWE-074/": {
+  "domain": "scs.owasp.org",
+  "icon": "scs.owasp.org.png",
+  "title": "SCWE-074: Hash Collisions with Multiple Variable Length Arguments - OWASP Smart Contract Security"
+ },
+ "https://scs.owasp.org/SCWE/SCSVS-GOV/SCWE-044/": {
+  "domain": "scs.owasp.org",
+  "icon": "scs.owasp.org.png",
+  "title": "SCWE-044: Insecure Use of Storage - OWASP Smart Contract Security"
+ },
+ "https://scs.owasp.org/sctop10/SC05-Reentrancy/": {
+  "domain": "scs.owasp.org",
+  "icon": "scs.owasp.org.png",
+  "title": null
+ },
+ "https://scsfg.io/hackers/abi-hash-collisions/": {
+  "domain": "scsfg.io",
+  "icon": "scsfg.io.png",
+  "title": "ABI Hash Collisions - Smart Contract Security Field Guide"
+ },
+ "https://secframe.com/blog/a-sidhistory-attack-marching-onto-a-dc/": {
+  "domain": "secframe.com",
+  "icon": "secframe.com.png",
+  "title": null
+ },
+ "https://securitylabs.datadoghq.com/articles/overlayfs-cve-2023-0386/": {
+  "domain": "securitylabs.datadoghq.com",
+  "icon": "securitylabs.datadoghq.com.png",
+  "title": "The OverlayFS vulnerability CVE-2023-0386: Overview, detection, and remediation | Datadog Security Labs"
+ },
+ "https://shahjerry33.medium.com/rce-via-lfi-log-poisoning-the-death-potion-c0831cebc16d": {
+  "domain": "shahjerry33.medium.com",
+  "icon": "shahjerry33.medium.com.ico",
+  "title": null
+ },
+ "https://shenaniganslabs.io/2019/01/28/Wagging-the-Dog.html": {
+  "domain": "shenaniganslabs.io",
+  "icon": null,
+  "title": "Wagging the Dog: Abusing Resource-Based Constrained Delegation to Attack Active Directory"
+ },
+ "https://shenaniganslabs.io/2019/01/28/Wagging-the-Dog.html#unconstrained-domain-persistence": {
+  "domain": "shenaniganslabs.io",
+  "icon": null,
+  "title": "Wagging the Dog: Abusing Resource-Based Constrained Delegation to Attack Active Directory"
+ },
+ "https://shenaniganslabs.io/2019/01/28/Wagging-the-Dog.html#when-accounts-collude---trustedtoauthfordelegation-who": {
+  "domain": "shenaniganslabs.io",
+  "icon": null,
+  "title": "Wagging the Dog: Abusing Resource-Based Constrained Delegation to Attack Active Directory"
+ },
+ "https://shenaniganslabs.io/2021/06/21/Shadow-Credentials.html": {
+  "domain": "shenaniganslabs.io",
+  "icon": null,
+  "title": "Shadow Credentials: Abusing Key Trust Account Mapping for Account Takeover"
+ },
+ "https://sid4hack.medium.com/malware-development-part-12-apc-injection-via-nttestalert-8beb70834dff": {
+  "domain": "sid4hack.medium.com",
+  "icon": "sid4hack.medium.com.ico",
+  "title": null
+ },
+ "https://simondotsh.com/infosec/2022/07/11/dirsync.html": {
+  "domain": "simondotsh.com",
+  "icon": null,
+  "title": "DirSync: Leveraging Replication Get-Changes and Get-Changes-In-Filtered-Set"
+ },
+ "https://skyblue.team/posts/delegate-krbtgt/": {
+  "domain": "skyblue.team",
+  "icon": "skyblue.team.png",
+  "title": "Delegate to KRBTGT service | Sky Blueteam"
+ },
+ "https://snovvcrash.rocks/2020/12/28/htb-hades.html#spoofing-active-directory-integrated-dns": {
+  "domain": "snovvcrash.rocks",
+  "icon": null,
+  "title": null
+ },
+ "https://snovvcrash.rocks/2022/03/06/abusing-kcd-without-protocol-transition.html": {
+  "domain": "snovvcrash.rocks",
+  "icon": null,
+  "title": null
+ },
+ "https://social.technet.microsoft.com/wiki/contents/articles/23559.kerberos-pre-authentication-why-it-should-not-be-disabled.aspx": {
+  "domain": "social.technet.microsoft.com",
+  "icon": "social.technet.microsoft.com.ico",
+  "title": "Kerberos Pre-Authentication: Why It Should Not Be Disabled"
+ },
+ "https://social.technet.microsoft.com/wiki/contents/articles/5446.active-directory-how-to-prevent-authenticated-users-from-joining-workstations-to-a-domain.aspx": {
+  "domain": "social.technet.microsoft.com",
+  "icon": "social.technet.microsoft.com.ico",
+  "title": "Active Directory: How to Prevent Authenticated Users from Joining Workstations to a Domain"
+ },
+ "https://specterops.io/blog/2025/05/27/understanding-mitigating-badsuccessor/": {
+  "domain": "specterops.io",
+  "icon": "specterops.io.png",
+  "title": "Understanding & Mitigating BadSuccessor"
+ },
+ "https://ssd-disclosure.com/ssd-advisory-overlayfs-pe/": {
+  "domain": "ssd-disclosure.com",
+  "icon": null,
+  "title": null
+ },
+ "https://stackoverflow.com/questions/14479074/c-sharp-reflection-load-assembly-and-invoke-a-method-if-it-exists": {
+  "domain": "stackoverflow.com",
+  "icon": "stackoverflow.com.png",
+  "title": null
+ },
+ "https://stealthbits.com/blog/unconstrained-delegation-permissions/": {
+  "domain": "stealthbits.com",
+  "icon": "stealthbits.com.png",
+  "title": "Unconstrained Delegation | Netwrix"
+ },
+ "https://swcregistry.io/docs/SWC-118/": {
+  "domain": "swcregistry.io",
+  "icon": "swcregistry.io.png",
+  "title": "SWC-118 - Smart Contract Weakness Classification (SWC)"
+ },
+ "https://swcregistry.io/docs/SWC-124/": {
+  "domain": "swcregistry.io",
+  "icon": "swcregistry.io.png",
+  "title": "SWC-124 - Smart Contract Weakness Classification (SWC)"
+ },
+ "https://swisskyrepo.github.io/PayloadsAllTheThingsWeb/Insecure%20Deserialization/Python/": {
+  "domain": "swisskyrepo.github.io",
+  "icon": "swisskyrepo.github.io.png",
+  "title": null
+ },
+ "https://trustedsec.com/blog/kubernetes-for-pentesters-part-1": {
+  "domain": "trustedsec.com",
+  "icon": null,
+  "title": null
+ },
+ "https://trustedsec.com/resources/tools/specula": {
+  "domain": "trustedsec.com",
+  "icon": null,
+  "title": null
+ },
+ "https://tryhackme.com/r/room/sandboxevasion": {
+  "domain": "tryhackme.com",
+  "icon": null,
+  "title": null
+ },
+ "https://tryhackme.com/r/room/signatureevasion": {
+  "domain": "tryhackme.com",
+  "icon": null,
+  "title": null
+ },
+ "https://tryhackme.com/room/abusingwindowsinternals": {
+  "domain": "tryhackme.com",
+  "icon": null,
+  "title": null
+ },
+ "https://tryhackme.com/room/bypassinguac": {
+  "domain": "tryhackme.com",
+  "icon": null,
+  "title": null
+ },
+ "https://tryhackme.com/room/credharvesting": {
+  "domain": "tryhackme.com",
+  "icon": null,
+  "title": null
+ },
+ "https://tryhackme.com/room/cve202226923": {
+  "domain": "tryhackme.com",
+  "icon": null,
+  "title": null
+ },
+ "https://tryhackme.com/room/dataxexfilt": {
+  "domain": "tryhackme.com",
+  "icon": null,
+  "title": null
+ },
+ "https://tryhackme.com/room/dataxexfilt/": {
+  "domain": "tryhackme.com",
+  "icon": null,
+  "title": null
+ },
+ "https://tryhackme.com/room/dirtypipe": {
+  "domain": "tryhackme.com",
+  "icon": null,
+  "title": null
+ },
+ "https://tryhackme.com/room/lateralmovementandpivoting": {
+  "domain": "tryhackme.com",
+  "icon": null,
+  "title": null
+ },
+ "https://tryhackme.com/room/linuxprivescarena": {
+  "domain": "tryhackme.com",
+  "icon": null,
+  "title": null
+ },
+ "https://tryhackme.com/room/livingofftheland": {
+  "domain": "tryhackme.com",
+  "icon": null,
+  "title": null
+ },
+ "https://tryhackme.com/room/looneytunes": {
+  "domain": "tryhackme.com",
+  "icon": null,
+  "title": null
+ },
+ "https://tryhackme.com/room/monitoringevasion": {
+  "domain": "tryhackme.com",
+  "icon": null,
+  "title": null
+ },
+ "https://tryhackme.com/room/overlayfs": {
+  "domain": "tryhackme.com",
+  "icon": null,
+  "title": null
+ },
+ "https://tryhackme.com/room/passwordattacks": {
+  "domain": "tryhackme.com",
+  "icon": null,
+  "title": null
+ },
+ "https://tryhackme.com/room/polkit": {
+  "domain": "tryhackme.com",
+  "icon": null,
+  "title": null
+ },
+ "https://tryhackme.com/room/pwnkit": {
+  "domain": "tryhackme.com",
+  "icon": null,
+  "title": null
+ },
+ "https://tryhackme.com/room/recon": {
+  "domain": "tryhackme.com",
+  "icon": null,
+  "title": null
+ },
+ "https://tryhackme.com/room/runtimedetectionevasion": {
+  "domain": "tryhackme.com",
+  "icon": null,
+  "title": null
+ },
+ "https://tryhackme.com/room/spring4shell": {
+  "domain": "tryhackme.com",
+  "icon": null,
+  "title": null
+ },
+ "https://tryhackme.com/room/thelayoftheland": {
+  "domain": "tryhackme.com",
+  "icon": null,
+  "title": null
+ },
+ "https://tryhackme.com/room/weaponization": {
+  "domain": "tryhackme.com",
+  "icon": null,
+  "title": null
+ },
+ "https://tryhackme.com/room/wreath": {
+  "domain": "tryhackme.com",
+  "icon": null,
+  "title": null
+ },
+ "https://twitter.com/snovvcrash/status/1471829627765239816": {
+  "domain": "twitter.com",
+  "icon": "twitter.com.png",
+  "title": "sn\ud83e\udd76vvcr\ud83d\udca5sh (@snovvcrash) on X"
+ },
+ "https://unit42.paloaltonetworks.com/next-gen-kerberos-attacks/": {
+  "domain": "unit42.paloaltonetworks.com",
+  "icon": "unit42.paloaltonetworks.com.png",
+  "title": "Precious Gemstones: The New Generation of Kerberos Attacks"
+ },
+ "https://v3ded.github.io/redteam/utilizing-programmatic-identifiers-progids-for-uac-bypasses": {
+  "domain": "v3ded.github.io",
+  "icon": "v3ded.github.io.png",
+  "title": "Utilizing Programmatic Identifiers (ProgIDs) for UAC Bypasses"
+ },
+ "https://viperone.gitbook.io/pentest-everything/everything/everything-active-directory/laps": {
+  "domain": "viperone.gitbook.io",
+  "icon": null,
+  "title": "LAPS | Pentest Everything"
+ },
+ "https://viperone.gitbook.io/pentest-everything/everything/everything-active-directory/sccm-mecm": {
+  "domain": "viperone.gitbook.io",
+  "icon": null,
+  "title": "SCCM / MECM | Pentest Everything"
+ },
+ "https://web.archive.org/web/20080205233505/http://support.microsoft.com/kb/320187": {
+  "domain": "web.archive.org",
+  "icon": null,
+  "title": "HOW TO: Manage Computer Accounts in Active Directory in Windows 2000"
+ },
+ "https://webstersprodigy.net/2014/02/03/mscash-hash-primer-for-pentesters/": {
+  "domain": "webstersprodigy.net",
+  "icon": null,
+  "title": null
+ },
+ "https://wiki.samba.org/index.php/Back_up_and_Restoring_a_Samba_AD_DC": {
+  "domain": "wiki.samba.org",
+  "icon": null,
+  "title": null
+ },
+ "https://wiki.wireshark.org/NetBIOS/NBNS": {
+  "domain": "wiki.wireshark.org",
+  "icon": "wiki.wireshark.org.png",
+  "title": "NetBIOS/NBNS - Wireshark Wiki"
+ },
+ "https://www.akamai.com/blog/security-research/abusing-dmsa-for-privilege-escalation-in-active-directory": {
+  "domain": "www.akamai.com",
+  "icon": null,
+  "title": null
+ },
+ "https://www.atomicredteam.io/atomic-red-team/atomics/T1048.003": {
+  "domain": "www.atomicredteam.io",
+  "icon": "www.atomicredteam.io.png",
+  "title": "Atomic Red Team\u2122: T1048.003"
+ },
+ "https://www.bettercap.org/modules/ethernet/spoofers/arp.spoof/": {
+  "domain": "www.bettercap.org",
+  "icon": null,
+  "title": null
+ },
+ "https://www.bettercap.org/modules/ethernet/spoofers/dhcp6.spoof/": {
+  "domain": "www.bettercap.org",
+  "icon": null,
+  "title": null
+ },
+ "https://www.bettercap.org/modules/ethernet/spoofers/dns.spoof/": {
+  "domain": "www.bettercap.org",
+  "icon": null,
+  "title": null
+ },
+ "https://www.beyondtrust.com/blog/entry/a-quick-look-at-ms14-068": {
+  "domain": "www.beyondtrust.com",
+  "icon": "www.beyondtrust.com.png",
+  "title": null
+ },
+ "https://www.cisco.com/c/en/us/support/docs/ios-nx-os-software/nx-os-software/213841-understanding-icmp-redirect-messages.html": {
+  "domain": "www.cisco.com",
+  "icon": "www.cisco.com.png",
+  "title": "Understand ICMP Redirect Messages"
+ },
+ "https://www.cybereason.com/blog/leveraging-excel-dde-for-lateral-movement-via-dcom": {
+  "domain": "www.cybereason.com",
+  "icon": "www.cybereason.com.png",
+  "title": "Leveraging Excel DDE for lateral movement via DCOM"
+ },
+ "https://www.cyfrin.io/blog/solodit-checklist-explained-8-reentrancy-attack": {
+  "domain": "www.cyfrin.io",
+  "icon": "www.cyfrin.io.png",
+  "title": "Solodit Checklist Explained: Reentrancy Attack"
+ },
+ "https://www.errno.fr/artifactory/Attacking_Artifactory": {
+  "domain": "www.errno.fr",
+  "icon": null,
+  "title": "Artifactory Hacking guide"
+ },
+ "https://www.errno.fr/nfs_privesc.html": {
+  "domain": "www.errno.fr",
+  "icon": null,
+  "title": "A tale of a lesser known NFS privesc"
+ },
+ "https://www.exandroid.dev/2021/06/23/ad-cs-relay-attack-practical-guide": {
+  "domain": "www.exandroid.dev",
+  "icon": "www.exandroid.dev.png",
+  "title": "AD CS relay attack - practical guide"
+ },
+ "https://www.exploit-db.com/exploits/47115": {
+  "domain": "www.exploit-db.com",
+  "icon": "www.exploit-db.com.png",
+  "title": "Microsoft Windows 10.0.17134.648 - HTTP - SMB NTLM Reflection Leads to Privilege Elevation"
+ },
+ "https://www.exploit-db.com/exploits/48767": {
+  "domain": "www.exploit-db.com",
+  "icon": "www.exploit-db.com.png",
+  "title": "Abusing COM & DCOM objects - Paper"
+ },
+ "https://www.exploit-db.com/google-hacking-database": {
+  "domain": "www.exploit-db.com",
+  "icon": "www.exploit-db.com.png",
+  "title": "OffSec\u2019s Exploit Database Archive"
+ },
+ "https://www.fox-it.com/en/news/blog/mitm6-compromising-ipv4-networks-via-ipv6/": {
+  "domain": "www.fox-it.com",
+  "icon": "www.fox-it.com.png",
+  "title": null
+ },
+ "https://www.geeksforgeeks.org/vulnerability-in-str-format-in-python/": {
+  "domain": "www.geeksforgeeks.org",
+  "icon": "www.geeksforgeeks.org.png",
+  "title": "Vulnerability in str.format() in Python - GeeksforGeeks"
+ },
+ "https://www.gosecure.net/blog/2020/09/03/wsus-attacks-part-1-introducing-pywsus/": {
+  "domain": "www.gosecure.net",
+  "icon": "www.gosecure.net.png",
+  "title": "24/7 managed detection, response, and expert cybersecurity services - GoSecure"
+ },
+ "https://www.gsocket.io/": {
+  "domain": "www.gsocket.io",
+  "icon": "www.gsocket.io.png",
+  "title": "Global Socket"
+ },
+ "https://www.hackingarticles.in/abusing-ad-dacl-writeowner/": {
+  "domain": "www.hackingarticles.in",
+  "icon": "www.hackingarticles.in.png",
+  "title": "Abusing AD-DACL: WriteOwner"
+ },
+ "https://www.hackingarticles.in/domain-persistence-golden-certificate-attack/": {
+  "domain": "www.hackingarticles.in",
+  "icon": "www.hackingarticles.in.png",
+  "title": "Domain Persistence: Golden Certificate Attack"
+ },
+ "https://www.hackingarticles.in/lxd-privilege-escalation/": {
+  "domain": "www.hackingarticles.in",
+  "icon": "www.hackingarticles.in.png",
+  "title": "Lxd Privilege Escalation"
+ },
+ "https://www.harmj0y.net/blog/activedirectory/roasting-as-reps/": {
+  "domain": "www.harmj0y.net",
+  "icon": "www.harmj0y.net.png",
+  "title": null
+ },
+ "https://www.harmj0y.net/blog/activedirectory/the-most-dangerous-user-right-you-probably-have-never-heard-of/": {
+  "domain": "www.harmj0y.net",
+  "icon": "www.harmj0y.net.png",
+  "title": null
+ },
+ "https://www.harmj0y.net/blog/redteaming/abusing-gpo-permissions/": {
+  "domain": "www.harmj0y.net",
+  "icon": "www.harmj0y.net.png",
+  "title": null
+ },
+ "https://www.harmj0y.net/blog/redteaming/not-a-security-boundary-breaking-forest-trusts/": {
+  "domain": "www.harmj0y.net",
+  "icon": "www.harmj0y.net.png",
+  "title": null
+ },
+ "https://www.harmj0y.net/blog/redteaming/pass-the-hash-is-dead-long-live-localaccounttokenfilterpolicy/": {
+  "domain": "www.harmj0y.net",
+  "icon": "www.harmj0y.net.png",
+  "title": null
+ },
+ "https://www.hexacorn.com/blog/2013/09/19/beyond-good-ol-run-key-part-4/": {
+  "domain": "www.hexacorn.com",
+  "icon": "www.hexacorn.com.png",
+  "title": "Beyond good ol\u2019 Run key, Part 4 | Hexacorn"
+ },
+ "https://www.hexacorn.com/blog/2018/12/30/beyond-good-ol-run-key-part-98/": {
+  "domain": "www.hexacorn.com",
+  "icon": "www.hexacorn.com.png",
+  "title": "Beyond good ol\u2019 Run key, Part 98 | Hexacorn"
+ },
+ "https://www.hub.trimarcsecurity.com/post/push-comes-to-shove-exploring-the-attack-surface-of-sccm-client-push-accounts": {
+  "domain": "www.hub.trimarcsecurity.com",
+  "icon": "www.hub.trimarcsecurity.com.png",
+  "title": "Push Comes To Shove: exploring the attack surface of SCCM Client Push Accounts"
+ },
+ "https://www.ibm.com/think/news/fileless-lateral-movement-trapped-com-objects": {
+  "domain": "www.ibm.com",
+  "icon": "www.ibm.com.svg",
+  "title": "Fileless lateral movement with trapped COM objects | IBM"
+ },
+ "https://www.ired.team/": {
+  "domain": "www.ired.team",
+  "icon": null,
+  "title": "What is ired.team notes? | Red Team Notes"
+ },
+ "https://www.ired.team/offensive-security-experiments/active-directory-kerberos-abuse/dump-password-hashes-from-domain-controller-with-dcsync": {
+  "domain": "www.ired.team",
+  "icon": null,
+  "title": "DCSync: Dump Password Hashes from Domain Controller | Red Team Notes"
+ },
+ "https://www.ired.team/offensive-security-experiments/active-directory-kerberos-abuse/how-to-abuse-and-backdoor-adminsdholder-to-obtain-domain-admin-persistence": {
+  "domain": "www.ired.team",
+  "icon": null,
+  "title": "Backdooring AdminSDHolder for Persistence | Red Team Notes"
+ },
+ "https://www.ired.team/offensive-security-experiments/active-directory-kerberos-abuse/privileged-accounts-and-token-privileges#gpo-delegation": {
+  "domain": "www.ired.team",
+  "icon": null,
+  "title": "Privileged Accounts and Token Privileges | Red Team Notes"
+ },
+ "https://www.ired.team/offensive-security-experiments/active-directory-kerberos-abuse/using-dsacls-to-check-ad-object-permissions": {
+  "domain": "www.ired.team",
+  "icon": null,
+  "title": "Enumerating AD Object Permissions with dsacls | Red Team Notes"
+ },
+ "https://www.ired.team/offensive-security/code-execution/application-whitelisting-bypass-with-wmic-and-xsl": {
+  "domain": "www.ired.team",
+  "icon": null,
+  "title": "Application Whitelisting Bypass with WMIC and XSL | Red Team Notes"
+ },
+ "https://www.ired.team/offensive-security/code-execution/powershell-without-powershell": {
+  "domain": "www.ired.team",
+  "icon": null,
+  "title": "Powershell Without Powershell.exe | Red Team Notes"
+ },
+ "https://www.ired.team/offensive-security/code-execution/t1117-regsvr32-aka-squiblydoo": {
+  "domain": "www.ired.team",
+  "icon": null,
+  "title": "regsvr32 | Red Team Notes"
+ },
+ "https://www.ired.team/offensive-security/code-execution/t1170-mshta-code-execution": {
+  "domain": "www.ired.team",
+  "icon": null,
+  "title": "MSHTA | Red Team Notes"
+ },
+ "https://www.ired.team/offensive-security/code-execution/t1191-cmstp-code-execution": {
+  "domain": "www.ired.team",
+  "icon": null,
+  "title": "CMSTP | Red Team Notes"
+ },
+ "https://www.ired.team/offensive-security/code-execution/t1216-signed-script-ce": {
+  "domain": "www.ired.team",
+  "icon": null,
+  "title": "pubprn.vbs Signed Script Code Execution | Red Team Notes"
+ },
+ "https://www.ired.team/offensive-security/code-execution/using-msbuild-to-execute-shellcode-in-c": {
+  "domain": "www.ired.team",
+  "icon": null,
+  "title": "Using MSBuild to Execute Shellcode in C# | Red Team Notes"
+ },
+ "https://www.ired.team/offensive-security/code-injection-process-injection/executing-shellcode-with-createfiber": {
+  "domain": "www.ired.team",
+  "icon": null,
+  "title": "Shellcode Execution through Fibers | Red Team Notes"
+ },
+ "https://www.ired.team/offensive-security/code-injection-process-injection/injecting-and-executing-.net-assemblies-to-unmanaged-process": {
+  "domain": "www.ired.team",
+  "icon": null,
+  "title": "Injecting .NET Assembly to an Unmanaged Process | Red Team Notes"
+ },
+ "https://www.ired.team/offensive-security/code-injection-process-injection/modulestomping-dll-hollowing-shellcode-injection": {
+  "domain": "www.ired.team",
+  "icon": null,
+  "title": "Module Stomping for Shellcode Injection | Red Team Notes"
+ },
+ "https://www.ired.team/offensive-security/code-injection-process-injection/process-hollowing-and-pe-image-relocations": {
+  "domain": "www.ired.team",
+  "icon": null,
+  "title": "Process Hollowing and Portable Executable Relocations | Red Team Notes"
+ },
+ "https://www.ired.team/offensive-security/code-injection-process-injection/shellcode-execution-in-a-local-process-with-queueuserapc-and-nttestalert": {
+  "domain": "www.ired.team",
+  "icon": null,
+  "title": "Shellcode Execution in a Local Process with QueueUserAPC and NtTestAlert | Red Team Notes"
+ },
+ "https://www.ired.team/offensive-security/code-injection-process-injection/shellcode-execution-via-createthreadpoolwait": {
+  "domain": "www.ired.team",
+  "icon": null,
+  "title": "Shellcode Execution via CreateThreadpoolWait | Red Team Notes"
+ },
+ "https://www.ired.team/offensive-security/credential-access-and-credential-dumping/intercepting-logon-credentials-via-custom-security-support-provider-and-authentication-package": {
+  "domain": "www.ired.team",
+  "icon": null,
+  "title": "Intercepting Logon Credentials via Custom Security Support Provider and Authentication Packages | Red Team Not"
+ },
+ "https://www.ired.team/offensive-security/defense-evasion/executing-csharp-assemblies-from-jscript-and-wscript-with-dotnettojscript": {
+  "domain": "www.ired.team",
+  "icon": null,
+  "title": "Executing C# Assemblies from Jscript and wscript with DotNetToJscript | Red Team Notes"
+ },
+ "https://www.ired.team/offensive-security/defense-evasion/file-smuggling-with-html-and-javascript": {
+  "domain": "www.ired.team",
+  "icon": null,
+  "title": "File Smuggling with HTML and JavaScript | Red Team Notes"
+ },
+ "https://www.ired.team/offensive-security/initial-access/phishing-with-ms-office/inject-macros-from-a-remote-dotm-template-docx-with-macros": {
+  "domain": "www.ired.team",
+  "icon": null,
+  "title": "Inject Macros from a Remote Dotm Template | Red Team Notes"
+ },
+ "https://www.ired.team/offensive-security/initial-access/phishing-with-ms-office/phishing-xlm-macro-4.0": {
+  "domain": "www.ired.team",
+  "icon": null,
+  "title": "Phishing: XLM / Macro 4.0 | Red Team Notes"
+ },
+ "https://www.ired.team/offensive-security/lateral-movement/lateral-movement-over-headless-rdp-with-sharprdp": {
+  "domain": "www.ired.team",
+  "icon": null,
+  "title": "Lateral Movement over headless RDP with SharpRDP | Red Team Notes"
+ },
+ "https://www.ired.team/offensive-security/lateral-movement/t1175-distributed-component-object-model": {
+  "domain": "www.ired.team",
+  "icon": null,
+  "title": "Lateral Movement via DCOM | Red Team Notes"
+ },
+ "https://www.ired.team/offensive-security/lateral-movement/wmi-+-msi-lateral-movement": {
+  "domain": "www.ired.team",
+  "icon": null,
+  "title": "WMI + MSI Lateral Movement | Red Team Notes"
+ },
+ "https://www.ired.team/offensive-security/lateral-movement/wmi-via-newscheduledtask": {
+  "domain": "www.ired.team",
+  "icon": null,
+  "title": "WMI + NewScheduledTaskAction Lateral Movement | Red Team Notes"
+ },
+ "https://www.ired.team/offensive-security/red-team-infrastructure/how-to-setup-modliska-reverse-http-proxy-for-phishing": {
+  "domain": "www.ired.team",
+  "icon": null,
+  "title": "Phishing with Modlishka Reverse HTTP Proxy | Red Team Notes"
+ },
+ "https://www.keyfactor.com/blog/hidden-dangers-certificate-subject-alternative-names-sans": {
+  "domain": "www.keyfactor.com",
+  "icon": "www.keyfactor.com.png",
+  "title": "Hidden Dangers: Certificate Subject Alternative Names (SANs)"
+ },
+ "https://www.lockheedmartin.com/en-us/capabilities/cyber/cyber-kill-chain.html": {
+  "domain": "www.lockheedmartin.com",
+  "icon": "www.lockheedmartin.com.png",
+  "title": "Cyber Kill Chain\u00ae"
+ },
+ "https://www.logpoint.com/en/blog/text4shell-detecting-exploitation-of-cve-2022-42889/": {
+  "domain": "www.logpoint.com",
+  "icon": "www.logpoint.com.png",
+  "title": "Text4Shell: Detecting exploitation of CVE-2022-42889"
+ },
+ "https://www.mandiant.com/resources/blog/greater-visibility": {
+  "domain": "www.mandiant.com",
+  "icon": "www.mandiant.com.png",
+  "title": "Mandiant Cybersecurity Consulting"
+ },
+ "https://www.mdsec.co.uk/2018/03/payload-generation-using-sharpshooter/": {
+  "domain": "www.mdsec.co.uk",
+  "icon": "www.mdsec.co.uk.png",
+  "title": "Payload Generation using SharpShooter - MDSec"
+ },
+ "https://www.nethermind.io/blog/understanding-hash-collisions-abi-encodepacked-in-solidity": {
+  "domain": "www.nethermind.io",
+  "icon": "www.nethermind.io.png",
+  "title": "Understanding Hash Collisions: abi.encodePacked in Solidity | Nethermind"
+ },
+ "https://www.netspi.com/blog/technical-blog/adversary-simulation/attacking-sql-server-clr-assemblies/": {
+  "domain": "www.netspi.com",
+  "icon": "www.netspi.com.png",
+  "title": "Attacking SQL Server CLR Assemblies"
+ },
+ "https://www.netspi.com/blog/technical-blog/adversary-simulation/decrypting-mssql-database-link-server-passwords/": {
+  "domain": "www.netspi.com",
+  "icon": "www.netspi.com.png",
+  "title": "Decrypting MSSQL Database Link Server Passwords"
+ },
+ "https://www.netspi.com/blog/technical/network-penetration-testing/cve-2020-17049-kerberos-bronze-bit-overview": {
+  "domain": "www.netspi.com",
+  "icon": "www.netspi.com.png",
+  "title": "CVE-2020-17049: Kerberos Bronze Bit Attack - Overview"
+ },
+ "https://www.netspi.com/blog/technical/network-penetration-testing/cve-2020-17049-kerberos-bronze-bit-theory/": {
+  "domain": "www.netspi.com",
+  "icon": "www.netspi.com.png",
+  "title": "CVE-2020-17049: Kerberos Bronze Bit Attack - Theory"
+ },
+ "https://www.ninjaone.com/blog/understanding-windows-defender-application-control-wdac/": {
+  "domain": "www.ninjaone.com",
+  "icon": "www.ninjaone.com.png",
+  "title": "What is Windows Defender Application Control (WDAC)? | NinjaOne"
+ },
+ "https://www.outflank.nl/blog/2018/08/14/html-smuggling-explained/": {
+  "domain": "www.outflank.nl",
+  "icon": null,
+  "title": null
+ },
+ "https://www.outflank.nl/blog/2018/10/06/old-school-evil-excel-4-0-macros-xlm/": {
+  "domain": "www.outflank.nl",
+  "icon": null,
+  "title": null
+ },
+ "https://www.phpinternalsbook.com/php5/classes_objects/serialization.html": {
+  "domain": "www.phpinternalsbook.com",
+  "icon": null,
+  "title": "Serialization \u2014 PHP Internals Book"
+ },
+ "https://www.picussecurity.com/resource/blog/proxynotshellcve-2022-41040-and-cve-2022-41082-exploits-explained": {
+  "domain": "www.picussecurity.com",
+  "icon": "www.picussecurity.com.png",
+  "title": "ProxyNotShell: CVE-2022-41040 and CVE-2022-41082 Exploits Explained"
+ },
+ "https://www.praetorian.com/blog/aws-iam-assume-role-vulnerabilities/": {
+  "domain": "www.praetorian.com",
+  "icon": "www.praetorian.com.png",
+  "title": "AWS IAM Assume Role Vulnerabilities Found in Many Top Vendors"
+ },
+ "https://www.pwndefend.com/2021/02/15/retrieving-passwords-from-veeam-backup-servers/": {
+  "domain": "www.pwndefend.com",
+  "icon": "www.pwndefend.com.png",
+  "title": "Retrieving Passwords From Veeam Backup Servers \u2013 PwnDefend"
+ },
+ "https://www.qualys.com/2023/10/03/cve-2023-4911/looney-tunables-local-privilege-escalation-glibc-ld-so.txt": {
+  "domain": "www.qualys.com",
+  "icon": "www.qualys.com.png",
+  "title": null
+ },
+ "https://www.rezilion.com/blog/proxyshell-or-proxynotshell-lets-set-the-record-straight/": {
+  "domain": "www.rezilion.com",
+  "icon": "www.rezilion.com.png",
+  "title": null
+ },
+ "https://www.riskinsight-wavestone.com/en/2021/06/microsoft-adcs-abusing-pki-in-active-directory-environment": {
+  "domain": "www.riskinsight-wavestone.com",
+  "icon": "www.riskinsight-wavestone.com.png",
+  "title": "Microsoft ADCS \u2013 Abusing PKI in Active Directory Environment - RiskInsight"
+ },
+ "https://www.riskinsight-wavestone.com/en/2021/06/microsoft-adcs-abusing-pki-in-active-directory-environment#section-3-6": {
+  "domain": "www.riskinsight-wavestone.com",
+  "icon": "www.riskinsight-wavestone.com.png",
+  "title": "Microsoft ADCS \u2013 Abusing PKI in Active Directory Environment - RiskInsight"
+ },
+ "https://www.secura.com/blog/zero-logon": {
+  "domain": "www.secura.com",
+  "icon": "www.secura.com.png",
+  "title": "Zerologon: instantly become domain admin by subverting Netlogon cryptography (CVE-2020-1472) | Bureau Veritas "
+ },
+ "https://www.secureauth.com/blog/kerberos-delegation-spns-and-more": {
+  "domain": "www.secureauth.com",
+  "icon": "www.secureauth.com.png",
+  "title": null
+ },
+ "https://www.secureauth.com/blog/the-kerberos-key-list-attack-the-return-of-the-read-only-domain-controllers/": {
+  "domain": "www.secureauth.com",
+  "icon": "www.secureauth.com.png",
+  "title": null
+ },
+ "https://www.securesystems.de/blog/active-directory-spotlight-attacking-the-microsoft-configuration-manager/": {
+  "domain": "www.securesystems.de",
+  "icon": null,
+  "title": null
+ },
+ "https://www.semperis.com/blog/a-diamond-ticket-in-the-ruff/": {
+  "domain": "www.semperis.com",
+  "icon": "www.semperis.com.png",
+  "title": "A Diamond Ticket in the Ruff | Semperis"
+ },
+ "https://www.semperis.com/blog/ad-security-research-breaking-trust-transitivity/": {
+  "domain": "www.semperis.com",
+  "icon": "www.semperis.com.png",
+  "title": "Transitive Trust and Active Directory: Semperis AD 101"
+ },
+ "https://www.semperis.com/blog/golden-gmsa-attack": {
+  "domain": "www.semperis.com",
+  "icon": "www.semperis.com.png",
+  "title": null
+ },
+ "https://www.semperis.com/blog/spn-jacking-an-edge-case-in-writespn-abuse": {
+  "domain": "www.semperis.com",
+  "icon": "www.semperis.com.png",
+  "title": null
+ },
+ "https://www.shodan.io/": {
+  "domain": "www.shodan.io",
+  "icon": "www.shodan.io.png",
+  "title": "Shodan"
+ },
+ "https://www.slideshare.net/harmj0y/an-ace-in-the-hole-stealthy-host-persistence-via-security-descriptors": {
+  "domain": "www.slideshare.net",
+  "icon": "www.slideshare.net.png",
+  "title": "An ACE in the Hole - Stealthy Host Persistence via Security Descriptors"
+ },
+ "https://www.sstic.org/2014/presentation/secrets_dauthentification_pisode_ii__kerberos_contre-attaque/": {
+  "domain": "www.sstic.org",
+  "icon": "www.sstic.org.png",
+  "title": "SSTIC2014  Pr\u00e9sentation  Secrets d&#x27;authentification \u00e9pisode II : Kerberos contre-attaque - Aur\u00e9lien Borde"
+ },
+ "https://www.stackhawk.com/blog/command-injection-python/": {
+  "domain": "www.stackhawk.com",
+  "icon": null,
+  "title": "Preventing Command Injection in Python: A Guide to Security"
+ },
+ "https://www.sternsecurity.com/blog/local-network-attacks-llmnr-and-nbt-ns-poisoning": {
+  "domain": "www.sternsecurity.com",
+  "icon": "www.sternsecurity.com.png",
+  "title": "Local Network Attacks: LLMNR and NBT-NS Poisoning"
+ },
+ "https://www.sudo.ws/security/advisories/pwfeedback/": {
+  "domain": "www.sudo.ws",
+  "icon": "www.sudo.ws.png",
+  "title": "Buffer overflow when pwfeedback is set in sudoers"
+ },
+ "https://www.synacktiv.com/en/publications/azure-ad-introduction-for-red-teamers.html#azure-ad-overview": {
+  "domain": "www.synacktiv.com",
+  "icon": "www.synacktiv.com.png",
+  "title": "Azure AD introduction for red teamers"
+ },
+ "https://www.synacktiv.com/publications/azure-ad-introduction-for-red-teamers#attacking-azure-ad": {
+  "domain": "www.synacktiv.com",
+  "icon": "www.synacktiv.com.png",
+  "title": "Azure AD introduction for red teamers"
+ },
+ "https://www.synacktiv.com/sites/default/files/2023-01/sudo-CVE-2023-22809.pdf": {
+  "domain": "www.synacktiv.com",
+  "icon": "www.synacktiv.com.png",
+  "title": null
+ },
+ "https://www.thehacker.recipes/ad/movement/adcs/certificate-templates": {
+  "domain": "www.thehacker.recipes",
+  "icon": "www.thehacker.recipes.png",
+  "title": "Certificate templates | The Hacker Recipes"
+ },
+ "https://www.thehacker.recipes/ad/movement/credentials/dumping/dcsync": {
+  "domain": "www.thehacker.recipes",
+  "icon": "www.thehacker.recipes.png",
+  "title": "DCSync | The Hacker Recipes"
+ },
+ "https://www.thehacker.recipes/ad/movement/credentials/dumping/dpapi-protected-secrets": {
+  "domain": "www.thehacker.recipes",
+  "icon": "www.thehacker.recipes.png",
+  "title": "DPAPI secrets | The Hacker Recipes"
+ },
+ "https://www.thehacker.recipes/ad/movement/credentials/dumping/kerberos-key-list": {
+  "domain": "www.thehacker.recipes",
+  "icon": "www.thehacker.recipes.png",
+  "title": "Kerberos key list | The Hacker Recipes"
+ },
+ "https://www.thehacker.recipes/ad/movement/credentials/dumping/lsass": {
+  "domain": "www.thehacker.recipes",
+  "icon": "www.thehacker.recipes.png",
+  "title": "LSASS secrets | The Hacker Recipes"
+ },
+ "https://www.thehacker.recipes/ad/movement/credentials/dumping/ntds": {
+  "domain": "www.thehacker.recipes",
+  "icon": "www.thehacker.recipes.png",
+  "title": "NTDS secrets | The Hacker Recipes"
+ },
+ "https://www.thehacker.recipes/ad/movement/credentials/dumping/sam-and-lsa-secrets": {
+  "domain": "www.thehacker.recipes",
+  "icon": "www.thehacker.recipes.png",
+  "title": "SAM & LSA secrets | The Hacker Recipes"
+ },
+ "https://www.thehacker.recipes/ad/movement/sccm-mecm": {
+  "domain": "www.thehacker.recipes",
+  "icon": "www.thehacker.recipes.png",
+  "title": "SCCM / MECM | The Hacker Recipes"
+ },
+ "https://www.thehacker.recipes/ad/movement/schannel/passthecert": {
+  "domain": "www.thehacker.recipes",
+  "icon": "www.thehacker.recipes.png",
+  "title": "Pass the Certificate | The Hacker Recipes"
+ },
+ "https://www.thehacker.recipes/ad/movement/trusts": {
+  "domain": "www.thehacker.recipes",
+  "icon": "www.thehacker.recipes.png",
+  "title": "Trusts | The Hacker Recipes"
+ },
+ "https://www.thehacker.recipes/web/inputs/file-inclusion/lfi-to-rce/logs-poisoning": {
+  "domain": "www.thehacker.recipes",
+  "icon": "www.thehacker.recipes.png",
+  "title": "logs poisoning | The Hacker Recipes"
+ },
+ "https://www.thehacker.recipes/web/inputs/file-inclusion/lfi-to-rce/phpinfo": {
+  "domain": "www.thehacker.recipes",
+  "icon": "www.thehacker.recipes.png",
+  "title": "phpinfo | The Hacker Recipes"
+ },
+ "https://www.thehacker.recipes/web/inputs/file-inclusion/rfi-to-rce": {
+  "domain": "www.thehacker.recipes",
+  "icon": "www.thehacker.recipes.png",
+  "title": "RFI to RCE | The Hacker Recipes"
+ },
+ "https://www.thehacker.recipes/web/inputs/xss": {
+  "domain": "www.thehacker.recipes",
+  "icon": "www.thehacker.recipes.png",
+  "title": "XSS (Cross-Site Scripting) | The Hacker Recipes"
+ },
+ "https://www.tiraniddo.dev/2019/11/the-internals-of-applocker-part-1.html": {
+  "domain": "www.tiraniddo.dev",
+  "icon": "www.tiraniddo.dev.png",
+  "title": "Tyranid's Lair: The Internals of AppLocker - Part 1 - Overview and Setup"
+ },
+ "https://www.tkng.io/": {
+  "domain": "www.tkng.io",
+  "icon": null,
+  "title": "The Kubernetes Networking Guide"
+ },
+ "https://www.trendmicro.com/en_us/research/24/a/kasseika-ransomware-deploys-byovd-attacks-abuses-psexec-and-expl.html": {
+  "domain": "www.trendmicro.com",
+  "icon": "www.trendmicro.com.png",
+  "title": "Kasseika Ransomware Deploys BYOVD Attacks Abuses PsExec and Exploits Martini Driver"
+ },
+ "https://www.trustedsec.com/blog/a-comprehensive-guide-on-relaying-anno-2022": {
+  "domain": "www.trustedsec.com",
+  "icon": null,
+  "title": null
+ },
+ "https://www.trustedsec.com/blog/a-diamond-in-the-ruff/": {
+  "domain": "www.trustedsec.com",
+  "icon": null,
+  "title": null
+ },
+ "https://www.trustedsec.com/blog/diving-into-pre-created-computer-accounts/": {
+  "domain": "www.trustedsec.com",
+  "icon": null,
+  "title": null
+ },
+ "https://www.trustedsec.com/blog/splunk-spl-queries-for-detecting-gmsa-attacks/": {
+  "domain": "www.trustedsec.com",
+  "icon": null,
+  "title": null
+ },
+ "https://www.trustwave.com/en-us/resources/blogs/spiderlabs-blog/responder-20-owning-windows-networks-part-3/": {
+  "domain": "www.trustwave.com",
+  "icon": "www.trustwave.com.png",
+  "title": null
+ },
+ "https://www.unifiedkillchain.com/": {
+  "domain": "www.unifiedkillchain.com",
+  "icon": "www.unifiedkillchain.com.png",
+  "title": "The Unified Kill Chain"
+ },
+ "https://www.unifiedkillchain.com/#thescience": {
+  "domain": "www.unifiedkillchain.com",
+  "icon": "www.unifiedkillchain.com.png",
+  "title": "The Unified Kill Chain"
+ },
+ "https://www.virusbulletin.com/uploads/pdf/magazine/2016/vb201601-skeleton-key.pdf": {
+  "domain": "www.virusbulletin.com",
+  "icon": "www.virusbulletin.com.png",
+  "title": null
+ },
+ "https://www.webdavsystem.com/server/access/windows": {
+  "domain": "www.webdavsystem.com",
+  "icon": "www.webdavsystem.com.png",
+  "title": "Connecting to WebDAV server on Microsoft Windows"
+ },
+ "https://www.wiz.io/blog/ubuntu-overlayfs-vulnerability": {
+  "domain": "www.wiz.io",
+  "icon": "www.wiz.io.png",
+  "title": "GameOverlay Vulnerability Impacts 40% of Ubuntu Workloads | Wiz Blog"
+ },
+ "https://www.youtube.com/watch?v=2KZCsfplSlI": {
+  "domain": "www.youtube.com",
+  "icon": "www.youtube.com.png",
+  "title": null
+ },
+ "https://x.com/0x64616e/status/1822041831573479479": {
+  "domain": "x.com",
+  "icon": "x.com.png",
+  "title": "Daniel (@0x64616e) on X"
+ },
+ "https://yandex.com/": {
+  "domain": "yandex.com",
+  "icon": "yandex.com.png",
+  "title": "Yandex"
+ },
+ "https://youtu.be/_nGpZ1ydzS8": {
+  "domain": "youtu.be",
+  "icon": "youtu.be.png",
+  "title": null
+ },
+ "https://youtu.be/byykEId3FUs": {
+  "domain": "youtu.be",
+  "icon": "youtu.be.png",
+  "title": null
+ }
+}

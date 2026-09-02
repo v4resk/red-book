@@ -1,0 +1,35 @@
+{
+  "name": "red-book-site",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "serve out",
+    "links": "python3 fetch_link_meta.py",
+    "links:apply": "python3 fetch_link_meta.py --apply-only",
+    "links:refresh": "python3 fetch_link_meta.py --refresh",
+    "types:check": "next typegen && tsc --noEmit"
+  },
+  "dependencies": {
+    "cnfast": "^0.1.0",
+    "fumadocs-core": "^16.15.4",
+    "fumadocs-mdx": "^15.4.0",
+    "fumadocs-ui": "npm:@fumadocs/base-ui@^16.15.4",
+    "lucide-react": "^1.34.0",
+    "next": "16.3.3",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.3.3",
+    "@types/mdx": "^2.0.14",
+    "@types/node": "^26.3.0",
+    "@types/react": "^19.2.18",
+    "@types/react-dom": "^19.2.5",
+    "postcss": "^8.5.26",
+    "serve": "^14.2.6",
+    "tailwindcss": "^4.3.3",
+    "typescript": "^6.0.3"
+  }
+}

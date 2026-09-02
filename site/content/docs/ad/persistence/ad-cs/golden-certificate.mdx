@@ -1,0 +1,22 @@
+---
+title: "Golden certificate"
+---
+
+## Theory
+
+Golden certificates usually refer to one of two types of attacks.
+
+* Forge certificate and sign them with the CA cert private key --> [#stolen-ca](certificate-authority.md#stolen-ca "mention")
+* Modify a template and turn it into a SmartCard template --> [access-controls.md](access-controls.md "mention")
+
+Most tools ([certsync](https://github.com/zblurx/certsync), [certipy](https://github.com/ly4k/Certipy#golden-certificates)) and resources refer to the [#stolen-ca](certificate-authority.md#stolen-ca "mention") technique when mentioning Golden Certificates. Since Golden Tickets consist in Kerberos tickets forged when knowing the KRBTGT keys, it makes sense to call "Golden Certificate" a technique that consists in forging a certificate when knowing the CA private key.
+
+## Resources
+
+<ResourceCard href="https://cyberstoph.org/posts/2019/12/an-introduction-to-golden-certificates/" title="An introduction to Golden Certificates :: Cyberstoph's blog \u2014 Cyberstoph's Blog" description="cyberstoph.org" />
+
+<ResourceCard href="https://www.hackingarticles.in/domain-persistence-golden-certificate-attack/" title="Domain Persistence: Golden Certificate Attack" description="www.hackingarticles.in" icon="/assets/favicons/www.hackingarticles.in.png" />
+
+<ResourceCard href="https://san3ncrypt3d.com/2022/02/19/gc/" title="Golden Certificate Attack - Persistence" description="san3ncrypt3d.com" />
+
+<ResourceCard href="https://www.youtube.com/watch?v=2KZCsfplSlI" title="www.youtube.com" description="www.youtube.com" icon="/assets/favicons/www.youtube.com.png" />

@@ -1,0 +1,24 @@
+{
+  "title": "MITM and coerced auths",
+  "pages": [
+    "arp-poisoning",
+    "dns-spoofing",
+    "dhcp-poisoning",
+    "dhcpv6-spoofing",
+    "wsus-spoofing",
+    "llmnr-nbtns-mdns-spoofing",
+    "adidns-spoofing",
+    "wpad-spoofing",
+    "ms-efsr",
+    "ms-rprn",
+    "ms-fsrvp",
+    "ms-dfsnm",
+    "ms-even-abuse-cheeseounce",
+    "pushsubscription-abuse",
+    "webclient",
+    "living-off-the-land",
+    "nbt-name-overwrite",
+    "icmp-redirect",
+    "..."
+  ]
+}

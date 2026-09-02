@@ -1,0 +1,22 @@
+{
+  "title": "Kerberos",
+  "pages": [
+    "pre-auth-bruteforce",
+    "ptk",
+    "opth",
+    "ptt",
+    "ptc",
+    "forged-tickets",
+    "asreqroast",
+    "asreproast",
+    "kerberoast",
+    "delegations",
+    "shadow-credentials",
+    "unpac-the-hash",
+    "pass-the-certificate",
+    "kerberos-relay",
+    "samaccountname-spoofing",
+    "spn-jacking",
+    "..."
+  ]
+}

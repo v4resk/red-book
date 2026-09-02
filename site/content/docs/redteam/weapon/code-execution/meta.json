@@ -1,0 +1,21 @@
+{
+  "title": "Code Execution",
+  "pages": [
+    "cmstp",
+    "msbuild",
+    "mshta",
+    "microsoft-office-execution",
+    "wsh",
+    "outlook-home-page-abuse-specula",
+    "whithout-powershell",
+    "regsrv32",
+    "scheduled-tasks",
+    "services",
+    "windows-library-files",
+    "html-help-files",
+    "wmic",
+    "script-exploits",
+    "sliver",
+    "..."
+  ]
+}

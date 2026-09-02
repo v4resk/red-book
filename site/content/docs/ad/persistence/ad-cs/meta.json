@@ -1,0 +1,9 @@
+{
+  "title": "Certificate Services (AD-CS)",
+  "pages": [
+    "certificate-authority",
+    "access-controls",
+    "golden-certificate",
+    "..."
+  ]
+}

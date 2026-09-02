@@ -1,0 +1,104 @@
+---
+title: "Processes & Services"
+description: ">-"
+---
+
+## Theory
+
+This page provides useful commands for Windows enumeration that can be used to query process and services information.
+
+## Practice
+
+### Services
+
+<Callout type="error">
+
+When using a network logon like WinRM or a bind shell, use of `Get-CimInstance` or `Get-Service` with a non-administrative user leads to a "permission denied". However, employing an interactive logon, such as RDP, resolves this issue.
+
+</Callout>
+
+<Tabs items={['CMD', 'PowerShell']}>
+<Tab value="CMD">
+
+To obtain a list of all the services, we can use one of the following commands
+
+```powershell
+#Net command
+net start
+
+#WMI
+wmic service list brief
+wmic service get name,displayname,pathname,startmode
+
+#sc.exe
+sc.exe query state= all
+```
+
+</Tab>
+
+<Tab value="PowerShell">
+
+To obtain a list of all the services, we can use one of the following commands
+
+```powershell
+# WMI
+## Basic Usage
+Get-CimInstance -ClassName win32_service | Select Name,State,PathName
+## Running Services
+Get-CimInstance -ClassName win32_service | Select Name,State,PathName | Where-Object {$_.State -like 'Running'}
+
+# WMI Wrapper
+## Basic Usage
+Get-Service
+## Running Services
+Get-Service | Where-Object {$_.Status -eq "Running"}
+```
+
+</Tab>
+</Tabs>
+
+### Processes
+
+<Tabs items={['CMD', 'PowerShell']}>
+<Tab value="CMD">
+
+To obtain a list of all processes, we can use one of the following commands
+
+```powershell
+# WMI
+## wmic.exe
+wmic process list brief
+wmic process get name,executablepath,processid
+wmic process get processid,commandline 
+#Get commandline for a given process
+wmic process where processid="2484" get name,commandline,processid
+
+# TaskList
+tasklist /V
+## Display services hosted in each process
+tasklist /SVC
+## Display detailled information for process not running as SYSTEM
+tasklist /FI "USERNAME ne NT AUTHORITY\SYSTEM" /FI "STATUS eq running" /V
+```
+
+</Tab>
+
+<Tab value="PowerShell">
+
+```powershell
+# WMI Wrapper
+## Basic Usage
+Get-Process
+
+## By name + print all attributes
+Get-Process winword | Format-List *
+```
+
+</Tab>
+</Tabs>
+
+## Resources
+
+<ResourceCard href="https://attack.mitre.org/techniques/T1007/" title="System Service Discovery, Technique T1007 - Enterprise | MITRE ATT&CK" description="attack.mitre.org" icon="/assets/favicons/attack.mitre.org.png" />
+
+<ResourceCard href="https://attack.mitre.org/techniques/T1057/" title="Process Discovery, Technique T1057 - Enterprise | MITRE ATT&CK" description="attack.mitre.org" icon="/assets/favicons/attack.mitre.org.png" />

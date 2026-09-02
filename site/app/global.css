@@ -1,0 +1,67 @@
+@import 'tailwindcss';
+@import 'fumadocs-ui/css/neutral.css';
+@import 'fumadocs-ui/css/preset.css';
+
+/* Content MDX carries almost no Tailwind utilities and scanning 558 files (one
+   with a 98KB single line) is slow, so it is excluded -- except the landing
+   page, which is hand-authored and does use utilities.
+   NB: @source paths are relative to THIS file (app/), not the project root. */
+@source not "../content";
+@source "../content/docs/index.mdx";
+
+/* infiltr8 brand red (sampled from the logo) as the accent colour: active
+   sidebar item, "On this page" highlight, links and primary buttons */
+:root {
+  --color-fd-primary: #bf0426;
+  --color-fd-ring: #bf0426;
+}
+.dark {
+  --color-fd-primary: #f2415f;   /* lifted for contrast on #121212 */
+  --color-fd-ring: #f2415f;
+}
+
+
+html {
+  scrollbar-gutter: stable;
+}
+
+html > body[data-scroll-locked] {
+  margin-right: 0px !important;
+  --removed-body-scroll-bar-size: 0px !important;
+}
+
+/* ---------------------------------------------------------------------------
+   Sidebar: top-level categories read as categories via weight + brightness +
+   whitespace (GitBook-style), with no rules or separators.
+
+   Fumadocs encodes tree depth as an inline padding-inline-start of
+   calc(N * var(--spacing)) with N = 2, 5, 8, 11 ... (3 per level), so N=2
+   uniquely selects depth-0 items. Restricting to <button> targets the
+   collapsible category headers and leaves the "The Red-Book" root link alone.
+--------------------------------------------------------------------------- */
+#nd-sidebar button[style*="calc(2 * var(--spacing))"] {
+  color: var(--color-fd-foreground);
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  margin-top: 1.15rem;   /* breathing room instead of a separator line */
+}
+
+/* the intro page sits above the categories: same level, deliberately quieter,
+   with a gap separating it from the section list (GitBook does the same) */
+#nd-sidebar a[style*="calc(2 * var(--spacing))"] {
+  color: var(--color-fd-muted-foreground);
+  font-weight: 400;
+  /* no margin-bottom: the next category's margin-top already supplies the gap,
+     and flex containers don't collapse margins, so the two would stack */
+}
+
+#nd-sidebar button[style*="calc(2 * var(--spacing))"]:hover {
+  color: var(--color-fd-primary);
+}
+
+/* children sit quieter beneath the category */
+#nd-sidebar a[style*="calc(5 * var(--spacing))"],
+#nd-sidebar button[style*="calc(5 * var(--spacing))"] {
+  font-size: 0.8125rem;
+}
+

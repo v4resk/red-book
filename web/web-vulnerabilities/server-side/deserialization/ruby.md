@@ -1,2 +1,0 @@
-# 🛠️ Ruby Deserialization
-

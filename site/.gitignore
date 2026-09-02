@@ -1,0 +1,16 @@
+# deps
+/node_modules
+
+# next build output
+/.next/
+/out/
+/.source
+*.tsbuildinfo
+next-env.d.ts
+build.log
+serve.log
+fetch.log
+
+# python
+__pycache__/
+*.pyc

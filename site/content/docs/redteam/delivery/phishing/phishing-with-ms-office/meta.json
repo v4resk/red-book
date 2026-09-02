@@ -1,0 +1,12 @@
+{
+  "title": "Phishing With Microsoft Office",
+  "pages": [
+    "vba",
+    "ms-word-rtf-files-rce",
+    "ms-office-custom-xml-parts",
+    "ms-office-excel-4.0-xlm-macros",
+    "ms-office-vba-stomping",
+    "ms-office-remote-dotm-template-injection",
+    "..."
+  ]
+}

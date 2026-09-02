@@ -1,0 +1,17 @@
+{
+  "title": "Lateral Movement",
+  "pages": [
+    "portfwd",
+    "tls-tunneling-ligolo-ng",
+    "http-tunneling",
+    "ssh-tunneling",
+    "dnstunneling",
+    "smb-based",
+    "winrm",
+    "remote-wmi",
+    "dcom",
+    "scheduled-tasks-atsvc",
+    "services-svcctl",
+    "..."
+  ]
+}

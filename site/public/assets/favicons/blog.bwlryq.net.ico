@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>bWlrYQ | Homepage</title>
+  <link rel="canonical" href="https://bwlryq.net/">
+  <meta property="og:title" content="bWlrYQ | Homepage" />
+  <meta property="og:url" content="https://bwlryq.net/" />
+  <meta name="twitter:title" content="bWlrYQ | Homepage"/>
+    <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="keywords" content="Blog, Portfolio, CyberSecurity, IT">
+  <meta name="description" content="Personal website of someone who's tired of the 21st century.">
+  <meta name="author" content="bWlrYQ">
+
+  <link rel="icon" href="/static/pfp.jpg">
+  <link rel="icon" type="image/png" sizes="16x16" href="/static/pfp.jpg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/static/pfp.jpg">
+  <link rel="apple-touch-icon" href="/static/pfp.jpg">
+
+  <meta property="og:description" content="Personal website of someone who's tired of the 21st century." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://bwlryq.net/static/pfp.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://bwlryq.net/static/pfp.jpg" />
+  <meta name="twitter:description" content="Personal website of someone who's tired of the 21st century."/>
+
+  <link rel="stylesheet" href="/static/style.css">
+  <script defer src="https://analytics.bwlryq.net/script.js" data-website-id="1e3be879-7222-47e5-b95a-3b88c65e689a"></script>
+
+</head>
+<body>
+
+  <div class="terminal">
+    <div class="title-bar">~/.bWlrYQ — tty0</div>
+
+        
+    <div class="profile">
+      <a href="/" class="pfp-wrapper">
+        <div class="pfp-ring">
+          <img src="/static/pfp.jpg" alt="pfp" class="pfp-img">
+        </div>
+      </a>
+
+      <a href="/" class="name">bWlrYQ</a>
+      <div class="quote">Audi, vide, tace, si vis vivere in pace.</div>
+
+      <nav class="nav">
+        <a href="/about">about</a>
+        <a href="/projects">projects</a>
+        <a href="/static/pgp-key.txt" target="_blank">pgp</a>
+        <a href="mailto:contact@bwlryq.net">contact</a>
+      </nav>
+    </div>
+
+
+    <div class="content-box" data-label="// README">
+      <p><span class="prompt">$</span>more quote.txt</p>
+      <p>
+        We do not rush toward death, we flee the catastrophe of birth, survivors struggling to forget it. Fear of death is merely the projection into the future of a fear which dates back to our first moment of life.
+        We are reluctant, of course, to treat birth as a scourge: has it not been inculcated as the sovereign good—have we not been told that the worst came at the end, not at the outset of our lives? Yet evil, the real evil, is behind, not ahead of us. What escaped Jesus did not escape Buddha: "If three things did not exist in the world, O disciples, the Perfect One would not appear in the world. …" And ahead of old age and death he places the fact of birth, source of every infirmity, every disaster."
+      </p>
+      <p>— Emil Cioran, The Trouble with Being Born (1973)</p>
+      <p><span class="prompt">$</span>_<span class="cursor"></span></p>
+    </div>
+
+        <div class="social-links">
+      <a href="https://twitter.com/bWlrYQ" target="_blank" rel="noopener">twitter</a>
+      <a href="https://github.com/bWlrYQ" target="_blank" rel="noopener">github</a>
+      <a href="https://www.root-me.org/bWlrYQ" target="_blank" rel="noopener">root-me</a>
+    </div>
+
+    <div class="ascii-deco">---[ EOF ]---</div>
+
+    <div class="footer">
+      <span id="copy-year"></span> bWlrYQ | Semper Fidelis.
+    </div>
+  </div>
+
+  <script>document.getElementById('copy-year').textContent = '© ' + new Date().getFullYear();</script>
+</body>
+</html>
+

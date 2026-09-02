@@ -1,0 +1,9 @@
+---
+title: "Reconnaissance"
+---
+
+When attacking an Active Directory, or in fact any system, it is essential to gather useful information that will help define who, what, when and where. Here are some examples of what information to look for.
+
+* The location of the **domain controllers** (and other major AD services like KDC, DNS and so on). This can be achieved by [resolving standard names](/ad/recon/network/nbt-ns), by [scanning the network](/ad/recon/network/port-scanning) and with [standard LDAP queries](/ad/recon/network/ldap)
+* The **domain name**. It can be found with [standard LDAP queries](/ad/recon/network/ldap), recon through [MS-RPC named pipes](/ad/recon/network/ms-rpc), by combining [different recon techniques with enum4linux](/ad/recon/tools/enum4linux), by [inspecting multicast and broadcast name resolution queries](/ad/recon/tools/responder), ...
+* **Domain objects** and relations between them with [BloodHound](/ad/recon/tools/bloodhound), with [MS-RPC named pipes](/ad/recon/network/ms-rpc) and with [enum4linux](/ad/recon/tools/enum4linux).

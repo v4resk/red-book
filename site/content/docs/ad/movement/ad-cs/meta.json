@@ -1,0 +1,11 @@
+{
+  "title": "Certificate Services (AD-CS)",
+  "pages": [
+    "certificate-templates",
+    "certificate-authority",
+    "access-controls",
+    "unsigned-endpoints",
+    "certifried",
+    "..."
+  ]
+}

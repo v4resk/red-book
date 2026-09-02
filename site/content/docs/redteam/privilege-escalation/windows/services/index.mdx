@@ -1,0 +1,24 @@
+---
+title: "Insecure Services"
+description: "MITRE ATT&CK™  Hijack Execution Flow - Technique T1574"
+---
+
+## Theory
+
+One of the basic features of Microsoft Windows is the ability to run services. These are background processes, similar to Unix deamons. They are managed by the [Service Control Manager](https://learn.microsoft.com/en-us/windows/win32/services/service-control-manager). If they are misconfigured, as they usually run as a local system account, they can lead to privilege escalation.
+
+## Practice
+
+### Enumerate
+
+<Card href="../../../discovery/windows/processes-and-services.md" title="processes-and-services.md" />
+
+### Exploit
+
+<Card href="weak-service-permissions.md" title="weak-service-permissions.md" />
+
+<Card href="weak-files-permissions.md" title="weak-files-permissions.md" />
+
+<Card href="weak-registry-permissions.md" title="weak-registry-permissions.md" />
+
+<Card href="unquoted-service-path.md" title="unquoted-service-path.md" />

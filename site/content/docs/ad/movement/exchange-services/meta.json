@@ -1,0 +1,10 @@
+{
+  "title": "Exchange services",
+  "pages": [
+    "privexchange",
+    "proxylogon",
+    "proxyshell",
+    "proxynotshell",
+    "..."
+  ]
+}

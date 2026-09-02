@@ -1,0 +1,14 @@
+{
+  "title": "Endpoint Detection Respons (EDR) Bypass",
+  "pages": [
+    "bring-your-own-vulnerable-driver-byovd",
+    "safe-mode-with-networking",
+    "windows-defender-application-control-wdac-killing-edr",
+    "load-unsigned-drivers",
+    "minifilter-altitude",
+    "hypervisor-code-integrity-hvci-disallowed-images",
+    "windows-filtering-platform-wfp",
+    "userland-hooking-bypass",
+    "..."
+  ]
+}

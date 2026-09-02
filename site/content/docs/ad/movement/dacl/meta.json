@@ -1,0 +1,17 @@
+{
+  "title": "DACL abuse",
+  "pages": [
+    "addmember",
+    "forcechangepassword",
+    "targeted-kerberoasting",
+    "writeowner",
+    "readlapspassword",
+    "readgmsapassword",
+    "grant-ownership",
+    "grant-rights",
+    "logon-script",
+    "rights-on-rodc-object",
+    "badsuccessor-dmsa-abuse",
+    "..."
+  ]
+}

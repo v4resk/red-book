@@ -1,0 +1,14 @@
+{
+  "title": "Windows",
+  "pages": [
+    "tools",
+    "credentials-in-files",
+    "abusing-tokens",
+    "services",
+    "alwaysinstallelevated",
+    "autologon-registry",
+    "insecure-scheduled-tasks",
+    "dll-hijacking",
+    "..."
+  ]
+}

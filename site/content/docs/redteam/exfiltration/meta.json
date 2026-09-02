@@ -1,0 +1,10 @@
+{
+  "title": "Exfiltration",
+  "pages": [
+    "icmp",
+    "dns",
+    "http",
+    "smb",
+    "..."
+  ]
+}

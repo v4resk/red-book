@@ -1,0 +1,1313 @@
+<!DOCTYPE html><!--[if IE 7]>
+<html class="ie ie7" lang="en-US" prefix="og: http://ogp.me/ns#">
+<![endif]-->
+<!--[if IE 8]>
+<html class="ie ie8" lang="en-US" prefix="og: http://ogp.me/ns#">
+<![endif]-->
+<!--[if !(IE 7) & !(IE 8)]><!-->
+<html lang="en-US" prefix="og: http://ogp.me/ns#">
+<!--<![endif]-->
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Active Directory &amp; Azure AD/Entra ID Security &#8211; Active Directory &amp; Azure AD/Entra ID: Enterprise Security, Methods to Secure Active Directory, Attack Methods &amp; Effective Defenses, PowerShell, Tech Notes, &amp; Geek Trivia&#8230;</title>
+<meta name='robots' content='max-image-preview:large' />
+<link rel='dns-prefetch' href='//www.statcounter.com' />
+<link rel="alternate" type="application/rss+xml" title="Active Directory &amp; Azure AD/Entra ID Security &raquo; Feed" href="https://adsecurity.org/?feed=rss2" />
+<link rel="alternate" type="application/rss+xml" title="Active Directory &amp; Azure AD/Entra ID Security &raquo; Comments Feed" href="https://adsecurity.org/?feed=comments-rss2" />
+<style id="wp-img-auto-sizes-contain-inline-css">
+img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
+/*# sourceURL=wp-img-auto-sizes-contain-inline-css */
+</style>
+<style id="wp-emoji-styles-inline-css">
+
+	img.wp-smiley, img.emoji {
+		display: inline !important;
+		border: none !important;
+		box-shadow: none !important;
+		height: 1em !important;
+		width: 1em !important;
+		margin: 0 0.07em !important;
+		vertical-align: -0.1em !important;
+		background: none !important;
+		padding: 0 !important;
+	}
+/*# sourceURL=wp-emoji-styles-inline-css */
+</style>
+<style id="wp-block-library-inline-css">
+:root{--wp-block-synced-color:#7a00df;--wp-block-synced-color--rgb:122,0,223;--wp-bound-block-color:var(--wp-block-synced-color);--wp-editor-canvas-background:#ddd;--wp-admin-theme-color:#007cba;--wp-admin-theme-color--rgb:0,124,186;--wp-admin-theme-color-darker-10:#006ba1;--wp-admin-theme-color-darker-10--rgb:0,107,160.5;--wp-admin-theme-color-darker-20:#005a87;--wp-admin-theme-color-darker-20--rgb:0,90,135;--wp-admin-border-width-focus:2px}@media (min-resolution:192dpi){:root{--wp-admin-border-width-focus:1.5px}}.wp-element-button{cursor:pointer}:root .has-very-light-gray-background-color{background-color:#eee}:root .has-very-dark-gray-background-color{background-color:#313131}:root .has-very-light-gray-color{color:#eee}:root .has-very-dark-gray-color{color:#313131}:root .has-vivid-green-cyan-to-vivid-cyan-blue-gradient-background{background:linear-gradient(135deg,#00d084,#0693e3)}:root .has-purple-crush-gradient-background{background:linear-gradient(135deg,#34e2e4,#4721fb 50%,#ab1dfe)}:root .has-hazy-dawn-gradient-background{background:linear-gradient(135deg,#faaca8,#dad0ec)}:root .has-subdued-olive-gradient-background{background:linear-gradient(135deg,#fafae1,#67a671)}:root .has-atomic-cream-gradient-background{background:linear-gradient(135deg,#fdd79a,#004a59)}:root .has-nightshade-gradient-background{background:linear-gradient(135deg,#330968,#31cdcf)}:root .has-midnight-gradient-background{background:linear-gradient(135deg,#020381,#2874fc)}:root{--wp--preset--font-size--normal:16px;--wp--preset--font-size--huge:42px}.has-regular-font-size{font-size:1em}.has-larger-font-size{font-size:2.625em}.has-normal-font-size{font-size:var(--wp--preset--font-size--normal)}.has-huge-font-size{font-size:var(--wp--preset--font-size--huge)}:root .has-text-align-center{text-align:center}:root .has-text-align-left{text-align:left}:root .has-text-align-right{text-align:right}.has-fit-text{white-space:nowrap!important}#end-resizable-editor-section{display:none}.aligncenter{clear:both}.items-justified-left{justify-content:flex-start}.items-justified-center{justify-content:center}.items-justified-right{justify-content:flex-end}.items-justified-space-between{justify-content:space-between}.screen-reader-text{word-wrap:normal!important;border:0;clip-path:inset(50%);height:1px;margin:-1px;overflow:hidden;padding:0;position:absolute;width:1px;word-break:normal!important}.screen-reader-text:focus{background-color:#ddd;clip-path:none;color:#444;display:block;font-size:1em;height:auto;left:5px;line-height:normal;padding:15px 23px 14px;text-decoration:none;top:5px;width:auto;z-index:100000}html :where(.has-border-color){border-style:solid}html :where([style^=border-color],[style*=";border-color"],[style*="; border-color"]){border-style:solid}html :where([style^=border-top-color],[style*=";border-top-color"],[style*="; border-top-color"]){border-top-style:solid}html :where([style^=border-right-color],[style*=";border-right-color"],[style*="; border-right-color"]){border-right-style:solid}html :where([style^=border-bottom-color],[style*=";border-bottom-color"],[style*="; border-bottom-color"]){border-bottom-style:solid}html :where([style^=border-left-color],[style*=";border-left-color"],[style*="; border-left-color"]){border-left-style:solid}html :where([style^=border-width],[style*=";border-width"],[style*="; border-width"]){border-style:solid}html :where([style^=border-top-width],[style*=";border-top-width"],[style*="; border-top-width"]){border-top-style:solid}html :where([style^=border-right-width],[style*=";border-right-width"],[style*="; border-right-width"]){border-right-style:solid}html :where([style^=border-bottom-width],[style*=";border-bottom-width"],[style*="; border-bottom-width"]){border-bottom-style:solid}html :where([style^=border-left-width],[style*=";border-left-width"],[style*="; border-left-width"]){border-left-style:solid}html :where(img[class*=wp-image-]){height:auto;max-width:100%}:where(figure){margin:0 0 1em}html :where(.is-position-sticky){--wp-admin--admin-bar--position-offset:var(--wp-admin--admin-bar--height,0px)}@media screen and (max-width:600px){html :where(.is-position-sticky){--wp-admin--admin-bar--position-offset:0px}}
+
+/*# sourceURL=/wp-includes/css/dist/block-library/common.min.css */
+</style>
+<style id="wp-block-heading-inline-css">
+h1:where(.wp-block-heading).has-background,h2:where(.wp-block-heading).has-background,h3:where(.wp-block-heading).has-background,h4:where(.wp-block-heading).has-background,h5:where(.wp-block-heading).has-background,h6:where(.wp-block-heading).has-background{padding:1.25em 2.375em}h1.has-text-align-left[style*=writing-mode]:where([style*=vertical-lr]),h1.has-text-align-right[style*=writing-mode]:where([style*=vertical-rl]),h2.has-text-align-left[style*=writing-mode]:where([style*=vertical-lr]),h2.has-text-align-right[style*=writing-mode]:where([style*=vertical-rl]),h3.has-text-align-left[style*=writing-mode]:where([style*=vertical-lr]),h3.has-text-align-right[style*=writing-mode]:where([style*=vertical-rl]),h4.has-text-align-left[style*=writing-mode]:where([style*=vertical-lr]),h4.has-text-align-right[style*=writing-mode]:where([style*=vertical-rl]),h5.has-text-align-left[style*=writing-mode]:where([style*=vertical-lr]),h5.has-text-align-right[style*=writing-mode]:where([style*=vertical-rl]),h6.has-text-align-left[style*=writing-mode]:where([style*=vertical-lr]),h6.has-text-align-right[style*=writing-mode]:where([style*=vertical-rl]){rotate:180deg}
+/*# sourceURL=https://adsecurity.org/wp-includes/blocks/heading/style.min.css */
+</style>
+<style id="wp-block-list-inline-css">
+ol,ul{box-sizing:border-box}:root :where(.wp-block-list.has-background){padding:1.25em 2.375em}
+/*# sourceURL=https://adsecurity.org/wp-includes/blocks/list/style.min.css */
+</style>
+<style id="wp-block-paragraph-inline-css">
+.is-small-text{font-size:.875em}.is-regular-text{font-size:1em}.is-large-text{font-size:2.25em}.is-larger-text{font-size:3em}.has-drop-cap:not(:focus):first-letter{float:left;font-size:8.4em;font-style:normal;font-weight:100;line-height:.68;margin:.05em .1em 0 0;text-transform:uppercase}body.rtl .has-drop-cap:not(:focus):first-letter{float:none;margin-left:.1em}p.has-drop-cap.has-background{overflow:hidden}:root :where(p.has-background){padding:1.25em 2.375em}:where(p.has-text-color:not(.has-link-color)) a{color:inherit}p.has-text-align-left[style*="writing-mode:vertical-lr"],p.has-text-align-right[style*="writing-mode:vertical-rl"]{rotate:180deg}
+/*# sourceURL=https://adsecurity.org/wp-includes/blocks/paragraph/style.min.css */
+</style>
+<style id="wp-block-code-inline-css">
+.wp-block-code{box-sizing:border-box}.wp-block-code code{direction:ltr;display:block;font-family:inherit;overflow-wrap:break-word;text-align:initial;white-space:break-spaces}
+/*# sourceURL=https://adsecurity.org/wp-includes/blocks/code/style.min.css */
+</style>
+
+<style id="classic-theme-styles-inline-css">
+/*! This file is auto-generated */
+.wp-block-button__link{color:#fff;background-color:#32373c;border-radius:9999px;box-shadow:none;text-decoration:none;padding:calc(.667em + 2px) calc(1.333em + 2px);font-size:1.125em}.wp-block-file__button{background:#32373c;color:#fff;text-decoration:none}
+/*# sourceURL=/wp-includes/css/classic-themes.min.css */
+</style>
+
+<style id="global-styles-inline-css">
+:root{--wp--preset--aspect-ratio--square: 1;--wp--preset--aspect-ratio--4-3: 4/3;--wp--preset--aspect-ratio--3-4: 3/4;--wp--preset--aspect-ratio--3-2: 3/2;--wp--preset--aspect-ratio--2-3: 2/3;--wp--preset--aspect-ratio--16-9: 16/9;--wp--preset--aspect-ratio--9-16: 9/16;--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: #abb8c3;--wp--preset--color--white: #ffffff;--wp--preset--color--pale-pink: #f78da7;--wp--preset--color--vivid-red: #cf2e2e;--wp--preset--color--luminous-vivid-orange: #ff6900;--wp--preset--color--luminous-vivid-amber: #fcb900;--wp--preset--color--light-green-cyan: #7bdcb5;--wp--preset--color--vivid-green-cyan: #00d084;--wp--preset--color--pale-cyan-blue: #8ed1fc;--wp--preset--color--vivid-cyan-blue: #0693e3;--wp--preset--color--vivid-purple: #9b51e0;--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(135deg,rgb(6,147,227) 0%,rgb(155,81,224) 100%);--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan: linear-gradient(135deg,rgb(122,220,180) 0%,rgb(0,208,130) 100%);--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange: linear-gradient(135deg,rgb(252,185,0) 0%,rgb(255,105,0) 100%);--wp--preset--gradient--luminous-vivid-orange-to-vivid-red: linear-gradient(135deg,rgb(255,105,0) 0%,rgb(207,46,46) 100%);--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray: linear-gradient(135deg,rgb(238,238,238) 0%,rgb(169,184,195) 100%);--wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(135deg,rgb(74,234,220) 0%,rgb(151,120,209) 20%,rgb(207,42,186) 40%,rgb(238,44,130) 60%,rgb(251,105,98) 80%,rgb(254,248,76) 100%);--wp--preset--gradient--blush-light-purple: linear-gradient(135deg,rgb(255,206,236) 0%,rgb(152,150,240) 100%);--wp--preset--gradient--blush-bordeaux: linear-gradient(135deg,rgb(254,205,165) 0%,rgb(254,45,45) 50%,rgb(107,0,62) 100%);--wp--preset--gradient--luminous-dusk: linear-gradient(135deg,rgb(255,203,112) 0%,rgb(199,81,192) 50%,rgb(65,88,208) 100%);--wp--preset--gradient--pale-ocean: linear-gradient(135deg,rgb(255,245,203) 0%,rgb(182,227,212) 50%,rgb(51,167,181) 100%);--wp--preset--gradient--electric-grass: linear-gradient(135deg,rgb(202,248,128) 0%,rgb(113,206,126) 100%);--wp--preset--gradient--midnight: linear-gradient(135deg,rgb(2,3,129) 0%,rgb(40,116,252) 100%);--wp--preset--font-size--small: 14px;--wp--preset--font-size--medium: 20px;--wp--preset--font-size--large: 20px;--wp--preset--font-size--x-large: 42px;--wp--preset--font-size--tiny: 10px;--wp--preset--font-size--regular: 16px;--wp--preset--font-size--larger: 26px;--wp--preset--spacing--20: 0.44rem;--wp--preset--spacing--30: 0.67rem;--wp--preset--spacing--40: 1rem;--wp--preset--spacing--50: 1.5rem;--wp--preset--spacing--60: 2.25rem;--wp--preset--spacing--70: 3.38rem;--wp--preset--spacing--80: 5.06rem;--wp--preset--shadow--natural: 6px 6px 9px rgba(0, 0, 0, 0.2);--wp--preset--shadow--deep: 12px 12px 50px rgba(0, 0, 0, 0.4);--wp--preset--shadow--sharp: 6px 6px 0px rgba(0, 0, 0, 0.2);--wp--preset--shadow--outlined: 6px 6px 0px -3px rgb(255, 255, 255), 6px 6px rgb(0, 0, 0);--wp--preset--shadow--crisp: 6px 6px 0px rgb(0, 0, 0);}.wp-block-button{--wp--preset--dimension--25: 25%;--wp--preset--dimension--50: 50%;--wp--preset--dimension--75: 75%;--wp--preset--dimension--100: 100%;}:where(body) { margin: 0; }:where(.is-layout-flex){gap: 0.5em;}:where(.is-layout-grid){gap: 0.5em;}body .is-layout-flex{display: flex;}.is-layout-flex{flex-wrap: wrap;align-items: center;}.is-layout-flex > :is(*, div){margin: 0;}body .is-layout-grid{display: grid;}.is-layout-grid > :is(*, div){margin: 0;}body{padding-top: 0px;padding-right: 0px;padding-bottom: 0px;padding-left: 0px;}:root :where(.wp-element-button, .wp-block-button__link){background-color: #32373c;border-width: 0;color: #fff;font-family: inherit;font-size: inherit;font-style: inherit;font-weight: inherit;letter-spacing: inherit;line-height: inherit;padding-top: calc(0.667em + 2px);padding-right: calc(1.333em + 2px);padding-bottom: calc(0.667em + 2px);padding-left: calc(1.333em + 2px);text-decoration: none;text-transform: inherit;}.has-black-color{color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-color{color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-color{color: var(--wp--preset--color--white) !important;}.has-pale-pink-color{color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-color{color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-color{color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-color{color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-color{color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-color{color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-color{color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-color{color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-color{color: var(--wp--preset--color--vivid-purple) !important;}.has-black-background-color{background-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-background-color{background-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-background-color{background-color: var(--wp--preset--color--white) !important;}.has-pale-pink-background-color{background-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-background-color{background-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-background-color{background-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-background-color{background-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-background-color{background-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-background-color{background-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-background-color{background-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-background-color{background-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-background-color{background-color: var(--wp--preset--color--vivid-purple) !important;}.has-black-border-color{border-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-border-color{border-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-border-color{border-color: var(--wp--preset--color--white) !important;}.has-pale-pink-border-color{border-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-border-color{border-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-border-color{border-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-border-color{border-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-border-color{border-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-border-color{border-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-border-color{border-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-border-color{border-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-border-color{border-color: var(--wp--preset--color--vivid-purple) !important;}.has-vivid-cyan-blue-to-vivid-purple-gradient-background{background: var(--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple) !important;}.has-light-green-cyan-to-vivid-green-cyan-gradient-background{background: var(--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan) !important;}.has-luminous-vivid-amber-to-luminous-vivid-orange-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange) !important;}.has-luminous-vivid-orange-to-vivid-red-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-orange-to-vivid-red) !important;}.has-very-light-gray-to-cyan-bluish-gray-gradient-background{background: var(--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray) !important;}.has-cool-to-warm-spectrum-gradient-background{background: var(--wp--preset--gradient--cool-to-warm-spectrum) !important;}.has-blush-light-purple-gradient-background{background: var(--wp--preset--gradient--blush-light-purple) !important;}.has-blush-bordeaux-gradient-background{background: var(--wp--preset--gradient--blush-bordeaux) !important;}.has-luminous-dusk-gradient-background{background: var(--wp--preset--gradient--luminous-dusk) !important;}.has-pale-ocean-gradient-background{background: var(--wp--preset--gradient--pale-ocean) !important;}.has-electric-grass-gradient-background{background: var(--wp--preset--gradient--electric-grass) !important;}.has-midnight-gradient-background{background: var(--wp--preset--gradient--midnight) !important;}.has-small-font-size{font-size: var(--wp--preset--font-size--small) !important;}.has-medium-font-size{font-size: var(--wp--preset--font-size--medium) !important;}.has-large-font-size{font-size: var(--wp--preset--font-size--large) !important;}.has-x-large-font-size{font-size: var(--wp--preset--font-size--x-large) !important;}.has-tiny-font-size{font-size: var(--wp--preset--font-size--tiny) !important;}.has-regular-font-size{font-size: var(--wp--preset--font-size--regular) !important;}.has-larger-font-size{font-size: var(--wp--preset--font-size--larger) !important;}
+/*# sourceURL=global-styles-inline-css */
+</style>
+
+<link rel='stylesheet' id='bootstrap-css' href='https://adsecurity.org/wp-content/themes/graphene/bootstrap/css/bootstrap.min.css?ver=7.1' media='all' />
+<link rel='stylesheet' id='font-awesome-css' href='https://adsecurity.org/wp-content/themes/graphene/fonts/font-awesome/css/font-awesome.min.css?ver=7.1' media='all' />
+<link rel='stylesheet' id='graphene-css' href='https://adsecurity.org/wp-content/themes/graphene/style.css?ver=2.9.4' media='screen' />
+<link rel='stylesheet' id='graphene-responsive-css' href='https://adsecurity.org/wp-content/themes/graphene/responsive.css?ver=2.9.4' media='all' />
+<link rel='stylesheet' id='graphene-blocks-css' href='https://adsecurity.org/wp-content/themes/graphene/blocks.css?ver=2.9.4' media='all' />
+<script id="jquery-core-js" src="https://adsecurity.org/wp-includes/js/jquery/jquery.min.js?ver=3.7.1"></script>
+<script id="jquery-migrate-js" src="https://adsecurity.org/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.4.1"></script>
+<script defer id="bootstrap-js" src="https://adsecurity.org/wp-content/themes/graphene/bootstrap/js/bootstrap.min.js?ver=2.9.4"></script>
+<script defer id="bootstrap-hover-dropdown-js" src="https://adsecurity.org/wp-content/themes/graphene/js/bootstrap-hover-dropdown/bootstrap-hover-dropdown.min.js?ver=2.9.4"></script>
+<script defer id="bootstrap-submenu-js" src="https://adsecurity.org/wp-content/themes/graphene/js/bootstrap-submenu/bootstrap-submenu.min.js?ver=2.9.4"></script>
+<script defer id="infinite-scroll-js" src="https://adsecurity.org/wp-content/themes/graphene/js/jquery.infinitescroll.min.js?ver=2.9.4"></script>
+<script id="graphene-js-extra">
+var grapheneJS = {"siteurl":"https://adsecurity.org","ajaxurl":"https://adsecurity.org/wp-admin/admin-ajax.php","templateUrl":"https://adsecurity.org/wp-content/themes/graphene","isSingular":"","enableStickyMenu":"","shouldShowComments":"","commentsOrder":"newest","sliderDisable":"","sliderInterval":"7000","infScrollBtnLbl":"Load more","infScrollOn":"1","infScrollCommentsOn":"","totalPosts":"276","postsPerPage":"10","isPageNavi":"","infScrollMsgText":"Fetching window.grapheneInfScrollItemsPerPage of window.grapheneInfScrollItemsLeft items left ...","infScrollMsgTextPlural":"Fetching window.grapheneInfScrollItemsPerPage of window.grapheneInfScrollItemsLeft items left ...","infScrollFinishedText":"All loaded!","commentsPerPage":"50","totalComments":"0","infScrollCommentsMsg":"Fetching window.grapheneInfScrollCommentsPerPage of window.grapheneInfScrollCommentsLeft comments left ...","infScrollCommentsMsgPlural":"Fetching window.grapheneInfScrollCommentsPerPage of window.grapheneInfScrollCommentsLeft comments left ...","infScrollCommentsFinishedMsg":"All comments loaded!","disableLiveSearch":"1","txtNoResult":"No result found.","isMasonry":""};
+//# sourceURL=graphene-js-extra
+</script>
+<script defer id="graphene-js" src="https://adsecurity.org/wp-content/themes/graphene/js/graphene.js?ver=2.9.4"></script>
+<script id="wpstg-global-js-extra">
+var wpstg = {"nonce":"5ddb0acb45"};
+//# sourceURL=wpstg-global-js-extra
+</script>
+<script id="wpstg-global-js" src="https://adsecurity.org/wp-content/plugins/wp-staging-pro/assets/js/dist/wpstg-blank-loader.min.js?ver=7.1"></script>
+<link rel="https://api.w.org/" href="https://adsecurity.org/index.php?rest_route=/" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://adsecurity.org/xmlrpc.php?rsd" />
+<meta name="generator" content="WordPress 7.1" />
+		<script>
+		   WebFontConfig = {
+		      google: { 
+		      	families: ["Lato:400,400i,700,700i&display=swap"]		      }
+		   };
+
+		   (function(d) {
+		      var wf = d.createElement('script'), s = d.scripts[0];
+		      wf.src = 'https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js';
+		      wf.async = true;
+		      s.parentNode.insertBefore(wf, s);
+		   })(document);
+		</script>
+	<style type="text/css">
+.header_title, .header_title a, .header_title a:visited, .header_title a:hover, .header_desc {color:#000000}.carousel, .carousel .item{height:400px}@media (max-width: 991px) {.carousel, .carousel .item{height:250px}}#header{max-height:198px}@media (min-width: 1200px) {.container {width:1280px}}
+</style>
+<style>.recentcomments a{display:inline !important;padding:0 !important;margin:0 !important;}</style>    </head>
+    <body class="home blog custom-background wp-embed-responsive wp-theme-graphene layout-boxed two_col_left two-columns">
+        
+        <div class="container boxed-wrapper">
+            
+                            <div id="top-bar" class="row clearfix top-bar ">
+                    
+                                                    
+                            <div class="col-md-12 top-bar-items">
+                                
+                                                                                                    	<ul class="social-profiles">
+							
+			            <li class="social-profile social-profile-rss">
+			            	<a href="https://adsecurity.org/?feed=rss2" title="Subscribe to Tech, News, and Other Ideations&#039;s RSS feed" id="social-id-1" class="mysocial social-rss">
+			            				                            <i class="fa fa-rss"></i>
+		                        			            	</a>
+			            </li>
+		            
+		    	    </ul>
+                                    
+                                                                    <button type="button" class="search-toggle navbar-toggle collapsed" data-toggle="collapse" data-target="#top_search">
+                                        <span class="sr-only">Toggle search form</span>
+                                        <i class="fa fa-search-plus"></i>
+                                    </button>
+
+                                    <div id="top_search" class="top-search-form">
+                                        <form class="searchform" method="get" action="https://adsecurity.org">
+	<div class="input-group">
+		<div class="form-group live-search-input">
+			<label for="s" class="screen-reader-text">Search for:</label>
+		    <input type="text" id="s" name="s" class="form-control" placeholder="Search">
+		    		</div>
+	    <span class="input-group-btn">
+	    	<button class="btn btn-default" type="submit"><i class="fa fa-search"></i></button>
+	    </span>
+    </div>
+    </form>                                                                            </div>
+                                
+                                                            </div>
+
+                        
+                                    </div>
+            
+
+            <div id="header" class="row">
+
+                <img src="https://adsecurity.org/wp-content/themes/graphene/images/headers/fluid.jpg" alt="Active Directory &amp; Azure AD/Entra ID Security" title="Active Directory &amp; Azure AD/Entra ID Security" width="960" height="198" />                
+                                                                </div>
+
+
+                        <nav class="navbar row navbar-inverse">
+
+                <div class="navbar-header align-center">
+                		                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#header-menu-wrap, #secondary-menu-wrap">
+	                        <span class="sr-only">Toggle navigation</span>
+	                        <span class="icon-bar"></span>
+	                        <span class="icon-bar"></span>
+	                        <span class="icon-bar"></span>
+	                    </button>
+                	                    
+                    
+                                            <p class="header_title">
+                                                            Active Directory &amp; Azure AD/Entra ID Security                                                    </p>
+                    
+                                                    <p class="header_desc">Active Directory &amp; Azure AD/Entra ID: Enterprise Security, Methods to Secure Active Directory, Attack Methods &amp; Effective Defenses, PowerShell, Tech Notes, &amp; Geek Trivia&#8230;</p>
+                                            
+                                    </div>
+
+                                    <div class="collapse navbar-collapse" id="header-menu-wrap">
+
+            			<ul class="nav navbar-nav flip"><li class="current_page_item"><a href="https://adsecurity.org/">Home</a></li><li class="menu-item menu-item-8"><a href="https://adsecurity.org/?page_id=8" >About</a></li><li class="menu-item menu-item-41"><a href="https://adsecurity.org/?page_id=41" >AD Resources</a></li><li class="menu-item menu-item-4031"><a href="https://adsecurity.org/?page_id=4031" >Attack Defense &#038; Detection</a></li><li class="menu-item menu-item-1821"><a href="https://adsecurity.org/?page_id=1821" >Mimikatz</a></li><li class="menu-item menu-item-1352"><a href="https://adsecurity.org/?page_id=1352" >Presentations</a></li><li class="menu-item menu-item-195"><a href="https://adsecurity.org/?page_id=195" >Schema Versions</a></li><li class="menu-item menu-item-399"><a href="https://adsecurity.org/?page_id=399" >Security Resources</a></li><li class="menu-item menu-item-183"><a href="https://adsecurity.org/?page_id=183" >SPNs</a></li><li class="menu-item menu-item-2532"><a href="https://adsecurity.org/?page_id=2532" >Top Posts</a></li></ul>                        
+            			                        
+                                            </div>
+                
+                                    
+                            </nav>
+
+            
+            <div id="content" class="clearfix hfeed row">
+                
+                    
+                                        
+                    <div id="content-main" class="clearfix content-main col-md-8">
+                        <div class="carousel slide carousel-fade style-bgimage-excerpt row" data-ride="carousel" id="graphene-slider">
+		    
+	    	    <div class="carousel-inner" role="listbox">
+
+	    					    <div style="background-image:url(https://adsecurity.org/wp-content/uploads/2026/06/Screenshot-2026-06-09-at-1.05.04-PM-823x400.png);" class="item active" id="slider-post-5061">
+				    	
+				    			                	<a href="https://adsecurity.org/?p=5061" class="permalink-overlay" title="View post"></a>
+
+		                			                		<div class="carousel-caption">
+		                					                			<div class="carousel-caption-content">
+								    	<h2 class="slider_post_title"><a href="https://adsecurity.org/?p=5061">AD Fundamentals: Group Policy Permissions &amp; Owner Rights</a></h2>
+							    		<div class="slider_post_excerpt"><p>This series of posts focuses on key Active Directory (AD) components that need to be secured in order to ensure AD security is leveled up. In this post, we focus on Group Policy Objects (GPOs) &hellip; </p>
+</div>
+
+							    		
+							    								    		</div>
+						    								    	</div>
+						    		                
+		                
+
+		                				    </div>
+							    <div style="background-image:url(https://adsecurity.org/wp-content/uploads/2026/05/Screenshot-2026-06-09-at-12.31.53-PM-400x400.png);" class="item " id="slider-post-5049">
+				    	
+				    			                	<a href="https://adsecurity.org/?p=5049" class="permalink-overlay" title="View post"></a>
+
+		                			                		<div class="carousel-caption">
+		                					                			<div class="carousel-caption-content">
+								    	<h2 class="slider_post_title"><a href="https://adsecurity.org/?p=5049">AD Fundamentals: Domain Root &amp; AdminSDHolder Permissions</a></h2>
+							    		<div class="slider_post_excerpt"><p>This series of posts focuses on key Active Directory (AD) components that need to be secured in order to ensure AD security is leveled up. this post focuses on permissions on two important objects in AD: &hellip; </p>
+</div>
+
+							    		
+							    								    		</div>
+						    								    	</div>
+						    		                
+		                
+
+		                				    </div>
+							    <div  class="item " id="slider-post-5044">
+				    	
+				    			                	<a href="https://adsecurity.org/?p=5044" class="permalink-overlay" title="View post"></a>
+
+		                			                		<div class="carousel-caption">
+		                					                			<div class="carousel-caption-content">
+								    	<h2 class="slider_post_title"><a href="https://adsecurity.org/?p=5044">AD Fundamentals: DSHeuristics</a></h2>
+							    		<div class="slider_post_excerpt"><p>This series of posts focuses on key Active Directory (AD) components that need to be secured in order to ensure AD security is leveled up. In this post, we focus on the mostly unknown AD &hellip; </p>
+</div>
+
+							    		
+							    								    		</div>
+						    								    	</div>
+						    		                
+		                
+
+		                				    </div>
+							    <div  class="item " id="slider-post-5041">
+				    	
+				    			                	<a href="https://adsecurity.org/?p=5041" class="permalink-overlay" title="View post"></a>
+
+		                			                		<div class="carousel-caption">
+		                					                			<div class="carousel-caption-content">
+								    	<h2 class="slider_post_title"><a href="https://adsecurity.org/?p=5041">AD Fundamentals: Pre-Windows 2000 Compatible Group</a></h2>
+							    		<div class="slider_post_excerpt"><p>This series of posts focuses on key Active Directory (AD) components that need to be secured in order to ensure AD security is leveled up. In this post, we focus on the often-misunderstood group called &hellip; </p>
+</div>
+
+							    		
+							    								    		</div>
+						    								    	</div>
+						    		                
+		                
+
+		                				    </div>
+							    <div style="background-image:url(https://adsecurity.org/wp-content/uploads/2026/06/image-711x400.png);" class="item " id="slider-post-5036">
+				    	
+				    			                	<a href="https://adsecurity.org/?p=5036" class="permalink-overlay" title="View post"></a>
+
+		                			                		<div class="carousel-caption">
+		                					                			<div class="carousel-caption-content">
+								    	<h2 class="slider_post_title"><a href="https://adsecurity.org/?p=5036">AD Fundamentals: Domain Controller Security</a></h2>
+							    		<div class="slider_post_excerpt"><p>This series of posts focuses on key Active Directory (AD) components that need to be secured in order to ensure AD security is leveled up. In this post, we focus on Domain Controller configuration. Tier &hellip; </p>
+</div>
+
+							    		
+							    								    		</div>
+						    								    	</div>
+						    		                
+		                
+
+		                				    </div>
+					</div>
+        
+        			<ol class="carousel-indicators slider_nav">
+	            	            	 <li data-target="#graphene-slider" class="active" data-slide-to="0"></li>
+	            	            	 <li data-target="#graphene-slider"  data-slide-to="1"></li>
+	            	            	 <li data-target="#graphene-slider"  data-slide-to="2"></li>
+	            	            	 <li data-target="#graphene-slider"  data-slide-to="3"></li>
+	            	            	 <li data-target="#graphene-slider"  data-slide-to="4"></li>
+	            
+	            	        </ol>
+
+	        <a class="left carousel-control" href="#graphene-slider" role="button" data-slide="prev">
+	        	<i class="fa fa-long-arrow-left"></i>
+			    <span class="sr-only">Previous</span>
+			</a>
+			<a class="right carousel-control" href="#graphene-slider" role="button" data-slide="next">
+				<i class="fa fa-long-arrow-right"></i>
+			    <span class="sr-only">Next</span>
+			</a>
+		    </div>
+    
+	<div class="entries-wrapper">
+	
+                
+
+<div id="post-5061" class="clearfix post post-5061 type-post status-publish format-standard hentry category-activedirectorysecurity category-ad-fundamentals tag-gpoowner tag-gpopermissions tag-gposecurity tag-grouppolicyowner tag-grouppolicypermissions tag-grouppolicysecurity item-wrap">
+		
+	<div class="entry clearfix">
+    
+    			    	<div class="post-date date alpha with-year">
+            <p class="default_date">
+            	<span class="month">May</span>
+                <span class="day">19</span>
+                	                <span class="year">2026</span>
+                            </p>
+                    </div>
+            
+		        <h2 class="post-title entry-title">
+			<a href="https://adsecurity.org/?p=5061" rel="bookmark" title="Permalink to AD Fundamentals: Group Policy Permissions &amp; Owner Rights">
+				AD Fundamentals: Group Policy Permissions &amp; Owner Rights            </a>
+			        </h2>
+		
+					    <ul class="post-meta entry-meta clearfix">
+	    		        <li class="byline">
+	        	By <span class="author"><a href="https://adsecurity.org/?author=2" rel="author">Sean Metcalf</a></span><span class="entry-cat"> in <span class="terms"><a class="term term-category term-565" href="https://adsecurity.org/?cat=565">ActiveDirectorySecurity</a>, <a class="term term-category term-1578" href="https://adsecurity.org/?cat=1578">AD Fundamentals</a></span></span>	        </li>
+	        	    </ul>
+    		
+				<div class="entry-content clearfix">
+			
+													
+							
+												
+								
+<p class="wp-block-paragraph">This series of posts focuses on key Active Directory (AD) components that need to be secured in order to ensure AD security is leveled up. In this post, we focus on Group Policy Objects (GPOs) and their permissions.</p>
+
+
+
+<p class="wp-block-paragraph">Group Policy provides the ability to change application settings, security settings, install and run code, and more! As such it&#8217;s a powerful tool for the administrator as well as the attacker/adversary.</p>
+
+
+
+ <a href="https://adsecurity.org/?p=5061#more-5061" class="more-link btn"><span class="btn">Continue reading <i class="fa fa-arrow-circle-right"></i></span></a>
+						
+						
+						
+		</div>
+		
+			    <ul class="entry-footer">
+	    		        <li class="post-tags col-sm-8"><i class="fa fa-tags" title="Tags"></i> <span class="terms"><a class="term term-tagpost_tag term-1582" href="https://adsecurity.org/?tag=gpoowner">GPOOwner</a>, <a class="term term-tagpost_tag term-1580" href="https://adsecurity.org/?tag=gpopermissions">GPOPermissions</a>, <a class="term term-tagpost_tag term-190" href="https://adsecurity.org/?tag=gposecurity">GPOSecurity</a>, <a class="term term-tagpost_tag term-1581" href="https://adsecurity.org/?tag=grouppolicyowner">GroupPolicyOwner</a>, <a class="term term-tagpost_tag term-1579" href="https://adsecurity.org/?tag=grouppolicypermissions">GroupPolicyPermissions</a>, <a class="term term-tagpost_tag term-192" href="https://adsecurity.org/?tag=grouppolicysecurity">GroupPolicySecurity</a></span></li>
+	        	    </ul>
+    	</div>
+</div>
+
+ 
+
+
+                
+
+<div id="post-5049" class="clearfix post post-5049 type-post status-publish format-standard hentry category-activedirectorysecurity category-ad-fundamentals category-technical-reference tag-adminsdholder tag-adminsdholderpermissions tag-domainpermissions tag-domainrootpermissions item-wrap">
+		
+	<div class="entry clearfix">
+    
+    			    	<div class="post-date date alpha with-year">
+            <p class="default_date">
+            	<span class="month">May</span>
+                <span class="day">13</span>
+                	                <span class="year">2026</span>
+                            </p>
+                    </div>
+            
+		        <h2 class="post-title entry-title">
+			<a href="https://adsecurity.org/?p=5049" rel="bookmark" title="Permalink to AD Fundamentals: Domain Root &amp; AdminSDHolder Permissions">
+				AD Fundamentals: Domain Root &amp; AdminSDHolder Permissions            </a>
+			        </h2>
+		
+					    <ul class="post-meta entry-meta clearfix">
+	    		        <li class="byline">
+	        	By <span class="author"><a href="https://adsecurity.org/?author=2" rel="author">Sean Metcalf</a></span><span class="entry-cat"> in <span class="terms"><a class="term term-category term-565" href="https://adsecurity.org/?cat=565">ActiveDirectorySecurity</a>, <a class="term term-category term-1578" href="https://adsecurity.org/?cat=1578">AD Fundamentals</a>, <a class="term term-category term-2" href="https://adsecurity.org/?cat=2">Technical Reference</a></span></span>	        </li>
+	        	    </ul>
+    		
+				<div class="entry-content clearfix">
+			
+													
+							
+												
+								
+<p class="wp-block-paragraph">This series of posts focuses on key Active Directory (AD) components that need to be secured in order to ensure AD security is leveled up. this post focuses on permissions on two important objects in AD: the Domain root and the AdminSDHolder object.</p>
+
+
+
+<h3 class="wp-block-heading">Domain Root</h3>
+
+
+
+<p class="wp-block-paragraph">Let&#8217;s start with the domain root. The domain is the container for all domain objects and on the domain object itself, there are permissions in a similar manner to any object in Active Directory. What makes the Domain root object special is that any permissions set here are inherited by default on objects below it which means that permissions here can affect all domain objects: users, computers, groups, etc. Note that permissions set at the domain level do not apply to AdminSDHolder protected objects, such as Domain Admins and DA members, but can apply to Domain Controllers and Read-Only Domain Controllers.</p>
+
+
+
+ <a href="https://adsecurity.org/?p=5049#more-5049" class="more-link btn"><span class="btn">Continue reading <i class="fa fa-arrow-circle-right"></i></span></a>
+						
+						
+						
+		</div>
+		
+			    <ul class="entry-footer">
+	    		        <li class="post-tags col-sm-8"><i class="fa fa-tags" title="Tags"></i> <span class="terms"><a class="term term-tagpost_tag term-654" href="https://adsecurity.org/?tag=adminsdholder">AdminSDHolder</a>, <a class="term term-tagpost_tag term-1576" href="https://adsecurity.org/?tag=adminsdholderpermissions">AdminSDHolderPermissions</a>, <a class="term term-tagpost_tag term-1575" href="https://adsecurity.org/?tag=domainpermissions">DomainPermissions</a>, <a class="term term-tagpost_tag term-1574" href="https://adsecurity.org/?tag=domainrootpermissions">DomainRootPermissions</a></span></li>
+	        	    </ul>
+    	</div>
+</div>
+
+ 
+
+
+                
+
+<div id="post-5044" class="clearfix post post-5044 type-post status-publish format-standard hentry category-activedirectorysecurity category-ad-fundamentals tag-dsheuristics tag-dsheuristicssecurity tag-dwadminsdexmask tag-fallowanonnspi tag-fldapblockanonops item-wrap">
+		
+	<div class="entry clearfix">
+    
+    			    	<div class="post-date date alpha with-year">
+            <p class="default_date">
+            	<span class="month">May</span>
+                <span class="day">12</span>
+                	                <span class="year">2026</span>
+                            </p>
+                    </div>
+            
+		        <h2 class="post-title entry-title">
+			<a href="https://adsecurity.org/?p=5044" rel="bookmark" title="Permalink to AD Fundamentals: DSHeuristics">
+				AD Fundamentals: DSHeuristics            </a>
+			        </h2>
+		
+					    <ul class="post-meta entry-meta clearfix">
+	    		        <li class="byline">
+	        	By <span class="author"><a href="https://adsecurity.org/?author=2" rel="author">Sean Metcalf</a></span><span class="entry-cat"> in <span class="terms"><a class="term term-category term-565" href="https://adsecurity.org/?cat=565">ActiveDirectorySecurity</a>, <a class="term term-category term-1578" href="https://adsecurity.org/?cat=1578">AD Fundamentals</a></span></span>	        </li>
+	        	    </ul>
+    		
+				<div class="entry-content clearfix">
+			
+													
+							
+												
+								
+<p class="wp-block-paragraph">This series of posts focuses on key Active Directory (AD) components that need to be secured in order to ensure AD security is leveled up. In this post, we focus on the mostly unknown AD component called DSHeuristics</p>
+
+
+
+<p class="wp-block-paragraph">DSHeuristics is like a registry editor for changing behavior in the Active Directory forest (and AD Lightweight Directory Service, aka LDS). </p>
+
+
+
+<p class="wp-block-paragraph">This PowerShell code gets the current DSHeuristics value:</p>
+
+
+
+<pre class="wp-block-code"><code>Import-Module ActiveDirectory
+
+$ds = Get-ADObject `
+    -Identity "CN=Directory Service,CN=Windows NT,CN=Services,$((Get-ADRootDSE).configurationNamingContext)" `
+    -Properties dsHeuristics
+
+$ds.dsHeuristics</code></pre>
+
+
+
+<p class="wp-block-paragraph">By default, the attribute doesn&#8217;t exist. If it is set to 0, there&#8217;s no change to behavior.</p>
+
+
+
+ <a href="https://adsecurity.org/?p=5044#more-5044" class="more-link btn"><span class="btn">Continue reading <i class="fa fa-arrow-circle-right"></i></span></a>
+						
+						
+						
+		</div>
+		
+			    <ul class="entry-footer">
+	    		        <li class="post-tags col-sm-8"><i class="fa fa-tags" title="Tags"></i> <span class="terms"><a class="term term-tagpost_tag term-1569" href="https://adsecurity.org/?tag=dsheuristics">DSHeuristics</a>, <a class="term term-tagpost_tag term-1570" href="https://adsecurity.org/?tag=dsheuristicssecurity">DSHeuristicsSecurity</a>, <a class="term term-tagpost_tag term-1573" href="https://adsecurity.org/?tag=dwadminsdexmask">dwAdminSDExMask</a>, <a class="term term-tagpost_tag term-1572" href="https://adsecurity.org/?tag=fallowanonnspi">fAllowAnonNSPI</a>, <a class="term term-tagpost_tag term-1571" href="https://adsecurity.org/?tag=fldapblockanonops">fLDAPBlockAnonOps</a></span></li>
+	        	    </ul>
+    	</div>
+</div>
+
+ 
+
+
+                
+
+<div id="post-5041" class="clearfix post post-5041 type-post status-publish format-standard hentry category-activedirectorysecurity category-ad-fundamentals category-microsoft-security category-technical-reference tag-pre-windows2000 tag-pre-windows2000compatiblegroup tag-pre-windows2000compatiblesecurity tag-prewindows200compatible item-wrap">
+		
+	<div class="entry clearfix">
+    
+    			    	<div class="post-date date alpha with-year">
+            <p class="default_date">
+            	<span class="month">May</span>
+                <span class="day">06</span>
+                	                <span class="year">2026</span>
+                            </p>
+                    </div>
+            
+		        <h2 class="post-title entry-title">
+			<a href="https://adsecurity.org/?p=5041" rel="bookmark" title="Permalink to AD Fundamentals: Pre-Windows 2000 Compatible Group">
+				AD Fundamentals: Pre-Windows 2000 Compatible Group            </a>
+			        </h2>
+		
+					    <ul class="post-meta entry-meta clearfix">
+	    		        <li class="byline">
+	        	By <span class="author"><a href="https://adsecurity.org/?author=2" rel="author">Sean Metcalf</a></span><span class="entry-cat"> in <span class="terms"><a class="term term-category term-565" href="https://adsecurity.org/?cat=565">ActiveDirectorySecurity</a>, <a class="term term-category term-1578" href="https://adsecurity.org/?cat=1578">AD Fundamentals</a>, <a class="term term-category term-11" href="https://adsecurity.org/?cat=11">Microsoft Security</a>, <a class="term term-category term-2" href="https://adsecurity.org/?cat=2">Technical Reference</a></span></span>	        </li>
+	        	    </ul>
+    		
+				<div class="entry-content clearfix">
+			
+													
+							
+												
+								
+<p class="wp-block-paragraph">This series of posts focuses on key Active Directory (AD) components that need to be secured in order to ensure AD security is leveled up. In this post, we focus on the often-misunderstood group called &#8220;Pre-Windows Compatible&#8221;.</p>
+
+
+
+<p class="wp-block-paragraph">This domain-scoped group is created automatically in the Built-in root OU and is part of any Active Directory forest controlling anonymous access to AD. Its original intent was to provide a migration path from using a Windows NT domain to Active Directory, thus the compatible word in the name. Members of this group have read access to all users and groups in the domain.</p>
+
+
+
+ <a href="https://adsecurity.org/?p=5041#more-5041" class="more-link btn"><span class="btn">Continue reading <i class="fa fa-arrow-circle-right"></i></span></a>
+						
+						
+						
+		</div>
+		
+			    <ul class="entry-footer">
+	    		        <li class="post-tags col-sm-8"><i class="fa fa-tags" title="Tags"></i> <span class="terms"><a class="term term-tagpost_tag term-1566" href="https://adsecurity.org/?tag=pre-windows2000">Pre-Windows2000</a>, <a class="term term-tagpost_tag term-1567" href="https://adsecurity.org/?tag=pre-windows2000compatiblegroup">Pre-Windows2000CompatibleGroup</a>, <a class="term term-tagpost_tag term-1568" href="https://adsecurity.org/?tag=pre-windows2000compatiblesecurity">Pre-Windows2000CompatibleSecurity</a>, <a class="term term-tagpost_tag term-1565" href="https://adsecurity.org/?tag=prewindows200compatible">PreWindows200Compatible</a></span></li>
+	        	    </ul>
+    	</div>
+</div>
+
+ 
+
+
+                
+
+<div id="post-5036" class="clearfix post post-5036 type-post status-publish format-standard hentry category-activedirectorysecurity category-ad-fundamentals category-technical-reference tag-dcacls tag-dcsecurity tag-dcsupportedwindows tag-domaincontroller tag-domaincontrollerpermissions tag-domaincontrollersecurity tag-domaincontrollersoftware item-wrap">
+		
+	<div class="entry clearfix">
+    
+    			    	<div class="post-date date alpha with-year">
+            <p class="default_date">
+            	<span class="month">May</span>
+                <span class="day">05</span>
+                	                <span class="year">2026</span>
+                            </p>
+                    </div>
+            
+		        <h2 class="post-title entry-title">
+			<a href="https://adsecurity.org/?p=5036" rel="bookmark" title="Permalink to AD Fundamentals: Domain Controller Security">
+				AD Fundamentals: Domain Controller Security            </a>
+			        </h2>
+		
+					    <ul class="post-meta entry-meta clearfix">
+	    		        <li class="byline">
+	        	By <span class="author"><a href="https://adsecurity.org/?author=2" rel="author">Sean Metcalf</a></span><span class="entry-cat"> in <span class="terms"><a class="term term-category term-565" href="https://adsecurity.org/?cat=565">ActiveDirectorySecurity</a>, <a class="term term-category term-1578" href="https://adsecurity.org/?cat=1578">AD Fundamentals</a>, <a class="term term-category term-2" href="https://adsecurity.org/?cat=2">Technical Reference</a></span></span>	        </li>
+	        	    </ul>
+    		
+				<div class="entry-content clearfix">
+			
+													
+							
+												
+								
+<p class="wp-block-paragraph">This series of posts focuses on key Active Directory (AD) components that need to be secured in order to ensure AD security is leveled up. In this post, we focus on Domain Controller configuration. </p>
+
+
+
+<h3 class="wp-block-heading">Tier 0</h3>
+
+
+
+<p class="wp-block-paragraph">Domain Controllers need to be managed and maintained as Tier 0 servers since they handle authentication and authorization for the organization. Tier 0 being the highest tier that requires nothing outside of this be in the tier including users, groups, and computers. Only AD admins as Tier 0 accounts should be able to manage Domain Controllers. Any system outside of this is in violation of the Tier 0 principal whether it be management, inventory, security, or virtualization administration.</p>
+
+
+
+<h3 class="wp-block-heading">Supported Windows Version</h3>
+
+
+
+<p class="wp-block-paragraph">The first key item is ensuring that all Domain Controllers (DCs) are running on supported Microsoft Windows operating system versions. At this point, DCs should be running at least Windows Server 2019, preferably Windows Server 2022 or 2025. The t<a href="https://learn.microsoft.com/en-us/windows/release-health/windows-server-release-info">able below</a> shows that Windows Server 2016 &amp; 2019 have ended mainstream support. Windows Server 2019 has extended support until January 2029.</p>
+
+
+
+ <a href="https://adsecurity.org/?p=5036#more-5036" class="more-link btn"><span class="btn">Continue reading <i class="fa fa-arrow-circle-right"></i></span></a>
+						
+						
+						
+		</div>
+		
+			    <ul class="entry-footer">
+	    		        <li class="post-tags col-sm-8"><i class="fa fa-tags" title="Tags"></i> <span class="terms"><a class="term term-tagpost_tag term-1562" href="https://adsecurity.org/?tag=dcacls">DCACLs</a>, <a class="term term-tagpost_tag term-1560" href="https://adsecurity.org/?tag=dcsecurity">DCSecurity</a>, <a class="term term-tagpost_tag term-1561" href="https://adsecurity.org/?tag=dcsupportedwindows">DCSupportedWindows</a>, <a class="term term-tagpost_tag term-101" href="https://adsecurity.org/?tag=domaincontroller">DomainController</a>, <a class="term term-tagpost_tag term-1563" href="https://adsecurity.org/?tag=domaincontrollerpermissions">DomainControllerPermissions</a>, <a class="term term-tagpost_tag term-664" href="https://adsecurity.org/?tag=domaincontrollersecurity">DomainControllerSecurity</a>, <a class="term term-tagpost_tag term-1564" href="https://adsecurity.org/?tag=domaincontrollersoftware">DomainControllerSoftware</a></span></li>
+	        	    </ul>
+    	</div>
+</div>
+
+ 
+
+
+                
+
+<div id="post-4969" class="clearfix post post-4969 type-post status-publish format-standard hentry category-activedirectorysecurity category-microsoft-security category-mitigation category-powershell tag-activedirectory tag-activedirectoryreplicationmetadata tag-fakeadpasswordchange tag-fakepasswordchange tag-powershell tag-pwdlastset tag-unicodepwd item-wrap">
+		
+	<div class="entry clearfix">
+    
+    			    	<div class="post-date date alpha with-year">
+            <p class="default_date">
+            	<span class="month">Mar</span>
+                <span class="day">02</span>
+                	                <span class="year">2026</span>
+                            </p>
+                    </div>
+            
+		        <h2 class="post-title entry-title">
+			<a href="https://adsecurity.org/?p=4969" rel="bookmark" title="Permalink to Detecting Fake Active Directory Password Changes">
+				Detecting Fake Active Directory Password Changes            </a>
+			        </h2>
+		
+					    <ul class="post-meta entry-meta clearfix">
+	    		        <li class="byline">
+	        	By <span class="author"><a href="https://adsecurity.org/?author=2" rel="author">Sean Metcalf</a></span><span class="entry-cat"> in <span class="terms"><a class="term term-category term-565" href="https://adsecurity.org/?cat=565">ActiveDirectorySecurity</a>, <a class="term term-category term-11" href="https://adsecurity.org/?cat=11">Microsoft Security</a>, <a class="term term-category term-819" href="https://adsecurity.org/?cat=819">Mitigation</a>, <a class="term term-category term-7" href="https://adsecurity.org/?cat=7">PowerShell</a></span></span>	        </li>
+	        	    </ul>
+    		
+				<div class="entry-content clearfix">
+			
+													
+							
+												
+								
+<p class="wp-block-paragraph">In Active Directory, there has been a method that&#8217;s been around for many years which changes the password last set date but not the actual password. This is what I call a &#8220;fake password change&#8221; since the account appears to have a recent password when scanning for old passwords based on password last set, but the underlying password hasn&#8217;t actually changed.<br />I spoke about this in my <a href="https://adsecurity.org/wp-content/uploads/2016/03/BsidesCharm-RedvsBlue-v1-2015-04-11-Published.pdf">2015 BSides Charm talk</a> which was my first conference talk.<br /><br /><strong>Why does this happen?</strong><br />There are times where service account (or admin accounts) need to have password changes, but someone doesn&#8217;t want to do the work to change them. The ability to fake a password change requires modify rights on the pwdLastSet attribute which provides the ability to check/uncheck the setting &#8220;User must change password at next logon&#8221;. This setting is enabled when you want the user to change their own password when they logon.</p>
+
+
+
+<p class="wp-block-paragraph"><br /><strong>How does this work?</strong></p>
+
+
+
+<p class="wp-block-paragraph">To see how this works, we&#8217;ll focus on the service account &#8220;svc-AGPM&#8221; in my lab. This account last changed its password on August 20th in 2025.</p>
+
+
+
+ <a href="https://adsecurity.org/?p=4969#more-4969" class="more-link btn"><span class="btn">Continue reading <i class="fa fa-arrow-circle-right"></i></span></a>
+						
+						
+						
+		</div>
+		
+			    <ul class="entry-footer">
+	    		        <li class="post-tags col-sm-8"><i class="fa fa-tags" title="Tags"></i> <span class="terms"><a class="term term-tagpost_tag term-20" href="https://adsecurity.org/?tag=activedirectory">ActiveDirectory</a>, <a class="term term-tagpost_tag term-1558" href="https://adsecurity.org/?tag=activedirectoryreplicationmetadata">ActiveDirectoryReplicationMetadata</a>, <a class="term term-tagpost_tag term-1555" href="https://adsecurity.org/?tag=fakeadpasswordchange">FakeADPasswordChange</a>, <a class="term term-tagpost_tag term-1554" href="https://adsecurity.org/?tag=fakepasswordchange">FakePasswordChange</a>, <a class="term term-tagpost_tag term-575" href="https://adsecurity.org/?tag=powershell">PowerShell</a>, <a class="term term-tagpost_tag term-1557" href="https://adsecurity.org/?tag=pwdlastset">pwdlastset</a>, <a class="term term-tagpost_tag term-1556" href="https://adsecurity.org/?tag=unicodepwd">unicodepwd</a></span></li>
+	        	    </ul>
+    	</div>
+</div>
+
+ 
+
+
+                
+
+<div id="post-4955" class="clearfix post post-4955 type-post status-publish format-standard hentry category-activedirectorysecurity category-microsoft-security category-mitigation category-powershell category-realworld tag-activedirectory tag-activedirectorysecuritytip tag-kerberoast tag-kerberoasting tag-mitigatekerberoastattack tag-powershell item-wrap">
+		
+	<div class="entry clearfix">
+    
+    			    	<div class="post-date date alpha with-year">
+            <p class="default_date">
+            	<span class="month">Jan</span>
+                <span class="day">20</span>
+                	                <span class="year">2026</span>
+                            </p>
+                    </div>
+            
+		        <h2 class="post-title entry-title">
+			<a href="https://adsecurity.org/?p=4955" rel="bookmark" title="Permalink to Active Directory Security Tip #16: Mitigating Kerberoast Attacks">
+				Active Directory Security Tip #16: Mitigating Kerberoast Attacks            </a>
+			        </h2>
+		
+					    <ul class="post-meta entry-meta clearfix">
+	    		        <li class="byline">
+	        	By <span class="author"><a href="https://adsecurity.org/?author=2" rel="author">Sean Metcalf</a></span><span class="entry-cat"> in <span class="terms"><a class="term term-category term-565" href="https://adsecurity.org/?cat=565">ActiveDirectorySecurity</a>, <a class="term term-category term-11" href="https://adsecurity.org/?cat=11">Microsoft Security</a>, <a class="term term-category term-819" href="https://adsecurity.org/?cat=819">Mitigation</a>, <a class="term term-category term-7" href="https://adsecurity.org/?cat=7">PowerShell</a>, <a class="term term-category term-698" href="https://adsecurity.org/?cat=698">RealWorld</a></span></span>	        </li>
+	        	    </ul>
+    		
+				<div class="entry-content clearfix">
+			
+													
+							
+												
+								
+<p class="wp-block-paragraph">There are two main password attacks leveraged by adversaries; one is called Password Spraying and the other is called Kerberoasting. </p>
+
+
+
+<p class="wp-block-paragraph">This post focuses on identifying accounts that may be targeted for Kerberoasting and how to harden the environment against Kerberoasting. </p>
+
+
+
+ <a href="https://adsecurity.org/?p=4955#more-4955" class="more-link btn"><span class="btn">Continue reading <i class="fa fa-arrow-circle-right"></i></span></a>
+						
+						
+						
+		</div>
+		
+			    <ul class="entry-footer">
+	    		        <li class="post-tags col-sm-8"><i class="fa fa-tags" title="Tags"></i> <span class="terms"><a class="term term-tagpost_tag term-20" href="https://adsecurity.org/?tag=activedirectory">ActiveDirectory</a>, <a class="term term-tagpost_tag term-1469" href="https://adsecurity.org/?tag=activedirectorysecuritytip">ActiveDirectorySecurityTip</a>, <a class="term term-tagpost_tag term-673" href="https://adsecurity.org/?tag=kerberoast">Kerberoast</a>, <a class="term term-tagpost_tag term-1136" href="https://adsecurity.org/?tag=kerberoasting">kerberoasting</a>, <a class="term term-tagpost_tag term-1553" href="https://adsecurity.org/?tag=mitigatekerberoastattack">MitigateKerberoastAttack</a>, <a class="term term-tagpost_tag term-575" href="https://adsecurity.org/?tag=powershell">PowerShell</a></span></li>
+	        	    </ul>
+    	</div>
+</div>
+
+ 
+
+
+                
+
+<div id="post-4941" class="clearfix post post-4941 type-post status-publish format-standard hentry category-activedirectorysecurity category-microsoft-security category-powershell tag-activedirectory tag-activedirectorysecuritytip tag-adpermissions tag-domain-root-permissions item-wrap">
+		
+	<div class="entry clearfix">
+    
+    			    	<div class="post-date date alpha with-year">
+            <p class="default_date">
+            	<span class="month">Dec</span>
+                <span class="day">02</span>
+                	                <span class="year">2025</span>
+                            </p>
+                    </div>
+            
+		        <h2 class="post-title entry-title">
+			<a href="https://adsecurity.org/?p=4941" rel="bookmark" title="Permalink to Active Directory Security Tip #15: Active Directory Domain Root Permissions">
+				Active Directory Security Tip #15: Active Directory Domain Root Permissions            </a>
+			        </h2>
+		
+					    <ul class="post-meta entry-meta clearfix">
+	    		        <li class="byline">
+	        	By <span class="author"><a href="https://adsecurity.org/?author=2" rel="author">Sean Metcalf</a></span><span class="entry-cat"> in <span class="terms"><a class="term term-category term-565" href="https://adsecurity.org/?cat=565">ActiveDirectorySecurity</a>, <a class="term term-category term-11" href="https://adsecurity.org/?cat=11">Microsoft Security</a>, <a class="term term-category term-7" href="https://adsecurity.org/?cat=7">PowerShell</a></span></span>	        </li>
+	        	    </ul>
+    		
+				<div class="entry-content clearfix">
+			
+													
+							
+												
+								
+<p class="wp-block-paragraph">This week let&#8217;s look at Active Directory domain permissions which are configured on the domain root and apply to the domain. There are many different type of concerning permissions, but let&#8217;s look at the most egregious. </p>
+
+
+
+ <a href="https://adsecurity.org/?p=4941#more-4941" class="more-link btn"><span class="btn">Continue reading <i class="fa fa-arrow-circle-right"></i></span></a>
+						
+						
+						
+		</div>
+		
+			    <ul class="entry-footer">
+	    		        <li class="post-tags col-sm-8"><i class="fa fa-tags" title="Tags"></i> <span class="terms"><a class="term term-tagpost_tag term-20" href="https://adsecurity.org/?tag=activedirectory">ActiveDirectory</a>, <a class="term term-tagpost_tag term-1469" href="https://adsecurity.org/?tag=activedirectorysecuritytip">ActiveDirectorySecurityTip</a>, <a class="term term-tagpost_tag term-1552" href="https://adsecurity.org/?tag=adpermissions">ADPermissions</a>, <a class="term term-tagpost_tag term-1551" href="https://adsecurity.org/?tag=domain-root-permissions">Domain Root Permissions</a></span></li>
+	        	    </ul>
+    	</div>
+</div>
+
+ 
+
+
+                
+
+<div id="post-4904" class="clearfix post post-4904 type-post status-publish format-standard hentry category-activedirectorysecurity category-microsoft-security category-powershell category-technical-reference tag-activedirectorysecuritytip tag-gmsa tag-groupmanagedserviceaccount tag-msds-groupmanagedserviceaccount tag-msds-groupmsamembership tag-msds-managedpassword tag-msds-managedpasswordid tag-msds-managedpasswordinterval tag-principalsallowedtoretrievemanagedpassword item-wrap">
+		
+	<div class="entry clearfix">
+    
+    			    	<div class="post-date date alpha with-year">
+            <p class="default_date">
+            	<span class="month">Nov</span>
+                <span class="day">04</span>
+                	                <span class="year">2025</span>
+                            </p>
+                    </div>
+            
+		        <h2 class="post-title entry-title">
+			<a href="https://adsecurity.org/?p=4904" rel="bookmark" title="Permalink to Active Directory Security Tip #14: Group Managed Service Accounts (GMSAs)">
+				Active Directory Security Tip #14: Group Managed Service Accounts (GMSAs)            </a>
+			        </h2>
+		
+					    <ul class="post-meta entry-meta clearfix">
+	    		        <li class="byline">
+	        	By <span class="author"><a href="https://adsecurity.org/?author=2" rel="author">Sean Metcalf</a></span><span class="entry-cat"> in <span class="terms"><a class="term term-category term-565" href="https://adsecurity.org/?cat=565">ActiveDirectorySecurity</a>, <a class="term term-category term-11" href="https://adsecurity.org/?cat=11">Microsoft Security</a>, <a class="term term-category term-7" href="https://adsecurity.org/?cat=7">PowerShell</a>, <a class="term term-category term-2" href="https://adsecurity.org/?cat=2">Technical Reference</a></span></span>	        </li>
+	        	    </ul>
+    		
+				<div class="entry-content clearfix">
+			
+													
+							
+												
+								
+<h2 class="wp-block-heading"><strong>Group Managed Service Accounts (GMSAs)</strong></h2>
+
+
+
+<p class="wp-block-paragraph">User accounts created to be used as service accounts rarely have their password changed. <a href="https://docs.microsoft.com/en-us/windows-server/security/group-managed-service-accounts/group-managed-service-accounts-overview">Group Managed Service Accounts (GMSAs) </a>provide a better approach (starting in the Windows 2012 timeframe). The password is managed by AD and automatically changed. This means that the GMSA has to have security principals explicitly delegated to have access to the clear-text password. Much like with other areas where delegation controls access (<a href="https://adsecurity.org/?p=3164">LAPS</a>), determining who should have be delegated access needs to be be carefully considered.</p>
+
+
+
+<h2 class="wp-block-heading"><strong>Key Points for Group Managed Service Accounts (GMSAs)</strong></h2>
+
+
+
+<ul class="wp-block-list">
+<li>The GMSA password is managed by AD.</li>
+
+
+
+<li>Computers hosting GMSA service account(s) request the current password from Active Directory to start the associated service.</li>
+
+
+
+<li>Configure the GMSA to allow computer account(s) access to the GMSA password.</li>
+
+
+
+<li>If an attacker compromises any computer hosting services using the GMSA, the GMSA is compromised.</li>
+
+
+
+<li>If attacker compromises an account with rights to request the GMSA password, the GMSA is compromised.</li>
+</ul>
+
+
+
+ <a href="https://adsecurity.org/?p=4904#more-4904" class="more-link btn"><span class="btn">Continue reading <i class="fa fa-arrow-circle-right"></i></span></a>
+						
+						
+						
+		</div>
+		
+			    <ul class="entry-footer">
+	    		        <li class="post-tags col-sm-8"><i class="fa fa-tags" title="Tags"></i> <span class="terms"><a class="term term-tagpost_tag term-1469" href="https://adsecurity.org/?tag=activedirectorysecuritytip">ActiveDirectorySecurityTip</a>, <a class="term term-tagpost_tag term-1430" href="https://adsecurity.org/?tag=gmsa">GMSA</a>, <a class="term term-tagpost_tag term-1547" href="https://adsecurity.org/?tag=groupmanagedserviceaccount">GroupManagedServiceAccount</a>, <a class="term term-tagpost_tag term-1449" href="https://adsecurity.org/?tag=msds-groupmanagedserviceaccount">msDS-GroupManagedServiceAccount</a>, <a class="term term-tagpost_tag term-1451" href="https://adsecurity.org/?tag=msds-groupmsamembership">msDS-GroupMSAMembership</a>, <a class="term term-tagpost_tag term-1443" href="https://adsecurity.org/?tag=msds-managedpassword">msds-ManagedPassword</a>, <a class="term term-tagpost_tag term-1452" href="https://adsecurity.org/?tag=msds-managedpasswordid">msDS-ManagedPasswordId</a>, <a class="term term-tagpost_tag term-1450" href="https://adsecurity.org/?tag=msds-managedpasswordinterval">msDS-ManagedPasswordInterval</a>, <a class="term term-tagpost_tag term-1548" href="https://adsecurity.org/?tag=principalsallowedtoretrievemanagedpassword">PrincipalsAllowedToRetrieveManagedPassword</a></span></li>
+	        	    </ul>
+    	</div>
+</div>
+
+ 
+
+
+                
+
+<div id="post-4825" class="clearfix post post-4825 type-post status-publish format-standard hentry category-entra-id-security category-microsoft-security category-technical-reference tag-entraid tag-entraidsecurity tag-guestdefaults tag-userdefaults item-wrap">
+		
+	<div class="entry clearfix">
+    
+    			    	<div class="post-date date alpha with-year">
+            <p class="default_date">
+            	<span class="month">Oct</span>
+                <span class="day">19</span>
+                	                <span class="year">2025</span>
+                            </p>
+                    </div>
+            
+		        <h2 class="post-title entry-title">
+			<a href="https://adsecurity.org/?p=4825" rel="bookmark" title="Permalink to Improve Entra ID Security More Quickly">
+				Improve Entra ID Security More Quickly            </a>
+			        </h2>
+		
+					    <ul class="post-meta entry-meta clearfix">
+	    		        <li class="byline">
+	        	By <span class="author"><a href="https://adsecurity.org/?author=2" rel="author">Sean Metcalf</a></span><span class="entry-cat"> in <span class="terms"><a class="term term-category term-1536" href="https://adsecurity.org/?cat=1536">Entra ID Security</a>, <a class="term term-category term-11" href="https://adsecurity.org/?cat=11">Microsoft Security</a>, <a class="term term-category term-2" href="https://adsecurity.org/?cat=2">Technical Reference</a></span></span>	        </li>
+	        	    </ul>
+    		
+				<div class="entry-content clearfix">
+			
+													
+							
+												
+								
+<p class="wp-block-paragraph">At BSides Northern Virginia (<a href="https://www.bsidesnova.org/" data-type="link" data-id="https://www.bsidesnova.org/">BSides NoVa</a>) in October 2025, I presented a talk on <a href="https://bsidesnova-2025.sessionize.com/session/997515" data-type="link" data-id="https://bsidesnova-2025.sessionize.com/session/997515">how to improve Entra ID security quickly</a>. This post captures the key information from <a href="https://adsecurity.org/wp-content/uploads/2025/10/2025-BSidesNOVA-SecuringEntraID-Metcalf-Final.pdf" data-type="link" data-id="https://adsecurity.org/wp-content/uploads/2025/10/2025-BSidesNOVA-SecuringEntraID-Metcalf-Final.pdf">my talk slides</a>.</p>
+
+
+
+<p class="wp-block-paragraph">This article describes the Entra ID settings and configuration that should be set to improve security including:</p>
+
+
+
+<ul class="wp-block-list">
+<li>User Default Configurations</li>
+
+
+
+<li>Guest Defaults</li>
+
+
+
+<li>User Applications Consent and Permissions</li>
+
+
+
+<li>Secure Entra ID roles</li>
+
+
+
+<li>Privileged Role Membership Protection</li>
+
+
+
+<li>Role Assignable Group Configurations</li>
+
+
+
+<li>Highly Privileged Applications</li>
+
+
+
+<li>Conditional Access Policies</li>
+
+
+
+<li>Partner Access</li>
+
+
+
+<li>Securing Entra Connect</li>
+
+
+
+<li>Secure Entra ID Quickly Checklist</li>
+</ul>
+
+
+
+ <a href="https://adsecurity.org/?p=4825#more-4825" class="more-link btn"><span class="btn">Continue reading <i class="fa fa-arrow-circle-right"></i></span></a>
+						
+						
+						
+		</div>
+		
+			    <ul class="entry-footer">
+	    		        <li class="post-tags col-sm-8"><i class="fa fa-tags" title="Tags"></i> <span class="terms"><a class="term term-tagpost_tag term-1453" href="https://adsecurity.org/?tag=entraid">EntraID</a>, <a class="term term-tagpost_tag term-1537" href="https://adsecurity.org/?tag=entraidsecurity">EntraIDSecurity</a>, <a class="term term-tagpost_tag term-1546" href="https://adsecurity.org/?tag=guestdefaults">GuestDefaults</a>, <a class="term term-tagpost_tag term-1545" href="https://adsecurity.org/?tag=userdefaults">UserDefaults</a></span></li>
+	        	    </ul>
+    	</div>
+</div>
+
+ 
+
+    </div>
+    
+    	<div class="pagination-wrapper">
+		<ul class="pagination">
+			<li class="disabled"><span class="page-numbers"><i class="fa fa-angle-left"></i></span></li>			<li class="active"><span aria-current="page" class="page-numbers current">1</span></li><li><a class="page-numbers" href="https://adsecurity.org/favicon.ico/?paged=2">2</a></li><li><a class="page-numbers" href="https://adsecurity.org/favicon.ico/?paged=3">3</a></li><li><span class="page-numbers dots">&hellip;</span></li><li><a class="page-numbers" href="https://adsecurity.org/favicon.ico/?paged=28">28</a></li><li><a class="next page-numbers" href="https://adsecurity.org/favicon.ico/?paged=2"><i class="fa fa-angle-right"></i></a></li>		</ul>
+	</div>
+	    	<p class="infinite-load">
+        	<a href="#" class="load" data-container=".entries-wrapper" data-nav-selector=".pagination" data-next-selector=".pagination .next" data-item-selector=".entries-wrapper .item-wrap" data-total-posts="276" data-posts-per-page="10" data-method="auto" >Load more</a>
+        </p>
+	            
+  
+
+                </div><!-- #content-main -->
+        
+            
+<div id="sidebar1" class="sidebar sidebar-right widget-area col-md-4">
+
+	
+    
+		<div id="recent-posts-4" class="sidebar-wrap widget_recent_entries">
+		<h2 class="widget-title">Recent Posts</h2>
+		<ul>
+											<li>
+					<a href="https://adsecurity.org/?p=5061">AD Fundamentals: Group Policy Permissions &amp; Owner Rights</a>
+									</li>
+											<li>
+					<a href="https://adsecurity.org/?p=5049">AD Fundamentals: Domain Root &amp; AdminSDHolder Permissions</a>
+									</li>
+											<li>
+					<a href="https://adsecurity.org/?p=5044">AD Fundamentals: DSHeuristics</a>
+									</li>
+											<li>
+					<a href="https://adsecurity.org/?p=5041">AD Fundamentals: Pre-Windows 2000 Compatible Group</a>
+									</li>
+											<li>
+					<a href="https://adsecurity.org/?p=5036">AD Fundamentals: Domain Controller Security</a>
+									</li>
+					</ul>
+
+		</div><div id="text-3" class="sidebar-wrap widget_text"><h2 class="widget-title">Active Directory &#038; Entra ID Security Services</h2>			<div class="textwidget">Have concerns about your Active Directory environment and/or Entra ID tenant?
+
+We help enterprises improve their security posture. <p>
+<a href="https://www.trimarcsecurity.com/contact">Find out how...</a> 
+</div>
+		</div><div id="widget_tptn_pop-4" class="sidebar-wrap tptn_posts_list_widget"><h2 class="widget-title">Popular Posts</h2><div class="tptn_posts  tptn_posts_widget tptn_posts_widget-widget_tptn_pop-4    tptn-text-only"><ul><li><span class="tptn_after_thumb"><a href="https://adsecurity.org/?p=4187"     class="tptn_link"><span class="tptn_title">AD Reading: Windows Server 2019 Active Directory Features</span></a></span></li><li><span class="tptn_after_thumb"><a href="https://adsecurity.org/?p=478"     class="tptn_link"><span class="tptn_title">PowerShell Encoding &#038; Decoding (Base64)</span></a></span></li><li><span class="tptn_after_thumb"><a href="https://adsecurity.org/?p=2362"     class="tptn_link"><span class="tptn_title">Attack Methods for Gaining Domain Admin Rights in&hellip;</span></a></span></li><li><span class="tptn_after_thumb"><a href="https://adsecurity.org/?p=483"     class="tptn_link"><span class="tptn_title">Kerberos &#038; KRBTGT: Active Directory&#8217;s&hellip;</span></a></span></li><li><span class="tptn_after_thumb"><a href="https://adsecurity.org/?p=2288"     class="tptn_link"><span class="tptn_title">Finding Passwords in SYSVOL &#038; Exploiting Group&hellip;</span></a></span></li><li><span class="tptn_after_thumb"><a href="https://adsecurity.org/?p=3299"     class="tptn_link"><span class="tptn_title">Securing Windows Workstations: Developing a Secure Baseline</span></a></span></li><li><span class="tptn_after_thumb"><a href="https://adsecurity.org/?p=3377"     class="tptn_link"><span class="tptn_title">Securing Domain Controllers to Improve Active&hellip;</span></a></span></li><li><span class="tptn_after_thumb"><a href="https://adsecurity.org/?p=3458"     class="tptn_link"><span class="tptn_title">Detecting Kerberoasting Activity</span></a></span></li><li><span class="tptn_after_thumb"><a href="https://adsecurity.org/?p=1729"     class="tptn_link"><span class="tptn_title">Mimikatz DCSync Usage, Exploitation, and Detection</span></a></span></li><li><span class="tptn_after_thumb"><a href="https://adsecurity.org/?p=3658"     class="tptn_link"><span class="tptn_title">Scanning for Active Directory Privileges &#038;&hellip;</span></a></span></li></ul><div class="tptn_clear"></div></div></div><div id="categories-4" class="sidebar-wrap widget_categories"><h2 class="widget-title">Categories</h2>
+			<ul>
+					<li class="cat-item cat-item-565"><a href="https://adsecurity.org/?cat=565">ActiveDirectorySecurity</a>
+</li>
+	<li class="cat-item cat-item-1578"><a href="https://adsecurity.org/?cat=1578">AD Fundamentals</a>
+</li>
+	<li class="cat-item cat-item-55"><a href="https://adsecurity.org/?cat=55">Apple Security</a>
+</li>
+	<li class="cat-item cat-item-431"><a href="https://adsecurity.org/?cat=431">Cloud Security</a>
+</li>
+	<li class="cat-item cat-item-17"><a href="https://adsecurity.org/?cat=17">Continuing Education</a>
+</li>
+	<li class="cat-item cat-item-396"><a href="https://adsecurity.org/?cat=396">Entertainment</a>
+</li>
+	<li class="cat-item cat-item-1536"><a href="https://adsecurity.org/?cat=1536">Entra ID Security</a>
+</li>
+	<li class="cat-item cat-item-347"><a href="https://adsecurity.org/?cat=347">Exploit</a>
+</li>
+	<li class="cat-item cat-item-1039"><a href="https://adsecurity.org/?cat=1039">Hacking</a>
+</li>
+	<li class="cat-item cat-item-168"><a href="https://adsecurity.org/?cat=168">Hardware Security</a>
+</li>
+	<li class="cat-item cat-item-172"><a href="https://adsecurity.org/?cat=172">Hypervisor Security</a>
+</li>
+	<li class="cat-item cat-item-1540"><a href="https://adsecurity.org/?cat=1540">Interview</a>
+</li>
+	<li class="cat-item cat-item-126"><a href="https://adsecurity.org/?cat=126">Linux/Unix Security</a>
+</li>
+	<li class="cat-item cat-item-343"><a href="https://adsecurity.org/?cat=343">Malware</a>
+</li>
+	<li class="cat-item cat-item-11"><a href="https://adsecurity.org/?cat=11">Microsoft Security</a>
+</li>
+	<li class="cat-item cat-item-819"><a href="https://adsecurity.org/?cat=819">Mitigation</a>
+</li>
+	<li class="cat-item cat-item-48"><a href="https://adsecurity.org/?cat=48">Network/System Security</a>
+</li>
+	<li class="cat-item cat-item-7"><a href="https://adsecurity.org/?cat=7">PowerShell</a>
+</li>
+	<li class="cat-item cat-item-698"><a href="https://adsecurity.org/?cat=698">RealWorld</a>
+</li>
+	<li class="cat-item cat-item-21"><a href="https://adsecurity.org/?cat=21">Security</a>
+</li>
+	<li class="cat-item cat-item-234"><a href="https://adsecurity.org/?cat=234">Security Conference Presentation/Video</a>
+</li>
+	<li class="cat-item cat-item-1045"><a href="https://adsecurity.org/?cat=1045">Security Recommendation</a>
+</li>
+	<li class="cat-item cat-item-24"><a href="https://adsecurity.org/?cat=24">Technical Article</a>
+</li>
+	<li class="cat-item cat-item-4"><a href="https://adsecurity.org/?cat=4">Technical Reading</a>
+</li>
+	<li class="cat-item cat-item-2"><a href="https://adsecurity.org/?cat=2">Technical Reference</a>
+</li>
+	<li class="cat-item cat-item-156"><a href="https://adsecurity.org/?cat=156">TheCloud</a>
+</li>
+	<li class="cat-item cat-item-930"><a href="https://adsecurity.org/?cat=930">Vulnerability</a>
+</li>
+			</ul>
+
+			</div><div id="tag_cloud-3" class="sidebar-wrap widget_tag_cloud"><h2 class="widget-title">Tags</h2><div class="tagcloud"><a href="https://adsecurity.org/?tag=activedirectory" class="tag-cloud-link tag-link-20 tag-link-position-1" style="font-size: 22pt;" aria-label="ActiveDirectory (59 items)">ActiveDirectory</a>
+<a href="https://adsecurity.org/?tag=active-directory" class="tag-cloud-link tag-link-75 tag-link-position-2" style="font-size: 10.38pt;" aria-label="Active Directory (8 items)">Active Directory</a>
+<a href="https://adsecurity.org/?tag=activedirectorysecurity" class="tag-cloud-link tag-link-113 tag-link-position-3" style="font-size: 13.88pt;" aria-label="ActiveDirectorySecurity (15 items)">ActiveDirectorySecurity</a>
+<a href="https://adsecurity.org/?tag=active-directory-security" class="tag-cloud-link tag-link-976 tag-link-position-4" style="font-size: 9.68pt;" aria-label="Active Directory Security (7 items)">Active Directory Security</a>
+<a href="https://adsecurity.org/?tag=activedirectorysecuritytip" class="tag-cloud-link tag-link-1469 tag-link-position-5" style="font-size: 14.3pt;" aria-label="ActiveDirectorySecurityTip (16 items)">ActiveDirectorySecurityTip</a>
+<a href="https://adsecurity.org/?tag=adreading" class="tag-cloud-link tag-link-5 tag-link-position-6" style="font-size: 13.18pt;" aria-label="ADReading (13 items)">ADReading</a>
+<a href="https://adsecurity.org/?tag=adsecurity" class="tag-cloud-link tag-link-86 tag-link-position-7" style="font-size: 10.38pt;" aria-label="ADSecurity (8 items)">ADSecurity</a>
+<a href="https://adsecurity.org/?tag=ad-security" class="tag-cloud-link tag-link-100 tag-link-position-8" style="font-size: 8pt;" aria-label="AD Security (5 items)">AD Security</a>
+<a href="https://adsecurity.org/?tag=azure" class="tag-cloud-link tag-link-25 tag-link-position-9" style="font-size: 8pt;" aria-label="Azure (5 items)">Azure</a>
+<a href="https://adsecurity.org/?tag=dcsync" class="tag-cloud-link tag-link-598 tag-link-position-10" style="font-size: 11.08pt;" aria-label="DCSync (9 items)">DCSync</a>
+<a href="https://adsecurity.org/?tag=domaincontroller" class="tag-cloud-link tag-link-101 tag-link-position-11" style="font-size: 15.28pt;" aria-label="DomainController (19 items)">DomainController</a>
+<a href="https://adsecurity.org/?tag=goldenticket" class="tag-cloud-link tag-link-303 tag-link-position-12" style="font-size: 11.08pt;" aria-label="GoldenTicket (9 items)">GoldenTicket</a>
+<a href="https://adsecurity.org/?tag=hyperv" class="tag-cloud-link tag-link-3 tag-link-position-13" style="font-size: 8pt;" aria-label="HyperV (5 items)">HyperV</a>
+<a href="https://adsecurity.org/?tag=invoke-mimikatz" class="tag-cloud-link tag-link-336 tag-link-position-14" style="font-size: 10.38pt;" aria-label="Invoke-Mimikatz (8 items)">Invoke-Mimikatz</a>
+<a href="https://adsecurity.org/?tag=kb3011780" class="tag-cloud-link tag-link-337 tag-link-position-15" style="font-size: 9.68pt;" aria-label="KB3011780 (7 items)">KB3011780</a>
+<a href="https://adsecurity.org/?tag=kdc" class="tag-cloud-link tag-link-80 tag-link-position-16" style="font-size: 8pt;" aria-label="KDC (5 items)">KDC</a>
+<a href="https://adsecurity.org/?tag=kerberoast" class="tag-cloud-link tag-link-673 tag-link-position-17" style="font-size: 8.98pt;" aria-label="Kerberoast (6 items)">Kerberoast</a>
+<a href="https://adsecurity.org/?tag=kerberos" class="tag-cloud-link tag-link-81 tag-link-position-18" style="font-size: 15pt;" aria-label="Kerberos (18 items)">Kerberos</a>
+<a href="https://adsecurity.org/?tag=kerberoshacking" class="tag-cloud-link tag-link-298 tag-link-position-19" style="font-size: 11.64pt;" aria-label="KerberosHacking (10 items)">KerberosHacking</a>
+<a href="https://adsecurity.org/?tag=krbtgt" class="tag-cloud-link tag-link-394 tag-link-position-20" style="font-size: 10.38pt;" aria-label="KRBTGT (8 items)">KRBTGT</a>
+<a href="https://adsecurity.org/?tag=laps" class="tag-cloud-link tag-link-631 tag-link-position-21" style="font-size: 8.98pt;" aria-label="LAPS (6 items)">LAPS</a>
+<a href="https://adsecurity.org/?tag=lsass" class="tag-cloud-link tag-link-71 tag-link-position-22" style="font-size: 11.08pt;" aria-label="LSASS (9 items)">LSASS</a>
+<a href="https://adsecurity.org/?tag=mcm" class="tag-cloud-link tag-link-6 tag-link-position-23" style="font-size: 13.88pt;" aria-label="MCM (15 items)">MCM</a>
+<a href="https://adsecurity.org/?tag=microsoftemet" class="tag-cloud-link tag-link-58 tag-link-position-24" style="font-size: 11.08pt;" aria-label="MicrosoftEMET (9 items)">MicrosoftEMET</a>
+<a href="https://adsecurity.org/?tag=microsoftwindows" class="tag-cloud-link tag-link-102 tag-link-position-25" style="font-size: 9.68pt;" aria-label="MicrosoftWindows (7 items)">MicrosoftWindows</a>
+<a href="https://adsecurity.org/?tag=mimikatz" class="tag-cloud-link tag-link-207 tag-link-position-26" style="font-size: 17.94pt;" aria-label="mimikatz (30 items)">mimikatz</a>
+<a href="https://adsecurity.org/?tag=ms14068" class="tag-cloud-link tag-link-295 tag-link-position-27" style="font-size: 11.08pt;" aria-label="MS14068 (9 items)">MS14068</a>
+<a href="https://adsecurity.org/?tag=passthehash" class="tag-cloud-link tag-link-44 tag-link-position-28" style="font-size: 10.38pt;" aria-label="PassTheHash (8 items)">PassTheHash</a>
+<a href="https://adsecurity.org/?tag=powershell" class="tag-cloud-link tag-link-575 tag-link-position-29" style="font-size: 18.92pt;" aria-label="PowerShell (35 items)">PowerShell</a>
+<a href="https://adsecurity.org/?tag=powershellcode" class="tag-cloud-link tag-link-22 tag-link-position-30" style="font-size: 14.72pt;" aria-label="PowerShellCode (17 items)">PowerShellCode</a>
+<a href="https://adsecurity.org/?tag=powershellhacking" class="tag-cloud-link tag-link-68 tag-link-position-31" style="font-size: 8pt;" aria-label="PowerShellHacking (5 items)">PowerShellHacking</a>
+<a href="https://adsecurity.org/?tag=powershellv5" class="tag-cloud-link tag-link-69 tag-link-position-32" style="font-size: 8pt;" aria-label="PowerShellv5 (5 items)">PowerShellv5</a>
+<a href="https://adsecurity.org/?tag=powersploit" class="tag-cloud-link tag-link-232 tag-link-position-33" style="font-size: 11.08pt;" aria-label="PowerSploit (9 items)">PowerSploit</a>
+<a href="https://adsecurity.org/?tag=powerview" class="tag-cloud-link tag-link-696 tag-link-position-34" style="font-size: 8.98pt;" aria-label="PowerView (6 items)">PowerView</a>
+<a href="https://adsecurity.org/?tag=presentation" class="tag-cloud-link tag-link-422 tag-link-position-35" style="font-size: 9.68pt;" aria-label="Presentation (7 items)">Presentation</a>
+<a href="https://adsecurity.org/?tag=security" class="tag-cloud-link tag-link-576 tag-link-position-36" style="font-size: 8pt;" aria-label="Security (5 items)">Security</a>
+<a href="https://adsecurity.org/?tag=silverticket" class="tag-cloud-link tag-link-304 tag-link-position-37" style="font-size: 11.08pt;" aria-label="SilverTicket (9 items)">SilverTicket</a>
+<a href="https://adsecurity.org/?tag=sneakyadpersistence" class="tag-cloud-link tag-link-596 tag-link-position-38" style="font-size: 8.98pt;" aria-label="SneakyADPersistence (6 items)">SneakyADPersistence</a>
+<a href="https://adsecurity.org/?tag=spn" class="tag-cloud-link tag-link-294 tag-link-position-39" style="font-size: 8.98pt;" aria-label="SPN (6 items)">SPN</a>
+<a href="https://adsecurity.org/?tag=tgs" class="tag-cloud-link tag-link-528 tag-link-position-40" style="font-size: 8.98pt;" aria-label="TGS (6 items)">TGS</a>
+<a href="https://adsecurity.org/?tag=tgt" class="tag-cloud-link tag-link-529 tag-link-position-41" style="font-size: 8.98pt;" aria-label="TGT (6 items)">TGT</a>
+<a href="https://adsecurity.org/?tag=windows10" class="tag-cloud-link tag-link-494 tag-link-position-42" style="font-size: 10.38pt;" aria-label="Windows10 (8 items)">Windows10</a>
+<a href="https://adsecurity.org/?tag=windowsserver2008r2" class="tag-cloud-link tag-link-46 tag-link-position-43" style="font-size: 8.98pt;" aria-label="WindowsServer2008R2 (6 items)">WindowsServer2008R2</a>
+<a href="https://adsecurity.org/?tag=windowsserver2012" class="tag-cloud-link tag-link-47 tag-link-position-44" style="font-size: 11.08pt;" aria-label="WindowsServer2012 (9 items)">WindowsServer2012</a>
+<a href="https://adsecurity.org/?tag=windowsserver2012r2" class="tag-cloud-link tag-link-54 tag-link-position-45" style="font-size: 9.68pt;" aria-label="WindowsServer2012R2 (7 items)">WindowsServer2012R2</a></div>
+</div><div id="search-2" class="sidebar-wrap widget_search"><form class="searchform" method="get" action="https://adsecurity.org">
+	<div class="input-group">
+		<div class="form-group live-search-input">
+			<label for="s" class="screen-reader-text">Search for:</label>
+		    <input type="text" id="s" name="s" class="form-control" placeholder="Search">
+		    		</div>
+	    <span class="input-group-btn">
+	    	<button class="btn btn-default" type="submit"><i class="fa fa-search"></i></button>
+	    </span>
+    </div>
+    </form></div>
+		<div id="recent-posts-2" class="sidebar-wrap widget_recent_entries">
+		<h2 class="widget-title">Recent Posts</h2>
+		<ul>
+											<li>
+					<a href="https://adsecurity.org/?p=5061">AD Fundamentals: Group Policy Permissions &amp; Owner Rights</a>
+									</li>
+											<li>
+					<a href="https://adsecurity.org/?p=5049">AD Fundamentals: Domain Root &amp; AdminSDHolder Permissions</a>
+									</li>
+											<li>
+					<a href="https://adsecurity.org/?p=5044">AD Fundamentals: DSHeuristics</a>
+									</li>
+											<li>
+					<a href="https://adsecurity.org/?p=5041">AD Fundamentals: Pre-Windows 2000 Compatible Group</a>
+									</li>
+											<li>
+					<a href="https://adsecurity.org/?p=5036">AD Fundamentals: Domain Controller Security</a>
+									</li>
+					</ul>
+
+		</div><div id="recent-comments-2" class="sidebar-wrap widget_recent_comments"><h2 class="widget-title">Recent Comments</h2><ul id="recentcomments"><li class="recentcomments"><span class="comment-author-link">Gxxxx</span> on <a href="https://adsecurity.org/?p=4577#comment-21961">Active Directory Security Tip #1: Active Directory Admins</a></li><li class="recentcomments"><span class="comment-author-link"><a href="https://ADSecurity.org" class="url" rel="ugc">Sean Metcalf</a></span> on <a href="https://adsecurity.org/?p=3377#comment-11391">Securing Domain Controllers to Improve Active Directory Security</a></li><li class="recentcomments"><span class="comment-author-link">Oliver</span> on <a href="https://adsecurity.org/?p=3377#comment-11390">Securing Domain Controllers to Improve Active Directory Security</a></li><li class="recentcomments"><span class="comment-author-link"><a href="https://msitpros.com" class="url" rel="ugc external nofollow">Oddvar Moe</a></span> on <a href="https://adsecurity.org/?p=3299#comment-11281">Securing Windows Workstations: Developing a Secure Baseline</a></li><li class="recentcomments"><span class="comment-author-link"><a href="http://blogs.technet.com/kfalde" class="url" rel="ugc external nofollow">Kurt Falde</a></span> on <a href="https://adsecurity.org/?p=3299#comment-11274">Securing Windows Workstations: Developing a Secure Baseline</a></li></ul></div><div id="archives-2" class="sidebar-wrap widget_archive"><h2 class="widget-title">Archives</h2>
+			<ul>
+					<li><a href='https://adsecurity.org/?m=202605'>May 2026</a></li>
+	<li><a href='https://adsecurity.org/?m=202603'>March 2026</a></li>
+	<li><a href='https://adsecurity.org/?m=202601'>January 2026</a></li>
+	<li><a href='https://adsecurity.org/?m=202512'>December 2025</a></li>
+	<li><a href='https://adsecurity.org/?m=202511'>November 2025</a></li>
+	<li><a href='https://adsecurity.org/?m=202510'>October 2025</a></li>
+	<li><a href='https://adsecurity.org/?m=202509'>September 2025</a></li>
+	<li><a href='https://adsecurity.org/?m=202508'>August 2025</a></li>
+	<li><a href='https://adsecurity.org/?m=202012'>December 2020</a></li>
+	<li><a href='https://adsecurity.org/?m=202005'>May 2020</a></li>
+	<li><a href='https://adsecurity.org/?m=202001'>January 2020</a></li>
+	<li><a href='https://adsecurity.org/?m=201908'>August 2019</a></li>
+	<li><a href='https://adsecurity.org/?m=201903'>March 2019</a></li>
+	<li><a href='https://adsecurity.org/?m=201902'>February 2019</a></li>
+	<li><a href='https://adsecurity.org/?m=201810'>October 2018</a></li>
+	<li><a href='https://adsecurity.org/?m=201808'>August 2018</a></li>
+	<li><a href='https://adsecurity.org/?m=201805'>May 2018</a></li>
+	<li><a href='https://adsecurity.org/?m=201801'>January 2018</a></li>
+	<li><a href='https://adsecurity.org/?m=201711'>November 2017</a></li>
+	<li><a href='https://adsecurity.org/?m=201708'>August 2017</a></li>
+	<li><a href='https://adsecurity.org/?m=201706'>June 2017</a></li>
+	<li><a href='https://adsecurity.org/?m=201705'>May 2017</a></li>
+	<li><a href='https://adsecurity.org/?m=201702'>February 2017</a></li>
+	<li><a href='https://adsecurity.org/?m=201701'>January 2017</a></li>
+	<li><a href='https://adsecurity.org/?m=201611'>November 2016</a></li>
+	<li><a href='https://adsecurity.org/?m=201610'>October 2016</a></li>
+	<li><a href='https://adsecurity.org/?m=201609'>September 2016</a></li>
+	<li><a href='https://adsecurity.org/?m=201608'>August 2016</a></li>
+	<li><a href='https://adsecurity.org/?m=201607'>July 2016</a></li>
+	<li><a href='https://adsecurity.org/?m=201606'>June 2016</a></li>
+	<li><a href='https://adsecurity.org/?m=201604'>April 2016</a></li>
+	<li><a href='https://adsecurity.org/?m=201603'>March 2016</a></li>
+	<li><a href='https://adsecurity.org/?m=201602'>February 2016</a></li>
+	<li><a href='https://adsecurity.org/?m=201601'>January 2016</a></li>
+	<li><a href='https://adsecurity.org/?m=201512'>December 2015</a></li>
+	<li><a href='https://adsecurity.org/?m=201511'>November 2015</a></li>
+	<li><a href='https://adsecurity.org/?m=201510'>October 2015</a></li>
+	<li><a href='https://adsecurity.org/?m=201509'>September 2015</a></li>
+	<li><a href='https://adsecurity.org/?m=201508'>August 2015</a></li>
+	<li><a href='https://adsecurity.org/?m=201507'>July 2015</a></li>
+	<li><a href='https://adsecurity.org/?m=201506'>June 2015</a></li>
+	<li><a href='https://adsecurity.org/?m=201505'>May 2015</a></li>
+	<li><a href='https://adsecurity.org/?m=201504'>April 2015</a></li>
+	<li><a href='https://adsecurity.org/?m=201503'>March 2015</a></li>
+	<li><a href='https://adsecurity.org/?m=201502'>February 2015</a></li>
+	<li><a href='https://adsecurity.org/?m=201501'>January 2015</a></li>
+	<li><a href='https://adsecurity.org/?m=201412'>December 2014</a></li>
+	<li><a href='https://adsecurity.org/?m=201411'>November 2014</a></li>
+	<li><a href='https://adsecurity.org/?m=201410'>October 2014</a></li>
+	<li><a href='https://adsecurity.org/?m=201409'>September 2014</a></li>
+	<li><a href='https://adsecurity.org/?m=201408'>August 2014</a></li>
+	<li><a href='https://adsecurity.org/?m=201407'>July 2014</a></li>
+	<li><a href='https://adsecurity.org/?m=201406'>June 2014</a></li>
+	<li><a href='https://adsecurity.org/?m=201405'>May 2014</a></li>
+	<li><a href='https://adsecurity.org/?m=201404'>April 2014</a></li>
+	<li><a href='https://adsecurity.org/?m=201403'>March 2014</a></li>
+	<li><a href='https://adsecurity.org/?m=201402'>February 2014</a></li>
+	<li><a href='https://adsecurity.org/?m=201307'>July 2013</a></li>
+	<li><a href='https://adsecurity.org/?m=201211'>November 2012</a></li>
+	<li><a href='https://adsecurity.org/?m=201203'>March 2012</a></li>
+	<li><a href='https://adsecurity.org/?m=201202'>February 2012</a></li>
+			</ul>
+
+			</div><div id="categories-2" class="sidebar-wrap widget_categories"><h2 class="widget-title">Categories</h2>
+			<ul>
+					<li class="cat-item cat-item-565"><a href="https://adsecurity.org/?cat=565">ActiveDirectorySecurity</a>
+</li>
+	<li class="cat-item cat-item-1578"><a href="https://adsecurity.org/?cat=1578">AD Fundamentals</a>
+</li>
+	<li class="cat-item cat-item-55"><a href="https://adsecurity.org/?cat=55">Apple Security</a>
+</li>
+	<li class="cat-item cat-item-431"><a href="https://adsecurity.org/?cat=431">Cloud Security</a>
+</li>
+	<li class="cat-item cat-item-17"><a href="https://adsecurity.org/?cat=17">Continuing Education</a>
+</li>
+	<li class="cat-item cat-item-396"><a href="https://adsecurity.org/?cat=396">Entertainment</a>
+</li>
+	<li class="cat-item cat-item-1536"><a href="https://adsecurity.org/?cat=1536">Entra ID Security</a>
+</li>
+	<li class="cat-item cat-item-347"><a href="https://adsecurity.org/?cat=347">Exploit</a>
+</li>
+	<li class="cat-item cat-item-1039"><a href="https://adsecurity.org/?cat=1039">Hacking</a>
+</li>
+	<li class="cat-item cat-item-168"><a href="https://adsecurity.org/?cat=168">Hardware Security</a>
+</li>
+	<li class="cat-item cat-item-172"><a href="https://adsecurity.org/?cat=172">Hypervisor Security</a>
+</li>
+	<li class="cat-item cat-item-1540"><a href="https://adsecurity.org/?cat=1540">Interview</a>
+</li>
+	<li class="cat-item cat-item-126"><a href="https://adsecurity.org/?cat=126">Linux/Unix Security</a>
+</li>
+	<li class="cat-item cat-item-343"><a href="https://adsecurity.org/?cat=343">Malware</a>
+</li>
+	<li class="cat-item cat-item-11"><a href="https://adsecurity.org/?cat=11">Microsoft Security</a>
+</li>
+	<li class="cat-item cat-item-819"><a href="https://adsecurity.org/?cat=819">Mitigation</a>
+</li>
+	<li class="cat-item cat-item-48"><a href="https://adsecurity.org/?cat=48">Network/System Security</a>
+</li>
+	<li class="cat-item cat-item-7"><a href="https://adsecurity.org/?cat=7">PowerShell</a>
+</li>
+	<li class="cat-item cat-item-698"><a href="https://adsecurity.org/?cat=698">RealWorld</a>
+</li>
+	<li class="cat-item cat-item-21"><a href="https://adsecurity.org/?cat=21">Security</a>
+</li>
+	<li class="cat-item cat-item-234"><a href="https://adsecurity.org/?cat=234">Security Conference Presentation/Video</a>
+</li>
+	<li class="cat-item cat-item-1045"><a href="https://adsecurity.org/?cat=1045">Security Recommendation</a>
+</li>
+	<li class="cat-item cat-item-24"><a href="https://adsecurity.org/?cat=24">Technical Article</a>
+</li>
+	<li class="cat-item cat-item-4"><a href="https://adsecurity.org/?cat=4">Technical Reading</a>
+</li>
+	<li class="cat-item cat-item-2"><a href="https://adsecurity.org/?cat=2">Technical Reference</a>
+</li>
+	<li class="cat-item cat-item-156"><a href="https://adsecurity.org/?cat=156">TheCloud</a>
+</li>
+	<li class="cat-item cat-item-930"><a href="https://adsecurity.org/?cat=930">Vulnerability</a>
+</li>
+			</ul>
+
+			</div><div id="meta-2" class="sidebar-wrap widget_meta"><h2 class="widget-title">Meta</h2>
+		<ul>
+						<li><a href="https://adsecurity.org/wp-login.php">Log in</a></li>
+			<li><a href="https://adsecurity.org/?feed=rss2">Entries feed</a></li>
+			<li><a href="https://adsecurity.org/?feed=comments-rss2">Comments feed</a></li>
+
+			<li><a href="https://wordpress.org/">WordPress.org</a></li>
+		</ul>
+
+		</div>    
+        
+    
+</div><!-- #sidebar1 -->        
+        
+    </div><!-- #content -->
+
+
+    
+        
+    <div id="sidebar_bottom" class="sidebar widget-area row footer-widget-col-3">
+                    <div id="text-2" class="sidebar-wrap widget_text col-sm-4"><h2 class="widget-title">Copyright</h2>			<div class="textwidget">Content Disclaimer: This blog and its contents are provided "AS IS" with no warranties, and they confer no rights. Script samples are provided for informational purposes only and no guarantee is provided as to functionality or suitability.
+The views shared on this blog reflect those of the authors and do not represent the views of any companies mentioned.
+
+Content Ownership: All content posted here is intellectual work and under the current law, the poster owns the copyright of the article. Terms of Use Copyright © 2011 - 2025.</div>
+		</div>		
+            </div>
+
+	
+
+<div id="footer" class="row default-footer">
+    
+        
+            
+            <div class="copyright-developer">
+                                    <div id="copyright">
+                        <p>Content Disclaimer: This blog and its contents are provided "AS IS" with no warranties, and they confer no rights. Script samples are provided for informational purposes only and no guarantee is provided as to functionality or suitability. The views shared on this blog reflect those of the authors and do not represent the views of any companies mentioned. </p>
+                    </div>
+                
+                                    <div id="developer">
+                        <p>
+                                                        Made with <i class="fa fa-heart"></i> by <a href="https://www.graphene-theme.com/" rel="nofollow">Graphene Themes</a>.                        </p>
+
+                                            </div>
+                            </div>
+
+        
+                
+    </div><!-- #footer -->
+
+
+</div><!-- #container -->
+
+		<a href="#" id="back-to-top" title="Back to top"><i class="fa fa-chevron-up"></i></a>
+		<noscript><div class="statcounter"><a title="web analytics" href="https://statcounter.com/"><img class="statcounter" src="https://c.statcounter.com/10100711/0/4b306538/1/" alt="web analytics" /></a></div></noscript>
+	<script id="statcounter-js-js-before">
+var sc_project=10100711;
+var sc_security="4b306538";
+var sc_invisible=1;
+
+//# sourceURL=statcounter-js-js-before
+</script>
+<script id="statcounter-js-js" async src="https://www.statcounter.com/counter/counter.js"></script>
+<script defer async data-wp-strategy="async" fetchpriority="low" id="comment-reply-js" src="https://adsecurity.org/wp-includes/js/comment-reply.min.js?ver=7.1"></script>
+<script id="wp-emoji-settings" type="application/json">
+{"baseUrl":"https://s.w.org/images/core/emoji/17.0.2/72x72/","ext":".png","svgUrl":"https://s.w.org/images/core/emoji/17.0.2/svg/","svgExt":".svg","source":{"concatemoji":"https://adsecurity.org/wp-includes/js/wp-emoji-release.min.js?ver=7.1"}}
+</script>
+<script type="module">
+/*! This file is auto-generated */
+var e="script#wp-emoji-settings",t=document.querySelector(e);if(!(t instanceof HTMLScriptElement))throw new Error("Element missing: "+e);const r=JSON.parse(t.text),s=(window._wpemojiSettings=r,"wpEmojiSettingsSupports"),o=["flag","emoji"];function i(e){try{var t={supportTests:e,timestamp:(new Date).valueOf()};sessionStorage.setItem(s,JSON.stringify(t))}catch(e){}}function c(e,t,n){e.clearRect(0,0,e.canvas.width,e.canvas.height),e.fillText(t,0,0);t=new Uint32Array(e.getImageData(0,0,e.canvas.width,e.canvas.height).data);e.clearRect(0,0,e.canvas.width,e.canvas.height),e.fillText(n,0,0);const r=new Uint32Array(e.getImageData(0,0,e.canvas.width,e.canvas.height).data);return t.every((e,t)=>e===r[t])}function p(e,t){e.clearRect(0,0,e.canvas.width,e.canvas.height),e.fillText(t,0,0);var n=e.getImageData(16,16,1,1);for(let e=0;e<n.data.length;e++)if(0!==n.data[e])return!1;return!0}function u(e,t,n,r){switch(t){case"flag":return n(e,"\ud83c\udff3\ufe0f\u200d\u26a7\ufe0f","\ud83c\udff3\ufe0f\u200b\u26a7\ufe0f")?!1:!n(e,"\ud83c\udde8\ud83c\uddf6","\ud83c\udde8\u200b\ud83c\uddf6")&&!n(e,"\ud83c\udff4\udb40\udc67\udb40\udc62\udb40\udc65\udb40\udc6e\udb40\udc67\udb40\udc7f","\ud83c\udff4\u200b\udb40\udc67\u200b\udb40\udc62\u200b\udb40\udc65\u200b\udb40\udc6e\u200b\udb40\udc67\u200b\udb40\udc7f");case"emoji":return!r(e,"\ud83e\u1fac8")}return!1}function f(e,t,n,r){let a;const s=(a="undefined"!=typeof WorkerGlobalScope&&self instanceof WorkerGlobalScope?new OffscreenCanvas(300,150):document.createElement("canvas")).getContext("2d",{willReadFrequently:!0}),o=(s.textBaseline="top",s.font="600 32px Arial",{});return e.forEach(e=>{o[e]=t(s,e,n,r)}),o}function a(e){var t=document.createElement("script");t.src=e,t.defer=!0,document.head.appendChild(t)}r.supports={everything:!0,everythingExceptFlag:!0},new Promise(t=>{let n=function(){try{var e=JSON.parse(sessionStorage.getItem(s));if("object"==typeof e&&"number"==typeof e.timestamp&&(new Date).valueOf()<e.timestamp+604800&&"object"==typeof e.supportTests)return e.supportTests}catch(e){}return null}();if(!n){if("undefined"!=typeof Worker&&"undefined"!=typeof OffscreenCanvas&&"undefined"!=typeof URL&&URL.createObjectURL&&"undefined"!=typeof Blob)try{var e="postMessage("+f.toString()+"("+[JSON.stringify(o),u.toString(),c.toString(),p.toString()].join(",")+"));",r=new Blob([e],{type:"text/javascript"});const a=new Worker(URL.createObjectURL(r),{name:"wpTestEmojiSupports"});return void(a.onmessage=e=>{i(n=e.data),a.terminate(),t(n)})}catch(e){}i(n=f(o,u,c,p))}t(n)}).then(e=>{for(const n in e)r.supports[n]=e[n],r.supports.everything=r.supports.everything&&r.supports[n],"flag"!==n&&(r.supports.everythingExceptFlag=r.supports.everythingExceptFlag&&r.supports[n]);var t;r.supports.everythingExceptFlag=r.supports.everythingExceptFlag&&!r.supports.flag,r.supports.everything||((t=r.source||{}).concatemoji?a(t.concatemoji):t.wpemoji&&t.twemoji&&(a(t.twemoji),a(t.wpemoji)))});
+//# sourceURL=https://adsecurity.org/wp-includes/js/wp-emoji-loader.min.js
+</script>
+</body>
+</html>

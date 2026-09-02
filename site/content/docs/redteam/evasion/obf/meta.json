@@ -1,0 +1,10 @@
+{
+  "title": "Obfuscation",
+  "pages": [
+    "powershell-obfuscation",
+    "commandline-obfusaction",
+    "pe-obfuscation",
+    "string-encryption",
+    "..."
+  ]
+}

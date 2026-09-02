@@ -1,0 +1,15 @@
+{
+  "title": "Windows",
+  "pages": [
+    "accessibility-features-backdoor",
+    "aedebug-keys",
+    "image-file-execution-options",
+    "logon-triggered",
+    "lsa",
+    "natural-language-6-dlls",
+    "run-keys",
+    "winlogon",
+    "wmi-event-subscription",
+    "..."
+  ]
+}

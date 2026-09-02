@@ -1,0 +1,8 @@
+{
+  "title": "SCCM / MECM",
+  "pages": [
+    "privilege-escalation",
+    "post-exploitation",
+    "..."
+  ]
+}

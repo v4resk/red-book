@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<link rel="shortcut icon" href="https://stealthbits.com/wp-content/uploads/2020/10/sb-favicon.png">	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Stealthbits</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+	<style>
+		body{
+			background-color: #1d1d1d;
+			margin: 0;
+			padding: 0;
+			font-family: "Roboto", sans-serif;
+		}
+		.header{
+			height: 100px;
+			max-width: 1498px;
+			margin: 0 auto;
+			display: flex;
+    		align-items: center;
+    		padding: 0 20px;
+
+		}
+		.main-container{
+			padding: 85px 20px 0;
+			background: linear-gradient(90deg,#1f9dce, #48e4c3);;
+			min-height: calc(100vh - 175px);
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+		}
+		.main-heading{
+			font-weight: 500;
+			font-size: 67px;
+			margin: 0 auto 85px;
+			color: #fff;
+			text-align: center;
+		}
+		.main-heading span{
+			display: block;
+			font-size: 24px;
+			font-weight: 400;
+			margin-top: 14px;
+		}
+		.main-heading span a{
+			text-decoration: underline;
+			font-size: 24px;
+			font-weight: 600;
+			color: #fff;
+			text-align: center;
+		}
+		.tile-list{
+			max-width: 996px;
+			margin: 0 auto;
+			padding: 0;
+			list-style: none;
+			display: flex;
+    		flex-wrap: wrap;
+    		align-items: stretch;
+    		justify-content: center;
+			gap: 20px;
+			margin-bottom: 120px;
+		}
+		.tile-list li{
+			box-sizing: border-box;
+			background: #fff;
+			flex-basis: calc(50% - 10px);
+			display: flex;
+			align-items: center;
+			justify-content: flex-start;
+			flex-direction: column;
+			padding: 48px 24px;
+			text-align: center;
+			border-radius: 6px;
+		}
+		.tile-list li h3{
+			font-size: 24px;
+			font-weight: 500;
+			color: #354556;
+			margin:0;
+		}
+		.tile-list li p{
+			font-size: 16px;
+			font-weight: 400;
+			color: #354556;
+			margin: 20px 0 0;
+		    line-height: 28px;
+		    min-height: 96px;
+			max-width: 410px;
+		}
+		.tile-list li a{
+			color: #0a74e4;
+			text-wrap: nowrap;
+		}
+
+		@media (min-width: 1241px) and (max-width:1598px ){
+			.main-heading{
+				font-size: 56px;
+			}
+			.header{
+				max-width:967px ;
+			}
+		}
+		@media only screen and (max-width: 1240px) {
+			.tile-list{
+				max-width: 742px;
+			}
+			.main-heading{
+				font-size: 40px;
+			}
+			.header{
+				justify-content: center;
+			}
+		}
+		@media only screen and (max-width: 899px) {
+			.tile-list li h3{
+				font-size: 20px;
+			}
+			.tile-list li p{
+				font-size: 14px;
+			}
+			.main-heading{
+				font-size: 36px;
+    			max-width: 496px;
+			}
+		}
+		@media only screen and (max-width: 767px) {
+
+			.main-heading span, .main-heading span a{
+				font-size: 18px;
+			}
+			.tile-list li{
+				flex-basis:100%
+			}
+		}
+	</style>
+</head>
+<body>
+	<div class="header">
+
+		<a href="https://netwrix.com"><img src="data:image/png;base64,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" height="44" alt="Stealthbits logo"></a>
+	</div>
+	<div class="main-container">
+
+		<h1 class="main-heading">Stealthbits is now part of Netwrix!<span>Please visit <a href="https://www.netwrix.com">netwrix.com</a> to find:</span></h1>
+		<ul class="tile-list">
+			<li>
+				<h3>Product information</h3>
+				<p>
+					Stealthbits products are now available as
+					<a href="https://www.netwrix.com/enterprise-auditor.html">Netwrix Enterprise Auditor</a>,
+					<a href="https://www.netwrix.com/threat_detection_software.html">Netwrix Threat Manager</a>,
+					<a href="https://www.netwrix.com/privilege_secure.html">Netwrix Privilege Secure</a>,
+					<a href="https://www.netwrix.com/threat-prevention.html">Netwrix Threat Prevention</a>, and
+					<a href="https://www.netwrix.com/active_directory_recovery_software.html">Netwrix Recovery for Active Directory</a>.
+					For comprehensive data, identity and infrastructure security, check out the <a href="https://www.netwrix.com/solutions.html">Netwrix solutions</a> page.
+				</p>
+			</li>
+			<li>
+				<h3>Support and documentation</h3>
+				<p>To get technical support, explore product documentation, or access the Netwrix knowledgebase, please visit the <a href="https://www.netwrix.com/support.html"> Netwrix Support Portal</a>.</p>
+			</li>
+			<li>
+				<h3>Information for resellers</h3>
+				<p>To become a reseller of Netwrix solutions, <a href="https://www.netwrix.com/netwrix_partner_program.html">partner with us</a>! If you are already a partner and want to add Stealthbits products to your portfolio, simply reach out to your Netwrix contact.</p>
+			</li>
+			<li>
+				<h3>Information about the merger</h3>
+				<p>To learn more about Stealthbits becoming part of Netwrix, read the <a href="https://www.netwrix.com/netwrix_stealthbits_merge_to_address_demand_for_data_protection.html">press release.</a></p>
+			</li>
+		</ul>
+	</div>
+</body>
+</html>

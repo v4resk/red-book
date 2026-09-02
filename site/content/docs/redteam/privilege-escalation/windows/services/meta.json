@@ -1,0 +1,10 @@
+{
+  "title": "Insecure Services",
+  "pages": [
+    "weak-service-permissions",
+    "weak-files-permissions",
+    "weak-registry-permissions",
+    "unquoted-service-path",
+    "..."
+  ]
+}

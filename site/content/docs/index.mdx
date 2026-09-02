@@ -1,0 +1,85 @@
+---
+title: The Red-Book
+description: The Art of Offensive CyberSecurity
+---
+
+<div className="not-prose mb-10 flex flex-col items-center gap-5 rounded-2xl border border-fd-border bg-fd-card px-6 py-12 text-center">
+  {/* two variants: the wordmark is white in the source asset, so a light-mode
+      copy is generated with a dark wordmark and the brand red preserved */}
+  <Img src="/assets/logo-infiltr8-light.png" alt="infiltr8" className="w-64 max-w-full dark:hidden" />
+  <Img src="/assets/logo-infiltr8-dark.png" alt="infiltr8" className="hidden w-64 max-w-full dark:block" />
+  <h1 className="text-3xl font-semibold tracking-tight text-fd-foreground sm:text-4xl">
+    The Art of Offensive CyberSecurity
+  </h1>
+  <p className="max-w-2xl text-fd-muted-foreground">
+    Technical notes and cheat sheets for red teamers, pentesters and security
+    researchers — sourced from research papers, industry blogs and field
+    experience, and kept in one place.
+  </p>
+  <div className="mt-2 flex flex-wrap items-center justify-center gap-3">
+    <A href="/redteam/recon" className="rounded-lg bg-fd-primary px-5 py-2.5 text-sm font-medium text-fd-primary-foreground no-underline transition-opacity hover:opacity-90">
+      Start with Reconnaissance
+    </A>
+    <a href="https://github.com/v4resk/red-book" className="rounded-lg border border-fd-border px-5 py-2.5 text-sm font-medium text-fd-foreground no-underline transition-colors hover:bg-fd-accent">
+      Contribute on GitHub
+    </a>
+  </div>
+</div>
+
+## Where to start
+
+<Cards>
+  <Card href="/redteam/recon" title="Red-Teaming"
+        description="The host and endpoint attack lifecycle, ordered by the ATT&CK kill chain — recon, execution, persistence, privilege escalation, evasion, credential access, lateral movement, exfiltration." />
+  <Card href="/ad/recon" title="Active Directory"
+        description="The deepest tree in the book: Kerberos, NTLM, AD-CS, DACLs, delegations, coerced authentication, SCCM/MECM, trusts and persistence." />
+  <Card href="/web-pentesting/recon" title="Web Pentesting"
+        description="Server-side and client-side vulnerabilities, plus the infrastructure underneath — web servers, CMSs, frameworks and DBMSs." />
+  <Card href="/network-pentesting/protocols" title="Network & Wireless"
+        description="Service-by-service notes for the protocols you meet on an engagement, plus WiFi and Bluetooth." />
+  <Card href="/cloud-cicd-pentesting/kubernetes" title="Cloud & CI/CD"
+        description="AWS and Entra ID identity abuse, Kubernetes, containers, and the pipelines that deploy them." />
+  <Card href="/smart-contracts-pentesting/vulnerabilities" title="Smart Contracts"
+        description="EVM attack surfaces, upgradeability patterns and protocol-layer weaknesses, tagged with SCWE identifiers." />
+</Cards>
+
+## About this book
+
+**The Red-Book** by **infiltr8** collects practical knowledge rooted in real-world
+experience. Techniques and methodologies here have been vetted and tested — but
+we are human, so mistakes are possible. Corrections are welcome.
+
+Offensive security **is not about malicious intent**. It is about understanding
+the tactics an adversary would use, and applying that understanding to defend
+against them. Knowledge is power, and with power comes responsibility.
+
+<Callout type="info">
+  Contributions, feedback and suggestions are welcome — open an issue or a pull
+  request on [GitHub](https://github.com/v4resk/red-book), or reach out on
+  Discord (**v4resk#0430**).
+</Callout>
+
+<Callout type="warn">
+  Around 90% of the Active Directory content originates from
+  [The Hacker Recipes](https://www.thehacker.recipes/). Many thanks to
+  [Charlie Bromberg](https://twitter.com/_nwodtuhs) for that work.
+</Callout>
+
+## Disclaimer
+
+The information here is provided for **educational and informational purposes
+only**.
+
+- **No unlawful activity.** Using anything in this book for unauthorised access
+  or any activity that violates applicable law is strictly prohibited.
+- **Ethical use.** Apply these techniques only where you have explicit
+  authorisation to do so.
+- **Your responsibility.** You alone are accountable for your actions and their
+  consequences. infiltr8 and its contributors accept no liability for misuse.
+- **No guarantees.** We aim for accuracy but make no warranty as to
+  completeness or reliability — verify independently.
+- **External links and tools.** Mentioning a tool or service is not an
+  endorsement, and we are not responsible for third-party content or security.
+
+By using this site you accept these terms. If you do not agree with them, please
+do not use it.

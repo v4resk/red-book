@@ -1,0 +1,20 @@
+{
+  "title": "Movement",
+  "pages": [
+    "credentials",
+    "mitm-and-coerced-authentications",
+    "ntlm",
+    "kerberos",
+    "netlogon",
+    "dacl",
+    "group-policies",
+    "domain-trusts",
+    "ad-cs",
+    "schannel",
+    "sccm-mecm",
+    "exchange-services",
+    "print-spooler-service",
+    "domain-settings",
+    "..."
+  ]
+}

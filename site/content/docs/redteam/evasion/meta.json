@@ -1,0 +1,19 @@
+{
+  "title": "Defense Evasion",
+  "pages": [
+    "endpoint-detection-respons-edr-bypass",
+    "uac",
+    "amsi",
+    "etw-evasion",
+    "living-off-the-land",
+    "signature-evasion",
+    "obf",
+    "applocker-bypass",
+    "motw-bypass",
+    "powershell-constrained-language-mode-clm-bypass",
+    "kill-windows-defender",
+    "virtualization-based-security-vbs-bypass",
+    "sandbox-evasion",
+    "..."
+  ]
+}

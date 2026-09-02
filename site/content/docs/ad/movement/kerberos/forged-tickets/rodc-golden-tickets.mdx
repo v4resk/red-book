@@ -1,0 +1,43 @@
+---
+title: "RODC Golden tickets"
+---
+
+## Theory
+
+With administrative access to an [RODC](/ad/movement/domain-settings/rodc), it is possible to dump all the cached credentials, including those of the`krbtgt_XXXXX` account. The hash can be used to forge a "RODC golden ticket" for any account in the `msDS-RevealOnDemandGroup` and not in the `msDS-NeverRevealGroup` attributes of the RODC. This ticket can be presented to the RODC or any accessible standard writable Domain Controller to request a Service Ticket (ST).
+
+<Callout type="info">
+
+When presenting a RODC golden ticket to a writable (i.e. standard) Domain Controller, it is not worth crafting the PAC because it will be recalculated by the writable Domain Controller when issuing a service ticket (ST).
+
+</Callout>
+
+## Practice
+
+<Tabs items={['UNIX-like', 'Windows']}>
+<Tab value="UNIX-like">
+
+For the moment, from UNIX-like systems no tool is available to only forge a RODC Golden Ticket.
+
+</Tab>
+
+<Tab value="Windows">
+
+From Windows systems, [Rubeus](https://github.com/GhostPack/Rubeus) (C#) can be used for this purpose.
+
+```powershell
+Rubeus.exe golden /rodcNumber:$KBRTGT_NUMBER /flags:forwardable,renewable,enc_pa_rep /nowrap /outfile:ticket.kirbi /aes256:$KRBTGT_AES_KEY /user:USER /id:USER_RID /domain:domain.local /sid:DOMAIN_SID
+```
+
+</Tab>
+</Tabs>
+
+> The secret ingredient for making an RODC golden ticket viable is including the correct key version number in the _kvno_ field of the ticket.&#x20;
+>
+> _(By Elad Shamir on_ [_specterops.io_](https://posts.specterops.io/at-the-edge-of-tier-zero-the-curious-case-of-the-rodc-ef5f1799ca06)_)_
+
+## Resources
+
+<ResourceCard href="https://adsecurity.org/?p=3592" title="Attacking Read-Only Domain Controllers (RODCs) to Own Active Directory" description="adsecurity.org" icon="/assets/favicons/adsecurity.org.ico" />
+
+<ResourceCard href="https://www.secureauth.com/blog/the-kerberos-key-list-attack-the-return-of-the-read-only-domain-controllers/" title="www.secureauth.com" description="www.secureauth.com" icon="/assets/favicons/www.secureauth.com.png" />

@@ -1,0 +1,8 @@
+{
+  "title": "Kerberos",
+  "pages": [
+    "forged-tickets",
+    "delegation-to-krbtgt",
+    "..."
+  ]
+}

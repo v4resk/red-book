@@ -1,0 +1,849 @@
+ <!DOCTYPE html>
+		<html
+			class="layout layout-single    welcome  default-focus"
+			lang="en-us"
+			dir="ltr"
+			data-authenticated="false"
+			data-auth-status-determined="false"
+			data-target="docs"
+			x-ms-format-detection="none"
+		>
+			
+		<head>
+			<title>Microsoft Learn: Build with answers in reach</title>
+			<meta charset="utf-8" />
+			<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+			<meta name="color-scheme" content="light dark" />
+
+			<meta name="description" content="Find official documentation, practical know-how, and expert guidance for builders working and troubleshooting in Microsoft products." />
+			 
+
+			<!-- Non-customizable open graph and sharing-related metadata -->
+			<meta name="twitter:card" content="summary_large_image" />
+			<meta name="twitter:site" content="@MicrosoftLearn" />
+			<meta property="og:type" content="website" />
+			<meta property="og:image:alt" content="Microsoft Learn" />
+			<meta property="og:image" content="https://learn.microsoft.com/en-us/media/open-graph-image.png" />
+			<!-- Page specific open graph and sharing-related metadata -->
+			<meta property="og:title" content="Microsoft Learn: Build with answers in reach" />
+			
+			<meta property="og:description" content="Find official documentation, practical know-how, and expert guidance for builders working and troubleshooting in Microsoft products." />
+			<meta name="platform_id" content="921fc462-a2ae-c9d6-f17d-ebcb806eacac" /> 
+			<meta name="locale" content="en-us" />
+			 
+			
+
+			<meta name="page_type" content="Docs" />
+
+			<!--page specific meta tags-->
+			
+
+			<!-- custom meta tags -->
+			 
+
+			<!-- Apply persisted/system theme before first paint to prevent wrong-theme flash when scripts are deferred. -->
+			<script id="theme-preference">
+				(function () {
+			try {
+				var stored = localStorage.getItem('theme');
+				var theme = /^(light|dark|high-contrast)$/.test(stored)
+					? stored
+					: matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+				document.documentElement.classList.add('theme-' + theme);
+			} catch (e) {}
+		})();;
+			</script>
+
+			<script id="atlas-layout-preferences">
+				(function () {
+			try {
+				var state = JSON.parse(localStorage.getItem('atlas-layout-preferences') || '{}');
+				var view = state["Welcome"] || {};
+				var excludesKey = "";
+				var blocked = {};
+				if (excludesKey) {
+					var exclusions = JSON.parse(localStorage.getItem('atlas-layout-exclusions') || '{}');
+					if (Object.prototype.hasOwnProperty.call(exclusions, excludesKey)) {
+						var scoped = exclusions[excludesKey];
+						if (scoped) {
+							if (typeof scoped === 'object') blocked = scoped;
+						}
+					}
+				}
+				var html = document.documentElement;
+				for (var c in view) {
+					if (Object.prototype.hasOwnProperty.call(blocked, c)) continue;
+					if (view[c]) html.classList.add(c);
+					else html.classList.remove(c);
+				}
+			} catch (e) {}
+		})();;
+			</script>
+
+			<!-- assets and js globals -->
+			
+			<link rel="stylesheet" href="/static/assets/0.4.03529.8188-7f8df7ab/styles/site.css" />
+			
+			<script src="https://wcpstatic.microsoft.com/mscc/lib/v2/wcp-consent.js"></script>
+			<!-- Keep this URL in sync with oneDSScriptSelector in instrumentation/one-ds.ts. -->
+			<script async src="https://js.monitor.azure.com/scripts/c/ms.jsll-4.min.js"></script>
+			
+
+			<!-- msdocs global object -->
+			<script id="msdocs-script">
+		var msDocs = {
+  "environment": {
+    "accessLevel": "online",
+    "azurePortalHostname": "portal.azure.com",
+    "reviewFeatures": false,
+    "supportLevel": "production",
+    "systemContent": true,
+    "siteName": "learn",
+    "legacyHosting": false
+  },
+  "data": {
+    "contentLocale": "en-us",
+    "contentDir": "ltr",
+    "userLocale": "en-us",
+    "userDir": "ltr",
+    "pageTemplate": "Welcome",
+    "layoutStateStorageKey": "Welcome",
+    "brand": "",
+    "context": {},
+    "standardFeedback": false,
+    "showFeedbackReport": false,
+    "feedbackHelpLinkType": "",
+    "feedbackHelpLinkUrl": "",
+    "feedbackSystem": "",
+    "feedbackGitHubRepo": "",
+    "feedbackProductUrl": "",
+    "extendBreadcrumb": false,
+    "isEditDisplayable": false,
+    "isPrivateUnauthorized": false,
+    "hideViewSource": false,
+    "isPermissioned": false,
+    "hasRecommendations": false
+  },
+  "functions": {}
+};;
+	</script>
+
+			<!-- base scripts, msdocs global should be before this -->
+			<script
+				src="/static/assets/0.4.03529.8188-7f8df7ab/scripts/en-us/index-docs.js"
+				async
+			></script>
+			
+
+			<!-- json-ld -->
+			
+		</head>
+	
+			<body
+				id="body"
+				data-bi-name="body"
+				class="layout-body "
+				lang="en-us"
+				dir="ltr"
+			>
+				<header class="layout-body-header background-color-body-medium">
+		<div class="header-holder has-default-focus">
+			
+		<a
+			href="#main"
+			
+			style="z-index: 1070"
+			class="outline-color-text visually-hidden-until-focused position-fixed inner-focus focus-visible top-0 left-0 right-0 padding-xs text-align-center background-color-body"
+			
+		>
+			Skip to main content
+		</a>
+	
+
+			<div hidden id="cookie-consent-holder" data-test-id="cookie-consent-container"></div>
+			<!-- Unsupported browser warning -->
+			<div
+				id="unsupported-browser"
+				style="background-color: white; color: black; padding: 16px; border-bottom: 1px solid grey;"
+				hidden
+			>
+				<div style="max-width: 800px; margin: 0 auto;">
+					<p style="font-size: 24px">This browser is no longer supported.</p>
+					<p style="font-size: 16px; margin-top: 16px;">
+						Upgrade to Microsoft Edge to take advantage of the latest features, security updates, and technical support.
+					</p>
+					<div style="margin-top: 12px;">
+						<a
+							href="https://go.microsoft.com/fwlink/p/?LinkID=2092881 "
+							style="background-color: #0078d4; border: 1px solid #0078d4; color: white; padding: 6px 12px; border-radius: 2px; display: inline-block;"
+						>
+							Download Microsoft Edge
+						</a>
+						<a
+							href="https://learn.microsoft.com/en-us/lifecycle/faq/internet-explorer-microsoft-edge"
+							style="background-color: white; padding: 6px 12px; border: 1px solid #505050; color: #171717; border-radius: 2px; display: inline-block;"
+						>
+							More info about Internet Explorer and Microsoft Edge
+						</a>
+					</div>
+				</div>
+			</div>
+			<!-- site header -->
+			<div
+				id="ms--site-header"
+				data-test-id="site-header-wrapper"
+				itemscope="itemscope"
+				itemtype="http://schema.org/Organization"
+			>
+				<div
+					id="ms--mobile-nav"
+					class="site-header display-none-tablet padding-inline-none gap-none"
+					data-bi-name="mobile-header"
+					data-test-id="mobile-header"
+				></div>
+				<div
+					id="ms--primary-nav"
+					class="site-header display-none display-flex-tablet"
+					data-bi-name="L1-header"
+					data-test-id="primary-header"
+				></div>
+				<div
+					id="ms--secondary-nav"
+					class="display-none"
+					data-bi-name="L2-header"
+					data-test-id="secondary-header"
+					hidden
+				></div>
+			</div>
+			
+		<!-- banner -->
+		<div data-banner>
+			<div id="disclaimer-holder"></div>
+			
+		</div>
+		<!-- banner end -->
+	
+		</div>
+	</header>
+				 
+
+				<main
+					id="main"
+					role="main"
+					class="layout-body-main "
+					data-bi-name="content"
+					lang="en-us"
+					dir="ltr"
+				>
+					
+		<div id="ms--homepage-container">
+			
+		<section
+			id="ms--welcome-hero"
+			data-bi-name="hero"
+			class="hero hero-image gradient-border-right gradient-border-body-accent background-color-body-accent"
+			style="--hero-background-image-light: url(&quot;/media/home-and-directory/answers-in-reach-hero_light.png&quot;); --hero-background-image-dark: url(&quot;/media/home-and-directory/answers-in-reach-hero_dark.png&quot;);"
+		>
+			<div class="hero-content">
+				
+				<h1 class="title is-1 gradient-text-vivid padding-bottom-sm margin-bottom-none">
+					Build with answers in reach
+				</h1>
+				<p>Dive into official documentation, practical answers, and expert guidance for working and troubleshooting with Microsoft.</p>
+
+				<div id="form-wrapper" class="margin-top-sm">
+					<form
+						method="GET"
+						id="welcome-search-form-replacement"
+						name="welcome-search-form"
+						role="search"
+						action="/search"
+					>
+						<div class="display-flex flex-direction-column flex-direction-row-tablet gap-xxs">
+							<div class="flex-grow-1">
+								<div id="autocomplete-replacement" class="autocomplete display-block">
+									<div class="control">
+										<input
+											role="combobox"
+											id="facet-search-input"
+											class="autocomplete-input input control input-lg"
+											type="search"
+											aria-label="Search Microsoft Learn"
+											aria-controls="autocomplete-list"
+											aria-expanded="false"
+											placeholder="Search Microsoft Learn"
+											data-bi-name="home-search"
+											data-test-id="home-search-input"
+										/>
+									</div>
+								</div>
+							</div>
+							<button
+								class="button button-primary button-filled button-lg width-full width-auto-tablet"
+								type="submit"
+								data-bi-name="hero-search-button"
+								data-test-id="home-search-button"
+							>
+								<span class="icon" aria-hidden="true">
+									<span class="docon docon-search"></span>
+								</span>
+								<span>Search</span>
+							</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</section>
+	 
+		<section id="popular-section" class="uhf-container" data-bi-name="popular-section">
+			<div class="padding-block-lg">
+				<h2 class="title is-2 text-align-center-tablet">Popular technical resources and training</h2>
+				<ul class=" grid is-3 gap-md gap-lg-desktop margin-top-lg">
+					
+							<li class="grid-item">
+								<article data-bi-name="popular-card" class="card position-relative">
+									<div class="card-content">
+										<h3 class="card-title color-text font-size-xl margin-bottom-sm">
+											Discover AI, Azure, and Copilot essentials
+										</h3>
+										
+													<p class="card-content-description color-text-subtle margin-bottom-sm">
+														Develop knowledge and skills faster with the latest resources and expert insights.
+													</p>
+											  
+										
+		<div class="margin-top-sm">
+			<div class="media align-items-center">
+				
+							<div class="media-left">
+								<img
+									aria-hidden="true"
+									class="card-template-icon"
+									src="/media/common/ai-microchip.svg"
+									loading="lazy"
+								/>
+							</div>
+					  
+				<div class="media-content">
+					<a href="/ai" class="has-external-link-indicator card-title">Artificial Intelligence</a>
+					
+				</div>
+			</div>
+		</div>
+	
+		<div class="margin-top-sm">
+			<div class="media align-items-center">
+				
+							<div class="media-left">
+								<img
+									aria-hidden="true"
+									class="card-template-icon"
+									src="/media/logos/logo_azure.svg"
+									loading="lazy"
+								/>
+							</div>
+					  
+				<div class="media-content">
+					<a href="/azure" class="has-external-link-indicator card-title">Azure</a>
+					
+				</div>
+			</div>
+		</div>
+	
+		<div class="margin-top-sm">
+			<div class="media align-items-center">
+				
+							<div class="media-left">
+								<img
+									aria-hidden="true"
+									class="card-template-icon"
+									src="/media/logos/logo_copilot.svg"
+									loading="lazy"
+								/>
+							</div>
+					  
+				<div class="media-content">
+					<a href="/copilot" class="has-external-link-indicator card-title">Microsoft Copilot</a>
+					
+				</div>
+			</div>
+		</div>
+	
+									</div>
+									
+												<div class="card-footer card-footer-left border-top-none">
+													<div class="card-footer-item padding-block-xs">
+														<a
+															href="/docs"
+															class="font-size-sm font-weight-semibold color-hyperlink text-wrap-pretty"
+														>
+															Browse all product documentation
+															<span aria-hidden="true" class="icon">
+																<span class="docon docon-chevron-right-light"></span>
+															</span>
+														</a>
+													</div>
+												</div>
+										  
+								</article>
+							</li>
+						
+							<li class="grid-item">
+								<article data-bi-name="popular-card" class="card position-relative">
+									<div class="card-content">
+										<h3 class="card-title color-text font-size-xl margin-bottom-sm">
+											Take in-demand training
+										</h3>
+										
+													<p class="card-content-description color-text-subtle margin-bottom-sm">
+														Advance your technical career with training and verified credentials.
+													</p>
+											  
+										
+		<div class="margin-top-sm">
+			<div class="media align-items-center">
+				
+							<div class="media-left">
+								<img
+									aria-hidden="true"
+									class="card-template-icon"
+									src="/media/learn/instructor-led-badge.svg"
+									loading="lazy"
+								/>
+							</div>
+					  
+				<div class="media-content">
+					<a href="/training/courses/ai-900t00" class="has-external-link-indicator card-title">Microsoft Azure Fundamentals</a>
+					
+				</div>
+			</div>
+		</div>
+	
+		<div class="margin-top-sm">
+			<div class="media align-items-center">
+				
+							<div class="media-left">
+								<img
+									aria-hidden="true"
+									class="card-template-icon"
+									src="/training/achievements/generic-badge.svg"
+									loading="lazy"
+								/>
+							</div>
+					  
+				<div class="media-content">
+					<a href="/training/modules/fundamentals-generative-ai" class="has-external-link-indicator card-title">Fundamentals of Generative AI</a>
+					
+				</div>
+			</div>
+		</div>
+	
+		<div class="margin-top-sm">
+			<div class="media align-items-center">
+				
+							<div class="media-left">
+								<img
+									aria-hidden="true"
+									class="card-template-icon"
+									src="/media/home-and-directory/icon-azure-cloud.svg"
+									loading="lazy"
+								/>
+							</div>
+					  
+				<div class="media-content">
+					<a href="/training/paths/microsoft-azure-fundamentals-describe-cloud-concepts" class="has-external-link-indicator card-title">Microsoft Azure Fundamentals: Describe cloud concepts</a>
+					
+				</div>
+			</div>
+		</div>
+	
+									</div>
+									
+												<div class="card-footer card-footer-left border-top-none">
+													<div class="card-footer-item padding-block-xs">
+														<a
+															href="/training/browse/"
+															class="font-size-sm font-weight-semibold color-hyperlink text-wrap-pretty"
+														>
+															Browse all training
+															<span aria-hidden="true" class="icon">
+																<span class="docon docon-chevron-right-light"></span>
+															</span>
+														</a>
+													</div>
+												</div>
+										  
+								</article>
+							</li>
+						
+							<li class="grid-item">
+								<article data-bi-name="popular-card" class="card position-relative">
+									<div class="card-content">
+										<h3 class="card-title color-text font-size-xl margin-bottom-sm">
+											Additional resources
+										</h3>
+										
+													<p class="card-content-description color-text-subtle margin-bottom-sm">
+														Ask our developer community tech questions or gain applied skills and verified certifications.
+													</p>
+											  
+										
+		<div class="margin-top-sm">
+			<div class="media align-items-center">
+				
+				<div class="media-content">
+					<a href="/answers" class="has-external-link-indicator card-title">Ask a question</a>
+					
+								<p class="card-content-description color-text-subtle margin-top-xxs">
+									Join our Q&amp;A tech community to ask questions, share knowledge, and learn together.
+								</p>
+						  
+				</div>
+			</div>
+		</div>
+	
+		<div class="margin-top-sm">
+			<div class="media align-items-center">
+				
+				<div class="media-content">
+					<a href="/credentials" class="has-external-link-indicator card-title">Earn credentials</a>
+					
+								<p class="card-content-description color-text-subtle margin-top-xxs">
+									Explore credentials including real-world, scenario-based skills and verified, industry-recognized credentials.
+								</p>
+						  
+				</div>
+			</div>
+		</div>
+	
+		<div class="margin-top-sm">
+			<div class="media align-items-center">
+				
+				<div class="media-content">
+					<a href="/training/student-hub/certifications" class="has-external-link-indicator card-title">Get student certifications</a>
+					
+								<p class="card-content-description color-text-subtle margin-top-xxs">
+									Stand out to hiring managers with a Microsoft Certification and take exams at a discounted student price.
+								</p>
+						  
+				</div>
+			</div>
+		</div>
+	
+									</div>
+									
+								</article>
+							</li>
+						
+				</ul>
+			</div>
+		</section>
+	
+			
+		<section
+			id="ms--highlight-section"
+			class="uhf-container margin-bottom-lg"
+			data-bi-name="highlight-section"
+		>
+			<div
+				class="hero hero-sm hero-image background-color-body-accent gradient-border-right gradient-border-body-accent border-radius-lg margin-block-md-tablet padding-inline-lg-tablet"
+				style="--hero-background-image-light: url(&quot;/media/home-and-directory/hero_mcp.png&quot;); --hero-background-image-dark: url(&quot;/media/home-and-directory/hero_mcp.png&quot;);"
+			>
+				<div class="hero-content">
+					<h2 class="title is-2 margin-bottom-md">Get started with Microsoft Learn MCP Server</h2>
+					<p>Create a custom agent that uses Learn MCP Server to answer all its users&#39; questions with trusted Microsoft documentation.</p>
+					<div class="margin-top-xs">
+						<a
+							href="/training/support/mcp"
+							class="button button-clear border"
+							data-bi-name="create-plan-ai"
+						>
+							
+										<span class="icon" aria-hidden="true">
+											<span class="docon docon-sparkle"></span>
+										</span>
+								  
+							<span> Start building </span>
+						</a>
+					</div>
+				</div>
+			</div>
+		</section>
+	
+		</div>
+	
+				</main>
+				  <div class="layout-body-footer " data-bi-name="layout-footer">
+		<footer
+			id="footer"
+			data-test-id="footer"
+			data-bi-name="footer"
+			class="footer-layout padding-xs padding-sm-desktop has-default-focus border-top"
+			role="contentinfo"
+		>
+			<div class="display-flex gap-xs flex-wrap-wrap is-full-height padding-right-lg-desktop">
+				
+		<a
+			data-mscc-ic="false"
+			href="#"
+			data-bi-name="select-locale"
+			class="locale-selector-link flex-shrink-0 button button-sm button-clear external-link-indicator"
+			id=""
+			title=""
+			><span class="icon" aria-hidden="true"
+				><span class="docon docon-world"></span></span
+			><span class="local-selector-link-text">en-us</span></a
+		>
+	 <div class="ccpa-privacy-link" data-ccpa-privacy-link hidden>
+		
+		<a
+			data-mscc-ic="false"
+			href="https://aka.ms/yourcaliforniaprivacychoices"
+			data-bi-name="your-privacy-choices"
+			class="button button-sm button-clear flex-shrink-0 external-link-indicator"
+			id=""
+			title=""
+			>
+		<svg
+			xmlns="http://www.w3.org/2000/svg"
+			viewBox="0 0 30 14"
+			xml:space="preserve"
+			height="16"
+			width="43"
+			aria-hidden="true"
+			focusable="false"
+		>
+			<path
+				d="M7.4 12.8h6.8l3.1-11.6H7.4C4.2 1.2 1.6 3.8 1.6 7s2.6 5.8 5.8 5.8z"
+				style="fill-rule:evenodd;clip-rule:evenodd;fill:#fff"
+			></path>
+			<path
+				d="M22.6 0H7.4c-3.9 0-7 3.1-7 7s3.1 7 7 7h15.2c3.9 0 7-3.1 7-7s-3.2-7-7-7zm-21 7c0-3.2 2.6-5.8 5.8-5.8h9.9l-3.1 11.6H7.4c-3.2 0-5.8-2.6-5.8-5.8z"
+				style="fill-rule:evenodd;clip-rule:evenodd;fill:#06f"
+			></path>
+			<path
+				d="M24.6 4c.2.2.2.6 0 .8L22.5 7l2.2 2.2c.2.2.2.6 0 .8-.2.2-.6.2-.8 0l-2.2-2.2-2.2 2.2c-.2.2-.6.2-.8 0-.2-.2-.2-.6 0-.8L20.8 7l-2.2-2.2c-.2-.2-.2-.6 0-.8.2-.2.6-.2.8 0l2.2 2.2L23.8 4c.2-.2.6-.2.8 0z"
+				style="fill:#fff"
+			></path>
+			<path
+				d="M12.7 4.1c.2.2.3.6.1.8L8.6 9.8c-.1.1-.2.2-.3.2-.2.1-.5.1-.7-.1L5.4 7.7c-.2-.2-.2-.6 0-.8.2-.2.6-.2.8 0L8 8.6l3.8-4.5c.2-.2.6-.2.9 0z"
+				style="fill:#06f"
+			></path>
+		</svg>
+	
+			<span>Your Privacy Choices</span></a
+		>
+	
+	</div>
+				<div class="flex-shrink-0">
+		<div class="dropdown has-caret-up">
+			<button
+				data-test-id="theme-selector-button"
+				class="dropdown-trigger button button-clear button-sm inner-focus theme-dropdown-trigger"
+				aria-controls="{{ themeMenuId }}"
+				aria-haspopup="true"
+				aria-expanded="false"
+				data-bi-name="theme"
+			>
+				<span class="icon" aria-hidden="true"><span class="docon docon-sun"></span></span>
+				<span>Theme</span>
+				<span class="icon expanded-indicator" aria-hidden="true">
+					<span class="docon docon-chevron-down-light"></span>
+				</span>
+			</button>
+			<div class="dropdown-menu" id="{{ themeMenuId }}" role="menu">
+				<ul class="theme-selector padding-xxs" data-test-id="theme-dropdown-menu" role="none">
+					<li class="theme display-block" role="none">
+						<button
+							class="button button-clear button-sm theme-control button-block justify-content-flex-start text-align-left"
+							role="menuitemradio"
+							aria-checked="false"
+							data-theme-to="light"
+							tabindex="-1"
+						>
+							<span class="theme-light margin-right-xxs">
+								<span
+									class="theme-selector-icon border display-inline-block has-body-background"
+									aria-hidden="true"
+								>
+									<svg class="svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 14">
+										<rect width="22" height="14" class="has-fill-body-background" />
+										<rect x="5" y="5" width="12" height="4" class="has-fill-secondary" />
+										<rect x="5" y="2" width="2" height="1" class="has-fill-secondary" />
+										<rect x="8" y="2" width="2" height="1" class="has-fill-secondary" />
+										<rect x="11" y="2" width="3" height="1" class="has-fill-secondary" />
+										<rect x="1" y="1" width="2" height="2" class="has-fill-secondary" />
+										<rect x="5" y="10" width="7" height="2" rx="0.3" class="has-fill-primary" />
+										<rect x="19" y="1" width="2" height="2" rx="1" class="has-fill-secondary" />
+									</svg>
+								</span>
+							</span>
+							<span> Light </span>
+						</button>
+					</li>
+					<li class="theme display-block" role="none">
+						<button
+							class="button button-clear button-sm theme-control button-block justify-content-flex-start text-align-left"
+							role="menuitemradio"
+							aria-checked="false"
+							data-theme-to="dark"
+							tabindex="-1"
+						>
+							<span class="theme-dark margin-right-xxs">
+								<span
+									class="border theme-selector-icon display-inline-block has-body-background"
+									aria-hidden="true"
+								>
+									<svg class="svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 14">
+										<rect width="22" height="14" class="has-fill-body-background" />
+										<rect x="5" y="5" width="12" height="4" class="has-fill-secondary" />
+										<rect x="5" y="2" width="2" height="1" class="has-fill-secondary" />
+										<rect x="8" y="2" width="2" height="1" class="has-fill-secondary" />
+										<rect x="11" y="2" width="3" height="1" class="has-fill-secondary" />
+										<rect x="1" y="1" width="2" height="2" class="has-fill-secondary" />
+										<rect x="5" y="10" width="7" height="2" rx="0.3" class="has-fill-primary" />
+										<rect x="19" y="1" width="2" height="2" rx="1" class="has-fill-secondary" />
+									</svg>
+								</span>
+							</span>
+							<span> Dark </span>
+						</button>
+					</li>
+					<li class="theme display-block" role="none">
+						<button
+							class="button button-clear button-sm theme-control button-block justify-content-flex-start text-align-left"
+							role="menuitemradio"
+							aria-checked="false"
+							data-theme-to="high-contrast"
+							tabindex="-1"
+						>
+							<span class="theme-high-contrast margin-right-xxs">
+								<span
+									class="border theme-selector-icon display-inline-block has-body-background"
+									aria-hidden="true"
+								>
+									<svg class="svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 14">
+										<rect width="22" height="14" class="has-fill-body-background" />
+										<rect x="5" y="5" width="12" height="4" class="has-fill-secondary" />
+										<rect x="5" y="2" width="2" height="1" class="has-fill-secondary" />
+										<rect x="8" y="2" width="2" height="1" class="has-fill-secondary" />
+										<rect x="11" y="2" width="3" height="1" class="has-fill-secondary" />
+										<rect x="1" y="1" width="2" height="2" class="has-fill-secondary" />
+										<rect x="5" y="10" width="7" height="2" rx="0.3" class="has-fill-primary" />
+										<rect x="19" y="1" width="2" height="2" rx="1" class="has-fill-secondary" />
+									</svg>
+								</span>
+							</span>
+							<span> High contrast </span>
+						</button>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+			</div>
+			<ul class="links" data-bi-name="footerlinks">
+				<li class="manage-cookies-holder" hidden=""></li>
+				<li>
+		
+		<a
+			data-mscc-ic="false"
+			href="https://learn.microsoft.com/en-us/principles-for-ai-generated-content"
+			data-bi-name="aiDisclaimer"
+			class=" external-link-indicator"
+			id=""
+			title=""
+			>AI Disclaimer</a
+		>
+	
+	</li><li>
+		
+		<a
+			data-mscc-ic="false"
+			href="https://learn.microsoft.com/en-us/previous-versions/"
+			data-bi-name="archivelink"
+			class=" external-link-indicator"
+			id=""
+			title=""
+			>Previous Versions</a
+		>
+	
+	</li> <li>
+		
+		<a
+			data-mscc-ic="false"
+			href="https://techcommunity.microsoft.com/t5/microsoft-learn-blog/bg-p/MicrosoftLearnBlog"
+			data-bi-name="bloglink"
+			class=" external-link-indicator"
+			id=""
+			title=""
+			>Blog</a
+		>
+	
+	</li> <li>
+		
+		<a
+			data-mscc-ic="false"
+			href="https://learn.microsoft.com/en-us/contribute"
+			data-bi-name="contributorGuide"
+			class=" external-link-indicator"
+			id=""
+			title=""
+			>Contribute</a
+		>
+	
+	</li><li>
+		
+		<a
+			data-mscc-ic="false"
+			href="https://go.microsoft.com/fwlink/?LinkId=521839"
+			data-bi-name="privacy"
+			class=" external-link-indicator"
+			id=""
+			title=""
+			>Privacy</a
+		>
+	
+	</li><li>
+		
+		<a
+			data-mscc-ic="false"
+			href="https://go.microsoft.com/fwlink/?linkid=2259814"
+			data-bi-name="consumer-health-privacy"
+			class=" external-link-indicator"
+			id=""
+			title=""
+			>Consumer Health Privacy</a
+		>
+	
+	</li><li>
+		
+		<a
+			data-mscc-ic="false"
+			href="https://learn.microsoft.com/en-us/legal/termsofuse"
+			data-bi-name="termsofuse"
+			class=" external-link-indicator"
+			id=""
+			title=""
+			>Terms of Use</a
+		>
+	
+	</li><li>
+		
+		<a
+			data-mscc-ic="false"
+			href="https://www.microsoft.com/legal/intellectualproperty/Trademarks/"
+			data-bi-name="trademarks"
+			class=" external-link-indicator"
+			id=""
+			title=""
+			>Trademarks</a
+		>
+	
+	</li>
+				<li>&copy; Microsoft 2026</li>
+			</ul>
+		</footer>
+	</footer>
+			</body>
+		</html>

@@ -1,0 +1,9 @@
+{
+  "title": "Virtualization-based security (VBS) Bypass",
+  "pages": [
+    "credential-guard-bypass",
+    "hypervisor-protected-code-integrity-hvci-bypass",
+    "windows-defender-application-control-wdac-bypass",
+    "..."
+  ]
+}

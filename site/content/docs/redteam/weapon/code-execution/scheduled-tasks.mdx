@@ -1,0 +1,33 @@
+---
+title: "Scheduled Tasks"
+description: "MITRE ATT&CK™  Scheduled Task/Job  - Technique T1053.002"
+---
+
+## Theory
+
+Windows scheduled tasks can also be leveraged to run arbitrary commands since they execute a command when started.&#x20;
+
+## Practice
+
+<Tabs items={['schtasks.exe']}>
+<Tab value="schtasks.exe">
+
+On windows, we can use the built in schtasks.exe binary to remotely interact with services
+
+```bash
+#Create a Task
+schtasks /RU "SYSTEM" /create /tn "MyTask" /tr "<command/payload to execute>" /sc ONCE /sd 01/01/1970 /st 00:00 
+
+#Run It 
+schtasks /run /TN "MyTask" 
+
+#Delete a Task
+schtasks /TN "MyTask" /DELETE /F
+```
+
+</Tab>
+</Tabs>
+
+You may want to check this page for remote scheduled tasks execution :
+
+<Card href="../../pivoting/scheduled-tasks-atsvc.md" title="scheduled-tasks-atsvc.md" />

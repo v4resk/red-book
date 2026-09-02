@@ -1,0 +1,15 @@
+{
+  "title": "Persistence",
+  "pages": [
+    "skeleton-key",
+    "sid-history",
+    "adminsdholder",
+    "goldengmsa",
+    "kerberos",
+    "ad-cs",
+    "laps",
+    "dcshadow",
+    "access-controls",
+    "..."
+  ]
+}

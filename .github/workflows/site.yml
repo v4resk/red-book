@@ -1,0 +1,67 @@
+name: Build site
+
+on:
+  push:
+    branches: [main, migration/fumadocs]
+    paths: ['site/**', '.github/workflows/site.yml']
+  pull_request:
+    paths: ['site/**']
+  workflow_dispatch:
+
+# Pushes made with GITHUB_TOKEN do not trigger workflow runs (GitHub prevents
+# recursion by design), so the commit step below cannot loop. The default token
+# permission is read-only, though, so the write scope must be requested.
+permissions:
+  contents: write
+
+concurrency:
+  group: site-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: site
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: site/package-lock.json
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - run: npm ci
+
+      # Resolve titles/favicons for any newly added resource links and rewrite
+      # the cards. Incremental: only URLs missing from link-meta.json are
+      # fetched. Never fails the build -- a flaky third-party host must not
+      # break the site, cards just fall back to the bare domain.
+      - name: Enrich resource links
+        run: npm run links || echo "link enrichment failed; continuing with cached metadata"
+
+      - run: npm run build
+
+      # If enrichment found anything new, keep the cache in the repo so future
+      # builds stay offline and deterministic.
+      - name: Commit refreshed link metadata
+        if: github.event_name == 'push'
+        run: |
+          cd ..
+          if ! git diff --quiet -- site/link-meta.json site/public/assets/favicons site/content; then
+            git config user.name  "github-actions[bot]"
+            git config user.email "github-actions[bot]@users.noreply.github.com"
+            git add site/link-meta.json site/public/assets/favicons site/content
+            git commit -m "chore(site): refresh resource-link metadata [skip ci]"
+            git push
+          fi
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: site
+          path: site/out
+          retention-days: 7

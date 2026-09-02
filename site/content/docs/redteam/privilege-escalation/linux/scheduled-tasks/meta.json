@@ -1,0 +1,8 @@
+{
+  "title": "Scheduled tasks",
+  "pages": [
+    "cron-jobs",
+    "systemd-timers",
+    "..."
+  ]
+}

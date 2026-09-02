@@ -1,48 +1,98 @@
+<div align="center">
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="site/public/assets/logo-infiltr8-dark.png">
+  <source media="(prefers-color-scheme: light)" srcset="site/public/assets/logo-infiltr8-light.png">
+  <img alt="infiltr8" src="site/public/assets/logo-infiltr8-light.png" width="360">
+</picture>
+
+### The Red-Book
+
+**The Art of Offensive CyberSecurity**
+
+Technical notes and cheat sheets for red teamers, pentesters and security
+researchers — sourced from research papers, industry blogs and field
+experience, and kept in one place.
+
+<p>
+  <img alt="pages" src="https://img.shields.io/badge/pages-558-BF0426?style=flat-square">
+  <img alt="code blocks" src="https://img.shields.io/badge/code%20blocks-2592-BF0426?style=flat-square">
+  <img alt="built with" src="https://img.shields.io/badge/built%20with-Fumadocs%20%2B%20Next.js-111?style=flat-square">
+  <img alt="license" src="https://img.shields.io/badge/use-educational%20only-777?style=flat-square">
+</p>
+
+</div>
+
 ---
-description: The Art of Offensive CyberSecurity
----
 
-# The Red-Book
+## What's inside
 
-<figure><img src=".gitbook/assets/logo-blanc-rouge.png" alt=""><figcaption></figcaption></figure>
+| Section | Pages | Covers |
+| :--- | ---: | :--- |
+| **Red-Teaming** | 248 | The host & endpoint lifecycle, ordered by the ATT&CK kill chain — recon, execution, persistence, privilege escalation, defense evasion, credential access, lateral movement, exfiltration |
+| **Active Directory** | 136 | Kerberos, NTLM, AD-CS, DACLs, delegations, coerced authentication, SCCM/MECM, trusts, persistence |
+| **Web Pentesting** | 61 | Server-side and client-side vulnerabilities, plus web servers, CMSs, frameworks and DBMSs |
+| **Cloud & CI/CD** | 61 | AWS and Entra ID identity abuse, Kubernetes, containers, and the pipelines that deploy them |
+| **Network & Wireless** | 28 | Service-by-service notes for the protocols you meet on an engagement, plus WiFi and Bluetooth |
+| **Smart Contracts** | 18 | EVM attack surfaces, upgradeability patterns and protocol-layer weaknesses, tagged with SCWE IDs |
+| **AI Red-Teaming** | 5 | 🛠️ LLMs, RAG, ML, agents and training infrastructure — in progress |
 
-**The Red-Book** by **infiltr8** is offering a collection of **technical notes** and **cheat sheets**. Our goal is to provide you with practical knowledge rooted in real-world experience. All the information you find within these pages has been meticulously sourced from a diverse range of valuable resources on the internet.
+Techniques are tagged with **MITRE ATT&CK** identifiers where they map, and
+**OWASP WSTG** / **SCWE** identifiers in the web and smart-contract sections.
 
-We have scoured numerous reputable sources, including research papers, industry blogs, documentation, and expert opinions, to bring you the most relevant and up-to-date content. The techniques, methodologies, and concepts presented in **The Red-Book** have been carefully vetted and tested (we still human, it's possible there's some mistakes).
+## Running it locally
 
-Whether you are a cybersecurity enthusiast, an aspiring ethical hacker, or a concerned individual seeking to fortify your digital defenses, **The Red-Book** will serve as your indispensable resource. We cover a wide range of topics, including penetration testing, vulnerability assessments, social engineering, red teaming, network security, web application security, and much more.
+The site is a static [Fumadocs](https://fumadocs.dev) / Next.js build living in
+[`site/`](site/).
 
-As you embark on this journey with us, keep in mind that offensive cybersecurity **is not about malicious intent**. It is about understanding the tactics employed by potential adversaries and using that knowledge to protect yourself and others. Together, let's take a proactive stance and defend against the ever-evolving digital threats that surround us. Remember, **knowledge is power, and with power comes responsibility**.
+```bash
+cd site
+npm install
+npm run build     # -> site/out/
+npm start         # serve it
+```
 
-:tada:Please feel free to contribute, give feedback/suggestions or reach out to me on Discord (**v4resk#0430**).
+Content is `site/content/docs/**.mdx` — edit it directly. See
+[`site/README.md`](site/README.md) for navigation conventions, the resource-link
+metadata cache, and the handful of non-obvious build constraints.
 
-{% hint style="danger" %}
-Around 90%, of the content relating to "Active Directory" comes from [The Hacker Recipes](https://www.thehacker.recipes/) website. Many thanks to [Charlie Bromberg](https://twitter.com/_nwodtuhs) for his valuable work.
-{% endhint %}
+## Contributing
 
-{% hint style="info" %}
-Fell free to contribute with donation in cryptocurrency\
-ETH/BSC: 0x6F8274f1BEF5ca774769A73AB520C5461fB22219
-{% endhint %}
+Corrections and additions are welcome — open an issue or a pull request. The
+techniques here have been vetted and tested, but we're human and mistakes are
+possible.
 
-{% hint style="danger" %}
-**Disclaimer: Use of Information and Tools on infiltr8.io**
+When adding external resource links, run `npm run links` in `site/` so the card
+picks up the target's title and favicon. CI does this automatically on push.
 
-The information provided on infiltr8.io is intended for educational and informational purposes only. The website offers resources related to penetration testing (pentest) and red teaming, with the goal of enhancing cybersecurity awareness and knowledge.
+## Credits
 
-**1. No Unlawful Activities:** Users are strictly prohibited from using any information, tools, or resources provided on this website for any unlawful activities. Engaging in unauthorized access, malicious hacking, or any activities that violate applicable laws and regulations is strictly against our principles.
+Around 90% of the **Active Directory** content originates from
+[The Hacker Recipes](https://www.thehacker.recipes/). Many thanks to
+[Charlie Bromberg](https://twitter.com/_nwodtuhs) for that work.
 
-**2. Ethical Use:** All content on infiltr8.io is meant to be used ethically and responsibly. Users are encouraged to adhere to ethical guidelines and legal standards when applying the information, tools, or methodologies discussed on the website.
+Previously published with GitBook; the original markdown source remains in this
+repository's history prior to the migration.
 
-**3. User Responsibility:** Users are solely responsible for their actions and the consequences that may arise from using the information presented on the website. infiltr8.io and its contributors will not be held liable for any misuse or illegal activities carried out by individuals using the provided content.
+## Disclaimer
 
-**4. No Guarantees:** While we strive to provide accurate and up-to-date information, infiltr8.io makes no guarantees regarding the completeness, accuracy, or reliability of the content. Users are encouraged to verify information independently and use it at their own discretion.
+Provided for **educational and informational purposes only**.
 
-**5. External Links:** The website may contain links to external resources, tools, or websites. infiltr8.io is not responsible for the content, security, or privacy practices of these external links. Users should exercise caution and review the policies of external sites.
+Offensive security **is not about malicious intent** — it is about understanding
+the tactics an adversary would use, and applying that understanding to defend
+against them.
 
-**6. Changes to Disclaimer:** infiltr8.io reserves the right to modify or update this disclaimer at any time without prior notice. It is the user's responsibility to review the disclaimer periodically for any changes.
+- **No unlawful activity.** Using anything here for unauthorised access, or any
+  activity that violates applicable law, is strictly prohibited.
+- **Ethical use.** Apply these techniques only where you have explicit
+  authorisation to do so.
+- **Your responsibility.** You alone are accountable for your actions and their
+  consequences. infiltr8 and its contributors accept no liability for misuse.
+- **No guarantees.** We aim for accuracy but make no warranty as to
+  completeness or reliability — verify independently.
+- **No endorsement.** Mentioning a tool or service is not an endorsement, and we
+  are not responsible for third-party content or security.
 
-**7. No Endorsement:** Any mention of specific tools, products, or services on infiltr8.io does not constitute an endorsement. Users are encouraged to conduct their own research and make informed decisions.
-
-By accessing and using infiltr8.io, users acknowledge and agree to comply with the terms of this disclaimer. If you do not agree with these terms, please refrain from using the website.
-{% endhint %}
+<div align="center">
+<sub>Knowledge is power, and with power comes responsibility.</sub>
+</div>
