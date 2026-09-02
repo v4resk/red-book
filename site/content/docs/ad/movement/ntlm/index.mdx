@@ -42,9 +42,9 @@ This is meant to protect the user's password from eavesdropping by implementing 
 * a bruteforce attack against the LM/NTLM response to retrieve the LM or NT hash it was derivated from
 * if found, a bruteforce/dictionary attack against the NT hash to retrieve the user's password
 
-<Card href="capture.md" title="capture.md" />
+<Card href="/ad/movement/ntlm/capture" title="Capture" />
 
-<Card href="../credentials/cracking.md" title="cracking.md" />
+<Card href="/ad/movement/credentials/cracking" title="Cracking" />
 
 The problem is that Microsoft has poorly implemented the zero-knowledge proof concept in the LM and NTLM protocols. The LM or NT hash is used "as is" to compute the response. This means an attacker knowing an LM or NT hash could use it to authenticate as a user without knowing the user's password. This technique is called [Pass the hash](/ad/movement/ntlm/pth#pass-the-hash-ntlm).
 
@@ -52,7 +52,7 @@ The problem is that Microsoft has poorly implemented the zero-knowledge proof co
 
 Attackers could also rely on [forced authentications and phishing](/ad/movement/mitm-and-coerced-authentications) to [relay incoming authentications](/ad/movement/ntlm/relay).
 
-<Card href="../mitm-and-coerced-authentications/" title="mitm-and-coerced-authentications" />
+<Card href="/ad/movement/mitm-and-coerced-authentications" title="MITM and coerced auths" />
 
 <Card href="/ad/movement/ntlm/relay" title="PFGlaZOk9WQQxTsZmSJ0" />
 

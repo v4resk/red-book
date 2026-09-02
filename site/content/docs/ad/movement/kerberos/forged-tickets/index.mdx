@@ -17,19 +17,19 @@ Silver, Golden, Diamond and Sapphire tickets are forged or modified Kerberos tic
 
 **Silver ticket**: the long-term key of a service account can be used to forge a Service ticket that can later be used with [pass-the-ticket](/ad/movement/kerberos/ptt) to access that service. In a Silver Ticket scenario, an attacker will forge a Service Ticket containing a PAC that features arbitrary information about the requesting user, effectively granting lots of access.
 
-<Card href="silver.md" title="silver.md" />
+<Card href="/ad/movement/kerberos/forged-tickets/silver" title="Silver tickets" />
 
 **Golden ticket**: the long-term key of the `krbtgt` account can be used to forge a special TGT (Ticket Granting Ticket) that can later be used with [pass-the-ticket](/ad/movement/kerberos/ptt) to access any resource within the AD domain. The `krbtgt`'s key is used to encrypt the PAC. In a Golden Ticket scenario, an attacker that has knowledge of the `krbtgt` long-term key, will usually forge a PAC indicating that the user belongs to privileged groups. This PAC will be embedded in a forged TGT. The TGT will be used to request Service Tickets than will then feature the PAC presented in the TGT, hence granting lots of access to the attacker.
 
-<Card href="golden.md" title="golden.md" />
+<Card href="/ad/movement/kerberos/forged-tickets/golden" title="Golden tickets" />
 
 **Diamond ticket**: Golden and Silver tickets can usually be detected by probes that monitor the service ticket requests (`KRB_TGS_REQ`) that have no corresponding TGT requests (`KRB_AS_REQ`). Those types of tickets also feature forged PACs that sometimes fail at mimicking real ones, thus increasing their detection rates. Diamond tickets can be a useful alternative in the way they simply request a normal ticket, decrypt the PAC, modify it, recalculate the signatures and encrypt it again. It requires knowledge of the target service long-term key (can be the `krbtgt` for a TGT, or a target service for a Service Ticket).
 
-<Card href="diamond.md" title="diamond.md" />
+<Card href="/ad/movement/kerberos/forged-tickets/diamond" title="Diamond tickets" />
 
 **Sapphire ticket**: Sapphire tickets are similar to Diamond tickets in the way the ticket is not forged, but instead based on a legitimate one obtained after a request. The difference lays in how the PAC is modified. The Diamond ticket approach modifies the legitimate PAC to add some privileged groups (or replace it with a fully-forged one). In the Sapphire ticket approach, the PAC of another powerful user is obtained through an [S4U2self+u2u](/ad/movement/kerberos#s4u2self-+-u2u) trick. This PAC then replaces the one featured in the legitimate ticket. The resulting ticket is an assembly of legitimate elements, and follows a standard ticket request, which makes it then most difficult silver/golden ticket variant to detect.
 
-<Card href="sapphire.md" title="sapphire.md" />
+<Card href="/ad/movement/kerberos/forged-tickets/sapphire" title="Sapphire tickets" />
 
 The **Bronze bit** vulnerability (CVE-2020-17049) introduced the possibility of forwarding service tickets when it shouldn't normally be possible (protected users, unconstrained delegation, constrained delegation configured with protocol transition).
 
