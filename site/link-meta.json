@@ -6,7 +6,7 @@
  },
  "http://blog.gentilkiwi.com/securite/mimikatz/overpass-the-hash": {
   "domain": "blog.gentilkiwi.com",
-  "icon": "blog.gentilkiwi.com.png",
+  "icon": "blog.gentilkiwi.com.ico",
   "title": null
  },
  "http://davenport.sourceforge.net/ntlm.html": {
@@ -16,17 +16,17 @@
  },
  "http://g-laurent.blogspot.com/2016/10/introducing-responder-multirelay-10.html": {
   "domain": "g-laurent.blogspot.com",
-  "icon": "g-laurent.blogspot.com.png",
+  "icon": "g-laurent.blogspot.com.ico",
   "title": "Laurent Gaffi\u00e9 blog: Introducing Responder MultiRelay 1.0"
  },
  "http://moyix.blogspot.com/2008/02/decrypting-lsa-secrets.html": {
   "domain": "moyix.blogspot.com",
-  "icon": "moyix.blogspot.com.png",
+  "icon": "moyix.blogspot.com.ico",
   "title": "Decrypting LSA Secrets"
  },
  "http://moyix.blogspot.com/2008/02/syskey-and-sam.html": {
   "domain": "moyix.blogspot.com",
-  "icon": "moyix.blogspot.com.png",
+  "icon": "moyix.blogspot.com.ico",
   "title": "SysKey and the SAM"
  },
  "http://remivernier.com/index.php/2018/08/26/protocoles-nbt-ns-llmnr-et-exploitation-des-failles/": {
@@ -421,17 +421,17 @@
  },
  "https://blog.nody.cc/posts/container-breakouts-part1/": {
   "domain": "blog.nody.cc",
-  "icon": "blog.nody.cc.png",
+  "icon": "blog.nody.cc.ico",
   "title": "Container Breakouts \u2013 Part 1: Access to root directory of the Host"
  },
  "https://blog.nody.cc/posts/container-breakouts-part2/": {
   "domain": "blog.nody.cc",
-  "icon": "blog.nody.cc.png",
+  "icon": "blog.nody.cc.ico",
   "title": "Container Breakouts \u2013 Part 2: Privileged Container"
  },
  "https://blog.nody.cc/posts/container-breakouts-part3/": {
   "domain": "blog.nody.cc",
-  "icon": "blog.nody.cc.png",
+  "icon": "blog.nody.cc.ico",
   "title": "Container Breakouts \u2013 Part 3: Docker Socket"
  },
  "https://blog.notso.pro/2020-05-09-offops-in-ad-1/": {
@@ -441,7 +441,7 @@
  },
  "https://blog.orange.tw/2021/08/proxylogon-a-new-attack-surface-on-ms-exchange-part-1.html": {
   "domain": "blog.orange.tw",
-  "icon": "blog.orange.tw.png",
+  "icon": "blog.orange.tw.ico",
   "title": "Redirecting..."
  },
  "https://blog.ploetzli.ch/2014/understanding-linux-capabilities/": {
@@ -481,17 +481,17 @@
  },
  "https://blog.thc.org/infecting-ssh-public-keys-with-backdoors": {
   "domain": "blog.thc.org",
-  "icon": "blog.thc.org.png",
+  "icon": "blog.thc.org.ico",
   "title": "Infecting SSH Public Keys with backdoors"
  },
  "https://blog.xpnsec.com/kerberos-attacks-part-2/": {
   "domain": "blog.xpnsec.com",
-  "icon": "blog.xpnsec.com.png",
+  "icon": "blog.xpnsec.com.ico",
   "title": "Kerberos AD Attacks - More Roasting with AS-REP"
  },
  "https://blog.xpnsec.com/unobfuscating-network-access-accounts/": {
   "domain": "blog.xpnsec.com",
-  "icon": "blog.xpnsec.com.png",
+  "icon": "blog.xpnsec.com.ico",
   "title": "Exploring SCCM by Unobfuscating Network Access Accounts"
  },
  "https://bloodhound.readthedocs.io/en/latest/": {
@@ -761,7 +761,7 @@
  },
  "https://cloudsplaining.readthedocs.io": {
   "domain": "cloudsplaining.readthedocs.io",
-  "icon": "cloudsplaining.readthedocs.io.png",
+  "icon": "cloudsplaining.readthedocs.io.ico",
   "title": "Cloudsplaining"
  },
  "https://connormcgarr.github.io/hvci/": {
@@ -821,7 +821,7 @@
  },
  "https://developer.mozilla.org/en-US/docs/Web/Security/Subdomain_takeovers": {
   "domain": "developer.mozilla.org",
-  "icon": "developer.mozilla.org.png",
+  "icon": "developer.mozilla.org.ico",
   "title": "Subdomain takeover - Security | MDN"
  },
  "https://dirkjanm.io/abusing-exchange-one-api-call-away-from-domain-admin/": {
@@ -901,12 +901,12 @@
  },
  "https://docs.docker.com/registry/spec/api/": {
   "domain": "docs.docker.com",
-  "icon": "docs.docker.com.png",
+  "icon": "docs.docker.com.ico",
   "title": "Deprecated and retired Docker products and features"
  },
  "https://docs.google.com/presentation/d/1rAl-XKrkuFjCpExHBGrp5L8ZwtuFFrOygZMapxMp28I/edit?usp=sharing": {
   "domain": "docs.google.com",
-  "icon": "docs.google.com.png",
+  "icon": "docs.google.com.ico",
   "title": "Insomnihack 2022 - Delegating Kerberos To Bypass Kerberos Delegation Limitations"
  },
  "https://docs.kernel.org/filesystems/overlayfs.html": {
@@ -921,67 +921,67 @@
  },
  "https://docs.microsoft.com/en-us/archive/blogs/askds/five-common-questions-about-adminsdholder-and-sdprop": {
   "domain": "docs.microsoft.com",
-  "icon": "docs.microsoft.com.png",
+  "icon": "docs.microsoft.com.ico",
   "title": "Five common questions about AdminSdHolder and SDProp"
  },
  "https://docs.microsoft.com/en-us/archive/blogs/josebda/the-basics-of-smb-signing-covering-both-smb1-and-smb2": {
   "domain": "docs.microsoft.com",
-  "icon": "docs.microsoft.com.png",
+  "icon": "docs.microsoft.com.ico",
   "title": "The Basics of SMB Signing (covering both SMB1 and SMB2)"
  },
  "https://docs.microsoft.com/en-us/dotnet/api/system.directoryservices.activedirectoryrights": {
   "domain": "docs.microsoft.com",
-  "icon": "docs.microsoft.com.png",
+  "icon": "docs.microsoft.com.ico",
   "title": "ActiveDirectoryRights Enum (System.DirectoryServices)"
  },
  "https://docs.microsoft.com/en-us/openspecs/windows_protocols/ms-adts/990fb975-ab31-4bc1-8b75-5da132cd4584": {
   "domain": "docs.microsoft.com",
-  "icon": "docs.microsoft.com.png",
+  "icon": "docs.microsoft.com.ico",
   "title": "[MS-ADTS]: Access Rights"
  },
  "https://docs.microsoft.com/en-us/openspecs/windows_protocols/ms-dfsnm/95a506a8-cae6-4c42-b19d-9c1ed1223979": {
   "domain": "docs.microsoft.com",
-  "icon": "docs.microsoft.com.png",
+  "icon": "docs.microsoft.com.ico",
   "title": "[MS-DFSNM]: Distributed File System (DFS): Namespace Management Protocol"
  },
  "https://docs.microsoft.com/en-us/openspecs/windows_protocols/ms-fsrvp/dae107ec-8198-4778-a950-faa7edad125b": {
   "domain": "docs.microsoft.com",
-  "icon": "docs.microsoft.com.png",
+  "icon": "docs.microsoft.com.ico",
   "title": "[MS-FSRVP]: File Server Remote VSS Protocol"
  },
  "https://docs.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/2c15cbf0-f086-4c74-8b70-1f2fa45dd4be": {
   "domain": "docs.microsoft.com",
-  "icon": "docs.microsoft.com.png",
+  "icon": "docs.microsoft.com.ico",
   "title": "[MS-GPPREF]: Password Encryption"
  },
  "https://docs.microsoft.com/en-us/powershell/module/configurationmanager/?view=sccm-ps": {
   "domain": "docs.microsoft.com",
-  "icon": "docs.microsoft.com.png",
+  "icon": "docs.microsoft.com.ico",
   "title": "ConfigurationManager Module - Configuration Manager"
  },
  "https://docs.microsoft.com/en-us/previous-versions/windows/it-pro/windows-server-2003/cc759554(v=ws.10)?redirectedfrom=MSDN": {
   "domain": "docs.microsoft.com",
-  "icon": "docs.microsoft.com.png",
+  "icon": "docs.microsoft.com.ico",
   "title": "Trust Technologies: Domain and Forest Trusts"
  },
  "https://docs.microsoft.com/en-us/troubleshoot/windows-server/identity/security-identifiers-in-windows": {
   "domain": "docs.microsoft.com",
-  "icon": "docs.microsoft.com.png",
+  "icon": "docs.microsoft.com.ico",
   "title": "Security Identifiers"
  },
  "https://docs.soliditylang.org/en/latest/contracts.html#events": {
   "domain": "docs.soliditylang.org",
-  "icon": "docs.soliditylang.org.png",
+  "icon": "docs.soliditylang.org.ico",
   "title": "Contracts  Solidity 0.8.37-develop documentation"
  },
  "https://docs.soliditylang.org/en/latest/metadata.html": {
   "domain": "docs.soliditylang.org",
-  "icon": "docs.soliditylang.org.png",
+  "icon": "docs.soliditylang.org.ico",
   "title": "Contract Metadata  Solidity 0.8.37-develop documentation"
  },
  "https://docs.soliditylang.org/en/v0.8.13/internals/layout_in_storage.html#mappings-and-dynamic-arrays": {
   "domain": "docs.soliditylang.org",
-  "icon": "docs.soliditylang.org.png",
+  "icon": "docs.soliditylang.org.ico",
   "title": "Layout of State Variables in Storage  Solidity 0.8.13 documentation"
  },
  "https://doublepulsar.com/rdp-hijacking-how-to-hijack-rds-and-remoteapp-sessions-transparently-to-move-through-an-da2a1e73a5f6": {
@@ -991,7 +991,7 @@
  },
  "https://dumpco.re/blog/asreqroast": {
   "domain": "dumpco.re",
-  "icon": "dumpco.re.png",
+  "icon": "dumpco.re.ico",
   "title": "dumpco.re - asreqroast"
  },
  "https://en.hackndo.com/kerberos": {
@@ -1216,7 +1216,7 @@
  },
  "https://forum.winbatch.com/index.php?topic=1545.0": {
   "domain": "forum.winbatch.com",
-  "icon": "forum.winbatch.com.png",
+  "icon": "forum.winbatch.com.ico",
   "title": "Modify the sidHistory attribute"
  },
  "https://forums.veeam.com/veeam-backup-replication-f2/recover-esxi-password-in-veeam-t34630.htm": {
@@ -1226,12 +1226,12 @@
  },
  "https://g-laurent.blogspot.com/2021/08/responders-dhcp-poisoner.html": {
   "domain": "g-laurent.blogspot.com",
-  "icon": "g-laurent.blogspot.com.png",
+  "icon": "g-laurent.blogspot.com.ico",
   "title": "Laurent Gaffi\u00e9 blog: Responder's DHCP Poisoner"
  },
  "https://github.blog/2021-06-10-privilege-escalation-polkit-root-on-linux-with-bug/": {
   "domain": "github.blog",
-  "icon": "github.blog.png",
+  "icon": "github.blog.ico",
   "title": "Privilege escalation with polkit: How to get root on Linux with a seven-year-old bug"
  },
  "https://github.com/0xJs/CARTP-cheatsheet/blob/main/recon.md": {
@@ -1496,7 +1496,7 @@
  },
  "https://googleprojectzero.blogspot.com/2025/01/windows-bug-class-accessing-trapped-com.html": {
   "domain": "googleprojectzero.blogspot.com",
-  "icon": "googleprojectzero.blogspot.com.png",
+  "icon": "googleprojectzero.blogspot.com.ico",
   "title": "Windows Bug Class: Accessing Trapped COM Objects with IDispatch"
  },
  "https://hackingthe.cloud/aws/exploitation/iam_privilege_escalation/": {
@@ -1516,7 +1516,7 @@
  },
  "https://hashcat.net/wiki/doku.php?id=example_hashes": {
   "domain": "hashcat.net",
-  "icon": "hashcat.net.png",
+  "icon": "hashcat.net.ico",
   "title": "example_hashes [hashcat wiki]"
  },
  "https://hatching.io/blog/lnk-hta-polyglot/": {
@@ -1601,7 +1601,7 @@
  },
  "https://labs.detectify.com/2021/02/18/middleware-middleware-everywhere-and-lots-of-misconfigurations-to-fix/": {
   "domain": "labs.detectify.com",
-  "icon": "labs.detectify.com.png",
+  "icon": "labs.detectify.com.ico",
   "title": "Middleware, middleware everywhere - and lots of misconfigurations to fix"
  },
  "https://labs.withsecure.com/publications/digging-into-ms14-068-exploitation-and-defence": {
@@ -1696,7 +1696,7 @@
  },
  "https://malicious.link/post/2020/compiling-a-dll-using-mingw/": {
   "domain": "malicious.link",
-  "icon": "malicious.link.png",
+  "icon": "malicious.link.ico",
   "title": "Compiling a DLL using MingGW"
  },
  "https://mayfly277.github.io/posts/GOADv2-pwning-part12/": {
@@ -1801,37 +1801,37 @@
  },
  "https://osandamalith.com/2017/03/24/places-of-interest-in-stealing-netntlm-hashes/": {
   "domain": "osandamalith.com",
-  "icon": "osandamalith.com.png",
+  "icon": "osandamalith.com.ico",
   "title": "Places of Interest in Stealing NetNTLM Hashes | \ud83d\udd10Blog of Osanda"
  },
  "https://owasp.org/www-community/attacks/Brute_force_attack": {
   "domain": "owasp.org",
-  "icon": "owasp.org.png",
+  "icon": "owasp.org.ico",
   "title": "Brute Force Attack | OWASP Foundation"
  },
  "https://owasp.org/www-community/attacks/Command_Injection": {
   "domain": "owasp.org",
-  "icon": "owasp.org.png",
+  "icon": "owasp.org.ico",
   "title": "Command Injection | OWASP Foundation"
  },
  "https://owasp.org/www-community/attacks/xss/": {
   "domain": "owasp.org",
-  "icon": "owasp.org.png",
+  "icon": "owasp.org.ico",
   "title": "Cross Site Scripting (XSS) | OWASP Foundation"
  },
  "https://owasp.org/www-community/vulnerabilities/Unrestricted_File_Upload": {
   "domain": "owasp.org",
-  "icon": "owasp.org.png",
+  "icon": "owasp.org.ico",
   "title": "Unrestricted File Upload | OWASP Foundation"
  },
  "https://owasp.org/www-project-top-ten/2017/A3_2017-Sensitive_Data_Exposure": {
   "domain": "owasp.org",
-  "icon": "owasp.org.png",
+  "icon": "owasp.org.ico",
   "title": "OWASP Top Ten 2017 | A3:2017-Sensitive Data Exposure | OWASP Foundation"
  },
  "https://owasp.org/www-project-web-security-testing-guide/latest/4-Web_Application_Security_Testing/02-Configuration_and_Deployment_Management_Testing/10-Test_for_Subdomain_Takeover": {
   "domain": "owasp.org",
-  "icon": "owasp.org.png",
+  "icon": "owasp.org.ico",
   "title": "WSTG - Latest | OWASP Foundation"
  },
  "https://pentest.y-security.de/OWASP%20Cheat%20Sheet%20Series/Kubernetes_Security_Cheat_Sheet/": {
@@ -1841,37 +1841,37 @@
  },
  "https://pentestlab.blog/2017/12/13/smb-share-scf-file-attacks/": {
   "domain": "pentestlab.blog",
-  "icon": "pentestlab.blog.png",
+  "icon": "pentestlab.blog.ico",
   "title": "SMB Share \u2013 SCF File Attacks"
  },
  "https://pentestlab.blog/2018/04/10/skeleton-key": {
   "domain": "pentestlab.blog",
-  "icon": "pentestlab.blog.png",
+  "icon": "pentestlab.blog.ico",
   "title": "Skeleton Key"
  },
  "https://pentestlab.blog/2019/10/21/persistence-security-support-provider/": {
   "domain": "pentestlab.blog",
-  "icon": "pentestlab.blog.png",
+  "icon": "pentestlab.blog.ico",
   "title": "Persistence \u2013 Security Support Provider"
  },
  "https://pentestlab.blog/2019/11/13/persistence-accessibility-features/": {
   "domain": "pentestlab.blog",
-  "icon": "pentestlab.blog.png",
+  "icon": "pentestlab.blog.ico",
   "title": "Persistence \u2013 Accessibility Features"
  },
  "https://pentestlab.blog/2020/01/13/persistence-image-file-execution-options-injection/": {
   "domain": "pentestlab.blog",
-  "icon": "pentestlab.blog.png",
+  "icon": "pentestlab.blog.ico",
   "title": "Persistence \u2013 Image File Execution Options Injection"
  },
  "https://pentestlab.blog/2020/01/21/persistence-wmi-event-subscription/": {
   "domain": "pentestlab.blog",
-  "icon": "pentestlab.blog.png",
+  "icon": "pentestlab.blog.ico",
   "title": "Persistence \u2013 WMI Event Subscription"
  },
  "https://pentestlab.blog/2021/10/20/lateral-movement-webclient": {
   "domain": "pentestlab.blog",
-  "icon": "pentestlab.blog.png",
+  "icon": "pentestlab.blog.ico",
   "title": "Lateral Movement \u2013 WebClient"
  },
  "https://persistence-info.github.io/Data/aedebug.html": {
@@ -2131,17 +2131,17 @@
  },
  "https://scsfg.io/hackers/abi-hash-collisions/": {
   "domain": "scsfg.io",
-  "icon": "scsfg.io.png",
+  "icon": "scsfg.io.ico",
   "title": "ABI Hash Collisions - Smart Contract Security Field Guide"
  },
  "https://secframe.com/blog/a-sidhistory-attack-marching-onto-a-dc/": {
   "domain": "secframe.com",
-  "icon": "secframe.com.png",
+  "icon": "secframe.com.ico",
   "title": null
  },
  "https://securitylabs.datadoghq.com/articles/overlayfs-cve-2023-0386/": {
   "domain": "securitylabs.datadoghq.com",
-  "icon": "securitylabs.datadoghq.com.png",
+  "icon": "securitylabs.datadoghq.com.ico",
   "title": "The OverlayFS vulnerability CVE-2023-0386: Overview, detection, and remediation | Datadog Security Labs"
  },
  "https://shahjerry33.medium.com/rce-via-lfi-log-poisoning-the-death-potion-c0831cebc16d": {
@@ -2186,12 +2186,12 @@
  },
  "https://snovvcrash.rocks/2020/12/28/htb-hades.html#spoofing-active-directory-integrated-dns": {
   "domain": "snovvcrash.rocks",
-  "icon": null,
+  "icon": "snovvcrash.rocks.ico",
   "title": null
  },
  "https://snovvcrash.rocks/2022/03/06/abusing-kcd-without-protocol-transition.html": {
   "domain": "snovvcrash.rocks",
-  "icon": null,
+  "icon": "snovvcrash.rocks.ico",
   "title": null
  },
  "https://social.technet.microsoft.com/wiki/contents/articles/23559.kerberos-pre-authentication-why-it-should-not-be-disabled.aspx": {
@@ -2211,7 +2211,7 @@
  },
  "https://ssd-disclosure.com/ssd-advisory-overlayfs-pe/": {
   "domain": "ssd-disclosure.com",
-  "icon": null,
+  "icon": "ssd-disclosure.com.ico",
   "title": null
  },
  "https://stackoverflow.com/questions/14479074/c-sharp-reflection-load-assembly-and-invoke-a-method-if-it-exists": {
@@ -2236,7 +2236,7 @@
  },
  "https://swisskyrepo.github.io/PayloadsAllTheThingsWeb/Insecure%20Deserialization/Python/": {
   "domain": "swisskyrepo.github.io",
-  "icon": "swisskyrepo.github.io.png",
+  "icon": "swisskyrepo.github.io.ico",
   "title": null
  },
  "https://trustedsec.com/blog/kubernetes-for-pentesters-part-1": {
@@ -2371,7 +2371,7 @@
  },
  "https://twitter.com/snovvcrash/status/1471829627765239816": {
   "domain": "twitter.com",
-  "icon": "twitter.com.png",
+  "icon": "twitter.com.ico",
   "title": "sn\ud83e\udd76vvcr\ud83d\udca5sh (@snovvcrash) on X"
  },
  "https://unit42.paloaltonetworks.com/next-gen-kerberos-attacks/": {
@@ -2411,7 +2411,7 @@
  },
  "https://wiki.wireshark.org/NetBIOS/NBNS": {
   "domain": "wiki.wireshark.org",
-  "icon": "wiki.wireshark.org.png",
+  "icon": "wiki.wireshark.org.ico",
   "title": "NetBIOS/NBNS - Wireshark Wiki"
  },
  "https://www.akamai.com/blog/security-research/abusing-dmsa-for-privilege-escalation-in-active-directory": {
@@ -2421,7 +2421,7 @@
  },
  "https://www.atomicredteam.io/atomic-red-team/atomics/T1048.003": {
   "domain": "www.atomicredteam.io",
-  "icon": "www.atomicredteam.io.png",
+  "icon": "www.atomicredteam.io.ico",
   "title": "Atomic Red Team\u2122: T1048.003"
  },
  "https://www.bettercap.org/modules/ethernet/spoofers/arp.spoof/": {
@@ -2441,7 +2441,7 @@
  },
  "https://www.beyondtrust.com/blog/entry/a-quick-look-at-ms14-068": {
   "domain": "www.beyondtrust.com",
-  "icon": "www.beyondtrust.com.png",
+  "icon": "www.beyondtrust.com.ico",
   "title": null
  },
  "https://www.cisco.com/c/en/us/support/docs/ios-nx-os-software/nx-os-software/213841-understanding-icmp-redirect-messages.html": {
@@ -2491,7 +2491,7 @@
  },
  "https://www.fox-it.com/en/news/blog/mitm6-compromising-ipv4-networks-via-ipv6/": {
   "domain": "www.fox-it.com",
-  "icon": "www.fox-it.com.png",
+  "icon": "www.fox-it.com.ico",
   "title": null
  },
  "https://www.geeksforgeeks.org/vulnerability-in-str-format-in-python/": {
@@ -2551,12 +2551,12 @@
  },
  "https://www.hexacorn.com/blog/2013/09/19/beyond-good-ol-run-key-part-4/": {
   "domain": "www.hexacorn.com",
-  "icon": "www.hexacorn.com.png",
+  "icon": "www.hexacorn.com.ico",
   "title": "Beyond good ol\u2019 Run key, Part 4 | Hexacorn"
  },
  "https://www.hexacorn.com/blog/2018/12/30/beyond-good-ol-run-key-part-98/": {
   "domain": "www.hexacorn.com",
-  "icon": "www.hexacorn.com.png",
+  "icon": "www.hexacorn.com.ico",
   "title": "Beyond good ol\u2019 Run key, Part 98 | Hexacorn"
  },
  "https://www.hub.trimarcsecurity.com/post/push-comes-to-shove-exploring-the-attack-surface-of-sccm-client-push-accounts": {
@@ -2876,7 +2876,7 @@
  },
  "https://www.sternsecurity.com/blog/local-network-attacks-llmnr-and-nbt-ns-poisoning": {
   "domain": "www.sternsecurity.com",
-  "icon": "www.sternsecurity.com.png",
+  "icon": "www.sternsecurity.com.ico",
   "title": "Local Network Attacks: LLMNR and NBT-NS Poisoning"
  },
  "https://www.sudo.ws/security/advisories/pwfeedback/": {
@@ -2886,17 +2886,17 @@
  },
  "https://www.synacktiv.com/en/publications/azure-ad-introduction-for-red-teamers.html#azure-ad-overview": {
   "domain": "www.synacktiv.com",
-  "icon": "www.synacktiv.com.png",
+  "icon": "www.synacktiv.com.ico",
   "title": "Azure AD introduction for red teamers"
  },
  "https://www.synacktiv.com/publications/azure-ad-introduction-for-red-teamers#attacking-azure-ad": {
   "domain": "www.synacktiv.com",
-  "icon": "www.synacktiv.com.png",
+  "icon": "www.synacktiv.com.ico",
   "title": "Azure AD introduction for red teamers"
  },
  "https://www.synacktiv.com/sites/default/files/2023-01/sudo-CVE-2023-22809.pdf": {
   "domain": "www.synacktiv.com",
-  "icon": "www.synacktiv.com.png",
+  "icon": "www.synacktiv.com.ico",
   "title": null
  },
  "https://www.thehacker.recipes/ad/movement/adcs/certificate-templates": {
@@ -3026,7 +3026,7 @@
  },
  "https://www.webdavsystem.com/server/access/windows": {
   "domain": "www.webdavsystem.com",
-  "icon": "www.webdavsystem.com.png",
+  "icon": "www.webdavsystem.com.ico",
   "title": "Connecting to WebDAV server on Microsoft Windows"
  },
  "https://www.wiz.io/blog/ubuntu-overlayfs-vulnerability": {
