@@ -65,3 +65,26 @@ jobs:
           name: site
           path: site/out
           retention-days: 7
+
+  # Publish the static export to the VPS (served by nginx at
+  # https://infiltr8.io/redbook/, alongside the GitBook at red.infiltr8.io).
+  deploy:
+    needs: build
+    if: github.event_name == 'push' && github.ref == 'refs/heads/migration/fumadocs'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: site
+          path: out
+
+      # `rsync --delete` keeps /var/www/redbook an exact mirror of the build;
+      # that path serves ONLY the Red-Book, so nothing else is ever removed.
+      # The key comes from a secret (a string) but `ssh -i` needs a file, so it
+      # is written out and locked down before use.
+      - name: Deploy to VPS
+        run: |
+          printf '%s\n' "${{ secrets.VPS_SSH_KEY }}" > deploy_key
+          chmod 600 deploy_key
+          rsync -az --delete -e "ssh -i deploy_key -o StrictHostKeyChecking=accept-new" \
+            out/ "${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }}:/var/www/redbook/"
