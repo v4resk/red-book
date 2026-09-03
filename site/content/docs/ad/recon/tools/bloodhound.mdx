@@ -4,7 +4,7 @@ title: "BloodHound ⚙️"
 
 ## Theory
 
-[BloodHound](https://github.com/BloodHoundAD/BloodHound) (Javascript webapp, compiled with Electron, uses [Neo4j](https://neo4j.com/) as graph DBMS) is an awesome tool that allows mapping of relationships within Active Directory environments. It mostly uses Windows API functions and LDAP namespace functions to collect data from domain controllers and domain-joined Windows systems.
+[BloodHound CE](https://github.com/SpecterOps/BloodHound) (web app deployed with Docker Compose, uses [Neo4j](https://neo4j.com/) as graph DBMS) is an awesome tool that allows mapping of relationships within Active Directory environments. It mostly uses Windows API functions and LDAP namespace functions to collect data from domain controllers and domain-joined Windows systems.
 
 ## Practice
 
@@ -20,7 +20,7 @@ SharpHound ([sources](https://github.com/BloodHoundAD/SharpHound), [builds](http
 It must be run from the context of a domain user, either directly through a logon or through another method such as runas (`runas /netonly /user:$DOMAIN\$USER`) (see [Impersonation](/redteam/credentials/impersonation)). Alternatively, SharpHound can be used with the `LdapUsername` and `LdapPassword` flags for that matter.
 
 ```bash
-SharpHound.exe --collectionmethod All
+SharpHound.exe -c All
 ```
 
 <Callout type="info">
@@ -33,7 +33,7 @@ The previous commands are basic but some options (i.e. Stealth and Loop) can be 
 
 ```bash
 # Perform stealth collection methods
-SharpHound.exe --collectionmethod All --Stealth
+SharpHound.exe -c All --Stealth
 
 # Loop collections (especially useful for session collection)
 # e.g. collect sessions every 10 minutes for 3 hours
@@ -133,7 +133,7 @@ Once the collection is over, the data can be uploaded and analysed in BloodHound
 
 Using BloodHound can help find attack paths and abuses like ACEs abuse, [Kerberos delegations abuse](/ad/movement/kerberos/delegations), [credential dumping](/ad/movement/credentials/dumping) and [credential shuffling](/ad/movement/credentials/credential-shuffling), [GPOs abuse](/ad/movement/group-policies), [Kerberoast](/ad/movement/kerberos/roasting/kerberoast), [ASREProast](/ad/movement/kerberos/roasting/asreproast), [domain trusts attacks](/ad/movement/domain-trusts), etc.
 
-![](&lt;/assets/Screenshot from 2020-12-08 15-29-30.png>)
+<Figure src="/assets/Screenshot from 2020-12-08 15-29-30.png" />
 
 For detailed and official documentation on the analysis process, testers can check the following resources: [the BloodHound GUI](https://bloodhound.readthedocs.io/en/latest/data-analysis/bloodhound-gui.html), [nodes](https://bloodhound.readthedocs.io/en/latest/data-analysis/nodes.html) and [edges](https://bloodhound.readthedocs.io/en/latest/data-analysis/edges.html).
 

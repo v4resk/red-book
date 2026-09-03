@@ -30,7 +30,7 @@ The RODC computer account has reset rights on the account `krbtgt_XXXXX`'s passw
 
 </Callout>
 
-When the RODC generates the TGT, it indicates in the `kvno` field the version number of the key used to generate the ticket. With this TGT, it is possible to request a Service Ticket (ST) against the RODC or any accessible standard writable Domain Controller (provided that the principal is listed in `msDS-RevealOnDemandGroup` and not listed in `msDS-NeverRevealGroup`).
+When the RODC generates the TGT, it indicates in the `kvno` field the version number of the key used to generate the ticket. With this TGT, it is possible to request a Service Ticket (ST) from any accessible writable Domain Controller, which will issue it regardless of the Password Replication Policy. Requesting the ST from the RODC itself only works if the principal is allowed by the RODC's PRP (listed in `msDS-RevealOnDemandGroup` and not in `msDS-NeverRevealGroup`).
 
 ## Practice
 

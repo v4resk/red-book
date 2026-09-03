@@ -40,6 +40,13 @@ Then, forging (and signing) a certificate can be done as follows.
 ```bash
 certipy forge -ca-pfx "CA.pfx" -upn "administrator@corp.local" -subject "CN=Administrator,CN=Users,DC=CORP,DC=LOCAL"
 ```
+
+<Callout type="warn">
+
+Since the May 2022 patch ([KB5014754](https://support.microsoft.com/en-us/topic/kb5014754-certificate-based-authentication-changes-on-windows-domain-controllers-ad2c23b0-15d8-4340-a468-4d4f3b188f16)), DCs in Compatibility (`1`) or Full enforcement (`2`) mode reject certificates lacking a `szOID_NTDS_CA_SECURITY_EXT` SID extension matching the impersonated principal. Add `-sid "$TARGET_SID"` to `certipy forge` so the forged certificate carries the right SID.
+
+</Callout>
+
 The certificate can then be used with [Pass the Certificate](/ad/movement/kerberos/pass-the/pass-the-certificate).
 
 </Tab>

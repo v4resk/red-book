@@ -15,7 +15,7 @@ In most situations, services accounts are machine accounts, which have very comp
 
 <Callout type="warn">
 
-Unlike [ASREProasting](/ad/movement/kerberos/roasting/asreproast), this attack can only be carried out with a prior foothold (valid domain credentials).
+Unlike [ASREProasting](/ad/movement/kerberos/roasting/asreproast), this attack usually requires a prior foothold (valid domain credentials). The exception is *Kerberoasting without pre-authentication* (Charlie Clark), which works unauthenticated against accounts that have Kerberos pre-authentication disabled.
 
 </Callout>
 
@@ -72,6 +72,33 @@ hashcat -m 13100 kerberoastables.txt $wordlist
 ```bash
 john --format=krb5tgs --wordlist=$wordlist kerberoastables.txt
 ```
+
+### Kerberoasting without pre-authentication
+
+In September 2022, [Charlie Clark](https://twitter.com/exploitph) showed that Service Tickets can be obtained through `AS-REQ` requests (normally used for TGT requests) rather than the usual `TGS-REQ`, and [implemented](https://github.com/GhostPack/Rubeus/pull/139) it for Kerberoasting.
+
+If an attacker knows an account for which pre-authentication is not required (an [ASREProastable](/ad/movement/kerberos/roasting/asreproast) account) plus one or more target service accounts, a Kerberoast can be attempted **without controlling any domain account**, since pre-authentication will not be required.
+
+<Tabs items={['UNIX-like', 'Windows']}>
+<Tab value="UNIX-like">
+
+[Impacket](https://github.com/fortra/impacket)'s [GetUserSPNs](https://github.com/fortra/impacket/blob/master/examples/GetUserSPNs.py) (Python) supports it with `-no-preauth` (the target SPNs/service names go one per line in `services.txt`).
+
+```bash
+GetUserSPNs.py -no-preauth "$PREAUTH_DISABLED_USER" -usersfile "services.txt" -dc-host "$DC_HOST" "$DOMAIN/"
+```
+
+</Tab>
+<Tab value="Windows">
+
+[Rubeus](https://github.com/GhostPack/Rubeus) (C#) uses `/nopreauth:` and `/spn:`.
+
+```powershell
+Rubeus.exe kerberoast /outfile:kerberoastables.txt /domain:"$DOMAIN" /dc:"$DC_HOST" /nopreauth:"$PREAUTH_DISABLED_USER" /spn:"$TARGET_SPN"
+```
+
+</Tab>
+</Tabs>
 
 ### Targeted Kerberoasting
 

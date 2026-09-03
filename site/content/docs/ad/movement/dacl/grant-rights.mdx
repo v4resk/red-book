@@ -16,7 +16,7 @@ Story time, Exchange Servers used to have `WriteDacl` over domain objects, allow
 
 If attacker can write an ACE (`WriteDacl`) for a container or organisational unit (OU), if inheritance flags are added (`0x01+ 0x02`) to the ACE, and inheritance is enabled for an object in that container/OU, the ACE will be applied to it. By default, all the objects with `AdminCount=0` will inherit ACEs from their parent container/OU.
 
-Impacket's dacledit (Python) can be used with the `-inheritance` flag for that purpose ([PR#1291](https://github.com/fortra/impacket/pull/1291)).
+Impacket's dacledit (Python) can be used with the `-inheritance` flag for that purpose.
 
 </Callout>
 
@@ -73,7 +73,7 @@ From a Windows system, this can be achieved with [Add-DomainObjectAcl](https://p
 Add-DomainObjectAcl -Rights 'All' -TargetIdentity "target_object" -PrincipalIdentity "controlled_object"
 
 # Give DCSync (DS-Replication-Get-Changes, DS-Replication-Get-Changes-All)
-Add-DomainObjectAcl -Rights 'All' -TargetIdentity "target_object" -PrincipalIdentity "controlled_object"
+Add-DomainObjectAcl -Rights 'DCSync' -TargetIdentity "target_object" -PrincipalIdentity "controlled_object"
 ```
 
 <Callout type="info">

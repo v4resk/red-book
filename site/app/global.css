@@ -70,3 +70,73 @@ html > body[data-scroll-locked] {
   padding-inline-start: calc(5 * var(--spacing)) !important;
 }
 
+
+/* Center content images. <Figure>/<Img> center themselves inline, but a
+   markdown ![](...) with a local path is turned by remark-image into a
+   next/image element (rendered as <img data-nimg>), which bypasses those
+   components. next/image is only used for content images (the navbar mark and
+   resource-card favicons are raw <img> without data-nimg), so this is a precise
+   target. Scoped to the page body so nothing in the chrome is affected. */
+#nd-page img[data-nimg] {
+  display: block;
+  margin-inline: auto;
+}
+
+/* -------- Sidebar: nested tree rails (guide lines at every depth) --------
+   Fumadocs draws the folder rail (a ::before line) only on the depth-1 children
+   container (sidebar.js: `depth === 1 && before:bg-fd-border`), so opening a
+   nested folder adds a level shown by indent alone, with no rail. Every folder
+   content wrapper carries the class trio `flex-col gap-0.5 pt-0.5`; the root
+   page list lacks `pt-0.5`, so the trio matches folder levels only, and each
+   wrapper is `position: relative`, so a ::before anchors to it.
+
+   We add the same 1px rail to every wrapper that has a wrapper ancestor (depth
+   2 and deeper; depth 1 keeps its native rail), stepping the inset by 3 spacing
+   units per level to track the link indent (depth-1 rail sits at 2.5 spacing).
+   `:has()` tints the rails along the active branch with the brand primary, so
+   the path you are in lights up while sibling branches stay neutral. */
+
+/* base rail for depth 2+ (any wrapper nested inside another wrapper) */
+#nd-sidebar [class~="flex-col"][class~="gap-0.5"][class~="pt-0.5"]
+            [class~="flex-col"][class~="gap-0.5"][class~="pt-0.5"]::before {
+  content: "";
+  position: absolute;
+  inset-block: 0.25rem;
+  width: 1px;
+  background: var(--color-fd-border);
+  inset-inline-start: calc(5.5 * var(--spacing)); /* depth 2 */
+}
+/* deeper levels: step the rail inward to sit under each parent */
+#nd-sidebar [class~="flex-col"][class~="gap-0.5"][class~="pt-0.5"]
+            [class~="flex-col"][class~="gap-0.5"][class~="pt-0.5"]
+            [class~="flex-col"][class~="gap-0.5"][class~="pt-0.5"]::before {
+  inset-inline-start: calc(8.5 * var(--spacing)); /* depth 3 */
+}
+#nd-sidebar [class~="flex-col"][class~="gap-0.5"][class~="pt-0.5"]
+            [class~="flex-col"][class~="gap-0.5"][class~="pt-0.5"]
+            [class~="flex-col"][class~="gap-0.5"][class~="pt-0.5"]
+            [class~="flex-col"][class~="gap-0.5"][class~="pt-0.5"]::before {
+  inset-inline-start: calc(11.5 * var(--spacing)); /* depth 4 */
+}
+#nd-sidebar [class~="flex-col"][class~="gap-0.5"][class~="pt-0.5"]
+            [class~="flex-col"][class~="gap-0.5"][class~="pt-0.5"]
+            [class~="flex-col"][class~="gap-0.5"][class~="pt-0.5"]
+            [class~="flex-col"][class~="gap-0.5"][class~="pt-0.5"]
+            [class~="flex-col"][class~="gap-0.5"][class~="pt-0.5"]::before {
+  inset-inline-start: calc(14.5 * var(--spacing)); /* depth 5 */
+}
+#nd-sidebar [class~="flex-col"][class~="gap-0.5"][class~="pt-0.5"]
+            [class~="flex-col"][class~="gap-0.5"][class~="pt-0.5"]
+            [class~="flex-col"][class~="gap-0.5"][class~="pt-0.5"]
+            [class~="flex-col"][class~="gap-0.5"][class~="pt-0.5"]
+            [class~="flex-col"][class~="gap-0.5"][class~="pt-0.5"]
+            [class~="flex-col"][class~="gap-0.5"][class~="pt-0.5"]::before {
+  inset-inline-start: calc(17.5 * var(--spacing)); /* depth 6 */
+}
+
+/* active branch: tint the rail of every depth-2+ wrapper containing the
+   current page, leaving sibling branches and the depth-1 rail neutral */
+#nd-sidebar [class~="flex-col"][class~="gap-0.5"][class~="pt-0.5"]
+            [class~="flex-col"][class~="gap-0.5"][class~="pt-0.5"]:has(a[data-active="true"])::before {
+  background: var(--color-fd-primary);
+}

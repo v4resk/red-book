@@ -18,7 +18,7 @@ If an object's (called **objectA**) DACL features an ACE stating that another ob
 
 DACL abuse potential paths can be identified by [BloodHound](/ad/recon/tools/bloodhound) from UNIX-like (using the Python ingestor [bloodhound.py](https://github.com/fox-it/BloodHound.py)) and Windows (using the [SharpHound](https://github.com/BloodHoundAD/SharpHound3) ingestor) systems.
 
-Other tools like, `Get-DomainObjectAcl` and `Add-DomainObjectAcl` from [Powersploit](https://github.com/PowerShellMafia/PowerSploit/)'s [Powerview](https://github.com/PowerShellMafia/PowerSploit/blob/dev/Recon/PowerView.ps1), `Get-Acl` and `Set-Acl` official Powershell cmdlets, or [Impacket](https://github.com/SecureAuthCorp/impacket)'s dacledit.py script (Python) can be used in order to manually inspect an object's DACL. :warning: _At the time of writing, the Pull Request (_[_#1291_](https://github.com/SecureAuthCorp/impacket/pull/1291)_) offering that dacledit is still being reviewed and in active development. It has the following command-line arguments._
+Other tools like, `Get-DomainObjectAcl` and `Add-DomainObjectAcl` from [Powersploit](https://github.com/PowerShellMafia/PowerSploit/)'s [Powerview](https://github.com/PowerShellMafia/PowerSploit/blob/dev/Recon/PowerView.ps1), `Get-Acl` and `Set-Acl` official Powershell cmdlets, or [Impacket](https://github.com/SecureAuthCorp/impacket)'s dacledit.py script (Python) can be used in order to manually inspect an object's DACL.
 
 See this page for more details
 
@@ -28,7 +28,7 @@ See this page for more details
 
 In order to navigate the notes, testers can use the mindmap below.
 
-![](&lt;/assets/spaces_-MHRw3PMJtbDDjbxm5ub_uploads_ntRNzbqz7Ji1ZB1kjrqp_DACL abuse-dark.png>)
+<Figure src="/assets/spaces_-MHRw3PMJtbDDjbxm5ub_uploads_ntRNzbqz7Ji1ZB1kjrqp_DACL abuse-dark.png" />
 
 All of the aforementioned attacks (red blocks) are detailed in the child notes, except:
 
@@ -51,7 +51,7 @@ All of the aforementioned attacks (red blocks) are detailed in the child notes, 
 
 **ACE inheritance**
 
-If attacker can write an ACE (`WriteDacl`) for a container or organisational unit (OU), if inheritance flags are added (`0x01+ 0x02`) to the ACE, and inheritance is enabled for an object in that container/OU, the ACE will be applied to it. Impacket's dacledit (Python) can be used with the `-inheritance` flag for that purpose ([PR#1291](https://github.com/fortra/impacket/pull/1291)).
+If attacker can write an ACE (`WriteDacl`) for a container or organisational unit (OU), if inheritance flags are added (`0x01+ 0x02`) to the ACE, and inheritance is enabled for an object in that container/OU, the ACE will be applied to it. Impacket's dacledit (Python) can be used with the `-inheritance` flag for that purpose.
 
 </Callout>
 
@@ -86,8 +86,8 @@ The following table should help for better understanding of the ACE types and wh
 | Self                           | `ADS_RIGHT_DS_SELF`                    | Access Right                          | Perform "Validated writes" (i.e. edit an attribute's value and have that value verified and validate by AD). The "Validated writes" is referenced by an "ObjectType GUID".                                  |
 | AllExtendedRights              | `ADS_RIGHT_DS_CONTROL_ACCESS`          | Access Right                          | Peform "Extended rights". "AllExtendedRights" refers to that permission being unrestricted. This right can be restricted by specifying the extended right in the "ObjectType GUID".                         |
 | User-Force-Change-Password     | `00299570-246d-11d0-a768-00aa006e0529` | Control Access Right (extended right) | Change the password of the object without having to know the previous one.                                                                                                                                  |
-| DS-Replication-Get-Changes     | `1131f6aa-9c07-11d1-f79f-00c04fc2dcd2` | Control Access Right (extended right) | One of the two extended rights needed to operate a [DCSync](https://www.thehacker.recipes/ad/movement/credentials/dumping/dcsync).                                                                          |
-| DS-Replication-Get-Changes-All | `1131f6ad-9c07-11d1-f79f-00c04fc2dcd2` | Control Access Right (extended right) | One of the two extended rights needed to operate a [DCSync](https://www.thehacker.recipes/ad/movement/credentials/dumping/dcsync).                                                                          |
+| DS-Replication-Get-Changes     | `1131f6aa-9c07-11d1-f79f-00c04fc2dcd2` | Control Access Right (extended right) | One of the two extended rights needed to operate a [DCSync](/redteam/credentials/os-credentials/windows-and-active-directory/dcsync).                                                                          |
+| DS-Replication-Get-Changes-All | `1131f6ad-9c07-11d1-f79f-00c04fc2dcd2` | Control Access Right (extended right) | One of the two extended rights needed to operate a [DCSync](/redteam/credentials/os-credentials/windows-and-active-directory/dcsync).                                                                          |
 | Self-Membership                | `bf9679c0-0de6-11d0-a285-00aa003049e2` | Validate Write                        | Edit the "member" attribute of the object.                                                                                                                                                                  |
 | Validated-SPN                  | `f3a64788-5306-11d1-a9c5-0000f80367c1` | Validate Write                        | Edit the "servicePrincipalName" attribute of the object.                                                                                                                                                    |
 

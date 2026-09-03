@@ -86,7 +86,7 @@ By default any user in Active Directory can enumerate all DNS records in the Dom
 [adidnsdump](https://github.com/dirkjanm/adidnsdump) can be used for that purpose.
 
 ```bash
-adidnsdump -u <DOMAIN_FQDN>\\<USERNAME> ldap://<DC_IP> -r
+adidnsdump -u <DOMAIN_FQDN>\\<USERNAME> -p <PASSWORD> ldap://<DC_IP> -r
 cat records.csv
 ```
 
@@ -97,7 +97,7 @@ cat records.csv
 
 NetExec's [Enum_dns](https://www.infosecmatter.com/netexec-module-library/?netexecm=smb-enum_dns) module utilizes WMI to dump DNS information from an Active Directory DNS Server. It extracts `MicrosoftDNS_ResourceRecord` (complete zone information) from all found domains.
 ```bash
-netexec smb -u <USERNAME> -p <PASSWORD> -d <DOMAIN> -M enum_dns
+netexec smb <DC_IP> -u <USERNAME> -p <PASSWORD> -d <DOMAIN> -M enum_dns
 ```
 <Callout type="info">
 

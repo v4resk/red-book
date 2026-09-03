@@ -16,7 +16,7 @@ For instance, the SID of an account with Domain Admin rights can be added to a n
 
 <Callout type="error">
 
-There is currently no way to exploit this technique purely from a distant UNIX-like machine, as it requires some operations on specific Windows processes' memory.
+The classic implementations run on or against the Domain Controller directly (mimikatz `sid::add`, or DSInternals `Add-ADDBSidHistory` against an offline `NTDS.dit`). More recent Python tooling implements the DRSUAPI `DsAddSidHistory` method, which allows injection over the wire from a UNIX-like machine given sufficient privileges.
 
 </Callout>
 

@@ -19,9 +19,8 @@ The powerful user's PAC can be obtained through an [S4U2self+u2u](/ad/movement/k
 
 From UNIX-like systems, [Impacket](https://github.com/SecureAuthCorp/impacket)'s [ticketer](https://github.com/SecureAuthCorp/impacket/blob/master/examples/ticketer.py) (Python) script can be used for such purposes with the `-impersonate` argument.
 
-_As of September 25th, 2022, this feature is in a pull request (_[_#1411_](https://github.com/SecureAuthCorp/impacket/pull/1411)_) awaiting to be merged._
 
-The arguments used to customize the PAC will be ignored (`-groups`, `-user-id`, `-extra-sid`,`-duration`), the required domain SID (`-domain-sid`) as well as the username supplied in the positional argument (`baduser` in this case). All these information will be kept as-is from the PAC obtained beforehand using the [S4U2self+u2u](/ad/movement/kerberos) trick.
+The arguments used to customize the PAC from scratch are ignored (`-groups`, `-extra-sid`, `-duration`) since the PAC is taken from the ticket obtained beforehand; `-user-id` and the key material (`-nthash`/`-aesKey`) are honored, the required domain SID (`-domain-sid`) as well as the username supplied in the positional argument (`baduser` in this case). All these information will be kept as-is from the PAC obtained beforehand using the [S4U2self+u2u](/ad/movement/kerberos) trick.
 
 ```bash
 ticketer.py -request -impersonate 'domainadmin' -domain 'DOMAIN.FQDN' -user 'domain_user' -password 'password' -aesKey 'krbtgt/service AES key' -domain-sid 'S-1-5-21-...' 'baduser'
@@ -35,6 +34,14 @@ _At the time of writing this recipe, September 25th, 2022, no equivalent exists 
 
 </Tab>
 </Tabs>
+
+<Callout type="warn">
+
+**KDC_ERR_TGT_REVOKED on patched domains (KB5008380 / CVE-2021-42287)**
+
+Since the [PAC_REQUESTOR enforcement](https://blog.netwrix.com/2022/01/10/pacrequestorenforcement-and-kerberos-authentication/) phase (October 2022), TGTs must carry the new `PAC_REQUESTOR` and `PAC_ATTRIBUTES_INFO` structures or the KDC raises `KDC_ERR_TGT_REVOKED`. Because the Sapphire technique lifts a privileged PAC from an S4U2self + U2U **service** ticket (which never contains those structures), a forged TGT built from it lacks them and is rejected on essentially every patched (2022+) domain. Use tooling that re-adds them: [Impacket](https://github.com/fortra/impacket) (PR [#1391](https://github.com/fortra/impacket/pull/1391), [#1545](https://github.com/fortra/impacket/pull/1545)) and [Rubeus](https://github.com/GhostPack/Rubeus) (PR [#105](https://github.com/GhostPack/Rubeus/pull/105)).
+
+</Callout>
 
 ## Resources
 

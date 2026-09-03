@@ -47,7 +47,7 @@ GoldenGMSA.exe kdsinfo --forest child.lab.local
 
 <Tab value="UNIX-like">
 
-_At the time of writing this recipe, September 24th, 2022, no equivalent exists (not that we know of), for UNIX-like systems._
+_The offline Golden gMSA computation (deriving any gMSA password from a stolen KDS root key) currently has no UNIX-native tool and must be run from Windows with GoldenGMSA.exe. Reading a live gMSA password over LDAP, by contrast, is possible from UNIX with tools like gMSADumper or NetExec once the account can be queried._
 
 </Tab>
 </Tabs>
@@ -103,7 +103,7 @@ GoldenGMSA.exe compute --sid "S-1-5-21-[...]1586295871-1112" --kdskey "AQA[...]j
 ```
 Since the password is randomly generated and is not intended to be used by real users with a keyboard (but instead by servers, programs, scripts, etc.) the password is very long, complex and can include non-printable characters. [GoldenGMSA](https://github.com/Semperis/GoldenGMSA) will output the password in base64.
 
-In order to use the password, its MD4 (i.e. NT) hash can be calculated, for [Broken link](/ad/movement/ntlm/pth "mention").
+In order to use the password, its MD4 (i.e. NT) hash can be calculated, for [pass-the-hash](/ad/movement/ntlm/pth).
 
 ```bash
 import base64

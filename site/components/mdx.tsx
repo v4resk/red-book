@@ -27,7 +27,13 @@ export function getMDXComponents(components?: MDXComponents) {
         const Default = defaultMdxComponents.img as React.ComponentType<typeof props>;
         return <Default {...props} />;
       }
-      return <img {...props} src={withBase(props.src)} />;
+      return (
+        <img
+          {...props}
+          src={withBase(props.src)}
+          style={{ display: 'block', marginInline: 'auto', ...(props.style as React.CSSProperties) }}
+        />
+      );
     },
     Favicon,
     ResourceCard,

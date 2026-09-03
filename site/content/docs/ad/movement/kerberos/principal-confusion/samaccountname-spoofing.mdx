@@ -38,10 +38,7 @@ The attack can then be conducted as follows.
 
 <Callout type="warn">
 
-Some of the tools and features that allow exploitation of these vulnerabilities are still in development
-
-* Impacket's getST: [https://github.com/SecureAuthCorp/impacket/pull/1202](https://github.com/SecureAuthCorp/impacket/pull/1202)
-* Impacket's renameMachine: [https://github.com/SecureAuthCorp/impacket/pull/1224](https://github.com/SecureAuthCorp/impacket/pull/1224)
+Impacket's `getST` (`-self` / `-altservice`) is merged and ships in current Impacket. The `renameMachine.py` helper is still an open pull request ([#1224](https://github.com/fortra/impacket/pull/1224)), so it must be run from that PR branch.
 
 </Callout>
 
@@ -94,7 +91,7 @@ KRB5CCNAME='DomainAdmin.ccache' secretsdump.py -just-dc-user 'krbtgt' -k -no-pas
 
 <Callout type="success">
 
-When using [Impacket](https://github.com/SecureAuthCorp/impacket)'s addcomputer script for the creation of a computer account, the "SAMR" method is used by default (instead of the LDAPS one). At the time of writing (10th of December, 2021), the SAMR method creates the account without SPNs, which allows to skip step #1.
+When using [Impacket](https://github.com/SecureAuthCorp/impacket)'s addcomputer script for the creation of a computer account, the "SAMR" method is used by default (instead of the LDAPS one). The SAMR method creates the account without SPNs, which allows to skip step #1.
 
 </Callout>
 

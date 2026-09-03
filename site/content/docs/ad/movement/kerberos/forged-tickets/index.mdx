@@ -9,7 +9,7 @@ Silver, Golden, Diamond and Sapphire tickets are forged or modified Kerberos tic
 
 <summary>Glossary</summary>
 
-**PAC (Privileged Authentication Certificate)**: a special set of data contained in the ticket (TGT or Service Ticket) that give information about the requesting user (username, groups, UserAccountControl, etc.).
+**PAC (Privileged Attribute Certificate)**: a special set of data contained in the ticket (TGT or Service Ticket) that give information about the requesting user (username, groups, UserAccountControl, etc.).
 
 **Long-term key**: the long-term key of an account refers to its NT hash (when the RC4 etype is not disabled in the domain) or another Kerberos key (DES, AES128, AES256).
 
@@ -31,7 +31,7 @@ Silver, Golden, Diamond and Sapphire tickets are forged or modified Kerberos tic
 
 <Card href="/ad/movement/kerberos/forged-tickets/sapphire" title="Sapphire tickets" />
 
-The **Bronze bit** vulnerability (CVE-2020-17049) introduced the possibility of forwarding service tickets when it shouldn't normally be possible (protected users, unconstrained delegation, constrained delegation configured with protocol transition).
+The **Bronze bit** vulnerability (CVE-2020-17049) makes it possible to forward service tickets that normally could not be, bypassing two protections: accounts flagged "sensitive and cannot be delegated" (or in the Protected Users group), and [constrained delegation](/ad/movement/kerberos/delegations/constrained) configured **without** protocol transition.
 
 ![](/assets/Kerberos_delegation.png)
 

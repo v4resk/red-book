@@ -14,7 +14,7 @@ NTLM capture can be combined with any forced authentication attack. Testers shou
 
 </Callout>
 
-[Responder](https://github.com/SpiderLabs/Responder) (Python) and [Inveigh](https://github.com/Kevin-Robertson/Inveigh) (Powershell) are great tools able to do name poisoning for forced authentication attacks, but also able to capture responses (LM or NTLM hashes) by starting servers waiting for incoming authentications. Once those listening servers are up and ready, the tester can initiate the [forced authentication attack](/ad/movement/mitm-and-coerced-authentications).
+[Responder](https://github.com/lgandx/Responder) (Python) and [Inveigh](https://github.com/Kevin-Robertson/Inveigh) (Powershell) are great tools able to do name poisoning for forced authentication attacks, but also able to capture responses (LM or NTLM hashes) by starting servers waiting for incoming authentications. Once those listening servers are up and ready, the tester can initiate the [forced authentication attack](/ad/movement/mitm-and-coerced-authentications).
 
 <Callout type="info">
 
@@ -65,8 +65,8 @@ There are cases where a downgrade attempt will fail and the capture authenticati
 
 Start poisoning LLMNR, NBT-NS and mDNS with a custom challenge, enable HTTPS capturing, enable proxy server authentication captures
 
-```
-Invoke-Inveigh -Challenge 1122334455667788 -ConsoleOutput Y -LLMNR Y -NBNS Y -mDNS Y -HTTPS Y -Proxy Y
+```powershell
+.\Inveigh.exe -Challenge 1122334455667788 -ConsoleOutput Y -LLMNR Y -NBNS Y -mDNS Y -HTTPS Y -Proxy Y
 ```
 
 </Tab>

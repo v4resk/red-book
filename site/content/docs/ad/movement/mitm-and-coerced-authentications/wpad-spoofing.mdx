@@ -34,7 +34,7 @@ Proxy auth NTLM authentication can either be
 
 On old Windows systems (i.e. lacking the MS16-077 security update), the WPAD location could be obtained through insecure name resolution protocols like LLMNR and NBT-NS when standard DNS queries were failing (i.e. no DNS record for WPAD). This allowed attackers to operate [LLMNR and NBT-NS spoofing](/ad/movement/mitm-and-coerced-authentications/llmnr-nbtns-mdns-spoofing) to answer those WPAD queries and redirect to a fake `wpad.dat` file, hence poisoning the web proxy configuration of the requesting clients, hence obtaining more traffic.
 
-[Responder](https://github.com/SpiderLabs/Responder) (Python) and [Inveigh](https://github.com/Kevin-Robertson/Inveigh) (Powershell) are great tools for name poisoning. In addition to name poisoning, they also have the ability to start servers (listeners) that will [capture authentications](/ad/movement/ntlm/capture) and echo the NTLM hashes to the attacker.
+[Responder](https://github.com/lgandx/Responder) (Python) and [Inveigh](https://github.com/Kevin-Robertson/Inveigh) (Powershell) are great tools for name poisoning. In addition to name poisoning, they also have the ability to start servers (listeners) that will [capture authentications](/ad/movement/ntlm/capture) and echo the NTLM hashes to the attacker.
 
 <Tabs items={['UNIX-like', 'Windows']}>
 <Tab value="UNIX-like">

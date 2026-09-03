@@ -1,6 +1,88 @@
 ---
 title: "DC Shadow"
-wip: true
-icon: Construction
 ---
 
+## Theory
+
+The idea behind this persistence technique is to have an attacker-controlled machine act as a domain controller (a "shadow DC") to push changes onto the domain by forcing legitimate domain controllers to replicate from it.
+
+Two requirements must be met for a machine to act as a domain controller:
+
+1. **Be registered as a DC in the domain**, by:
+   * modifying the computer's SPN (`servicePrincipalName`) to `GC/$HOSTNAME.$DOMAIN/$DOMAIN`, and registering the DRS GUID SPN `E3514235-4B06-11D1-AB04-00C04FC2DCD2/$HOSTNAME.$DOMAIN`
+   * adding an entry `CN=$HOSTNAME,CN=Servers,CN=Default-First-Site-Name,CN=Sites,CN=Configuration,DC=$DOMAIN` with `objectClass: server`, `dNSHostName: $HOSTNAME.$DOMAIN` and `serverReference: CN=$HOSTNAME,CN=Computers,DC=$DOMAIN`
+2. **Be able to issue and respond to the replication RPC calls**: `DRSBind`, `DRSUnbind`, `DRSCrackNames`, `DRSAddEntry`, `DRSReplicaAdd`, `DRSReplicaDel`, `DRSGetNCChanges`.
+
+The attack workflow (steps 1 and 2 can be swapped):
+
+1. Register the workstation as a shadow DC (add the `CN=Configuration` entry, modify its SPN).
+2. Prepare the changes to push (`DRSAddEntry`).
+3. Push them by forcing a legitimate DC to replicate from the workstation (`DRSReplicaAdd`, which triggers a `DRSGetNCChanges` from the legitimate DC to the shadow DC).
+4. Unregister the workstation (`DRSReplicaDel`, and revert the `CN=Configuration` entry and the SPN).
+
+<Callout type="info">
+
+DC Shadow is a "meta" technique: because it can push **any** attribute change into the domain, it can be used to deliver other persistence primitives such as [SID History](/ad/persistence/sid-history), [Delegation to KRBTGT](/ad/persistence/kerberos/delegation-to-krbtgt) and [DACL abuse](/ad/persistence/access-controls) while blending in as legitimate replication traffic.
+
+</Callout>
+
+## Practice
+
+<Tabs items={['UNIX-like', 'Windows']}>
+<Tab value="UNIX-like">
+
+<Callout type="warn">
+
+There is currently no UNIX-native tool to perform DC Shadow; the replication-server side of the attack has yet to be implemented outside of Windows.
+
+</Callout>
+
+</Tab>
+<Tab value="Windows">
+
+DC Shadow is performed with Mimikatz and works on every 64-bit Windows Server up to 2022. Everything happens on the workstation that will act as the shadow DC, and **two** Mimikatz shells are required:
+
+* one with domain admin privileges (the **trigger** shell)
+* one as `NT-AUTHORITY\SYSTEM` (the **RPC** shell)
+
+#### Preparing the shells
+
+```powershell
+# In a mimikatz shell launched with DA rights (the trigger shell)
+privilege::debug
+
+# Open a second mimikatz shell as NT-AUTHORITY\SYSTEM (the RPC shell)
+process::runp
+
+# On each shell, confirm the identity:
+#  - trigger shell -> the domain admin account
+#  - RPC shell     -> NT-AUTHORITY\SYSTEM
+token::whoami
+```
+
+#### Preparing the changes to push
+
+```powershell
+# (RPC shell)
+lsadump::dcshadow /object:ObjectToModify /attribute:AttributeToModify /value:NewValue
+```
+
+#### Pushing the changes
+
+```powershell
+# (Trigger shell) registers the shadow DC, pushes the changes, and unregisters
+lsadump::dcshadow /push
+```
+
+</Tab>
+</Tabs>
+
+## Resources
+
+<ResourceCard href="https://www.dcshadow.com/" title="DCShadow" description="dcshadow.com" />
+
+<ResourceCard href="https://tools.thehacker.recipes/mimikatz/modules/lsadump/dcshadow" title="mimikatz lsadump::dcshadow" description="tools.thehacker.recipes" />
+
+<ResourceCard href="https://blog.netwrix.com/2022/09/28/dcshadow_attack/" title="What Is a DCShadow Attack and How to Defend Against It" description="blog.netwrix.com" />
+
+<ResourceCard href="https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-drsr/f977faaa-673e-4f66-b9bf-48c640241d47" title="[MS-DRSR] Directory Replication Service Remote Protocol" description="learn.microsoft.com" />

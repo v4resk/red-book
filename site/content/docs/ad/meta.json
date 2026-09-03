@@ -1,6 +1,5 @@
 {
   "title": "Active Directory Pentesting",
-  "defaultOpen": true,
   "pages": [
     "recon",
     "movement",

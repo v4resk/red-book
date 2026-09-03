@@ -36,7 +36,7 @@ On a side note, a technique called [AnySPN or "service class modification"](/ad/
 
 ### With protocol transition
 
-![Domain Controller > Active Directory Users and Computers > delegation properties of a user](&lt;/assets/kcd with protocol transition.png>)
+<Figure src="/assets/kcd with protocol transition.png" alt="Domain Controller > Active Directory Users and Computers > delegation properties of a user" />
 
 If a service is configured with constrained delegation **with protocol transition**, then it can obtain a service ticket on behalf of a user by combining S4U2self and S4U2proxy requests, as long as the user is not sensitive for delegation, or a member of the "Protected Users" group. The service ticket can then be used with [pass-the-ticket](/ad/movement/kerberos/pass-the/ptt). This process is similar to [resource-based contrained delegation](/ad/movement/kerberos/delegations/rbcd) exploitation.
 
@@ -80,7 +80,7 @@ Rubeus.exe s4u /nowrap /msdsspn:"cifs/target" /impersonateuser:"administrator" /
 
 ### Without protocol transition
 
-![Domain Controller > Active Directory Users and Computers > delegation properties of a user](&lt;/assets/kcd without proto transition.png>)
+<Figure src="/assets/kcd without proto transition.png" alt="Domain Controller > Active Directory Users and Computers > delegation properties of a user" />
 
 If a service is configured with constrained delegation **without protocol transition** (i.e. set with "Kerberos only"), then S4U2self requests won't result in forwardable service tickets, hence failing at providing the requirement for S4U2proxy to work.
 

@@ -64,7 +64,7 @@ The trust "flavor", on the other hand, represents the nature of the trust relati
 | Shortcut (a.k.a. cross-link) | Transitive     | Either    | Either           | Manual        |
 | Realm                        | Either         | Either    | Kerberos V5 only | Manual        |
 | Forest                       | Transitive     | Either    | Either           | Manual        |
-| External                     | Non-transitive | One-way   | NTLM only        | Manual        |
+| External                     | Non-transitive | One-way   | Either           | Manual        |
 
 #### Transitivity <a href="#transitivity" id="transitivity"></a>
 
@@ -100,7 +100,7 @@ Section [4.1.2.2](https://docs.microsoft.com/en-us/openspecs/windows_protocols/m
 
 * if SID filtering is fully enabled, all SIDs that differ from the trusted domain will be filtered out
 * even if it's enabled, a few SIDs will (almost) never be filtered: "Enterprise Domain Controllers" (S-1-5-9) SID and those described by the [trusted domain object (TDO)](https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-pac/f2ef15b6-1e9b-48b5-bf0b-019f061d41c8#gt_f2ceef4e-999b-4276-84cd-2e2829de5fc4), as well as seven well-known SIDs (see [MS-PAC doc](https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-pac/55fc19f2-55ba-4251-8a6a-103dd7c66280), and [improsec's blogpost](https://improsec.com/tech-blog/sid-filter-as-security-boundary-between-domains-part-3-sid-filtering-explained#yui_3_17_2_1_1673614140169_543)).
-* there are two kinds of inter-forest trusts: "Forest", and "External" (see [trust types](https://www.thehacker.recipes/ad/movement/trusts/index#trust-types)). Microsoft says "[cross-forest trusts are more stringently filtered than external trusts](https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-dtyp/81d92bba-d22b-4a8c-908a-554ab29148ab?redirectedfrom=MSDN)", meaning that in External trusts, SID filtering only filters out RID &lt; 1000.
+* there are two kinds of inter-forest trusts: "Forest", and "External" (see [trust types](/ad/movement/domain-trusts#trust-types)). Microsoft says "[cross-forest trusts are more stringently filtered than external trusts](https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-dtyp/81d92bba-d22b-4a8c-908a-554ab29148ab?redirectedfrom=MSDN)", meaning that in External trusts, SID filtering only filters out RID &lt; 1000.
 
 ![](/assets/MS_PAC_section_4.1.2.2.Cmw5BXcP.png)
 
@@ -120,7 +120,7 @@ Above are some key, usually valid, elements. But as [Carsten Sandker](https://tw
 
 SID filtering is not unique to trusts. It occurs "[whenever a service ticket is accepted](https://twitter.com/SteveSyfuhs/status/1329148611305693185)" either by the KDC or by a local service and behaves differently depending on the contect in which the ticket was produced.
 
-Also, SID filtering works the same way for NTLM and Kerberos. It's a separate mechanism invoked after user logon info are unpacked (more details in [NTLM](https://www.thehacker.recipes/ad/movement/trusts/index#ntlm-authentication) and [Kerberos](https://www.thehacker.recipes/ad/movement/trusts/index#kerberos-authentication) chapters).
+Also, SID filtering works the same way for NTLM and Kerberos. It's a separate mechanism invoked after user logon info are unpacked (more details in [NTLM](/ad/movement/domain-trusts#ntlm-authentication) and [Kerberos](/ad/movement/domain-trusts#kerberos-authentication) chapters).
 
 #### SID history <a href="#sid-history" id="sid-history"></a>
 
@@ -130,15 +130,15 @@ The SID history is a property of a user or group object that allows the object t
 
 Many resources across the Internet, including Microsoft's docs and tools, state that SID history can be enabled across a trust. This is not 100% true. SID history is not a feature that can be toggled on or off per say.
 
-When authenticating across trusts [using Kerberos](https://www.thehacker.recipes/ad/movement/trusts/index#kerberos-authentication), it is assumed that the extra SID field of the ticket's PAC (Privileged Attribute Certificate) reflects the SID history attribute of the authenticating user. With [SID filtering](https://www.thehacker.recipes/ad/movement/trusts/index#sid-filtering) enabled in a trust, the SIDs contained in that field are filtered, effectively preventing SID history from doing its job. There are certain scenarios where some SIDs are not filtered, allowing for example SIDs with a RID >= 1000. Some, including Microsoft, call it "enabling SID history", but in fact, SID history is not toggled on or off here, it's the behavior of SID filtering that is adjusted. I'd call that "partial SID filtering", or "unencumbered SID history". [Dirk-jan Mollema](https://twitter.com/_dirkjan) calls that "[SID filtering relaxation](https://dirkjanm.io/active-directory-forest-trusts-part-one-how-does-sid-filtering-work/#sid-filtering-relaxation)".
+When authenticating across trusts [using Kerberos](/ad/movement/domain-trusts#kerberos-authentication), it is assumed that the extra SID field of the ticket's PAC (Privileged Attribute Certificate) reflects the SID history attribute of the authenticating user. With [SID filtering](/ad/movement/domain-trusts#sid-filtering) enabled in a trust, the SIDs contained in that field are filtered, effectively preventing SID history from doing its job. There are certain scenarios where some SIDs are not filtered, allowing for example SIDs with a RID >= 1000. Some, including Microsoft, call it "enabling SID history", but in fact, SID history is not toggled on or off here, it's the behavior of SID filtering that is adjusted. I'd call that "partial SID filtering", or "unencumbered SID history". [Dirk-jan Mollema](https://twitter.com/_dirkjan) calls that "[SID filtering relaxation](https://dirkjanm.io/active-directory-forest-trusts-part-one-how-does-sid-filtering-work/#sid-filtering-relaxation)".
 
-When authenticating with NTLM, the process is highly similar, see the [NTLM authentication](https://www.thehacker.recipes/ad/movement/trusts/index#ntlm-authentication) theory chapter for more information.
+When authenticating with NTLM, the process is highly similar, see the [NTLM authentication](/ad/movement/domain-trusts#ntlm-authentication) theory chapter for more information.
 
 #### Authentication level <a href="#authentication-level" id="authentication-level"></a>
 
 Inter-forest trusts ("External" and "Forest" trusts) can be configured with different levels of authentication:
 
-* Forest-wide authentication: allows unrestricted authentication from the trusted forest's principals to the trusting forest's resources. This is the least secure level, it completely opens one forest to another (authentication-wise though, not access-wise). This level is specific to intra-forest trusts.
+* Forest-wide authentication: allows unrestricted authentication from the trusted forest's principals to the trusting forest's resources. This is the least secure level, it completely opens one forest to another (authentication-wise though, not access-wise). This is the default authentication level for inter-forest (forest) trusts.
 * Domain-wide authentication: allows unrestricted authentication from the trusted domain's principals to the trusting domain's resources. This is more secure than forest-wide authentication because it only allows users in a specific (trusted) domain to access resources in another (trusting).
 * Selective authentication: allows only specific users in the trusted domain to access resources in the trusting domain. This is the most secure type of trust because it allows administrators to tightly control access to resources in the trusted domain. In order to allow a "trusted user" to access a "trusting resource", the resource's DACL must include an ACE in which the trusted user has the "`Allowed-To-Authenticate`" extended right (GUID: `68b1d179-0d15-4d4f-ab71-46152e79a7bc`).
 
@@ -158,11 +158,11 @@ The authentication level of a trust depends on the [trustAttributes](https://doc
 
 #### TGT delegation <a href="#tgt-delegation" id="tgt-delegation"></a>
 
-Kerberos unconstrained delegation (KUD) allows a service configured for it to impersonate (almost) any user on any other service. This is a dangerous feature to configure, that won't be explained into many details here as the [Kerberos](https://www.thehacker.recipes/ad/movement/kerberos/index#delegations), [Kerberos delegations](https://www.thehacker.recipes/ad/movement/kerberos/delegations/index) and [Kerberos unconstrained delegations](https://www.thehacker.recipes/ad/movement/kerberos/delegations/unconstrained) pages already cover it.
+Kerberos unconstrained delegation (KUD) allows a service configured for it to impersonate (almost) any user on any other service. This is a dangerous feature to configure, that won't be explained into many details here as the [Kerberos](/ad/movement/kerberos#delegations), [Kerberos delegations](/ad/movement/kerberos/delegations) and [Kerberos unconstrained delegations](/ad/movement/kerberos/delegations/unconstrained) pages already cover it.
 
 Kerberos unconstrained delegations could be abused across trusts to take control over any resource of the trusting domain, including the domain controller, as long as the trusted domain is compromised. This relies on the delegation of TGT across trusts, which can be disabled.
 
-If TGT delegation is disabled in a trust, attackers won't be able to [escalate from one domain to another by abusing unconstrained delegation](https://www.thehacker.recipes/ad/movement/trusts/index#unconstrained-delegation-abuse). On a side note, the other types of delegations are not affected by this as they don't rely on the delegation of tickets, but on S4U extensions instead.
+If TGT delegation is disabled in a trust, attackers won't be able to [escalate from one domain to another by abusing unconstrained delegation](/ad/movement/kerberos/delegations/unconstrained). On a side note, the other types of delegations are not affected by this as they don't rely on the delegation of tickets, but on S4U extensions instead.
 
 The TGT delegation status of a trust depends on the [trustAttributes](https://docs.microsoft.com/en-us/openspecs/windows_protocols/ms-adts/e9a2d23c-c31e-4a6f-88a0-6646fdb51a3c) flags of a [TDO](https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-adts/b645c125-a7da-4097-84a1-2fa7cea07714#gt_f2ceef4e-999b-4276-84cd-2e2829de5fc4).
 
@@ -175,7 +175,7 @@ The TGT delegation status of a trust depends on the [trustAttributes](https://do
 
 #### Kerberos authentication <a href="#kerberos-authentication" id="kerberos-authentication"></a>
 
-Understanding how Kerberos works is required here: [the Kerberos protocol](https://www.thehacker.recipes/ad/movement/kerberos/index).
+Understanding how Kerberos works is required here: [the Kerberos protocol](/ad/movement/kerberos).
 
 > For a Kerberos authentication to occur across a domain trust, the Kerberos key distribution centers (KDCs) in two domains must have a shared secret, called an inter-realm key. This key is [derived from a shared password](https://msdn.microsoft.com/en-us/library/windows/desktop/aa378170\(v=vs.85\).aspx), and rotates approximately every 30 days. Parent-child domains share an inter-realm key implicitly.
 >
@@ -185,11 +185,11 @@ Understanding how Kerberos works is required here: [the Kerberos protocol](https
 >
 > _(by_ [_Will Schroeder_](https://twitter.com/harmj0y) _on_ [_blog.harmj0y.net_](https://blog.harmj0y.net/redteaming/domain-trusts-were-not-done-yet/)_)_
 
-From an offensive point of view, just like a [golden ticket](https://www.thehacker.recipes/ad/movement/kerberos/forged-tickets/golden), a referral ticket could be forged. Forging a referral ticket using the inter-realm key, instead of relying on the krbtgt keys for a golden ticket, is a nice alternative for organizations that choose to roll their krbtgt keys, as they should. This technique is [a little bit trickier](https://dirkjanm.io/active-directory-forest-trusts-part-two-trust-transitivity/#do-you-need-to-use-inter-realm-tickets) though, as it requires to [use the correct key](https://dirkjanm.io/active-directory-forest-trusts-part-two-trust-transitivity/#which-keys-do-i-need-for-inter-realm-tickets).
+From an offensive point of view, just like a [golden ticket](/ad/movement/kerberos/forged-tickets/golden), a referral ticket could be forged. Forging a referral ticket using the inter-realm key, instead of relying on the krbtgt keys for a golden ticket, is a nice alternative for organizations that choose to roll their krbtgt keys, as they should. This technique is [a little bit trickier](https://dirkjanm.io/active-directory-forest-trusts-part-two-trust-transitivity/#do-you-need-to-use-inter-realm-tickets) though, as it requires to [use the correct key](https://dirkjanm.io/active-directory-forest-trusts-part-two-trust-transitivity/#which-keys-do-i-need-for-inter-realm-tickets).
 
-Depending on the trust characteristics, ticket forgery can also be combined with [SID history](https://www.thehacker.recipes/ad/movement/trusts/index#sid-history) spoofing for a direct privilege escalation from a child to a parent domain.
+Depending on the trust characteristics, ticket forgery can also be combined with [SID history](/ad/movement/domain-trusts#sid-history) spoofing for a direct privilege escalation from a child to a parent domain.
 
-When doing Kerberos authentications across trusts, the trusting domain's domain controller [checks a few things](https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-kile/bac4dc69-352d-416c-a9f4-730b81ababb3) before handing out service tickets to trusted users: [SID filtering](https://www.thehacker.recipes/ad/movement/trusts/index#sid-filtering) during [PAC validation](https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-pac/55fc19f2-55ba-4251-8a6a-103dd7c66280) (looking in the `ExtraSids` attribute from the [`KERB_VALIDATION_INFO`](https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-pac/69e86ccc-85e3-41b9-b514-7d969cd0ed73) structure in the PAC), [TGT delegation](https://www.thehacker.recipes/ad/movement/trusts/index#tgt-delegation) verification (when asked for a Service Ticket for a service configured for unconstrained delegation), and [Selective Authentication](https://www.thehacker.recipes/ad/movement/trusts/index#authentication-level) limitation.
+When doing Kerberos authentications across trusts, the trusting domain's domain controller [checks a few things](https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-kile/bac4dc69-352d-416c-a9f4-730b81ababb3) before handing out service tickets to trusted users: [SID filtering](/ad/movement/domain-trusts#sid-filtering) during [PAC validation](https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-pac/55fc19f2-55ba-4251-8a6a-103dd7c66280) (looking in the `ExtraSids` attribute from the [`KERB_VALIDATION_INFO`](https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-pac/69e86ccc-85e3-41b9-b514-7d969cd0ed73) structure in the PAC), [TGT delegation](/ad/movement/domain-trusts#tgt-delegation) verification (when asked for a Service Ticket for a service configured for unconstrained delegation), and [Selective Authentication](/ad/movement/domain-trusts#authentication-level) limitation.
 
 #### NTLM authentication <a href="#ntlm-authentication" id="ntlm-authentication"></a>
 
@@ -207,7 +207,7 @@ When a trusted domain's user wants to access a resource from a trusting domain, 
 
 The trusted domain's DC does the usual checks and passes the result to the trusting DC, which in turn passes it to the resource. The resource then accepts or rejects the authentication based on the decision passed through the DCs.
 
-When doing NTLM authentications across trusts, the trusting domain's domain controller checks a few things from the user info structure supplied by the trusted domain controller: [SID filtering](https://www.thehacker.recipes/ad/movement/trusts/index#sid-filtering) (looking in the `ExtraSids` attribute from the [`NETLOGON_VALIDATION_SAM_INFO2`](https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-nrpc/2a12e289-7904-4ecb-9d83-6732200230c0) structure), and [Selective Authentication](https://www.thehacker.recipes/ad/movement/trusts/index#authentication-level) limitation during the [DC's validation of the user credentials](https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-apds/f47e40e1-b9ca-47e2-b139-15a1e96b0e72). [TGT delegation](https://www.thehacker.recipes/ad/movement/trusts/index#tgt-delegation) verification doesn't occur here, since it's a Kerberos mechanism.
+When doing NTLM authentications across trusts, the trusting domain's domain controller checks a few things from the user info structure supplied by the trusted domain controller: [SID filtering](/ad/movement/domain-trusts#sid-filtering) (looking in the `ExtraSids` attribute from the [`NETLOGON_VALIDATION_SAM_INFO2`](https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-nrpc/2a12e289-7904-4ecb-9d83-6732200230c0) structure), and [Selective Authentication](/ad/movement/domain-trusts#authentication-level) limitation during the [DC's validation of the user credentials](https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-apds/f47e40e1-b9ca-47e2-b139-15a1e96b0e72). [TGT delegation](/ad/movement/domain-trusts#tgt-delegation) verification doesn't occur here, since it's a Kerberos mechanism.
 
 _Nota bene, wether it's Kerberos or NTLM, the ExtraSids are in the same data structure, it's just named differently for each protocol. And, the SID filtering function called by the trusting DC is the same, for both authentication protocols._
 
@@ -298,7 +298,7 @@ Get-DomainForeignGroupMember
 
 **BloodHound**
 
-[BloodHound](https://www.thehacker.recipes/a-d/recon/bloodhound) can also be used to map the trusts. While it doesn't provide much details, it shows a visual representation.
+[BloodHound](/ad/recon/tools/bloodhound) can also be used to map the trusts. While it doesn't provide much details, it shows a visual representation.
 
 </Tab>
 </Tabs>
