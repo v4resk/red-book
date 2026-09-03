@@ -70,7 +70,7 @@ jobs:
   # https://infiltr8.io/redbook/, alongside the GitBook at red.infiltr8.io).
   deploy:
     needs: build
-    if: github.event_name == 'push' && github.ref == 'refs/heads/migration/fumadocs'
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     steps:
       # Full history so the IndexNow step can diff the pages changed in the push.
