@@ -134,9 +134,42 @@ html > body[data-scroll-locked] {
   inset-inline-start: calc(17.5 * var(--spacing)); /* depth 6 */
 }
 
-/* active branch: tint the rail of every depth-2+ wrapper containing the
-   current page, leaving sibling branches and the depth-1 rail neutral */
+/* Active marker. Fumadocs draws a short brand-primary bar on the active link,
+   but pins it at the depth-1 rail position (inset-s-2.5), so a deep page lights
+   the far-left rail. Reposition that bar to the page's OWN depth so it becomes
+   a short segment on the nearest rail, right next to the title, and leave every
+   ancestor rail neutral. One rule per nesting level; the deepest match wins.
+   Insets mirror the rail insets above (2.5 + 3 per level). */
+#nd-sidebar [class~="flex-col"][class~="gap-0.5"][class~="pt-0.5"] a[data-active="true"]::before {
+  inset-inline-start: calc(2.5 * var(--spacing)); /* depth 1 */
+}
 #nd-sidebar [class~="flex-col"][class~="gap-0.5"][class~="pt-0.5"]
-            [class~="flex-col"][class~="gap-0.5"][class~="pt-0.5"]:has(a[data-active="true"])::before {
-  background: var(--color-fd-primary);
+            [class~="flex-col"][class~="gap-0.5"][class~="pt-0.5"] a[data-active="true"]::before {
+  inset-inline-start: calc(5.5 * var(--spacing)); /* depth 2 */
+}
+#nd-sidebar [class~="flex-col"][class~="gap-0.5"][class~="pt-0.5"]
+            [class~="flex-col"][class~="gap-0.5"][class~="pt-0.5"]
+            [class~="flex-col"][class~="gap-0.5"][class~="pt-0.5"] a[data-active="true"]::before {
+  inset-inline-start: calc(8.5 * var(--spacing)); /* depth 3 */
+}
+#nd-sidebar [class~="flex-col"][class~="gap-0.5"][class~="pt-0.5"]
+            [class~="flex-col"][class~="gap-0.5"][class~="pt-0.5"]
+            [class~="flex-col"][class~="gap-0.5"][class~="pt-0.5"]
+            [class~="flex-col"][class~="gap-0.5"][class~="pt-0.5"] a[data-active="true"]::before {
+  inset-inline-start: calc(11.5 * var(--spacing)); /* depth 4 */
+}
+#nd-sidebar [class~="flex-col"][class~="gap-0.5"][class~="pt-0.5"]
+            [class~="flex-col"][class~="gap-0.5"][class~="pt-0.5"]
+            [class~="flex-col"][class~="gap-0.5"][class~="pt-0.5"]
+            [class~="flex-col"][class~="gap-0.5"][class~="pt-0.5"]
+            [class~="flex-col"][class~="gap-0.5"][class~="pt-0.5"] a[data-active="true"]::before {
+  inset-inline-start: calc(14.5 * var(--spacing)); /* depth 5 */
+}
+#nd-sidebar [class~="flex-col"][class~="gap-0.5"][class~="pt-0.5"]
+            [class~="flex-col"][class~="gap-0.5"][class~="pt-0.5"]
+            [class~="flex-col"][class~="gap-0.5"][class~="pt-0.5"]
+            [class~="flex-col"][class~="gap-0.5"][class~="pt-0.5"]
+            [class~="flex-col"][class~="gap-0.5"][class~="pt-0.5"]
+            [class~="flex-col"][class~="gap-0.5"][class~="pt-0.5"] a[data-active="true"]::before {
+  inset-inline-start: calc(17.5 * var(--spacing)); /* depth 6 */
 }
