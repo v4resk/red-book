@@ -14,9 +14,7 @@ const docs = defineDocs({
     // a sidebar icon and an in-page banner. Replaces the GitBook convention of
     // putting a hammer emoji in the title.
     schema: pageSchema.extend({ wip: z.boolean().optional() }),
-    // two pages have a leading dot (.net-reflective-assembly.mdx); the default
-    // glob treats them as hidden, so match them explicitly to keep URL parity
-    files: ['**/*.mdx', '**/.*.mdx'],
+    files: ['**/*.mdx'],
     postprocess: {
       includeProcessedMarkdown: true,
     },

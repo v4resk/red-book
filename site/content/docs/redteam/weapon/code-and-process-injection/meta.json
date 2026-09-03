@@ -1,8 +1,8 @@
 {
   "title": "Code & Process Injection",
   "pages": [
-    ".net-reflective-assembly",
-    ".net-assembly-from-windows-script-hosting",
+    "dotnet-reflective-assembly",
+    "dotnet-assembly-from-windows-script-hosting",
     "process-hollowing",
     "wndproc-callback-shellcode-execution",
     "fibers-shellcode-execution",
