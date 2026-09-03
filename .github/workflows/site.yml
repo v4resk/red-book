@@ -73,6 +73,10 @@ jobs:
     if: github.event_name == 'push' && github.ref == 'refs/heads/migration/fumadocs'
     runs-on: ubuntu-latest
     steps:
+      # Full history so the IndexNow step can diff the pages changed in the push.
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - uses: actions/download-artifact@v4
         with:
           name: site
@@ -88,3 +92,14 @@ jobs:
           chmod 600 deploy_key
           rsync -az --delete -e "ssh -i deploy_key -o StrictHostKeyChecking=accept-new" \
             out/ "${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }}:/var/www/redbook/"
+
+      # Notify IndexNow (Bing, Yandex, DuckDuckGo, ...) of the pages changed in
+      # this push, so they re-index in minutes. The key is public (also served at
+      # /<key>.txt), so it is fine in the workflow. Never fails the deploy.
+      - name: Ping IndexNow
+        continue-on-error: true
+        env:
+          INDEXNOW_KEY: 9cf2e2694d7c4dfe81283ebb957116af
+          BEFORE: ${{ github.event.before }}
+          AFTER: ${{ github.sha }}
+        run: python3 .github/scripts/indexnow.py
