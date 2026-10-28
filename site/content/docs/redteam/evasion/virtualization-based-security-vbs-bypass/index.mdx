@@ -1,12 +1,71 @@
 ---
 title: "Virtualization-based security (VBS) Bypass"
-wip: true
-icon: Construction
+description: "What VBS is, how the hypervisor isolates security assets, and why attackers target it"
 ---
 
 ## Theory
 
 Virtualization-based security, or VBS, uses hardware virtualization and the Windows hypervisor to create an isolated virtual environment that becomes the root of trust of the OS that assumes the kernel can be compromised. Windows uses this isolated environment to host a number of security solutions, providing them with greatly increased protection from vulnerabilities in the operating system, and preventing the use of malicious exploits which attempt to defeat protections. VBS enforces restrictions to protect vital system and operating system resources, or to protect security assets such as authenticated user credentials.
+
+### The problem VBS solves: one kernel is one trust boundary
+
+In a classic operating system there are really only two privilege worlds. User-mode applications are isolated from one another by the kernel, but the kernel itself is the single most privileged component on the machine. Everything of value (credential material in [LSASS](/redteam/credentials/os-credentials/windows-and-active-directory/lsass), cryptographic keys, the security policy that decides what code may run) ultimately lives at the mercy of ring 0.
+
+```
+     Classic model                 the weakness
+ ┌─────┐ ┌─────┐ ┌─────┐
+ │ App │ │ App │ │ App │          apps are isolated from each other
+ └──┬──┘ └──┬──┘ └──┬──┘          ... but everything trusts the kernel
+    └───────┼───────┘
+      ┌─────┴─────┐
+      │   Kernel  │  ring 0       one compromise here (rootkit, malicious or
+      └─────┬─────┘               vulnerable driver) owns credentials, keys,
+      ┌─────┴─────┐               code-integrity policy - the whole system
+      │  Hardware │
+      └───────────┘
+```
+
+That is exactly the position a modern attacker reaches after loading a [vulnerable driver (BYOVD)](/redteam/evasion/endpoint-detection-respons-edr-bypass/bring-your-own-vulnerable-driver-byovd) or exploiting a kernel bug: with ring 0, dumping secrets or disabling a defense is trivial. VBS exists to make that assumption ("I own the kernel, therefore I own everything") false.
+
+### What VBS actually does
+
+VBS puts the Windows hypervisor (Hyper-V) underneath the normal kernel and uses it, together with CPU virtualization extensions, to carve out a second, more trusted environment that the normal kernel cannot reach. The root of trust moves from the kernel down to the hypervisor. The design assumption is explicit: the normal kernel may already be compromised, and the security assets must survive that.
+
+The hypervisor enforces this with **Second Layer Address Translation** (SLAT, called EPT on Intel). Because the hypervisor controls the final translation from guest-physical to real-physical memory, it can make a page of secure-world memory simply not exist from the normal kernel's point of view, no matter what page tables that kernel builds.
+
+### Virtual Trust Levels (VTL0 and VTL1)
+
+The isolation is expressed as **Virtual Trust Levels**. A higher VTL is more privileged than a lower one and its memory is unreachable from below.
+
+* **VTL0 - the normal world.** The ordinary Windows kernel and every user-mode application you normally interact with. This is where malware, drivers and exploits run.
+* **VTL1 - the secure world (Isolated User Mode, IUM).** A minimal, separately-signed **secure kernel** plus a small set of protected processes. VTL1 can see into VTL0, but VTL0 cannot see into VTL1.
+
+<Figure src="/assets/vbs-isolation-principle.png">VBS isolation principle - VTL0 (normal world) hosts apps and the NT kernel, VTL1 (secure world) hosts trustlets and the secure kernel, all sitting above the Hyper-V hypervisor</Figure>
+
+### Trustlets: what runs in the secure world
+
+The protected processes hosted in VTL1 are called **Windows Security Applications (WSA)**, or informally **trustlets**. Hosting a security service as a trustlet gives it:
+
+* **Protection of security assets** - authenticated user credentials, security keys, the security policy, and attestation logs, all kept out of reach of the normal kernel.
+* **Isolation from the normal OS** - a trustlet runs in VTL1, so even a fully-compromised VTL0 cannot read its memory or tamper with it.
+* **Code integrity enforcement** - the secure kernel validates what is allowed to execute (see HVCI below).
+* **Attestation of host health** - the secure world can measure and vouch for the state of the machine.
+
+The VBS-backed features documented in this section are each a trustlet or a secure-kernel service:
+
+* **[Credential Guard](/redteam/evasion/virtualization-based-security-vbs-bypass/credential-guard-bypass)** - the `LsaIso.exe` trustlet holds NTLM hashes and Kerberos keys in VTL1, so a VTL0 LSASS dump no longer yields them.
+* **[HVCI (Hypervisor-protected Code Integrity)](/redteam/evasion/virtualization-based-security-vbs-bypass/hypervisor-protected-code-integrity-hvci-bypass)** - the secure kernel verifies every kernel code page before VTL0 is allowed to execute it, so unsigned kernel code cannot run.
+* **[WDAC (Windows Defender Application Control)](/redteam/evasion/virtualization-based-security-vbs-bypass/windows-defender-application-control-wdac-bypass)** - application-level code-integrity policy that VBS can enforce and protect.
+
+### How a secure-world call is dispatched
+
+Isolation also constrains execution flow. A normal VTL0 thread issues system calls straight to the normal NT kernel as usual. A thread running inside a trustlet cannot simply call the normal kernel, a VTL1 service request is marshalled down through the hypervisor and dispatched to the secure kernel, keeping the two worlds separated even during a syscall.
+
+<Figure src="/assets/vbs-system-calls.png">System calls in VBS - VTL0 threads go through the normal system service dispatcher, while VTL1 isolated threads are dispatched through the hypervisor to the secure kernel</Figure>
+
+### Requirements
+
+VBS relies on platform features that must all be present and enabled: CPU virtualization extensions with SLAT (Intel VT-x + EPT, or AMD-V + RVI), [UEFI Secure Boot](https://learn.microsoft.com/en-us/windows-hardware/design/device-experiences/oem-secure-boot), and ideally an IOMMU (Intel VT-d / AMD-Vi) to stop malicious DMA from devices, plus a TPM for key protection and attestation.
 
 ## Practice
 
@@ -19,3 +78,4 @@ Virtualization-based security, or VBS, uses hardware virtualization and the Wind
 ## Resources
 
 <ResourceCard href="https://learn.microsoft.com/en-us/windows-hardware/design/device-experiences/oem-vbs" title="Virtualization-based Security (VBS)" description="learn.microsoft.com" icon="/assets/favicons/learn.microsoft.com.png" />
+<ResourceCard href="https://learn.microsoft.com/en-us/windows/security/hardware-security/enable-virtualization-based-protection-of-code-integrity" title="Virtualization-based protection of code integrity" description="learn.microsoft.com" icon="/assets/favicons/learn.microsoft.com.png" />
